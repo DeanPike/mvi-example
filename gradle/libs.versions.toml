@@ -10,6 +10,7 @@ junitVersion = "1.1.5"
 kapt = "1.9.23"
 kotlin = "1.9.23"
 lifecycleRuntimeKtx = "2.7.0"
+jetbrainsKotlinJvm = "1.9.23"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -34,4 +35,5 @@ androidApplication = { id = "com.android.application", version.ref = "agp" }
 jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 daggerHiltPlugin = { id = "com.google.dagger.hilt.android", version.ref = "daggerHiltPlugin" }
 kaptPlugin = { id = "org.jetbrains.kotlin.kapt", version.ref = "kapt" }
+jetbrainsKotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
 
