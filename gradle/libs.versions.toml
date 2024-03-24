@@ -39,6 +39,7 @@ junit-jupiter = { group = "org.junit.jupiter", name = "junit-jupiter", version.r
 assertj = { group = "org.assertj", name = "assertj-core", version.ref = "assertj" }
 mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
 coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "couroutines" }
+coroutines-core-jvm = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core-jvm", version.ref = "couroutines" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
