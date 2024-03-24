@@ -10,6 +10,7 @@ java {
 }
 
 dependencies {
+    implementation(project(":client"))
     implementation(libs.hilt.core)
     kapt(libs.hilt.compiler)
 

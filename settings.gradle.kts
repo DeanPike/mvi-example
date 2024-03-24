@@ -22,3 +22,4 @@ dependencyResolutionManagement {
 rootProject.name = "mvi-example"
 include(":app")
 include(":data")
+include(":client")
