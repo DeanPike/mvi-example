@@ -15,6 +15,8 @@ dependencies {
 
     testImplementation(libs.junit.jupiter)
     testImplementation(libs.assertj)
+    testImplementation(libs.mockk)
+    testImplementation(libs.coroutines.test)
 }
 
 tasks.test {

@@ -1,10 +1,11 @@
-package au.com.deanpike.client.data.datasource
+package au.com.deanpike.client.data.repository
 
+import au.com.deanpike.client.data.datasource.PersonDataSource
 import au.com.deanpike.client.model.PersonDTO
 import java.util.UUID
 import javax.inject.Inject
 
-internal interface PersonDataSource {
+internal interface PersonRepository {
     suspend fun addPerson(person: PersonDTO)
     suspend fun getPeople(): List<PersonDTO>
     suspend fun getPerson(id: UUID): PersonDTO?
@@ -12,32 +13,26 @@ internal interface PersonDataSource {
     suspend fun deletePerson(person: PersonDTO)
 }
 
-internal class PersonDataSourceImpl @Inject constructor() : PersonDataSource {
-    private val personMap = mutableMapOf<UUID, PersonDTO>()
-
-    init {
-        personMap.clear()
+internal class PersonRepositoryImpl @Inject constructor(
+    private val dataSource: PersonDataSource
+) : PersonRepository {
+    override suspend fun addPerson(person: PersonDTO) {
+        dataSource.addPerson(person)
     }
 
     override suspend fun getPeople(): List<PersonDTO> {
-        return personMap.values.toList()
+        return dataSource.getPeople()
     }
 
     override suspend fun getPerson(id: UUID): PersonDTO? {
-        return personMap[id]
-    }
-
-    override suspend fun addPerson(person: PersonDTO) {
-        person.id?.let { id ->
-            personMap[id] = person
-        }
+        return dataSource.getPerson(id)
     }
 
     override suspend fun updatePerson(person: PersonDTO) {
-        addPerson(person)
+        dataSource.updatePerson(person)
     }
 
     override suspend fun deletePerson(person: PersonDTO) {
-        personMap.remove(person.id)
+        dataSource.deletePerson(person)
     }
 }

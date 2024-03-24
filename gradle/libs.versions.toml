@@ -12,7 +12,9 @@ junitJupiter = "5.10.2"
 kapt = "1.9.23"
 kotlin = "1.9.23"
 lifecycleRuntimeKtx = "2.7.0"
+mockk = "1.13.10"
 jetbrainsKotlinJvm = "1.9.23"
+couroutines = "1.8.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -34,7 +36,9 @@ hilt-core = { group = "com.google.dagger", name = "hilt-core", version.ref = "da
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 junit-jupiter = { group = "org.junit.jupiter", name = "junit-jupiter", version.ref = "junitJupiter" }
-assertj = {group = "org.assertj", name=  "assertj-core", version.ref = "assertj"}
+assertj = { group = "org.assertj", name = "assertj-core", version.ref = "assertj" }
+mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
+coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "couroutines" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

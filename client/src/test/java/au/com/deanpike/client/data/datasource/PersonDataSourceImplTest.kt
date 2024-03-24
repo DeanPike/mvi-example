@@ -2,6 +2,7 @@ package au.com.deanpike.client.data.datasource
 
 import au.com.deanpike.client.model.PersonDTO
 import java.util.UUID
+import kotlinx.coroutines.test.runTest
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
@@ -18,12 +19,12 @@ internal class PersonDataSourceImplTest {
     }
 
     @Test
-    fun `should initialise person map`() {
+    fun `should initialise person map`() = runTest {
         assertTrue(dataSource.getPeople().isEmpty())
     }
 
     @Test
-    fun `should add person`() {
+    fun `should add person`() = runTest {
         val person = PersonDTO(
             id = UUID.randomUUID(),
             name = "Name",
@@ -37,7 +38,7 @@ internal class PersonDataSourceImplTest {
     }
 
     @Test
-    fun `should not add a person without an id`() {
+    fun `should not add a person without an id`() = runTest {
         val person = PersonDTO(
             id = null,
             name = "Name",
@@ -51,7 +52,7 @@ internal class PersonDataSourceImplTest {
     }
 
     @Test
-    fun `should update a person`() {
+    fun `should update a person`() = runTest {
         val person = PersonDTO(
             id = UUID.randomUUID(),
             name = "Name",
@@ -88,7 +89,7 @@ internal class PersonDataSourceImplTest {
     }
 
     @Test
-    fun `should delete person`() {
+    fun `should delete person`() = runTest {
         val person = PersonDTO(
             id = UUID.randomUUID(),
             name = "Name",
