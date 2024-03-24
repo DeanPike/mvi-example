@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "au.com.deanpike.ui"
+    namespace = "au.com.deanpike.uishared"
     compileSdk = 34
 
     defaultConfig {
@@ -30,15 +30,11 @@ android {
 }
 
 dependencies {
-    implementation(project(":ui-shared"))
-    implementation(project(":client"))
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.material3)
-    implementation(libs.viewmodel.compose)
-
     testImplementation(libs.junit)
-
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 }
