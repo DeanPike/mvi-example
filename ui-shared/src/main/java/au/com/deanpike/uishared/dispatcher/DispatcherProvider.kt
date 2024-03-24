@@ -1,4 +1,4 @@
-package au.com.deanpike.mvi_example.ui.util.dispatcher
+package au.com.deanpike.uishared.dispatcher
 
 import javax.inject.Inject
 import kotlinx.coroutines.CoroutineDispatcher

@@ -1,4 +1,4 @@
-package au.com.deanpike.mvi_example.ui.theme
+package au.com.deanpike.uishared.theme
 
 import android.app.Activity
 import android.os.Build

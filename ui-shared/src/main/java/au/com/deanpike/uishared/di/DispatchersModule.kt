@@ -1,7 +1,7 @@
-package au.com.deanpike.mvi_example.ui.di
+package au.com.deanpike.uishared.di
 
-import au.com.deanpike.mvi_example.ui.util.dispatcher.DispatcherProvider
-import au.com.deanpike.mvi_example.ui.util.dispatcher.DispatcherProviderImpl
+import au.com.deanpike.uishared.dispatcher.DispatcherProvider
+import au.com.deanpike.uishared.dispatcher.DispatcherProviderImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

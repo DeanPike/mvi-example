@@ -1,4 +1,4 @@
-package au.com.deanpike.mvi_example.ui.base
+package au.com.deanpike.uishared.base
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf

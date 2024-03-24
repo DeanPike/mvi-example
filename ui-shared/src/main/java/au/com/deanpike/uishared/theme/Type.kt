@@ -1,4 +1,4 @@
-package au.com.deanpike.mvi_example.ui.theme
+package au.com.deanpike.uishared.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
