@@ -1,12 +1,14 @@
 [versions]
 activityCompose = "1.8.2"
 agp = "8.3.1"
+assertj = "3.25.3"
 composeBom = "2024.03.00"
 coreKtx = "1.12.0"
 daggerHiltPlugin = "2.51"
 espressoCore = "3.5.1"
 junit = "4.13.2"
 junitVersion = "1.1.5"
+junitJupiter = "5.10.2"
 kapt = "1.9.23"
 kotlin = "1.9.23"
 lifecycleRuntimeKtx = "2.7.0"
@@ -14,8 +16,6 @@ jetbrainsKotlinJvm = "1.9.23"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
-junit = { group = "junit", name = "junit", version.ref = "junit" }
-androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
@@ -29,6 +29,12 @@ androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "daggerHiltPlugin" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "daggerHiltPlugin" }
+hilt-core = { group = "com.google.dagger", name = "hilt-core", version.ref = "daggerHiltPlugin" }
+# Test
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
+junit-jupiter = { group = "org.junit.jupiter", name = "junit-jupiter", version.ref = "junitJupiter" }
+assertj = {group = "org.assertj", name=  "assertj-core", version.ref = "assertj"}
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
