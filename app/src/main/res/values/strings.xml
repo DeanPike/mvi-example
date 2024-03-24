@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">mvi-example</string>
+    <string name="mvi_example">MVI Example</string>
 </resources>
