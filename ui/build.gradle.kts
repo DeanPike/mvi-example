@@ -34,11 +34,22 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.11"
     }
+
+
+    tasks.withType<Test>() {
+        useJUnitPlatform()
+    }
+
+    testOptions {
+        animationsDisabled = true
+    }
 }
 
 dependencies {
     implementation(project(":ui-shared"))
     implementation(project(":client"))
+    implementation(project(":data-shared"))
+    testImplementation(testFixtures(project(":test-shared")))
 
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.activity.compose)
@@ -59,6 +70,11 @@ dependencies {
     kapt(libs.hilt.compiler)
 
     testImplementation(libs.junit)
+    testImplementation(libs.junit.jupiter)
+    testImplementation(libs.mockk)
+    testImplementation(libs.coroutines.test)
+    testRuntimeOnly(libs.junit.platform.launcher)
+    testImplementation(libs.assertj)
 
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

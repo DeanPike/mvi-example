@@ -7,8 +7,9 @@ coreKtx = "1.12.0"
 daggerHiltPlugin = "2.51"
 espressoCore = "3.5.1"
 junit = "4.13.2"
-junitVersion = "1.1.5"
+junitPlatformLauncher = "1.10.2"
 junitJupiter = "5.10.2"
+junitVersion = "1.1.5"
 kapt = "1.9.23"
 kotlin = "1.9.23"
 lifecycleRuntimeKtx = "2.7.0"
@@ -42,12 +43,16 @@ androidx-lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lif
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 junit-jupiter = { group = "org.junit.jupiter", name = "junit-jupiter", version.ref = "junitJupiter" }
+junit-vintage-engine = { group = "org.junit.vintage", name = "junit-vintage-engine", version.ref = "junitJupiter" }
+junit-platform-launcher = {group="org.junit.platform", name = "junit-platform-launcher", version.ref = "junitPlatformLauncher"}
 assertj = { group = "org.assertj", name = "assertj-core", version.ref = "assertj" }
 mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
 coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "couroutines" }
 coroutines-core-jvm = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core-jvm", version.ref = "couroutines" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 #material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+kotlinx-coroutines-test-jvm = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test-jvm", version.ref = "couroutines" }
+kotlinx-coroutines-core-jvm = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core-jvm", version.ref = "couroutines" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
