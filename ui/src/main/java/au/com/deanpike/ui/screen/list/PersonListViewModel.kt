@@ -2,8 +2,9 @@ package au.com.deanpike.ui.screen.list
 
 import androidx.lifecycle.viewModelScope
 import au.com.deanpike.client.usecase.PersonUseCase
+import au.com.deanpike.datashared.dispatcher.DispatcherProvider
 import au.com.deanpike.uishared.base.BaseViewModel
-import au.com.deanpike.uishared.dispatcher.DispatcherProvider
+import au.com.deanpike.uishared.base.ScreenStateType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.launch
@@ -28,6 +29,7 @@ class PersonListViewModel @Inject constructor(
             val people = personUseCase.getPeople()
             setState {
                 copy(
+                    screenState = ScreenStateType.SUCCESS,
                     people = people
                 )
             }
