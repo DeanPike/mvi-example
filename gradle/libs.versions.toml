@@ -7,6 +7,7 @@ coreKtx = "1.12.0"
 daggerHiltPlugin = "2.51"
 espressoCore = "3.5.1"
 junit = "4.13.2"
+junitAndroid = "1.6.4"
 junitPlatformLauncher = "1.10.2"
 junitJupiter = "5.10.2"
 junitVersion = "1.1.5"
@@ -19,10 +20,12 @@ couroutines = "1.8.0"
 viewmodelCompose = "2.7.0"
 appcompat = "1.6.1"
 material = "1.11.0"
+materialVersion = "1.11.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+espresso-idling-resource = {group="androidx.test.espresso", name="espresso-idling-resource", version.ref = "espressoCore" }
 androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
@@ -32,6 +35,7 @@ androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
+androidx-ui-test-junit4-android = { group = "androidx.compose.ui", name = "ui-test-junit4-android", version.ref="junitAndroid" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "daggerHiltPlugin" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "daggerHiltPlugin" }
@@ -53,6 +57,7 @@ androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version
 #material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 kotlinx-coroutines-test-jvm = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test-jvm", version.ref = "couroutines" }
 kotlinx-coroutines-core-jvm = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core-jvm", version.ref = "couroutines" }
+material = { group = "com.google.android.material", name = "material", version.ref = "materialVersion" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
