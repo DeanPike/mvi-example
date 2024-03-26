@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "au.com.deanpike.mvi_example"
+    namespace = "au.com.deanpike.mviexample"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "au.com.deanpike.mvi_example"
+        applicationId = "au.com.deanpike.mviexample"
         minSdk = 29
         targetSdk = 34
         versionCode = 1
