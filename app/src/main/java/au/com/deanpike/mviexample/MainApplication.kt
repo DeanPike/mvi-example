@@ -1,4 +1,4 @@
-package au.com.deanpike.mvi_example
+package au.com.deanpike.mviexample
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

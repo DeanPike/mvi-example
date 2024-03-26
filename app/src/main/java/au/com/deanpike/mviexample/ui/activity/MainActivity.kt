@@ -1,4 +1,4 @@
-package au.com.deanpike.mvi_example.ui.activity
+package au.com.deanpike.mviexample.ui.activity
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
