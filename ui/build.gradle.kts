@@ -49,7 +49,7 @@ dependencies {
     implementation(project(":ui-shared"))
     implementation(project(":client"))
     implementation(project(":data-shared"))
-    testImplementation(testFixtures(project(":test-shared")))
+    testImplementation(testFixtures(project(":test-util:test-fixtures")))
 
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.activity.compose)
