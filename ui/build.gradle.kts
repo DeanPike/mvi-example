@@ -43,6 +43,14 @@ android {
     testOptions {
         animationsDisabled = true
     }
+
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            excludes += "META-INF/LICENSE.md"
+            excludes += "META-INF/LICENSE-notice.md"
+        }
+    }
 }
 
 dependencies {
@@ -50,6 +58,8 @@ dependencies {
     implementation(project(":client"))
     implementation(project(":data-shared"))
     testImplementation(testFixtures(project(":test-util:test-fixtures")))
+    androidTestImplementation(project(":test-util:ui-test-shared"))
+    androidTestImplementation(project(":ui-shared"))
 
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.activity.compose)
@@ -60,6 +70,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.androidx.lifecycle.viewmodel)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
+    implementation(libs.constraintlayout.compose)
 
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
@@ -77,4 +88,5 @@ dependencies {
 
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(libs.androidx.ui.test.junit4.android)
 }

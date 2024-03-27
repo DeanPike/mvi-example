@@ -8,7 +8,7 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 
-class UiTestBase {
+open class UiTestBase {
 
     @get:Rule
     val composeTestRule = createComposeRule()
@@ -16,7 +16,7 @@ class UiTestBase {
     private lateinit var idlingResource: IdlingResource
 
     // There is a bug with compose and espresso to do with idling resources
-    // Thats why we are removing the idling resource
+    // That is why we are removing the idling resource
     // https://issuetracker.google.com/issues/223815266
 
     @Before
