@@ -37,7 +37,7 @@ class PersonListItemTest : UiTestBase() {
                 assertNameDisplayed(position = 0, text = "Name One Surname One")
                 assertAgeLabelDisplayed(0)
                 assertAgeDisplayed(position = 0, text = "11")
-                clickOnItem()
+                clickOnItem(0)
             }
 
             assertNotNull(wasItemClicked)

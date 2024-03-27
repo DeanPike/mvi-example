@@ -49,7 +49,7 @@ fun PersonListItem(
                     onItemClicked(it)
                 }
             }
-            .testTag(PERSON_LIST_ITEM_LAYOUT)
+            .testTag("${PERSON_LIST_ITEM_LAYOUT}_$position")
     ) {
         val (nameLabelRef, nameRef, ageLabelRef, ageRef) = createRefs()
         Text(

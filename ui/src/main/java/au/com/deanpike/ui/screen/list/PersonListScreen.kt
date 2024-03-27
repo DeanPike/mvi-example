@@ -26,6 +26,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import au.com.deanpike.client.model.PersonDTO
 import au.com.deanpike.ui.R
 import au.com.deanpike.ui.screen.list.PersonListScreenTestTags.PERSON_LIST
+import au.com.deanpike.ui.screen.list.PersonListScreenTestTags.PERSON_LIST_FAB
 import au.com.deanpike.ui.screen.list.component.PersonListItem
 import au.com.deanpike.uishared.base.ScreenStateType
 import au.com.deanpike.uishared.theme.Dimension.DIM_16
@@ -51,7 +52,8 @@ fun PersonListScreen(
 @Composable
 fun PersonListScreenContent(
     state: PersonListScreenState,
-    onFabClicked: () -> Unit = {}
+    onFabClicked: () -> Unit = {},
+    onItemClicked: (UUID) -> Unit = {}
 ) {
 
     val layoutDirection = LocalLayoutDirection.current
@@ -65,6 +67,7 @@ fun PersonListScreenContent(
         },
         floatingActionButton = {
             FloatingActionButton(
+                modifier = Modifier.testTag(PERSON_LIST_FAB),
                 onClick = { onFabClicked() }
             ) {
                 Icon(Icons.Default.Add, contentDescription = "Add")
@@ -87,7 +90,8 @@ fun PersonListScreenContent(
                     item(key = person.id) {
                         PersonListItem(
                             position = index,
-                            person = person
+                            person = person,
+                            onItemClicked = onItemClicked
                         )
                         Spacer(modifier = Modifier.height(DIM_4))
                     }
@@ -99,7 +103,8 @@ fun PersonListScreenContent(
 
 object PersonListScreenTestTags {
     private const val PREFIX = "PERSON_LIST_SCREEN_"
-    const val PERSON_LIST = "${PREFIX}PERSON_LIST"
+    const val PERSON_LIST = "${PREFIX}_LIST"
+    const val PERSON_LIST_FAB = "${PREFIX}_FAB"
 }
 
 @Composable

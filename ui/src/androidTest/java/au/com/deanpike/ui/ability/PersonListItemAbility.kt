@@ -22,7 +22,7 @@ class PersonListItemAbility(private val composeTestRule: ComposeContentTestRule)
         composeTestRule.assertTextDisplayed(tag = "${PersonListItemTesTags.PERSON_LIST_ITEM_AGE}_$position", text = text)
     }
 
-    fun clickOnItem() {
-        composeTestRule.clickOn(PersonListItemTesTags.PERSON_LIST_ITEM_LAYOUT)
+    fun clickOnItem(position: Int) {
+        composeTestRule.clickOn("${PersonListItemTesTags.PERSON_LIST_ITEM_LAYOUT}_$position")
     }
 }
