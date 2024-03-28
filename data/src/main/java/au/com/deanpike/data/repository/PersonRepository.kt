@@ -1,6 +1,6 @@
-package au.com.deanpike.data.data.repository
+package au.com.deanpike.data.repository
 
-import au.com.deanpike.data.data.datasource.PersonDataSource
+import au.com.deanpike.data.datasource.PersonDataSource
 import au.com.deanpike.client.model.PersonDTO
 import java.util.UUID
 import javax.inject.Inject

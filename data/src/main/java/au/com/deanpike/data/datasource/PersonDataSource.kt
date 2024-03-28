@@ -1,4 +1,4 @@
-package au.com.deanpike.data.data.datasource
+package au.com.deanpike.data.datasource
 
 import au.com.deanpike.client.model.PersonDTO
 import java.util.UUID
@@ -12,7 +12,7 @@ internal interface PersonDataSource {
     suspend fun deletePerson(person: PersonDTO): Boolean
 }
 
-// A data source to hold the people.
+// This class will usually call the rest api
 internal class PersonDataSourceImpl @Inject constructor() : PersonDataSource {
     private val personMap = mutableMapOf<UUID, PersonDTO>()
 

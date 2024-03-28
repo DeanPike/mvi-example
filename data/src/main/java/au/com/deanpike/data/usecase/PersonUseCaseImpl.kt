@@ -1,13 +1,13 @@
 package au.com.deanpike.data.usecase
 
-import au.com.deanpike.data.data.repository.PersonRepository
+import au.com.deanpike.data.repository.PersonRepository
 import au.com.deanpike.client.model.PersonDTO
 import au.com.deanpike.client.usecase.PersonUseCase
 import java.util.UUID
 import javax.inject.Inject
 
 
-// This class would usually map the local data types to remote data types
+// This class would usually maps the local data types to remote data types
 internal class PersonUseCaseImpl @Inject constructor(
     private val repository: PersonRepository
 ) : PersonUseCase {

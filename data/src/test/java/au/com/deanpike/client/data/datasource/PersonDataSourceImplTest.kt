@@ -1,8 +1,8 @@
 package au.com.deanpike.client.data.datasource
 
 import au.com.deanpike.client.model.PersonDTO
-import au.com.deanpike.data.data.datasource.PersonDataSource
-import au.com.deanpike.data.data.datasource.PersonDataSourceImpl
+import au.com.deanpike.data.datasource.PersonDataSource
+import au.com.deanpike.data.datasource.PersonDataSourceImpl
 import java.util.UUID
 import kotlinx.coroutines.test.runTest
 import org.assertj.core.api.Assertions.assertThat

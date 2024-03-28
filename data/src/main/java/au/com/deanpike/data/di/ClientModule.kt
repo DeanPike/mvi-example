@@ -1,9 +1,9 @@
 package au.com.deanpike.data.di
 
-import au.com.deanpike.data.data.datasource.PersonDataSource
-import au.com.deanpike.data.data.datasource.PersonDataSourceImpl
-import au.com.deanpike.data.data.repository.PersonRepository
-import au.com.deanpike.data.data.repository.PersonRepositoryImpl
+import au.com.deanpike.data.datasource.PersonDataSource
+import au.com.deanpike.data.datasource.PersonDataSourceImpl
+import au.com.deanpike.data.repository.PersonRepository
+import au.com.deanpike.data.repository.PersonRepositoryImpl
 import au.com.deanpike.client.usecase.PersonUseCase
 import au.com.deanpike.data.usecase.PersonUseCaseImpl
 import dagger.Binds

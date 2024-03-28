@@ -1,9 +1,9 @@
 package au.com.deanpike.client.data.repository
 
-import au.com.deanpike.data.data.datasource.PersonDataSource
+import au.com.deanpike.data.datasource.PersonDataSource
 import au.com.deanpike.client.model.PersonDTO
-import au.com.deanpike.data.data.repository.PersonRepository
-import au.com.deanpike.data.data.repository.PersonRepositoryImpl
+import au.com.deanpike.data.repository.PersonRepository
+import au.com.deanpike.data.repository.PersonRepositoryImpl
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
