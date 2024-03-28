@@ -26,7 +26,7 @@ class PersonRepositoryImplTest {
 
     @Test
     fun `should add person`() = runTest {
-        coEvery { dataSource.addPerson(person) } just runs
+        coEvery { dataSource.addPerson(person) } returns UUID.randomUUID()
 
         repo.addPerson(person)
 

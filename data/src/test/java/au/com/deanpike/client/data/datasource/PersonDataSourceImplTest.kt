@@ -4,8 +4,6 @@ import au.com.deanpike.client.model.PersonDTO
 import java.util.UUID
 import kotlinx.coroutines.test.runTest
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
@@ -20,7 +18,7 @@ internal class PersonDataSourceImplTest {
 
     @Test
     fun `should initialise person map`() = runTest {
-        assertTrue(dataSource.getPeople().isEmpty())
+        assertThat(dataSource.getPeople()).isEmpty()
     }
 
     @Test
@@ -32,13 +30,14 @@ internal class PersonDataSourceImplTest {
             age = 23
         )
 
-        dataSource.addPerson(person)
+        val addedId = dataSource.addPerson(person)
 
-        assertEquals(1, dataSource.getPeople().size)
+        assertThat(dataSource.getPeople().size).isEqualTo(1)
+        assertThat(person.id).isEqualTo(addedId)
     }
 
     @Test
-    fun `should not add a person without an id`() = runTest {
+    fun `should add a person without an id`() = runTest {
         val person = PersonDTO(
             id = null,
             name = "Name",
@@ -46,9 +45,11 @@ internal class PersonDataSourceImplTest {
             age = 23
         )
 
-        dataSource.addPerson(person)
+        assertThat(dataSource.getPeople()).isEmpty()
+        val addedId = dataSource.addPerson(person)
 
-        assertTrue(dataSource.getPeople().isEmpty())
+        assertThat(dataSource.getPeople().size).isEqualTo(1)
+        assertThat(addedId).isNotNull()
     }
 
     @Test
@@ -61,7 +62,7 @@ internal class PersonDataSourceImplTest {
         )
         dataSource.addPerson(person)
 
-        assertEquals(1, dataSource.getPeople().size)
+        assertThat(dataSource.getPeople().size).isEqualTo(1)
 
         val currentPerson = dataSource.getPerson(person.id!!)!!
         with(currentPerson) {
@@ -78,7 +79,7 @@ internal class PersonDataSourceImplTest {
         )
         dataSource.updatePerson(updatedPerson)
 
-        assertEquals(1, dataSource.getPeople().size)
+        assertThat(dataSource.getPeople().size).isEqualTo(1)
 
         val actualPerson = dataSource.getPerson(person.id!!)!!
         with(actualPerson) {
@@ -86,6 +87,22 @@ internal class PersonDataSourceImplTest {
             assertThat(surname).isEqualTo("New Surname")
             assertThat(age).isEqualTo(43)
         }
+    }
+
+    @Test
+    fun `should add a person that is trying to be updated but does not have an id`() = runTest {
+        val person = PersonDTO(
+            id = null,
+            name = "Name",
+            surname = "Surname",
+            age = 23
+        )
+
+        assertThat(dataSource.getPeople()).isEmpty()
+
+        dataSource.updatePerson(person)
+
+        assertThat(dataSource.getPeople().size).isEqualTo(1)
     }
 
     @Test
@@ -98,12 +115,11 @@ internal class PersonDataSourceImplTest {
         )
         dataSource.addPerson(person)
 
-        assertEquals(1, dataSource.getPeople().size)
+        assertThat(dataSource.getPeople().size).isEqualTo(1)
 
         // Test
         dataSource.deletePerson(person)
 
-        assertEquals(0, dataSource.getPeople().size)
+        assertThat(dataSource.getPeople()).isEmpty()
     }
-
 }

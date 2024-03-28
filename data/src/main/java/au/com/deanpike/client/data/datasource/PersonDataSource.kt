@@ -5,7 +5,7 @@ import java.util.UUID
 import javax.inject.Inject
 
 internal interface PersonDataSource {
-    suspend fun addPerson(person: PersonDTO)
+    suspend fun addPerson(person: PersonDTO): UUID
     suspend fun getPeople(): List<PersonDTO>
     suspend fun getPerson(id: UUID): PersonDTO?
     suspend fun updatePerson(person: PersonDTO)
@@ -27,14 +27,27 @@ internal class PersonDataSourceImpl @Inject constructor() : PersonDataSource {
         return personMap[id]
     }
 
-    override suspend fun addPerson(person: PersonDTO) {
-        person.id?.let { id ->
-            personMap[id] = person
+    override suspend fun addPerson(person: PersonDTO): UUID {
+        val personToAdd = if (person.id == null) {
+            person.copy(
+                id = UUID.randomUUID()
+            )
+        } else {
+            person
         }
+        personToAdd.id?.let {
+            personMap[it] = personToAdd
+        }
+
+        return personToAdd.id!!
     }
 
     override suspend fun updatePerson(person: PersonDTO) {
-        addPerson(person)
+        if (person.id == null) {
+            addPerson(person)
+        } else {
+            addPerson(person)
+        }
     }
 
     override suspend fun deletePerson(person: PersonDTO) {
