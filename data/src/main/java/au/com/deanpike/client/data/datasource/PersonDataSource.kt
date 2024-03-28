@@ -9,7 +9,7 @@ internal interface PersonDataSource {
     suspend fun getPeople(): List<PersonDTO>
     suspend fun getPerson(id: UUID): PersonDTO?
     suspend fun updatePerson(person: PersonDTO): Boolean
-    suspend fun deletePerson(person: PersonDTO)
+    suspend fun deletePerson(person: PersonDTO): Boolean
 }
 
 internal class PersonDataSourceImpl @Inject constructor() : PersonDataSource {
@@ -55,7 +55,12 @@ internal class PersonDataSourceImpl @Inject constructor() : PersonDataSource {
         }
     }
 
-    override suspend fun deletePerson(person: PersonDTO) {
-        personMap.remove(person.id)
+    override suspend fun deletePerson(person: PersonDTO): Boolean {
+        return if (personMap.containsKey(person.id)) {
+            personMap.remove(person.id)
+            true
+        } else {
+            false
+        }
     }
 }

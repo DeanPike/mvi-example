@@ -131,9 +131,26 @@ internal class PersonDataSourceImplTest {
         assertThat(dataSource.getPeople().size).isEqualTo(1)
 
         // Test
-        dataSource.deletePerson(person.copy(id = newId))
+        val response = dataSource.deletePerson(person.copy(id = newId))
 
         assertThat(dataSource.getPeople()).isEmpty()
+        assertThat(response).isTrue()
+    }
+
+    @Test
+    fun `should not delete a person that cannot be found`() = runTest {
+        val person = getPerson().copy(id = null)
+        val newId = dataSource.addPerson(person)
+        assertThat(dataSource.getPeople().size).isEqualTo(1)
+
+        val personToDelete = person.copy(id = UUID.randomUUID())
+
+        assertThat(newId).isNotEqualTo(personToDelete.id)
+
+        val response = dataSource.deletePerson(personToDelete)
+
+        assertThat(response).isFalse()
+        assertThat(dataSource.getPeople().size).isEqualTo(1)
     }
 
     private fun getPerson() = PersonDTO(
