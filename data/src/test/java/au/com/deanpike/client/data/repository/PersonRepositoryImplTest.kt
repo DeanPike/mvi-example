@@ -4,9 +4,7 @@ import au.com.deanpike.client.data.datasource.PersonDataSource
 import au.com.deanpike.client.model.PersonDTO
 import io.mockk.coEvery
 import io.mockk.coVerify
-import io.mockk.just
 import io.mockk.mockk
-import io.mockk.runs
 import java.util.UUID
 import kotlinx.coroutines.test.runTest
 import org.assertj.core.api.Assertions.assertThat
@@ -28,8 +26,9 @@ class PersonRepositoryImplTest {
     fun `should add person`() = runTest {
         coEvery { dataSource.addPerson(person) } returns UUID.randomUUID()
 
-        repo.addPerson(person)
+        val addedId = repo.addPerson(person)
 
+        assertThat(addedId).isNotNull()
         coVerify { dataSource.addPerson(person) }
     }
 
@@ -69,21 +68,22 @@ class PersonRepositoryImplTest {
 
     @Test
     fun `should update person`() = runTest {
-        coEvery { dataSource.updatePerson(person) } just runs
+        coEvery { dataSource.updatePerson(person) } returns true
 
-        repo.updatePerson(person)
+        val response = repo.updatePerson(person)
 
+        assertThat(response).isTrue()
         coVerify { dataSource.updatePerson(person) }
     }
 
     @Test
     fun `should delete person`() = runTest {
-        coEvery { dataSource.deletePerson(person) } just runs
+        coEvery { dataSource.deletePerson(person) } returns true
 
-        repo.deletePerson(person)
+        val response = repo.deletePerson(person)
 
+        assertThat(response).isTrue()
         coVerify { dataSource.deletePerson(person) }
-
     }
 
     private fun getPersonOne() = PersonDTO(
