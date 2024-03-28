@@ -13,6 +13,9 @@ internal interface PersonRepository {
     suspend fun deletePerson(person: PersonDTO): Boolean
 }
 
+// This will usually talk to a local or network data source
+// This is where we would make local data types to remote data types
+// Success/error responses from datasource calls are handled here
 internal class PersonRepositoryImpl @Inject constructor(
     private val dataSource: PersonDataSource
 ) : PersonRepository {

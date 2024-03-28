@@ -4,11 +4,10 @@ import au.com.deanpike.client.data.repository.PersonRepository
 import au.com.deanpike.client.model.PersonDTO
 import io.mockk.coEvery
 import io.mockk.coVerify
-import io.mockk.just
 import io.mockk.mockk
-import io.mockk.runs
 import java.util.UUID
 import kotlinx.coroutines.test.runTest
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
@@ -24,10 +23,11 @@ class PersonUseCaseImplTest {
 
     @Test
     fun `should add person`() = runTest {
-        coEvery { repo.addPerson(person) } just runs
+        coEvery { repo.addPerson(person) } returns UUID.randomUUID()
 
-        useCase.addPerson(person)
+        val id = useCase.addPerson(person)
 
+        assertThat(id).isNotNull
         coVerify { repo.addPerson(person) }
     }
 
@@ -36,7 +36,8 @@ class PersonUseCaseImplTest {
         val personTwo = getPersonTwo()
         coEvery { repo.getPeople() } returns listOf(person, personTwo)
 
-        useCase.getPeople()
+        val people = useCase.getPeople()
+        assertThat(people.size).isEqualTo(2)
 
         coVerify { repo.getPeople() }
     }
@@ -52,7 +53,7 @@ class PersonUseCaseImplTest {
 
     @Test
     fun `should update person`() = runTest {
-        coEvery { repo.updatePerson(person) } just runs
+        coEvery { repo.updatePerson(person) } returns true
 
         useCase.updatePerson(person)
 
@@ -61,7 +62,7 @@ class PersonUseCaseImplTest {
 
     @Test
     fun `should delete person`() = runTest {
-        coEvery { repo.deletePerson(person) } just runs
+        coEvery { repo.deletePerson(person) } returns true
 
         useCase.deletePerson(person)
 

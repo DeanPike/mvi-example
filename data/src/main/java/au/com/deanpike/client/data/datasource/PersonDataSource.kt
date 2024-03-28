@@ -12,6 +12,7 @@ internal interface PersonDataSource {
     suspend fun deletePerson(person: PersonDTO): Boolean
 }
 
+// A data source to hold the people.
 internal class PersonDataSourceImpl @Inject constructor() : PersonDataSource {
     private val personMap = mutableMapOf<UUID, PersonDTO>()
 
