@@ -1,4 +1,4 @@
-package au.com.deanpike.client.data.datasource
+package au.com.deanpike.data.data.datasource
 
 import au.com.deanpike.client.model.PersonDTO
 import java.util.UUID

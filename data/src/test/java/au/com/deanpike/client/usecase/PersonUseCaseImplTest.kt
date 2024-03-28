@@ -1,7 +1,8 @@
 package au.com.deanpike.client.usecase
 
-import au.com.deanpike.client.data.repository.PersonRepository
+import au.com.deanpike.data.data.repository.PersonRepository
 import au.com.deanpike.client.model.PersonDTO
+import au.com.deanpike.data.usecase.PersonUseCaseImpl
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk

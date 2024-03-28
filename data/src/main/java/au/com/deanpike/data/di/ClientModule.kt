@@ -1,11 +1,11 @@
-package au.com.deanpike.client.di
+package au.com.deanpike.data.di
 
-import au.com.deanpike.client.data.datasource.PersonDataSource
-import au.com.deanpike.client.data.datasource.PersonDataSourceImpl
-import au.com.deanpike.client.data.repository.PersonRepository
-import au.com.deanpike.client.data.repository.PersonRepositoryImpl
+import au.com.deanpike.data.data.datasource.PersonDataSource
+import au.com.deanpike.data.data.datasource.PersonDataSourceImpl
+import au.com.deanpike.data.data.repository.PersonRepository
+import au.com.deanpike.data.data.repository.PersonRepositoryImpl
 import au.com.deanpike.client.usecase.PersonUseCase
-import au.com.deanpike.client.usecase.PersonUseCaseImpl
+import au.com.deanpike.data.usecase.PersonUseCaseImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

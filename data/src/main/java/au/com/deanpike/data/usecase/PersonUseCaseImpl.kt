@@ -1,7 +1,8 @@
-package au.com.deanpike.client.usecase
+package au.com.deanpike.data.usecase
 
-import au.com.deanpike.client.data.repository.PersonRepository
+import au.com.deanpike.data.data.repository.PersonRepository
 import au.com.deanpike.client.model.PersonDTO
+import au.com.deanpike.client.usecase.PersonUseCase
 import java.util.UUID
 import javax.inject.Inject
 
