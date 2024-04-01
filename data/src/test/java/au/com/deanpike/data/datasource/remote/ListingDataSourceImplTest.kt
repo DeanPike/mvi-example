@@ -1,5 +1,6 @@
 package au.com.deanpike.data.datasource.remote
 
+import au.com.deanpike.client.model.listing.response.ListingType
 import au.com.deanpike.data.api.PropertyListingApi
 import au.com.deanpike.data.model.external.AddressComponents
 import au.com.deanpike.data.model.external.Advertiser
@@ -14,6 +15,7 @@ import au.com.deanpike.data.model.internal.ListingSearchRequest
 import au.com.deanpike.datashared.util.ResponseWrapper
 import io.mockk.coEvery
 import io.mockk.mockk
+import java.io.IOException
 import kotlinx.coroutines.test.runTest
 import org.assertj.core.api.Assertions.assertThat
 import org.joda.time.DateTime
@@ -65,7 +67,7 @@ class ListingDataSourceImplTest {
         }
 
         with(data.searchResults[0]) {
-            assertThat(listingType).isEqualTo("listing_type")
+            assertThat(listingType).isEqualTo(ListingType.PROPERTY)
             assertThat(id).isEqualTo(1)
             assertThat(dateListed).isEqualTo(now.toString(dateFormat))
             assertThat(address).isEqualTo("104/86 Burke Road, Malvern East")
@@ -95,6 +97,31 @@ class ListingDataSourceImplTest {
         }
     }
 
+    @Test
+    fun `should handle exception`() = runTest {
+        coEvery {
+            api.getListings(
+                contentType = "application/json",
+                body = ListingSearchRequest(
+                    searchMode = "Buy",
+                    dwellingTypes = listOf("House")
+                )
+            )
+        } throws IOException("No internet")
+
+        val response = dataSource.getListings(
+            request = ListingSearchRequest(
+                searchMode = "Buy",
+                dwellingTypes = listOf("House")
+            )
+        )
+
+        assertThat(response).isInstanceOf(ResponseWrapper.Error::class.java)
+        val error = response as ResponseWrapper.Error
+        assertThat(error.exception).isInstanceOf(IOException::class.java)
+        assertThat(error.exception.message).isEqualTo("No internet")
+    }
+
     private fun getResponse(): ListingResponse {
         val media = Medium(type = "photo", imageUrl = "http://some.url.com", mediaType = "image")
         val geoLocation = GeoLocation(-37.8696938, 145.0498)
@@ -119,7 +146,7 @@ class ListingDataSourceImplTest {
         )
 
         val searchResult = SearchResult(
-            listingType = "listing_type",
+            listingType = ListingType.PROPERTY,
             id = 1,
             dateListed = now.toString(dateFormat),
             address = "104/86 Burke Road, Malvern East",

@@ -11,6 +11,7 @@ java {
 
 dependencies {
     implementation(project(":client"))
+    testImplementation(project(":client"))
     implementation(project(":data-shared"))
     implementation(libs.hilt.core)
     kapt(libs.hilt.compiler)

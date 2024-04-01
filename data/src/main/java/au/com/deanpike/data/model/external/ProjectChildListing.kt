@@ -2,7 +2,7 @@ package au.com.deanpike.data.model.external
 
 import com.google.gson.annotations.SerializedName
 
-internal data class ChildListing(
+internal data class ProjectChildListing(
     val id: Long,
     @SerializedName("date_listed")
     val dateListed: String,

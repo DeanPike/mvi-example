@@ -12,7 +12,7 @@ internal data class Project(
     @SerializedName("project_price_from")
     val projectPriceFrom: Long?,
     @SerializedName("child_listings")
-    val childListings: List<ChildListing>,
+    val childListings: List<ProjectChildListing>,
     @SerializedName("project_color_hex")
     val projectColorHex: String?,
 )

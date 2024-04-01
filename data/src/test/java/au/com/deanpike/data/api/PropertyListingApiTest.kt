@@ -1,6 +1,9 @@
 package au.com.deanpike.data.api
 
+import au.com.deanpike.client.model.listing.response.ListingType
 import au.com.deanpike.data.model.internal.ListingSearchRequest
+import au.com.deanpike.data.util.ListingTypeDeserialiser
+import com.google.gson.GsonBuilder
 import java.io.InputStreamReader
 import kotlinx.coroutines.test.runTest
 import okhttp3.mockwebserver.MockResponse
@@ -16,13 +19,16 @@ class PropertyListingApiTest {
     private lateinit var server: MockWebServer
     private lateinit var api: PropertyListingApi
     private lateinit var jsonResponse: String
+    private val gson = GsonBuilder()
+        .registerTypeAdapter(ListingType::class.java, ListingTypeDeserialiser())
+        .create()
 
     @BeforeEach
     fun beforeEach() {
         server = MockWebServer()
         api = Retrofit.Builder()
             .baseUrl(server.url("/"))
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .build().create(PropertyListingApi::class.java)
         jsonResponse = readFile()
     }
@@ -34,9 +40,9 @@ class PropertyListingApiTest {
 
     @Test
     fun `getFeedbackQuestions, returns Success`() = runTest {
-        val res = MockResponse()//Make a fake response for our server call
-        res.setBody(jsonResponse)//set the body of the fake response as the json string you are expecting as a response
-        server.enqueue(res)//add it in the server response queue
+        val res = MockResponse()
+        res.setBody(jsonResponse)
+        server.enqueue(res)
 
         val data = api.getListings(
             contentType = "application/json",
@@ -52,7 +58,7 @@ class PropertyListingApiTest {
 
         // Top Spot
         with(data.searchResults[0]) {
-            assertThat(listingType).isEqualTo("topspot")
+            assertThat(listingType).isEqualTo(ListingType.TOPSPOT)
             assertThat(id).isEqualTo(2019096805)
             assertThat(dateListed).isEqualTo("2024-03-05T16:43:35+11:00")
             assertThat(address).isEqualTo("41 Chifley Road, Lithgow")
@@ -90,7 +96,7 @@ class PropertyListingApiTest {
 
         // Project
         with(data.searchResults[1]) {
-            assertThat(listingType).isEqualTo("project")
+            assertThat(listingType).isEqualTo(ListingType.PROJECT)
             assertThat(id).isEqualTo(2842)
             assertThat(address).isEqualTo("81 KITTYHAWK DRIVE, CHERMSIDE, QLD 4032")
             assertThat(promoLevel).isEqualTo("P+")
@@ -145,7 +151,7 @@ class PropertyListingApiTest {
 
         // Property
         with(data.searchResults[2]) {
-            assertThat(listingType).isEqualTo("property")
+            assertThat(listingType).isEqualTo(ListingType.PROPERTY)
             assertThat(id).isEqualTo(2019150933)
             assertThat(dateListed).isEqualTo("2024-04-01T10:43:10+11:00")
             assertThat(address).isEqualTo("14 Mayfair Drive, Browns Plains")

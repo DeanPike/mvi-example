@@ -1,0 +1,13 @@
+package au.com.deanpike.client.model.listing.response
+
+data class Property(
+    override val id: Long,
+    override val listingType: ListingType,
+    val address: String,
+    val listingImage: String?,
+    val agencyImage: String?,
+    val dwellingType: String?,
+    val headLine: String?,
+    val lifecycleStatus: String?,
+    val detail: ListingDetails
+) : Listing()
