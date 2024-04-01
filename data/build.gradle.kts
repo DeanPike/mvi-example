@@ -14,10 +14,19 @@ dependencies {
     implementation(libs.hilt.core)
     kapt(libs.hilt.compiler)
 
+    // Retrofit
+    implementation(libs.logging.interceptor)
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter.gson)
+    implementation(libs.retrofit.serialization.converter)
+
+    implementation(libs.kotlinx.serialization.json)
+
     testImplementation(libs.junit.jupiter)
     testImplementation(libs.assertj)
     testImplementation(libs.mockk)
     testImplementation(libs.coroutines.test)
+    testImplementation(libs.mockwebserver)
 }
 
 tasks.test {
