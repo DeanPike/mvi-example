@@ -7,6 +7,7 @@ constraintLayout = "1.0.1"
 coreKtx = "1.12.0"
 daggerHiltPlugin = "2.51"
 espressoCore = "3.5.1"
+jodaTimeVersion = "2.12.7"
 junitAndroid = "1.6.4"
 junitPlatformLauncher = "1.10.2"
 junitJupiter = "5.10.2"
@@ -72,6 +73,7 @@ kotlinx-coroutines-test-jvm = { group = "org.jetbrains.kotlinx", name = "kotlinx
 kotlinx-coroutines-core-jvm = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core-jvm", version.ref = "couroutines" }
 material = { group = "com.google.android.material", name = "material", version.ref = "materialVersion" }
 mockwebserver = { group = "com.squareup.okhttp3", name = "mockwebserver", version.ref = "mockwebserverVersion" }
+joda-time = { group = "joda-time", name = "joda-time", version.ref = "jodaTimeVersion" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

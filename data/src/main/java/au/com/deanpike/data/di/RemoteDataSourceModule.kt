@@ -1,6 +1,7 @@
 package au.com.deanpike.data.di
 
 import au.com.deanpike.data.model.external.ListingResponse
+import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -27,10 +28,10 @@ object RemoteDataSourceModule {
             .build()
 
     @Provides
-    fun provideRetrofit(okHttpClient: OkHttpClient) =
+    fun provideRetrofit(okHttpClient: OkHttpClient, gson: Gson) =
         Retrofit.Builder()
             .baseUrl("https://domain-adapter-api.domain.com.au/")
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .client(okHttpClient)
             .build()
 

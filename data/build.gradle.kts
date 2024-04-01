@@ -11,6 +11,7 @@ java {
 
 dependencies {
     implementation(project(":client"))
+    implementation(project(":data-shared"))
     implementation(libs.hilt.core)
     kapt(libs.hilt.compiler)
 
@@ -27,6 +28,7 @@ dependencies {
     testImplementation(libs.mockk)
     testImplementation(libs.coroutines.test)
     testImplementation(libs.mockwebserver)
+    testImplementation(libs.joda.time)
 }
 
 tasks.test {
