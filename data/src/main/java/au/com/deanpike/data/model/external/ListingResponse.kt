@@ -13,11 +13,6 @@ internal data class ListingResponse(
     val resultsReturned: Long,
     @SerializedName("school_metadata")
     val schoolMetadata: Any?,
-    @SerializedName("tracking_metadata")
-    val trackingMetadata: TrackingMetadata,
-    val tracking: Tracking,
     @SerializedName("allows_immediate_property_alert")
     val allowsImmediatePropertyAlert: Boolean,
-    @SerializedName("search_insights")
-    val searchInsights: SearchInsights,
 )

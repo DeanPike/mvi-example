@@ -26,46 +26,6 @@
           "type": "photo",
           "image_url": "https://bucket-api.domain.com.au/v1/bucket/image/2019096805_4_1_240305_054334-w1754-h1240",
           "media_type": "image"
-        },
-        {
-          "type": "photo",
-          "image_url": "https://bucket-api.domain.com.au/v1/bucket/image/2019096805_5_1_240305_054334-w2048-h1365",
-          "media_type": "image"
-        },
-        {
-          "type": "photo",
-          "image_url": "https://bucket-api.domain.com.au/v1/bucket/image/2019096805_6_1_240305_054334-w2048-h1365",
-          "media_type": "image"
-        },
-        {
-          "type": "photo",
-          "image_url": "https://bucket-api.domain.com.au/v1/bucket/image/2019096805_7_1_240305_054334-w2048-h1365",
-          "media_type": "image"
-        },
-        {
-          "type": "photo",
-          "image_url": "https://bucket-api.domain.com.au/v1/bucket/image/2019096805_8_1_240305_054335-w2048-h1365",
-          "media_type": "image"
-        },
-        {
-          "type": "photo",
-          "image_url": "https://bucket-api.domain.com.au/v1/bucket/image/2019096805_9_1_240305_054335-w2048-h1152",
-          "media_type": "image"
-        },
-        {
-          "type": "photo",
-          "image_url": "https://bucket-api.domain.com.au/v1/bucket/image/2019096805_10_1_240305_054334-w2048-h1365",
-          "media_type": "image"
-        },
-        {
-          "type": "photo",
-          "image_url": "https://bucket-api.domain.com.au/v1/bucket/image/2019096805_11_1_240305_054334-w2048-h1365",
-          "media_type": "image"
-        },
-        {
-          "type": "photo",
-          "image_url": "https://bucket-api.domain.com.au/v1/bucket/image/2019096805_12_1_240305_054335-w2048-h1365",
-          "media_type": "image"
         }
       ],
       "bedroom_count": 3,
@@ -129,7 +89,7 @@
             "price": "$3,250,000",
             "bathroom_count": 3,
             "bedroom_count": 4,
-            "carspace_count": 3,
+            "carspace_count": 2,
             "homepass_enabled": false,
             "property_size": "283m²",
             "earliest_inspections": [
@@ -141,16 +101,6 @@
               {
                 "time_open": "2024-04-04T10:00:00",
                 "time_close": "2024-04-04T14:00:00",
-                "recurrence_type": "weekly"
-              },
-              {
-                "time_open": "2024-04-10T10:00:00",
-                "time_close": "2024-04-10T14:00:00",
-                "recurrence_type": "weekly"
-              },
-              {
-                "time_open": "2024-04-11T10:00:00",
-                "time_close": "2024-04-11T14:00:00",
                 "recurrence_type": "weekly"
               }
             ]
@@ -174,112 +124,6 @@
               {
                 "time_open": "2024-04-04T10:00:00",
                 "time_close": "2024-04-04T14:00:00",
-                "recurrence_type": "weekly"
-              },
-              {
-                "time_open": "2024-04-10T10:00:00",
-                "time_close": "2024-04-10T14:00:00",
-                "recurrence_type": "weekly"
-              },
-              {
-                "time_open": "2024-04-11T10:00:00",
-                "time_close": "2024-04-11T14:00:00",
-                "recurrence_type": "weekly"
-              }
-            ]
-          },
-          {
-            "id": 2019092533,
-            "date_listed": "2024-03-04T10:53:19+11:00",
-            "lifecycle_status": "New Home",
-            "price": "$1,649,000",
-            "bathroom_count": 2,
-            "bedroom_count": 3,
-            "carspace_count": 2,
-            "homepass_enabled": false,
-            "property_size": "154m²",
-            "earliest_inspections": [
-              {
-                "time_open": "2024-04-03T10:00:00",
-                "time_close": "2024-04-03T14:00:00",
-                "recurrence_type": "weekly"
-              },
-              {
-                "time_open": "2024-04-04T10:00:00",
-                "time_close": "2024-04-04T14:00:00",
-                "recurrence_type": "weekly"
-              },
-              {
-                "time_open": "2024-04-05T10:00:00",
-                "time_close": "2024-04-05T14:00:00",
-                "recurrence_type": "weekly"
-              },
-              {
-                "time_open": "2024-04-06T10:00:00",
-                "time_close": "2024-04-06T14:00:00",
-                "recurrence_type": "weekly"
-              },
-              {
-                "time_open": "2024-04-10T10:00:00",
-                "time_close": "2024-04-10T14:00:00",
-                "recurrence_type": "weekly"
-              },
-              {
-                "time_open": "2024-04-11T10:00:00",
-                "time_close": "2024-04-11T14:00:00",
-                "recurrence_type": "weekly"
-              },
-              {
-                "time_open": "2024-04-12T10:00:00",
-                "time_close": "2024-04-12T14:00:00",
-                "recurrence_type": "weekly"
-              }
-            ]
-          },
-          {
-            "id": 2019092590,
-            "date_listed": "2024-03-04T11:07:29+11:00",
-            "lifecycle_status": "New Home",
-            "price": "$1,499,000",
-            "bathroom_count": 2,
-            "bedroom_count": 3,
-            "carspace_count": 2,
-            "homepass_enabled": false,
-            "property_size": "151m²",
-            "earliest_inspections": [
-              {
-                "time_open": "2024-04-03T10:00:00",
-                "time_close": "2024-04-03T14:00:00",
-                "recurrence_type": "weekly"
-              },
-              {
-                "time_open": "2024-04-04T10:00:00",
-                "time_close": "2024-04-04T14:00:00",
-                "recurrence_type": "weekly"
-              },
-              {
-                "time_open": "2024-04-05T10:00:00",
-                "time_close": "2024-04-05T14:00:00",
-                "recurrence_type": "weekly"
-              },
-              {
-                "time_open": "2024-04-06T10:00:00",
-                "time_close": "2024-04-06T14:00:00",
-                "recurrence_type": "weekly"
-              },
-              {
-                "time_open": "2024-04-10T10:00:00",
-                "time_close": "2024-04-10T14:00:00",
-                "recurrence_type": "weekly"
-              },
-              {
-                "time_open": "2024-04-11T10:00:00",
-                "time_close": "2024-04-11T14:00:00",
-                "recurrence_type": "weekly"
-              },
-              {
-                "time_open": "2024-04-12T10:00:00",
-                "time_close": "2024-04-12T14:00:00",
                 "recurrence_type": "weekly"
               }
             ]
@@ -319,76 +163,6 @@
         {
           "type": "photo",
           "image_url": "https://bucket-api.domain.com.au/v1/bucket/image/2019150933_3_1_240331_114308-w3600-h2400",
-          "media_type": "image"
-        },
-        {
-          "type": "photo",
-          "image_url": "https://bucket-api.domain.com.au/v1/bucket/image/2019150933_4_1_240331_114308-w3600-h2400",
-          "media_type": "image"
-        },
-        {
-          "type": "photo",
-          "image_url": "https://bucket-api.domain.com.au/v1/bucket/image/2019150933_5_1_240331_114308-w3600-h2400",
-          "media_type": "image"
-        },
-        {
-          "type": "photo",
-          "image_url": "https://bucket-api.domain.com.au/v1/bucket/image/2019150933_6_1_240331_114308-w3600-h2400",
-          "media_type": "image"
-        },
-        {
-          "type": "photo",
-          "image_url": "https://bucket-api.domain.com.au/v1/bucket/image/2019150933_7_1_240331_114308-w3600-h2400",
-          "media_type": "image"
-        },
-        {
-          "type": "photo",
-          "image_url": "https://bucket-api.domain.com.au/v1/bucket/image/2019150933_8_1_240331_114308-w3600-h2400",
-          "media_type": "image"
-        },
-        {
-          "type": "photo",
-          "image_url": "https://bucket-api.domain.com.au/v1/bucket/image/2019150933_9_1_240331_114308-w3600-h2400",
-          "media_type": "image"
-        },
-        {
-          "type": "photo",
-          "image_url": "https://bucket-api.domain.com.au/v1/bucket/image/2019150933_10_1_240331_114308-w3600-h2400",
-          "media_type": "image"
-        },
-        {
-          "type": "photo",
-          "image_url": "https://bucket-api.domain.com.au/v1/bucket/image/2019150933_11_1_240331_114308-w3600-h2400",
-          "media_type": "image"
-        },
-        {
-          "type": "photo",
-          "image_url": "https://bucket-api.domain.com.au/v1/bucket/image/2019150933_12_1_240331_114308-w3600-h2400",
-          "media_type": "image"
-        },
-        {
-          "type": "photo",
-          "image_url": "https://bucket-api.domain.com.au/v1/bucket/image/2019150933_13_1_240331_114308-w3200-h2400",
-          "media_type": "image"
-        },
-        {
-          "type": "photo",
-          "image_url": "https://bucket-api.domain.com.au/v1/bucket/image/2019150933_14_1_240331_114308-w3600-h2400",
-          "media_type": "image"
-        },
-        {
-          "type": "photo",
-          "image_url": "https://bucket-api.domain.com.au/v1/bucket/image/2019150933_15_1_240331_114308-w3200-h2400",
-          "media_type": "image"
-        },
-        {
-          "type": "photo",
-          "image_url": "https://bucket-api.domain.com.au/v1/bucket/image/2019150933_16_1_240331_114308-w3600-h2400",
-          "media_type": "image"
-        },
-        {
-          "type": "photo",
-          "image_url": "https://bucket-api.domain.com.au/v1/bucket/image/2019150933_17_1_240331_114308-w3600-h2400",
           "media_type": "image"
         }
       ],
