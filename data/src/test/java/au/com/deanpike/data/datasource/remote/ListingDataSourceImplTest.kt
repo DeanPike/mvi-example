@@ -12,7 +12,7 @@ import au.com.deanpike.data.model.external.Medium
 import au.com.deanpike.data.model.external.MetaData
 import au.com.deanpike.data.model.external.SearchResult
 import au.com.deanpike.data.model.internal.ListingSearchRequest
-import au.com.deanpike.datashared.util.ResponseWrapper
+import au.com.deanpike.client.util.ResponseWrapper
 import io.mockk.coEvery
 import io.mockk.mockk
 import java.io.IOException

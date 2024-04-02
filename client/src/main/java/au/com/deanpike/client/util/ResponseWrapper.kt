@@ -1,4 +1,4 @@
-package au.com.deanpike.datashared.util
+package au.com.deanpike.client.util
 
 sealed class ResponseWrapper<out T> {
     data class Success<out T>(val data: T) : ResponseWrapper<T>()

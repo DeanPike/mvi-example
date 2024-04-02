@@ -1,12 +1,14 @@
 package au.com.deanpike.data.di
 
+import au.com.deanpike.client.model.listing.response.ListingType
 import au.com.deanpike.data.converter.ListingConverterFactory
 import au.com.deanpike.data.converter.ListingConverterFactoryImpl
-import au.com.deanpike.client.model.listing.response.ListingType
 import au.com.deanpike.data.datasource.remote.ListingDataSource
 import au.com.deanpike.data.datasource.remote.ListingDataSourceImpl
 import au.com.deanpike.data.repository.ListingRepository
 import au.com.deanpike.data.repository.ListingRepositoryImpl
+import au.com.deanpike.data.usecase.ListingUseCase
+import au.com.deanpike.data.usecase.ListingUseCaseImpl
 import au.com.deanpike.data.util.ListingTypeDeserialiser
 import com.google.gson.GsonBuilder
 import dagger.Binds
@@ -27,6 +29,9 @@ internal abstract class DataModule {
 
     @Binds
     abstract fun bindListingConverterFactory(factory: ListingConverterFactoryImpl): ListingConverterFactory
+
+    @Binds
+    abstract fun bindListingUseCase(useCase: ListingUseCaseImpl): ListingUseCase
 
     companion object {
         @Provides
