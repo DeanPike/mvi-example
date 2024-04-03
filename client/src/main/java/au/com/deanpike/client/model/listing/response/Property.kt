@@ -6,6 +6,7 @@ data class Property(
     val address: String,
     val listingImage: String?,
     val agencyImage: String?,
+    val agencyColour: String?,
     val dwellingType: String?,
     val headLine: String?,
     val lifecycleStatus: String?,

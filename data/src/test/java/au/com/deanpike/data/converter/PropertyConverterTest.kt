@@ -68,6 +68,7 @@ class PropertyConverterTest {
             assertThat(address).isEqualTo("Property address")
             assertThat(listingImage).isEqualTo("http://some.image.one")
             assertThat(agencyImage).isEqualTo("http://advertiser.logo")
+            assertThat(agencyColour).isEqualTo("White")
             assertThat(dwellingType).isEqualTo("House")
             assertThat(headLine).isEqualTo("Property Headline")
             assertThat(lifecycleStatus).isEqualTo("New")
