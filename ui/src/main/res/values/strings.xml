@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="mvi_example">MVI Example</string>
-    <string name="name">Name</string>
-    <string name="age">Age</string>
+    <string name="mvi_example">Property</string>
+
+    <string name="property_image_description">Property image</string>
+    <string name="number_of_bedrooms">Number of bedrooms</string>
+    <string name="number_of_bathrooms">Number of bathrooms</string>
+    <string name="number_of_parking_spaces">Number of parking spaces</string>
 </resources>

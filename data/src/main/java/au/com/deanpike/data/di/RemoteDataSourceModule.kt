@@ -1,6 +1,6 @@
 package au.com.deanpike.data.di
 
-import au.com.deanpike.data.model.external.ListingResponse
+import au.com.deanpike.data.api.PropertyListingApi
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
@@ -36,5 +36,5 @@ object RemoteDataSourceModule {
             .build()
 
     @Provides
-    internal fun providePropertyListingsRemoteDataSourceApi(retrofit: Retrofit): ListingResponse = retrofit.create(ListingResponse::class.java)
+    internal fun providePropertyListingsRemoteDataSourceApi(retrofit: Retrofit): PropertyListingApi = retrofit.create(PropertyListingApi::class.java)
 }

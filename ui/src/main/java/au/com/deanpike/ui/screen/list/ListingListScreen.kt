@@ -3,22 +3,28 @@ package au.com.deanpike.ui.screen.list
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import au.com.deanpike.client.model.listing.response.Property
 import au.com.deanpike.ui.R
 import au.com.deanpike.ui.screen.list.ListingListScreenTestTags.LISTING_LIST
+import au.com.deanpike.ui.screen.list.component.PropertyListItem
 import au.com.deanpike.uishared.base.ScreenStateType
 import au.com.deanpike.uishared.theme.Dimension.DIM_16
 import au.com.deanpike.uishared.theme.MviExampleTheme
@@ -42,7 +48,6 @@ fun ListingListScreen(
 @Composable
 fun ListingListScreenContent(
     state: ListingListScreenState,
-    onFabClicked: () -> Unit = {},
     onItemClicked: (UUID) -> Unit = {}
 ) {
 
@@ -60,32 +65,39 @@ fun ListingListScreenContent(
             LazyColumn(
                 modifier = Modifier
                     .padding(
-                        start = innerPadding.calculateStartPadding(layoutDirection) + DIM_16,
-                        end = innerPadding.calculateEndPadding(layoutDirection) + DIM_16,
+                        start = innerPadding.calculateStartPadding(layoutDirection),
+                        end = innerPadding.calculateEndPadding(layoutDirection),
                         top = innerPadding.calculateTopPadding(),
                         bottom = innerPadding.calculateBottomPadding()
                     )
                     .testTag(LISTING_LIST),
                 verticalArrangement = Arrangement.spacedBy(DIM_16),
             ) {
-//                state.people.forEachIndexed { index, person ->
-//                    item(key = person.id) {
-//                        PersonListItem(
-//                            position = index,
-//                            person = person,
-//                            onItemClicked = onItemClicked
-//                        )
-//                        Spacer(modifier = Modifier.height(DIM_4))
-//                    }
-//                }
+                state.listings.forEachIndexed { index, listing ->
+                    if (listing is Property) {
+                        item(key = listing.id) {
+                            PropertyListItem(
+                                position = index,
+                                property = listing as Property
+                            )
+                        }
+                        item {
+                            HorizontalDivider(
+                                modifier = Modifier.fillMaxWidth(),
+                                thickness = 1.dp,
+                                color = Color.Gray
+                            )
+                        }
+                    }
+                }
             }
         }
     }
 }
 
 object ListingListScreenTestTags {
-    private const val PREFIX = "PERSON_LIST_SCREEN_"
-    const val LISTING_LIST = "${PREFIX}_LIST"
+    private const val PREFIX = "LISTING_LIST_SCREEN_"
+    const val LISTING_LIST = "${PREFIX}LIST"
 }
 
 @Composable

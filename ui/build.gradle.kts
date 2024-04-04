@@ -79,6 +79,7 @@ dependencies {
 
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
+    implementation(libs.coil.compose)
 
     testImplementation(libs.junit.jupiter)
     testImplementation(libs.mockk)
@@ -89,4 +90,5 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.ui.test.junit4.android)
+    androidTestImplementation(libs.assertj)
 }

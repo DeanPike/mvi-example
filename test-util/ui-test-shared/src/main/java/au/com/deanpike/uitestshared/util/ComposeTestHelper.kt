@@ -23,11 +23,13 @@ fun ComposeContentTestRule.assertTagDisplayed(tag: String) {
 fun ComposeContentTestRule.clickOnText(text: String, advanceTimeMillis: Long = 500) {
     onNodeWithText(text).performClick()
     mainClock.advanceTimeBy(advanceTimeMillis)
+    waitForIdle()
 }
 
 fun ComposeContentTestRule.clickOn(tag: String, advanceTimeMillis: Long = 500) {
     onNodeWithTag(testTag = tag, useUnmergedTree = true).performClick()
     mainClock.advanceTimeBy(advanceTimeMillis)
+    waitForIdle()
 }
 
 fun ComposeContentTestRule.assertTagDoesNotExist(tag: String) {

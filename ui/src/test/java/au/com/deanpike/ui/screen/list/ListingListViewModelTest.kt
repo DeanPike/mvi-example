@@ -127,6 +127,7 @@ class ListingListViewModelTest {
             dwellingType = "House",
             headLine = "Property headline",
             lifecycleStatus = "New",
+            agencyColour = "White",
             detail = ListingDetails(
                 price = "$1000000",
                 numberOfBedrooms = 4,

@@ -63,6 +63,7 @@ class ListingUseCaseImplTest {
         address = "Address",
         listingImage = "http://listing.image",
         agencyImage = "http://agency.image",
+        agencyColour = "Red",
         dwellingType = "House",
         headLine = "Headline",
         lifecycleStatus = "New",
