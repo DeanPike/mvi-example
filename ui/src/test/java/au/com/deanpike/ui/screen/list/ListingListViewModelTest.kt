@@ -62,6 +62,7 @@ class ListingListViewModelTest {
             assertThat(bannerImage).isEqualTo("http://project.banner.image")
             assertThat(logoImage).isEqualTo("http://project.lgog.image")
             assertThat(projectName).isEqualTo("Project Name")
+            assertThat(projectColour).isEqualTo("Red")
 
             assertThat(properties.size).isEqualTo(2)
 
@@ -95,6 +96,7 @@ class ListingListViewModelTest {
             assertThat(detail.numberOfBedrooms).isEqualTo(4)
             assertThat(detail.numberOfBathrooms).isEqualTo(3)
             assertThat(detail.numberOfCarSpaces).isEqualTo(2)
+            assertThat(agencyColour).isEqualTo("White")
         }
     }
 
@@ -167,7 +169,8 @@ class ListingListViewModelTest {
             bannerImage = "http://project.banner.image",
             logoImage = "http://project.lgog.image",
             projectName = "Project Name",
-            properties = listOf(childOne, childTwo)
+            properties = listOf(childOne, childTwo),
+            projectColour = "Red"
         )
     }
 }
