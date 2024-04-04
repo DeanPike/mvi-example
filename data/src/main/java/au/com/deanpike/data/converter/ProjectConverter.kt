@@ -32,6 +32,7 @@ internal class ProjectConverter @Inject constructor() : ListingConverter {
             bannerImage = listing.project?.projectBannerImage,
             logoImage = listing.project?.projectLogoImage,
             projectName = listing.project?.projectName,
+            projectColour = listing.project?.projectColorHex,
             properties = properties
         )
     }

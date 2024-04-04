@@ -7,6 +7,7 @@ data class Project(
     val bannerImage: String?,
     val logoImage: String?,
     val projectName: String?,
+    val projectColour: String?,
     val properties: List<ProjectChild>
 ) : Listing() {
 }

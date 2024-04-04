@@ -105,6 +105,7 @@ class ProjectConverterTest {
             assertThat(logoImage).isEqualTo("http://logo.image")
             assertThat(projectName).isEqualTo("Project Name")
             assertThat(properties.size).isEqualTo(1)
+            assertThat(projectColour).isEqualTo("White")
         }
 
         with(project.properties[0]) {
