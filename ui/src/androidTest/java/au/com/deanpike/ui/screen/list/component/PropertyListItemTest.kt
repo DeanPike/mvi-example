@@ -13,7 +13,7 @@ class PropertyListItemTest : UiTestBase() {
     private val ability = PropertyListItemAbility(composeTestRule)
 
     @Test
-    fun show_person_list_item() {
+    fun show_property_list_item() {
         val property = getProperty()
         var wasItemClicked = false
         with(composeTestRule) {
