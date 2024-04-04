@@ -40,4 +40,6 @@ dependencies {
     implementation(libs.junit.vintage.engine)
     implementation(libs.androidx.ui.test.junit4.android)
     implementation(libs.espresso.idling.resource)
+    implementation(testFixtures(project(":test-util:test-fixtures")))
+    api(testFixtures(project(":test-util:test-fixtures")))
 }

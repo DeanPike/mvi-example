@@ -4,14 +4,18 @@ import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.IdlingResource
+import au.com.deanpike.testshared.rule.TestDispatcherRule
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 
-open class UiTestBase {
+abstract class UiTestBase {
 
     @get:Rule
     val composeTestRule = createComposeRule()
+
+    @get:Rule
+    val dispatcherRule = TestDispatcherRule()
 
     private lateinit var idlingResource: IdlingResource
 

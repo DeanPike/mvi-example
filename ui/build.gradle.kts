@@ -91,4 +91,5 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.ui.test.junit4.android)
     androidTestImplementation(libs.assertj)
+    androidTestImplementation(libs.mockk.android)
 }
