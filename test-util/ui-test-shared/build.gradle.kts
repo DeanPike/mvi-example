@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    alias(libs.plugins.kaptPlugin)
+    alias(libs.plugins.daggerHiltPlugin)
 }
 
 android {
@@ -10,8 +12,9 @@ android {
     defaultConfig {
         minSdk = 29
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles("consumer-rules.pro")
+        vectorDrawables {
+            useSupportLibrary = true
+        }
     }
 
     buildTypes {
@@ -27,6 +30,12 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
+    buildFeatures {
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.11"
+    }
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1,LICENSE}"
@@ -37,9 +46,14 @@ android {
 }
 
 dependencies {
-    implementation(libs.junit.vintage.engine)
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
+    implementation(libs.hilt.android.testing)
+    api(libs.hilt.android.testing)
+    api(libs.androidx.espresso.core)
+
+    implementation(libs.androidx.activity.compose)
+    implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui.test.junit4.android)
-    implementation(libs.espresso.idling.resource)
-    implementation(testFixtures(project(":test-util:test-fixtures")))
-    api(testFixtures(project(":test-util:test-fixtures")))
+    implementation(libs.coil.compose)
 }

@@ -22,7 +22,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import au.com.deanpike.client.model.listing.response.ListingDetails
@@ -51,6 +50,7 @@ fun PropertyListItem(
     property: Property,
     onItemClicked: (Long) -> Unit = {}
 ) {
+
     Column(
         modifier = Modifier
             .background(color = Color.White)

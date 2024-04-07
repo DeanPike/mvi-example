@@ -16,7 +16,6 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -50,9 +49,12 @@ android {
 
 dependencies {
 
+    implementation(project(":client"))
+    implementation(project(":data"))
+    implementation(project(":data-shared"))
+    implementation(project(":network"))
     implementation(project(":ui"))
     implementation(project(":ui-shared"))
-    implementation(project(":data"))
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -63,6 +65,7 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
+    implementation(libs.lifecycle.viewmodel.compose)
 
     testImplementation(libs.junit.jupiter)
     testImplementation(libs.coroutines.core.jvm)

@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     alias(libs.plugins.kaptPlugin)
+    alias(libs.plugins.daggerHiltPlugin)
 }
 
 android {
@@ -11,7 +12,7 @@ android {
     defaultConfig {
         minSdk = 29
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "au.com.deanpike.uitestshared.MainTestApplication"
         consumerProguardFiles("consumer-rules.pro")
     }
 
@@ -35,15 +36,6 @@ android {
         kotlinCompilerExtensionVersion = "1.5.11"
     }
 
-
-    tasks.withType<Test>() {
-        useJUnitPlatform()
-    }
-
-    testOptions {
-        animationsDisabled = true
-    }
-
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
@@ -51,45 +43,50 @@ android {
             excludes += "META-INF/LICENSE-notice.md"
         }
     }
+    kapt {
+        correctErrorTypes = true
+    }
 }
 
 dependencies {
-    implementation(project(":ui-shared"))
     implementation(project(":client"))
+    implementation(project(":ui-shared"))
     implementation(project(":data-shared"))
-    testImplementation(testFixtures(project(":test-util:test-fixtures")))
+    androidTestImplementation(project(":client"))
+    androidTestImplementation(project(":data"))
     androidTestImplementation(project(":test-util:ui-test-shared"))
     androidTestImplementation(project(":ui-shared"))
-
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.activity.compose)
+    androidTestImplementation(project(":network"))
+    androidTestImplementation(testFixtures(project(":test-util:test-fixtures")))
 
     implementation(libs.androidx.core.ktx)
-
     implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.lifecycle.runtime.compose)
-    implementation(libs.androidx.lifecycle.viewmodel)
-    implementation(libs.androidx.lifecycle.viewmodel.compose)
-    implementation(libs.constraintlayout.compose)
-
+    implementation(libs.androidx.activity.compose)
+    implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(libs.androidx.ui.test.junit4)
+    debugImplementation(libs.androidx.ui.tooling)
+    debugImplementation(libs.androidx.ui.test.manifest)
 
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
+    implementation(libs.lifecycle.viewmodel.compose)
+
+    androidTestImplementation(libs.hilt.android)
+    kaptAndroidTest(libs.hilt.compiler)
+    androidTestImplementation(libs.hilt.android.testing)
+
+    // Added
     implementation(libs.coil.compose)
-
-    testImplementation(libs.junit.jupiter)
-    testImplementation(libs.mockk)
-    testImplementation(libs.coroutines.test)
-    testRuntimeOnly(libs.junit.platform.launcher)
-    testImplementation(libs.assertj)
-
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(libs.androidx.ui.test.junit4.android)
+    androidTestImplementation(libs.mockwebserver)
     androidTestImplementation(libs.assertj)
-    androidTestImplementation(libs.mockk.android)
+
+    androidTestImplementation(libs.lifecycle.viewmodel.compose)
 }

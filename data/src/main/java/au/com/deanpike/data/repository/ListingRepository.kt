@@ -1,10 +1,10 @@
 package au.com.deanpike.data.repository
 
 import au.com.deanpike.client.model.listing.response.Listing
+import au.com.deanpike.client.util.ResponseWrapper
 import au.com.deanpike.data.converter.ListingConverterFactory
 import au.com.deanpike.data.datasource.remote.ListingDataSource
-import au.com.deanpike.data.model.internal.ListingSearchRequest
-import au.com.deanpike.client.util.ResponseWrapper
+import au.com.deanpike.network.model.internal.ListingSearchRequest
 import javax.inject.Inject
 
 internal interface ListingRepository {

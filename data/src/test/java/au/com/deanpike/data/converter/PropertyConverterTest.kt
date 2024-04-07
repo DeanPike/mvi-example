@@ -2,11 +2,11 @@ package au.com.deanpike.data.converter
 
 import au.com.deanpike.client.model.listing.response.ListingType
 import au.com.deanpike.client.model.listing.response.Property
-import au.com.deanpike.data.model.external.Advertiser
-import au.com.deanpike.data.model.external.GeoLocation
-import au.com.deanpike.data.model.external.Images
-import au.com.deanpike.data.model.external.Medium
-import au.com.deanpike.data.model.external.SearchResult
+import au.com.deanpike.network.model.external.Advertiser
+import au.com.deanpike.network.model.external.GeoLocation
+import au.com.deanpike.network.model.external.Images
+import au.com.deanpike.network.model.external.Medium
+import au.com.deanpike.network.model.external.SearchResult
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 

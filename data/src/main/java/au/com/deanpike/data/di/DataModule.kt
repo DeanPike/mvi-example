@@ -10,6 +10,7 @@ import au.com.deanpike.data.repository.ListingRepository
 import au.com.deanpike.data.repository.ListingRepositoryImpl
 import au.com.deanpike.data.usecase.ListingUseCaseImpl
 import au.com.deanpike.data.util.ListingTypeDeserialiser
+import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Binds
 import dagger.Module
@@ -35,7 +36,7 @@ internal abstract class DataModule {
 
     companion object {
         @Provides
-        fun provideGson() = GsonBuilder()
+        fun provideGson(): Gson = GsonBuilder()
             .registerTypeAdapter(ListingType::class.java, ListingTypeDeserialiser())
             .create()
     }

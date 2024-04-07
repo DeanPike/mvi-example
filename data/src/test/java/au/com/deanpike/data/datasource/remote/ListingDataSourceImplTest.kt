@@ -1,18 +1,18 @@
 package au.com.deanpike.data.datasource.remote
 
 import au.com.deanpike.client.model.listing.response.ListingType
-import au.com.deanpike.data.api.PropertyListingApi
-import au.com.deanpike.data.model.external.AddressComponents
-import au.com.deanpike.data.model.external.Advertiser
-import au.com.deanpike.data.model.external.AgencyListingContact
-import au.com.deanpike.data.model.external.GeoLocation
-import au.com.deanpike.data.model.external.Images
-import au.com.deanpike.data.model.external.ListingResponse
-import au.com.deanpike.data.model.external.Medium
-import au.com.deanpike.data.model.external.MetaData
-import au.com.deanpike.data.model.external.SearchResult
-import au.com.deanpike.data.model.internal.ListingSearchRequest
 import au.com.deanpike.client.util.ResponseWrapper
+import au.com.deanpike.network.api.PropertyListingApi
+import au.com.deanpike.network.model.external.AddressComponents
+import au.com.deanpike.network.model.external.Advertiser
+import au.com.deanpike.network.model.external.AgencyListingContact
+import au.com.deanpike.network.model.external.GeoLocation
+import au.com.deanpike.network.model.external.Images
+import au.com.deanpike.network.model.external.ListingResponse
+import au.com.deanpike.network.model.external.Medium
+import au.com.deanpike.network.model.external.MetaData
+import au.com.deanpike.network.model.external.SearchResult
+import au.com.deanpike.network.model.internal.ListingSearchRequest
 import io.mockk.coEvery
 import io.mockk.mockk
 import java.io.IOException
@@ -87,7 +87,7 @@ class ListingDataSourceImplTest {
             assertThat(landArea).isEqualTo("150m²")
             assertThat(largeLand).isFalse()
             assertThat(metadata!!.addressComponents.unitNumber).isEqualTo("1")
-            assertThat(metadata.addressComponents.street).isEqualTo("Burke Road")
+            assertThat(metadata!!.addressComponents.street).isEqualTo("Burke Road")
             assertThat(advertiser!!.name).isEqualTo("Marshall White Stonnington")
             assertThat(topspot).isNull()
             assertThat(project).isNull()

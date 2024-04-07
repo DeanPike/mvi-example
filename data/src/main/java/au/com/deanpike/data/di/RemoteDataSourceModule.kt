@@ -1,6 +1,7 @@
 package au.com.deanpike.data.di
 
-import au.com.deanpike.data.api.PropertyListingApi
+import au.com.deanpike.data.util.BaseUrl
+import au.com.deanpike.network.api.PropertyListingApi
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
@@ -28,9 +29,13 @@ object RemoteDataSourceModule {
             .build()
 
     @Provides
-    fun provideRetrofit(okHttpClient: OkHttpClient, gson: Gson) =
+    fun provideRetrofit(
+        okHttpClient: OkHttpClient,
+        gson: Gson,
+        @BaseUrl baseUrl: String
+    ) =
         Retrofit.Builder()
-            .baseUrl("https://domain-adapter-api.domain.com.au/")
+            .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .client(okHttpClient)
             .build()

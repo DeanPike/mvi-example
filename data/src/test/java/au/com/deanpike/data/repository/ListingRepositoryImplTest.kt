@@ -2,17 +2,17 @@ package au.com.deanpike.data.repository
 
 import au.com.deanpike.client.model.listing.response.ListingType
 import au.com.deanpike.client.model.listing.response.Property
+import au.com.deanpike.client.util.ResponseWrapper
 import au.com.deanpike.data.converter.ListingConverterFactory
 import au.com.deanpike.data.converter.PropertyConverter
 import au.com.deanpike.data.datasource.remote.ListingDataSource
-import au.com.deanpike.data.model.external.Advertiser
-import au.com.deanpike.data.model.external.GeoLocation
-import au.com.deanpike.data.model.external.Images
-import au.com.deanpike.data.model.external.ListingResponse
-import au.com.deanpike.data.model.external.Medium
-import au.com.deanpike.data.model.external.SearchResult
-import au.com.deanpike.data.model.internal.ListingSearchRequest
-import au.com.deanpike.client.util.ResponseWrapper
+import au.com.deanpike.network.model.external.Advertiser
+import au.com.deanpike.network.model.external.GeoLocation
+import au.com.deanpike.network.model.external.Images
+import au.com.deanpike.network.model.external.ListingResponse
+import au.com.deanpike.network.model.external.Medium
+import au.com.deanpike.network.model.external.SearchResult
+import au.com.deanpike.network.model.internal.ListingSearchRequest
 import io.mockk.coEvery
 import io.mockk.mockk
 import java.io.IOException
