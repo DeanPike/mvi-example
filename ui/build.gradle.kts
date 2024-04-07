@@ -46,6 +46,14 @@ android {
     kapt {
         correctErrorTypes = true
     }
+
+    tasks.withType<Test>() {
+        useJUnitPlatform()
+    }
+
+    testOptions {
+        animationsDisabled = true
+    }
 }
 
 dependencies {
@@ -58,6 +66,7 @@ dependencies {
     androidTestImplementation(project(":ui-shared"))
     androidTestImplementation(project(":network"))
     androidTestImplementation(testFixtures(project(":test-util:test-fixtures")))
+    testImplementation(testFixtures(project(":test-util:test-fixtures")))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -87,6 +96,11 @@ dependencies {
     implementation(libs.coil.compose)
     androidTestImplementation(libs.mockwebserver)
     androidTestImplementation(libs.assertj)
-
     androidTestImplementation(libs.lifecycle.viewmodel.compose)
+
+    testImplementation(libs.junit.jupiter)
+    testImplementation(libs.mockk)
+    testImplementation(libs.assertj)
+    testImplementation(libs.coroutines.test)
+
 }

@@ -15,10 +15,10 @@ import org.junit.Rule
 
 abstract class UiTestBase {
 
-    @get:Rule(order = 1)
+    @get:Rule(order = 0)
     var hiltRule = HiltAndroidRule(this)
 
-    @get:Rule(order = 0)
+    @get:Rule(order = 1)
     val composeTestRule = createAndroidComposeRule<HiltTestActivity>()
     //val composeTestRule = createComposeRule()
 

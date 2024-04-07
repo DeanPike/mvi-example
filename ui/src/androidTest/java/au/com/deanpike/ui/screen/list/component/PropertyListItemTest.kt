@@ -6,14 +6,17 @@ import au.com.deanpike.client.model.listing.response.Property
 import au.com.deanpike.ui.ability.PropertyListItemAbility
 import au.com.deanpike.uishared.theme.MviExampleTheme
 import au.com.deanpike.uitestshared.base.UiTestBase
+import dagger.hilt.android.testing.HiltAndroidTest
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
+@HiltAndroidTest
 class PropertyListItemTest : UiTestBase() {
     private val ability = PropertyListItemAbility(composeTestRule)
 
     @Test
     fun show_property_list_item() {
+        hiltRule.inject()
         val property = getProperty()
         var wasItemClicked = false
         with(composeTestRule) {
