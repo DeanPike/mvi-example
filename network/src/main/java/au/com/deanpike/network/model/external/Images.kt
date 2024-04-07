@@ -1,8 +1,8 @@
-package au.com.deanpike.data.model.external
+package au.com.deanpike.network.model.external
 
 import com.google.gson.annotations.SerializedName
 
-internal data class Images(
+data class Images(
     @SerializedName("logo_url")
     val logoUrl: String,
 )

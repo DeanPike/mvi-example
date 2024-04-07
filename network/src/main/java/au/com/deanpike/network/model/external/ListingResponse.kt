@@ -1,8 +1,8 @@
-package au.com.deanpike.data.model.external
+package au.com.deanpike.network.model.external
 
 import com.google.gson.annotations.SerializedName
 
-internal data class ListingResponse(
+data class ListingResponse(
     @SerializedName("search_results")
     val searchResults: List<SearchResult>,
     @SerializedName("new_results")

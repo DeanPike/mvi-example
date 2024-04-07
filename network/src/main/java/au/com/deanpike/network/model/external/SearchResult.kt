@@ -1,9 +1,9 @@
-package au.com.deanpike.data.model.external
+package au.com.deanpike.network.model.external
 
 import au.com.deanpike.client.model.listing.response.ListingType
 import com.google.gson.annotations.SerializedName
 
-internal data class SearchResult(
+data class SearchResult(
     @SerializedName("listing_type")
     val listingType: ListingType,
     val id: Long,

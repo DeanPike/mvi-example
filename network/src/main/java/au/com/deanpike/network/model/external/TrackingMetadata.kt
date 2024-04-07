@@ -1,6 +1,6 @@
-package au.com.deanpike.data.model.external
+package au.com.deanpike.network.model.external
 
-internal data class TrackingMetadata(
+data class TrackingMetadata(
     val location: String,
     val pageType: String,
     val subCategory1: String,

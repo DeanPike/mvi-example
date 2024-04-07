@@ -1,8 +1,8 @@
-package au.com.deanpike.data.model.external
+package au.com.deanpike.network.model.external
 
 import com.google.gson.annotations.SerializedName
 
-internal data class AddressComponents(
+data class AddressComponents(
     val street: String,
     @SerializedName("street_number")
     val streetNumber: String,

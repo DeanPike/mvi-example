@@ -1,8 +1,8 @@
-package au.com.deanpike.data.model.external
+package au.com.deanpike.network.model.external
 
 import com.google.gson.annotations.SerializedName
 
-internal data class AgencyListingContact(
+data class AgencyListingContact(
     @SerializedName("display_full_name")
     val displayFullName: String,
     @SerializedName("image_url")
