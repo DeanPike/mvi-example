@@ -1,4 +1,4 @@
-package au.com.deanpike.ui.di
+package au.com.deanpike.uitestshared.di
 
 import au.com.deanpike.datashared.di.DataSharedModule
 import au.com.deanpike.datashared.dispatcher.DispatcherProvider

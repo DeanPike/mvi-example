@@ -1,4 +1,4 @@
-package au.com.deanpike.ui.di
+package au.com.deanpike.uitestshared.di
 
 import au.com.deanpike.data.di.NetworkModule
 import au.com.deanpike.data.util.BaseUrl
@@ -16,6 +16,6 @@ object TestNetworkModule {
     @Provides
     @BaseUrl
     fun provideBaseUrl(): String {
-        return "http://localhost:8080/"
+        return "https://localhost:8080"
     }
 }

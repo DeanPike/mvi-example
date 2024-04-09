@@ -41,7 +41,6 @@ class ListingListViewModel @Inject constructor(
                             listings = response.data
                         )
                     }
-
                 }
                 is ResponseWrapper.Error -> {
                     setState {

@@ -20,9 +20,9 @@ dependencies {
     kapt(libs.hilt.compiler)
 
     // Retrofit
-    implementation(libs.logging.interceptor)
+    api(libs.logging.interceptor)
     implementation(libs.retrofit)
-    implementation(libs.retrofit.converter.gson)
+    api(libs.retrofit.converter.gson)
     implementation(libs.retrofit.serialization.converter)
 
     implementation(libs.kotlinx.serialization.json)

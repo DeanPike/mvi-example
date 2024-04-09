@@ -46,14 +46,21 @@ android {
 }
 
 dependencies {
+    implementation(project(":data"))
+    implementation(project(":data-shared"))
+    implementation(project(":network"))
+    implementation(testFixtures(project(":test-util:test-fixtures")))
+
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
     implementation(libs.hilt.android.testing)
     api(libs.hilt.android.testing)
     api(libs.androidx.espresso.core)
+    api(libs.mockwebserver)
 
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui.test.junit4.android)
     implementation(libs.coil.compose)
+    api(libs.okhttp.tls)
 }

@@ -1,22 +1,20 @@
-package au.com.deanpike.ui.screen.list.component
+package au.com.deanpike.ui.unit.screen.list.component
 
 import au.com.deanpike.client.model.listing.response.ListingDetails
 import au.com.deanpike.client.model.listing.response.ListingType
 import au.com.deanpike.client.model.listing.response.Property
-import au.com.deanpike.ui.ability.PropertyListItemAbility
+import au.com.deanpike.ui.framework.ability.PropertyListItemAbility
+import au.com.deanpike.ui.screen.list.component.PropertyListItem
 import au.com.deanpike.uishared.theme.MviExampleTheme
-import au.com.deanpike.uitestshared.base.UiTestBase
-import dagger.hilt.android.testing.HiltAndroidTest
+import au.com.deanpike.uitestshared.base.UiUnitTestBase
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
-@HiltAndroidTest
-class PropertyListItemTest : UiTestBase() {
+class PropertyListItemTest : UiUnitTestBase() {
     private val ability = PropertyListItemAbility(composeTestRule)
 
     @Test
     fun show_property_list_item() {
-        hiltRule.inject()
         val property = getProperty()
         var wasItemClicked = false
         with(composeTestRule) {
