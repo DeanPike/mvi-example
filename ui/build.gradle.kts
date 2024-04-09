@@ -65,8 +65,8 @@ dependencies {
     androidTestImplementation(project(":test-util:ui-test-shared"))
     androidTestImplementation(project(":ui-shared"))
     androidTestImplementation(project(":network"))
-    androidTestImplementation(testFixtures(project(":test-util:test-fixtures")))
-    testImplementation(testFixtures(project(":test-util:test-fixtures")))
+    androidTestImplementation(project(":test-util:test-fixtures"))
+    testImplementation(project(":test-util:test-fixtures"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

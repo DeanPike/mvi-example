@@ -1,7 +1,6 @@
 plugins {
     id("java-library")
     alias(libs.plugins.jetbrainsKotlinJvm)
-    id("java-test-fixtures")
 }
 
 java {
@@ -10,9 +9,9 @@ java {
 }
 
 dependencies {
-    testFixturesImplementation(project(":data-shared"))
-    testFixturesImplementation(libs.junit.jupiter)
-    testFixturesImplementation(libs.kotlinx.coroutines.test.jvm)
-    testFixturesImplementation(libs.kotlinx.coroutines.core.jvm)
-    testFixturesImplementation(libs.junit.vintage.engine)
+    implementation(project(":data-shared"))
+    implementation(libs.junit.jupiter)
+    implementation(libs.kotlinx.coroutines.test.jvm)
+    implementation(libs.kotlinx.coroutines.core.jvm)
+    implementation(libs.junit.vintage.engine)
 }

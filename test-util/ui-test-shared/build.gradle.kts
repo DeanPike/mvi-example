@@ -49,7 +49,7 @@ dependencies {
     implementation(project(":data"))
     implementation(project(":data-shared"))
     implementation(project(":network"))
-    implementation(testFixtures(project(":test-util:test-fixtures")))
+    implementation(project(":test-util:test-fixtures"))
 
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
