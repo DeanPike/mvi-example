@@ -73,7 +73,13 @@ fun PropertyListItem(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(40.dp)
-                .background(color = Color(android.graphics.Color.parseColor(property.agencyColour))),
+                .background(
+                    color = if ((property.agencyColour?.length ?: 0) == 7) {
+                        Color(android.graphics.Color.parseColor(property.agencyColour))
+                    } else {
+                        Color.White
+                    }
+                ),
             horizontalArrangement = Arrangement.End
         ) {
             AsyncImage(
