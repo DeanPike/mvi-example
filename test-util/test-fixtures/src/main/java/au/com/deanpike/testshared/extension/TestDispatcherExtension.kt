@@ -30,10 +30,11 @@ class TestDispatcherExtension(private val testDispatcher: TestDispatcher = Uncon
 
     override fun beforeAll(context: ExtensionContext?) {
         dispatcherProvider = DispatcherTestHelper.getTestDispatcher(testDispatcher)
+        Dispatchers.setMain(dispatcherProvider.getMainDispatcher())
     }
 
     override fun afterAll(context: ExtensionContext?) {
-        DispatcherTestHelper.resetTestDispatcher()
+        Dispatchers.resetMain()
     }
 
     override fun supportsParameter(parameterContext: ParameterContext?, extensionContext: ExtensionContext?): Boolean {

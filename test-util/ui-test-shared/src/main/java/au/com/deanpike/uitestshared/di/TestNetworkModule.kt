@@ -1,5 +1,6 @@
 package au.com.deanpike.uitestshared.di
 
+import androidx.test.espresso.idling.CountingIdlingResource
 import au.com.deanpike.data.di.NetworkModule
 import au.com.deanpike.data.util.BaseUrl
 import dagger.Module
@@ -13,9 +14,15 @@ import dagger.hilt.testing.TestInstallIn
     replaces = [NetworkModule::class]
 )
 object TestNetworkModule {
+
     @Provides
     @BaseUrl
     fun provideBaseUrl(): String {
-        return "https://localhost:8080"
+        return "https://localhost:8080/"
+    }
+
+    @Provides
+    fun provideIdlingResource(): CountingIdlingResource {
+        return CountingIdlingResource("CountingIdlingResource")
     }
 }

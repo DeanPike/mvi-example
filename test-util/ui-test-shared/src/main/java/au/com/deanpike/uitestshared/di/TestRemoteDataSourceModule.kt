@@ -3,12 +3,13 @@ package au.com.deanpike.uitestshared.di
 import au.com.deanpike.data.di.RemoteDataSourceModule
 import au.com.deanpike.data.util.BaseUrl
 import au.com.deanpike.network.api.PropertyListingApi
-import au.com.deanpike.uitestshared.util.ServerPort
+import au.com.deanpike.uitestshared.util.MockServerCertificates
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.components.SingletonComponent
 import dagger.hilt.testing.TestInstallIn
+import java.util.concurrent.TimeUnit
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -32,7 +33,8 @@ object TestRemoteDataSourceModule {
         OkHttpClient
             .Builder()
             .addInterceptor(httpLoggingInterceptor)
-            .sslSocketFactory(ServerPort.clientCertificates.sslSocketFactory(), ServerPort.clientCertificates.trustManager)
+            .sslSocketFactory(MockServerCertificates.newClientCertificates.sslSocketFactory(), MockServerCertificates.newClientCertificates.trustManager)
+            .connectTimeout(5, TimeUnit.SECONDS)
             .build()
 
     @Provides
@@ -42,7 +44,6 @@ object TestRemoteDataSourceModule {
         @BaseUrl baseUrl: String
     ) =
         Retrofit.Builder()
-//            .baseUrl("https://${ServerPort.host}:${ServerPort.port}/")
             .baseUrl("https://localhost:8080/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .client(okHttpClient)

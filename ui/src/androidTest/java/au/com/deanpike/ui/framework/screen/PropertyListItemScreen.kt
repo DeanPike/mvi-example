@@ -15,13 +15,13 @@ class PropertyListItemScreen(private val composeTestRule: ComposeContentTestRule
             assertItemDisplayed(position)
             assertPropertyImageDisplayed(position)
             assertAgencyImageDisplayed(position)
-            assertPriceDisplayed(position = 0, price = property.detail.price!!)
-            assertHeadlineDisplayed(position = 0, headline = property.headLine!!)
-            assertAddressDisplayed(position = 0, address = property.address)
-            assertNumberOfBedrooms(position = 0, bedroomCount = property.detail.numberOfBedrooms!!)
-            assertNumberOfBathrooms(position = 0, bathroomCount = property.detail.numberOfBathrooms!!)
-            assertNumberOfCarSpaces(position = 0, carSpaces = property.detail.numberOfCarSpaces!!)
-            assertDwellingType(position = 0, dwellingType = property.dwellingType!!)
+            assertPriceDisplayed(position = position, price = property.detail.price!!)
+            assertHeadlineDisplayed(position = position, headline = property.headLine!!)
+            assertAddressDisplayed(position = position, address = property.address)
+            assertNumberOfBedrooms(position = position, bedroomCount = property.detail.numberOfBedrooms!!)
+            assertNumberOfBathrooms(position = position, bathroomCount = property.detail.numberOfBathrooms!!)
+            assertNumberOfCarSpaces(position = position, carSpaces = property.detail.numberOfCarSpaces!!)
+            assertDwellingType(position = position, dwellingType = property.dwellingType!!)
         }
     }
 }

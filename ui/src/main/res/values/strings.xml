@@ -2,6 +2,8 @@
 <resources>
     <string name="mvi_example">Property</string>
 
+    <string name="list_heading">%1$d Properties</string>
+
     <string name="property_image_description">Property image</string>
     <string name="number_of_bedrooms">Number of bedrooms</string>
     <string name="number_of_bathrooms">Number of bathrooms</string>

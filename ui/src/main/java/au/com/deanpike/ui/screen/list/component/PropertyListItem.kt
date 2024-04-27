@@ -50,7 +50,6 @@ fun PropertyListItem(
     property: Property,
     onItemClicked: (Long) -> Unit = {}
 ) {
-
     Column(
         modifier = Modifier
             .background(color = Color.White)

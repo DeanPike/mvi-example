@@ -2,7 +2,6 @@ package au.com.deanpike.uitestshared.di
 
 import au.com.deanpike.datashared.di.DataSharedModule
 import au.com.deanpike.datashared.dispatcher.DispatcherProvider
-import au.com.deanpike.testshared.extension.DispatcherTestHelper
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.components.SingletonComponent
@@ -20,6 +19,12 @@ class TestDataSharedModule {
 
     @Provides
     fun provideDispatcherProvider(): DispatcherProvider {
-        return DispatcherTestHelper.getTestDispatcher(UnconfinedTestDispatcher())
+        val dispatcher = UnconfinedTestDispatcher()
+
+        return object : DispatcherProvider {
+            override fun getIoDispatcher() = dispatcher
+
+            override fun getMainDispatcher() = dispatcher
+        }
     }
 }

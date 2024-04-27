@@ -14,12 +14,15 @@ import au.com.deanpike.uishared.base.ScreenStateType
 import io.mockk.coEvery
 import io.mockk.mockk
 import java.io.IOException
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 
+@OptIn(ExperimentalCoroutinesApi::class)
 @ExtendWith(TestDispatcherExtension::class)
 class ListingListViewModelTest {
 
@@ -47,6 +50,7 @@ class ListingListViewModelTest {
         } returns ResponseWrapper.Success(listOf(getProject(), getProperty()))
 
         viewModel.setEvent(ListingListScreenEvent.Initialise)
+        advanceUntilIdle()
 
         with(viewModel.uiState) {
             assertThat(screenState).isEqualTo(ScreenStateType.SUCCESS)
@@ -101,7 +105,7 @@ class ListingListViewModelTest {
     }
 
     @Test
-    fun `should handle error`() {
+    fun `should handle error`() = runTest {
         coEvery {
             useCase.getListings(
                 ListingSearch(
@@ -112,6 +116,7 @@ class ListingListViewModelTest {
         } returns ResponseWrapper.Error(IOException("No Internet"))
 
         viewModel.setEvent(ListingListScreenEvent.Initialise)
+        advanceUntilIdle()
 
         with(viewModel.uiState) {
             assertThat(screenState).isEqualTo(ScreenStateType.ERROR)

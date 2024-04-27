@@ -24,6 +24,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import au.com.deanpike.client.model.listing.response.Property
 import au.com.deanpike.ui.R
 import au.com.deanpike.ui.screen.list.ListingListScreenTestTags.LISTING_LIST
+import au.com.deanpike.ui.screen.list.ListingListScreenTestTags.LISTING_LIST_HEADING
 import au.com.deanpike.ui.screen.list.component.PropertyListItem
 import au.com.deanpike.uishared.base.ScreenStateType
 import au.com.deanpike.uishared.theme.Dimension.DIM_16
@@ -56,7 +57,8 @@ fun ListingListScreenContent(
         topBar = {
             TopAppBar(title = {
                 Text(
-                    text = stringResource(id = R.string.mvi_example)
+                    modifier = Modifier.testTag(LISTING_LIST_HEADING),
+                    text = stringResource(id = R.string.list_heading, state.listings.count())
                 )
             })
         },
@@ -97,6 +99,7 @@ fun ListingListScreenContent(
 
 object ListingListScreenTestTags {
     private const val PREFIX = "LISTING_LIST_SCREEN_"
+    const val LISTING_LIST_HEADING = "${PREFIX}_HEADING"
     const val LISTING_LIST = "${PREFIX}LIST"
 }
 
