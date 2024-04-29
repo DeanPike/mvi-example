@@ -49,7 +49,7 @@ fun PropertyListItem(
 ) {
     Column(
         modifier = Modifier
-            .background(color = Color.White)
+            .background(color = MaterialTheme.colorScheme.background)
             .fillMaxWidth()
             .clickable {
                 onItemClicked(property.id)
@@ -73,7 +73,7 @@ fun PropertyListItem(
                     color = if ((property.agencyColour?.length ?: 0) == 7) {
                         Color(android.graphics.Color.parseColor(property.agencyColour))
                     } else {
-                        Color.White
+                        MaterialTheme.colorScheme.background
                     }
                 ),
             horizontalArrangement = Arrangement.End
