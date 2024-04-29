@@ -3,10 +3,10 @@ package au.com.deanpike.uitestshared.util
 import androidx.annotation.DrawableRes
 import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.semantics.SemanticsProperties
-import androidx.compose.ui.semantics.SemanticsPropertyKey
 import androidx.compose.ui.semantics.getOrNull
 import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
+import au.com.deanpike.uishared.base.DrawablePropertyKey
 
 fun ComposeContentTestRule.assertTextDisplayed(text: String) {
     onNodeWithText(text = text, useUnmergedTree = true).assertIsDisplayed()
@@ -213,17 +213,11 @@ fun ComposeContentTestRule.waitUntilTagExists(tag: String, timeout: Long = 1000)
 
 fun ComposeContentTestRule.assertDrawableDisplayed(
     tag: String,
-    key: SemanticsPropertyKey<Int>,
     @DrawableRes drawable: Int
 ) {
     onNode(
         useUnmergedTree = true,
-        matcher = hasTestTag(tag) and hasDrawable(
-            key = key,
-            id = drawable
-        )
+        matcher = hasTestTag(tag) and
+            SemanticsMatcher.expectValue(key = DrawablePropertyKey, expectedValue = drawable)
     ).assertIsDisplayed()
 }
-
-private fun hasDrawable(key: SemanticsPropertyKey<Int>, @DrawableRes id: Int): SemanticsMatcher =
-    SemanticsMatcher.expectValue(key, id)
