@@ -50,6 +50,7 @@ dependencies {
     implementation(project(":data-shared"))
     implementation(project(":network"))
     implementation(project(":test-util:unit-test-shared"))
+    implementation(project(":ui-shared"))
 
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
