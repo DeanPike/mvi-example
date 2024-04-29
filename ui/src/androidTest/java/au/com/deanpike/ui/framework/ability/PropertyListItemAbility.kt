@@ -1,7 +1,9 @@
 package au.com.deanpike.ui.framework.ability
 
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
+import au.com.deanpike.ui.R
 import au.com.deanpike.ui.screen.list.component.PropertyListItemTesTags
+import au.com.deanpike.uitestshared.util.assertDrawableDisplayed
 import au.com.deanpike.uitestshared.util.assertTagDisplayed
 import au.com.deanpike.uitestshared.util.assertTextDisplayed
 import au.com.deanpike.uitestshared.util.clickOn
@@ -32,16 +34,28 @@ class PropertyListItemAbility(private val composeTestRule: ComposeContentTestRul
     }
 
     fun assertNumberOfBedrooms(position: Int, bedroomCount: Int) {
+        composeTestRule.assertDrawableDisplayed(
+            tag = "${PropertyListItemTesTags.PROPERTY_LIST_ITEM_BEDROOMS}_ICON_$position",
+            drawable = R.drawable.bed_outline
+        )
         composeTestRule.assertTagDisplayed(tag = "${PropertyListItemTesTags.PROPERTY_LIST_ITEM_BEDROOMS}_ICON_$position")
         composeTestRule.assertTextDisplayed(tag = "${PropertyListItemTesTags.PROPERTY_LIST_ITEM_BEDROOMS}_TEXT_$position", text = "$bedroomCount")
     }
 
     fun assertNumberOfBathrooms(position: Int, bathroomCount: Int) {
+        composeTestRule.assertDrawableDisplayed(
+            tag = "${PropertyListItemTesTags.PROPERTY_LIST_ITEM_BATHROOMS}_ICON_$position",
+            drawable = R.drawable.bath_outline
+        )
         composeTestRule.assertTagDisplayed(tag = "${PropertyListItemTesTags.PROPERTY_LIST_ITEM_BATHROOMS}_ICON_$position")
         composeTestRule.assertTextDisplayed(tag = "${PropertyListItemTesTags.PROPERTY_LIST_ITEM_BATHROOMS}_TEXT_$position", text = "$bathroomCount")
     }
 
     fun assertNumberOfCarSpaces(position: Int, carSpaces: Int) {
+        composeTestRule.assertDrawableDisplayed(
+            tag = "${PropertyListItemTesTags.PROPERTY_LIST_ITEM_CAR_SPACES}_ICON_$position",
+            drawable = R.drawable.car_outline
+        )
         composeTestRule.assertTagDisplayed(tag = "${PropertyListItemTesTags.PROPERTY_LIST_ITEM_CAR_SPACES}_ICON_$position")
         composeTestRule.assertTextDisplayed(tag = "${PropertyListItemTesTags.PROPERTY_LIST_ITEM_CAR_SPACES}_TEXT_$position", text = "$carSpaces")
     }

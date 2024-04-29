@@ -16,6 +16,13 @@ fun ComposeContentTestRule.assertTextDisplayed(tag: String, text: String) {
     onNodeWithTag(testTag = tag, useUnmergedTree = true).assertTextEquals(text).assertIsDisplayed()
 }
 
+fun ComposeContentTestRule.assertContentDescription(tag: String, text: String) {
+    onNodeWithTag(
+        useUnmergedTree = true,
+        testTag = tag,
+    ).assertContentDescriptionEquals(text)
+}
+
 fun ComposeContentTestRule.assertTagDisplayed(tag: String) {
     onNodeWithTag(testTag = tag, useUnmergedTree = true).assertIsDisplayed()
 }

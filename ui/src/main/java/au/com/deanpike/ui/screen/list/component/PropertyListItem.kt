@@ -1,7 +1,5 @@
 package au.com.deanpike.ui.screen.list.component
 
-import androidx.annotation.DrawableRes
-import androidx.annotation.StringRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -12,7 +10,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -159,29 +156,6 @@ fun PropertyListItem(
                 )
             }
         }
-    }
-}
-
-@Composable
-fun DetailItem(
-    @DrawableRes icon: Int,
-    text: String,
-    @StringRes description: Int,
-    testTag: String,
-    position: Int
-) {
-    Row {
-        Icon(
-            modifier = Modifier.testTag("${testTag}_ICON_$position"),
-            painter = painterResource(id = icon),
-            contentDescription = stringResource(id = description)
-        )
-        Text(
-            modifier = Modifier
-                .padding(start = DIM_4)
-                .testTag("${testTag}_TEXT_$position"),
-            text = text
-        )
     }
 }
 
