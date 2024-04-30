@@ -1,7 +1,7 @@
 package au.com.deanpike.ui.unit.screen.shared
 
 import au.com.deanpike.ui.R
-import au.com.deanpike.ui.framework.ability.DetailItemAbility
+import au.com.deanpike.ui.framework.ability.DetailItemComponentAbility
 import au.com.deanpike.ui.screen.shared.DetailItemComponent
 import au.com.deanpike.uishared.theme.MviExampleTheme
 import au.com.deanpike.uitestshared.base.UiUnitTestBase
@@ -10,7 +10,7 @@ import org.junit.Test
 
 class DetailItemComponentTest : UiUnitTestBase() {
 
-    private val ability = DetailItemAbility(composeTestRule)
+    private val ability = DetailItemComponentAbility(composeTestRule)
 
     @Test
     fun check_that_details_items_are_displayed() {

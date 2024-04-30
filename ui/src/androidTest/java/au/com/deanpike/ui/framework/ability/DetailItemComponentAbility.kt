@@ -6,7 +6,7 @@ import au.com.deanpike.uitestshared.util.assertContentDescription
 import au.com.deanpike.uitestshared.util.assertDrawableDisplayed
 import au.com.deanpike.uitestshared.util.assertTextDisplayed
 
-class DetailItemAbility(private val composeTestRule: ComposeContentTestRule) {
+class DetailItemComponentAbility(private val composeTestRule: ComposeContentTestRule) {
     fun assertTextDisplayed(
         position: Int,
         tag: String,
