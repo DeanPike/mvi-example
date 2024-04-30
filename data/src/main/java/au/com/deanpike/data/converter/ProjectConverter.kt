@@ -30,6 +30,9 @@ internal class ProjectConverter @Inject constructor() : ListingConverter {
             id = listing.id,
             listingType = listing.listingType,
             address = listing.address,
+            listingImage = listing.media.firstOrNull {
+                it.mediaType == "image"
+            }?.imageUrl,
             bannerImage = listing.project?.projectBannerImage,
             logoImage = listing.project?.projectLogoImage,
             projectName = listing.project?.projectName,

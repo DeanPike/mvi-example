@@ -4,6 +4,7 @@ data class Project(
     override val id: Long,
     override val listingType: ListingType,
     val address: String,
+    val listingImage: String?,
     val bannerImage: String?,
     val logoImage: String?,
     val projectName: String?,
