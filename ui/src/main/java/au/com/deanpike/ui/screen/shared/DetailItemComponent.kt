@@ -1,4 +1,4 @@
-package au.com.deanpike.ui.screen.list.component
+package au.com.deanpike.ui.screen.shared
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
@@ -18,7 +18,7 @@ import au.com.deanpike.uishared.theme.Dimension
 import au.com.deanpike.uishared.theme.MviExampleTheme
 
 @Composable
-fun DetailItem(
+fun DetailItemComponent(
     @DrawableRes icon: Int,
     text: String,
     @StringRes description: Int,
@@ -47,9 +47,9 @@ fun DetailItem(
 
 @Composable
 @Preview(showBackground = true)
-fun DetailItemPreview() {
+fun DetailItemComponentPreview() {
     MviExampleTheme {
-        DetailItem(
+        DetailItemComponent(
             icon = R.drawable.bed_outline,
             text = "Data",
             description = R.string.number_of_bedrooms,

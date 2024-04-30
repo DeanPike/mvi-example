@@ -1,14 +1,14 @@
-package au.com.deanpike.ui.unit.screen.list.component
+package au.com.deanpike.ui.unit.screen.shared
 
 import au.com.deanpike.ui.R
 import au.com.deanpike.ui.framework.ability.DetailItemAbility
-import au.com.deanpike.ui.screen.list.component.DetailItem
+import au.com.deanpike.ui.screen.shared.DetailItemComponent
 import au.com.deanpike.uishared.theme.MviExampleTheme
 import au.com.deanpike.uitestshared.base.UiUnitTestBase
 import au.com.deanpike.uitestshared.util.advanceTimeAndWait
 import org.junit.Test
 
-class DetailItemTest : UiUnitTestBase() {
+class DetailItemComponentTest : UiUnitTestBase() {
 
     private val ability = DetailItemAbility(composeTestRule)
 
@@ -17,7 +17,7 @@ class DetailItemTest : UiUnitTestBase() {
         with(composeTestRule) {
             setContent {
                 MviExampleTheme {
-                    DetailItem(
+                    DetailItemComponent(
                         icon = R.drawable.car_outline,
                         text = "Test Text",
                         description = R.string.number_of_parking_spaces,

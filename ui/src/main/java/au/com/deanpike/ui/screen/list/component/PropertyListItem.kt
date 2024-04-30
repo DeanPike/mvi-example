@@ -35,6 +35,7 @@ import au.com.deanpike.ui.screen.list.component.PropertyListItemTesTags.PROPERTY
 import au.com.deanpike.ui.screen.list.component.PropertyListItemTesTags.PROPERTY_LIST_ITEM_LAYOUT
 import au.com.deanpike.ui.screen.list.component.PropertyListItemTesTags.PROPERTY_LIST_ITEM_PRICE
 import au.com.deanpike.ui.screen.list.component.PropertyListItemTesTags.PROPERTY_LIST_ITEM_PROPERTY_IMAGE
+import au.com.deanpike.ui.screen.shared.DetailItemComponent
 import au.com.deanpike.uishared.theme.Dimension.DIM_16
 import au.com.deanpike.uishared.theme.Dimension.DIM_4
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
@@ -119,7 +120,7 @@ fun PropertyListItem(
             verticalAlignment = Alignment.CenterVertically
         ) {
             property.detail.numberOfBedrooms?.let {
-                DetailItem(
+                DetailItemComponent(
                     icon = R.drawable.bed_outline,
                     text = "$it",
                     description = R.string.number_of_bedrooms,
@@ -129,7 +130,7 @@ fun PropertyListItem(
             }
             Spacer(modifier = Modifier.width(DIM_16))
             property.detail.numberOfBathrooms?.let {
-                DetailItem(
+                DetailItemComponent(
                     icon = R.drawable.bath_outline,
                     text = "$it",
                     description = R.string.number_of_bathrooms,
@@ -139,7 +140,7 @@ fun PropertyListItem(
             }
             Spacer(modifier = Modifier.width(DIM_16))
             property.detail.numberOfCarSpaces?.let {
-                DetailItem(
+                DetailItemComponent(
                     icon = R.drawable.car_outline,
                     text = "$it",
                     description = R.string.number_of_parking_spaces,
