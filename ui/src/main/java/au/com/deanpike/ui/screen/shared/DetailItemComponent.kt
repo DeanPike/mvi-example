@@ -25,7 +25,9 @@ fun DetailItemComponent(
     testTag: String,
     position: Int
 ) {
-    Row {
+    Row(
+        modifier = Modifier.testTag("${testTag}_$position")
+    ) {
         Icon(
             modifier = Modifier
                 .drawableTestTag(

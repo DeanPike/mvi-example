@@ -68,7 +68,7 @@ fun ComposeContentTestRule.scrollTo(tag: String, advanceTimeMillis: Long = 500) 
     mainClock.advanceTimeBy(advanceTimeMillis)
 }
 
-fun ComposeContentTestRule.scrollToItemToPosition(tag: String, index: Int) {
+fun ComposeContentTestRule.scrollToItemPosition(tag: String, index: Int) {
     onNodeWithTag(tag).performScrollToIndex(index)
 }
 

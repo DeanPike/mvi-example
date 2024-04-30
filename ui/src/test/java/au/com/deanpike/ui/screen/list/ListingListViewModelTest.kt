@@ -171,6 +171,7 @@ class ListingListViewModelTest {
             id = 2,
             listingType = ListingType.PROJECT,
             address = "Project address",
+            listingImage = "http://project.listing.image",
             bannerImage = "http://project.banner.image",
             logoImage = "http://project.lgog.image",
             projectName = "Project Name",

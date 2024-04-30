@@ -5,15 +5,12 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
@@ -27,15 +24,11 @@ import au.com.deanpike.client.model.listing.response.Property
 import au.com.deanpike.ui.R
 import au.com.deanpike.ui.screen.list.component.PropertyListItemTesTags.PROPERTY_LIST_ITEM_ADDRESS
 import au.com.deanpike.ui.screen.list.component.PropertyListItemTesTags.PROPERTY_LIST_ITEM_AGENCY_IMAGE
-import au.com.deanpike.ui.screen.list.component.PropertyListItemTesTags.PROPERTY_LIST_ITEM_BATHROOMS
-import au.com.deanpike.ui.screen.list.component.PropertyListItemTesTags.PROPERTY_LIST_ITEM_BEDROOMS
-import au.com.deanpike.ui.screen.list.component.PropertyListItemTesTags.PROPERTY_LIST_ITEM_CAR_SPACES
-import au.com.deanpike.ui.screen.list.component.PropertyListItemTesTags.PROPERTY_LIST_ITEM_DWELLING_TYPE
 import au.com.deanpike.ui.screen.list.component.PropertyListItemTesTags.PROPERTY_LIST_ITEM_HEADLINE
 import au.com.deanpike.ui.screen.list.component.PropertyListItemTesTags.PROPERTY_LIST_ITEM_LAYOUT
 import au.com.deanpike.ui.screen.list.component.PropertyListItemTesTags.PROPERTY_LIST_ITEM_PRICE
 import au.com.deanpike.ui.screen.list.component.PropertyListItemTesTags.PROPERTY_LIST_ITEM_PROPERTY_IMAGE
-import au.com.deanpike.ui.screen.shared.DetailItemComponent
+import au.com.deanpike.ui.screen.shared.PropertyDetailComponent
 import au.com.deanpike.uishared.theme.Dimension.DIM_16
 import au.com.deanpike.uishared.theme.Dimension.DIM_4
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
@@ -113,50 +106,11 @@ fun PropertyListItem(
             text = property.address,
             style = MaterialTheme.typography.labelLarge
         )
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(start = DIM_16, end = DIM_16, top = DIM_4),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            property.detail.numberOfBedrooms?.let {
-                DetailItemComponent(
-                    icon = R.drawable.bed_outline,
-                    text = "$it",
-                    description = R.string.number_of_bedrooms,
-                    testTag = PROPERTY_LIST_ITEM_BEDROOMS,
-                    position = position
-                )
-            }
-            Spacer(modifier = Modifier.width(DIM_16))
-            property.detail.numberOfBathrooms?.let {
-                DetailItemComponent(
-                    icon = R.drawable.bath_outline,
-                    text = "$it",
-                    description = R.string.number_of_bathrooms,
-                    testTag = PROPERTY_LIST_ITEM_BATHROOMS,
-                    position = position
-                )
-            }
-            Spacer(modifier = Modifier.width(DIM_16))
-            property.detail.numberOfCarSpaces?.let {
-                DetailItemComponent(
-                    icon = R.drawable.car_outline,
-                    text = "$it",
-                    description = R.string.number_of_parking_spaces,
-                    testTag = PROPERTY_LIST_ITEM_CAR_SPACES,
-                    position = position
-                )
-            }
-            Spacer(modifier = Modifier.width(DIM_16))
-            property.dwellingType?.let {
-                Text(
-                    modifier = Modifier.testTag("${PROPERTY_LIST_ITEM_DWELLING_TYPE}_$position"),
-                    text = it,
-                    style = MaterialTheme.typography.bodyLarge
-                )
-            }
-        }
+        PropertyDetailComponent(
+            position = position,
+            details = property.detail,
+            dwellingType = property.dwellingType
+        )
     }
 }
 
@@ -168,10 +122,6 @@ object PropertyListItemTesTags {
     const val PROPERTY_LIST_ITEM_PRICE = "${PREFIX}PRICE"
     const val PROPERTY_LIST_ITEM_HEADLINE = "${PREFIX}HEADLINE"
     const val PROPERTY_LIST_ITEM_ADDRESS = "${PREFIX}ADDRESS"
-    const val PROPERTY_LIST_ITEM_BEDROOMS = "${PREFIX}BEDROOMS"
-    const val PROPERTY_LIST_ITEM_BATHROOMS = "${PREFIX}BATHROOMS"
-    const val PROPERTY_LIST_ITEM_CAR_SPACES = "${PREFIX}CAR_SPACES"
-    const val PROPERTY_LIST_ITEM_DWELLING_TYPE = "${PREFIX}DWELLING_TYPE"
 }
 
 @Composable
