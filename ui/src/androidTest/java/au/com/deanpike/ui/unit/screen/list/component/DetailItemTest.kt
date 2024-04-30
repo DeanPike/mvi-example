@@ -5,6 +5,7 @@ import au.com.deanpike.ui.framework.ability.DetailItemAbility
 import au.com.deanpike.ui.screen.list.component.DetailItem
 import au.com.deanpike.uishared.theme.MviExampleTheme
 import au.com.deanpike.uitestshared.base.UiUnitTestBase
+import au.com.deanpike.uitestshared.util.advanceTimeAndWait
 import org.junit.Test
 
 class DetailItemTest : UiUnitTestBase() {
@@ -25,7 +26,7 @@ class DetailItemTest : UiUnitTestBase() {
                     )
                 }
             }
-            advanceTimeAndWait(this)
+            advanceTimeAndWait()
         }
 
         with(ability) {

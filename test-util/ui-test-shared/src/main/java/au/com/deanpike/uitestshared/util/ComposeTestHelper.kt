@@ -8,6 +8,11 @@ import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import au.com.deanpike.uishared.base.DrawablePropertyKey
 
+fun ComposeContentTestRule.advanceTimeAndWait(delay: Long = 1000) {
+    mainClock.advanceTimeBy(delay)
+    waitForIdle()
+}
+
 fun ComposeContentTestRule.assertTextDisplayed(text: String) {
     onNodeWithText(text = text, useUnmergedTree = true).assertIsDisplayed()
 }

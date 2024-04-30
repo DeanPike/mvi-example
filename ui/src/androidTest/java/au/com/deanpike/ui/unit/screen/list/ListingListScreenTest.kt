@@ -10,6 +10,7 @@ import au.com.deanpike.ui.screen.list.ListingListScreenState
 import au.com.deanpike.uishared.base.ScreenStateType
 import au.com.deanpike.uishared.theme.MviExampleTheme
 import au.com.deanpike.uitestshared.base.UiUnitTestBase
+import au.com.deanpike.uitestshared.util.advanceTimeAndWait
 import org.junit.Test
 
 class ListingListScreenTest : UiUnitTestBase() {
@@ -31,7 +32,7 @@ class ListingListScreenTest : UiUnitTestBase() {
                     )
                 }
             }
-            advanceTimeAndWait(this)
+            advanceTimeAndWait()
         }
 
         with(listAbility) {

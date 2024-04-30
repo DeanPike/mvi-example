@@ -6,9 +6,9 @@ import au.com.deanpike.client.model.listing.response.Property
 import au.com.deanpike.ui.framework.screen.PropertyListItemScreen
 import au.com.deanpike.ui.screen.list.ListingListScreen
 import au.com.deanpike.ui.screen.list.ListingListScreenTestTags
-import au.com.deanpike.ui.screen.list.component.PropertyListItemTesTags
 import au.com.deanpike.uishared.theme.MviExampleTheme
 import au.com.deanpike.uitestshared.base.UiE2ETestBase
+import au.com.deanpike.uitestshared.util.advanceTimeAndWait
 import au.com.deanpike.uitestshared.util.assertTagDisplayed
 import au.com.deanpike.uitestshared.util.assertTextDisplayed
 import au.com.deanpike.uitestshared.util.waitUntilTagExists
@@ -37,7 +37,7 @@ class BuyListingTest : UiE2ETestBase() {
                     ListingListScreen()
                 }
             }
-            advanceTimeAndWait(composeTestRule)
+            advanceTimeAndWait()
 
             waitUntilTagExists(tag = ListingListScreenTestTags.LISTING_LIST, timeout = 2000)
             assertTagDisplayed(ListingListScreenTestTags.LISTING_LIST)

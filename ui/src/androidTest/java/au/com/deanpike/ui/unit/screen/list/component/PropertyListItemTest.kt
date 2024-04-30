@@ -7,6 +7,7 @@ import au.com.deanpike.ui.framework.ability.PropertyListItemAbility
 import au.com.deanpike.ui.screen.list.component.PropertyListItem
 import au.com.deanpike.uishared.theme.MviExampleTheme
 import au.com.deanpike.uitestshared.base.UiUnitTestBase
+import au.com.deanpike.uitestshared.util.advanceTimeAndWait
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
@@ -29,7 +30,7 @@ class PropertyListItemTest : UiUnitTestBase() {
                     )
                 }
             }
-            advanceTimeAndWait(this)
+            advanceTimeAndWait()
 
             with(ability) {
                 assertItemDisplayed(0)
