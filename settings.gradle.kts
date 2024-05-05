@@ -23,7 +23,7 @@ rootProject.name = "mvi-example"
 include(":app")
 include(":property:data")
 include(":property:client")
-include(":ui")
+include(":property:ui")
 include(":ui-shared")
 include(":test-util:unit-test-shared")
 include(":data-shared")
