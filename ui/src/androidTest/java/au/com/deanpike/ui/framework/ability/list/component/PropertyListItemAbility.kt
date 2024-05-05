@@ -1,10 +1,15 @@
-package au.com.deanpike.ui.framework.ability
+package au.com.deanpike.ui.framework.ability.list.component
 
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
+import au.com.deanpike.ui.framework.ability.shared.PropertyDetailComponentAbility
+import au.com.deanpike.ui.screen.list.ListingListScreenTestTags
 import au.com.deanpike.ui.screen.list.component.PropertyListItemTesTags
+import au.com.deanpike.ui.screen.shared.DetailListItemTestTags
 import au.com.deanpike.uitestshared.util.assertTagDisplayed
 import au.com.deanpike.uitestshared.util.assertTextDisplayed
 import au.com.deanpike.uitestshared.util.clickOn
+import au.com.deanpike.uitestshared.util.scrollTo
+import au.com.deanpike.uitestshared.util.scrollToItemPosition
 
 class PropertyListItemAbility(private val composeTestRule: ComposeContentTestRule) {
     private val ability = PropertyDetailComponentAbility(composeTestRule)
@@ -33,29 +38,49 @@ class PropertyListItemAbility(private val composeTestRule: ComposeContentTestRul
         composeTestRule.assertTextDisplayed(tag = "${PropertyListItemTesTags.PROPERTY_LIST_ITEM_ADDRESS}_$position", text = address)
     }
 
-    fun assertNumberOfBedrooms(position: Int, bedroomCount: Int) {
+    fun assertNumberOfBedrooms(
+        parentPosition: Int,
+        position: Int,
+        bedroomCount: Int
+    ) {
         ability.assertBedroomDisplayed(
+            parentPosition = parentPosition,
             position = position,
             text = "$bedroomCount"
         )
     }
 
-    fun assertNumberOfBathrooms(position: Int, bathroomCount: Int) {
+    fun assertNumberOfBathrooms(
+        parentPosition: Int,
+        position: Int,
+        bathroomCount: Int
+    ) {
         ability.assertBathroomDisplayed(
+            parentPosition = parentPosition,
             position = position,
             text = "$bathroomCount"
         )
     }
 
-    fun assertNumberOfCarSpaces(position: Int, carSpaces: Int) {
+    fun assertNumberOfCarSpaces(
+        parentPosition: Int,
+        position: Int,
+        carSpaces: Int
+    ) {
         ability.assertCarSpaceDisplayed(
+            parentPosition = parentPosition,
             position = position,
             text = "$carSpaces"
         )
     }
 
-    fun assertDwellingType(position: Int, dwellingType: String) {
+    fun assertDwellingType(
+        parentPosition: Int,
+        position: Int,
+        dwellingType: String
+    ) {
         ability.assertDwellingTypeDisplayed(
+            parentPosition = parentPosition,
             position = position,
             text = dwellingType
         )
@@ -63,5 +88,10 @@ class PropertyListItemAbility(private val composeTestRule: ComposeContentTestRul
 
     fun clickItem(position: Int) {
         composeTestRule.clickOn(tag = "${PropertyListItemTesTags.PROPERTY_LIST_ITEM_LAYOUT}_$position")
+    }
+
+    fun scrollTo(position: Int) {
+        composeTestRule.scrollToItemPosition(ListingListScreenTestTags.LISTING_LIST, position)
+        composeTestRule.scrollTo("${DetailListItemTestTags.DETAIL_ITEM_GROUP}_${position}_${position}")
     }
 }

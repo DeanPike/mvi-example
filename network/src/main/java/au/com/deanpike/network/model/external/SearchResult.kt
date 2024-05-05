@@ -11,7 +11,7 @@ data class SearchResult(
     val dateListed: String?,
     val address: String,
     val price: String?,
-    val media: List<Medium>,
+    val media: List<Medium>?,
     @SerializedName("bedroom_count")
     val bedroomCount: Long?,
     @SerializedName("bathroom_count")

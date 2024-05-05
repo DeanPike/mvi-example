@@ -92,8 +92,9 @@ dependencies {
     kaptAndroidTest(libs.hilt.compiler)
     androidTestImplementation(libs.hilt.android.testing)
 
-    // Added
     implementation(libs.coil.compose)
+    implementation(libs.constraintlayout.compose)
+
     androidTestImplementation(libs.mockwebserver)
     androidTestImplementation(libs.assertj)
     androidTestImplementation(libs.lifecycle.viewmodel.compose)

@@ -21,10 +21,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import au.com.deanpike.client.model.listing.response.Project
 import au.com.deanpike.client.model.listing.response.Property
 import au.com.deanpike.ui.R
 import au.com.deanpike.ui.screen.list.ListingListScreenTestTags.LISTING_LIST
 import au.com.deanpike.ui.screen.list.ListingListScreenTestTags.LISTING_LIST_HEADING
+import au.com.deanpike.ui.screen.list.component.ProjectListItem
 import au.com.deanpike.ui.screen.list.component.PropertyListItem
 import au.com.deanpike.uishared.base.ScreenStateType
 import au.com.deanpike.uishared.theme.Dimension.DIM_16
@@ -80,16 +82,24 @@ fun ListingListScreenContent(
                         item(key = listing.id) {
                             PropertyListItem(
                                 position = index,
-                                property = listing as Property
+                                property = listing
                             )
                         }
-                        item {
-                            HorizontalDivider(
-                                modifier = Modifier.fillMaxWidth(),
-                                thickness = 1.dp,
-                                color = Color.Gray
+                    } else if (listing is Project) {
+                        item(key = listing.id) {
+                            ProjectListItem(
+                                position = index,
+                                project = listing
                             )
                         }
+                    }
+
+                    item {
+                        HorizontalDivider(
+                            modifier = Modifier.fillMaxWidth(),
+                            thickness = 1.dp,
+                            color = Color.Gray
+                        )
                     }
                 }
             }

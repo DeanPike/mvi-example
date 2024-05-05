@@ -2,6 +2,8 @@ package au.com.deanpike.ui.e2e
 
 import au.com.deanpike.client.model.listing.response.ListingDetails
 import au.com.deanpike.client.model.listing.response.ListingType
+import au.com.deanpike.client.model.listing.response.Project
+import au.com.deanpike.client.model.listing.response.ProjectChild
 import au.com.deanpike.client.model.listing.response.Property
 import au.com.deanpike.ui.framework.screen.PropertyListItemScreen
 import au.com.deanpike.ui.screen.list.ListingListScreen
@@ -42,6 +44,44 @@ class BuyListingTest : UiE2ETestBase() {
             waitUntilTagExists(tag = ListingListScreenTestTags.LISTING_LIST, timeout = 2000)
             assertTagDisplayed(ListingListScreenTestTags.LISTING_LIST)
             assertTextDisplayed(tag = ListingListScreenTestTags.LISTING_LIST_HEADING, text = "2 Properties")
+
+            listScreen.assertProjectDisplayed(
+                position = 0,
+                project = Project(
+                    id = 2842,
+                    listingType = ListingType.PROJECT,
+                    address = "81 KITTYHAWK DRIVE, CHERMSIDE, QLD 4032",
+                    listingImage = "https://bucket-api.domain.com.au/v1/bucket/image/2842_8_13_210413_030454-w3244-h2160",
+                    bannerImage = "https://images.domain.com.au/img/Agencys/devproject/banner_2842_240304_023807",
+                    logoImage = "https://images.domain.com.au/img/Agencys/devproject/logo_2842_240304_023807",
+                    projectName = "Estilo on the Park",
+                    projectColour = "#00000d",
+                    properties = listOf(
+                        ProjectChild(
+                            id = 2019090910,
+                            listingType = ListingType.PROPERTY,
+                            listingDetails = ListingDetails(
+                                price = "$3,250,000",
+                                numberOfBedrooms = 4,
+                                numberOfBathrooms = 3,
+                                numberOfCarSpaces = 2
+                            )
+                        ),
+                        ProjectChild(
+                            id = 2019090988,
+                            listingType = ListingType.PROPERTY,
+                            listingDetails = ListingDetails(
+                                price = "$1,999,000",
+                                numberOfBedrooms = 4,
+                                numberOfBathrooms = 3,
+                                numberOfCarSpaces = 2
+                            )
+                        )
+                    )
+                )
+            )
+
+
 
             listScreen.assertPropertyDisplayed(
                 position = 1,

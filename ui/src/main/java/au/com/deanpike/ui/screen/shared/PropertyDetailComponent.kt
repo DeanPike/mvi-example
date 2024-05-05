@@ -24,6 +24,7 @@ import au.com.deanpike.uishared.theme.MviExampleTheme
 
 @Composable
 fun PropertyDetailComponent(
+    parentPosition: Int,
     position: Int,
     details: ListingDetails,
     dwellingType: String?
@@ -32,7 +33,7 @@ fun PropertyDetailComponent(
         modifier = Modifier
             .fillMaxWidth()
             .padding(start = Dimension.DIM_16, end = Dimension.DIM_16, top = Dimension.DIM_4)
-            .testTag("${DETAIL_ITEM_GROUP}_$position"),
+            .testTag("${DETAIL_ITEM_GROUP}_${parentPosition}_${position}"),
         verticalAlignment = Alignment.CenterVertically
     ) {
         details.numberOfBedrooms?.let {
@@ -41,6 +42,7 @@ fun PropertyDetailComponent(
                 text = "$it",
                 description = R.string.number_of_bedrooms,
                 testTag = DETAIL_ITEM_BEDROOMS,
+                parentPosition = parentPosition,
                 position = position
             )
         }
@@ -51,6 +53,7 @@ fun PropertyDetailComponent(
                 text = "$it",
                 description = R.string.number_of_bathrooms,
                 testTag = DETAIL_ITEM_BATHROOMS,
+                parentPosition = parentPosition,
                 position = position
             )
         }
@@ -61,13 +64,14 @@ fun PropertyDetailComponent(
                 text = "$it",
                 description = R.string.number_of_parking_spaces,
                 testTag = DETAIL_ITEM_CAR_SPACES,
+                parentPosition = parentPosition,
                 position = position
             )
         }
         Spacer(modifier = Modifier.weight(1F))
         dwellingType?.let {
             Text(
-                modifier = Modifier.testTag("${DETAIL_ITEM_DWELLING_TYPE}_$position"),
+                modifier = Modifier.testTag("${DETAIL_ITEM_DWELLING_TYPE}_${parentPosition}_${position}"),
                 text = it,
                 style = MaterialTheme.typography.bodyLarge
             )
@@ -89,6 +93,7 @@ object DetailListItemTestTags {
 fun DetailListItemComponentPreview() {
     MviExampleTheme {
         PropertyDetailComponent(
+            parentPosition = 0,
             position = 1,
             details = ListingDetails(
                 price = "$1,000,500",

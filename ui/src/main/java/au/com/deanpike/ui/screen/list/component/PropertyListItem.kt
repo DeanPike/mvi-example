@@ -107,6 +107,7 @@ fun PropertyListItem(
             style = MaterialTheme.typography.labelLarge
         )
         PropertyDetailComponent(
+            parentPosition = position,
             position = position,
             details = property.detail,
             dwellingType = property.dwellingType

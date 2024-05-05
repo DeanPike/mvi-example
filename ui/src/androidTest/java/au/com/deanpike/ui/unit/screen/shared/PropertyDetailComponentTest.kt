@@ -1,7 +1,7 @@
 package au.com.deanpike.ui.unit.screen.shared
 
 import au.com.deanpike.client.model.listing.response.ListingDetails
-import au.com.deanpike.ui.framework.ability.PropertyDetailComponentAbility
+import au.com.deanpike.ui.framework.ability.shared.PropertyDetailComponentAbility
 import au.com.deanpike.ui.screen.shared.PropertyDetailComponent
 import au.com.deanpike.uishared.theme.MviExampleTheme
 import au.com.deanpike.uitestshared.base.UiUnitTestBase
@@ -18,6 +18,7 @@ class PropertyDetailComponentTest : UiUnitTestBase() {
             setContent {
                 MviExampleTheme {
                     PropertyDetailComponent(
+                        parentPosition = 0,
                         position = 1,
                         details = ListingDetails(
                             price = "$100,000",
@@ -33,20 +34,27 @@ class PropertyDetailComponentTest : UiUnitTestBase() {
         }
 
         with(ability) {
-            assertGroupDisplayed(1)
+            assertGroupDisplayed(
+                parentPosition = 0,
+                position = 1
+            )
             assertBedroomDisplayed(
+                parentPosition = 0,
                 position = 1,
                 text = "5"
             )
             assertBathroomDisplayed(
+                parentPosition = 0,
                 position = 1,
                 text = "3"
             )
             assertCarSpaceDisplayed(
+                parentPosition = 0,
                 position = 1,
                 text = "2"
             )
             assertDwellingTypeDisplayed(
+                parentPosition = 0,
                 position = 1,
                 text = "House"
             )
@@ -59,6 +67,7 @@ class PropertyDetailComponentTest : UiUnitTestBase() {
             setContent {
                 MviExampleTheme {
                     PropertyDetailComponent(
+                        parentPosition = 0,
                         position = 1,
                         details = ListingDetails(
                             price = "100",
@@ -74,10 +83,22 @@ class PropertyDetailComponentTest : UiUnitTestBase() {
         }
 
         with(ability) {
-            assertBedroomNotDisplayed(1)
-            assertBathroomNotDisplayed(1)
-            assertCarSpaceNotDisplayed(1)
-            assertDwellingTypeNotDisplayed(1)
+            assertBedroomNotDisplayed(
+                parentPosition = 0,
+                position = 1
+            )
+            assertBathroomNotDisplayed(
+                parentPosition = 0,
+                position = 1
+            )
+            assertCarSpaceNotDisplayed(
+                parentPosition = 0,
+                position = 1
+            )
+            assertDwellingTypeNotDisplayed(
+                parentPosition = 0,
+                position = 1
+            )
         }
     }
 }

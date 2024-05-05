@@ -3,7 +3,7 @@ package au.com.deanpike.ui.unit.screen.list.component
 import au.com.deanpike.client.model.listing.response.ListingDetails
 import au.com.deanpike.client.model.listing.response.ListingType
 import au.com.deanpike.client.model.listing.response.Property
-import au.com.deanpike.ui.framework.ability.PropertyListItemAbility
+import au.com.deanpike.ui.framework.ability.list.component.PropertyListItemAbility
 import au.com.deanpike.ui.screen.list.component.PropertyListItem
 import au.com.deanpike.uishared.theme.MviExampleTheme
 import au.com.deanpike.uitestshared.base.UiUnitTestBase
@@ -17,7 +17,8 @@ class PropertyListItemTest : UiUnitTestBase() {
     @Test
     fun show_property_list_item() {
         val property = getProperty()
-        var wasItemClicked = false
+        var clickedId: Long? = null
+
         with(composeTestRule) {
             setContent {
                 MviExampleTheme {
@@ -25,7 +26,7 @@ class PropertyListItemTest : UiUnitTestBase() {
                         position = 0,
                         property = property,
                         onItemClicked = {
-                            wasItemClicked = true
+                            clickedId = it
                         }
                     )
                 }
@@ -39,13 +40,29 @@ class PropertyListItemTest : UiUnitTestBase() {
                 assertPriceDisplayed(position = 0, price = "$1000000")
                 assertHeadlineDisplayed(position = 0, headline = "Property headline")
                 assertAddressDisplayed(position = 0, address = "Property address")
-                assertNumberOfBedrooms(position = 0, bedroomCount = 4)
-                assertNumberOfBathrooms(position = 0, bathroomCount = 3)
-                assertNumberOfCarSpaces(position = 0, carSpaces = 2)
-                assertDwellingType(position = 0, dwellingType = "House")
+                assertNumberOfBedrooms(
+                    parentPosition = 0,
+                    position = 0,
+                    bedroomCount = 4
+                )
+                assertNumberOfBathrooms(
+                    parentPosition = 0,
+                    position = 0,
+                    bathroomCount = 3
+                )
+                assertNumberOfCarSpaces(
+                    parentPosition = 0,
+                    position = 0,
+                    carSpaces = 2
+                )
+                assertDwellingType(
+                    parentPosition = 0,
+                    position = 0,
+                    dwellingType = "House"
+                )
 
                 clickItem(0)
-                assertThat(wasItemClicked).isTrue()
+                assertThat(clickedId).isEqualTo(1)
             }
         }
     }

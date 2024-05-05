@@ -1,4 +1,4 @@
-package au.com.deanpike.ui.framework.ability
+package au.com.deanpike.ui.framework.ability.list
 
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import au.com.deanpike.ui.screen.list.ListingListScreenTestTags.LISTING_LIST

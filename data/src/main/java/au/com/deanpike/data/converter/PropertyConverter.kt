@@ -13,7 +13,7 @@ internal class PropertyConverter @Inject constructor() : ListingConverter {
         return Property(
             id = listing.id,
             listingType = listing.listingType,
-            listingImage = listing.media.firstOrNull()?.imageUrl,
+            listingImage = listing.media?.firstOrNull()?.imageUrl,
             address = listing.address,
             agencyImage = listing.advertiser?.images?.logoUrl,
             agencyColour = listing.advertiser?.preferredColorHex,

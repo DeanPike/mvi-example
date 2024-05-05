@@ -68,8 +68,9 @@ fun ComposeContentTestRule.scrollTo(tag: String, advanceTimeMillis: Long = 500) 
     mainClock.advanceTimeBy(advanceTimeMillis)
 }
 
-fun ComposeContentTestRule.scrollToItemPosition(tag: String, index: Int) {
-    onNodeWithTag(tag).performScrollToIndex(index)
+fun ComposeContentTestRule.scrollToItemPosition(tag: String, index: Int, advanceTimeMillis: Long = 500) {
+    onNodeWithTag(tag, useUnmergedTree = true).performScrollToIndex(index)
+    mainClock.advanceTimeBy(advanceTimeMillis)
 }
 
 fun ComposeContentTestRule.swipeUp(tag: String) {
