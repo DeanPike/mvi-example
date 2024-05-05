@@ -72,7 +72,7 @@ class ListingDataSourceImplTest {
             assertThat(dateListed).isEqualTo(now.toString(dateFormat))
             assertThat(address).isEqualTo("104/86 Burke Road, Malvern East")
             assertThat(price).isEqualTo("$1,549,000")
-            assertThat(media[0].imageUrl).isEqualTo("http://some.url.com")
+            assertThat(media!![0].imageUrl).isEqualTo("http://some.url.com")
             assertThat(bedroomCount).isEqualTo(4)
             assertThat(bathroomCount).isEqualTo(2)
             assertThat(homepassEnabled).isTrue()
