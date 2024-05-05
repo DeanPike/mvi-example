@@ -21,7 +21,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "mvi-example"
 include(":app")
-include(":data")
+include(":property:data")
 include(":client")
 include(":ui")
 include(":ui-shared")
