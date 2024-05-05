@@ -28,6 +28,11 @@ class ListingListViewModel @Inject constructor(
 
     private fun initialise() {
         viewModelScope.launch(dispatcher.getIoDispatcher()) {
+            setState {
+                copy(
+                    screenState = ScreenStateType.LOADING
+                )
+            }
             when (val response = listingUseCase.getListings(
                 ListingSearch(
                     searchMode = "Buy",

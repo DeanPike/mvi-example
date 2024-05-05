@@ -1,11 +1,15 @@
 package au.com.deanpike.ui.screen.list
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Scaffold
@@ -13,6 +17,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalLayoutDirection
@@ -57,50 +62,66 @@ fun ListingListScreenContent(
     val layoutDirection = LocalLayoutDirection.current
     Scaffold(
         topBar = {
-            TopAppBar(title = {
-                Text(
-                    modifier = Modifier.testTag(LISTING_LIST_HEADING),
-                    text = stringResource(id = R.string.list_heading, state.listings.count())
-                )
-            })
-        },
-    ) { innerPadding ->
-        if (state.screenState != ScreenStateType.INITIAL) {
-            LazyColumn(
-                modifier = Modifier
-                    .padding(
-                        start = innerPadding.calculateStartPadding(layoutDirection),
-                        end = innerPadding.calculateEndPadding(layoutDirection),
-                        top = innerPadding.calculateTopPadding(),
-                        bottom = innerPadding.calculateBottomPadding()
-                    )
-                    .testTag(LISTING_LIST),
-                verticalArrangement = Arrangement.spacedBy(DIM_16),
-            ) {
-                state.listings.forEachIndexed { index, listing ->
-                    if (listing is Property) {
-                        item(key = listing.id) {
-                            PropertyListItem(
-                                position = index,
-                                property = listing
-                            )
-                        }
-                    } else if (listing is Project) {
-                        item(key = listing.id) {
-                            ProjectListItem(
-                                position = index,
-                                project = listing
-                            )
-                        }
-                    }
-
-                    item {
-                        HorizontalDivider(
-                            modifier = Modifier.fillMaxWidth(),
-                            thickness = 1.dp,
-                            color = Color.Gray
+            if (state.screenState == ScreenStateType.SUCCESS) {
+                TopAppBar(
+                    title = {
+                        Text(
+                            modifier = Modifier.testTag(LISTING_LIST_HEADING),
+                            text = stringResource(id = R.string.list_heading, state.listings.count())
                         )
                     }
+                )
+            }
+        },
+    ) { innerPadding ->
+        if (state.screenState == ScreenStateType.SUCCESS) {
+            Column {
+                LazyColumn(
+                    modifier = Modifier
+                        .padding(
+                            start = innerPadding.calculateStartPadding(layoutDirection),
+                            end = innerPadding.calculateEndPadding(layoutDirection),
+                            top = innerPadding.calculateTopPadding(),
+                            bottom = innerPadding.calculateBottomPadding()
+                        )
+                        .testTag(LISTING_LIST),
+                    verticalArrangement = Arrangement.spacedBy(DIM_16),
+                ) {
+                    state.listings.forEachIndexed { index, listing ->
+                        if (listing is Property) {
+                            item(key = listing.id) {
+                                PropertyListItem(
+                                    position = index,
+                                    property = listing
+                                )
+                            }
+                        } else if (listing is Project) {
+                            item(key = listing.id) {
+                                ProjectListItem(
+                                    position = index,
+                                    project = listing
+                                )
+                            }
+                        }
+
+                        item {
+                            HorizontalDivider(
+                                modifier = Modifier.fillMaxWidth(),
+                                thickness = 1.dp,
+                                color = Color.Gray
+                            )
+                        }
+                    }
+                }
+            }
+        } else {
+            if (state.screenState == ScreenStateType.LOADING) {
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    CircularProgressIndicator(
+                    )
                 }
             }
         }
@@ -115,11 +136,24 @@ object ListingListScreenTestTags {
 
 @Composable
 @Preview
-fun ListingListScreenContentPreview() {
+fun ListingListScreenContentSuccessPreview() {
     MviExampleTheme {
         ListingListScreenContent(
             state = ListingListScreenState(
                 screenState = ScreenStateType.SUCCESS,
+                listings = emptyList(),
+            )
+        )
+    }
+}
+
+@Composable
+@Preview
+fun ListingListScreenContentLoadingPreview() {
+    MviExampleTheme {
+        ListingListScreenContent(
+            state = ListingListScreenState(
+                screenState = ScreenStateType.LOADING,
                 listings = emptyList(),
             )
         )
