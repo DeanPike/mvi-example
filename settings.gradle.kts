@@ -22,7 +22,7 @@ dependencyResolutionManagement {
 rootProject.name = "mvi-example"
 include(":app")
 include(":property:data")
-include(":client")
+include(":property:client")
 include(":ui")
 include(":ui-shared")
 include(":test-util:unit-test-shared")

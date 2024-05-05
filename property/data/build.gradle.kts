@@ -10,10 +10,10 @@ java {
 }
 
 dependencies {
-    implementation(project(":client"))
+    implementation(project(":property:client"))
     implementation(project(":data-shared"))
     implementation(project(":network"))
-    testImplementation(project(":client"))
+    testImplementation(project(":property:client"))
 
     // Hilt
     implementation(libs.hilt.core)

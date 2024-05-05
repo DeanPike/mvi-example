@@ -9,7 +9,7 @@ java {
 }
 
 dependencies {
-    implementation(project(":client"))
+    implementation(project(":property:client"))
     // Retrofit
     implementation(libs.logging.interceptor)
     implementation(libs.retrofit)
