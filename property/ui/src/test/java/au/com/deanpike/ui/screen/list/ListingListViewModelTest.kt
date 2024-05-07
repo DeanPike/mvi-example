@@ -6,6 +6,7 @@ import au.com.deanpike.client.model.listing.response.Project
 import au.com.deanpike.client.model.listing.response.ProjectChild
 import au.com.deanpike.client.model.listing.response.Property
 import au.com.deanpike.client.model.listing.search.ListingSearch
+import au.com.deanpike.client.type.StatusType
 import au.com.deanpike.client.usecase.ListingUseCase
 import au.com.deanpike.client.util.ResponseWrapper
 import au.com.deanpike.datashared.dispatcher.DispatcherProvider
@@ -43,8 +44,8 @@ class ListingListViewModelTest {
         coEvery {
             useCase.getListings(
                 ListingSearch(
-                    searchMode = "Buy",
-                    dwellingTypes = listOf("House")
+                    searchMode = StatusType.BUY,
+                    dwellingTypes = emptyList()
                 )
             )
         } returns ResponseWrapper.Success(listOf(getProject(), getProperty()))
@@ -109,8 +110,8 @@ class ListingListViewModelTest {
         coEvery {
             useCase.getListings(
                 ListingSearch(
-                    searchMode = "Buy",
-                    dwellingTypes = listOf("House")
+                    searchMode = StatusType.BUY,
+                    dwellingTypes = emptyList()
                 )
             )
         } returns ResponseWrapper.Error(IOException("No Internet"))
@@ -121,6 +122,27 @@ class ListingListViewModelTest {
         with(viewModel.uiState) {
             assertThat(screenState).isEqualTo(ScreenStateType.ERROR)
             assertThat(0).isEqualTo(listings.size)
+        }
+    }
+
+    @Test
+    fun `should handle status change`() = runTest {
+        coEvery {
+            useCase.getListings(
+                ListingSearch(
+                    searchMode = StatusType.RENT,
+                    dwellingTypes = emptyList()
+                )
+            )
+        } returns ResponseWrapper.Success(listOf(getProject(), getProperty()))
+
+        viewModel.setEvent(ListingListScreenEvent.OnStatusSelected(StatusType.RENT))
+        advanceUntilIdle()
+
+        with(viewModel.uiState) {
+            assertThat(screenState).isEqualTo(ScreenStateType.SUCCESS)
+            assertThat(listings.size).isEqualTo(2)
+            assertThat(selectedStatus).isEqualTo(StatusType.RENT)
         }
     }
 

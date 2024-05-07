@@ -2,6 +2,7 @@ package au.com.deanpike.ui.screen.list
 
 import androidx.lifecycle.viewModelScope
 import au.com.deanpike.client.model.listing.search.ListingSearch
+import au.com.deanpike.client.type.StatusType
 import au.com.deanpike.client.usecase.ListingUseCase
 import au.com.deanpike.client.util.ResponseWrapper
 import au.com.deanpike.datashared.dispatcher.DispatcherProvider
@@ -20,23 +21,40 @@ class ListingListViewModel @Inject constructor(
 
     override fun handleEvent(event: ListingListScreenEvent) {
         when (event) {
-            ListingListScreenEvent.Initialise -> {
+            is ListingListScreenEvent.Initialise -> {
                 initialise()
+            }
+            is ListingListScreenEvent.OnStatusSelected -> {
+                onStatusSelected(event.status)
             }
         }
     }
 
     private fun initialise() {
+        setState {
+            copy(
+                screenState = ScreenStateType.LOADING
+            )
+        }
+        getListings()
+    }
+
+    private fun onStatusSelected(status: StatusType) {
+        setState {
+            copy(
+                screenState = ScreenStateType.LOADING,
+                selectedStatus = status
+            )
+        }
+        getListings()
+    }
+
+    private fun getListings() {
         viewModelScope.launch(dispatcher.getIoDispatcher()) {
-            setState {
-                copy(
-                    screenState = ScreenStateType.LOADING
-                )
-            }
             when (val response = listingUseCase.getListings(
                 ListingSearch(
-                    searchMode = "Buy",
-                    dwellingTypes = listOf("House")
+                    searchMode = uiState.selectedStatus,
+                    dwellingTypes = uiState.selectedListingTypes
                 )
             )) {
                 is ResponseWrapper.Success -> {

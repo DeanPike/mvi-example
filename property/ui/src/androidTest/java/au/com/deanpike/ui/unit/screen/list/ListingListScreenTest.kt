@@ -6,6 +6,7 @@ import au.com.deanpike.client.model.listing.response.Project
 import au.com.deanpike.client.model.listing.response.ProjectChild
 import au.com.deanpike.client.model.listing.response.Property
 import au.com.deanpike.ui.framework.ability.list.ListingListScreenAbility
+import au.com.deanpike.ui.framework.ability.list.component.FilterComponentAbility
 import au.com.deanpike.ui.framework.screen.ProjectListItemScreen
 import au.com.deanpike.ui.framework.screen.PropertyListItemScreen
 import au.com.deanpike.ui.screen.list.ListingListScreenContent
@@ -19,6 +20,7 @@ import org.junit.Test
 class ListingListScreenTest : UiUnitTestBase() {
 
     private val listAbility = ListingListScreenAbility(composeTestRule)
+    private val filterAbility = FilterComponentAbility(composeTestRule)
     private val propertyItemScreen = PropertyListItemScreen(composeTestRule)
     private val projectItemScreen = ProjectListItemScreen(composeTestRule)
 
@@ -43,6 +45,11 @@ class ListingListScreenTest : UiUnitTestBase() {
 
         with(listAbility) {
             assertListDisplayed()
+        }
+
+        with(filterAbility){
+            assertStatusButtonDisplayed("Buy")
+            assertListingTypeButtonDisplayed("Property types")
         }
 
         propertyItemScreen.assertPropertyDisplayed(

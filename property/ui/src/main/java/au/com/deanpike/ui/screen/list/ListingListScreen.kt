@@ -1,13 +1,6 @@
 package au.com.deanpike.ui.screen.list
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.calculateEndPadding
-import androidx.compose.foundation.layout.calculateStartPadding
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -22,19 +15,22 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import au.com.deanpike.client.model.listing.response.Project
 import au.com.deanpike.client.model.listing.response.Property
+import au.com.deanpike.client.type.StatusType
 import au.com.deanpike.ui.R
 import au.com.deanpike.ui.screen.list.ListingListScreenTestTags.LISTING_LIST
 import au.com.deanpike.ui.screen.list.ListingListScreenTestTags.LISTING_LIST_HEADING
+import au.com.deanpike.ui.screen.list.component.FilterComponent
 import au.com.deanpike.ui.screen.list.component.ProjectListItem
 import au.com.deanpike.ui.screen.list.component.PropertyListItem
 import au.com.deanpike.uishared.base.ScreenStateType
 import au.com.deanpike.uishared.theme.Dimension.DIM_16
+import au.com.deanpike.uishared.theme.Dimension.DIM_8
 import au.com.deanpike.uishared.theme.MviExampleTheme
 import java.util.UUID
 
@@ -48,7 +44,10 @@ fun ListingListScreen(
 
     }
     ListingListScreenContent(
-        state = viewModel.uiState
+        state = viewModel.uiState,
+        onStatusSelected = {
+            viewModel.setEvent(ListingListScreenEvent.OnStatusSelected(it))
+        }
     )
 }
 
@@ -56,7 +55,8 @@ fun ListingListScreen(
 @Composable
 fun ListingListScreenContent(
     state: ListingListScreenState,
-    onItemClicked: (UUID) -> Unit = {}
+    onItemClicked: (UUID) -> Unit = {},
+    onStatusSelected: (StatusType) -> Unit = {}
 ) {
 
     val layoutDirection = LocalLayoutDirection.current
@@ -67,7 +67,7 @@ fun ListingListScreenContent(
                     title = {
                         Text(
                             modifier = Modifier.testTag(LISTING_LIST_HEADING),
-                            text = stringResource(id = R.string.list_heading, state.listings.count())
+                            text = pluralStringResource(id = R.plurals.project_properties, state.listings.count(), state.listings.count())
                         )
                     }
                 )
@@ -75,15 +75,29 @@ fun ListingListScreenContent(
         },
     ) { innerPadding ->
         if (state.screenState == ScreenStateType.SUCCESS) {
-            Column {
+            Column(
+                modifier = Modifier.padding(
+                    start = innerPadding.calculateStartPadding(layoutDirection),
+                    end = innerPadding.calculateEndPadding(layoutDirection),
+                    top = innerPadding.calculateTopPadding(),
+                    bottom = innerPadding.calculateBottomPadding()
+                )
+            ) {
+                HorizontalDivider()
+                FilterComponent(
+                    modifier = Modifier.padding(
+                        top = DIM_8,
+                        start = DIM_16,
+                        end = DIM_16
+                    ),
+                    selectedStatus = state.selectedStatus,
+                    selectedListingTypes = state.selectedListingTypes,
+                    onStatusSelected = onStatusSelected,
+                    onListingTypeSelected = {}
+                )
+                Spacer(modifier = Modifier.height(DIM_8))
                 LazyColumn(
                     modifier = Modifier
-                        .padding(
-                            start = innerPadding.calculateStartPadding(layoutDirection),
-                            end = innerPadding.calculateEndPadding(layoutDirection),
-                            top = innerPadding.calculateTopPadding(),
-                            bottom = innerPadding.calculateBottomPadding()
-                        )
                         .testTag(LISTING_LIST),
                     verticalArrangement = Arrangement.spacedBy(DIM_16),
                 ) {

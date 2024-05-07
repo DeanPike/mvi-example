@@ -2,11 +2,25 @@
 <resources>
     <string name="mvi_example">Property</string>
 
-    <string name="list_heading">%1$d Properties</string>
-
     <string name="property_image_description">Property image</string>
     <string name="project_banner_image_description">Project banner image</string>
     <string name="number_of_bedrooms">Number of bedrooms</string>
     <string name="number_of_bathrooms">Number of bathrooms</string>
     <string name="number_of_parking_spaces">Number of parking spaces</string>
+
+    <string name="property_type">Property type</string>
+    <string name="status_description">listing status</string>
+
+    <string name="no_listing_type">Property types</string>
+
+    <!-- Status Type -->
+    <string name="buy">Buy</string>
+    <string name="rent">Rent</string>
+    <string name="sold">Sold</string>
+
+    <!-- Listing Type-->
+    <string name="all">All</string>
+    <string name="apartment_unit_flat">Apartment / Unit / Flat</string>
+    <string name="house">House</string>
+    <string name="townhouse">Townhouse</string>
 </resources>

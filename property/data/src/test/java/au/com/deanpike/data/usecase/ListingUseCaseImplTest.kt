@@ -4,6 +4,8 @@ import au.com.deanpike.client.model.listing.response.ListingDetails
 import au.com.deanpike.client.model.listing.response.ListingType
 import au.com.deanpike.client.model.listing.response.Property
 import au.com.deanpike.client.model.listing.search.ListingSearch
+import au.com.deanpike.client.type.ListingType.HOUSE
+import au.com.deanpike.client.type.StatusType
 import au.com.deanpike.client.usecase.ListingUseCase
 import au.com.deanpike.client.util.ResponseWrapper
 import au.com.deanpike.data.repository.ListingRepository
@@ -26,7 +28,6 @@ class ListingUseCaseImplTest {
         )
     }
 
-
     @Test
     fun `get listings`() = runTest {
         val property = getProperty()
@@ -34,7 +35,7 @@ class ListingUseCaseImplTest {
         coEvery {
             repo.getListings(
                 request = ListingSearchRequest(
-                    searchMode = "Buy",
+                    searchMode = "buy",
                     dwellingTypes = listOf("House")
                 )
             )
@@ -46,8 +47,8 @@ class ListingUseCaseImplTest {
 
         val listingsResponse = useCase.getListings(
             ListingSearch(
-                searchMode = "Buy",
-                dwellingTypes = listOf("House")
+                searchMode = StatusType.BUY,
+                dwellingTypes = listOf(HOUSE)
             )
         )
 
