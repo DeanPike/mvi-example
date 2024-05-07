@@ -40,4 +40,15 @@ class ProjectChildListItemComponentAbility(private val composeTestRule: ComposeC
     ) {
         composeTestRule.scrollTo("${ProjectChildListItemComponentTestTags.PROJECT_CHILD_LIST_ITEM_LAYOUT}_${parentPosition}_${position}")
     }
+
+    fun assertLifecycleDisplayed(
+        parentPosition: Int,
+        position: Int,
+        text: String
+    ) {
+        composeTestRule.assertTextDisplayed(
+            tag = "${ProjectChildListItemComponentTestTags.PROJECT_CHILD_LIST_ITEM_LIFECYCLE}_${parentPosition}_${position}",
+            text = text
+        )
+    }
 }

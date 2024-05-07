@@ -253,6 +253,7 @@ fun ProjectListItem(
                             parentPosition = position,
                             position = index,
                             id = projectChild.id,
+                            lifecycleStatus = projectChild.lifecycleStatus,
                             listingDetails = projectChild.listingDetails,
                             onProjectChildClicked = onProjectChildClicked
                         )
@@ -296,6 +297,7 @@ fun ProjectListItemPreview() {
                     ProjectChild(
                         id = 1111,
                         listingType = ListingType.PROPERTY,
+                        lifecycleStatus = "New",
                         listingDetails = ListingDetails(
                             price = "Offers Above $659,275",
                             numberOfBedrooms = 3,
@@ -306,6 +308,7 @@ fun ProjectListItemPreview() {
                     ProjectChild(
                         id = 2222,
                         listingType = ListingType.PROPERTY,
+                        lifecycleStatus = "Sold",
                         listingDetails = ListingDetails(
                             price = "Contact Agent",
                             numberOfBedrooms = null,

@@ -1,7 +1,10 @@
 package au.com.deanpike.ui.screen.list.component
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material3.Card
@@ -9,12 +12,14 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import au.com.deanpike.client.model.listing.response.ListingDetails
 import au.com.deanpike.ui.screen.list.component.ProjectChildListItemComponentTestTags.PROJECT_CHILD_LIST_ITEM_LAYOUT
+import au.com.deanpike.ui.screen.list.component.ProjectChildListItemComponentTestTags.PROJECT_CHILD_LIST_ITEM_LIFECYCLE
 import au.com.deanpike.ui.screen.list.component.ProjectChildListItemComponentTestTags.PROJECT_CHILD_LIST_ITEM_PRICE
 import au.com.deanpike.ui.screen.shared.PropertyDetailComponent
 import au.com.deanpike.uishared.theme.Dimension.DIM_16
@@ -27,6 +32,7 @@ fun ProjectChildListItemComponent(
     parentPosition: Int,
     position: Int,
     id: Long,
+    lifecycleStatus: String?,
     listingDetails: ListingDetails,
     onProjectChildClicked: (Long) -> Unit = {}
 ) {
@@ -46,14 +52,29 @@ fun ProjectChildListItemComponent(
         Column(
             modifier = Modifier.padding(DIM_8),
         ) {
-            listingDetails.price?.let {
-                Text(
-                    modifier = Modifier
-                        .padding(start = DIM_16, end = DIM_16, top = DIM_8)
-                        .testTag("${PROJECT_CHILD_LIST_ITEM_PRICE}_${parentPosition}_${position}"),
-                    text = it,
-                    style = MaterialTheme.typography.titleMedium
-                )
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = DIM_16, end = DIM_16, top = DIM_8),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                listingDetails.price?.let {
+                    Text(
+                        modifier = Modifier
+                            .testTag("${PROJECT_CHILD_LIST_ITEM_PRICE}_${parentPosition}_${position}"),
+                        text = it,
+                        style = MaterialTheme.typography.titleMedium
+                    )
+                }
+                lifecycleStatus?.let {
+                    Text(
+                        modifier = Modifier
+                            .testTag("${PROJECT_CHILD_LIST_ITEM_LIFECYCLE}_${parentPosition}_${position}"),
+                        text = it,
+                        style = MaterialTheme.typography.titleSmall
+                    )
+                }
             }
             PropertyDetailComponent(
                 parentPosition = parentPosition,
@@ -69,6 +90,7 @@ object ProjectChildListItemComponentTestTags {
     private const val PREFIX = "PROJECT_CHILD_LIST_ITEM_"
     const val PROJECT_CHILD_LIST_ITEM_LAYOUT = "${PREFIX}LAYOUT"
     const val PROJECT_CHILD_LIST_ITEM_PRICE = "${PREFIX}PRICE"
+    const val PROJECT_CHILD_LIST_ITEM_LIFECYCLE = "${PREFIX}LIFECYCLE"
 }
 
 @Preview(showBackground = true)
@@ -79,6 +101,7 @@ fun ProjectChildListItemComponentPreview() {
             parentPosition = 0,
             position = 1,
             id = 2222,
+            lifecycleStatus = "New",
             listingDetails = ListingDetails(
                 price = "Contact Agent",
                 numberOfBedrooms = 4,

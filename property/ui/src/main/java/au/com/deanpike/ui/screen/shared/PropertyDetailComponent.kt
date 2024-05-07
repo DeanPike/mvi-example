@@ -24,13 +24,14 @@ import au.com.deanpike.uishared.theme.MviExampleTheme
 
 @Composable
 fun PropertyDetailComponent(
+    modifier: Modifier = Modifier,
     parentPosition: Int,
     position: Int,
     details: ListingDetails,
     dwellingType: String?
 ) {
     Row(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(start = Dimension.DIM_16, end = Dimension.DIM_16, top = Dimension.DIM_4)
             .testTag("${DETAIL_ITEM_GROUP}_${parentPosition}_${position}"),

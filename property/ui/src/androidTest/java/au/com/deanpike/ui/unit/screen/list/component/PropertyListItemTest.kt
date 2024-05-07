@@ -37,6 +37,7 @@ class PropertyListItemTest : UiUnitTestBase() {
                 assertItemDisplayed(0)
                 assertPropertyImageDisplayed(0)
                 assertAgencyImageDisplayed(0)
+                assertLifecycleDisplayed(0, "New")
                 assertPriceDisplayed(position = 0, price = "$1000000")
                 assertHeadlineDisplayed(position = 0, headline = "Property headline")
                 assertAddressDisplayed(position = 0, address = "Property address")

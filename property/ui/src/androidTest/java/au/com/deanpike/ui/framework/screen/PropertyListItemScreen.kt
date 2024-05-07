@@ -1,7 +1,6 @@
 package au.com.deanpike.ui.framework.screen
 
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
-import au.com.deanpike.client.model.listing.response.Project
 import au.com.deanpike.client.model.listing.response.Property
 import au.com.deanpike.ui.framework.ability.list.component.PropertyListItemAbility
 
@@ -16,6 +15,7 @@ class PropertyListItemScreen(private val composeTestRule: ComposeContentTestRule
             scrollTo(position)
             assertItemDisplayed(position)
             assertPropertyImageDisplayed(position)
+            assertLifecycleDisplayed(position = position, text = property.lifecycleStatus ?: "")
             assertAgencyImageDisplayed(position)
             assertPriceDisplayed(position = position, price = property.detail.price!!)
             assertHeadlineDisplayed(position = position, headline = property.headLine!!)
@@ -41,12 +41,5 @@ class PropertyListItemScreen(private val composeTestRule: ComposeContentTestRule
                 dwellingType = property.dwellingType!!
             )
         }
-    }
-
-    fun assertProjectDisplayed(
-        position: Int,
-        project: Project
-    ) {
-
     }
 }

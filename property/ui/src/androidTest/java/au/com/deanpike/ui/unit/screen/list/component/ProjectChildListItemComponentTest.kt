@@ -31,6 +31,7 @@ class ProjectChildListItemComponentTest : UiUnitTestBase() {
                             numberOfBathrooms = 3,
                             numberOfCarSpaces = 2
                         ),
+                        lifecycleStatus = "New",
                         onProjectChildClicked = {
                             clickedId = it
                         }
@@ -49,6 +50,11 @@ class ProjectChildListItemComponentTest : UiUnitTestBase() {
                 parentPosition = 0,
                 position = 1,
                 text = "Price"
+            )
+            assertLifecycleDisplayed(
+                parentPosition = 0,
+                position = 1,
+                text = "New"
             )
         }
 

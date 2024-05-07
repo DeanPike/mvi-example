@@ -112,6 +112,7 @@ class ProjectConverterTest {
         with(project.properties[0]) {
             assertThat(id).isEqualTo(11)
             assertThat(listingType).isEqualTo(ListingType.PROPERTY)
+            assertThat(lifecycleStatus).isEqualTo("New")
             assertThat(listingDetails.price).isEqualTo("900000")
             assertThat(listingDetails.numberOfBedrooms).isEqualTo(3)
             assertThat(listingDetails.numberOfBathrooms).isEqualTo(2)

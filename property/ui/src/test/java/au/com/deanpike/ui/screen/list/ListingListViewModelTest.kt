@@ -73,6 +73,7 @@ class ListingListViewModelTest {
 
             assertThat(properties[0].id).isEqualTo(21)
             assertThat(properties[0].listingType).isEqualTo(ListingType.PROPERTY)
+            assertThat(properties[0].lifecycleStatus).isEqualTo("New")
             assertThat(properties[0].listingDetails.price).isEqualTo("850000")
             assertThat(properties[0].listingDetails.numberOfBedrooms).isEqualTo(2)
             assertThat(properties[0].listingDetails.numberOfBathrooms).isEqualTo(1)
@@ -80,6 +81,7 @@ class ListingListViewModelTest {
 
             assertThat(properties[1].id).isEqualTo(22)
             assertThat(properties[1].listingType).isEqualTo(ListingType.PROPERTY)
+            assertThat(properties[1].lifecycleStatus).isEqualTo("Sold")
             assertThat(properties[1].listingDetails.price).isEqualTo("1200000")
             assertThat(properties[1].listingDetails.numberOfBedrooms).isEqualTo(3)
             assertThat(properties[1].listingDetails.numberOfBathrooms).isEqualTo(2)
@@ -170,6 +172,7 @@ class ListingListViewModelTest {
         val childOne = ProjectChild(
             id = 21,
             listingType = ListingType.PROPERTY,
+            lifecycleStatus = "New",
             listingDetails = ListingDetails(
                 price = "850000",
                 numberOfBedrooms = 2,
@@ -181,6 +184,7 @@ class ListingListViewModelTest {
         val childTwo = ProjectChild(
             id = 22,
             listingType = ListingType.PROPERTY,
+            lifecycleStatus = "Sold",
             listingDetails = ListingDetails(
                 price = "1200000",
                 numberOfBedrooms = 3,

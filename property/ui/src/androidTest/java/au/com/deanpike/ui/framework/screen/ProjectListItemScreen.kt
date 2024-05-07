@@ -44,6 +44,11 @@ class ProjectListItemScreen(private val composeTestRule: ComposeContentTestRule)
                     position = index,
                     text = projectChild.listingDetails.price!!
                 )
+                assertLifecycleDisplayed(
+                    parentPosition = position,
+                    position = index,
+                    text = projectChild.lifecycleStatus ?: ""
+                )
 
                 detailAbility.scrollTo(
                     parentPosition = position,

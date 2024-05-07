@@ -110,6 +110,7 @@ class ListingListScreenTest : UiUnitTestBase() {
         val childOne = ProjectChild(
             id = 2222,
             listingType = ListingType.PROPERTY,
+            lifecycleStatus = "New",
             listingDetails = ListingDetails(
                 price = "$100,000",
                 numberOfBedrooms = 3,
@@ -120,6 +121,7 @@ class ListingListScreenTest : UiUnitTestBase() {
         val childTwo = ProjectChild(
             id = 3333,
             listingType = ListingType.PROPERTY,
+            lifecycleStatus = "Sold",
             listingDetails = ListingDetails(
                 price = "$357,000",
                 numberOfBedrooms = 5,

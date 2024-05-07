@@ -5,6 +5,7 @@ import au.com.deanpike.client.model.listing.response.ListingType
 import au.com.deanpike.client.model.listing.response.Project
 import au.com.deanpike.client.model.listing.response.ProjectChild
 import au.com.deanpike.client.model.listing.response.Property
+import au.com.deanpike.ui.framework.screen.ProjectListItemScreen
 import au.com.deanpike.ui.framework.screen.PropertyListItemScreen
 import au.com.deanpike.ui.screen.list.ListingListScreen
 import au.com.deanpike.ui.screen.list.ListingListScreenTestTags
@@ -21,7 +22,8 @@ import org.junit.Test
 @HiltAndroidTest
 class BuyListingTest : UiE2ETestBase() {
 
-    private val listScreen = PropertyListItemScreen(composeTestRule)
+    private val propertyListScreen = PropertyListItemScreen(composeTestRule)
+    private val projectListScreen = ProjectListItemScreen(composeTestRule)
 
     @Test
     fun test_buy_listing_flow() {
@@ -45,7 +47,7 @@ class BuyListingTest : UiE2ETestBase() {
             assertTagDisplayed(ListingListScreenTestTags.LISTING_LIST)
             assertTextDisplayed(tag = ListingListScreenTestTags.LISTING_LIST_HEADING, text = "2 Properties")
 
-            listScreen.assertProjectDisplayed(
+            projectListScreen.assertProjectDisplayed(
                 position = 0,
                 project = Project(
                     id = 2842,
@@ -60,6 +62,7 @@ class BuyListingTest : UiE2ETestBase() {
                         ProjectChild(
                             id = 2019090910,
                             listingType = ListingType.PROPERTY,
+                            lifecycleStatus = "New Home",
                             listingDetails = ListingDetails(
                                 price = "$3,250,000",
                                 numberOfBedrooms = 4,
@@ -70,6 +73,7 @@ class BuyListingTest : UiE2ETestBase() {
                         ProjectChild(
                             id = 2019090988,
                             listingType = ListingType.PROPERTY,
+                            lifecycleStatus = "New",
                             listingDetails = ListingDetails(
                                 price = "$1,999,000",
                                 numberOfBedrooms = 4,
@@ -81,9 +85,7 @@ class BuyListingTest : UiE2ETestBase() {
                 )
             )
 
-
-
-            listScreen.assertPropertyDisplayed(
+            propertyListScreen.assertPropertyDisplayed(
                 position = 1,
                 property = Property(
                     id = 2019150933,

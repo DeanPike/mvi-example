@@ -17,6 +17,7 @@ internal class ProjectConverter @Inject constructor() : ListingConverter {
             ProjectChild(
                 id = it.id,
                 listingType = ListingType.PROPERTY,
+                lifecycleStatus = it.lifecycleStatus,
                 listingDetails = ListingDetails(
                     price = it.price,
                     numberOfBedrooms = it.bedroomCount?.toInt(),
