@@ -5,6 +5,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -21,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import au.com.deanpike.client.model.listing.response.Project
 import au.com.deanpike.client.model.listing.response.Property
+import au.com.deanpike.client.type.ListingType
 import au.com.deanpike.client.type.StatusType
 import au.com.deanpike.ui.R
 import au.com.deanpike.ui.screen.list.ListingListScreenTestTags.LISTING_LIST
@@ -28,11 +30,11 @@ import au.com.deanpike.ui.screen.list.ListingListScreenTestTags.LISTING_LIST_HEA
 import au.com.deanpike.ui.screen.list.component.FilterComponent
 import au.com.deanpike.ui.screen.list.component.ProjectListItem
 import au.com.deanpike.ui.screen.list.component.PropertyListItem
+import au.com.deanpike.ui.screen.listingType.ListingTypeScreen
 import au.com.deanpike.uishared.base.ScreenStateType
 import au.com.deanpike.uishared.theme.Dimension.DIM_16
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
 import au.com.deanpike.uishared.theme.MviExampleTheme
-import java.util.UUID
 
 @Composable
 fun ListingListScreen(
@@ -41,12 +43,22 @@ fun ListingListScreen(
 
     LaunchedEffect(Unit) {
         viewModel.setEvent(ListingListScreenEvent.Initialise)
-
     }
     ListingListScreenContent(
         state = viewModel.uiState,
         onStatusSelected = {
             viewModel.setEvent(ListingListScreenEvent.OnStatusSelected(it))
+        },
+        onListingTypeSelected = {
+            viewModel.setEvent(ListingListScreenEvent.OnListingTypeClicked)
+        },
+        onBottomSheetDismissed = {
+            viewModel.setEvent(ListingListScreenEvent.OnBottomSheetDismissed)
+        },
+        onListingTypesApplied = {
+            viewModel.setEvent(
+                ListingListScreenEvent.OnListingTypesApplied(it)
+            )
         }
     )
 }
@@ -55,32 +67,34 @@ fun ListingListScreen(
 @Composable
 fun ListingListScreenContent(
     state: ListingListScreenState,
-    onItemClicked: (UUID) -> Unit = {},
-    onStatusSelected: (StatusType) -> Unit = {}
+    onStatusSelected: (StatusType) -> Unit = {},
+    onListingTypeSelected: () -> Unit = {},
+    onBottomSheetDismissed: () -> Unit = {},
+    onListingTypesApplied: (List<ListingType>) -> Unit = {}
 ) {
 
     val layoutDirection = LocalLayoutDirection.current
+
     Scaffold(
         topBar = {
-            if (state.screenState == ScreenStateType.SUCCESS) {
-                TopAppBar(
-                    title = {
-                        Text(
-                            modifier = Modifier.testTag(LISTING_LIST_HEADING),
-                            text = pluralStringResource(id = R.plurals.project_properties, state.listings.count(), state.listings.count())
-                        )
-                    }
-                )
-            }
-        },
-    ) { innerPadding ->
+            TopAppBar(
+                title = {
+                    Text(
+                        modifier = Modifier.testTag(LISTING_LIST_HEADING),
+                        text = pluralStringResource(id = R.plurals.project_properties, state.listings.count(), state.listings.count())
+                    )
+                }
+            )
+
+        }
+    ) { padding ->
         if (state.screenState == ScreenStateType.SUCCESS) {
             Column(
                 modifier = Modifier.padding(
-                    start = innerPadding.calculateStartPadding(layoutDirection),
-                    end = innerPadding.calculateEndPadding(layoutDirection),
-                    top = innerPadding.calculateTopPadding(),
-                    bottom = innerPadding.calculateBottomPadding()
+                    start = padding.calculateStartPadding(layoutDirection),
+                    end = padding.calculateEndPadding(layoutDirection),
+                    top = padding.calculateTopPadding(),
+                    bottom = padding.calculateBottomPadding()
                 )
             ) {
                 HorizontalDivider()
@@ -93,7 +107,7 @@ fun ListingListScreenContent(
                     selectedStatus = state.selectedStatus,
                     selectedListingTypes = state.selectedListingTypes,
                     onStatusSelected = onStatusSelected,
-                    onListingTypeSelected = {}
+                    onListingTypeSelected = onListingTypeSelected
                 )
                 Spacer(modifier = Modifier.height(DIM_8))
                 LazyColumn(
@@ -128,6 +142,17 @@ fun ListingListScreenContent(
                     }
                 }
             }
+
+            if (state.showListingTypeScreen) {
+                ModalBottomSheet(
+                    onDismissRequest = { onBottomSheetDismissed() }
+                ) {
+                    ListingTypeScreen(
+                        selectedListingTypes = state.selectedListingTypes,
+                        onApplyClicked = onListingTypesApplied
+                    )
+                }
+            }
         } else {
             if (state.screenState == ScreenStateType.LOADING) {
                 Box(
@@ -139,6 +164,7 @@ fun ListingListScreenContent(
                 }
             }
         }
+
     }
 }
 

@@ -5,6 +5,8 @@ import au.com.deanpike.client.model.listing.response.ListingType
 import au.com.deanpike.client.model.listing.response.Project
 import au.com.deanpike.client.model.listing.response.ProjectChild
 import au.com.deanpike.client.model.listing.response.Property
+import au.com.deanpike.ui.framework.ability.list.ListingListScreenAbility
+import au.com.deanpike.ui.framework.screen.FilterComponentScreen
 import au.com.deanpike.ui.framework.screen.ProjectListItemScreen
 import au.com.deanpike.ui.framework.screen.PropertyListItemScreen
 import au.com.deanpike.ui.screen.list.ListingListScreen
@@ -12,18 +14,18 @@ import au.com.deanpike.ui.screen.list.ListingListScreenTestTags
 import au.com.deanpike.uishared.theme.MviExampleTheme
 import au.com.deanpike.uitestshared.base.UiE2ETestBase
 import au.com.deanpike.uitestshared.util.advanceTimeAndWait
-import au.com.deanpike.uitestshared.util.assertTagDisplayed
-import au.com.deanpike.uitestshared.util.assertTextDisplayed
 import au.com.deanpike.uitestshared.util.waitUntilTagExists
 import dagger.hilt.android.testing.HiltAndroidTest
 import java.net.HttpURLConnection
 import org.junit.Test
 
 @HiltAndroidTest
-class BuyListingTest : UiE2ETestBase() {
+class ListingListTest : UiE2ETestBase() {
 
+    private val listAbility = ListingListScreenAbility(composeTestRule)
     private val propertyListScreen = PropertyListItemScreen(composeTestRule)
     private val projectListScreen = ProjectListItemScreen(composeTestRule)
+    private val filterScreen = FilterComponentScreen(composeTestRule)
 
     @Test
     fun test_buy_listing_flow() {
@@ -44,8 +46,10 @@ class BuyListingTest : UiE2ETestBase() {
             advanceTimeAndWait()
 
             waitUntilTagExists(tag = ListingListScreenTestTags.LISTING_LIST, timeout = 2000)
-            assertTagDisplayed(ListingListScreenTestTags.LISTING_LIST)
-            assertTextDisplayed(tag = ListingListScreenTestTags.LISTING_LIST_HEADING, text = "2 Properties")
+            listAbility.assertListDisplayed()
+            listAbility.assertHeadingDisplayed("2 Properties")
+
+            filterScreen.assertFilterComponentDisplayed()
 
             projectListScreen.assertProjectDisplayed(
                 position = 0,
@@ -105,6 +109,37 @@ class BuyListingTest : UiE2ETestBase() {
                     )
                 )
             )
+        }
+    }
+
+    @Test
+    fun should_show_status_types() {
+        webServerDispatcher.addResponse(
+            context = context,
+            pathPattern = "v1/search",
+            filename = "raw/listing_response.json",
+            httpMethod = "POST",
+            status = HttpURLConnection.HTTP_OK
+        )
+
+        with(composeTestRule) {
+            setContent {
+                MviExampleTheme {
+                    ListingListScreen()
+                }
+            }
+            advanceTimeAndWait()
+
+            waitUntilTagExists(tag = ListingListScreenTestTags.LISTING_LIST, timeout = 2000)
+
+            with(filterScreen) {
+                assertFilterComponentDisplayed()
+                assertStatusItemsDisplayed()
+                selectSoldStatus()
+
+                assertListingTypesDisplayed()
+                selectHouseListingType()
+            }
         }
     }
 }

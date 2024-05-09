@@ -6,6 +6,8 @@ import au.com.deanpike.client.model.listing.response.Project
 import au.com.deanpike.client.model.listing.response.ProjectChild
 import au.com.deanpike.client.model.listing.response.Property
 import au.com.deanpike.client.model.listing.search.ListingSearch
+import au.com.deanpike.client.type.ListingType.HOUSE
+import au.com.deanpike.client.type.ListingType.TOWNHOUSE
 import au.com.deanpike.client.type.StatusType
 import au.com.deanpike.client.usecase.ListingUseCase
 import au.com.deanpike.client.util.ResponseWrapper
@@ -145,6 +147,53 @@ class ListingListViewModelTest {
             assertThat(screenState).isEqualTo(ScreenStateType.SUCCESS)
             assertThat(listings.size).isEqualTo(2)
             assertThat(selectedStatus).isEqualTo(StatusType.RENT)
+        }
+    }
+
+    @Test
+    fun `handle listing type clicked`() = runTest {
+        viewModel.setEvent(ListingListScreenEvent.OnListingTypeClicked)
+        advanceUntilIdle()
+
+        assertThat(viewModel.uiState.showListingTypeScreen).isTrue()
+
+    }
+
+    @Test
+    fun `handle bottom sheet dismissed`() = runTest {
+        viewModel.setEvent(ListingListScreenEvent.OnBottomSheetDismissed)
+        advanceUntilIdle()
+
+        assertThat(viewModel.uiState.showListingTypeScreen).isFalse()
+    }
+
+    @Test
+    fun `handle listing types applied`() = runTest {
+        coEvery {
+            useCase.getListings(
+                ListingSearch(
+                    searchMode = StatusType.BUY,
+                    dwellingTypes = listOf(HOUSE, TOWNHOUSE)
+                )
+            )
+        } returns ResponseWrapper.Success(emptyList())
+
+        viewModel.setEvent(
+            ListingListScreenEvent.OnListingTypesApplied(
+                listOf(
+                    HOUSE,
+                    TOWNHOUSE
+                )
+            )
+        )
+        advanceUntilIdle()
+
+        with(viewModel.uiState) {
+            assertThat(showListingTypeScreen).isFalse()
+            assertThat(selectedListingTypes.size).isEqualTo(2)
+            assertThat(selectedListingTypes[0]).isEqualTo(HOUSE)
+            assertThat(selectedListingTypes[1]).isEqualTo(TOWNHOUSE)
+            assertThat(screenState).isEqualTo(ScreenStateType.SUCCESS)
         }
     }
 

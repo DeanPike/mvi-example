@@ -32,6 +32,7 @@ retrofitSerializationConverter = "1.0.0"
 runnerVersion = "1.5.2"
 loggingInterceptor = "4.12.0"
 gsonVersion = "2.10.1"
+turbine = "1.1.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -65,6 +66,7 @@ gson = { group = "com.google.code.gson", name = "gson", version.ref = "gsonVersi
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinSerialization" }
 retrofit-serialization-converter = { group = "com.jakewharton.retrofit", name = "retrofit2-kotlinx-serialization-converter", version.ref = "retrofitSerializationConverter" }
 coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
+turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
 
 # Test
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
@@ -96,4 +98,3 @@ daggerHiltPlugin = { id = "com.google.dagger.hilt.android", version.ref = "dagge
 kaptPlugin = { id = "org.jetbrains.kotlin.kapt", version.ref = "kapt" }
 jetbrainsKotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
-

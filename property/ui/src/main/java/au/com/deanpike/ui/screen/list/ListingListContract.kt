@@ -12,7 +12,8 @@ data class ListingListScreenState(
     val screenState: ScreenStateType = ScreenStateType.INITIAL,
     val listings: List<Listing> = emptyList(),
     val selectedStatus: StatusType = StatusType.BUY,
-    val selectedListingTypes: List<ListingType> = emptyList()
+    val selectedListingTypes: List<ListingType> = emptyList(),
+    val showListingTypeScreen: Boolean = false
 ) : UiState
 
 sealed class ListingListScreenEvent : UiEvent {
@@ -20,6 +21,10 @@ sealed class ListingListScreenEvent : UiEvent {
     data class OnStatusSelected(
         val status: StatusType
     ) : ListingListScreenEvent()
+
+    data object OnListingTypeClicked : ListingListScreenEvent()
+    data object OnBottomSheetDismissed : ListingListScreenEvent()
+    data class OnListingTypesApplied(val selectedListingTypes: List<ListingType>) : ListingListScreenEvent()
 }
 
 sealed class ListingListScreenEffect : UiEffect {

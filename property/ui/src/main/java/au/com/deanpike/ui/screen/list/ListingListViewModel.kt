@@ -27,6 +27,15 @@ class ListingListViewModel @Inject constructor(
             is ListingListScreenEvent.OnStatusSelected -> {
                 onStatusSelected(event.status)
             }
+            is ListingListScreenEvent.OnListingTypeClicked -> {
+                onListingTypeClicked()
+            }
+            is ListingListScreenEvent.OnBottomSheetDismissed -> {
+                onBottomSheetDismissed()
+            }
+            is ListingListScreenEvent.OnListingTypesApplied -> {
+                onListingTypesApplied(event)
+            }
         }
     }
 
@@ -44,6 +53,33 @@ class ListingListViewModel @Inject constructor(
             copy(
                 screenState = ScreenStateType.LOADING,
                 selectedStatus = status
+            )
+        }
+        getListings()
+    }
+
+    private fun onListingTypeClicked() {
+        setState {
+            copy(
+                showListingTypeScreen = true
+            )
+        }
+    }
+
+    private fun onBottomSheetDismissed() {
+        setState {
+            copy(
+                showListingTypeScreen = false
+            )
+        }
+    }
+
+    private fun onListingTypesApplied(event: ListingListScreenEvent.OnListingTypesApplied) {
+        setState {
+            copy(
+                showListingTypeScreen = false,
+                selectedListingTypes = event.selectedListingTypes,
+                screenState = ScreenStateType.LOADING
             )
         }
         getListings()

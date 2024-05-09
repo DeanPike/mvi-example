@@ -12,6 +12,7 @@
     <string name="status_description">listing status</string>
 
     <string name="no_listing_type">Property types</string>
+    <string name="apply">Apply</string>
 
     <!-- Status Type -->
     <string name="buy">Buy</string>

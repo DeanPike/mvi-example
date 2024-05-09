@@ -103,5 +103,6 @@ dependencies {
     testImplementation(libs.mockk)
     testImplementation(libs.assertj)
     testImplementation(libs.coroutines.test)
+    testImplementation(libs.turbine)
 
 }
