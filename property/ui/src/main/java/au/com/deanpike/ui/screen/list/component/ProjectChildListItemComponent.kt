@@ -1,9 +1,6 @@
 package au.com.deanpike.ui.screen.list.component
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
@@ -12,17 +9,17 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.Dimension
 import au.com.deanpike.client.model.listing.response.ListingDetails
 import au.com.deanpike.ui.screen.list.component.ProjectChildListItemComponentTestTags.PROJECT_CHILD_LIST_ITEM_LAYOUT
 import au.com.deanpike.ui.screen.list.component.ProjectChildListItemComponentTestTags.PROJECT_CHILD_LIST_ITEM_LIFECYCLE
 import au.com.deanpike.ui.screen.list.component.ProjectChildListItemComponentTestTags.PROJECT_CHILD_LIST_ITEM_PRICE
 import au.com.deanpike.ui.screen.shared.PropertyDetailComponent
-import au.com.deanpike.uishared.theme.Dimension.DIM_16
 import au.com.deanpike.uishared.theme.Dimension.DIM_4
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
 import au.com.deanpike.uishared.theme.MviExampleTheme
@@ -49,34 +46,48 @@ fun ProjectChildListItemComponent(
             onProjectChildClicked(id)
         }
     ) {
-        Column(
-            modifier = Modifier.padding(DIM_8),
+        ConstraintLayout(
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .padding(DIM_8)
         ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(start = DIM_16, end = DIM_16, top = DIM_8),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                listingDetails.price?.let {
-                    Text(
-                        modifier = Modifier
-                            .testTag("${PROJECT_CHILD_LIST_ITEM_PRICE}_${parentPosition}_${position}"),
-                        text = it,
-                        style = MaterialTheme.typography.titleMedium
-                    )
-                }
-                lifecycleStatus?.let {
-                    Text(
-                        modifier = Modifier
-                            .testTag("${PROJECT_CHILD_LIST_ITEM_LIFECYCLE}_${parentPosition}_${position}"),
-                        text = it,
-                        style = MaterialTheme.typography.titleSmall
-                    )
-                }
+            val (priceRef, lifecycleRef, detailRef) = createRefs()
+            listingDetails.price?.let {
+                Text(
+                    modifier = Modifier
+                        .constrainAs(priceRef) {
+                            start.linkTo(parent.start)
+                            end.linkTo(lifecycleRef.start)
+                            top.linkTo(parent.top)
+                            width = Dimension.fillToConstraints
+                        }
+                        .testTag("${PROJECT_CHILD_LIST_ITEM_PRICE}_${parentPosition}_${position}"),
+                    text = it,
+                    style = MaterialTheme.typography.titleMedium
+                )
+            }
+            lifecycleStatus?.let {
+                Text(
+                    modifier = Modifier
+                        .constrainAs(lifecycleRef) {
+                            start.linkTo(priceRef.end)
+                            end.linkTo(parent.end)
+                            top.linkTo(parent.top)
+
+                        }
+                        .testTag("${PROJECT_CHILD_LIST_ITEM_LIFECYCLE}_${parentPosition}_${position}"),
+                    text = it,
+                    style = MaterialTheme.typography.titleSmall
+                )
             }
             PropertyDetailComponent(
+                modifier = Modifier
+                    .constrainAs(detailRef) {
+                        start.linkTo(parent.start)
+                        top.linkTo(priceRef.bottom)
+                    }
+                    .fillMaxWidth(),
                 parentPosition = parentPosition,
                 position = position,
                 details = listingDetails,
@@ -95,7 +106,7 @@ object ProjectChildListItemComponentTestTags {
 
 @Preview(showBackground = true)
 @Composable
-fun ProjectChildListItemComponentPreview() {
+fun ProjectChildListItemComponentShortPreview() {
     MviExampleTheme {
         ProjectChildListItemComponent(
             parentPosition = 0,
@@ -104,6 +115,25 @@ fun ProjectChildListItemComponentPreview() {
             lifecycleStatus = "New",
             listingDetails = ListingDetails(
                 price = "Contact Agent",
+                numberOfBedrooms = 4,
+                numberOfBathrooms = 3,
+                numberOfCarSpaces = 2
+            )
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ProjectChildListItemComponentLongPreview() {
+    MviExampleTheme {
+        ProjectChildListItemComponent(
+            parentPosition = 0,
+            position = 1,
+            id = 2222,
+            lifecycleStatus = "New",
+            listingDetails = ListingDetails(
+                price = "Whole Floor North-Facing Residence With Harbour Views",
                 numberOfBedrooms = 4,
                 numberOfBathrooms = 3,
                 numberOfCarSpaces = 2
