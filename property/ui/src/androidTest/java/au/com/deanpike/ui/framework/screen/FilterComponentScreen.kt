@@ -2,7 +2,6 @@ package au.com.deanpike.ui.framework.screen
 
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import au.com.deanpike.ui.framework.ability.list.component.FilterComponentAbility
-import au.com.deanpike.ui.framework.ability.listingType.ListingTypeScreenAbility
 import au.com.deanpike.ui.screen.list.ListingListScreenTestTags
 import au.com.deanpike.uitestshared.util.advanceTimeAndWait
 import au.com.deanpike.uitestshared.util.waitUntilTagExists
@@ -10,7 +9,6 @@ import au.com.deanpike.uitestshared.util.waitUntilTagExists
 class FilterComponentScreen(private val composeTestRule: ComposeContentTestRule) {
     private val listingTypeScreen = ListingTypeScreen(composeTestRule)
     private val filterAbility = FilterComponentAbility(composeTestRule)
-    private val listingTypeAbility = ListingTypeScreenAbility(composeTestRule)
 
     fun assertFilterComponentDisplayed() {
         filterAbility.assertStatusButtonDisplayed("Buy")

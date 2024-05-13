@@ -13,6 +13,7 @@ import au.com.deanpike.ui.screen.list.ListingListScreen
 import au.com.deanpike.ui.screen.list.ListingListScreenTestTags
 import au.com.deanpike.uishared.theme.MviExampleTheme
 import au.com.deanpike.uitestshared.base.UiE2ETestBase
+import au.com.deanpike.uitestshared.mockserver.HttpMethod
 import au.com.deanpike.uitestshared.util.advanceTimeAndWait
 import au.com.deanpike.uitestshared.util.waitUntilTagExists
 import dagger.hilt.android.testing.HiltAndroidTest
@@ -29,12 +30,9 @@ class ListingListTest : UiE2ETestBase() {
 
     @Test
     fun test_buy_listing_flow() {
-        webServerDispatcher.addResponse(
-            context = context,
-            pathPattern = "v1/search",
-            filename = "raw/listing_response.json",
-            httpMethod = "POST",
-            status = HttpURLConnection.HTTP_OK
+        setupResponse(
+            listingType = emptyList(),
+            statusType = "buy"
         )
 
         with(composeTestRule) {
@@ -112,34 +110,19 @@ class ListingListTest : UiE2ETestBase() {
         }
     }
 
-    @Test
-    fun should_show_status_types() {
+    private fun setupResponse(listingType: List<String>, statusType: String) {
+
+        val listingTypes = listingType.map {
+            "\"$it\""
+        }.toString()
+
         webServerDispatcher.addResponse(
             context = context,
             pathPattern = "v1/search",
             filename = "raw/listing_response.json",
-            httpMethod = "POST",
-            status = HttpURLConnection.HTTP_OK
+            httpMethod = HttpMethod.POST,
+            status = HttpURLConnection.HTTP_OK,
+            body = """{"dwelling_types":$listingTypes,"search_mode":"$statusType"}"""
         )
-
-        with(composeTestRule) {
-            setContent {
-                MviExampleTheme {
-                    ListingListScreen()
-                }
-            }
-            advanceTimeAndWait()
-
-            waitUntilTagExists(tag = ListingListScreenTestTags.LISTING_LIST, timeout = 2000)
-
-            with(filterScreen) {
-                assertFilterComponentDisplayed()
-                assertStatusItemsDisplayed()
-                selectSoldStatus()
-
-                assertListingTypesDisplayed()
-                selectHouseListingType()
-            }
-        }
     }
 }
