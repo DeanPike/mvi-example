@@ -14,33 +14,34 @@ typealias MockRequestHandler = (request: RecordedRequest) -> MockResponse
 class MockWebServerDispatcher @Inject constructor(
     private val idlingResource: CountingIdlingResource
 ) : Dispatcher() {
-    private val simpleResponses = mutableMapOf<String, MockResponse>()
+    private val simpleResponses = mutableMapOf<Pair<String, String>, MockResponse>()
     private val complexResponses = mutableMapOf<String, MockRequestHandler>()
 
     fun addResponse(
         context: Context,
         pathPattern: String,
         filename: String,
-        httpMethod: String = "GET",
+        httpMethod: HttpMethod = HttpMethod.GET,
+        body: String = "",
         status: Int = HttpURLConnection.HTTP_OK
     ) {
         val response = mockResponse(FileUtil.readFile(context, filename), status)
-        val responseKey = "$httpMethod/$pathPattern"
+        val responseKey = "${httpMethod.name}/$pathPattern"
         // adding the http method into the key allows for a repeated pathPattern
         // that is used by both GET and POST to behave differently for eg.
-        if (simpleResponses[responseKey] != null) {
-            simpleResponses.replace(responseKey, response)
+        if (simpleResponses[Pair(responseKey, body)] != null) {
+            simpleResponses.replace(Pair(responseKey, body), response)
         } else {
-            simpleResponses[responseKey] = response
+            simpleResponses[Pair(responseKey, body)] = response
         }
     }
 
     fun addResponse(
         pathPattern: String,
         requestHandler: MockRequestHandler,
-        httpMethod: String = "GET",
+        httpMethod: HttpMethod = HttpMethod.GET,
     ) {
-        val responseKey = "$httpMethod/$pathPattern"
+        val responseKey = "${httpMethod.name}/$pathPattern"
         if (complexResponses[responseKey] != null) {
             complexResponses.replace(responseKey, requestHandler)
         } else {
@@ -51,12 +52,12 @@ class MockWebServerDispatcher @Inject constructor(
     override fun dispatch(request: RecordedRequest): MockResponse {
         idlingResource.increment()
         Thread.sleep(200) // provide a small delay to better mimic real life network call across a mobile network
-        val responseKey = request.method + request.path
+        val responseKey = "${HttpMethod.valueOf(request.method ?: "GET")}${request.path}"
 
         var response = findComplexResponse(responseKey, request)
 
         if (response == null) {
-            response = findSimpleResponse(responseKey)
+            response = findSimpleResponse(responseKey, request.body.readUtf8())
         }
 
         if (response == null) {
@@ -78,9 +79,9 @@ class MockWebServerDispatcher @Inject constructor(
         return null
     }
 
-    private fun findSimpleResponse(responseKey: String): MockResponse? {
+    private fun findSimpleResponse(responseKey: String, body: String): MockResponse? {
         for (pathPattern in simpleResponses.keys) {
-            if (responseKey.matches(Regex(pathPattern))) {
+            if (responseKey.matches(Regex(pathPattern.first)) && body == pathPattern.second) {
                 val response = simpleResponses[pathPattern]
                 if (response != null) {
                     return response
