@@ -17,6 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.pluralStringResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -81,7 +82,11 @@ fun ListingListScreenContent(
                 title = {
                     Text(
                         modifier = Modifier.testTag(LISTING_LIST_HEADING),
-                        text = pluralStringResource(id = R.plurals.project_properties, state.listings.count(), state.listings.count())
+                        text = if (state.screenState == ScreenStateType.LOADING) {
+                            stringResource(id = R.string.loading)
+                        } else {
+                            pluralStringResource(id = R.plurals.project_properties, state.listings.count(), state.listings.count())
+                        }
                     )
                 }
             )
@@ -153,18 +158,18 @@ fun ListingListScreenContent(
                     )
                 }
             }
-        } else {
-            if (state.screenState == ScreenStateType.LOADING) {
-                Box(
-                    modifier = Modifier.fillMaxSize(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    CircularProgressIndicator(
-                    )
-                }
+        } else if (state.screenState == ScreenStateType.LOADING) {
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                CircularProgressIndicator(
+                )
             }
+        } else {
+            // We need to have a composable or the scaffold will crash the app
+            Text(text = "")
         }
-
     }
 }
 

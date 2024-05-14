@@ -13,6 +13,7 @@
 
     <string name="no_listing_type">Property types</string>
     <string name="apply">Apply</string>
+    <string name="loading">Loading\.\.\.</string>
 
     <!-- Status Type -->
     <string name="buy">Buy</string>
