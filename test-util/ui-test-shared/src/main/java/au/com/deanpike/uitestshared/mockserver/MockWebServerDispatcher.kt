@@ -15,7 +15,7 @@ class MockWebServerDispatcher @Inject constructor(
     private val idlingResource: CountingIdlingResource
 ) : Dispatcher() {
     private val simpleResponses = mutableMapOf<Pair<String, String>, MockResponse>()
-    private val complexResponses = mutableMapOf<String, MockRequestHandler>()
+    private val complexResponses = mutableMapOf<Pair<String, String>, MockRequestHandler>()
 
     fun addResponse(
         context: Context,
@@ -40,12 +40,13 @@ class MockWebServerDispatcher @Inject constructor(
         pathPattern: String,
         requestHandler: MockRequestHandler,
         httpMethod: HttpMethod = HttpMethod.GET,
+        body: String = "",
     ) {
         val responseKey = "${httpMethod.name}/$pathPattern"
-        if (complexResponses[responseKey] != null) {
-            complexResponses.replace(responseKey, requestHandler)
+        if (complexResponses[Pair(responseKey, body)] != null) {
+            complexResponses.replace(Pair(responseKey, body), requestHandler)
         } else {
-            complexResponses[responseKey] = requestHandler
+            complexResponses[Pair(responseKey, body)] = requestHandler
         }
     }
 
@@ -53,23 +54,28 @@ class MockWebServerDispatcher @Inject constructor(
         idlingResource.increment()
         Thread.sleep(200) // provide a small delay to better mimic real life network call across a mobile network
         val responseKey = "${HttpMethod.valueOf(request.method ?: "GET")}${request.path}"
+        val body = request.body.readUtf8()
 
-        var response = findComplexResponse(responseKey, request)
+        var simpleResponse: MockResponse? = null
 
-        if (response == null) {
-            response = findSimpleResponse(responseKey, request.body.readUtf8())
+        val complexResponse = findComplexResponse(responseKey, body, request)
+        if (complexResponse != null) {
+            complexResponses.remove(Pair(responseKey, body))
+        } else {
+            simpleResponse = findSimpleResponse(responseKey, body)
+
+            if (simpleResponse != null) {
+                simpleResponses.remove(Pair(responseKey, body))
+            }
         }
 
-        if (response == null) {
-            response = errorResponse(responseKey)
-        }
         idlingResource.decrement()
-        return response
+        return complexResponse ?: simpleResponse ?: errorResponse(responseKey)
     }
 
-    private fun findComplexResponse(responseKey: String, request: RecordedRequest): MockResponse? {
+    private fun findComplexResponse(responseKey: String, body: String, request: RecordedRequest): MockResponse? {
         for (pathPattern in complexResponses.keys) {
-            if (responseKey.matches(Regex(pathPattern))) {
+            if (responseKey.matches(Regex(pathPattern.first)) && body == pathPattern.second) {
                 val handler = complexResponses[pathPattern]
                 if (handler != null) {
                     return handler(request)
