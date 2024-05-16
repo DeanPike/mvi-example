@@ -1,7 +1,7 @@
 package au.com.deanpike.uitestshared.di
 
-import au.com.deanpike.data.di.RemoteDataSourceModule
-import au.com.deanpike.data.util.BaseUrl
+import au.com.deanpike.network.di.RemoteDataSourceModule
+import au.com.deanpike.network.util.BaseUrl
 import au.com.deanpike.network.api.ListingApi
 import au.com.deanpike.uitestshared.util.MockServerCertificates
 import com.google.gson.Gson

@@ -1,8 +1,8 @@
 package au.com.deanpike.uitestshared.di
 
 import androidx.test.espresso.idling.CountingIdlingResource
-import au.com.deanpike.data.di.NetworkModule
-import au.com.deanpike.data.util.BaseUrl
+import au.com.deanpike.network.di.NetworkModule
+import au.com.deanpike.network.util.BaseUrl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.components.SingletonComponent

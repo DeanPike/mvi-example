@@ -1,6 +1,7 @@
 plugins {
     id("java-library")
     alias(libs.plugins.jetbrainsKotlinJvm)
+    alias(libs.plugins.kaptPlugin)
 }
 
 java {
@@ -15,4 +16,8 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.retrofit.converter.gson)
     implementation(libs.retrofit.serialization.converter)
+
+    // Hilt
+    implementation(libs.hilt.core)
+    kapt(libs.hilt.compiler)
 }

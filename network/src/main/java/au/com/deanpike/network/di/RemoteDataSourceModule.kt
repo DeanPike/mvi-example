@@ -1,6 +1,6 @@
-package au.com.deanpike.data.di
+package au.com.deanpike.network.di
 
-import au.com.deanpike.data.util.BaseUrl
+import au.com.deanpike.network.util.BaseUrl
 import au.com.deanpike.network.api.ListingApi
 import com.google.gson.Gson
 import dagger.Module
