@@ -47,7 +47,7 @@ android {
 
 dependencies {
     implementation(project(":property:data"))
-    implementation(project(":data-shared"))
+    implementation(project(":shared:data-shared"))
     implementation(project(":network"))
     implementation(project(":test-util:unit-test-shared"))
     implementation(project(":shared:ui-shared"))

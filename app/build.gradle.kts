@@ -51,7 +51,7 @@ dependencies {
 
     implementation(project(":property:client"))
     implementation(project(":property:data"))
-    implementation(project(":data-shared"))
+    implementation(project(":shared:data-shared"))
     implementation(project(":network"))
     implementation(project(":property:ui"))
     implementation(project(":shared:ui-shared"))

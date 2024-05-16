@@ -11,7 +11,7 @@ java {
 
 dependencies {
     implementation(project(":property:client"))
-    implementation(project(":data-shared"))
+    implementation(project(":shared:data-shared"))
     implementation(project(":network"))
     testImplementation(project(":property:client"))
 

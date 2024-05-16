@@ -9,7 +9,7 @@ java {
 }
 
 dependencies {
-    implementation(project(":data-shared"))
+    implementation(project(":shared:data-shared"))
     implementation(libs.junit.jupiter)
     implementation(libs.kotlinx.coroutines.test.jvm)
     implementation(libs.kotlinx.coroutines.core.jvm)
