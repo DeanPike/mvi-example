@@ -36,6 +36,9 @@ class ListingListViewModel @Inject constructor(
             is ListingListScreenEvent.OnListingTypesApplied -> {
                 onListingTypesApplied(event)
             }
+            is ListingListScreenEvent.OnRetryClicked -> {
+                onRetryClicked()
+            }
         }
     }
 
@@ -82,6 +85,16 @@ class ListingListViewModel @Inject constructor(
                 screenState = ScreenStateType.LOADING
             )
         }
+        getListings()
+    }
+
+    private fun onRetryClicked() {
+        setState {
+            copy(
+                screenState = ScreenStateType.REFRESHING
+            )
+        }
+
         getListings()
     }
 

@@ -25,4 +25,9 @@
     <string name="apartment_unit_flat">Apartment / Unit / Flat</string>
     <string name="house">House</string>
     <string name="townhouse">Townhouse</string>
+
+    <!-- Error -->
+    <string name="error_title">Something went wrong</string>
+    <string name="error_message">Please check your network connection and try again</string>
+    <string name="retry">Retry</string>
 </resources>

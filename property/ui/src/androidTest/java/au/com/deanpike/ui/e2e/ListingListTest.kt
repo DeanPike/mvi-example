@@ -6,18 +6,23 @@ import au.com.deanpike.client.model.listing.response.Project
 import au.com.deanpike.client.model.listing.response.ProjectChild
 import au.com.deanpike.client.model.listing.response.Property
 import au.com.deanpike.ui.framework.ability.list.ListingListScreenAbility
+import au.com.deanpike.ui.framework.screen.ErrorComponentScreen
 import au.com.deanpike.ui.framework.screen.FilterComponentScreen
 import au.com.deanpike.ui.framework.screen.ProjectListItemScreen
 import au.com.deanpike.ui.framework.screen.PropertyListItemScreen
 import au.com.deanpike.ui.screen.list.ListingListScreen
 import au.com.deanpike.ui.screen.list.ListingListScreenTestTags
+import au.com.deanpike.ui.screen.shared.ErrorComponentTestTags
 import au.com.deanpike.uishared.theme.MviExampleTheme
 import au.com.deanpike.uitestshared.base.UiE2ETestBase
 import au.com.deanpike.uitestshared.mockserver.HttpMethod
+import au.com.deanpike.uitestshared.mockserver.MockRequestHandler
 import au.com.deanpike.uitestshared.util.advanceTimeAndWait
 import au.com.deanpike.uitestshared.util.waitUntilTagExists
 import dagger.hilt.android.testing.HiltAndroidTest
 import java.net.HttpURLConnection
+import okhttp3.mockwebserver.MockResponse
+import okhttp3.mockwebserver.RecordedRequest
 import org.junit.Test
 
 @HiltAndroidTest
@@ -27,6 +32,7 @@ class ListingListTest : UiE2ETestBase() {
     private val propertyListScreen = PropertyListItemScreen(composeTestRule)
     private val projectListScreen = ProjectListItemScreen(composeTestRule)
     private val filterScreen = FilterComponentScreen(composeTestRule)
+    private val errorScreen = ErrorComponentScreen(composeTestRule)
 
     @Test
     fun test_buy_listing_flow() {
@@ -108,6 +114,57 @@ class ListingListTest : UiE2ETestBase() {
                 )
             )
         }
+    }
+
+    @Test
+    fun test_error_flow() {
+        setupErrorResponse(
+            listingType = emptyList(),
+            statusType = "buy"
+        )
+
+        with(composeTestRule) {
+            setContent {
+                MviExampleTheme {
+                    ListingListScreen()
+                }
+            }
+            advanceTimeAndWait()
+
+            waitUntilTagExists(tag = ErrorComponentTestTags.ERROR_COMPONENT_LAYOUT, timeout = 2000)
+            errorScreen.assertErrorComponentDisplayed()
+
+            setupResponse(
+                listingType = emptyList(),
+                statusType = "buy"
+            )
+            errorScreen.clickRetryButton()
+            advanceTimeAndWait(2000)
+
+            waitUntilTagExists(tag = ListingListScreenTestTags.LISTING_LIST, timeout = 2000)
+            listAbility.assertListDisplayed()
+            listAbility.assertHeadingDisplayed("2 Properties")
+        }
+    }
+
+    private fun setupErrorResponse(listingType: List<String>, statusType: String) {
+        val listingTypes = listingType.map {
+            "\"$it\""
+        }.toString()
+
+        webServerDispatcher.addResponse(
+            pathPattern = "v1/search",
+            httpMethod = HttpMethod.POST,
+            body = """{"dwelling_types":$listingTypes,"search_mode":"$statusType"}""",
+            requestHandler = object : MockRequestHandler {
+                override fun invoke(request: RecordedRequest): MockResponse {
+                    return MockResponse().apply {
+                        setBody("""{"error":"Bad url"}""")
+                        setResponseCode(404)
+                    }
+                }
+            }
+        )
     }
 
     private fun setupResponse(listingType: List<String>, statusType: String) {

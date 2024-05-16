@@ -25,6 +25,7 @@ sealed class ListingListScreenEvent : UiEvent {
     data object OnListingTypeClicked : ListingListScreenEvent()
     data object OnBottomSheetDismissed : ListingListScreenEvent()
     data class OnListingTypesApplied(val selectedListingTypes: List<ListingType>) : ListingListScreenEvent()
+    data object OnRetryClicked : ListingListScreenEvent()
 }
 
 sealed class ListingListScreenEffect : UiEffect {

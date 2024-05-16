@@ -32,6 +32,7 @@ import au.com.deanpike.ui.screen.list.component.FilterComponent
 import au.com.deanpike.ui.screen.list.component.ProjectListItem
 import au.com.deanpike.ui.screen.list.component.PropertyListItem
 import au.com.deanpike.ui.screen.listingType.ListingTypeScreen
+import au.com.deanpike.ui.screen.shared.ErrorComponent
 import au.com.deanpike.uishared.base.ScreenStateType
 import au.com.deanpike.uishared.theme.Dimension.DIM_16
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
@@ -57,9 +58,10 @@ fun ListingListScreen(
             viewModel.setEvent(ListingListScreenEvent.OnBottomSheetDismissed)
         },
         onListingTypesApplied = {
-            viewModel.setEvent(
-                ListingListScreenEvent.OnListingTypesApplied(it)
-            )
+            viewModel.setEvent(ListingListScreenEvent.OnListingTypesApplied(it))
+        },
+        onRetryClicked = {
+            viewModel.setEvent(ListingListScreenEvent.OnRetryClicked)
         }
     )
 }
@@ -71,7 +73,8 @@ fun ListingListScreenContent(
     onStatusSelected: (StatusType) -> Unit = {},
     onListingTypeSelected: () -> Unit = {},
     onBottomSheetDismissed: () -> Unit = {},
-    onListingTypesApplied: (List<ListingType>) -> Unit = {}
+    onListingTypesApplied: (List<ListingType>) -> Unit = {},
+    onRetryClicked: () -> Unit = {}
 ) {
 
     val layoutDirection = LocalLayoutDirection.current
@@ -82,10 +85,16 @@ fun ListingListScreenContent(
                 title = {
                     Text(
                         modifier = Modifier.testTag(LISTING_LIST_HEADING),
-                        text = if (state.screenState == ScreenStateType.LOADING) {
-                            stringResource(id = R.string.loading)
-                        } else {
-                            pluralStringResource(id = R.plurals.project_properties, state.listings.count(), state.listings.count())
+                        text = when (state.screenState) {
+                            ScreenStateType.LOADING -> {
+                                stringResource(id = R.string.loading)
+                            }
+                            ScreenStateType.SUCCESS -> {
+                                pluralStringResource(id = R.plurals.project_properties, state.listings.count(), state.listings.count())
+                            }
+                            else -> {
+                                ""
+                            }
                         }
                     )
                 }
@@ -158,7 +167,17 @@ fun ListingListScreenContent(
                     )
                 }
             }
-        } else if (state.screenState == ScreenStateType.LOADING) {
+        } else if (state.screenState == ScreenStateType.ERROR) {
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                ErrorComponent(
+                    onRetryClicked = onRetryClicked
+                )
+            }
+        } else if (state.screenState == ScreenStateType.LOADING || state.screenState == ScreenStateType.REFRESHING) {
             Box(
                 modifier = Modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center
@@ -199,6 +218,19 @@ fun ListingListScreenContentLoadingPreview() {
         ListingListScreenContent(
             state = ListingListScreenState(
                 screenState = ScreenStateType.LOADING,
+                listings = emptyList(),
+            )
+        )
+    }
+}
+
+@Composable
+@Preview
+fun ListingListScreenContentErrorPreview() {
+    MviExampleTheme {
+        ListingListScreenContent(
+            state = ListingListScreenState(
+                screenState = ScreenStateType.ERROR,
                 listings = emptyList(),
             )
         )
