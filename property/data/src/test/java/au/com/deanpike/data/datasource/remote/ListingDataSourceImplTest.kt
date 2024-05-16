@@ -2,7 +2,7 @@ package au.com.deanpike.data.datasource.remote
 
 import au.com.deanpike.client.model.listing.response.ListingType
 import au.com.deanpike.client.util.ResponseWrapper
-import au.com.deanpike.network.api.PropertyListingApi
+import au.com.deanpike.network.api.ListingApi
 import au.com.deanpike.network.model.external.AddressComponents
 import au.com.deanpike.network.model.external.Advertiser
 import au.com.deanpike.network.model.external.AgencyListingContact
@@ -23,7 +23,7 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
 class ListingDataSourceImplTest {
-    private val api: PropertyListingApi = mockk()
+    private val api: ListingApi = mockk()
     private lateinit var dataSource: ListingDataSource
     private val now = DateTime.now()
     private val dateFormat = "YYYY-MM-dd'T'HH:mm:ssZ"

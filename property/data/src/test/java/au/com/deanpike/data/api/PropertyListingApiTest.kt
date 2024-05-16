@@ -2,7 +2,7 @@ package au.com.deanpike.data.api
 
 import au.com.deanpike.client.model.listing.response.ListingType
 import au.com.deanpike.data.util.ListingTypeDeserialiser
-import au.com.deanpike.network.api.PropertyListingApi
+import au.com.deanpike.network.api.ListingApi
 import au.com.deanpike.network.model.internal.ListingSearchRequest
 import com.google.gson.GsonBuilder
 import java.io.InputStreamReader
@@ -18,7 +18,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class PropertyListingApiTest {
     private lateinit var server: MockWebServer
-    private lateinit var api: PropertyListingApi
+    private lateinit var api: ListingApi
     private lateinit var jsonResponse: String
     private val gson = GsonBuilder()
         .registerTypeAdapter(ListingType::class.java, ListingTypeDeserialiser())
@@ -30,7 +30,7 @@ class PropertyListingApiTest {
         api = Retrofit.Builder()
             .baseUrl(server.url("/"))
             .addConverterFactory(GsonConverterFactory.create(gson))
-            .build().create(PropertyListingApi::class.java)
+            .build().create(ListingApi::class.java)
         jsonResponse = readFile()
     }
 

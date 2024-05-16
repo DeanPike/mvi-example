@@ -6,7 +6,7 @@ import retrofit2.http.Body
 import retrofit2.http.Header
 import retrofit2.http.POST
 
-interface PropertyListingApi {
+interface ListingApi {
     @POST("v1/search")
     suspend fun getListings(
         @Header("context-type") contentType: String,
