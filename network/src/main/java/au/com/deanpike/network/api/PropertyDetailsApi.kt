@@ -5,7 +5,7 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Path
 
-interface PropertyDetailsAPI {
+interface PropertyDetailsApi {
     @GET("v1/property-details/{id}")
     suspend fun getPropertyDetails(
         @Header("context-type") contentType: String,
