@@ -14,6 +14,7 @@ import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -126,6 +127,7 @@ fun ProjectListItem(
                     top.linkTo(bannerRef.bottom)
                 }
                 .fillMaxWidth()
+                .defaultMinSize(minHeight = 240.dp)
                 .testTag("${PROJECT_LIST_ITEM_IMAGE}_$position"),
             placeholder = painterResource(id = R.drawable.gallery_placeholder),
             model = project.listingImage,

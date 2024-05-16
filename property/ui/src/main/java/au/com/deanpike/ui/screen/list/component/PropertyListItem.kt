@@ -5,6 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -65,6 +66,7 @@ fun PropertyListItem(
                     end.linkTo(parent.end)
                 }
                 .fillMaxWidth()
+                .defaultMinSize(minHeight = 240.dp)
                 .testTag("${PROPERTY_LIST_ITEM_PROPERTY_IMAGE}_$position"),
             placeholder = painterResource(id = R.drawable.gallery_placeholder),
             model = property.listingImage,
