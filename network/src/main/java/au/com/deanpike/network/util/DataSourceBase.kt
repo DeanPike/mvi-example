@@ -1,4 +1,4 @@
-package au.com.deanpike.data.datasource.remote.base
+package au.com.deanpike.network.util
 
 import au.com.deanpike.client.util.ResponseWrapper
 
