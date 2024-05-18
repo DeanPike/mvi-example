@@ -1,11 +1,10 @@
 package au.com.deanpike.network.model.external.listing
 
-import au.com.deanpike.listings.client.model.listing.response.ListingType
 import com.google.gson.annotations.SerializedName
 
 data class SearchResult(
     @SerializedName("listing_type")
-    val listingType: ListingType,
+    val listingType: String,
     val id: Long,
     @SerializedName("date_listed")
     val dateListed: String?,

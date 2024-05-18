@@ -60,6 +60,7 @@ dependencies {
     implementation(project(":listings:client"))
     implementation(project(":shared:ui-shared"))
     implementation(project(":shared:data-shared"))
+    implementation(project(":shared:common-shared"))
     androidTestImplementation(project(":listings:client"))
     androidTestImplementation(project(":listings:data"))
     androidTestImplementation(project(":test-util:ui-test-shared"))

@@ -1,10 +1,10 @@
 package au.com.deanpike.listings.data.datasource.remote
 
-import au.com.deanpike.listings.client.util.ResponseWrapper
-import au.com.deanpike.network.util.DataSourceBase
+import au.com.deanpike.commonshared.util.ResponseWrapper
 import au.com.deanpike.network.api.ListingApi
 import au.com.deanpike.network.model.external.listing.ListingResponse
 import au.com.deanpike.network.model.internal.ListingSearchRequest
+import au.com.deanpike.network.util.DataSourceBase
 import javax.inject.Inject
 
 internal interface ListingDataSource {

@@ -1,8 +1,6 @@
 package au.com.deanpike.listings.data.converter
 
-import au.com.deanpike.listings.client.model.listing.response.ListingType
 import au.com.deanpike.listings.client.model.listing.response.Property
-import au.com.deanpike.listings.data.converter.PropertyConverter
 import au.com.deanpike.network.model.external.listing.Advertiser
 import au.com.deanpike.network.model.external.listing.GeoLocation
 import au.com.deanpike.network.model.external.listing.Images
@@ -16,7 +14,7 @@ class PropertyConverterTest {
     fun `create property`() {
         val result = SearchResult(
             id = 1234,
-            listingType = ListingType.PROPERTY,
+            listingType = "property",
             media = listOf(
                 Medium(
                     type = "image",

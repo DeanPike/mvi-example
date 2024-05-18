@@ -18,7 +18,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
-import au.com.deanpike.listings.client.type.ListingType
+import au.com.deanpike.listings.client.type.DwellingType
 import au.com.deanpike.ui.R
 import au.com.deanpike.ui.screen.listingType.ListingTypeScreenTestTags.LISTING_TYPE_SCREEN_ALL
 import au.com.deanpike.ui.screen.listingType.ListingTypeScreenTestTags.LISTING_TYPE_SCREEN_APARTMENT
@@ -33,8 +33,8 @@ import kotlinx.coroutines.launch
 @Composable
 fun ListingTypeScreen(
     viewModel: ListingTypeViewModel = viewModel(),
-    selectedListingTypes: List<ListingType>,
-    onApplyClicked: (List<ListingType>) -> Unit = {}
+    selectedListingTypes: List<DwellingType>,
+    onApplyClicked: (List<DwellingType>) -> Unit = {}
 ) {
     val scope = rememberCoroutineScope()
 
@@ -76,7 +76,7 @@ fun ListingTypeScreen(
 @Composable
 fun ListingTypeScreenContent(
     state: ListingTypeState,
-    onItemSelected: (ListingType, Boolean) -> Unit = { _, _ -> },
+    onItemSelected: (DwellingType, Boolean) -> Unit = { _, _ -> },
     onApplyClicked: () -> Unit = {}
 ) {
     Column(
@@ -88,25 +88,25 @@ fun ListingTypeScreenContent(
         ListingTypeItem(
             description = stringResource(id = R.string.all),
             isSelected = state.selectedListingTypes.isEmpty(),
-            onValueChanged = { onItemSelected(ListingType.ALL, it) },
+            onValueChanged = { onItemSelected(DwellingType.ALL, it) },
             testTag = LISTING_TYPE_SCREEN_ALL
         )
         ListingTypeItem(
             description = stringResource(id = R.string.house),
-            isSelected = state.selectedListingTypes.contains(ListingType.HOUSE),
-            onValueChanged = { onItemSelected(ListingType.HOUSE, it) },
+            isSelected = state.selectedListingTypes.contains(DwellingType.HOUSE),
+            onValueChanged = { onItemSelected(DwellingType.HOUSE, it) },
             testTag = LISTING_TYPE_SCREEN_HOUSE
         )
         ListingTypeItem(
             description = stringResource(id = R.string.townhouse),
-            isSelected = state.selectedListingTypes.contains(ListingType.TOWNHOUSE),
-            onValueChanged = { onItemSelected(ListingType.TOWNHOUSE, it) },
+            isSelected = state.selectedListingTypes.contains(DwellingType.TOWNHOUSE),
+            onValueChanged = { onItemSelected(DwellingType.TOWNHOUSE, it) },
             testTag = LISTING_TYPE_SCREEN_TOWNHOUSE
         )
         ListingTypeItem(
             description = stringResource(id = R.string.apartment_unit_flat),
-            isSelected = state.selectedListingTypes.contains(ListingType.APARTMENT_UNIT_FLAT),
-            onValueChanged = { onItemSelected(ListingType.APARTMENT_UNIT_FLAT, it) },
+            isSelected = state.selectedListingTypes.contains(DwellingType.APARTMENT_UNIT_FLAT),
+            onValueChanged = { onItemSelected(DwellingType.APARTMENT_UNIT_FLAT, it) },
             testTag = LISTING_TYPE_SCREEN_APARTMENT
         )
 

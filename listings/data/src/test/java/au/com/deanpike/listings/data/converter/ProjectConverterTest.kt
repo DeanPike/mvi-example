@@ -1,7 +1,5 @@
 package au.com.deanpike.listings.data.converter
 
-import au.com.deanpike.listings.client.model.listing.response.ListingType
-import au.com.deanpike.listings.data.converter.ProjectConverter
 import au.com.deanpike.network.model.external.listing.Advertiser
 import au.com.deanpike.network.model.external.listing.EarliestInspection
 import au.com.deanpike.network.model.external.listing.GeoLocation
@@ -51,7 +49,7 @@ class ProjectConverterTest {
 
         val result = SearchResult(
             id = 1234,
-            listingType = ListingType.PROJECT,
+            listingType = "project",
             media = listOf(
                 Medium(
                     type = "image",

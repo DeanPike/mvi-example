@@ -13,6 +13,7 @@ dependencies {
     implementation(project(":listings:client"))
     implementation(project(":shared:data-shared"))
     implementation(project(":network"))
+    implementation(project(":shared:common-shared"))
     testImplementation(project(":listings:client"))
 
     // Hilt

@@ -23,7 +23,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import au.com.deanpike.listings.client.type.ListingType
+import au.com.deanpike.listings.client.type.DwellingType
 import au.com.deanpike.listings.client.type.StatusType
 import au.com.deanpike.ui.R
 import au.com.deanpike.ui.screen.list.component.FilterComponentTestTags.LISTING_TYPE
@@ -38,7 +38,7 @@ import au.com.deanpike.uishared.theme.MviExampleTheme
 fun FilterComponent(
     modifier: Modifier = Modifier,
     selectedStatus: StatusType,
-    selectedListingTypes: List<ListingType>,
+    selectedListingTypes: List<DwellingType>,
     onStatusSelected: (StatusType) -> Unit,
     onListingTypeSelected: () -> Unit
 ) {
@@ -126,7 +126,7 @@ fun FilterComponentPreview() {
     MviExampleTheme {
         FilterComponent(
             selectedStatus = StatusType.BUY,
-            selectedListingTypes = listOf(ListingType.HOUSE, ListingType.TOWNHOUSE, ListingType.APARTMENT_UNIT_FLAT),
+            selectedListingTypes = listOf(DwellingType.HOUSE, DwellingType.TOWNHOUSE, DwellingType.APARTMENT_UNIT_FLAT),
             onStatusSelected = {},
             onListingTypeSelected = {}
         )

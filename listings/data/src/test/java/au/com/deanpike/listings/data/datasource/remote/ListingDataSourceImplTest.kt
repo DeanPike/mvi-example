@@ -1,9 +1,6 @@
 package au.com.deanpike.listings.data.datasource.remote
 
-import au.com.deanpike.listings.client.model.listing.response.ListingType
-import au.com.deanpike.listings.client.util.ResponseWrapper
-import au.com.deanpike.listings.data.datasource.remote.ListingDataSource
-import au.com.deanpike.listings.data.datasource.remote.ListingDataSourceImpl
+import au.com.deanpike.commonshared.util.ResponseWrapper
 import au.com.deanpike.network.api.ListingApi
 import au.com.deanpike.network.model.external.listing.AddressComponents
 import au.com.deanpike.network.model.external.listing.Advertiser
@@ -69,7 +66,7 @@ class ListingDataSourceImplTest {
         }
 
         with(data.searchResults[0]) {
-            assertThat(listingType).isEqualTo(au.com.deanpike.listings.client.model.listing.response.ListingType.PROPERTY)
+            assertThat(listingType).isEqualTo("property")
             assertThat(id).isEqualTo(1)
             assertThat(dateListed).isEqualTo(now.toString(dateFormat))
             assertThat(address).isEqualTo("104/86 Burke Road, Malvern East")
@@ -148,7 +145,7 @@ class ListingDataSourceImplTest {
         )
 
         val searchResult = SearchResult(
-            listingType = ListingType.PROPERTY,
+            listingType = "property",
             id = 1,
             dateListed = now.toString(dateFormat),
             address = "104/86 Burke Road, Malvern East",

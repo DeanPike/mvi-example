@@ -1,7 +1,5 @@
 package au.com.deanpike.listings.data.api
 
-import au.com.deanpike.listings.client.model.listing.response.ListingType
-import au.com.deanpike.listings.data.util.ListingTypeDeserialiser
 import au.com.deanpike.network.api.ListingApi
 import au.com.deanpike.network.model.internal.ListingSearchRequest
 import com.google.gson.GsonBuilder
@@ -21,7 +19,6 @@ class PropertyListingApiTest {
     private lateinit var api: ListingApi
     private lateinit var jsonResponse: String
     private val gson = GsonBuilder()
-        .registerTypeAdapter(ListingType::class.java, ListingTypeDeserialiser())
         .create()
 
     @BeforeEach
@@ -59,7 +56,7 @@ class PropertyListingApiTest {
 
         // Top Spot
         with(data.searchResults[0]) {
-            assertThat(listingType).isEqualTo(ListingType.TOPSPOT)
+            assertThat(listingType).isEqualTo("topspot")
             assertThat(id).isEqualTo(2019096805)
             assertThat(dateListed).isEqualTo("2024-03-05T16:43:35+11:00")
             assertThat(address).isEqualTo("41 Chifley Road, Lithgow")
@@ -97,7 +94,7 @@ class PropertyListingApiTest {
 
         // Project
         with(data.searchResults[1]) {
-            assertThat(listingType).isEqualTo(ListingType.PROJECT)
+            assertThat(listingType).isEqualTo("project")
             assertThat(id).isEqualTo(2842)
             assertThat(address).isEqualTo("81 KITTYHAWK DRIVE, CHERMSIDE, QLD 4032")
             assertThat(promoLevel).isEqualTo("P+")
@@ -154,7 +151,7 @@ class PropertyListingApiTest {
 
         // Property
         with(data.searchResults[2]) {
-            assertThat(listingType).isEqualTo(ListingType.PROPERTY)
+            assertThat(listingType).isEqualTo("property")
             assertThat(id).isEqualTo(2019150933)
             assertThat(dateListed).isEqualTo("2024-04-01T10:43:10+11:00")
             assertThat(address).isEqualTo("14 Mayfair Drive, Browns Plains")

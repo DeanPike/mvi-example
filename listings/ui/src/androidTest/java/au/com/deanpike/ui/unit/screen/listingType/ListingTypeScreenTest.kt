@@ -1,6 +1,6 @@
 package au.com.deanpike.ui.unit.screen.listingType
 
-import au.com.deanpike.listings.client.type.ListingType
+import au.com.deanpike.listings.client.type.DwellingType
 import au.com.deanpike.ui.framework.ability.listingType.ListingTypeScreenAbility
 import au.com.deanpike.ui.screen.listingType.ListingTypeScreenContent
 import au.com.deanpike.ui.screen.listingType.ListingTypeState
@@ -15,7 +15,7 @@ class ListingTypeScreenTest : UiUnitTestBase() {
 
     @Test
     fun should_show_default_screen() {
-        var listingTypeSelected: ListingType = ListingType.ALL
+        var listingTypeSelected: DwellingType = DwellingType.ALL
         var isSelected = false
         var applyClicked = false
         with(composeTestRule) {
@@ -56,7 +56,7 @@ class ListingTypeScreenTest : UiUnitTestBase() {
             clickHouse()
             composeTestRule.advanceTimeAndWait()
 
-            assertThat(listingTypeSelected).isEqualTo(ListingType.HOUSE)
+            assertThat(listingTypeSelected).isEqualTo(DwellingType.HOUSE)
             assertThat(isSelected).isTrue()
 
             clickApply()

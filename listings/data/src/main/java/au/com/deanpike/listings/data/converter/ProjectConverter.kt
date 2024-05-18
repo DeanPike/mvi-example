@@ -5,6 +5,7 @@ import au.com.deanpike.listings.client.model.listing.response.ListingDetails
 import au.com.deanpike.listings.client.model.listing.response.ListingType
 import au.com.deanpike.listings.client.model.listing.response.Project
 import au.com.deanpike.listings.client.model.listing.response.ProjectChild
+import au.com.deanpike.listings.data.util.ListingTypeConverter
 import au.com.deanpike.network.model.external.listing.SearchResult
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -29,7 +30,7 @@ internal class ProjectConverter @Inject constructor() : ListingConverter {
 
         return Project(
             id = listing.id,
-            listingType = listing.listingType,
+            listingType = ListingTypeConverter.getListingType(listing.listingType),
             address = listing.address,
             listingImage = listing.media?.firstOrNull {
                 it.mediaType == "image"

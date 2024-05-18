@@ -11,4 +11,7 @@ network - This contain all of the Retrofit API's anf their data classes
 ui-test-shared - Utility classes for UI tests
 unit-test-shared =Utility classes for unit tests
 ui - Contains the screen that the user will interact with
-ui-shared - Contains Themes and any other classes that can be used by multiple UI modules 
+ui-shared - Contains Themes and any other classes that can be used by multiple UI modules
+
+app --- listings --- ui --- client --- data -- network
+                                           

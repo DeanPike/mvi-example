@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import au.com.deanpike.listings.client.model.listing.response.Project
 import au.com.deanpike.listings.client.model.listing.response.Property
-import au.com.deanpike.listings.client.type.ListingType
+import au.com.deanpike.listings.client.type.DwellingType
 import au.com.deanpike.listings.client.type.StatusType
 import au.com.deanpike.ui.R
 import au.com.deanpike.ui.screen.list.ListingListScreenTestTags.LISTING_LIST
@@ -73,7 +73,7 @@ fun ListingListScreenContent(
     onStatusSelected: (StatusType) -> Unit = {},
     onListingTypeSelected: () -> Unit = {},
     onBottomSheetDismissed: () -> Unit = {},
-    onListingTypesApplied: (List<ListingType>) -> Unit = {},
+    onListingTypesApplied: (List<DwellingType>) -> Unit = {},
     onRetryClicked: () -> Unit = {}
 ) {
 

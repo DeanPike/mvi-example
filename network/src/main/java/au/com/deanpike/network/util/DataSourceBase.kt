@@ -1,6 +1,6 @@
 package au.com.deanpike.network.util
 
-import au.com.deanpike.listings.client.util.ResponseWrapper
+import au.com.deanpike.commonshared.util.ResponseWrapper
 
 abstract class DataSourceBase {
     suspend fun <T> safeApiCall(apiCall: suspend () -> T): ResponseWrapper<T> {

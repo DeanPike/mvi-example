@@ -1,7 +1,7 @@
 package au.com.deanpike.ui.unit.screen.util
 
 
-import au.com.deanpike.listings.client.type.ListingType
+import au.com.deanpike.listings.client.type.DwellingType
 import au.com.deanpike.listings.client.type.StatusType
 import au.com.deanpike.ui.screen.util.StringUtils
 import au.com.deanpike.uitestshared.base.UiUnitTestBase
@@ -24,10 +24,10 @@ class StringUtilsTest : UiUnitTestBase() {
     fun get_description_for_listing_type() {
         with(composeTestRule) {
             setContent {
-                assertThat(StringUtils.getPropertyTypeDescription(type = ListingType.ALL)).isEqualTo("All")
-                assertThat(StringUtils.getPropertyTypeDescription(type = ListingType.HOUSE)).isEqualTo("House")
-                assertThat(StringUtils.getPropertyTypeDescription(type = ListingType.TOWNHOUSE)).isEqualTo("Townhouse")
-                assertThat(StringUtils.getPropertyTypeDescription(type = ListingType.APARTMENT_UNIT_FLAT)).isEqualTo("Apartment / Unit / Flat")
+                assertThat(StringUtils.getPropertyTypeDescription(type = DwellingType.ALL)).isEqualTo("All")
+                assertThat(StringUtils.getPropertyTypeDescription(type = DwellingType.HOUSE)).isEqualTo("House")
+                assertThat(StringUtils.getPropertyTypeDescription(type = DwellingType.TOWNHOUSE)).isEqualTo("Townhouse")
+                assertThat(StringUtils.getPropertyTypeDescription(type = DwellingType.APARTMENT_UNIT_FLAT)).isEqualTo("Apartment / Unit / Flat")
             }
         }
     }

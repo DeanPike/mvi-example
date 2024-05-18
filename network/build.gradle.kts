@@ -10,7 +10,7 @@ java {
 }
 
 dependencies {
-    implementation(project(":listings:client"))
+    implementation(project(":shared:common-shared"))
     // Retrofit
     implementation(libs.logging.interceptor)
     implementation(libs.retrofit)

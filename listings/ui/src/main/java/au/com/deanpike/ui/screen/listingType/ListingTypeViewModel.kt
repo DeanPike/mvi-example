@@ -1,6 +1,6 @@
 package au.com.deanpike.ui.screen.listingType
 
-import au.com.deanpike.listings.client.type.ListingType
+import au.com.deanpike.listings.client.type.DwellingType
 import au.com.deanpike.uishared.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -25,7 +25,7 @@ class ListingTypeViewModel @Inject constructor() : BaseViewModel<ListingTypeEven
         }
     }
 
-    private fun initialiseScreen(listingTypes: List<ListingType>) {
+    private fun initialiseScreen(listingTypes: List<DwellingType>) {
         setState {
             copy(
                 selectedListingTypes = listingTypes
@@ -34,7 +34,7 @@ class ListingTypeViewModel @Inject constructor() : BaseViewModel<ListingTypeEven
     }
 
     private fun onItemSelected(event: ListingTypeEvent.OnItemSelected) {
-        if (event.listingType != ListingType.ALL) {
+        if (event.listingType != DwellingType.ALL) {
             val selectedListings = uiState.selectedListingTypes.toMutableList()
             if (event.selected) {
                 selectedListings.add(event.listingType)

@@ -1,6 +1,6 @@
 package au.com.deanpike.ui.unit.screen.list.component
 
-import au.com.deanpike.listings.client.type.ListingType
+import au.com.deanpike.listings.client.type.DwellingType
 import au.com.deanpike.listings.client.type.StatusType
 import au.com.deanpike.ui.framework.ability.list.component.FilterComponentAbility
 import au.com.deanpike.ui.screen.list.component.FilterComponent
@@ -23,7 +23,7 @@ class FilterComponentTest : UiUnitTestBase() {
                 MviExampleTheme {
                     FilterComponent(
                         selectedStatus = StatusType.RENT,
-                        selectedListingTypes = listOf(ListingType.HOUSE),
+                        selectedListingTypes = listOf(DwellingType.HOUSE),
                         onStatusSelected = {
                             statusSelected = it
                         },
@@ -85,7 +85,7 @@ class FilterComponentTest : UiUnitTestBase() {
                 MviExampleTheme {
                     FilterComponent(
                         selectedStatus = StatusType.RENT,
-                        selectedListingTypes = listOf(ListingType.HOUSE, ListingType.TOWNHOUSE),
+                        selectedListingTypes = listOf(DwellingType.HOUSE, DwellingType.TOWNHOUSE),
                         onStatusSelected = { },
                         onListingTypeSelected = { }
                     )

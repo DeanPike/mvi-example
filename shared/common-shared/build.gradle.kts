@@ -1,6 +1,7 @@
 plugins {
     id("java-library")
     alias(libs.plugins.jetbrainsKotlinJvm)
+    alias(libs.plugins.kaptPlugin)
 }
 
 java {
@@ -9,5 +10,9 @@ java {
 }
 
 dependencies {
-    implementation(project(":shared:common-shared"))
+    implementation(libs.gson)
+
+    // Hilt
+    implementation(libs.hilt.core)
+    kapt(libs.hilt.compiler)
 }

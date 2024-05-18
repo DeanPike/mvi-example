@@ -1,7 +1,7 @@
 package au.com.deanpike.ui.screen.list
 
 import au.com.deanpike.listings.client.model.listing.response.Listing
-import au.com.deanpike.listings.client.type.ListingType
+import au.com.deanpike.listings.client.type.DwellingType
 import au.com.deanpike.listings.client.type.StatusType
 import au.com.deanpike.uishared.base.ScreenStateType
 import au.com.deanpike.uishared.base.UiEffect
@@ -12,7 +12,7 @@ data class ListingListScreenState(
     val screenState: ScreenStateType = ScreenStateType.INITIAL,
     val listings: List<Listing> = emptyList(),
     val selectedStatus: StatusType = StatusType.BUY,
-    val selectedListingTypes: List<ListingType> = emptyList(),
+    val selectedListingTypes: List<DwellingType> = emptyList(),
     val showListingTypeScreen: Boolean = false
 ) : UiState
 
@@ -24,7 +24,7 @@ sealed class ListingListScreenEvent : UiEvent {
 
     data object OnListingTypeClicked : ListingListScreenEvent()
     data object OnBottomSheetDismissed : ListingListScreenEvent()
-    data class OnListingTypesApplied(val selectedListingTypes: List<ListingType>) : ListingListScreenEvent()
+    data class OnListingTypesApplied(val selectedListingTypes: List<DwellingType>) : ListingListScreenEvent()
     data object OnRetryClicked : ListingListScreenEvent()
 }
 

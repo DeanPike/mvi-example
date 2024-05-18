@@ -1,13 +1,11 @@
 package au.com.deanpike.listings.data.repository
 
+import au.com.deanpike.commonshared.util.ResponseWrapper
 import au.com.deanpike.listings.client.model.listing.response.ListingType
 import au.com.deanpike.listings.client.model.listing.response.Property
-import au.com.deanpike.listings.client.util.ResponseWrapper
 import au.com.deanpike.listings.data.converter.ListingConverterFactory
 import au.com.deanpike.listings.data.converter.PropertyConverter
 import au.com.deanpike.listings.data.datasource.remote.ListingDataSource
-import au.com.deanpike.listings.data.repository.ListingRepository
-import au.com.deanpike.listings.data.repository.ListingRepositoryImpl
 import au.com.deanpike.network.model.external.listing.Advertiser
 import au.com.deanpike.network.model.external.listing.GeoLocation
 import au.com.deanpike.network.model.external.listing.Images
@@ -118,7 +116,7 @@ internal class ListingRepositoryImplTest {
     private fun getProperty(): SearchResult {
         return SearchResult(
             id = 1234,
-            listingType = ListingType.PROPERTY,
+            listingType = "property",
             media = listOf(
                 Medium(
                     type = "image",
