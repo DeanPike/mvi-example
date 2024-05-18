@@ -61,7 +61,7 @@ dependencies {
     implementation(project(":shared:ui-shared"))
     implementation(project(":shared:data-shared"))
     androidTestImplementation(project(":property:client"))
-    androidTestImplementation(project(":property:data"))
+    androidTestImplementation(project(":listings:data"))
     androidTestImplementation(project(":test-util:ui-test-shared"))
     androidTestImplementation(project(":shared:ui-shared"))
     androidTestImplementation(project(":network"))

@@ -50,7 +50,7 @@ android {
 dependencies {
 
     implementation(project(":property:client"))
-    implementation(project(":property:data"))
+    implementation(project(":listings:data"))
     implementation(project(":shared:data-shared"))
     implementation(project(":network"))
     implementation(project(":property:ui"))
