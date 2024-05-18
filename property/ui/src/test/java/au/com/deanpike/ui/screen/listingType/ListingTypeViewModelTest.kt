@@ -1,7 +1,7 @@
 package au.com.deanpike.ui.screen.listingType
 
 import app.cash.turbine.test
-import au.com.deanpike.client.type.ListingType
+import au.com.deanpike.listings.client.type.ListingType
 import au.com.deanpike.datashared.dispatcher.DispatcherProvider
 import au.com.deanpike.testshared.extension.TestDispatcherExtension
 import kotlinx.coroutines.ExperimentalCoroutinesApi

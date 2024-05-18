@@ -1,6 +1,6 @@
 package au.com.deanpike.ui.unit.screen.listingType
 
-import au.com.deanpike.client.type.ListingType
+import au.com.deanpike.listings.client.type.ListingType
 import au.com.deanpike.ui.framework.ability.listingType.ListingTypeScreenAbility
 import au.com.deanpike.ui.screen.listingType.ListingTypeScreenContent
 import au.com.deanpike.ui.screen.listingType.ListingTypeState

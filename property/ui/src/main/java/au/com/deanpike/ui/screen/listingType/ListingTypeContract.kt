@@ -1,6 +1,6 @@
 package au.com.deanpike.ui.screen.listingType
 
-import au.com.deanpike.client.type.ListingType
+import au.com.deanpike.listings.client.type.ListingType
 import au.com.deanpike.uishared.base.ScreenStateType
 import au.com.deanpike.uishared.base.UiEffect
 import au.com.deanpike.uishared.base.UiEvent

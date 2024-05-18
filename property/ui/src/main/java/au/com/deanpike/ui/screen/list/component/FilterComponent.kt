@@ -23,8 +23,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import au.com.deanpike.client.type.ListingType
-import au.com.deanpike.client.type.StatusType
+import au.com.deanpike.listings.client.type.ListingType
+import au.com.deanpike.listings.client.type.StatusType
 import au.com.deanpike.ui.R
 import au.com.deanpike.ui.screen.list.component.FilterComponentTestTags.LISTING_TYPE
 import au.com.deanpike.ui.screen.list.component.FilterComponentTestTags.STATUS_BUTTON

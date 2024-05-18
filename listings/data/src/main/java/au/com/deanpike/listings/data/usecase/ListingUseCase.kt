@@ -1,11 +1,11 @@
 package au.com.deanpike.listings.data.usecase
 
-import au.com.deanpike.client.model.listing.response.Listing
-import au.com.deanpike.client.model.listing.search.ListingSearch
-import au.com.deanpike.client.type.ListingType
-import au.com.deanpike.client.type.StatusType
-import au.com.deanpike.client.usecase.ListingUseCase
-import au.com.deanpike.client.util.ResponseWrapper
+import au.com.deanpike.listings.client.model.listing.response.Listing
+import au.com.deanpike.listings.client.model.listing.search.ListingSearch
+import au.com.deanpike.listings.client.type.ListingType
+import au.com.deanpike.listings.client.type.StatusType
+import au.com.deanpike.listings.client.usecase.ListingUseCase
+import au.com.deanpike.listings.client.util.ResponseWrapper
 import au.com.deanpike.listings.data.repository.ListingRepository
 import au.com.deanpike.network.model.internal.ListingSearchRequest
 import javax.inject.Inject

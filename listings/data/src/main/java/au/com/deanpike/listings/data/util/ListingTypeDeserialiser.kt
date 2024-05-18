@@ -1,6 +1,6 @@
 package au.com.deanpike.listings.data.util
 
-import au.com.deanpike.client.model.listing.response.ListingType
+import au.com.deanpike.listings.client.model.listing.response.ListingType
 import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonDeserializer
 import com.google.gson.JsonElement

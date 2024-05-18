@@ -1,7 +1,7 @@
 package au.com.deanpike.listings.data.di
 
-import au.com.deanpike.client.model.listing.response.ListingType
-import au.com.deanpike.client.usecase.ListingUseCase
+import au.com.deanpike.listings.client.model.listing.response.ListingType
+import au.com.deanpike.listings.client.usecase.ListingUseCase
 import au.com.deanpike.listings.data.converter.ListingConverterFactory
 import au.com.deanpike.listings.data.converter.ListingConverterFactoryImpl
 import au.com.deanpike.listings.data.datasource.remote.ListingDataSource

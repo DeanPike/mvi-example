@@ -1,4 +1,4 @@
-package au.com.deanpike.client.type
+package au.com.deanpike.listings.client.type
 
 enum class ListingType {
     ALL,

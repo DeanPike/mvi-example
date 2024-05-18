@@ -49,7 +49,7 @@ android {
 
 dependencies {
 
-    implementation(project(":property:client"))
+    implementation(project(":listings:client"))
     implementation(project(":listings:data"))
     implementation(project(":shared:data-shared"))
     implementation(project(":network"))

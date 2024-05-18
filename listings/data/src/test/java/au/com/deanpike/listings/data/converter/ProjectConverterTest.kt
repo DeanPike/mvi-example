@@ -1,6 +1,6 @@
 package au.com.deanpike.listings.data.converter
 
-import au.com.deanpike.client.model.listing.response.ListingType
+import au.com.deanpike.listings.client.model.listing.response.ListingType
 import au.com.deanpike.listings.data.converter.ProjectConverter
 import au.com.deanpike.network.model.external.listing.Advertiser
 import au.com.deanpike.network.model.external.listing.EarliestInspection
@@ -95,12 +95,12 @@ class ProjectConverterTest {
         )
 
         val listing = ProjectConverter().convertListing(result)
-        assertThat(listing).isInstanceOf(au.com.deanpike.client.model.listing.response.Project::class.java)
-        val project = listing as au.com.deanpike.client.model.listing.response.Project
+        assertThat(listing).isInstanceOf(au.com.deanpike.listings.client.model.listing.response.Project::class.java)
+        val project = listing as au.com.deanpike.listings.client.model.listing.response.Project
 
         with(project) {
             assertThat(id).isEqualTo(1234)
-            assertThat(listingType).isEqualTo(ListingType.PROJECT)
+            assertThat(listingType).isEqualTo(au.com.deanpike.listings.client.model.listing.response.ListingType.PROJECT)
             assertThat(address).isEqualTo("Property address")
             assertThat(bannerImage).isEqualTo("http://banner.image")
             assertThat(logoImage).isEqualTo("http://logo.image")
@@ -112,7 +112,7 @@ class ProjectConverterTest {
 
         with(project.properties[0]) {
             assertThat(id).isEqualTo(11)
-            assertThat(listingType).isEqualTo(ListingType.PROPERTY)
+            assertThat(listingType).isEqualTo(au.com.deanpike.listings.client.model.listing.response.ListingType.PROPERTY)
             assertThat(lifecycleStatus).isEqualTo("New")
             assertThat(listingDetails.price).isEqualTo("900000")
             assertThat(listingDetails.numberOfBedrooms).isEqualTo(3)

@@ -1,6 +1,6 @@
 package au.com.deanpike.listings.data.datasource.remote
 
-import au.com.deanpike.client.util.ResponseWrapper
+import au.com.deanpike.listings.client.util.ResponseWrapper
 import au.com.deanpike.network.util.DataSourceBase
 import au.com.deanpike.network.api.ListingApi
 import au.com.deanpike.network.model.external.listing.ListingResponse

@@ -1,6 +1,6 @@
 package au.com.deanpike.network.model.external.listing
 
-import au.com.deanpike.client.model.listing.response.ListingType
+import au.com.deanpike.listings.client.model.listing.response.ListingType
 import com.google.gson.annotations.SerializedName
 
 data class SearchResult(

@@ -1,6 +1,6 @@
 package au.com.deanpike.listings.data.api
 
-import au.com.deanpike.client.model.listing.response.ListingType
+import au.com.deanpike.listings.client.model.listing.response.ListingType
 import au.com.deanpike.listings.data.util.ListingTypeDeserialiser
 import au.com.deanpike.network.api.ListingApi
 import au.com.deanpike.network.model.internal.ListingSearchRequest

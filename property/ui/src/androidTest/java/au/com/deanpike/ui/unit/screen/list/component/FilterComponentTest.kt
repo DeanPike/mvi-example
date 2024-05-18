@@ -1,7 +1,7 @@
 package au.com.deanpike.ui.unit.screen.list.component
 
-import au.com.deanpike.client.type.ListingType
-import au.com.deanpike.client.type.StatusType
+import au.com.deanpike.listings.client.type.ListingType
+import au.com.deanpike.listings.client.type.StatusType
 import au.com.deanpike.ui.framework.ability.list.component.FilterComponentAbility
 import au.com.deanpike.ui.screen.list.component.FilterComponent
 import au.com.deanpike.uishared.theme.MviExampleTheme

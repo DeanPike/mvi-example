@@ -3,8 +3,8 @@ package au.com.deanpike.ui.screen.util
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import au.com.deanpike.ui.R
-import au.com.deanpike.client.type.ListingType
-import au.com.deanpike.client.type.StatusType
+import au.com.deanpike.listings.client.type.ListingType
+import au.com.deanpike.listings.client.type.StatusType
 
 object StringUtils {
     @Composable

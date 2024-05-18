@@ -1,6 +1,6 @@
 package au.com.deanpike.listings.data.converter
 
-import au.com.deanpike.client.model.listing.response.ListingType
+import au.com.deanpike.listings.client.model.listing.response.ListingType
 import au.com.deanpike.listings.data.converter.ListingConverterFactory
 import au.com.deanpike.listings.data.converter.ListingConverterFactoryImpl
 import au.com.deanpike.listings.data.converter.ProjectConverter

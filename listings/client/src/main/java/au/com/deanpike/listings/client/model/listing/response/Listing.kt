@@ -1,4 +1,4 @@
-package au.com.deanpike.client.model.listing.response
+package au.com.deanpike.listings.client.model.listing.response
 
 abstract class Listing {
     abstract val id: Long

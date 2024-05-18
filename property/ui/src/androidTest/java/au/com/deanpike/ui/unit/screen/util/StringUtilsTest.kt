@@ -1,8 +1,8 @@
 package au.com.deanpike.ui.unit.screen.util
 
 
-import au.com.deanpike.client.type.ListingType
-import au.com.deanpike.client.type.StatusType
+import au.com.deanpike.listings.client.type.ListingType
+import au.com.deanpike.listings.client.type.StatusType
 import au.com.deanpike.ui.screen.util.StringUtils
 import au.com.deanpike.uitestshared.base.UiUnitTestBase
 import org.assertj.core.api.Assertions.assertThat

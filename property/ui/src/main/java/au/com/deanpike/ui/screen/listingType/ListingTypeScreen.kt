@@ -18,7 +18,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
-import au.com.deanpike.client.type.ListingType
+import au.com.deanpike.listings.client.type.ListingType
 import au.com.deanpike.ui.R
 import au.com.deanpike.ui.screen.listingType.ListingTypeScreenTestTags.LISTING_TYPE_SCREEN_ALL
 import au.com.deanpike.ui.screen.listingType.ListingTypeScreenTestTags.LISTING_TYPE_SCREEN_APARTMENT

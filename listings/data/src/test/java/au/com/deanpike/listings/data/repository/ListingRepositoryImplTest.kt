@@ -1,8 +1,8 @@
 package au.com.deanpike.listings.data.repository
 
-import au.com.deanpike.client.model.listing.response.ListingType
-import au.com.deanpike.client.model.listing.response.Property
-import au.com.deanpike.client.util.ResponseWrapper
+import au.com.deanpike.listings.client.model.listing.response.ListingType
+import au.com.deanpike.listings.client.model.listing.response.Property
+import au.com.deanpike.listings.client.util.ResponseWrapper
 import au.com.deanpike.listings.data.converter.ListingConverterFactory
 import au.com.deanpike.listings.data.converter.PropertyConverter
 import au.com.deanpike.listings.data.datasource.remote.ListingDataSource
@@ -75,7 +75,7 @@ internal class ListingRepositoryImplTest {
 
         with(success.data[0] as Property) {
             assertThat(id).isEqualTo(1234)
-            assertThat(listingType).isEqualTo(ListingType.PROPERTY)
+            assertThat(listingType).isEqualTo(au.com.deanpike.listings.client.model.listing.response.ListingType.PROPERTY)
             assertThat(address).isEqualTo("Property address")
             assertThat(listingImage).isEqualTo("http://some.image.one")
             assertThat(agencyImage).isEqualTo("http://advertiser.logo")

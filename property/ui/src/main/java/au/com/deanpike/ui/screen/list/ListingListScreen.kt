@@ -21,10 +21,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import au.com.deanpike.client.model.listing.response.Project
-import au.com.deanpike.client.model.listing.response.Property
-import au.com.deanpike.client.type.ListingType
-import au.com.deanpike.client.type.StatusType
+import au.com.deanpike.listings.client.model.listing.response.Project
+import au.com.deanpike.listings.client.model.listing.response.Property
+import au.com.deanpike.listings.client.type.ListingType
+import au.com.deanpike.listings.client.type.StatusType
 import au.com.deanpike.ui.R
 import au.com.deanpike.ui.screen.list.ListingListScreenTestTags.LISTING_LIST
 import au.com.deanpike.ui.screen.list.ListingListScreenTestTags.LISTING_LIST_HEADING

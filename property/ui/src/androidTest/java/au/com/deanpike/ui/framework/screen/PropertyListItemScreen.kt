@@ -1,7 +1,7 @@
 package au.com.deanpike.ui.framework.screen
 
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
-import au.com.deanpike.client.model.listing.response.Property
+import au.com.deanpike.listings.client.model.listing.response.Property
 import au.com.deanpike.ui.framework.ability.list.component.PropertyListItemAbility
 
 class PropertyListItemScreen(private val composeTestRule: ComposeContentTestRule) {

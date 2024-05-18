@@ -1,7 +1,7 @@
 package au.com.deanpike.listings.data.repository
 
-import au.com.deanpike.client.model.listing.response.Listing
-import au.com.deanpike.client.util.ResponseWrapper
+import au.com.deanpike.listings.client.model.listing.response.Listing
+import au.com.deanpike.listings.client.util.ResponseWrapper
 import au.com.deanpike.listings.data.converter.ListingConverterFactory
 import au.com.deanpike.listings.data.datasource.remote.ListingDataSource
 import au.com.deanpike.network.model.internal.ListingSearchRequest

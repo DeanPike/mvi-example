@@ -1,8 +1,8 @@
 package au.com.deanpike.ui.unit.screen.list.component
 
-import au.com.deanpike.client.model.listing.response.ListingDetails
-import au.com.deanpike.client.model.listing.response.ListingType
-import au.com.deanpike.client.model.listing.response.Property
+import au.com.deanpike.listings.client.model.listing.response.ListingDetails
+import au.com.deanpike.listings.client.model.listing.response.ListingType
+import au.com.deanpike.listings.client.model.listing.response.Property
 import au.com.deanpike.ui.framework.ability.list.component.PropertyListItemAbility
 import au.com.deanpike.ui.screen.list.component.PropertyListItem
 import au.com.deanpike.uishared.theme.MviExampleTheme

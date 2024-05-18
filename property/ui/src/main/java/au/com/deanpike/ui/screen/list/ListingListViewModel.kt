@@ -1,10 +1,10 @@
 package au.com.deanpike.ui.screen.list
 
 import androidx.lifecycle.viewModelScope
-import au.com.deanpike.client.model.listing.search.ListingSearch
-import au.com.deanpike.client.type.StatusType
-import au.com.deanpike.client.usecase.ListingUseCase
-import au.com.deanpike.client.util.ResponseWrapper
+import au.com.deanpike.listings.client.model.listing.search.ListingSearch
+import au.com.deanpike.listings.client.type.StatusType
+import au.com.deanpike.listings.client.usecase.ListingUseCase
+import au.com.deanpike.listings.client.util.ResponseWrapper
 import au.com.deanpike.datashared.dispatcher.DispatcherProvider
 import au.com.deanpike.uishared.base.BaseViewModel
 import au.com.deanpike.uishared.base.ScreenStateType

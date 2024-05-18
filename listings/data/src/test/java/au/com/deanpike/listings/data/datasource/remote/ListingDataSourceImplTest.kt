@@ -1,7 +1,7 @@
 package au.com.deanpike.listings.data.datasource.remote
 
-import au.com.deanpike.client.model.listing.response.ListingType
-import au.com.deanpike.client.util.ResponseWrapper
+import au.com.deanpike.listings.client.model.listing.response.ListingType
+import au.com.deanpike.listings.client.util.ResponseWrapper
 import au.com.deanpike.listings.data.datasource.remote.ListingDataSource
 import au.com.deanpike.listings.data.datasource.remote.ListingDataSourceImpl
 import au.com.deanpike.network.api.ListingApi
@@ -69,7 +69,7 @@ class ListingDataSourceImplTest {
         }
 
         with(data.searchResults[0]) {
-            assertThat(listingType).isEqualTo(ListingType.PROPERTY)
+            assertThat(listingType).isEqualTo(au.com.deanpike.listings.client.model.listing.response.ListingType.PROPERTY)
             assertThat(id).isEqualTo(1)
             assertThat(dateListed).isEqualTo(now.toString(dateFormat))
             assertThat(address).isEqualTo("104/86 Burke Road, Malvern East")

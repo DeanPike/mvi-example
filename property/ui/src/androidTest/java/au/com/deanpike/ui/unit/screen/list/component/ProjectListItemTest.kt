@@ -1,9 +1,9 @@
 package au.com.deanpike.ui.unit.screen.list.component
 
-import au.com.deanpike.client.model.listing.response.ListingDetails
-import au.com.deanpike.client.model.listing.response.ListingType
-import au.com.deanpike.client.model.listing.response.Project
-import au.com.deanpike.client.model.listing.response.ProjectChild
+import au.com.deanpike.listings.client.model.listing.response.ListingDetails
+import au.com.deanpike.listings.client.model.listing.response.ListingType
+import au.com.deanpike.listings.client.model.listing.response.Project
+import au.com.deanpike.listings.client.model.listing.response.ProjectChild
 import au.com.deanpike.ui.framework.ability.list.component.ProjectChildListItemComponentAbility
 import au.com.deanpike.ui.framework.ability.list.component.ProjectListItemAbility
 import au.com.deanpike.ui.framework.ability.shared.PropertyDetailComponentAbility

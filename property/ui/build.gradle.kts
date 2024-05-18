@@ -57,10 +57,10 @@ android {
 }
 
 dependencies {
-    implementation(project(":property:client"))
+    implementation(project(":listings:client"))
     implementation(project(":shared:ui-shared"))
     implementation(project(":shared:data-shared"))
-    androidTestImplementation(project(":property:client"))
+    androidTestImplementation(project(":listings:client"))
     androidTestImplementation(project(":listings:data"))
     androidTestImplementation(project(":test-util:ui-test-shared"))
     androidTestImplementation(project(":shared:ui-shared"))
