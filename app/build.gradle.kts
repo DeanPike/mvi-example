@@ -53,7 +53,7 @@ dependencies {
     implementation(project(":listings:data"))
     implementation(project(":shared:data-shared"))
     implementation(project(":network"))
-    implementation(project(":property:ui"))
+    implementation(project(":listings:ui"))
     implementation(project(":shared:ui-shared"))
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
