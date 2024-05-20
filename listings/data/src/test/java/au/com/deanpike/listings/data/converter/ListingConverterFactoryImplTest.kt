@@ -22,7 +22,7 @@ class ListingConverterFactoryImplTest {
     @Test
     fun `should return property converter`() {
         val converter = factory.getConverter(ListingType.PROPERTY)
-        assertThat(converter).isNotIn(PropertyConverter::class.java)
+        assertThat(converter).isInstanceOf(PropertyConverter::class.java)
     }
 
     @Test
