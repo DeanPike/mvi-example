@@ -37,7 +37,7 @@ class PropertyListingApiTest {
     }
 
     @Test
-    fun `getFeedbackQuestions, returns Success`() = runTest {
+    fun `get listings`() = runTest {
         val res = MockResponse()
         res.setBody(jsonResponse)
         server.enqueue(res)
