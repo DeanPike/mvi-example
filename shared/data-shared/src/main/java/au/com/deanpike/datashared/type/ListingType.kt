@@ -1,4 +1,4 @@
-package au.com.deanpike.listings.client.model.listing.response
+package au.com.deanpike.datashared.type
 
 enum class ListingType(val value: String) {
     TOPSPOT("topspot"),

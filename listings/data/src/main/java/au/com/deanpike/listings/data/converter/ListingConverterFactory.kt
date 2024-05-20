@@ -1,6 +1,6 @@
 package au.com.deanpike.listings.data.converter
 
-import au.com.deanpike.listings.client.model.listing.response.ListingType
+import au.com.deanpike.datashared.type.ListingType
 import javax.inject.Inject
 
 internal interface ListingConverterFactory {

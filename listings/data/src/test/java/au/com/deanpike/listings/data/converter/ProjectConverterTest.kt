@@ -1,5 +1,6 @@
 package au.com.deanpike.listings.data.converter
 
+import au.com.deanpike.datashared.type.ListingType
 import au.com.deanpike.network.model.external.listing.Advertiser
 import au.com.deanpike.network.model.external.listing.EarliestInspection
 import au.com.deanpike.network.model.external.listing.GeoLocation
@@ -98,7 +99,7 @@ class ProjectConverterTest {
 
         with(project) {
             assertThat(id).isEqualTo(1234)
-            assertThat(listingType).isEqualTo(au.com.deanpike.listings.client.model.listing.response.ListingType.PROJECT)
+            assertThat(listingType).isEqualTo(ListingType.PROJECT)
             assertThat(address).isEqualTo("Property address")
             assertThat(bannerImage).isEqualTo("http://banner.image")
             assertThat(logoImage).isEqualTo("http://logo.image")
@@ -110,7 +111,7 @@ class ProjectConverterTest {
 
         with(project.properties[0]) {
             assertThat(id).isEqualTo(11)
-            assertThat(listingType).isEqualTo(au.com.deanpike.listings.client.model.listing.response.ListingType.PROPERTY)
+            assertThat(listingType).isEqualTo(ListingType.PROPERTY)
             assertThat(lifecycleStatus).isEqualTo("New")
             assertThat(listingDetails.price).isEqualTo("900000")
             assertThat(listingDetails.numberOfBedrooms).isEqualTo(3)

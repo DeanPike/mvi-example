@@ -1,10 +1,6 @@
 package au.com.deanpike.listings.data.converter
 
-import au.com.deanpike.listings.client.model.listing.response.ListingType
-import au.com.deanpike.listings.data.converter.ListingConverterFactory
-import au.com.deanpike.listings.data.converter.ListingConverterFactoryImpl
-import au.com.deanpike.listings.data.converter.ProjectConverter
-import au.com.deanpike.listings.data.converter.PropertyConverter
+import au.com.deanpike.datashared.type.ListingType
 import io.mockk.mockk
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach

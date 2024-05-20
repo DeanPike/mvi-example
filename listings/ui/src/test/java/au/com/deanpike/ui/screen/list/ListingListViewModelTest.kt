@@ -1,7 +1,9 @@
 package au.com.deanpike.ui.screen.list
 
+import au.com.deanpike.commonshared.util.ResponseWrapper
+import au.com.deanpike.datashared.dispatcher.DispatcherProvider
+import au.com.deanpike.datashared.type.ListingType
 import au.com.deanpike.listings.client.model.listing.response.ListingDetails
-import au.com.deanpike.listings.client.model.listing.response.ListingType
 import au.com.deanpike.listings.client.model.listing.response.Project
 import au.com.deanpike.listings.client.model.listing.response.ProjectChild
 import au.com.deanpike.listings.client.model.listing.response.Property
@@ -10,8 +12,6 @@ import au.com.deanpike.listings.client.type.DwellingType.HOUSE
 import au.com.deanpike.listings.client.type.DwellingType.TOWNHOUSE
 import au.com.deanpike.listings.client.type.StatusType
 import au.com.deanpike.listings.client.usecase.ListingUseCase
-import au.com.deanpike.commonshared.util.ResponseWrapper
-import au.com.deanpike.datashared.dispatcher.DispatcherProvider
 import au.com.deanpike.testshared.extension.TestDispatcherExtension
 import au.com.deanpike.uishared.base.ScreenStateType
 import io.mockk.coEvery
@@ -64,7 +64,7 @@ class ListingListViewModelTest {
         assertThat(viewModel.uiState.listings[0]).isInstanceOf(Project::class.java)
         with(viewModel.uiState.listings[0] as Project) {
             assertThat(id).isEqualTo(2)
-            assertThat(listingType).isEqualTo(au.com.deanpike.listings.client.model.listing.response.ListingType.PROJECT)
+            assertThat(listingType).isEqualTo(ListingType.PROJECT)
             assertThat(address).isEqualTo("Project address")
             assertThat(bannerImage).isEqualTo("http://project.banner.image")
             assertThat(logoImage).isEqualTo("http://project.lgog.image")
@@ -74,7 +74,7 @@ class ListingListViewModelTest {
             assertThat(properties.size).isEqualTo(2)
 
             assertThat(properties[0].id).isEqualTo(21)
-            assertThat(properties[0].listingType).isEqualTo(au.com.deanpike.listings.client.model.listing.response.ListingType.PROPERTY)
+            assertThat(properties[0].listingType).isEqualTo(ListingType.PROPERTY)
             assertThat(properties[0].lifecycleStatus).isEqualTo("New")
             assertThat(properties[0].listingDetails.price).isEqualTo("850000")
             assertThat(properties[0].listingDetails.numberOfBedrooms).isEqualTo(2)
@@ -82,7 +82,7 @@ class ListingListViewModelTest {
             assertThat(properties[0].listingDetails.numberOfCarSpaces).isEqualTo(0)
 
             assertThat(properties[1].id).isEqualTo(22)
-            assertThat(properties[1].listingType).isEqualTo(au.com.deanpike.listings.client.model.listing.response.ListingType.PROPERTY)
+            assertThat(properties[1].listingType).isEqualTo(ListingType.PROPERTY)
             assertThat(properties[1].lifecycleStatus).isEqualTo("Sold")
             assertThat(properties[1].listingDetails.price).isEqualTo("1200000")
             assertThat(properties[1].listingDetails.numberOfBedrooms).isEqualTo(3)
@@ -94,7 +94,7 @@ class ListingListViewModelTest {
         assertThat(viewModel.uiState.listings[1]).isInstanceOf(Property::class.java)
         with(viewModel.uiState.listings[1] as Property) {
             assertThat(id).isEqualTo(1)
-            assertThat(listingType).isEqualTo(au.com.deanpike.listings.client.model.listing.response.ListingType.PROPERTY)
+            assertThat(listingType).isEqualTo(ListingType.PROPERTY)
             assertThat(address).isEqualTo("Property address")
             assertThat(listingImage).isEqualTo("http://listing.image")
             assertThat(agencyImage).isEqualTo("http://agency.image")

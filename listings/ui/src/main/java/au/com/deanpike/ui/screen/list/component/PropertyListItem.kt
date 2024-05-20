@@ -22,8 +22,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
+import au.com.deanpike.datashared.type.ListingType
 import au.com.deanpike.listings.client.model.listing.response.ListingDetails
-import au.com.deanpike.listings.client.model.listing.response.ListingType
 import au.com.deanpike.listings.client.model.listing.response.Property
 import au.com.deanpike.ui.R
 import au.com.deanpike.ui.screen.list.component.PropertyListItemTesTags.PROPERTY_LIST_ITEM_ADDRESS

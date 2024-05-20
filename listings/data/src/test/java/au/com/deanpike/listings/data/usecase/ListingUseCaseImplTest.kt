@@ -1,13 +1,13 @@
 package au.com.deanpike.listings.data.usecase
 
+import au.com.deanpike.commonshared.util.ResponseWrapper
+import au.com.deanpike.datashared.type.ListingType
 import au.com.deanpike.listings.client.model.listing.response.ListingDetails
-import au.com.deanpike.listings.client.model.listing.response.ListingType
 import au.com.deanpike.listings.client.model.listing.response.Property
 import au.com.deanpike.listings.client.model.listing.search.ListingSearch
 import au.com.deanpike.listings.client.type.DwellingType.HOUSE
 import au.com.deanpike.listings.client.type.StatusType
 import au.com.deanpike.listings.client.usecase.ListingUseCase
-import au.com.deanpike.commonshared.util.ResponseWrapper
 import au.com.deanpike.listings.data.repository.ListingRepository
 import au.com.deanpike.network.model.internal.ListingSearchRequest
 import io.mockk.coEvery

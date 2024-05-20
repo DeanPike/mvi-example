@@ -1,5 +1,6 @@
 package au.com.deanpike.listings.data.converter
 
+import au.com.deanpike.datashared.type.ListingType
 import au.com.deanpike.listings.client.model.listing.response.Property
 import au.com.deanpike.network.model.external.listing.Advertiser
 import au.com.deanpike.network.model.external.listing.GeoLocation
@@ -63,7 +64,7 @@ class PropertyConverterTest {
 
         with(property) {
             assertThat(id).isEqualTo(1234)
-            assertThat(listingType).isEqualTo(au.com.deanpike.listings.client.model.listing.response.ListingType.PROPERTY)
+            assertThat(listingType).isEqualTo(ListingType.PROPERTY)
             assertThat(address).isEqualTo("Property address")
             assertThat(listingImage).isEqualTo("http://some.image.one")
             assertThat(agencyImage).isEqualTo("http://advertiser.logo")
