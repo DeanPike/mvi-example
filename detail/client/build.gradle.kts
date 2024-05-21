@@ -9,4 +9,5 @@ java {
 }
 dependencies {
     implementation(project(":shared:data-shared"))
+    implementation(project(":shared:common-shared"))
 }
