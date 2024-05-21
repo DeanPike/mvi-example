@@ -5,7 +5,7 @@ import au.com.deanpike.listings.client.model.listing.response.Listing
 import au.com.deanpike.listings.client.model.listing.response.ListingDetails
 import au.com.deanpike.listings.client.model.listing.response.Project
 import au.com.deanpike.listings.client.model.listing.response.ProjectChild
-import au.com.deanpike.listings.data.util.ListingTypeConverter
+import au.com.deanpike.datashared.util.ListingTypeConverter
 import au.com.deanpike.network.model.external.listing.SearchResult
 import javax.inject.Inject
 import javax.inject.Singleton

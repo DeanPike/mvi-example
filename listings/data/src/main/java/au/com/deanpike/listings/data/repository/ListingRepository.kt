@@ -4,7 +4,7 @@ import au.com.deanpike.commonshared.util.ResponseWrapper
 import au.com.deanpike.listings.client.model.listing.response.Listing
 import au.com.deanpike.listings.data.converter.ListingConverterFactory
 import au.com.deanpike.listings.data.datasource.remote.ListingDataSource
-import au.com.deanpike.listings.data.util.ListingTypeConverter.getListingType
+import au.com.deanpike.datashared.util.ListingTypeConverter.getListingType
 import au.com.deanpike.network.model.internal.ListingSearchRequest
 import javax.inject.Inject
 

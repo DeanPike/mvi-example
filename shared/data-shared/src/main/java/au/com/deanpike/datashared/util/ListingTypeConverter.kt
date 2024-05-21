@@ -1,4 +1,4 @@
-package au.com.deanpike.listings.data.util
+package au.com.deanpike.datashared.util
 
 import au.com.deanpike.datashared.type.ListingType
 
