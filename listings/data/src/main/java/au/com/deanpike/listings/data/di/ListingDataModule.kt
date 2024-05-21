@@ -15,7 +15,7 @@ import dagger.hilt.components.SingletonComponent
 
 @Module
 @InstallIn(SingletonComponent::class)
-internal abstract class DataModule {
+internal abstract class ListingDataModule {
 
     @Binds
     abstract fun bindListingDataSource(dataSource: ListingDataSourceImpl): ListingDataSource
