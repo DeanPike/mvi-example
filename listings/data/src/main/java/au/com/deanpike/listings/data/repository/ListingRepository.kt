@@ -1,10 +1,10 @@
 package au.com.deanpike.listings.data.repository
 
 import au.com.deanpike.commonshared.util.ResponseWrapper
+import au.com.deanpike.datashared.util.ListingTypeConverter.getListingType
 import au.com.deanpike.listings.client.model.listing.response.Listing
 import au.com.deanpike.listings.data.converter.ListingConverterFactory
 import au.com.deanpike.listings.data.datasource.remote.ListingDataSource
-import au.com.deanpike.datashared.util.ListingTypeConverter.getListingType
 import au.com.deanpike.network.model.internal.ListingSearchRequest
 import javax.inject.Inject
 
@@ -23,9 +23,7 @@ internal class ListingRepositoryImpl @Inject constructor(
                 val data = response.data.searchResults
                 data.forEach { searchResult ->
                     val listingType = getListingType(searchResult.listingType)
-                    println("---- listingType : $listingType")
-                    //val listingType = ListingType.valueOf(searchResult.listingType)
-                    listingType?.let {
+                    listingType.let {
                         converterFactory.getConverter(it)?.convertListing(listing = searchResult)?.let { listing ->
                             listings.add(listing)
                         }
