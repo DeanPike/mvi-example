@@ -29,5 +29,6 @@ data class ListingDetail(
     @SerializedName("homepass_enabled") var homepassEnabled: Boolean? = null,
     @SerializedName("seo_url") var seoUrl: String? = null,
     @SerializedName("days_on_market") var daysOnMarket: Int? = null,
-    @SerializedName("time_on_market_formats") var timeOnMarketFormats: TimeOnMarketFormats? = TimeOnMarketFormats()
+    @SerializedName("time_on_market_formats") var timeOnMarketFormats: TimeOnMarketFormats? = TimeOnMarketFormats(),
+    @SerializedName("sale_metadata") var saleMetaData: SaleMetaData? = SaleMetaData()
 )

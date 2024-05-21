@@ -1,0 +1,59 @@
+{
+  "listing_type": "project",
+  "id": 6301,
+  "address": "20 GOVERNMENT ROAD, NELSON BAY, NSW 2315",
+  "promo_level": "P+",
+  "project": {
+    "project_name": "Silverpoint",
+    "project_banner_image": "https://images.domain.com.au/img/Agencys/devproject/banner_6301_240520_025749",
+    "project_logo_image": "https://images.domain.com.au/img/Agencys/devproject/logo_6301_240520_025749",
+    "project_price_from": 830000,
+    "child_listings": [
+      {
+        "id": 2019253216,
+        "date_listed": "2024-05-20T11:56:25+10:00",
+        "lifecycle_status": "New Home",
+        "price": "$830,000",
+        "bathroom_count": 2,
+        "bedroom_count": 2,
+        "carspace_count": 1,
+        "homepass_enabled": false,
+        "property_size": "124m²"
+      },
+      {
+        "id": 2019253331,
+        "date_listed": "2024-05-20T12:12:16+10:00",
+        "lifecycle_status": "New Home",
+        "price": "$910,000",
+        "bathroom_count": 2,
+        "bedroom_count": 2,
+        "carspace_count": 1,
+        "homepass_enabled": false,
+        "property_size": "123m²"
+      },
+      {
+        "id": 2019253363,
+        "date_listed": "2024-05-20T12:19:53+10:00",
+        "lifecycle_status": "New Home",
+        "price": "$1,200,000",
+        "bathroom_count": 2,
+        "bedroom_count": 3,
+        "carspace_count": 2,
+        "homepass_enabled": false,
+        "property_size": "154m²"
+      }
+    ],
+    "project_color_hex": "#253551"
+  },
+  "media": [
+    {
+      "type": "photo",
+      "image_url": "https://bucket-api.domain.com.au/v1/bucket/image/ba57cab8-9349-445d-808c-da3e3689dca3-w1600-h1200",
+      "media_type": "image"
+    }
+  ],
+  "geo_location": {
+    "latitude": -32.720512,
+    "longitude": 152.14081
+  }
+}
