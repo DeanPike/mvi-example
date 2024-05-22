@@ -1,6 +1,7 @@
 package au.com.deanpike.network.di
 
 import au.com.deanpike.network.api.ListingApi
+import au.com.deanpike.network.api.ProjectDetailApi
 import au.com.deanpike.network.api.PropertyDetailApi
 import au.com.deanpike.network.util.BaseUrl
 import com.google.gson.Gson
@@ -46,4 +47,7 @@ object RemoteDataSourceModule {
 
     @Provides
     internal fun providePropertyDetailsApi(retrofit: Retrofit): PropertyDetailApi = retrofit.create(PropertyDetailApi::class.java)
+
+    @Provides
+    internal fun provideProjectDetailApi(retrofit: Retrofit): ProjectDetailApi = retrofit.create(ProjectDetailApi::class.java)
 }
