@@ -13,7 +13,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
-class ListingDetailUseCaseImplTest {
+class PropertyDetailUseCaseImplTest {
     private val repo: PropertyDetailRepository = mockk()
     private lateinit var useCase: PropertyDetailUseCase
 

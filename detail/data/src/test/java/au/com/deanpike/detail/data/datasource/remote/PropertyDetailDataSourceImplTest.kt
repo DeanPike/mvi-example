@@ -12,7 +12,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
-class DetailDataSourceImplTest {
+class PropertyDetailDataSourceImplTest {
     private val api: PropertyDetailApi = mockk()
     private lateinit var dataSource: PropertyDetailDataSource
 
