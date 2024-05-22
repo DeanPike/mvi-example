@@ -14,7 +14,7 @@ import au.com.deanpike.network.model.external.detail.PhoneNumbers
 import au.com.deanpike.network.model.external.detail.Schools
 
 class PropertyConverter : DetailConverter {
-    override fun convertDetail(detail: PropertyDetail): au.com.deanpike.detail.client.model.detail.ListingDetail {
+    override fun convertDetail(detail: PropertyDetail): au.com.deanpike.detail.client.model.detail.PropertyDetail {
         return au.com.deanpike.detail.client.model.detail.PropertyDetail(
             id = detail.id,
             listingType = ListingType.PROPERTY,

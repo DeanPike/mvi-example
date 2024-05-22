@@ -2,7 +2,6 @@ package au.com.deanpike.detail.data.repository
 
 import au.com.deanpike.commonshared.util.ResponseWrapper
 import au.com.deanpike.datashared.type.ListingType
-import au.com.deanpike.detail.data.converter.DetailConverterFactory
 import au.com.deanpike.detail.data.converter.PropertyConverter
 import au.com.deanpike.detail.data.datasource.remote.PropertyDetailDataSource
 import au.com.deanpike.network.model.external.detail.PropertyDetail
@@ -15,7 +14,7 @@ import org.junit.jupiter.api.Test
 
 class DetailRepositoryImplTest {
     private val dataSource: PropertyDetailDataSource = mockk()
-    private val converterFactory: DetailConverterFactory = mockk()
+    private val propertyConverter = PropertyConverter()
 
     private lateinit var repo: PropertyDetailRepository
 
@@ -23,7 +22,7 @@ class DetailRepositoryImplTest {
     fun setupTest() {
         repo = PropertyDetailRepositoryImpl(
             dataSource = dataSource,
-            converterFactory = converterFactory
+            propertyConverter = propertyConverter
         )
     }
 
@@ -33,13 +32,11 @@ class DetailRepositoryImplTest {
             dataSource.getListingDetails(1234)
         } returns ResponseWrapper.Success(getNetworkListing())
 
-        coEvery { converterFactory.getConverter(ListingType.PROPERTY) } returns PropertyConverter()
-
         val response = repo.getDetails(1234)
 
         assertThat(response).isInstanceOf(ResponseWrapper.Success::class.java)
         val data = (response as ResponseWrapper.Success).data
-        assertThat(data).isInstanceOf(PropertyDetail::class.java)
+        assertThat(data).isInstanceOf(au.com.deanpike.detail.client.model.detail.PropertyDetail::class.java)
         assertThat(data!!.id).isEqualTo(1234)
         assertThat(data.listingType).isEqualTo(ListingType.PROPERTY)
     }

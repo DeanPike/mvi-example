@@ -1,33 +1,25 @@
 package au.com.deanpike.detail.data.repository
 
 import au.com.deanpike.commonshared.util.ResponseWrapper
-import au.com.deanpike.datashared.util.ListingTypeConverter.getListingType
-import au.com.deanpike.detail.client.model.detail.ListingDetail
-import au.com.deanpike.detail.data.converter.DetailConverterFactory
+import au.com.deanpike.detail.client.model.detail.PropertyDetail
+import au.com.deanpike.detail.data.converter.PropertyConverter
 import au.com.deanpike.detail.data.datasource.remote.PropertyDetailDataSource
 import javax.inject.Inject
 
 internal interface PropertyDetailRepository {
-    suspend fun getDetails(id: Int): ResponseWrapper<ListingDetail?>
+    suspend fun getDetails(id: Int): ResponseWrapper<PropertyDetail>
 }
 
 internal class PropertyDetailRepositoryImpl @Inject constructor(
     private val dataSource: PropertyDetailDataSource,
-    private val converterFactory: DetailConverterFactory
+    private val propertyConverter: PropertyConverter
 ) : PropertyDetailRepository {
-    override suspend fun getDetails(id: Int): ResponseWrapper<ListingDetail?> {
+    override suspend fun getDetails(id: Int): ResponseWrapper<PropertyDetail> {
         when (val response = dataSource.getListingDetails(id)) {
             is ResponseWrapper.Success -> {
                 val data = response.data
-                data.listingType?.let { checkedListingType ->
-                    val listingType = getListingType(checkedListingType)
-                    listingType.let { type ->
-                        converterFactory.getConverter(type)?.convertDetail(data)?.let { listing ->
-                            return ResponseWrapper.Success(listing)
-                        }
-                    }
-                }
-                return ResponseWrapper.Success(null)
+
+                return ResponseWrapper.Success(propertyConverter.convertDetail(data))
             }
             is ResponseWrapper.Error -> {
                 return ResponseWrapper.Error(response.exception)
