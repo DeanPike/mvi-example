@@ -5,7 +5,7 @@ import au.com.deanpike.datashared.type.ListingType
 import au.com.deanpike.detail.client.model.detail.Advertiser
 import au.com.deanpike.detail.client.model.detail.PropertyDetail
 import au.com.deanpike.detail.client.usecase.ListingDetailUseCase
-import au.com.deanpike.detail.data.repository.DetailRepository
+import au.com.deanpike.detail.data.repository.PropertyDetailRepository
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.test.runTest
@@ -14,7 +14,7 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
 class ListingDetailUseCaseImplTest {
-    private val repo: DetailRepository = mockk()
+    private val repo: PropertyDetailRepository = mockk()
     private lateinit var useCase: ListingDetailUseCase
 
     @BeforeEach

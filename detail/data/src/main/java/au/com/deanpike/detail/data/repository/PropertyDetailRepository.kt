@@ -7,14 +7,14 @@ import au.com.deanpike.detail.data.converter.DetailConverterFactory
 import au.com.deanpike.detail.data.datasource.remote.PropertyDetailDataSource
 import javax.inject.Inject
 
-internal interface DetailRepository {
+internal interface PropertyDetailRepository {
     suspend fun getDetails(id: Int): ResponseWrapper<ListingDetail?>
 }
 
-internal class DetailRepositoryImpl @Inject constructor(
+internal class PropertyDetailRepositoryImpl @Inject constructor(
     private val dataSource: PropertyDetailDataSource,
     private val converterFactory: DetailConverterFactory
-) : DetailRepository {
+) : PropertyDetailRepository {
     override suspend fun getDetails(id: Int): ResponseWrapper<ListingDetail?> {
         when (val response = dataSource.getListingDetails(id)) {
             is ResponseWrapper.Success -> {

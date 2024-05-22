@@ -17,11 +17,11 @@ class DetailRepositoryImplTest {
     private val dataSource: PropertyDetailDataSource = mockk()
     private val converterFactory: DetailConverterFactory = mockk()
 
-    private lateinit var repo: DetailRepository
+    private lateinit var repo: PropertyDetailRepository
 
     @BeforeEach
     fun setupTest() {
-        repo = DetailRepositoryImpl(
+        repo = PropertyDetailRepositoryImpl(
             dataSource = dataSource,
             converterFactory = converterFactory
         )
