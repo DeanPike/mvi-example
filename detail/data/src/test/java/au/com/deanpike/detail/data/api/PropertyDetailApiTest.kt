@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class ListingDetailApiTest {
+class PropertyDetailApiTest {
     private lateinit var server: MockWebServer
     private lateinit var api: PropertyDetailApi
     private lateinit var jsonResponse: String
