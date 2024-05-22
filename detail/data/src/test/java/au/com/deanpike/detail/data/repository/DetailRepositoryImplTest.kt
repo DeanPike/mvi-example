@@ -4,7 +4,7 @@ import au.com.deanpike.commonshared.util.ResponseWrapper
 import au.com.deanpike.datashared.type.ListingType
 import au.com.deanpike.detail.data.converter.DetailConverterFactory
 import au.com.deanpike.detail.data.converter.PropertyConverter
-import au.com.deanpike.detail.data.datasource.remote.DetailDataSource
+import au.com.deanpike.detail.data.datasource.remote.PropertyDetailDataSource
 import au.com.deanpike.network.model.external.detail.PropertyDetail
 import io.mockk.coEvery
 import io.mockk.mockk
@@ -14,7 +14,7 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
 class DetailRepositoryImplTest {
-    private val dataSource: DetailDataSource = mockk()
+    private val dataSource: PropertyDetailDataSource = mockk()
     private val converterFactory: DetailConverterFactory = mockk()
 
     private lateinit var repo: DetailRepository

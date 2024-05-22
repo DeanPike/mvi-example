@@ -4,7 +4,7 @@ import au.com.deanpike.commonshared.util.ResponseWrapper
 import au.com.deanpike.datashared.util.ListingTypeConverter.getListingType
 import au.com.deanpike.detail.client.model.detail.ListingDetail
 import au.com.deanpike.detail.data.converter.DetailConverterFactory
-import au.com.deanpike.detail.data.datasource.remote.DetailDataSource
+import au.com.deanpike.detail.data.datasource.remote.PropertyDetailDataSource
 import javax.inject.Inject
 
 internal interface DetailRepository {
@@ -12,7 +12,7 @@ internal interface DetailRepository {
 }
 
 internal class DetailRepositoryImpl @Inject constructor(
-    private val dataSource: DetailDataSource,
+    private val dataSource: PropertyDetailDataSource,
     private val converterFactory: DetailConverterFactory
 ) : DetailRepository {
     override suspend fun getDetails(id: Int): ResponseWrapper<ListingDetail?> {

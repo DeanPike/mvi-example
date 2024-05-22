@@ -14,11 +14,11 @@ import org.junit.jupiter.api.Test
 
 class DetailDataSourceImplTest {
     private val api: PropertyDetailApi = mockk()
-    private lateinit var dataSource: DetailDataSource
+    private lateinit var dataSource: PropertyDetailDataSource
 
     @BeforeEach
     fun setupTest() {
-        dataSource = DetailDataSourceImpl(
+        dataSource = PropertyDetailDataSourceImpl(
             api = api
         )
     }

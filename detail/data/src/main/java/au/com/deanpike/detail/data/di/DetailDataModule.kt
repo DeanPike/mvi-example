@@ -3,8 +3,8 @@ package au.com.deanpike.detail.data.di
 import au.com.deanpike.detail.client.usecase.ListingDetailUseCase
 import au.com.deanpike.detail.data.converter.DetailConverterFactory
 import au.com.deanpike.detail.data.converter.DetailConverterFactoryImpl
-import au.com.deanpike.detail.data.datasource.remote.DetailDataSource
-import au.com.deanpike.detail.data.datasource.remote.DetailDataSourceImpl
+import au.com.deanpike.detail.data.datasource.remote.PropertyDetailDataSource
+import au.com.deanpike.detail.data.datasource.remote.PropertyDetailDataSourceImpl
 import au.com.deanpike.detail.data.repository.DetailRepository
 import au.com.deanpike.detail.data.repository.DetailRepositoryImpl
 import au.com.deanpike.detail.data.usecase.ListingDetailUseCaseImpl
@@ -20,7 +20,7 @@ internal abstract class DetailDataModule {
     abstract fun bindDetailConverterFactory(impl: DetailConverterFactoryImpl): DetailConverterFactory
 
     @Binds
-    abstract fun bindDetailDataSource(impl: DetailDataSourceImpl): DetailDataSource
+    abstract fun bindPropertyDetailDataSource(impl: PropertyDetailDataSourceImpl): PropertyDetailDataSource
 
     @Binds
     abstract fun bindDetailRepository(impl: DetailRepositoryImpl): DetailRepository

@@ -6,13 +6,13 @@ import au.com.deanpike.network.model.external.detail.PropertyDetail
 import au.com.deanpike.network.util.DataSourceBase
 import javax.inject.Inject
 
-internal interface DetailDataSource {
+internal interface PropertyDetailDataSource {
     suspend fun getListingDetails(id: Int): ResponseWrapper<PropertyDetail>
 }
 
-internal class DetailDataSourceImpl @Inject constructor(
+internal class PropertyDetailDataSourceImpl @Inject constructor(
     private val api: PropertyDetailApi
-) : DetailDataSource, DataSourceBase() {
+) : PropertyDetailDataSource, DataSourceBase() {
     override suspend fun getListingDetails(id: Int): ResponseWrapper<PropertyDetail> {
         return safeApiCall {
             api.getPropertyDetails(
