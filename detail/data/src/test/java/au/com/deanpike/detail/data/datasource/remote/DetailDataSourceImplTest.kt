@@ -1,9 +1,9 @@
 package au.com.deanpike.detail.data.datasource.remote
 
 import au.com.deanpike.commonshared.util.ResponseWrapper
-import au.com.deanpike.network.api.ListingDetailApi
+import au.com.deanpike.network.api.PropertyDetailApi
 import au.com.deanpike.network.model.external.detail.Advertiser
-import au.com.deanpike.network.model.external.detail.ListingDetail
+import au.com.deanpike.network.model.external.detail.PropertyDetail
 import io.mockk.coEvery
 import io.mockk.mockk
 import java.io.IOException
@@ -13,7 +13,7 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
 class DetailDataSourceImplTest {
-    private val api: ListingDetailApi = mockk()
+    private val api: PropertyDetailApi = mockk()
     private lateinit var dataSource: DetailDataSource
 
     @BeforeEach
@@ -54,8 +54,8 @@ class DetailDataSourceImplTest {
         val error = (response as ResponseWrapper.Error).exception
     }
 
-    private fun getResponse(): ListingDetail {
-        return ListingDetail(
+    private fun getResponse(): PropertyDetail {
+        return PropertyDetail(
             id = 1468,
             listingType = "Lisrting detail",
             address = "Address",

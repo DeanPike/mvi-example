@@ -9,12 +9,12 @@ import au.com.deanpike.detail.client.model.detail.School
 import au.com.deanpike.detail.client.model.type.MediaType
 import au.com.deanpike.detail.client.model.type.PhoneNumberType
 import au.com.deanpike.network.model.external.detail.AgencyListingContacts
-import au.com.deanpike.network.model.external.detail.ListingDetail
+import au.com.deanpike.network.model.external.detail.PropertyDetail
 import au.com.deanpike.network.model.external.detail.PhoneNumbers
 import au.com.deanpike.network.model.external.detail.Schools
 
 class PropertyConverter : DetailConverter {
-    override fun convertDetail(detail: ListingDetail): au.com.deanpike.detail.client.model.detail.ListingDetail {
+    override fun convertDetail(detail: PropertyDetail): au.com.deanpike.detail.client.model.detail.ListingDetail {
         return au.com.deanpike.detail.client.model.detail.PropertyDetail(
             id = detail.id,
             listingType = ListingType.PROPERTY,

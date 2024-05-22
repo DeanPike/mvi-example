@@ -1,6 +1,6 @@
 package au.com.deanpike.detail.data.api
 
-import au.com.deanpike.network.api.ListingDetailApi
+import au.com.deanpike.network.api.PropertyDetailApi
 import com.google.gson.GsonBuilder
 import java.io.InputStreamReader
 import kotlinx.coroutines.test.runTest
@@ -15,7 +15,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class ListingDetailApiTest {
     private lateinit var server: MockWebServer
-    private lateinit var api: ListingDetailApi
+    private lateinit var api: PropertyDetailApi
     private lateinit var jsonResponse: String
     private val gson = GsonBuilder().create()
 
@@ -25,7 +25,7 @@ class ListingDetailApiTest {
         api = Retrofit.Builder()
             .baseUrl(server.url("/"))
             .addConverterFactory(GsonConverterFactory.create(gson))
-            .build().create(ListingDetailApi::class.java)
+            .build().create(PropertyDetailApi::class.java)
         jsonResponse = readFile()
     }
 

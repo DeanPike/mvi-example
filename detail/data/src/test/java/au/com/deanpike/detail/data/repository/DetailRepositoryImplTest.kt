@@ -2,11 +2,10 @@ package au.com.deanpike.detail.data.repository
 
 import au.com.deanpike.commonshared.util.ResponseWrapper
 import au.com.deanpike.datashared.type.ListingType
-import au.com.deanpike.detail.client.model.detail.PropertyDetail
 import au.com.deanpike.detail.data.converter.DetailConverterFactory
 import au.com.deanpike.detail.data.converter.PropertyConverter
 import au.com.deanpike.detail.data.datasource.remote.DetailDataSource
-import au.com.deanpike.network.model.external.detail.ListingDetail
+import au.com.deanpike.network.model.external.detail.PropertyDetail
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.test.runTest
@@ -45,8 +44,8 @@ class DetailRepositoryImplTest {
         assertThat(data.listingType).isEqualTo(ListingType.PROPERTY)
     }
 
-    private fun getNetworkListing(): ListingDetail {
-        return ListingDetail(
+    private fun getNetworkListing(): PropertyDetail {
+        return PropertyDetail(
             id = 1234,
             listingType = "property"
         )

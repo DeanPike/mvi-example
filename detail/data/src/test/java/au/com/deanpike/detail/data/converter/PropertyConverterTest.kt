@@ -4,7 +4,6 @@ import au.com.deanpike.datashared.type.ListingType
 import au.com.deanpike.detail.client.model.detail.PropertyDetail
 import au.com.deanpike.detail.client.model.type.MediaType
 import au.com.deanpike.detail.client.model.type.PhoneNumberType
-import au.com.deanpike.network.model.external.detail.ListingDetail
 import com.google.gson.Gson
 import java.io.InputStreamReader
 import org.assertj.core.api.Assertions.assertThat
@@ -105,8 +104,8 @@ class PropertyConverterTest {
         }
     }
 
-    private fun readData(): ListingDetail {
+    private fun readData(): au.com.deanpike.network.model.external.detail.PropertyDetail {
         val data = ClassLoader.getSystemResourceAsStream("raw/property_details.json")?.let { InputStreamReader(it, "UTF-8").readText() }
-        return gson.fromJson<ListingDetail>(data, ListingDetail::class.java)
+        return gson.fromJson(data, au.com.deanpike.network.model.external.detail.PropertyDetail::class.java)
     }
 }
