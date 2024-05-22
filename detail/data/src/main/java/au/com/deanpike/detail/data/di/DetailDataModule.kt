@@ -1,13 +1,13 @@
 package au.com.deanpike.detail.data.di
 
-import au.com.deanpike.detail.client.usecase.ListingDetailUseCase
+import au.com.deanpike.detail.client.usecase.PropertyDetailUseCase
 import au.com.deanpike.detail.data.converter.DetailConverterFactory
 import au.com.deanpike.detail.data.converter.DetailConverterFactoryImpl
 import au.com.deanpike.detail.data.datasource.remote.PropertyDetailDataSource
 import au.com.deanpike.detail.data.datasource.remote.PropertyDetailDataSourceImpl
 import au.com.deanpike.detail.data.repository.PropertyDetailRepository
 import au.com.deanpike.detail.data.repository.PropertyDetailRepositoryImpl
-import au.com.deanpike.detail.data.usecase.ListingDetailUseCaseImpl
+import au.com.deanpike.detail.data.usecase.PropertyDetailUseCaseImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -26,6 +26,6 @@ internal abstract class DetailDataModule {
     abstract fun bindPropertyDetailRepository(impl: PropertyDetailRepositoryImpl): PropertyDetailRepository
 
     @Binds
-    abstract fun bindListingDetailUseCase(impl: ListingDetailUseCaseImpl): ListingDetailUseCase
+    abstract fun bindPropertyDetailUseCase(impl: PropertyDetailUseCaseImpl): PropertyDetailUseCase
 
 }
