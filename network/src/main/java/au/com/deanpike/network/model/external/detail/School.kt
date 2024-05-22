@@ -3,7 +3,7 @@ package au.com.deanpike.network.model.external.detail
 import au.com.deanpike.network.model.external.listing.GeoLocation
 import com.google.gson.annotations.SerializedName
 
-data class Schools(
+data class School(
     @SerializedName("id") var id: Int? = null,
     @SerializedName("acara_id") var acaraId: Int? = null,
     @SerializedName("domain_id") var domainId: Int? = null,

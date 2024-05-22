@@ -13,7 +13,7 @@ data class PropertyDetail(
     @SerializedName("media") var media: List<Media> = emptyList(),
     @SerializedName("advertiser") var advertiser: Advertiser? = Advertiser(),
     @SerializedName("geo_location") var geoLocation: GeoLocation? = null,
-    @SerializedName("schools") var schools: ArrayList<Schools> = arrayListOf(),
+    @SerializedName("schools") var schools: ArrayList<School> = arrayListOf(),
     @SerializedName("inspection_schedule") var inspectionSchedule: InspectionSchedule? = InspectionSchedule(),
     @SerializedName("dwelling_type") var dwellingType: String? = null,
     @SerializedName("phone_enquiry_preference") var phoneEnquiryPreference: Boolean? = null,

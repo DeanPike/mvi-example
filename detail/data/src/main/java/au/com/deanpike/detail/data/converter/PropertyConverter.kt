@@ -9,9 +9,8 @@ import au.com.deanpike.detail.client.model.detail.School
 import au.com.deanpike.detail.client.model.type.MediaType
 import au.com.deanpike.detail.client.model.type.PhoneNumberType
 import au.com.deanpike.network.model.external.detail.AgencyListingContacts
-import au.com.deanpike.network.model.external.detail.PropertyDetail
 import au.com.deanpike.network.model.external.detail.PhoneNumbers
-import au.com.deanpike.network.model.external.detail.Schools
+import au.com.deanpike.network.model.external.detail.PropertyDetail
 
 class PropertyConverter {
     fun convertDetail(detail: PropertyDetail): au.com.deanpike.detail.client.model.detail.PropertyDetail {
@@ -132,7 +131,7 @@ class PropertyConverter {
         }
     }
 
-    private fun schoolConverter(items: List<Schools>): List<School> {
+    private fun schoolConverter(items: List<au.com.deanpike.network.model.external.detail.School>): List<School> {
         val responses = mutableListOf<School>()
         items.forEach { item ->
             responses.add(
