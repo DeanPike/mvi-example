@@ -51,7 +51,6 @@ class PropertyDetailDataSourceImplTest {
         val response = dataSource.getPropertyDetails(1468)
 
         assertThat(response).isInstanceOf(ResponseWrapper.Error::class.java)
-        val error = (response as ResponseWrapper.Error).exception
     }
 
     private fun getResponse(): PropertyDetail {
