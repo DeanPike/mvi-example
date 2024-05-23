@@ -32,7 +32,7 @@ class PropertyDetailDataSourceImplTest {
             )
         } returns getResponse()
 
-        val response = dataSource.getListingDetails(1468)
+        val response = dataSource.getPropertyDetails(1468)
 
         assertThat(response).isInstanceOf(ResponseWrapper.Success::class.java)
         val data = (response as ResponseWrapper.Success).data
@@ -48,7 +48,7 @@ class PropertyDetailDataSourceImplTest {
             )
         } throws IOException("Error")
 
-        val response = dataSource.getListingDetails(1468)
+        val response = dataSource.getPropertyDetails(1468)
 
         assertThat(response).isInstanceOf(ResponseWrapper.Error::class.java)
         val error = (response as ResponseWrapper.Error).exception

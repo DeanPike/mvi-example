@@ -9,7 +9,7 @@ import javax.inject.Inject
 internal class PropertyDetailUseCaseImpl @Inject constructor(
     private val repo: PropertyDetailRepository
 ) : PropertyDetailUseCase {
-    override suspend fun getDetails(id: Int): ResponseWrapper<PropertyDetail> {
+    override suspend fun getPropertyDetails(id: Int): ResponseWrapper<PropertyDetail> {
         return repo.getDetails(id)
     }
 }

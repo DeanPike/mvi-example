@@ -55,7 +55,7 @@ class PropertyDetailUseCaseImplTest {
                     saleType = "Auction"
                 )
             )
-        val details = useCase.getDetails(1234)
+        val details = useCase.getPropertyDetails(1234)
 
         assertThat(details).isInstanceOf(ResponseWrapper.Success::class.java)
         val data = (details as ResponseWrapper.Success).data

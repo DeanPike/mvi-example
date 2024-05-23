@@ -29,7 +29,7 @@ class PropertyDetailRepositoryImplTest {
     @Test
     fun `should convert property detail`() = runTest {
         coEvery {
-            dataSource.getListingDetails(1234)
+            dataSource.getPropertyDetails(1234)
         } returns ResponseWrapper.Success(getNetworkListing())
 
         val response = repo.getDetails(1234)

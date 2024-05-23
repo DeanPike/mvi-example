@@ -15,7 +15,7 @@ internal class PropertyDetailRepositoryImpl @Inject constructor(
     private val propertyConverter: PropertyConverter
 ) : PropertyDetailRepository {
     override suspend fun getDetails(id: Int): ResponseWrapper<PropertyDetail> {
-        when (val response = dataSource.getListingDetails(id)) {
+        when (val response = dataSource.getPropertyDetails(id)) {
             is ResponseWrapper.Success -> {
                 val data = response.data
 

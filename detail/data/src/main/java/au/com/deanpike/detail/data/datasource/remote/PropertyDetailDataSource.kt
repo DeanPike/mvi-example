@@ -7,13 +7,13 @@ import au.com.deanpike.network.util.DataSourceBase
 import javax.inject.Inject
 
 internal interface PropertyDetailDataSource {
-    suspend fun getListingDetails(id: Int): ResponseWrapper<PropertyDetail>
+    suspend fun getPropertyDetails(id: Int): ResponseWrapper<PropertyDetail>
 }
 
 internal class PropertyDetailDataSourceImpl @Inject constructor(
     private val api: PropertyDetailApi
 ) : PropertyDetailDataSource, DataSourceBase() {
-    override suspend fun getListingDetails(id: Int): ResponseWrapper<PropertyDetail> {
+    override suspend fun getPropertyDetails(id: Int): ResponseWrapper<PropertyDetail> {
         return safeApiCall {
             api.getPropertyDetails(
                 contentType = "application/json",
