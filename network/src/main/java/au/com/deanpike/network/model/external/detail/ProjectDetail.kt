@@ -5,7 +5,7 @@ import au.com.deanpike.network.model.external.listing.TrackingMetadata
 import com.google.gson.annotations.SerializedName
 
 data class ProjectDetail(
-    val id: Long,
+    override var id: Int,
     val headline: String,
     @SerializedName("end_date")
     val endDate: String,
@@ -55,4 +55,4 @@ data class ProjectDetail(
     val showroomGeoLocation: GeoLocation,
     @SerializedName("showroom_address")
     val showroomAddress: String,
-)
+): Detail

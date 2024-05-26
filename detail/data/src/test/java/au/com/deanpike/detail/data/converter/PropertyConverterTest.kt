@@ -19,7 +19,7 @@ class PropertyConverterTest {
 
         assertThat(property).isInstanceOf(PropertyDetail::class.java)
 
-        with(property as PropertyDetail) {
+        with(property) {
             assertThat(id).isEqualTo(2018868051)
             assertThat(listingType).isEqualTo(ListingType.PROPERTY)
             assertThat(address).isEqualTo("2 Glenton Street, Abbotsbury")
