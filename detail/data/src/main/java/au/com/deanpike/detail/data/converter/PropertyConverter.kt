@@ -12,7 +12,7 @@ import au.com.deanpike.network.model.external.detail.AgencyListingContacts
 import au.com.deanpike.network.model.external.detail.PhoneNumbers
 import au.com.deanpike.network.model.external.detail.PropertyDetail
 
-class PropertyConverter {
+object PropertyConverter {
     fun convertDetail(detail: PropertyDetail): au.com.deanpike.detail.client.model.detail.PropertyDetail {
         return au.com.deanpike.detail.client.model.detail.PropertyDetail(
             id = detail.id,

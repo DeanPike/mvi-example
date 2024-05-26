@@ -12,12 +12,10 @@ import org.junit.jupiter.api.Test
 class PropertyConverterTest {
     private val gson = Gson()
 
-    private val converter = PropertyConverter()
-
     @Test
     fun `create property`() {
         val data = readData()
-        val property = converter.convertDetail(data)
+        val property = PropertyConverter.convertDetail(data)
 
         assertThat(property).isInstanceOf(PropertyDetail::class.java)
 

@@ -11,15 +11,14 @@ internal interface PropertyDetailRepository {
 }
 
 internal class PropertyDetailRepositoryImpl @Inject constructor(
-    private val dataSource: PropertyDetailDataSource,
-    private val propertyConverter: PropertyConverter
+    private val dataSource: PropertyDetailDataSource
 ) : PropertyDetailRepository {
     override suspend fun getDetails(id: Int): ResponseWrapper<PropertyDetail> {
         when (val response = dataSource.getPropertyDetails(id)) {
             is ResponseWrapper.Success -> {
                 val data = response.data
 
-                return ResponseWrapper.Success(propertyConverter.convertDetail(data))
+                return ResponseWrapper.Success(PropertyConverter.convertDetail(data))
             }
             is ResponseWrapper.Error -> {
                 return ResponseWrapper.Error(response.exception)
