@@ -1,6 +1,14 @@
 package au.com.deanpike.detail.data.di
 
 import au.com.deanpike.detail.client.usecase.PropertyDetailUseCase
+import au.com.deanpike.detail.data.cache.ListingCache
+import au.com.deanpike.detail.data.cache.ListingCacheImpl
+import au.com.deanpike.detail.data.cache.ListingConverter
+import au.com.deanpike.detail.data.cache.ListingConverterImpl
+import au.com.deanpike.detail.data.cache.ListingFetcher
+import au.com.deanpike.detail.data.cache.ListingFetcherImpl
+import au.com.deanpike.detail.data.cache.ListingTruth
+import au.com.deanpike.detail.data.cache.ListingTruthImpl
 import au.com.deanpike.detail.data.datasource.remote.ProjectDetailDataSource
 import au.com.deanpike.detail.data.datasource.remote.ProjectDetailDataSourceImpl
 import au.com.deanpike.detail.data.datasource.remote.PropertyDetailDataSource
@@ -28,5 +36,17 @@ internal abstract class DetailDataModule {
 
     @Binds
     abstract fun bindProjectDetailDataSource(impl: ProjectDetailDataSourceImpl): ProjectDetailDataSource
+
+    @Binds
+    abstract fun bindListingCache(impl: ListingCacheImpl): ListingCache
+
+    @Binds
+    abstract fun bindListingFetcher(impl: ListingFetcherImpl): ListingFetcher
+
+    @Binds
+    abstract fun bindListingTruth(impl: ListingTruthImpl): ListingTruth
+
+    @Binds
+    abstract fun bindListingConverter(impl: ListingConverterImpl): ListingConverter
 
 }

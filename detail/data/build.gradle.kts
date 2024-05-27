@@ -26,6 +26,7 @@ dependencies {
     implementation(libs.retrofit.serialization.converter)
 
     implementation(libs.kotlinx.serialization.json)
+    implementation(libs.store)
 
     testImplementation(libs.junit.jupiter)
     testImplementation(libs.assertj)

@@ -2,27 +2,30 @@ package au.com.deanpike.detail.data.repository
 
 import au.com.deanpike.commonshared.util.ResponseWrapper
 import au.com.deanpike.detail.client.model.detail.PropertyDetail
-import au.com.deanpike.detail.data.converter.PropertyConverter
-import au.com.deanpike.detail.data.datasource.remote.PropertyDetailDataSource
+import au.com.deanpike.detail.data.cache.ListingCache
+import au.com.deanpike.detail.data.cache.ListingCacheType
+import au.com.deanpike.detail.data.cache.ListingKey
 import javax.inject.Inject
+import org.mobilenativefoundation.store.store5.impl.extensions.get
 
 internal interface PropertyDetailRepository {
     suspend fun getDetails(id: Int): ResponseWrapper<PropertyDetail>
 }
 
 internal class PropertyDetailRepositoryImpl @Inject constructor(
-    private val dataSource: PropertyDetailDataSource
+    private val cache: ListingCache
 ) : PropertyDetailRepository {
     override suspend fun getDetails(id: Int): ResponseWrapper<PropertyDetail> {
-        when (val response = dataSource.getPropertyDetails(id)) {
-            is ResponseWrapper.Success -> {
-                val data = response.data
-
-                return ResponseWrapper.Success(PropertyConverter.convertDetail(data))
-            }
-            is ResponseWrapper.Error -> {
-                return ResponseWrapper.Error(response.exception)
-            }
+        return try {
+            val detail = cache.getStore().get(
+                ListingKey(
+                    type = ListingCacheType.PROPERTY,
+                    id = id
+                )
+            )
+            ResponseWrapper.Success(detail as PropertyDetail)
+        } catch (e: Exception) {
+            ResponseWrapper.Error(e)
         }
     }
 }

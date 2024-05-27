@@ -27,6 +27,7 @@ viewmodelCompose = "2.8.0"
 appcompat = "1.6.1"
 material = "1.11.0"
 materialVersion = "1.12.0"
+store = "5.1.0-alpha02"
 retrofit = "2.11.0"
 retrofitSerializationConverter = "1.0.0"
 runnerVersion = "1.5.2"
@@ -67,6 +68,7 @@ kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-
 retrofit-serialization-converter = { group = "com.jakewharton.retrofit", name = "retrofit2-kotlinx-serialization-converter", version.ref = "retrofitSerializationConverter" }
 coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
 turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
+store = {group="org.mobilenativefoundation.store", name = "store5", version.ref="store"}
 
 # Test
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
