@@ -76,7 +76,7 @@ class ProjectDetailApiTest {
             assertThat(showroomAddress).isEqualTo("49 Denison Street, Wollongong")
         }
 
-        with(data.advertiser) {
+        with(data.advertiser!!) {
             assertThat(id).isEqualTo(37445)
             assertThat(name).isEqualTo("Level 33")
             assertThat(type).isEqualTo("Agent")
@@ -87,7 +87,7 @@ class ProjectDetailApiTest {
             assertThat(domainUrl).isEqualTo("level33-37445")
         }
 
-        with(data.advertiser.agencyListingContacts[0]) {
+        with(data.advertiser!!.agencyListingContacts[0]) {
             assertThat(agentId).isEqualTo("1925335")
             assertThat(address).isEqualTo("30a Eva St\nRiverwood NSW 2210")
             assertThat(firstName).isEqualTo("Property")
@@ -132,7 +132,7 @@ class ProjectDetailApiTest {
             assertThat(this[1].system).isEqualTo("Government")
         }
 
-        with(data.inspectionSchedule) {
+        with(data.inspectionSchedule!!) {
             assertThat(isByAppointmentOnly).isFalse()
             assertThat(isBookingsEnabled).isFalse()
             assertThat(inspections.count()).isEqualTo(1)
