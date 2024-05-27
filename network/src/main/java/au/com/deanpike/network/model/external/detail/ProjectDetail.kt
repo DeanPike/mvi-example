@@ -14,7 +14,7 @@ data class ProjectDetail(
     @SerializedName("listing_type")
     val listingType: String? = null,
     val media: List<Media> = emptyList(),
-    val advertiser: Advertiser?,
+    val advertiser: Advertiser? = null,
     @SerializedName("additional_features")
     val additionalFeatures: List<String> = emptyList(),
     @SerializedName("geo_location")

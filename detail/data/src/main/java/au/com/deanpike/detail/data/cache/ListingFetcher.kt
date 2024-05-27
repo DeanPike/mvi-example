@@ -1,6 +1,7 @@
 package au.com.deanpike.detail.data.cache
 
 import au.com.deanpike.commonshared.util.ResponseWrapper
+import au.com.deanpike.detail.data.datasource.remote.ProjectDetailDataSource
 import au.com.deanpike.detail.data.datasource.remote.PropertyDetailDataSource
 import au.com.deanpike.network.model.external.detail.Detail
 import javax.inject.Inject
@@ -12,7 +13,8 @@ internal interface ListingFetcher {
 }
 
 internal class ListingFetcherImpl @Inject constructor(
-    private val propertyDetailDataSource: PropertyDetailDataSource
+    private val propertyDetailDataSource: PropertyDetailDataSource,
+    private val projectDetailDataSource: ProjectDetailDataSource
 ) : ListingFetcher {
     override fun createFetcher(): Fetcher<ListingKey, Detail> {
         return Fetcher.ofResult { key: ListingKey ->
@@ -26,6 +28,15 @@ internal class ListingFetcherImpl @Inject constructor(
                     }
                 }
 
+            } else if (key.type == ListingCacheType.PROJECT) {
+                when (val data = projectDetailDataSource.getProjectDetails(key.id)) {
+                    is ResponseWrapper.Success -> {
+                        FetcherResult.Data(data.data)
+                    }
+                    is ResponseWrapper.Error -> {
+                        FetcherResult.Error.Exception(data.exception)
+                    }
+                }
             } else {
                 FetcherResult.Error.Exception(Exception())
             }
