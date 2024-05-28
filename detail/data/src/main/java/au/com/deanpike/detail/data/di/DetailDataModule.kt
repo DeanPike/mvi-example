@@ -13,6 +13,8 @@ import au.com.deanpike.detail.data.datasource.remote.ProjectDetailDataSource
 import au.com.deanpike.detail.data.datasource.remote.ProjectDetailDataSourceImpl
 import au.com.deanpike.detail.data.datasource.remote.PropertyDetailDataSource
 import au.com.deanpike.detail.data.datasource.remote.PropertyDetailDataSourceImpl
+import au.com.deanpike.detail.data.repository.ProjectDetailRepository
+import au.com.deanpike.detail.data.repository.ProjectDetailRepositoryImpl
 import au.com.deanpike.detail.data.repository.PropertyDetailRepository
 import au.com.deanpike.detail.data.repository.PropertyDetailRepositoryImpl
 import au.com.deanpike.detail.data.usecase.PropertyDetailUseCaseImpl
@@ -48,5 +50,8 @@ internal abstract class DetailDataModule {
 
     @Binds
     abstract fun bindListingConverter(impl: ListingConverterImpl): ListingConverter
+
+    @Binds
+    abstract fun bindProjectDetailRepository(impl: ProjectDetailRepositoryImpl): ProjectDetailRepository
 
 }
