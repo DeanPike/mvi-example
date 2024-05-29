@@ -25,7 +25,7 @@ class PropertyDetailUseCaseImplTest {
     }
 
     @Test
-    fun `should get listing details`() = runTest {
+    fun `should get property details`() = runTest {
         coEvery { repo.getDetails(1234) } returns
             ResponseWrapper.Success(
                 PropertyDetail(
