@@ -19,11 +19,6 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
     }
-    versionCatalogs {
-        create("config"){
-            version("kotlinCompilerVersion", "1.5.11")
-        }
-    }
 }
 
 rootProject.name = "mvi-example"
