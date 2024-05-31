@@ -27,7 +27,6 @@ dependencies {
     api(libs.retrofit.converter.gson)
     implementation(libs.retrofit.serialization.converter)
 
-    implementation(libs.kotlinx.serialization.json)
     implementation(libs.store)
 
     testImplementation(libs.junit.jupiter)
