@@ -1,7 +1,7 @@
 plugins {
     id("java-library")
     alias(libs.plugins.jetbrainsKotlinJvm)
-    alias(libs.plugins.kaptPlugin)
+    alias(libs.plugins.ksp)
 }
 
 val compatibilityVersion = libs.versions.javaCompileVersion.get()
@@ -20,7 +20,7 @@ dependencies {
 
     // Hilt
     implementation(libs.hilt.core)
-    kapt(libs.hilt.compiler)
+    ksp(libs.hilt.compiler)
 
     // Retrofit
     api(libs.logging.interceptor)

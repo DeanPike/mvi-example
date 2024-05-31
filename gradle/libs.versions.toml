@@ -23,7 +23,6 @@ junitAndroid = "1.6.7"
 junitPlatformLauncher = "1.10.2"
 junitJupiter = "5.10.2"
 junitVersion = "1.1.5"
-kapt = "1.9.23"
 kotlin = "1.9.23"
 kotlinSerialization = "1.6.3"
 lifecycleRuntimeKtx = "2.8.0"
@@ -42,6 +41,7 @@ runnerVersion = "1.5.2"
 loggingInterceptor = "4.12.0"
 gsonVersion = "2.10.1"
 turbine = "1.1.0"
+kspVersion = "1.9.23-1.0.20"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -76,7 +76,7 @@ kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-
 retrofit-serialization-converter = { group = "com.jakewharton.retrofit", name = "retrofit2-kotlinx-serialization-converter", version.ref = "retrofitSerializationConverter" }
 coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
 turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
-store = {group="org.mobilenativefoundation.store", name = "store5", version.ref="store"}
+store = { group = "org.mobilenativefoundation.store", name = "store5", version.ref = "store" }
 
 # Test
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
@@ -104,6 +104,6 @@ okhttp-tls = { group = "com.squareup.okhttp3", name = "okhttp-tls", version.ref 
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 daggerHiltPlugin = { id = "com.google.dagger.hilt.android", version.ref = "daggerHiltVersion" }
-kaptPlugin = { id = "org.jetbrains.kotlin.kapt", version.ref = "kapt" }
 jetbrainsKotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "kspVersion" }

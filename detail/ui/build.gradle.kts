@@ -1,8 +1,8 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsKotlinAndroid)
-    alias(libs.plugins.kaptPlugin)
     alias(libs.plugins.daggerHiltPlugin)
+    alias(libs.plugins.ksp)
 }
 
 val compatibilityVersion = libs.versions.javaCompileVersion.get()
@@ -45,9 +45,6 @@ android {
             excludes += "META-INF/LICENSE-notice.md"
         }
     }
-    kapt {
-        correctErrorTypes = true
-    }
 
     tasks.withType<Test>() {
         useJUnitPlatform()
@@ -88,11 +85,11 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 
     implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
+    ksp(libs.hilt.compiler)
     implementation(libs.lifecycle.viewmodel.compose)
 
     androidTestImplementation(libs.hilt.android)
-    kaptAndroidTest(libs.hilt.compiler)
+    kspAndroidTest(libs.hilt.compiler)
     androidTestImplementation(libs.hilt.android.testing)
 
     implementation(libs.coil.compose)

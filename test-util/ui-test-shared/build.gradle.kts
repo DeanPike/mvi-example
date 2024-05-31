@@ -1,8 +1,8 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsKotlinAndroid)
-    alias(libs.plugins.kaptPlugin)
     alias(libs.plugins.daggerHiltPlugin)
+    alias(libs.plugins.ksp)
 }
 
 val compatibilityVersion = libs.versions.javaCompileVersion.get()
@@ -55,7 +55,7 @@ dependencies {
     implementation(project(":shared:ui-shared"))
 
     implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
+    ksp(libs.hilt.compiler)
     implementation(libs.hilt.android.testing)
     api(libs.hilt.android.testing)
     api(libs.androidx.espresso.core)

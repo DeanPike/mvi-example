@@ -1,7 +1,7 @@
 plugins {
     id("java-library")
     alias(libs.plugins.jetbrainsKotlinJvm)
-    alias(libs.plugins.kaptPlugin)
+    alias(libs.plugins.ksp)
 }
 
 val compatibilityVersion = libs.versions.javaCompileVersion.get()
@@ -14,5 +14,5 @@ java {
 dependencies {
     implementation(libs.kotlinx.coroutines.core.jvm)
     implementation(libs.hilt.core)
-    kapt(libs.hilt.compiler)
+    ksp(libs.hilt.compiler)
 }

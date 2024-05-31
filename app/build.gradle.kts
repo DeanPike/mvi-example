@@ -1,8 +1,8 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
-    alias(libs.plugins.kaptPlugin)
     alias(libs.plugins.daggerHiltPlugin)
+    alias(libs.plugins.ksp)
 }
 
 val compatibilityVersion = libs.versions.javaCompileVersion.get()
@@ -66,7 +66,7 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
+    ksp(libs.hilt.compiler)
     implementation(libs.lifecycle.viewmodel.compose)
 
     testImplementation(libs.junit.jupiter)
