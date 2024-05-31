@@ -9,7 +9,7 @@ val compatibilityVersion = libs.versions.javaCompileVersion.get()
 
 android {
     namespace = "au.com.deanpike.detail.ui"
-    compileSdk = 34
+    compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
         minSdk = 29

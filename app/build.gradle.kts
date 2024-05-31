@@ -9,7 +9,7 @@ val compatibilityVersion = libs.versions.javaCompileVersion.get()
 
 android {
     namespace = "au.com.deanpike.mviexample"
-    compileSdk = 34
+    compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
         applicationId = "au.com.deanpike.mviexample"
