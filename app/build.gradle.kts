@@ -70,7 +70,7 @@ dependencies {
     implementation(libs.lifecycle.viewmodel.compose)
 
     testImplementation(libs.junit.jupiter)
-    testImplementation(libs.coroutines.core.jvm)
+    testImplementation(libs.kotlinx.coroutines.core.jvm)
     testImplementation(libs.coroutines.test)
 
     androidTestImplementation(libs.androidx.junit)
