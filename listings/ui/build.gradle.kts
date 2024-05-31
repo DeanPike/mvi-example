@@ -5,6 +5,8 @@ plugins {
     alias(libs.plugins.daggerHiltPlugin)
 }
 
+val compatibilityVersion = libs.versions.javaCompileVersion.get()
+
 android {
     namespace = "au.com.deanpike.ui"
     compileSdk = 34
@@ -23,11 +25,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.valueOf(config.versions.javaCompileVersion.get())
-        targetCompatibility = JavaVersion.valueOf(config.versions.javaCompileVersion.get())
+        sourceCompatibility = JavaVersion.valueOf(compatibilityVersion)
+        targetCompatibility = JavaVersion.valueOf(compatibilityVersion)
     }
     kotlinOptions {
-        jvmTarget = config.versions.jvmTargetVersion.get()
+        jvmTarget = libs.versions.jvmTargetVersion.get()
     }
     buildFeatures {
         compose = true

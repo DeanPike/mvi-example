@@ -4,9 +4,11 @@ plugins {
     alias(libs.plugins.kaptPlugin)
 }
 
+val compatibilityVersion = libs.versions.javaCompileVersion.get()
+
 java {
-    sourceCompatibility = JavaVersion.valueOf(config.versions.javaCompileVersion.get())
-    targetCompatibility = JavaVersion.valueOf(config.versions.javaCompileVersion.get())
+    sourceCompatibility = JavaVersion.valueOf(compatibilityVersion)
+    targetCompatibility = JavaVersion.valueOf(compatibilityVersion)
 }
 
 dependencies {

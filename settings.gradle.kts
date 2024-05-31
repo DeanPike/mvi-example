@@ -21,8 +21,6 @@ dependencyResolutionManagement {
     }
     versionCatalogs {
         create("config"){
-            version("jvmTargetVersion", "17")
-            version("javaCompileVersion", "VERSION_17")
             version("kotlinCompilerVersion", "1.5.11")
         }
     }
