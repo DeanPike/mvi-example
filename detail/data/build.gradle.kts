@@ -25,7 +25,6 @@ dependencies {
     api(libs.logging.interceptor)
     implementation(libs.retrofit)
     api(libs.retrofit.converter.gson)
-    implementation(libs.retrofit.serialization.converter)
 
     implementation(libs.store)
 

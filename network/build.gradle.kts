@@ -17,7 +17,6 @@ dependencies {
     implementation(libs.logging.interceptor)
     implementation(libs.retrofit)
     implementation(libs.retrofit.converter.gson)
-    implementation(libs.retrofit.serialization.converter)
 
     // Hilt
     implementation(libs.hilt.core)

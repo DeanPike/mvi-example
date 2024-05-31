@@ -76,7 +76,6 @@ retrofit-converter-gson = { group = "com.squareup.retrofit2", name = "converter-
 logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "loggingInterceptor" }
 gson = { group = "com.google.code.gson", name = "gson", version.ref = "gsonVersion" }
 
-retrofit-serialization-converter = { group = "com.jakewharton.retrofit", name = "retrofit2-kotlinx-serialization-converter", version.ref = "retrofitSerializationConverter" }
 coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
 turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
 store = { group = "org.mobilenativefoundation.store", name = "store5", version.ref = "store" }
