@@ -24,11 +24,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.valueOf(config.versions.javaCompileVersion.get())
+        targetCompatibility = JavaVersion.valueOf(config.versions.javaCompileVersion.get())
     }
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = config.versions.jvmTargetVersion.get()
     }
     buildFeatures {
         compose = true

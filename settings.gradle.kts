@@ -1,3 +1,5 @@
+import org.gradle.api.JavaVersion
+
 pluginManagement {
     repositories {
         google {
@@ -16,6 +18,12 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+    }
+    versionCatalogs {
+        create("config"){
+            version("jvmTargetVersion", "17")
+            version("javaCompileVersion", "VERSION_17")
+        }
     }
 }
 
