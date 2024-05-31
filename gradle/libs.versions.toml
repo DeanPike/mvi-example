@@ -81,10 +81,8 @@ turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine
 store = { group = "org.mobilenativefoundation.store", name = "store5", version.ref = "store" }
 
 # Test
-androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
-junit = { group = "junit", name = "junit", version.ref = "junit" }
 junit-jupiter = { group = "org.junit.jupiter", name = "junit-jupiter", version.ref = "junitJupiter" }
-junit-vintage-engine = { group = "org.junit.vintage", name = "junit-vintage-engine", version.ref = "junitJupiter" }
+
 junit-platform-launcher = { group = "org.junit.platform", name = "junit-platform-launcher", version.ref = "junitPlatformLauncher" }
 assertj = { group = "org.assertj", name = "assertj-core", version.ref = "assertj" }
 mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
