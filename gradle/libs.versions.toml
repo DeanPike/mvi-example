@@ -92,8 +92,6 @@ joda-time = { group = "joda-time", name = "joda-time", version.ref = "jodaTimeVe
 hilt-android-testing = { group = "com.google.dagger", name = "hilt-android-testing", version.ref = "daggerHiltVersion" }
 
 
-hilt-android-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "daggerHiltVersion" }
-runner = { group = "androidx.test", name = "runner", version.ref = "runnerVersion" }
 okhttp-tls = { group = "com.squareup.okhttp3", name = "okhttp-tls", version.ref = "mockwebserverVersion" }
 
 [plugins]
