@@ -2,7 +2,6 @@
 #Configuration versions
 jvmTargetVersion = "17"
 javaCompileVersion = "VERSION_17"
-kotlinCompilerVersion = "1.5.11"
 compileSdk = "34"
 minSdk = "29"
 
@@ -21,8 +20,8 @@ gsonVersion = "2.10.1"
 jetbrainsKotlinJvm = "1.9.23"
 jodaTimeVersion = "2.12.7"
 junitJupiter = "5.10.2"
-kotlin = "1.9.23"
-kspVersion = "1.9.23-1.0.20"
+kotlin = "2.0.0"
+kspVersion = "2.0.0-1.0.21"
 lifecycleRuntimeKtx = "2.8.0"
 loggingInterceptor = "4.12.0"
 mockk = "1.13.10"
@@ -85,6 +84,7 @@ okhttp-tls = { group = "com.squareup.okhttp3", name = "okhttp-tls", version.ref 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 daggerHiltPlugin = { id = "com.google.dagger.hilt.android", version.ref = "daggerHiltVersion" }
 jetbrainsKotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
