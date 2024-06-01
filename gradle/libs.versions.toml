@@ -9,7 +9,6 @@ minSdk = "29"
 #Dependency versions
 activityCompose = "1.9.0"
 agp = "8.4.1"
-appcompat = "1.6.1"
 assertj = "3.25.3"
 coil = "2.6.0"
 composeBom = "2024.05.00"
@@ -19,25 +18,16 @@ coroutines = "1.8.0"
 daggerHiltVersion = "2.51.1"
 espressoCore = "3.5.1"
 gsonVersion = "2.10.1"
-hiltNavigationVersion = "1.2.0"
 jetbrainsKotlinJvm = "1.9.23"
 jodaTimeVersion = "2.12.7"
-junit = "4.13.2"
-junitAndroid = "1.6.7"
 junitJupiter = "5.10.2"
-junitPlatformLauncher = "1.10.2"
-junitVersion = "1.1.5"
 kotlin = "1.9.23"
-kotlinSerialization = "1.6.3"
 kspVersion = "1.9.23-1.0.20"
 lifecycleRuntimeKtx = "2.8.0"
 loggingInterceptor = "4.12.0"
-materialVersion = "1.12.0"
 mockk = "1.13.10"
 mockwebserverVersion = "4.12.0"
 retrofit = "2.11.0"
-retrofitSerializationConverter = "1.0.0"
-runnerVersion = "1.5.2"
 store = "5.1.0-alpha02"
 turbine = "1.1.0"
 viewmodelCompose = "2.8.0"
@@ -90,8 +80,6 @@ kotlinx-coroutines-test-jvm = { group = "org.jetbrains.kotlinx", name = "kotlinx
 mockwebserver = { group = "com.squareup.okhttp3", name = "mockwebserver", version.ref = "mockwebserverVersion" }
 joda-time = { group = "joda-time", name = "joda-time", version.ref = "jodaTimeVersion" }
 hilt-android-testing = { group = "com.google.dagger", name = "hilt-android-testing", version.ref = "daggerHiltVersion" }
-
-
 okhttp-tls = { group = "com.squareup.okhttp3", name = "okhttp-tls", version.ref = "mockwebserverVersion" }
 
 [plugins]
