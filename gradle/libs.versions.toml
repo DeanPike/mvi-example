@@ -87,11 +87,11 @@ assertj = { group = "org.assertj", name = "assertj-core", version.ref = "assertj
 mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
 coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutines" }
 kotlinx-coroutines-test-jvm = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test-jvm", version.ref = "coroutines" }
-
-
 mockwebserver = { group = "com.squareup.okhttp3", name = "mockwebserver", version.ref = "mockwebserverVersion" }
 joda-time = { group = "joda-time", name = "joda-time", version.ref = "jodaTimeVersion" }
 hilt-android-testing = { group = "com.google.dagger", name = "hilt-android-testing", version.ref = "daggerHiltVersion" }
+
+
 hilt-android-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "daggerHiltVersion" }
 runner = { group = "androidx.test", name = "runner", version.ref = "runnerVersion" }
 okhttp-tls = { group = "com.squareup.okhttp3", name = "okhttp-tls", version.ref = "mockwebserverVersion" }

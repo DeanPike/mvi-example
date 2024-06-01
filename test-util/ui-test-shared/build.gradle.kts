@@ -57,7 +57,6 @@ dependencies {
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
     implementation(libs.hilt.android.testing)
-    api(libs.hilt.android.testing)
     api(libs.androidx.espresso.core)
     api(libs.mockwebserver)
 
