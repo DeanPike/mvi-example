@@ -4,7 +4,7 @@ import au.com.deanpike.network.model.external.listing.GeoLocation
 import com.google.gson.annotations.SerializedName
 
 data class PropertyDetail(
-    @SerializedName("id") override var id: Int,
+    @SerializedName("id") override var id: Long,
     @SerializedName("headline") var headline: String? = null,
     @SerializedName("description") var description: String? = null,
     @SerializedName("address") var address: String? = null,

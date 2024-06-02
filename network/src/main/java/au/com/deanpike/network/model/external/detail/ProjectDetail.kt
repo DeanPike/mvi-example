@@ -5,7 +5,7 @@ import au.com.deanpike.network.model.external.listing.TrackingMetadata
 import com.google.gson.annotations.SerializedName
 
 data class ProjectDetail(
-    override var id: Int,
+    override var id: Long,
     val headline: String? = null,
     @SerializedName("end_date")
     val endDate: String? = null,

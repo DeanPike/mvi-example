@@ -3,7 +3,7 @@ package au.com.deanpike.detail.client.model.detail
 import au.com.deanpike.datashared.type.ListingType
 
 data class ProjectDetail(
-    override val id: Int?,
+    override val id: Long?,
     override val listingType: ListingType,
     override val address: String? = null,
     val headline: String? = null,
