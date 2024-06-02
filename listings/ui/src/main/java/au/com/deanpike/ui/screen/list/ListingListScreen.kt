@@ -20,7 +20,7 @@ import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import au.com.deanpike.listings.client.model.listing.response.Project
 import au.com.deanpike.listings.client.model.listing.response.Property
 import au.com.deanpike.listings.client.type.DwellingType
@@ -40,7 +40,8 @@ import au.com.deanpike.uishared.theme.MviExampleTheme
 
 @Composable
 fun ListingListScreen(
-    viewModel: ListingListViewModel = viewModel()
+    viewModel: ListingListViewModel = hiltViewModel<ListingListViewModel>(),
+    onPropertyClicked: (Long) -> Unit = {}
 ) {
 
     LaunchedEffect(Unit) {
@@ -62,7 +63,8 @@ fun ListingListScreen(
         },
         onRetryClicked = {
             viewModel.setEvent(ListingListScreenEvent.OnRetryClicked)
-        }
+        },
+        onPropertyClicked = onPropertyClicked
     )
 }
 
@@ -74,7 +76,8 @@ fun ListingListScreenContent(
     onListingTypeSelected: () -> Unit = {},
     onBottomSheetDismissed: () -> Unit = {},
     onListingTypesApplied: (List<DwellingType>) -> Unit = {},
-    onRetryClicked: () -> Unit = {}
+    onRetryClicked: () -> Unit = {},
+    onPropertyClicked: (Long) -> Unit = {}
 ) {
 
     val layoutDirection = LocalLayoutDirection.current
@@ -134,7 +137,10 @@ fun ListingListScreenContent(
                             item(key = listing.id) {
                                 PropertyListItem(
                                     position = index,
-                                    property = listing
+                                    property = listing,
+                                    onItemClicked = {
+                                        onPropertyClicked(listing.id)
+                                    }
                                 )
                             }
                         } else if (listing is Project) {

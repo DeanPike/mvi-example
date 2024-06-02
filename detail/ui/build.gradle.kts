@@ -82,7 +82,7 @@ dependencies {
 
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
-    implementation(libs.lifecycle.viewmodel.compose)
+    implementation(libs.hilt.navigation.compose)
 
     androidTestImplementation(libs.hilt.android)
     kspAndroidTest(libs.hilt.compiler)
@@ -93,7 +93,6 @@ dependencies {
 
     androidTestImplementation(libs.mockwebserver)
     androidTestImplementation(libs.assertj)
-    androidTestImplementation(libs.lifecycle.viewmodel.compose)
 
     testImplementation(libs.junit.jupiter)
     testImplementation(libs.mockk)

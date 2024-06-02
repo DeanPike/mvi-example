@@ -49,11 +49,14 @@ android {
 
 dependencies {
 
+    implementation(project(":listings:ui"))
     implementation(project(":listings:client"))
     implementation(project(":listings:data"))
+    implementation(project(":detail:ui"))
+    implementation(project(":detail:client"))
+    implementation(project(":detail:data"))
     implementation(project(":shared:data-shared"))
     implementation(project(":network"))
-    implementation(project(":listings:ui"))
     implementation(project(":shared:ui-shared"))
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -65,7 +68,7 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
-    implementation(libs.lifecycle.viewmodel.compose)
+    implementation(libs.hilt.navigation.compose)
 
     testImplementation(libs.junit.jupiter)
     testImplementation(libs.kotlinx.coroutines.core.jvm)
