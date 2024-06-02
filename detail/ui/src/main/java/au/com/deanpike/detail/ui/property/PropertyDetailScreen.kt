@@ -1,5 +1,6 @@
 package au.com.deanpike.detail.ui.property
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -19,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
+import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAILS_LAYOUT
 import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAIL_PROGRESS
 import au.com.deanpike.detail.ui.shared.DetailAppBarComponent
 import au.com.deanpike.uishared.base.ScreenStateType
@@ -27,16 +29,29 @@ import au.com.deanpike.uishared.theme.MviExampleTheme
 @Composable
 fun PropertyDetailScreen(
     viewModel: PropertyDetailViewModel = hiltViewModel<PropertyDetailViewModel>(),
-    propertyId: Int
+    propertyId: Int,
+    onCloseClicked: () -> Unit = {}
 ) {
     LaunchedEffect(Unit) {
         viewModel.setEvent(PropertyDetailScreenEvent.Initialise(propertyId = propertyId))
     }
+
+    PropertyDetailScreenContent(
+        state = viewModel.uiState,
+        onCloseClicked = onCloseClicked
+    )
 }
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun PropertyDetailScreenContent(state: PropertyDetailScreenState) {
+fun PropertyDetailScreenContent(
+    state: PropertyDetailScreenState,
+    onCloseClicked: () -> Unit = {}
+) {
+
+    BackHandler {
+        onCloseClicked()
+    }
 
     val pagerState = rememberPagerState(pageCount = { state.propertyDetail?.media?.count() ?: 0 })
 
@@ -49,9 +64,14 @@ fun PropertyDetailScreenContent(state: PropertyDetailScreenState) {
     }
 
     Column(
-        modifier = Modifier.background(color = MaterialTheme.colorScheme.background)
+        modifier = Modifier
+            .background(color = MaterialTheme.colorScheme.background)
+            .testTag(PROPERTY_DETAILS_LAYOUT)
     ) {
-        DetailAppBarComponent(address = state.propertyDetail?.address ?: "")
+        DetailAppBarComponent(
+            address = state.propertyDetail?.address ?: "",
+            onCloseClicked = onCloseClicked
+        )
         HorizontalDivider()
         if (state.screenState == ScreenStateType.LOADING) {
             Box(
@@ -68,6 +88,7 @@ fun PropertyDetailScreenContent(state: PropertyDetailScreenState) {
 
 object PropertyDetailScreenTestTags {
     private const val PREFIX = "PROPERTY_DETAIL_"
+    const val PROPERTY_DETAILS_LAYOUT = "${PREFIX}LAYOUT"
     const val PROPERTY_DETAIL_PROGRESS = "${PREFIX}PROGRESS"
 }
 

@@ -1,5 +1,6 @@
 package au.com.deanpike.detail.ui.unit.screen.property
 
+import au.com.deanpike.detail.ui.framework.ability.DetailAppBarComponentAbility
 import au.com.deanpike.detail.ui.framework.ability.PropertyDetailScreenAbility
 import au.com.deanpike.detail.ui.property.PropertyDetailScreenContent
 import au.com.deanpike.detail.ui.property.PropertyDetailScreenState
@@ -11,6 +12,7 @@ import org.junit.Test
 
 class PropertyDetailScreenTest : UiUnitTestBase() {
     private val propertyScreenAbility = PropertyDetailScreenAbility(composeTestRule)
+    private val appBarAbility = DetailAppBarComponentAbility(composeTestRule)
 
     @Test
     fun should_display_progress() {
@@ -27,6 +29,7 @@ class PropertyDetailScreenTest : UiUnitTestBase() {
             advanceTimeAndWait()
 
             with(propertyScreenAbility) {
+                assertScreenDisplayed()
                 assertProgressDisplayed()
             }
         }

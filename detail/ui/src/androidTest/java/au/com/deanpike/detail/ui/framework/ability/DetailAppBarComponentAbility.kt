@@ -7,7 +7,7 @@ import au.com.deanpike.uitestshared.util.assertTagDisplayed
 import au.com.deanpike.uitestshared.util.assertTextDisplayed
 import au.com.deanpike.uitestshared.util.clickOn
 
-class DetailItemComponentAbility(private val composeTestRule: ComposeContentTestRule) {
+class DetailAppBarComponentAbility(private val composeTestRule: ComposeContentTestRule) {
     fun assertCloseIconDisplayed() {
         composeTestRule.assertTagDisplayed(DETAIL_APP_BAR_CLOSE_ICON)
     }

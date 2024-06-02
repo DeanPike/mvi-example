@@ -1,6 +1,6 @@
 package au.com.deanpike.detail.ui.unit.screen.shared
 
-import au.com.deanpike.detail.ui.framework.ability.DetailItemComponentAbility
+import au.com.deanpike.detail.ui.framework.ability.DetailAppBarComponentAbility
 import au.com.deanpike.detail.ui.shared.DetailAppBarComponent
 import au.com.deanpike.uishared.theme.MviExampleTheme
 import au.com.deanpike.uitestshared.base.UiUnitTestBase
@@ -9,7 +9,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
 class DetailAppBarComponentTest : UiUnitTestBase() {
-    private val ability = DetailItemComponentAbility(composeTestRule)
+    private val ability = DetailAppBarComponentAbility(composeTestRule)
 
     @Test
     fun should_display_detail_app_bar() {

@@ -51,7 +51,12 @@ fun MviApp(navController: NavHostController) {
             route = "property-detail/{id}",
             arguments = listOf(navArgument("id") { type = NavType.IntType })
         ) { backStackEntry ->
-            PropertyDetailScreen(propertyId = backStackEntry.arguments!!.getInt("id"))
+            PropertyDetailScreen(
+                propertyId = backStackEntry.arguments!!.getInt("id"),
+                onCloseClicked = {
+                    navController.popBackStack()
+                }
+            )
         }
     }
 }
