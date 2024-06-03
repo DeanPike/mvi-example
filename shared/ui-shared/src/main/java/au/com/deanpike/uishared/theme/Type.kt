@@ -1,7 +1,6 @@
 package au.com.deanpike.uishared.theme
 
 import androidx.compose.material3.Typography
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -32,11 +31,4 @@ val Typography = Typography(
         letterSpacing = 0.5.sp
     )
     */
-)
-
-val PriceTextStyle = TextStyle(
-    color = Color.Black,
-    fontSize = 18.sp,
-    fontWeight = FontWeight.Bold,
-    fontFamily = FontFamily.Serif
 )

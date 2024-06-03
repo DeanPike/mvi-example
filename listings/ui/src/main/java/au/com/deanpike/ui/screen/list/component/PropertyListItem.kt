@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -34,7 +35,6 @@ import au.com.deanpike.uishared.theme.Dimension.DIM_16
 import au.com.deanpike.uishared.theme.Dimension.DIM_4
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
 import au.com.deanpike.uishared.theme.MviExampleTheme
-import au.com.deanpike.uishared.theme.PriceTextStyle
 import coil.compose.AsyncImage
 
 @Composable
@@ -114,16 +114,29 @@ fun PropertyListItem(
                     .padding(start = DIM_16, end = DIM_16, top = DIM_8)
                     .testTag("${PROPERTY_LIST_ITEM_PRICE}_$position"),
                 text = it,
-                style = PriceTextStyle
+                style = MaterialTheme.typography.titleLarge,
+                fontWeight = FontWeight.Bold
             )
         }
+
+        Text(
+            modifier = Modifier
+                .constrainAs(addressRef) {
+                    start.linkTo(parent.start)
+                    top.linkTo(priceRef.bottom)
+                }
+                .padding(start = DIM_16, end = DIM_16, top = DIM_4)
+                .testTag("${PROPERTY_LIST_ITEM_ADDRESS}_$position"),
+            text = property.address,
+            style = MaterialTheme.typography.labelLarge
+        )
 
         property.headLine?.let {
             Text(
                 modifier = Modifier
                     .constrainAs(headlineRef) {
                         start.linkTo(parent.start)
-                        top.linkTo(priceRef.bottom)
+                        top.linkTo(addressRef.bottom)
                     }
                     .padding(start = DIM_16, end = DIM_16, top = DIM_8)
                     .testTag("${PROPERTY_LIST_ITEM_HEADLINE}_$position"),
@@ -132,21 +145,10 @@ fun PropertyListItem(
             )
         }
 
-        Text(
-            modifier = Modifier
-                .constrainAs(addressRef) {
-                    start.linkTo(parent.start)
-                    top.linkTo(headlineRef.bottom)
-                }
-                .padding(start = DIM_16, end = DIM_16, top = DIM_4)
-                .testTag("${PROPERTY_LIST_ITEM_ADDRESS}_$position"),
-            text = property.address,
-            style = MaterialTheme.typography.labelLarge
-        )
         PropertyDetailComponent(
             modifier = Modifier.constrainAs(propertyDetailRef) {
                 start.linkTo(parent.start)
-                top.linkTo(addressRef.bottom)
+                top.linkTo(headlineRef.bottom)
             },
             parentPosition = position,
             position = position,

@@ -44,7 +44,6 @@ import au.com.deanpike.uishared.component.AgentBanner
 import au.com.deanpike.uishared.theme.Dimension
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
 import au.com.deanpike.uishared.theme.MviExampleTheme
-import au.com.deanpike.uishared.theme.PriceTextStyle
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 
@@ -93,36 +92,47 @@ fun PropertyDetailScreenContent(
                 )
             }
         } else if (state.screenState == ScreenStateType.SUCCESS) {
-            AgentBanner(
-                agencyColour = state.propertyDetail?.advertiser?.preferredColorHex,
-                logo = state.propertyDetail?.advertiser?.logoUrl
+            ProjectDetailSuccess(
+                state = state
             )
-            PropertyDetailImages(
-                media = state.propertyDetail?.media ?: emptyList()
+        }
+    }
+}
+
+@Composable
+fun ProjectDetailSuccess(
+    state: PropertyDetailScreenState,
+) {
+    Column {
+        AgentBanner(
+            agencyColour = state.propertyDetail?.advertiser?.preferredColorHex,
+            logo = state.propertyDetail?.advertiser?.logoUrl
+        )
+        PropertyDetailImages(
+            media = state.propertyDetail?.media ?: emptyList()
+        )
+        state.propertyDetail?.price?.let {
+            Text(
+                modifier = Modifier.padding(
+                    start = Dimension.DIM_16,
+                    end = Dimension.DIM_16,
+                    top = DIM_8
+                ),
+                text = it,
+                style = MaterialTheme.typography.titleLarge,
+                fontWeight = FontWeight.Bold
             )
-            state.propertyDetail?.price?.let {
-                Text(
-                    modifier = Modifier.padding(
-                        start = Dimension.DIM_16,
-                        end = Dimension.DIM_16,
-                        top = DIM_8
-                    ),
-                    text = it,
-                    style = PriceTextStyle
-                )
-            }
-            state.propertyDetail?.address?.let {
-                Text(
-                    modifier = Modifier.padding(
-                        start = Dimension.DIM_16,
-                        end = Dimension.DIM_16,
-                        top = DIM_8
-                    ),
-                    text = it,
-                    style = MaterialTheme.typography.bodyLarge,
-                    fontWeight = FontWeight.Bold
-                )
-            }
+        }
+        state.propertyDetail?.address?.let {
+            Text(
+                modifier = Modifier.padding(
+                    start = Dimension.DIM_16,
+                    end = Dimension.DIM_16,
+                    top = DIM_8
+                ),
+                text = it,
+                style = MaterialTheme.typography.labelLarge
+            )
         }
     }
 }

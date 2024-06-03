@@ -11,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -23,7 +24,6 @@ import au.com.deanpike.ui.screen.shared.PropertyDetailComponent
 import au.com.deanpike.uishared.theme.Dimension.DIM_4
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
 import au.com.deanpike.uishared.theme.MviExampleTheme
-import au.com.deanpike.uishared.theme.PriceTextStyle
 
 @Composable
 fun ProjectChildListItemComponent(
@@ -65,8 +65,8 @@ fun ProjectChildListItemComponent(
                         }
                         .testTag("${PROJECT_CHILD_LIST_ITEM_PRICE}_${parentPosition}_${position}"),
                     text = it,
-                    style = PriceTextStyle
-
+                    style = MaterialTheme.typography.titleLarge,
+                    fontWeight = FontWeight.Bold
                 )
             }
             lifecycleStatus?.let {
