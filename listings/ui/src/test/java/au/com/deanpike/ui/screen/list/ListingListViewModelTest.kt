@@ -15,6 +15,7 @@ import au.com.deanpike.listings.client.usecase.ListingUseCase
 import au.com.deanpike.testshared.extension.TestDispatcherExtension
 import au.com.deanpike.uishared.base.ScreenStateType
 import io.mockk.coEvery
+import io.mockk.coVerify
 import io.mockk.mockk
 import java.io.IOException
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -148,6 +149,19 @@ class ListingListViewModelTest {
             assertThat(listings.size).isEqualTo(2)
             assertThat(selectedStatus).isEqualTo(StatusType.RENT)
         }
+
+        // Do nothing if the user selects the same search mode
+        viewModel.setEvent(ListingListScreenEvent.OnStatusSelected(StatusType.RENT))
+        advanceUntilIdle()
+
+        coVerify(exactly = 1) {
+            useCase.getListings(
+                ListingSearch(
+                    searchMode = StatusType.RENT,
+                    dwellingTypes = emptyList()
+                )
+            )
+        }
     }
 
     @Test
@@ -194,6 +208,26 @@ class ListingListViewModelTest {
             assertThat(selectedListingTypes[0]).isEqualTo(HOUSE)
             assertThat(selectedListingTypes[1]).isEqualTo(TOWNHOUSE)
             assertThat(screenState).isEqualTo(ScreenStateType.SUCCESS)
+        }
+
+        // Do nothing if the user chooses the same listing type
+        viewModel.setEvent(
+            ListingListScreenEvent.OnListingTypesApplied(
+                listOf(
+                    HOUSE,
+                    TOWNHOUSE
+                )
+            )
+        )
+        advanceUntilIdle()
+
+        coVerify(exactly = 1) {
+            useCase.getListings(
+                ListingSearch(
+                    searchMode = StatusType.BUY,
+                    dwellingTypes = listOf(HOUSE, TOWNHOUSE)
+                )
+            )
         }
     }
 

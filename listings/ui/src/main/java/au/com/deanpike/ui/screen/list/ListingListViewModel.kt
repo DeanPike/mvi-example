@@ -52,13 +52,15 @@ class ListingListViewModel @Inject constructor(
     }
 
     private fun onStatusSelected(status: StatusType) {
-        setState {
-            copy(
-                screenState = ScreenStateType.LOADING,
-                selectedStatus = status
-            )
+        if (status != uiState.selectedStatus) {
+            setState {
+                copy(
+                    screenState = ScreenStateType.LOADING,
+                    selectedStatus = status
+                )
+            }
+            getListings()
         }
-        getListings()
     }
 
     private fun onListingTypeClicked() {
@@ -78,14 +80,24 @@ class ListingListViewModel @Inject constructor(
     }
 
     private fun onListingTypesApplied(event: ListingListScreenEvent.OnListingTypesApplied) {
-        setState {
-            copy(
-                showListingTypeScreen = false,
-                selectedListingTypes = event.selectedListingTypes,
-                screenState = ScreenStateType.LOADING
-            )
+        if (event.selectedListingTypes.count() != uiState.selectedListingTypes.count() ||
+            !uiState.selectedListingTypes.containsAll(event.selectedListingTypes)
+        ) {
+            setState {
+                copy(
+                    showListingTypeScreen = false,
+                    selectedListingTypes = event.selectedListingTypes,
+                    screenState = ScreenStateType.LOADING
+                )
+            }
+            getListings()
+        } else {
+            setState {
+                copy(
+                    showListingTypeScreen = false,
+                )
+            }
         }
-        getListings()
     }
 
     private fun onRetryClicked() {
