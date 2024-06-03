@@ -80,7 +80,6 @@ fun PropertyDetailScreenContent(
             .testTag(PROPERTY_DETAILS_LAYOUT)
     ) {
         DetailAppBarComponent(
-            address = state.propertyDetail?.address ?: "",
             onCloseClicked = onCloseClicked
         )
         HorizontalDivider()

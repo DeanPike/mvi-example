@@ -19,7 +19,6 @@ class DetailAppBarComponentTest : UiUnitTestBase() {
             setContent {
                 MviExampleTheme {
                     DetailAppBarComponent(
-                        address = "Test address",
                         onCloseClicked = {
                             closeClicked = true
                         }
@@ -31,7 +30,6 @@ class DetailAppBarComponentTest : UiUnitTestBase() {
 
         with(ability) {
             assertCloseIconDisplayed()
-            assertAddressDisplayed("Test address")
 
             clickOnClose()
             composeTestRule.advanceTimeAndWait()
