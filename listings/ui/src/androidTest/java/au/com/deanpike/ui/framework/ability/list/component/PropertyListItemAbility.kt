@@ -5,7 +5,6 @@ import au.com.deanpike.ui.framework.ability.shared.PropertyDetailComponentAbilit
 import au.com.deanpike.ui.screen.list.ListingListScreenTestTags
 import au.com.deanpike.ui.screen.list.component.PropertyListItemTesTags
 import au.com.deanpike.ui.screen.shared.DetailListItemTestTags
-import au.com.deanpike.uishared.component.AgentBannerTestTags
 import au.com.deanpike.uitestshared.util.assertTagDisplayed
 import au.com.deanpike.uitestshared.util.assertTextDisplayed
 import au.com.deanpike.uitestshared.util.clickOn
@@ -21,10 +20,6 @@ class PropertyListItemAbility(private val composeTestRule: ComposeContentTestRul
 
     fun assertPropertyImageDisplayed(position: Int) {
         composeTestRule.assertTagDisplayed(tag = "${PropertyListItemTesTags.PROPERTY_LIST_ITEM_PROPERTY_IMAGE}_$position")
-    }
-
-    fun assertAgencyImageDisplayed(position: Int) {
-        composeTestRule.assertTagDisplayed("${AgentBannerTestTags.AGENT_BANNER_IMAGE}_$position")
     }
 
     fun assertPriceDisplayed(position: Int, price: String) {

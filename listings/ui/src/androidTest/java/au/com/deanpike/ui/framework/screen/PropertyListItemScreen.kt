@@ -3,11 +3,13 @@ package au.com.deanpike.ui.framework.screen
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import au.com.deanpike.listings.client.model.listing.response.Property
 import au.com.deanpike.ui.framework.ability.list.component.PropertyListItemAbility
+import au.com.deanpike.uitestshared.ability.AgentBannerAbility
 import au.com.deanpike.uitestshared.ability.LifecycleStatusAbility
 
 class PropertyListItemScreen(composeTestRule: ComposeContentTestRule) {
     private val listItemAbility = PropertyListItemAbility(composeTestRule)
     private val lifecycleStatusAbility = LifecycleStatusAbility(composeTestRule)
+    private val agentBannerAbility = AgentBannerAbility(composeTestRule)
 
     fun assertPropertyDisplayed(
         position: Int,
@@ -18,7 +20,7 @@ class PropertyListItemScreen(composeTestRule: ComposeContentTestRule) {
             assertItemDisplayed(position)
             assertPropertyImageDisplayed(position)
             lifecycleStatusAbility.assertLifecycleDisplayed(position = position, text = property.lifecycleStatus ?: "")
-            assertAgencyImageDisplayed(position)
+            agentBannerAbility.assertAgencyImageDisplayed(position)
             assertPriceDisplayed(position = position, price = property.detail.price!!)
             assertHeadlineDisplayed(position = position, headline = property.headLine!!)
             assertAddressDisplayed(position = position, address = property.address)

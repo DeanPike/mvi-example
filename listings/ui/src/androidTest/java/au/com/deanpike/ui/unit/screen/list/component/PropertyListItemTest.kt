@@ -6,6 +6,7 @@ import au.com.deanpike.listings.client.model.listing.response.Property
 import au.com.deanpike.ui.framework.ability.list.component.PropertyListItemAbility
 import au.com.deanpike.ui.screen.list.component.PropertyListItem
 import au.com.deanpike.uishared.theme.MviExampleTheme
+import au.com.deanpike.uitestshared.ability.AgentBannerAbility
 import au.com.deanpike.uitestshared.ability.LifecycleStatusAbility
 import au.com.deanpike.uitestshared.base.UiUnitTestBase
 import au.com.deanpike.uitestshared.util.advanceTimeAndWait
@@ -15,6 +16,7 @@ import org.junit.Test
 class PropertyListItemTest : UiUnitTestBase() {
     private val listItemAbility = PropertyListItemAbility(composeTestRule)
     private val lifecycleStatusAbility = LifecycleStatusAbility(composeTestRule)
+    private val agentBannerAbility = AgentBannerAbility(composeTestRule)
 
     @Test
     fun show_property_list_item() {
@@ -38,7 +40,7 @@ class PropertyListItemTest : UiUnitTestBase() {
             with(listItemAbility) {
                 assertItemDisplayed(0)
                 assertPropertyImageDisplayed(0)
-                assertAgencyImageDisplayed(0)
+                agentBannerAbility.assertAgencyImageDisplayed(0)
                 lifecycleStatusAbility.assertLifecycleDisplayed(0, "New")
                 assertPriceDisplayed(position = 0, price = "$1000000")
                 assertHeadlineDisplayed(position = 0, headline = "Property headline")

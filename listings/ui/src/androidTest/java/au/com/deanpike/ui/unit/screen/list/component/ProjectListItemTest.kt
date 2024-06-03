@@ -9,6 +9,7 @@ import au.com.deanpike.ui.framework.ability.list.component.ProjectListItemAbilit
 import au.com.deanpike.ui.framework.ability.shared.PropertyDetailComponentAbility
 import au.com.deanpike.ui.screen.list.component.ProjectListItem
 import au.com.deanpike.uishared.theme.MviExampleTheme
+import au.com.deanpike.uitestshared.ability.AgentBannerAbility
 import au.com.deanpike.uitestshared.base.UiUnitTestBase
 import au.com.deanpike.uitestshared.util.advanceTimeAndWait
 import org.assertj.core.api.Assertions.assertThat
@@ -19,6 +20,7 @@ class ProjectListItemTest : UiUnitTestBase() {
     private val ability = ProjectListItemAbility(composeTestRule)
     private val projectChildAbility = ProjectChildListItemComponentAbility(composeTestRule)
     private val detailComponentAbility = PropertyDetailComponentAbility(composeTestRule)
+    private val agentBannerAbility = AgentBannerAbility(composeTestRule)
 
     @Test
     fun should_show_project_list_item() {
@@ -47,7 +49,7 @@ class ProjectListItemTest : UiUnitTestBase() {
             assertProjectDisplayed(1)
             assertBannerImageDisplayed(1)
             assertProjectImageDisplayed(1)
-            assertAgencyImageDisplayed(1)
+            agentBannerAbility.assertAgencyImageDisplayed(1)
             assertProjectName(
                 position = 1,
                 text = "Project name"

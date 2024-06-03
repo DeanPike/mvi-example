@@ -3,7 +3,6 @@ package au.com.deanpike.ui.framework.ability.list.component
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import au.com.deanpike.ui.screen.list.ListingListScreenTestTags
 import au.com.deanpike.ui.screen.list.component.ProjectListItemTesTags
-import au.com.deanpike.uishared.component.AgentBannerTestTags
 import au.com.deanpike.uitestshared.util.assertTagDisplayed
 import au.com.deanpike.uitestshared.util.assertTextDisplayed
 import au.com.deanpike.uitestshared.util.clickOn
@@ -24,9 +23,6 @@ class ProjectListItemAbility(private val composeTestRule: ComposeContentTestRule
         composeTestRule.assertTagDisplayed("${ProjectListItemTesTags.PROJECT_LIST_ITEM_IMAGE}_$position")
     }
 
-    fun assertAgencyImageDisplayed(position: Int) {
-        composeTestRule.assertTagDisplayed("${AgentBannerTestTags.AGENT_BANNER_IMAGE}_$position")
-    }
 
     fun assertProjectName(
         position: Int,

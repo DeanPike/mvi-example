@@ -5,12 +5,14 @@ import au.com.deanpike.listings.client.model.listing.response.Project
 import au.com.deanpike.ui.framework.ability.list.component.ProjectChildListItemComponentAbility
 import au.com.deanpike.ui.framework.ability.list.component.ProjectListItemAbility
 import au.com.deanpike.ui.framework.ability.shared.PropertyDetailComponentAbility
+import au.com.deanpike.uitestshared.ability.AgentBannerAbility
 import au.com.deanpike.uitestshared.util.advanceTimeAndWait
 
 class ProjectListItemScreen(private val composeTestRule: ComposeContentTestRule) {
     private val ability = ProjectListItemAbility(composeTestRule)
     private val childAbility = ProjectChildListItemComponentAbility(composeTestRule)
     private val detailAbility = PropertyDetailComponentAbility(composeTestRule)
+    private val agentBannerAbility = AgentBannerAbility(composeTestRule)
 
     fun assertProjectDisplayed(
         position: Int,
@@ -21,7 +23,7 @@ class ProjectListItemScreen(private val composeTestRule: ComposeContentTestRule)
             assertProjectDisplayed(position)
             assertBannerImageDisplayed(position)
             assertProjectImageDisplayed(position)
-            assertAgencyImageDisplayed(position)
+            agentBannerAbility.assertAgencyImageDisplayed(position)
             assertProjectName(position = position, text = project.projectName!!)
             assertAddress(position = position, text = project.address)
             assertProjectChildrenButtonText(position = position, text = if (project.properties.size == 1) "1 Property" else "${project.properties.size} Properties")
