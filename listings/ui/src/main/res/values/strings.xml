@@ -2,7 +2,6 @@
 <resources>
     <string name="mvi_example">Property</string>
 
-    <string name="property_image_description">Property image</string>
     <string name="project_banner_image_description">Project banner image</string>
     <string name="number_of_bedrooms">Number of bedrooms</string>
     <string name="number_of_bathrooms">Number of bathrooms</string>

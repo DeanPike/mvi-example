@@ -1,5 +1,6 @@
 package au.com.deanpike.ui.screen.list.component
 
+import au.com.deanpike.uishared.R as RShared
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -47,7 +48,6 @@ import au.com.deanpike.listings.client.model.listing.response.Project
 import au.com.deanpike.listings.client.model.listing.response.ProjectChild
 import au.com.deanpike.ui.R
 import au.com.deanpike.ui.screen.list.component.ProjectListItemTesTags.PROJECT_LIST_ITEM_ADDRESS
-import au.com.deanpike.ui.screen.list.component.ProjectListItemTesTags.PROJECT_LIST_ITEM_AGENCY_IMAGE
 import au.com.deanpike.ui.screen.list.component.ProjectListItemTesTags.PROJECT_LIST_ITEM_BANNER_IMAGE
 import au.com.deanpike.ui.screen.list.component.ProjectListItemTesTags.PROJECT_LIST_ITEM_CHILDREN
 import au.com.deanpike.ui.screen.list.component.ProjectListItemTesTags.PROJECT_LIST_ITEM_CHILD_BUTTON
@@ -55,6 +55,7 @@ import au.com.deanpike.ui.screen.list.component.ProjectListItemTesTags.PROJECT_L
 import au.com.deanpike.ui.screen.list.component.ProjectListItemTesTags.PROJECT_LIST_ITEM_IMAGE
 import au.com.deanpike.ui.screen.list.component.ProjectListItemTesTags.PROJECT_LIST_ITEM_LAYOUT
 import au.com.deanpike.ui.screen.list.component.ProjectListItemTesTags.PROJECT_LIST_ITEM_PROJECT_NAME
+import au.com.deanpike.uishared.component.AgentBanner
 import au.com.deanpike.uishared.theme.Dimension
 import au.com.deanpike.uishared.theme.Dimension.DIM_16
 import au.com.deanpike.uishared.theme.Dimension.DIM_4
@@ -115,7 +116,7 @@ fun ProjectListItem(
                     }
                 )
                 .testTag("${PROJECT_LIST_ITEM_BANNER_IMAGE}_$position"),
-            placeholder = painterResource(id = R.drawable.gallery_placeholder),
+            placeholder = painterResource(id = RShared.drawable.gallery_placeholder),
             model = project.bannerImage,
             contentDescription = stringResource(id = R.string.project_banner_image_description),
         )
@@ -129,37 +130,21 @@ fun ProjectListItem(
                 .fillMaxWidth()
                 .defaultMinSize(minHeight = 240.dp)
                 .testTag("${PROJECT_LIST_ITEM_IMAGE}_$position"),
-            placeholder = painterResource(id = R.drawable.gallery_placeholder),
+            placeholder = painterResource(id = RShared.drawable.gallery_placeholder),
             model = project.listingImage,
-            contentDescription = stringResource(id = R.string.property_image_description)
+            contentDescription = stringResource(id = RShared.string.property_image_description)
         )
 
-        Row(
+        AgentBanner(
             modifier = Modifier
                 .constrainAs(logoRowRef) {
                     start.linkTo(parent.start)
                     top.linkTo(imageRef.bottom)
-                }
-                .fillMaxWidth()
-                .height(40.dp)
-                .background(
-                    color = if ((project.projectColour?.length ?: 0) == 7) {
-                        Color(android.graphics.Color.parseColor(project.projectColour))
-                    } else {
-                        MaterialTheme.colorScheme.background
-                    }
-                ),
-            horizontalArrangement = Arrangement.End
-        ) {
-            AsyncImage(
-                modifier = Modifier
-                    .height(40.dp)
-                    .testTag("${PROJECT_LIST_ITEM_AGENCY_IMAGE}_$position"),
-                placeholder = painterResource(id = R.drawable.gallery_placeholder),
-                model = project.logoImage,
-                contentDescription = stringResource(id = R.string.property_image_description)
-            )
-        }
+                },
+            position = position,
+            agencyColour = project.projectColour,
+            logo = project.logoImage
+        )
 
         project.projectName?.let {
             Text(

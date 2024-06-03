@@ -1,13 +1,11 @@
 package au.com.deanpike.ui.screen.list.component
 
+import au.com.deanpike.uishared.R as RShared
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
@@ -15,7 +13,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -25,15 +22,14 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import au.com.deanpike.datashared.type.ListingType
 import au.com.deanpike.listings.client.model.listing.response.ListingDetails
 import au.com.deanpike.listings.client.model.listing.response.Property
-import au.com.deanpike.ui.R
 import au.com.deanpike.ui.screen.list.component.PropertyListItemTesTags.PROPERTY_LIST_ITEM_ADDRESS
-import au.com.deanpike.ui.screen.list.component.PropertyListItemTesTags.PROPERTY_LIST_ITEM_AGENCY_IMAGE
 import au.com.deanpike.ui.screen.list.component.PropertyListItemTesTags.PROPERTY_LIST_ITEM_HEADLINE
 import au.com.deanpike.ui.screen.list.component.PropertyListItemTesTags.PROPERTY_LIST_ITEM_LAYOUT
 import au.com.deanpike.ui.screen.list.component.PropertyListItemTesTags.PROPERTY_LIST_ITEM_LIFECYCLE
 import au.com.deanpike.ui.screen.list.component.PropertyListItemTesTags.PROPERTY_LIST_ITEM_PRICE
 import au.com.deanpike.ui.screen.list.component.PropertyListItemTesTags.PROPERTY_LIST_ITEM_PROPERTY_IMAGE
 import au.com.deanpike.ui.screen.shared.PropertyDetailComponent
+import au.com.deanpike.uishared.component.AgentBanner
 import au.com.deanpike.uishared.theme.Dimension.DIM_16
 import au.com.deanpike.uishared.theme.Dimension.DIM_4
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
@@ -68,9 +64,9 @@ fun PropertyListItem(
                 .fillMaxWidth()
                 .defaultMinSize(minHeight = 240.dp)
                 .testTag("${PROPERTY_LIST_ITEM_PROPERTY_IMAGE}_$position"),
-            placeholder = painterResource(id = R.drawable.gallery_placeholder),
+            placeholder = painterResource(id = RShared.drawable.gallery_placeholder),
             model = property.listingImage,
-            contentDescription = stringResource(id = R.string.property_image_description)
+            contentDescription = stringResource(id = RShared.string.property_image_description)
         )
 
         property.lifecycleStatus?.let {
@@ -96,32 +92,16 @@ fun PropertyListItem(
             }
         }
 
-        Row(
+        AgentBanner(
             modifier = Modifier
                 .constrainAs(agencyRef) {
                     start.linkTo(parent.start)
                     top.linkTo(propertyImageRef.bottom)
-                }
-                .fillMaxWidth()
-                .height(40.dp)
-                .background(
-                    color = if ((property.agencyColour?.length ?: 0) == 7) {
-                        Color(android.graphics.Color.parseColor(property.agencyColour))
-                    } else {
-                        MaterialTheme.colorScheme.background
-                    }
-                ),
-            horizontalArrangement = Arrangement.End
-        ) {
-            AsyncImage(
-                modifier = Modifier
-                    .height(40.dp)
-                    .testTag("${PROPERTY_LIST_ITEM_AGENCY_IMAGE}_$position"),
-                placeholder = painterResource(id = R.drawable.gallery_placeholder),
-                model = property.agencyImage,
-                contentDescription = stringResource(id = R.string.property_image_description)
-            )
-        }
+                },
+            position = position,
+            agencyColour = property.agencyColour,
+            logo = property.agencyImage
+        )
 
         property.detail.price?.let {
             Text(
@@ -179,7 +159,6 @@ object PropertyListItemTesTags {
     private const val PREFIX = "PROPERTY_LIST_ITEM_"
     const val PROPERTY_LIST_ITEM_LAYOUT = "${PREFIX}LAYOUT"
     const val PROPERTY_LIST_ITEM_PROPERTY_IMAGE = "${PREFIX}PROPERTY_IMAGE"
-    const val PROPERTY_LIST_ITEM_AGENCY_IMAGE = "${PREFIX}AGENCY_IMAGE"
     const val PROPERTY_LIST_ITEM_PRICE = "${PREFIX}PRICE"
     const val PROPERTY_LIST_ITEM_HEADLINE = "${PREFIX}HEADLINE"
     const val PROPERTY_LIST_ITEM_ADDRESS = "${PREFIX}ADDRESS"
