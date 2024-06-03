@@ -41,6 +41,7 @@ import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_
 import au.com.deanpike.detail.ui.shared.DetailAppBarComponent
 import au.com.deanpike.uishared.base.ScreenStateType
 import au.com.deanpike.uishared.component.AgentBanner
+import au.com.deanpike.uishared.component.LifecycleStatus
 import au.com.deanpike.uishared.theme.Dimension
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
 import au.com.deanpike.uishared.theme.MviExampleTheme
@@ -109,7 +110,8 @@ fun ProjectDetailSuccess(
             logo = state.propertyDetail?.advertiser?.logoUrl
         )
         PropertyDetailImages(
-            media = state.propertyDetail?.media ?: emptyList()
+            media = state.propertyDetail?.media ?: emptyList(),
+            lifecycleStatus = state.propertyDetail?.lifecycleStatus
         )
         state.propertyDetail?.price?.let {
             Text(
@@ -139,7 +141,10 @@ fun ProjectDetailSuccess(
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun PropertyDetailImages(media: List<Media>) {
+fun PropertyDetailImages(
+    media: List<Media>,
+    lifecycleStatus: String?
+) {
     if (media.isNotEmpty()) {
         val pagerState = rememberPagerState(pageCount = { media.count() })
         Box {
@@ -180,6 +185,10 @@ fun PropertyDetailImages(media: List<Media>) {
                     )
                 }
             }
+
+            LifecycleStatus(
+                lifecycleStatus = lifecycleStatus
+            )
         }
     }
 }

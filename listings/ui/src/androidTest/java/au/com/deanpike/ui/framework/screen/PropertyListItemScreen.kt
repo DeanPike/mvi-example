@@ -3,19 +3,21 @@ package au.com.deanpike.ui.framework.screen
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import au.com.deanpike.listings.client.model.listing.response.Property
 import au.com.deanpike.ui.framework.ability.list.component.PropertyListItemAbility
+import au.com.deanpike.uitestshared.ability.LifecycleStatusAbility
 
-class PropertyListItemScreen(private val composeTestRule: ComposeContentTestRule) {
-    private val ability = PropertyListItemAbility(composeTestRule)
+class PropertyListItemScreen(composeTestRule: ComposeContentTestRule) {
+    private val listItemAbility = PropertyListItemAbility(composeTestRule)
+    private val lifecycleStatusAbility = LifecycleStatusAbility(composeTestRule)
 
     fun assertPropertyDisplayed(
         position: Int,
         property: Property
     ) {
-        with(ability) {
+        with(listItemAbility) {
             scrollTo(position)
             assertItemDisplayed(position)
             assertPropertyImageDisplayed(position)
-            assertLifecycleDisplayed(position = position, text = property.lifecycleStatus ?: "")
+            lifecycleStatusAbility.assertLifecycleDisplayed(position = position, text = property.lifecycleStatus ?: "")
             assertAgencyImageDisplayed(position)
             assertPriceDisplayed(position = position, price = property.detail.price!!)
             assertHeadlineDisplayed(position = position, headline = property.headLine!!)

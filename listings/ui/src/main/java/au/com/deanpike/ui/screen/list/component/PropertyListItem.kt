@@ -3,15 +3,12 @@ package au.com.deanpike.ui.screen.list.component
 import au.com.deanpike.uishared.R as RShared
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
@@ -26,11 +23,11 @@ import au.com.deanpike.listings.client.model.listing.response.Property
 import au.com.deanpike.ui.screen.list.component.PropertyListItemTesTags.PROPERTY_LIST_ITEM_ADDRESS
 import au.com.deanpike.ui.screen.list.component.PropertyListItemTesTags.PROPERTY_LIST_ITEM_HEADLINE
 import au.com.deanpike.ui.screen.list.component.PropertyListItemTesTags.PROPERTY_LIST_ITEM_LAYOUT
-import au.com.deanpike.ui.screen.list.component.PropertyListItemTesTags.PROPERTY_LIST_ITEM_LIFECYCLE
 import au.com.deanpike.ui.screen.list.component.PropertyListItemTesTags.PROPERTY_LIST_ITEM_PRICE
 import au.com.deanpike.ui.screen.list.component.PropertyListItemTesTags.PROPERTY_LIST_ITEM_PROPERTY_IMAGE
 import au.com.deanpike.ui.screen.shared.PropertyDetailComponent
 import au.com.deanpike.uishared.component.AgentBanner
+import au.com.deanpike.uishared.component.LifecycleStatus
 import au.com.deanpike.uishared.theme.Dimension.DIM_16
 import au.com.deanpike.uishared.theme.Dimension.DIM_4
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
@@ -70,28 +67,14 @@ fun PropertyListItem(
             contentDescription = stringResource(id = RShared.string.property_image_description)
         )
 
-        property.lifecycleStatus?.let {
-            Box(
-                modifier = Modifier
-                    .constrainAs(lifecycleRef) {
-                        start.linkTo(parent.start)
-                        top.linkTo(parent.top)
-                    }
-                    .padding(start = DIM_4, top = DIM_4)
-                    .background(
-                        color = MaterialTheme.colorScheme.secondaryContainer,
-                        shape = RoundedCornerShape(DIM_8)
-                    ),
-                contentAlignment = Alignment.TopStart
-            ) {
-                Text(
-                    modifier = Modifier
-                        .padding(DIM_4)
-                        .testTag("${PROPERTY_LIST_ITEM_LIFECYCLE}_$position"),
-                    text = it
-                )
-            }
-        }
+        LifecycleStatus(
+            modifier = Modifier.constrainAs(lifecycleRef) {
+                start.linkTo(parent.start)
+                top.linkTo(parent.top)
+            },
+            position = position,
+            lifecycleStatus = property.lifecycleStatus
+        )
 
         AgentBanner(
             modifier = Modifier

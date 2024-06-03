@@ -95,9 +95,4 @@ class PropertyListItemAbility(private val composeTestRule: ComposeContentTestRul
         composeTestRule.scrollToItemPosition(ListingListScreenTestTags.LISTING_LIST, position)
         composeTestRule.scrollTo("${DetailListItemTestTags.DETAIL_ITEM_GROUP}_${position}_${position}")
     }
-
-    fun assertLifecycleDisplayed(position: Int, text: String) {
-        composeTestRule.assertTextDisplayed(tag = "${PropertyListItemTesTags.PROPERTY_LIST_ITEM_LIFECYCLE}_$position", text = text)
-    }
-
 }
