@@ -34,6 +34,7 @@ import au.com.deanpike.uishared.theme.Dimension.DIM_16
 import au.com.deanpike.uishared.theme.Dimension.DIM_4
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
 import au.com.deanpike.uishared.theme.MviExampleTheme
+import au.com.deanpike.uishared.theme.PriceTextStyle
 import coil.compose.AsyncImage
 
 @Composable
@@ -113,7 +114,7 @@ fun PropertyListItem(
                     .padding(start = DIM_16, end = DIM_16, top = DIM_8)
                     .testTag("${PROPERTY_LIST_ITEM_PRICE}_$position"),
                 text = it,
-                style = MaterialTheme.typography.titleMedium
+                style = PriceTextStyle
             )
         }
 

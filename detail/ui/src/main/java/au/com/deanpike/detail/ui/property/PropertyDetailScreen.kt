@@ -23,6 +23,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -41,7 +42,9 @@ import au.com.deanpike.detail.ui.shared.DetailAppBarComponent
 import au.com.deanpike.uishared.base.ScreenStateType
 import au.com.deanpike.uishared.component.AgentBanner
 import au.com.deanpike.uishared.theme.Dimension
+import au.com.deanpike.uishared.theme.Dimension.DIM_8
 import au.com.deanpike.uishared.theme.MviExampleTheme
+import au.com.deanpike.uishared.theme.PriceTextStyle
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 
@@ -98,10 +101,29 @@ fun PropertyDetailScreenContent(
             PropertyDetailImages(
                 media = state.propertyDetail?.media ?: emptyList()
             )
-        }
-
-        state.propertyDetail?.price?.let {
-            Text(text = it)
+            state.propertyDetail?.price?.let {
+                Text(
+                    modifier = Modifier.padding(
+                        start = Dimension.DIM_16,
+                        end = Dimension.DIM_16,
+                        top = DIM_8
+                    ),
+                    text = it,
+                    style = PriceTextStyle
+                )
+            }
+            state.propertyDetail?.address?.let {
+                Text(
+                    modifier = Modifier.padding(
+                        start = Dimension.DIM_16,
+                        end = Dimension.DIM_16,
+                        top = DIM_8
+                    ),
+                    text = it,
+                    style = MaterialTheme.typography.bodyLarge,
+                    fontWeight = FontWeight.Bold
+                )
+            }
         }
     }
 }

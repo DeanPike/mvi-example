@@ -23,6 +23,7 @@ import au.com.deanpike.ui.screen.shared.PropertyDetailComponent
 import au.com.deanpike.uishared.theme.Dimension.DIM_4
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
 import au.com.deanpike.uishared.theme.MviExampleTheme
+import au.com.deanpike.uishared.theme.PriceTextStyle
 
 @Composable
 fun ProjectChildListItemComponent(
@@ -64,7 +65,8 @@ fun ProjectChildListItemComponent(
                         }
                         .testTag("${PROJECT_CHILD_LIST_ITEM_PRICE}_${parentPosition}_${position}"),
                     text = it,
-                    style = MaterialTheme.typography.titleMedium
+                    style = PriceTextStyle
+
                 )
             }
             lifecycleStatus?.let {
