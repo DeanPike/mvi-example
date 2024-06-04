@@ -1,6 +1,6 @@
 package au.com.deanpike.ui.unit.screen.list.component
 
-import au.com.deanpike.listings.client.model.listing.response.ListingDetails
+import au.com.deanpike.commonshared.model.ListingDetails
 import au.com.deanpike.ui.framework.ability.list.component.ProjectChildListItemComponentAbility
 import au.com.deanpike.ui.framework.ability.shared.PropertyDetailComponentAbility
 import au.com.deanpike.ui.screen.list.component.ProjectChildListItemComponent

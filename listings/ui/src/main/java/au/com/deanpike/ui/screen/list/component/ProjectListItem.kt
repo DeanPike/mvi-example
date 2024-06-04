@@ -43,7 +43,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import au.com.deanpike.datashared.type.ListingType
-import au.com.deanpike.listings.client.model.listing.response.ListingDetails
+import au.com.deanpike.commonshared.model.ListingDetails
 import au.com.deanpike.listings.client.model.listing.response.Project
 import au.com.deanpike.listings.client.model.listing.response.ProjectChild
 import au.com.deanpike.ui.R

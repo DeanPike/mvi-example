@@ -1,4 +1,4 @@
-package au.com.deanpike.listings.client.model.listing.response
+package au.com.deanpike.commonshared.model
 
 data class ListingDetails(
     val price: String?,

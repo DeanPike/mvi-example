@@ -12,7 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
-import au.com.deanpike.listings.client.model.listing.response.ListingDetails
+import au.com.deanpike.commonshared.model.ListingDetails
 import au.com.deanpike.ui.R
 import au.com.deanpike.ui.screen.shared.DetailListItemTestTags.DETAIL_ITEM_BATHROOMS
 import au.com.deanpike.ui.screen.shared.DetailListItemTestTags.DETAIL_ITEM_BEDROOMS

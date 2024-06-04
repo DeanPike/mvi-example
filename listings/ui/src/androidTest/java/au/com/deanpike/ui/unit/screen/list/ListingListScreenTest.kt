@@ -1,7 +1,7 @@
 package au.com.deanpike.ui.unit.screen.list
 
 import au.com.deanpike.datashared.type.ListingType
-import au.com.deanpike.listings.client.model.listing.response.ListingDetails
+import au.com.deanpike.commonshared.model.ListingDetails
 import au.com.deanpike.listings.client.model.listing.response.Project
 import au.com.deanpike.listings.client.model.listing.response.ProjectChild
 import au.com.deanpike.listings.client.model.listing.response.Property

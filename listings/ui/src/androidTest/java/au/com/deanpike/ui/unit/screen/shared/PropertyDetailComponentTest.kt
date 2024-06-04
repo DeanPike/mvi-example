@@ -1,6 +1,6 @@
 package au.com.deanpike.ui.unit.screen.shared
 
-import au.com.deanpike.listings.client.model.listing.response.ListingDetails
+import au.com.deanpike.commonshared.model.ListingDetails
 import au.com.deanpike.ui.framework.ability.shared.PropertyDetailComponentAbility
 import au.com.deanpike.ui.screen.shared.PropertyDetailComponent
 import au.com.deanpike.uishared.theme.MviExampleTheme

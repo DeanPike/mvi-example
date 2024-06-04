@@ -2,7 +2,7 @@ package au.com.deanpike.listings.data.usecase
 
 import au.com.deanpike.commonshared.util.ResponseWrapper
 import au.com.deanpike.datashared.type.ListingType
-import au.com.deanpike.listings.client.model.listing.response.ListingDetails
+import au.com.deanpike.commonshared.model.ListingDetails
 import au.com.deanpike.listings.client.model.listing.response.Property
 import au.com.deanpike.listings.client.model.listing.search.ListingSearch
 import au.com.deanpike.listings.client.type.DwellingType.HOUSE
