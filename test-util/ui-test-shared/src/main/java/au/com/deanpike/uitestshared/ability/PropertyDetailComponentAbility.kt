@@ -1,9 +1,8 @@
-package au.com.deanpike.ui.framework.ability.shared
+package au.com.deanpike.uitestshared.ability
 
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
-import au.com.deanpike.ui.R
-import au.com.deanpike.ui.screen.list.component.ProjectChildListItemComponentTestTags
-import au.com.deanpike.ui.screen.shared.DetailListItemTestTags
+import au.com.deanpike.uishared.R
+import au.com.deanpike.uishared.component.DetailListItemTestTags
 import au.com.deanpike.uitestshared.util.assertTagDisplayed
 import au.com.deanpike.uitestshared.util.assertTagDoesNotExist
 import au.com.deanpike.uitestshared.util.assertTextDisplayed
@@ -13,7 +12,7 @@ class PropertyDetailComponentAbility(private val composeTestRule: ComposeContent
     private val ability = DetailItemComponentAbility(composeTestRule)
 
     fun scrollTo(parentPosition: Int, childPosition: Int) {
-        composeTestRule.scrollTo("${ProjectChildListItemComponentTestTags.PROJECT_CHILD_LIST_ITEM_LAYOUT}_${parentPosition}_${childPosition}")
+        composeTestRule.scrollTo("${DetailListItemTestTags.DETAIL_ITEM_GROUP}_${parentPosition}_${childPosition}")
     }
 
     fun assertGroupDisplayed(

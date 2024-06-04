@@ -1,15 +1,13 @@
-package au.com.deanpike.ui.unit.screen.shared
+package au.com.deanpike.uishared.component
 
-import au.com.deanpike.ui.R
-import au.com.deanpike.ui.framework.ability.shared.DetailItemComponentAbility
-import au.com.deanpike.ui.screen.shared.DetailItemComponent
+import au.com.deanpike.uishared.R
+import au.com.deanpike.uitestshared.ability.DetailItemComponentAbility
 import au.com.deanpike.uishared.theme.MviExampleTheme
 import au.com.deanpike.uitestshared.base.UiUnitTestBase
 import au.com.deanpike.uitestshared.util.advanceTimeAndWait
 import org.junit.Test
 
 class DetailItemComponentTest : UiUnitTestBase() {
-
     private val ability = DetailItemComponentAbility(composeTestRule)
 
     @Test

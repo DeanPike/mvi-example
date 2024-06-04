@@ -1,4 +1,4 @@
-package au.com.deanpike.ui.framework.ability.shared
+package au.com.deanpike.uitestshared.ability
 
 import androidx.annotation.DrawableRes
 import androidx.compose.ui.test.junit4.ComposeContentTestRule

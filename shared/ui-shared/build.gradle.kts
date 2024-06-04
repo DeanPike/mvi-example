@@ -34,10 +34,19 @@ android {
     buildFeatures {
         compose = true
     }
+    packaging {
+        resources {
+            excludes += "META-INF/LICENSE.md"
+            excludes += "META-INF/LICENSE-notice.md"
+        }
+    }
 }
 
 dependencies {
     implementation(project(":shared:data-shared"))
+    implementation(project(":shared:common-shared"))
+    androidTestImplementation(project(":test-util:ui-test-shared"))
+
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.core.ktx)
@@ -55,4 +64,4 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 
     androidTestImplementation(libs.androidx.espresso.core)
-}
+    androidTestImplementation(libs.androidx.ui.test.junit4)}

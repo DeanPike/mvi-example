@@ -1,4 +1,4 @@
-package au.com.deanpike.ui.screen.shared
+package au.com.deanpike.uishared.component
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -13,12 +13,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import au.com.deanpike.commonshared.model.ListingDetails
-import au.com.deanpike.ui.R
-import au.com.deanpike.ui.screen.shared.DetailListItemTestTags.DETAIL_ITEM_BATHROOMS
-import au.com.deanpike.ui.screen.shared.DetailListItemTestTags.DETAIL_ITEM_BEDROOMS
-import au.com.deanpike.ui.screen.shared.DetailListItemTestTags.DETAIL_ITEM_CAR_SPACES
-import au.com.deanpike.ui.screen.shared.DetailListItemTestTags.DETAIL_ITEM_DWELLING_TYPE
-import au.com.deanpike.ui.screen.shared.DetailListItemTestTags.DETAIL_ITEM_GROUP
+import au.com.deanpike.uishared.R
+import au.com.deanpike.uishared.component.DetailListItemTestTags.DETAIL_ITEM_BATHROOMS
+import au.com.deanpike.uishared.component.DetailListItemTestTags.DETAIL_ITEM_BEDROOMS
+import au.com.deanpike.uishared.component.DetailListItemTestTags.DETAIL_ITEM_CAR_SPACES
+import au.com.deanpike.uishared.component.DetailListItemTestTags.DETAIL_ITEM_DWELLING_TYPE
+import au.com.deanpike.uishared.component.DetailListItemTestTags.DETAIL_ITEM_GROUP
 import au.com.deanpike.uishared.theme.Dimension
 import au.com.deanpike.uishared.theme.MviExampleTheme
 

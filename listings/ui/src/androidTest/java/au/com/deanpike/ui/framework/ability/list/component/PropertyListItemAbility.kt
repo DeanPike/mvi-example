@@ -1,10 +1,10 @@
 package au.com.deanpike.ui.framework.ability.list.component
 
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
-import au.com.deanpike.ui.framework.ability.shared.PropertyDetailComponentAbility
 import au.com.deanpike.ui.screen.list.ListingListScreenTestTags
 import au.com.deanpike.ui.screen.list.component.PropertyListItemTesTags
-import au.com.deanpike.ui.screen.shared.DetailListItemTestTags
+import au.com.deanpike.uishared.component.DetailListItemTestTags
+import au.com.deanpike.uitestshared.ability.PropertyDetailComponentAbility
 import au.com.deanpike.uitestshared.util.assertTagDisplayed
 import au.com.deanpike.uitestshared.util.assertTextDisplayed
 import au.com.deanpike.uitestshared.util.clickOn

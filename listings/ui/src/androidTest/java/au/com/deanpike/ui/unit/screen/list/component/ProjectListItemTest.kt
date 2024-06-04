@@ -1,15 +1,15 @@
 package au.com.deanpike.ui.unit.screen.list.component
 
-import au.com.deanpike.datashared.type.ListingType
 import au.com.deanpike.commonshared.model.ListingDetails
+import au.com.deanpike.datashared.type.ListingType
 import au.com.deanpike.listings.client.model.listing.response.Project
 import au.com.deanpike.listings.client.model.listing.response.ProjectChild
 import au.com.deanpike.ui.framework.ability.list.component.ProjectChildListItemComponentAbility
 import au.com.deanpike.ui.framework.ability.list.component.ProjectListItemAbility
-import au.com.deanpike.ui.framework.ability.shared.PropertyDetailComponentAbility
 import au.com.deanpike.ui.screen.list.component.ProjectListItem
 import au.com.deanpike.uishared.theme.MviExampleTheme
 import au.com.deanpike.uitestshared.ability.AgentBannerAbility
+import au.com.deanpike.uitestshared.ability.PropertyDetailComponentAbility
 import au.com.deanpike.uitestshared.base.UiUnitTestBase
 import au.com.deanpike.uitestshared.util.advanceTimeAndWait
 import org.assertj.core.api.Assertions.assertThat

@@ -1,9 +1,8 @@
-package au.com.deanpike.ui.unit.screen.shared
+package au.com.deanpike.uishared.component
 
 import au.com.deanpike.commonshared.model.ListingDetails
-import au.com.deanpike.ui.framework.ability.shared.PropertyDetailComponentAbility
-import au.com.deanpike.ui.screen.shared.PropertyDetailComponent
 import au.com.deanpike.uishared.theme.MviExampleTheme
+import au.com.deanpike.uitestshared.ability.PropertyDetailComponentAbility
 import au.com.deanpike.uitestshared.base.UiUnitTestBase
 import au.com.deanpike.uitestshared.util.advanceTimeAndWait
 import org.junit.Test

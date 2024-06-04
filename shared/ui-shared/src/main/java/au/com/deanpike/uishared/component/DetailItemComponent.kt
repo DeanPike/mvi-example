@@ -1,4 +1,4 @@
-package au.com.deanpike.ui.screen.shared
+package au.com.deanpike.uishared.component
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
@@ -12,7 +12,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import au.com.deanpike.ui.R
+import au.com.deanpike.uishared.R
 import au.com.deanpike.uishared.base.drawableTestTag
 import au.com.deanpike.uishared.theme.Dimension
 import au.com.deanpike.uishared.theme.MviExampleTheme

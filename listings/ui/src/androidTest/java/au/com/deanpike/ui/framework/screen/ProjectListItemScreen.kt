@@ -4,8 +4,8 @@ import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import au.com.deanpike.listings.client.model.listing.response.Project
 import au.com.deanpike.ui.framework.ability.list.component.ProjectChildListItemComponentAbility
 import au.com.deanpike.ui.framework.ability.list.component.ProjectListItemAbility
-import au.com.deanpike.ui.framework.ability.shared.PropertyDetailComponentAbility
 import au.com.deanpike.uitestshared.ability.AgentBannerAbility
+import au.com.deanpike.uitestshared.ability.PropertyDetailComponentAbility
 import au.com.deanpike.uitestshared.util.advanceTimeAndWait
 
 class ProjectListItemScreen(private val composeTestRule: ComposeContentTestRule) {
