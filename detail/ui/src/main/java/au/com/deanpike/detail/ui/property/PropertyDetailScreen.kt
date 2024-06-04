@@ -29,6 +29,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import au.com.deanpike.commonshared.model.ListingDetails
 import au.com.deanpike.datashared.type.ListingType
 import au.com.deanpike.detail.client.model.detail.Advertiser
 import au.com.deanpike.detail.client.model.detail.Agent
@@ -50,6 +51,7 @@ import au.com.deanpike.uishared.base.ScreenStateType
 import au.com.deanpike.uishared.component.AgentBanner
 import au.com.deanpike.uishared.component.ExpandableText
 import au.com.deanpike.uishared.component.LifecycleStatus
+import au.com.deanpike.uishared.component.PropertyDetailComponent
 import au.com.deanpike.uishared.theme.Dimension.DIM_16
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
 import au.com.deanpike.uishared.theme.MviExampleTheme
@@ -153,6 +155,18 @@ fun ProjectDetailSuccess(
                 style = MaterialTheme.typography.labelLarge
             )
         }
+        PropertyDetailComponent(
+            parentPosition = 0,
+            position = 0,
+            details = ListingDetails(
+                price = null,
+                numberOfBedrooms = state.propertyDetail?.bedroomCount,
+                numberOfBathrooms = state.propertyDetail?.bathroomCount,
+                numberOfCarSpaces = state.propertyDetail?.carSpaceCount,
+            ),
+            dwellingType = state.propertyDetail?.dwellingType
+
+        )
         state.propertyDetail?.headline?.let {
             Text(
                 modifier = Modifier

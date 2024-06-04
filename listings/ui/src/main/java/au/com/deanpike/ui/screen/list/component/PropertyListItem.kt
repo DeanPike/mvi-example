@@ -114,30 +114,31 @@ fun PropertyListItem(
             style = MaterialTheme.typography.labelLarge
         )
 
-        property.headLine?.let {
-            Text(
-                modifier = Modifier
-                    .constrainAs(headlineRef) {
-                        start.linkTo(parent.start)
-                        top.linkTo(addressRef.bottom)
-                    }
-                    .padding(start = DIM_16, end = DIM_16, top = DIM_8)
-                    .testTag("${PROPERTY_LIST_ITEM_HEADLINE}_$position"),
-                text = it,
-                style = MaterialTheme.typography.bodyMedium
-            )
-        }
-
         PropertyDetailComponent(
             modifier = Modifier.constrainAs(propertyDetailRef) {
                 start.linkTo(parent.start)
-                top.linkTo(headlineRef.bottom)
+                top.linkTo(addressRef.bottom)
             },
             parentPosition = position,
             position = position,
             details = property.detail,
             dwellingType = property.dwellingType
         )
+
+        property.headLine?.let {
+            Text(
+                modifier = Modifier
+                    .constrainAs(headlineRef) {
+                        start.linkTo(parent.start)
+                        top.linkTo(propertyDetailRef.bottom)
+                    }
+                    .padding(start = DIM_16, end = DIM_16, top = DIM_8)
+                    .testTag("${PROPERTY_LIST_ITEM_HEADLINE}_$position"),
+                text = it,
+                style = MaterialTheme.typography.bodyMedium,
+                fontWeight = FontWeight.Bold
+            )
+        }
     }
 }
 
