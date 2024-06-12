@@ -1,7 +1,7 @@
 package au.com.deanpike.ui.framework.screen
 
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
-import au.com.deanpike.ui.framework.ability.shared.ErrorComponentAbility
+import au.com.deanpike.uitestshared.ability.ErrorComponentAbility
 
 class ErrorComponentScreen(private val composeTestRule: ComposeContentTestRule) {
 

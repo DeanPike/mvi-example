@@ -1,4 +1,4 @@
-package au.com.deanpike.ui.screen.shared
+package au.com.deanpike.uishared.component
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -13,11 +13,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import au.com.deanpike.ui.R
-import au.com.deanpike.ui.screen.shared.ErrorComponentTestTags.ERROR_COMPONENT_BUTTON
-import au.com.deanpike.ui.screen.shared.ErrorComponentTestTags.ERROR_COMPONENT_LAYOUT
-import au.com.deanpike.ui.screen.shared.ErrorComponentTestTags.ERROR_COMPONENT_MESSAGE
-import au.com.deanpike.ui.screen.shared.ErrorComponentTestTags.ERROR_COMPONENT_TITLE
+import au.com.deanpike.uishared.R
+import au.com.deanpike.uishared.component.ErrorComponentTestTags.ERROR_COMPONENT_BUTTON
+import au.com.deanpike.uishared.component.ErrorComponentTestTags.ERROR_COMPONENT_LAYOUT
+import au.com.deanpike.uishared.component.ErrorComponentTestTags.ERROR_COMPONENT_MESSAGE
+import au.com.deanpike.uishared.component.ErrorComponentTestTags.ERROR_COMPONENT_TITLE
 import au.com.deanpike.uishared.theme.Dimension.DIM_16
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
 import au.com.deanpike.uishared.theme.MviExampleTheme

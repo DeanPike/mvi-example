@@ -1,8 +1,7 @@
-package au.com.deanpike.ui.unit.screen.shared
+package au.com.deanpike.uishared.component
 
-import au.com.deanpike.ui.framework.ability.shared.ErrorComponentAbility
-import au.com.deanpike.ui.screen.shared.ErrorComponent
 import au.com.deanpike.uishared.theme.MviExampleTheme
+import au.com.deanpike.uitestshared.ability.ErrorComponentAbility
 import au.com.deanpike.uitestshared.base.UiUnitTestBase
 import au.com.deanpike.uitestshared.util.advanceTimeAndWait
 import org.assertj.core.api.Assertions.assertThat

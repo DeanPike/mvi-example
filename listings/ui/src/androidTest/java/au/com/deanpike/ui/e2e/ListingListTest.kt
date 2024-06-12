@@ -12,7 +12,7 @@ import au.com.deanpike.ui.framework.screen.ProjectListItemScreen
 import au.com.deanpike.ui.framework.screen.PropertyListItemScreen
 import au.com.deanpike.ui.screen.list.ListingListScreen
 import au.com.deanpike.ui.screen.list.ListingListScreenTestTags
-import au.com.deanpike.ui.screen.shared.ErrorComponentTestTags
+import au.com.deanpike.uishared.component.ErrorComponentTestTags
 import au.com.deanpike.uishared.theme.MviExampleTheme
 import au.com.deanpike.uitestshared.base.UiE2ETestBase
 import au.com.deanpike.uitestshared.mockserver.HttpMethod

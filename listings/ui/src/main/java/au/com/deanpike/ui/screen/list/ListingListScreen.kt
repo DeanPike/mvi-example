@@ -32,7 +32,7 @@ import au.com.deanpike.ui.screen.list.component.FilterComponent
 import au.com.deanpike.ui.screen.list.component.ProjectListItem
 import au.com.deanpike.ui.screen.list.component.PropertyListItem
 import au.com.deanpike.ui.screen.listingType.ListingTypeScreen
-import au.com.deanpike.ui.screen.shared.ErrorComponent
+import au.com.deanpike.uishared.component.ErrorComponent
 import au.com.deanpike.uishared.base.ScreenStateType
 import au.com.deanpike.uishared.theme.Dimension.DIM_16
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
