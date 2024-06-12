@@ -3,13 +3,13 @@ package au.com.deanpike.ui.framework.screen
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import au.com.deanpike.listings.client.model.listing.response.Property
 import au.com.deanpike.ui.framework.ability.list.component.PropertyListItemAbility
-import au.com.deanpike.uitestshared.ability.AgentBannerAbility
+import au.com.deanpike.uitestshared.ability.AgencyBannerAbility
 import au.com.deanpike.uitestshared.ability.LifecycleStatusAbility
 
 class PropertyListItemScreen(composeTestRule: ComposeContentTestRule) {
     private val listItemAbility = PropertyListItemAbility(composeTestRule)
     private val lifecycleStatusAbility = LifecycleStatusAbility(composeTestRule)
-    private val agentBannerAbility = AgentBannerAbility(composeTestRule)
+    private val agentBannerAbility = AgencyBannerAbility(composeTestRule)
 
     fun assertPropertyDisplayed(
         position: Int,

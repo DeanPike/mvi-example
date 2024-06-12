@@ -1,0 +1,363 @@
+{
+  "id": 2018868051,
+  "headline": "Neat Corner Block Home on 657sqm",
+  "description": "Rare opportunity to secure this single storey corner block home on 657sqm. Perfect for a downsizer or someone looking for a canvas to knock down & build their dream home! With four bedrooms, two bathrooms & a two car garage this home will cater your needs.\r\n\r\nOutside, the low-maintenance yard is perfect for those who want to spend more time enjoying their home and less time maintaining it. With plenty of natural light throughout the home. Dont miss this chance to get into the Abbotsbury market!\r\n\r\nWhat the dwelling offers;\r\n• Four well appointed bedrooms all with built in wardrobes\r\n• Two Bathrooms (ensuite to main)\r\n• Double garage\r\n• Split system air conditioning \r\n• Separate & spacious kitchen and dining area\r\n• Large outdoor alfresco over looking backyard\r\n• Granny Flat potential (STCA)",
+  "address": "2 Glenton Street, Abbotsbury",
+  "listing_type": "property",
+  "lifecycle_status": "Sold",
+  "media": [
+    {
+      "media_type": "video",
+      "type": "youtube",
+      "image_url": "https://bucket-api.domain.com.au/v1/bucket/image/2018868051_1_1_231030_075432-w5000-h3333",
+      "video_url": "https://youtu.be/liTv-qS7_EU"
+    },
+    {
+      "media_type": "image",
+      "type": "photo",
+      "image_url": "https://bucket-api.domain.com.au/v1/bucket/image/2018868051_1_1_231030_075432-w5000-h3333"
+    },
+    {
+      "media_type": "image",
+      "type": "photo",
+      "image_url": "https://bucket-api.domain.com.au/v1/bucket/image/2018868051_2_1_231030_075432-w5000-h3333"
+    },
+    {
+      "media_type": "image",
+      "type": "photo",
+      "image_url": "https://bucket-api.domain.com.au/v1/bucket/image/2018868051_3_1_231030_075432-w5000-h3333"
+    },
+    {
+      "media_type": "image",
+      "type": "photo",
+      "image_url": "https://bucket-api.domain.com.au/v1/bucket/image/2018868051_4_1_231030_075432-w5000-h3333"
+    },
+    {
+      "media_type": "image",
+      "type": "photo",
+      "image_url": "https://bucket-api.domain.com.au/v1/bucket/image/2018868051_5_1_231030_075432-w5000-h3333"
+    },
+    {
+      "media_type": "image",
+      "type": "photo",
+      "image_url": "https://bucket-api.domain.com.au/v1/bucket/image/2018868051_6_1_231030_075432-w5000-h3333"
+    },
+    {
+      "media_type": "image",
+      "type": "photo",
+      "image_url": "https://bucket-api.domain.com.au/v1/bucket/image/2018868051_7_1_231030_075432-w5000-h3333"
+    },
+    {
+      "media_type": "image",
+      "type": "photo",
+      "image_url": "https://bucket-api.domain.com.au/v1/bucket/image/2018868051_8_1_231030_075432-w5000-h3333"
+    },
+    {
+      "media_type": "image",
+      "type": "photo",
+      "image_url": "https://bucket-api.domain.com.au/v1/bucket/image/2018868051_9_1_231030_075432-w5000-h3333"
+    },
+    {
+      "media_type": "image",
+      "type": "photo",
+      "image_url": "https://bucket-api.domain.com.au/v1/bucket/image/2018868051_10_1_231030_075432-w5000-h3333"
+    },
+    {
+      "media_type": "image",
+      "type": "photo",
+      "image_url": "https://bucket-api.domain.com.au/v1/bucket/image/2018868051_11_1_231030_075432-w5000-h3333"
+    },
+    {
+      "media_type": "image",
+      "type": "photo",
+      "image_url": "https://bucket-api.domain.com.au/v1/bucket/image/2018868051_12_1_231030_075432-w5000-h3333"
+    },
+    {
+      "media_type": "image",
+      "type": "floor_plan",
+      "image_url": "https://bucket-api.domain.com.au/v1/bucket/image/2018868051_13_3_231030_075432-w2550-h3300"
+    }
+  ],
+  "advertiser": {
+    "id": 2373,
+    "name": "Ray White Wetherill Park",
+    "type": "Agent",
+    "address": "Shop 1H, 1183-1187 The Horsley Drive\nWetherill Park NSW 2164",
+    "images": {
+      "logo_url": "https://images.domain.com.au/img/Agencys/2373/logo_2373.jpg?buster=2024-06-12",
+      "agency_banner_image_url": "https://images.domain.com.au/img/Agencys/2373/banner_2373.jpg?buster=2024-06-12",
+      "agency_banner_wide_image_url": "https://images.domain.com.au/img/Agencys/2373/wide_banner_2373.png?buster=2024-06-12"
+    },
+    "preferred_color_hex": "#FEE536",
+    "agency_listing_contacts": [
+      {
+        "agent_id": "1697102",
+        "address": "Shop 1H, 1183-1187 The Horsley Drive\nWetherill Park NSW 2164",
+        "first_name": "Riccardo",
+        "last_name": "Romolo",
+        "display_full_name": "Riccardo Romolo",
+        "image_url": "https://images.domain.com.au/img/2373/contact_1697102.jpeg?buster=2024-06-12",
+        "email_address": "riccardo.romolo@raywhite.com",
+        "phone_numbers": [
+          {
+            "type": "Mobile",
+            "display_label": "Mobile",
+            "number": "0452 184 976"
+          },
+          {
+            "type": "General",
+            "display_label": "General",
+            "number": "02 9609 7099"
+          },
+          {
+            "type": "Fax",
+            "display_label": "Fax",
+            "number": "02 9609 2370"
+          }
+        ],
+        "domain_url": "riccardo-romolo-1697102",
+        "social_urls": [
+          {
+            "type": "facebook",
+            "url": "https://www.facebook.com/raywhitewetherillparknsw/"
+          },
+          {
+            "type": "personal_website",
+            "url": "https://raywhitewetherillpark.com.au/"
+          }
+        ]
+      },
+      {
+        "agent_id": "1350251",
+        "address": "Shop 1H, 1183-1187 The Horsley Drive\nWetherill Park NSW 2164",
+        "first_name": "Marcus",
+        "last_name": "Biasetto",
+        "display_full_name": "Marcus Biasetto",
+        "image_url": "https://images.domain.com.au/img/2373/contact_1350251.png?buster=2024-06-12",
+        "email_address": "marcus.biasetto@raywhite.com",
+        "phone_numbers": [
+          {
+            "type": "Mobile",
+            "display_label": "Mobile",
+            "number": "0414 246 947"
+          },
+          {
+            "type": "General",
+            "display_label": "General",
+            "number": "02 9609 7099"
+          },
+          {
+            "type": "Fax",
+            "display_label": "Fax",
+            "number": "02 9609 2370"
+          }
+        ],
+        "domain_url": "marcus-biasetto-1350251",
+        "social_urls": [
+          {
+            "type": "facebook",
+            "url": "https://www.facebook.com/raywhitewetherillparknsw/"
+          }
+        ]
+      }
+    ],
+    "domain_url": "raywhitewetherillpark-2373"
+  },
+  "geo_location": {
+    "latitude": -33.8730862,
+    "longitude": 150.8663649
+  },
+  "schools": [
+    {
+      "id": 41609,
+      "acara_id": 41609,
+      "domain_id": 551,
+      "address": "Bossley Park NSW 2176",
+      "year_range": "7-12",
+      "geo_location": {
+        "latitude": -33.866199,
+        "longitude": 150.88375
+      },
+      "name": "Bossley Park High School",
+      "website_url": "http://www.bossleyparkhigh.nsw.edu.au/",
+      "metadata": {
+        "address_components": {
+          "postcode": "2176",
+          "state_short": "NSW",
+          "suburb": "Bossley Park"
+        }
+      },
+      "education_level": "Secondary",
+      "gender": "Co-ed",
+      "system": "Government"
+    },
+    {
+      "id": 41513,
+      "acara_id": 41513,
+      "domain_id": 624,
+      "address": "Edensor Park NSW 2176",
+      "year_range": "K-6",
+      "geo_location": {
+        "latitude": -33.882056,
+        "longitude": 150.876121
+      },
+      "name": "Edensor Park Public School",
+      "website_url": "https://edensorpk-p.schools.nsw.gov.au",
+      "metadata": {
+        "address_components": {
+          "postcode": "2176",
+          "state_short": "NSW",
+          "suburb": "Edensor Park"
+        }
+      },
+      "education_level": "Primary",
+      "gender": "Co-ed",
+      "system": "Government"
+    }
+  ],
+  "dwelling_type": "House",
+  "phone_enquiry_preference": false,
+  "inspection_metadata": {
+    "inspection_planner": true,
+    "title": "Inspections",
+    "cta": [
+      {
+        "id": "inspections_main",
+        "title": "Want to visit this property?",
+        "body_text": "Get in touch with the agent to schedule a private inspection.",
+        "button": {
+          "text": "Request private inspection",
+          "style": "default",
+          "action": {
+            "type": "enquiry",
+            "tracking_label": "Request private inspection",
+            "content": "Could I please have a private inspection of this property?"
+          }
+        }
+      },
+      {
+        "id": "inspections_online",
+        "title": "Can't inspect in person?",
+        "body_text": "You can now inspect this property online from any device. Contact the agent to request a 1:1 walkthrough of the property over video call.",
+        "button": {
+          "text": "Request online inspection",
+          "style": "light",
+          "action": {
+            "type": "enquiry",
+            "tracking_label": "Request online inspection",
+            "content": "Could I please have an online inspection of this property?"
+          }
+        }
+      }
+    ]
+  },
+  "auction_metadata": {
+    "header": {
+      "label": "Online auction available"
+    },
+    "cta": [
+      {
+        "id": "go_to_auction",
+        "button": {
+          "text": "Go to online auction",
+          "style": "default",
+          "action": {
+            "type": "link",
+            "tracking_label": "online auction go-to"
+          }
+        }
+      },
+      {
+        "id": "follow_auction",
+        "button": {
+          "text": "Follow this auction",
+          "style": "default",
+          "action": {
+            "type": "link",
+            "tracking_label": "online auction follow this auction"
+          }
+        }
+      },
+      {
+        "id": "contact_to_register",
+        "title": "How do I register for an online auction?",
+        "body_text": "Please contact the agent to pre-register for the online auction, as well as to understand how an online auction is conducted and how to be an active bidder.",
+        "button": {
+          "text": "Contact agent to register",
+          "style": "light",
+          "action": {
+            "type": "enquiry",
+            "tracking_label": "online auction register",
+            "content": "Please send me more information about how to register or bid for the online auction."
+          }
+        }
+      },
+      {
+        "id": "enquire_auction",
+        "title": "Is there an online auction available for this property?",
+        "body_text": "Please contact the agent to pre-register and find out if there's an online auction available, as well as to understand how an online auction is conducted and how to be an active bidder.",
+        "button": {
+          "text": "Enquire about online auction",
+          "style": "light",
+          "action": {
+            "type": "enquiry",
+            "tracking_label": "online auction enquire",
+            "content": "Is there an online auction available for this property?"
+          }
+        }
+      },
+      {
+        "id": "register_auction",
+        "title": "How do I register for an online auction?",
+        "body_text": "Please contact the agent to pre-register for the online auction, as well as to understand how an online auction is conducted and how to be an active bidder.",
+        "button": {
+          "text": "Register to bid online",
+          "style": "light",
+          "action": {
+            "type": "link",
+            "tracking_label": "online auction register to bid online"
+          }
+        }
+      }
+    ]
+  },
+  "tracking_metadata": {
+    "saleMethod": "privateTreaty",
+    "primaryCategory": "Sold",
+    "adType": "premiumPlus",
+    "daysListed": 226,
+    "expHouseAndLandFilterExperiment": "excludeHouseAndLand",
+    "corePropertyID": "FJ-9096-HS",
+    "hasInteractiveFloorplan": false
+  },
+  "price": "$1,320,000",
+  "land_area": "657m²",
+  "large_land": false,
+  "promo_level": "P+",
+  "bedroom_count": 4.0,
+  "bathroom_count": 2.0,
+  "carspace_count": 2,
+  "metadata": {
+    "address_components": {
+      "area": "Western Sydney",
+      "postcode": "2176",
+      "region": "Sydney Region",
+      "state_short": "NSW",
+      "street": "Glenton Street",
+      "street_number": "2",
+      "suburb": "Abbotsbury",
+      "suburb_id": 22
+    }
+  },
+  "search_mode": "sold",
+  "sale_metadata": {
+    "date_sold": "2023-11-25T00:00:00",
+    "sale_type": "Auction"
+  },
+  "homepass_enabled": false,
+  "seo_url": "https://www.domain.com.au/2-glenton-street-abbotsbury-nsw-2176-2018868051",
+  "days_on_market": 226.0,
+  "time_on_market_formats": {
+    "details_section": "Active since:  30/10/2023"
+  }
+}

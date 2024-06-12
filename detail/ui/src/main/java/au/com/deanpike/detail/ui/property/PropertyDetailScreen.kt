@@ -12,6 +12,8 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -41,16 +43,16 @@ import au.com.deanpike.detail.client.model.type.PhoneNumberType
 import au.com.deanpike.detail.ui.R
 import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAILS_LAYOUT
 import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAIL_ADDRESS
+import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAIL_CLOSE
 import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAIL_DESCRIPTION
 import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAIL_HEADLINE
 import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAIL_IMAGE_PAGER
 import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAIL_PRICE
 import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAIL_PROGRESS
-import au.com.deanpike.detail.ui.shared.DetailAppBarComponent
+import au.com.deanpike.detail.ui.shared.AgencyComponent
 import au.com.deanpike.uishared.base.ScreenStateType
-import au.com.deanpike.uishared.component.AgentBanner
+import au.com.deanpike.uishared.base.drawableTestTag
 import au.com.deanpike.uishared.component.ExpandableText
-import au.com.deanpike.uishared.component.LifecycleStatus
 import au.com.deanpike.uishared.component.PropertyDetailComponent
 import au.com.deanpike.uishared.theme.Dimension.DIM_16
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
@@ -89,10 +91,6 @@ fun PropertyDetailScreenContent(
             .background(color = MaterialTheme.colorScheme.background)
             .testTag(PROPERTY_DETAILS_LAYOUT)
     ) {
-        DetailAppBarComponent(
-            onCloseClicked = onCloseClicked
-        )
-        HorizontalDivider()
         if (state.screenState == ScreenStateType.LOADING) {
             Box(
                 modifier = Modifier.fillMaxSize(),
@@ -108,6 +106,24 @@ fun PropertyDetailScreenContent(
             )
         }
     }
+
+    Box(
+        contentAlignment = Alignment.TopStart
+    ) {
+        IconButton(
+            onClick = { onCloseClicked() }) {
+            Icon(
+                modifier = Modifier
+                    .drawableTestTag(
+                        tag = PROPERTY_DETAIL_CLOSE,
+                        id = R.drawable.clear_24
+                    )
+                    .background(color = MaterialTheme.colorScheme.background, shape = CircleShape),
+                painter = painterResource(id = R.drawable.clear_24),
+                contentDescription = stringResource(id = R.string.close)
+            )
+        }
+    }
 }
 
 @Composable
@@ -120,13 +136,8 @@ fun ProjectDetailSuccess(
             .fillMaxSize()
             .verticalScroll(scrollState)
     ) {
-        AgentBanner(
-            agencyColour = state.propertyDetail?.advertiser?.preferredColorHex,
-            logo = state.propertyDetail?.advertiser?.logoUrl
-        )
         PropertyDetailImages(
-            media = state.propertyDetail?.media ?: emptyList(),
-            lifecycleStatus = state.propertyDetail?.lifecycleStatus
+            media = state.propertyDetail?.media ?: emptyList()
         )
         state.propertyDetail?.price?.let {
             Text(
@@ -167,6 +178,9 @@ fun ProjectDetailSuccess(
             dwellingType = state.propertyDetail?.dwellingType
 
         )
+        HorizontalDivider(
+            modifier = Modifier.padding(top = DIM_8, bottom = DIM_8)
+        )
         state.propertyDetail?.headline?.let {
             Text(
                 modifier = Modifier
@@ -180,12 +194,16 @@ fun ProjectDetailSuccess(
         state.propertyDetail?.description?.let {
             ExpandableText(
                 modifier = Modifier
-                    .padding(start = DIM_16, end = DIM_16, top = DIM_8)
+                    .padding(start = DIM_16, end = DIM_16, top = DIM_8, bottom = DIM_8)
                     .testTag(PROPERTY_DETAIL_DESCRIPTION),
                 text = it,
                 fontSize = MaterialTheme.typography.bodyMedium.fontSize,
                 collapsedMaxLine = 3
             )
+        }
+
+        state.propertyDetail?.advertiser?.let { advertiser ->
+            AgencyComponent(advertiser = advertiser)
         }
     }
 }
@@ -193,8 +211,7 @@ fun ProjectDetailSuccess(
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun PropertyDetailImages(
-    media: List<Media>,
-    lifecycleStatus: String?
+    media: List<Media>
 ) {
     if (media.isNotEmpty()) {
         val pagerState = rememberPagerState(pageCount = { media.count() })
@@ -238,10 +255,6 @@ fun PropertyDetailImages(
                     )
                 }
             }
-
-            LifecycleStatus(
-                lifecycleStatus = lifecycleStatus
-            )
         }
     }
 }
@@ -255,6 +268,7 @@ object PropertyDetailScreenTestTags {
     const val PROPERTY_DETAIL_ADDRESS = "${PREFIX}ADDRESS"
     const val PROPERTY_DETAIL_HEADLINE = "${PREFIX}HEADLINE"
     const val PROPERTY_DETAIL_DESCRIPTION = "${PREFIX}DESCRIPTION"
+    const val PROPERTY_DETAIL_CLOSE = "${PREFIX}CLOSE"
 }
 
 @Preview

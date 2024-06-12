@@ -17,7 +17,7 @@ import au.com.deanpike.uishared.R
 import coil.compose.AsyncImage
 
 @Composable
-fun AgentBanner(
+fun AgencyBanner(
     modifier: Modifier = Modifier,
     position: Int = 0,
     agencyColour: String?,
@@ -39,7 +39,7 @@ fun AgentBanner(
         AsyncImage(
             modifier = Modifier
                 .height(40.dp)
-                .testTag("${AgentBannerTestTags.AGENT_BANNER_IMAGE}_$position"),
+                .testTag("${AgencyBannerTestTags.AGENCY_BANNER_IMAGE}_$position"),
             placeholder = painterResource(id = R.drawable.gallery_placeholder),
             model = logo,
             contentDescription = stringResource(id = R.string.property_image_description)
@@ -47,7 +47,7 @@ fun AgentBanner(
     }
 }
 
-object AgentBannerTestTags {
+object AgencyBannerTestTags {
     private const val PREFIX = "AGENCY_BANNER_"
-    const val AGENT_BANNER_IMAGE = "${PREFIX}IMAGE"
+    const val AGENCY_BANNER_IMAGE = "${PREFIX}IMAGE"
 }
