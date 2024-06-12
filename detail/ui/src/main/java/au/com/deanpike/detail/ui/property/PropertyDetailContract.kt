@@ -16,6 +16,8 @@ sealed class PropertyDetailScreenEvent : UiEvent {
     data class Initialise(
         val propertyId: Int
     ) : PropertyDetailScreenEvent()
+
+    data object OnRetryClicked : PropertyDetailScreenEvent()
 }
 
 sealed class PropertyDetailScreenEffect : UiEffect {

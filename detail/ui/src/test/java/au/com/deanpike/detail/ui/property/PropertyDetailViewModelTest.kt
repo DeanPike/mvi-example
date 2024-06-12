@@ -8,6 +8,7 @@ import au.com.deanpike.detail.client.usecase.PropertyDetailUseCase
 import au.com.deanpike.testshared.extension.TestDispatcherExtension
 import au.com.deanpike.uishared.base.ScreenStateType
 import io.mockk.coEvery
+import io.mockk.coVerify
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.advanceUntilIdle
@@ -69,6 +70,27 @@ class PropertyDetailViewModelTest {
             assertThat(propertyId).isEqualTo(12)
             assertThat(propertyDetail).isNull()
         }
+    }
+
+    @Test
+    fun `should handle retry on error`() = runTest {
+        coEvery {
+            useCase.getPropertyDetails(12)
+        } returns ResponseWrapper.Error(
+            Exception("Error")
+        )
+        viewModel.setEvent(PropertyDetailScreenEvent.Initialise(propertyId = 12))
+        advanceUntilIdle()
+
+        // Test
+        viewModel.setEvent(PropertyDetailScreenEvent.OnRetryClicked)
+        advanceUntilIdle()
+
+        with(viewModel.uiState) {
+            assertThat(screenState).isEqualTo(ScreenStateType.ERROR)
+        }
+
+        coVerify(exactly = 2) { useCase.getPropertyDetails(12) }
     }
 
     private fun getProperty(): PropertyDetail {

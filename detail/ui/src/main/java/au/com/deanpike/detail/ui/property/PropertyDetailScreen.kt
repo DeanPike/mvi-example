@@ -52,6 +52,7 @@ import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_
 import au.com.deanpike.detail.ui.shared.AgencyComponent
 import au.com.deanpike.uishared.base.ScreenStateType
 import au.com.deanpike.uishared.base.drawableTestTag
+import au.com.deanpike.uishared.component.ErrorComponent
 import au.com.deanpike.uishared.component.ExpandableText
 import au.com.deanpike.uishared.component.PropertyDetailComponent
 import au.com.deanpike.uishared.theme.Dimension.DIM_16
@@ -72,14 +73,18 @@ fun PropertyDetailScreen(
 
     PropertyDetailScreenContent(
         state = viewModel.uiState,
-        onCloseClicked = onCloseClicked
+        onCloseClicked = onCloseClicked,
+        onRetryClicked = {
+            viewModel.setEvent(PropertyDetailScreenEvent.OnRetryClicked)
+        }
     )
 }
 
 @Composable
 fun PropertyDetailScreenContent(
     state: PropertyDetailScreenState,
-    onCloseClicked: () -> Unit = {}
+    onCloseClicked: () -> Unit = {},
+    onRetryClicked: () -> Unit = {}
 ) {
 
     BackHandler {
@@ -104,6 +109,16 @@ fun PropertyDetailScreenContent(
             ProjectDetailSuccess(
                 state = state
             )
+        } else if (state.screenState == ScreenStateType.ERROR) {
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                ErrorComponent(
+                    onRetryClicked = onRetryClicked
+                )
+            }
         }
     }
 

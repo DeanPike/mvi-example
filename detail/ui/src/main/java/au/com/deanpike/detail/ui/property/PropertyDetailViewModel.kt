@@ -22,6 +22,11 @@ class PropertyDetailViewModel @Inject constructor(
             is PropertyDetailScreenEvent.Initialise -> {
                 initialiseScreen(event.propertyId)
             }
+            is PropertyDetailScreenEvent.OnRetryClicked -> {
+                uiState.propertyId?.let {
+                    initialiseScreen(it)
+                }
+            }
         }
     }
 

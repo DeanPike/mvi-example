@@ -15,6 +15,7 @@ import au.com.deanpike.detail.ui.property.PropertyDetailScreenState
 import au.com.deanpike.uishared.base.ScreenStateType
 import au.com.deanpike.uishared.theme.MviExampleTheme
 import au.com.deanpike.uitestshared.ability.AgencyBannerAbility
+import au.com.deanpike.uitestshared.ability.ErrorComponentAbility
 import au.com.deanpike.uitestshared.base.UiUnitTestBase
 import au.com.deanpike.uitestshared.util.advanceTimeAndWait
 import org.assertj.core.api.Assertions.assertThat
@@ -24,6 +25,7 @@ class PropertyDetailScreenTest : UiUnitTestBase() {
     private val propertyScreenAbility = PropertyDetailScreenAbility(composeTestRule)
     private val agencyBannerAbility = AgencyBannerAbility(composeTestRule)
     private val agencyAbility = AgencyComponentAbility(composeTestRule)
+    private val errorAbility = ErrorComponentAbility(composeTestRule)
 
     @Test
     fun should_display_progress() {
@@ -44,6 +46,39 @@ class PropertyDetailScreenTest : UiUnitTestBase() {
             assertScreenDisplayed()
             assertProgressDisplayed()
         }
+    }
+
+    @Test
+    fun should_handle_error() {
+        var retryClicked = false
+        with(composeTestRule) {
+            setContent {
+                MviExampleTheme {
+                    PropertyDetailScreenContent(
+                        state = PropertyDetailScreenState(
+                            screenState = ScreenStateType.ERROR,
+                            propertyId = 1234,
+                            propertyDetail = null
+                        ),
+                        onCloseClicked = { },
+                        onRetryClicked = {
+                            retryClicked = true
+                        }
+                    )
+                }
+            }
+            advanceTimeAndWait()
+        }
+
+        with(errorAbility) {
+            assertComponentDisplayed()
+            assertTitle()
+            assertMessage()
+            assertRetryButtonDisplayed()
+            clickRetryButton()
+        }
+
+        assertThat(retryClicked).isTrue()
     }
 
     @Test
@@ -85,6 +120,8 @@ class PropertyDetailScreenTest : UiUnitTestBase() {
 
             clickCloseIcon()
         }
+
+        assertThat(closeClicked).isTrue()
 
         agencyBannerAbility.assertAgencyImageDisplayed(0)
 
@@ -133,7 +170,6 @@ class PropertyDetailScreenTest : UiUnitTestBase() {
                 email = "marcus.biasetto@raywhite.com"
             )
         }
-        assertThat(closeClicked).isTrue()
     }
 
     private fun getPropertyDetail(): PropertyDetail {
