@@ -2,7 +2,7 @@ package au.com.deanpike.detail.data.converter
 
 import au.com.deanpike.datashared.type.ListingType
 import au.com.deanpike.detail.client.model.detail.PropertyDetail
-import au.com.deanpike.detail.client.model.type.MediaType
+import au.com.deanpike.commonshared.type.MediaType
 import au.com.deanpike.detail.client.model.type.PhoneNumberType
 import com.google.gson.Gson
 import java.io.InputStreamReader

@@ -2,10 +2,10 @@ package au.com.deanpike.detail.data.converter
 
 import au.com.deanpike.detail.client.model.detail.Advertiser
 import au.com.deanpike.detail.client.model.detail.Agent
-import au.com.deanpike.detail.client.model.detail.Media
+import au.com.deanpike.commonshared.model.Media
 import au.com.deanpike.detail.client.model.detail.PhoneNumber
 import au.com.deanpike.detail.client.model.detail.School
-import au.com.deanpike.detail.client.model.type.MediaType
+import au.com.deanpike.commonshared.type.MediaType
 import au.com.deanpike.detail.client.model.type.PhoneNumberType
 import au.com.deanpike.network.model.external.detail.AgencyListingContacts
 import au.com.deanpike.network.model.external.detail.PhoneNumbers

@@ -1,5 +1,6 @@
 package au.com.deanpike.detail.client.model.detail
 
+import au.com.deanpike.commonshared.model.Media
 import au.com.deanpike.datashared.type.ListingType
 
 data class PropertyDetail(

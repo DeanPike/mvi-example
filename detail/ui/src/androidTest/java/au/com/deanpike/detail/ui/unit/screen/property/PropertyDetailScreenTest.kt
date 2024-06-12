@@ -3,10 +3,10 @@ package au.com.deanpike.detail.ui.unit.screen.property
 import au.com.deanpike.datashared.type.ListingType
 import au.com.deanpike.detail.client.model.detail.Advertiser
 import au.com.deanpike.detail.client.model.detail.Agent
-import au.com.deanpike.detail.client.model.detail.Media
+import au.com.deanpike.commonshared.model.Media
 import au.com.deanpike.detail.client.model.detail.PhoneNumber
 import au.com.deanpike.detail.client.model.detail.PropertyDetail
-import au.com.deanpike.detail.client.model.type.MediaType
+import au.com.deanpike.commonshared.type.MediaType
 import au.com.deanpike.detail.client.model.type.PhoneNumberType
 import au.com.deanpike.detail.ui.framework.ability.AgencyComponentAbility
 import au.com.deanpike.detail.ui.framework.ability.PropertyDetailScreenAbility

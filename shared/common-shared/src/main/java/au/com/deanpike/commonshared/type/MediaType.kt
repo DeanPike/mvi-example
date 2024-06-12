@@ -1,4 +1,4 @@
-package au.com.deanpike.detail.client.model.type
+package au.com.deanpike.commonshared.type
 
 enum class MediaType {
     PHOTO,
