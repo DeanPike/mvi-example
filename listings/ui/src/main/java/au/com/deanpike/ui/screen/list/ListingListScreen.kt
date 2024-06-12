@@ -45,7 +45,9 @@ fun ListingListScreen(
 ) {
 
     LaunchedEffect(Unit) {
-        viewModel.setEvent(ListingListScreenEvent.Initialise)
+        if (viewModel.uiState.screenState == ScreenStateType.INITIAL) {
+            viewModel.setEvent(ListingListScreenEvent.Initialise)
+        }
     }
     ListingListScreenContent(
         state = viewModel.uiState,
