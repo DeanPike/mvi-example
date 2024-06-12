@@ -1,0 +1,314 @@
+{
+  "id": 6303,
+  "headline": "Easterly Wollongong",
+  "end_date": "2025-05-21T00:00:00",
+  "description": "Introducing ‘Easterly’, a prestigious collection of 21 elegantly designed 2 & 3 bedroom residences, accompanied by 3 spectacular penthouses, located at 13 Crown Street, Wollongong. \n\nAwaken to the gentle rhythm of waves, bask in sweeping ocean panoramas, and savour the refined sophistication of your impeccably crafted residence. Positioned directly opposite WIN Stadium and mere steps from the beach, Easterly offers an unparalleled coastal lifestyle.\n\nExplore Wollongong's premier attractions nearby, from the historic Flagstaff Point Lighthouse to the serene Wollongong Botanic Gardens, & Blue Mile Pathway. Delight in the vibrant local dining scene, with charming cafes, stylish bars, and gourmet restaurants just moments away, enriching the allure of this iconic location.\n\nDeveloped by Level 33, Easterly epitomizes coastal living with its commitment to privacy, exclusivity, and unparalleled craftsmanship. In collaboration with Turner Architects, the architectural design seamlessly integrates the natural allure of the ocean with the enduring strength of the land, capturing the essence of coastal beauty in both structure and interiors.\n\nExperience coastal living redefined with Easterly's expansive balconies, floor-to-ceiling windows, premium Gaggenau appliances, luxurious stone finishes, bespoke joinery, spa-inspired bathrooms with freestanding baths, and tranquil bedrooms finished with custom wardrobes.\n\nWelcome to elevated coastal living – welcome to Easterly.",
+  "address": "13 Crown Street, Wollongong",
+  "listing_type": "project",
+  "media": [
+    {
+      "media_type": "video",
+      "type": "youtube",
+      "image_url": "https://bucket-api.domain.com.au/v1/bucket/image/915bae83-b78c-449d-a646-8c29a786e0c6-w2500-h906",
+      "video_url": "https://youtu.be/7uvssieg9mE"
+    },
+    {
+      "media_type": "image",
+      "type": "photo",
+      "image_url": "https://bucket-api.domain.com.au/v1/bucket/image/915bae83-b78c-449d-a646-8c29a786e0c6-w2500-h906"
+    },
+    {
+      "media_type": "image",
+      "type": "photo",
+      "image_url": "https://bucket-api.domain.com.au/v1/bucket/image/2019256302_12_1_240521_034536-w2160-h2160"
+    },
+    {
+      "media_type": "image",
+      "type": "photo",
+      "image_url": "https://bucket-api.domain.com.au/v1/bucket/image/2019256302_11_1_240521_034536-w1692-h2160"
+    },
+    {
+      "media_type": "image",
+      "type": "photo",
+      "image_url": "https://bucket-api.domain.com.au/v1/bucket/image/c372ae25-4f55-4b47-9ddb-a890e028adf7-w2500-h1719"
+    },
+    {
+      "media_type": "image",
+      "type": "photo",
+      "image_url": "https://bucket-api.domain.com.au/v1/bucket/image/2019256302_14_1_240521_034536-w1920-h2160"
+    },
+    {
+      "media_type": "image",
+      "type": "photo",
+      "image_url": "https://bucket-api.domain.com.au/v1/bucket/image/6ae33802-45a0-4716-a476-b66cd9834441-w3000-h1875"
+    },
+    {
+      "media_type": "image",
+      "type": "photo",
+      "image_url": "https://bucket-api.domain.com.au/v1/bucket/image/7a4457c8-6367-49e3-831b-5f31ec6dde66-w2500-h1719"
+    },
+    {
+      "media_type": "image",
+      "type": "photo",
+      "image_url": "https://bucket-api.domain.com.au/v1/bucket/image/26f6a243-3154-4d78-929a-79ae6a7dd8c5-w2500-h1409"
+    },
+    {
+      "media_type": "image",
+      "type": "photo",
+      "image_url": "https://bucket-api.domain.com.au/v1/bucket/image/945ba5c2-6fb6-497b-a134-59dbd4266adb-w2500-h1468"
+    },
+    {
+      "media_type": "image",
+      "type": "photo",
+      "image_url": "https://bucket-api.domain.com.au/v1/bucket/image/15bf90b3-10b4-4e27-89df-03df94efe771-w2500-h1468"
+    },
+    {
+      "media_type": "image",
+      "type": "photo",
+      "image_url": "https://bucket-api.domain.com.au/v1/bucket/image/2019256302_3_1_240521_034536-w1571-h2160"
+    },
+    {
+      "media_type": "image",
+      "type": "photo",
+      "image_url": "https://bucket-api.domain.com.au/v1/bucket/image/d8a8e48a-3345-4b2e-a3b7-4f11c6fcaa2c-w2500-h1563"
+    },
+    {
+      "media_type": "image",
+      "type": "photo",
+      "image_url": "https://bucket-api.domain.com.au/v1/bucket/image/39a7ad91-5424-4e79-999d-14f90225e1d6-w2500-h1563"
+    },
+    {
+      "media_type": "image",
+      "type": "photo",
+      "image_url": "https://bucket-api.domain.com.au/v1/bucket/image/2019256302_10_1_240521_034536-w1571-h2160"
+    },
+    {
+      "media_type": "image",
+      "type": "photo",
+      "image_url": "https://bucket-api.domain.com.au/v1/bucket/image/2019256302_9_1_240521_034536-w1571-h2160"
+    }
+  ],
+  "advertiser": {
+    "id": 37445,
+    "name": "Level 33",
+    "type": "Agent",
+    "address": "30a Eva St\nRiverwood NSW 2210",
+    "images": {
+      "logo_url": "https://images.domain.com.au/img/Agencys/37445/logo_37445.png?buster=2024-06-12"
+    },
+    "preferred_color_hex": "#000000",
+    "agency_listing_contacts": [
+      {
+        "agent_id": "1925335",
+        "address": "30a Eva St\nRiverwood NSW 2210",
+        "first_name": "Property",
+        "last_name": "Team",
+        "display_full_name": "Property Team",
+        "image_url": "https://images.domain.com.au/img/37445/contact_1925335.png?buster=2024-06-12",
+        "email_address": "will.wehbe@level33.com.au",
+        "phone_numbers": [
+          {
+            "type": "Mobile",
+            "display_label": "Mobile",
+            "number": "1300 112 712"
+          },
+          {
+            "type": "General",
+            "display_label": "General",
+            "number": "(02) 8199 1144"
+          },
+          {
+            "type": "Fax",
+            "display_label": "Fax"
+          }
+        ],
+        "social_urls": [
+          {
+            "type": "facebook",
+            "url": "https://www.facebook.com/Level33developments"
+          },
+          {
+            "type": "linked_in",
+            "url": "https://www.linkedin.com/company/4837567/admin/feed/posts/"
+          },
+          {
+            "type": "personal_website",
+            "url": "https://level33.com.au/"
+          }
+        ]
+      }
+    ],
+    "domain_url": "level33-37445"
+  },
+  "additional_features": [
+    "Stunning Water Views",
+    "Gaggenau Appliances Throughout",
+    "Natural Stone Benchtops",
+    "Travertine Floors",
+    "Two Colour Schemes Options",
+    "Walking Distance to Beaches",
+    "Walk to Cafes and Restaurants",
+    "Only Two Units Per Floor"
+  ],
+  "geo_location": {
+    "latitude": -34.4263748,
+    "longitude": 150.9018748
+  },
+  "schools": [
+    {
+      "id": 42932,
+      "acara_id": 42932,
+      "domain_id": 8892,
+      "address": "Fairy Meadow NSW 2519",
+      "year_range": "7-12",
+      "geo_location": {
+        "latitude": -34.406672,
+        "longitude": 150.888607
+      },
+      "name": "Keira High School",
+      "website_url": "https://keira-h.schools.nsw.gov.au",
+      "metadata": {
+        "address_components": {
+          "postcode": "2519",
+          "state_short": "NSW",
+          "suburb": "Fairy Meadow"
+        }
+      },
+      "education_level": "Secondary",
+      "gender": "Co-ed",
+      "system": "Government"
+    },
+    {
+      "id": 42848,
+      "acara_id": 42848,
+      "domain_id": 9892,
+      "address": "Wollongong NSW 2500",
+      "year_range": "K-6",
+      "geo_location": {
+        "latitude": -34.422861,
+        "longitude": 150.896726
+      },
+      "name": "Wollongong Public School",
+      "website_url": "http://www.wollongong-p.schools.nsw.edu.au",
+      "metadata": {
+        "address_components": {
+          "postcode": "2500",
+          "state_short": "NSW",
+          "suburb": "Wollongong"
+        }
+      },
+      "education_level": "Primary",
+      "gender": "Co-ed",
+      "system": "Government"
+    }
+  ],
+  "inspection_schedule": {
+    "is_by_appointment_only": false,
+    "is_bookings_enabled": false,
+    "inspections": [
+      {
+        "recurrence_type": "weekly",
+        "time_open": "2024-06-12T10:00:00",
+        "time_close": "2024-06-12T16:00:00",
+        "weekday": "Wednesday"
+      },
+      {
+        "recurrence_type": "weekly",
+        "time_open": "2024-06-13T16:00:00",
+        "time_close": "2024-06-13T18:00:00",
+        "weekday": "Thursday"
+      },
+      {
+        "recurrence_type": "weekly",
+        "time_open": "2024-06-14T10:00:00",
+        "time_close": "2024-06-14T16:00:00",
+        "weekday": "Friday"
+      },
+      {
+        "recurrence_type": "weekly",
+        "time_open": "2024-06-15T10:00:00",
+        "time_close": "2024-06-15T16:00:00",
+        "weekday": "Saturday"
+      }
+    ]
+  },
+  "dwelling_type": "New Apartments / Off the Plan",
+  "phone_enquiry_preference": false,
+  "inspection_metadata": {
+    "inspection_planner": true,
+    "title": "Inspections",
+    "cta": [
+      {
+        "title": "Display suite opening hours",
+        "body_text": "Display suite is accessible by private appointment only. Get in touch with the agent to schedule a private viewing.",
+        "button": {
+          "text": "Request private appointment",
+          "style": "default",
+          "action": {
+            "type": "enquiry",
+            "tracking_label": "Request private inspection",
+            "content": "Could I please have a private inspection of this property?"
+          }
+        }
+      }
+    ]
+  },
+  "tracking_metadata": {
+    "primaryCategory": "New Homes",
+    "adType": "project listing",
+    "projectTier": "Premium",
+    "hasProjectPriceFrom": true,
+    "hasEstimatedCompletionDate": true,
+    "hasTotalNumberOfResidences": true,
+    "hasTotalNumberOfBuildings": false,
+    "hasNumberOfFloors": false,
+    "hasBuildingHeight": false,
+    "expHouseAndLandFilterExperiment": "excludeHouseAndLand",
+    "totalNumberOfResidences": 21,
+    "projectCategory": "houseAndLand"
+  },
+  "project_brochure_url": "https://s3-ap-southeast-2.amazonaws.com/p-listing-documents/ProjectBrochure_agentadmin%2337445%2307823a4f-e846-4b25-8c19-e20ee454f6ec%23.pdf",
+  "project_website_url": "https://easterlyresidences.com.au/",
+  "child_listings": [
+    {
+      "id": 2019256252,
+      "bedroom_count": 2.0,
+      "bathroom_count": 2.0,
+      "carspace_count": 1.0,
+      "price": "Starting from $2,000,000",
+      "property_type_description": "newApartments",
+      "property_url": "https://www.domain.com.au/13-crown-street-wollongong-nsw-2500-2019256252",
+      "property_image": "https://bucket-api.domain.com.au/v1/bucket/image/2019256252_1_1_240521_034448-w3000-h1875",
+      "lifecycle_status": "New Home"
+    },
+    {
+      "id": 2019256302,
+      "bedroom_count": 3.0,
+      "bathroom_count": 2.0,
+      "carspace_count": 1.0,
+      "price": "Starting from $3,250,000",
+      "property_type_description": "newApartments",
+      "property_url": "https://www.domain.com.au/13-crown-street-wollongong-nsw-2500-2019256302",
+      "property_image": "https://bucket-api.domain.com.au/v1/bucket/image/2019256252_5_1_240521_034450-w2500-h1468",
+      "lifecycle_status": "New Home"
+    }
+  ],
+  "project_name": "Easterly Wollongong",
+  "project_category": "houseAndLand",
+  "priceRange": {
+    "from": 2000000
+  },
+  "completion_date": {
+    "formatted_completion_date": "Late 2026 est. completion date",
+    "estimated_completion_date": "2026-12-01 00:00:00"
+  },
+  "total_number_residences": 21,
+  "project_color_hex": "#C8BDB1",
+  "project_logo_image_url": "https://images.domain.com.au/img/Agencys/devproject/logo_6303_240606_070452",
+  "is_premium_project": true,
+  "showroom_geo_location": {
+    "latitude": -34.4252718,
+    "longitude": 150.8880477
+  },
+  "showroom_address": "49 Denison Street, Wollongong"
+}
