@@ -21,7 +21,7 @@ abstract class BaseViewModel<Event : UiEvent, State : UiState, Effect : UiEffect
         private set
 
     private val _event: MutableSharedFlow<Event> = MutableSharedFlow()
-    val event = _event.asSharedFlow()
+    private val event = _event.asSharedFlow()
 
     private val _effect: Channel<Effect> = Channel()
     val effect = _effect.receiveAsFlow()
@@ -41,10 +41,8 @@ abstract class BaseViewModel<Event : UiEvent, State : UiState, Effect : UiEffect
 
     @ExperimentalCoroutinesApi
     protected fun setEffect(builder: () -> Effect) {
-        if (!_effect.isClosedForSend) {
-            val effectValue = builder()
-            viewModelScope.launch { _effect.send(effectValue) }
-        }
+        val effectValue = builder()
+        viewModelScope.launch { _effect.trySend(effectValue) }
     }
 
     fun setEvent(event: Event) {
