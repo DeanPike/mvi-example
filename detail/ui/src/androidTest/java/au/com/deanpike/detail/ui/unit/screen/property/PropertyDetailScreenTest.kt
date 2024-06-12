@@ -1,12 +1,12 @@
 package au.com.deanpike.detail.ui.unit.screen.property
 
+import au.com.deanpike.commonshared.model.Media
+import au.com.deanpike.commonshared.type.MediaType
 import au.com.deanpike.datashared.type.ListingType
 import au.com.deanpike.detail.client.model.detail.Advertiser
 import au.com.deanpike.detail.client.model.detail.Agent
-import au.com.deanpike.commonshared.model.Media
 import au.com.deanpike.detail.client.model.detail.PhoneNumber
 import au.com.deanpike.detail.client.model.detail.PropertyDetail
-import au.com.deanpike.commonshared.type.MediaType
 import au.com.deanpike.detail.client.model.type.PhoneNumberType
 import au.com.deanpike.detail.ui.framework.ability.AgencyComponentAbility
 import au.com.deanpike.detail.ui.framework.ability.PropertyDetailScreenAbility
@@ -16,6 +16,7 @@ import au.com.deanpike.uishared.base.ScreenStateType
 import au.com.deanpike.uishared.theme.MviExampleTheme
 import au.com.deanpike.uitestshared.ability.AgencyBannerAbility
 import au.com.deanpike.uitestshared.ability.ErrorComponentAbility
+import au.com.deanpike.uitestshared.ability.ListingDetailImagesAbility
 import au.com.deanpike.uitestshared.base.UiUnitTestBase
 import au.com.deanpike.uitestshared.util.advanceTimeAndWait
 import org.assertj.core.api.Assertions.assertThat
@@ -26,6 +27,7 @@ class PropertyDetailScreenTest : UiUnitTestBase() {
     private val agencyBannerAbility = AgencyBannerAbility(composeTestRule)
     private val agencyAbility = AgencyComponentAbility(composeTestRule)
     private val errorAbility = ErrorComponentAbility(composeTestRule)
+    private val imagesAbility = ListingDetailImagesAbility(composeTestRule)
 
     @Test
     fun should_display_progress() {
@@ -106,7 +108,6 @@ class PropertyDetailScreenTest : UiUnitTestBase() {
             assertScreenDisplayed()
             assertProgressNotDisplayed()
             assertCloseIconDisplayed()
-            assertImagesDisplayed()
             assertPriceDisplayed("$1,000,000")
             assertAddressDisplayed("2 Glenton Street, Abbotsbury")
 
@@ -120,6 +121,8 @@ class PropertyDetailScreenTest : UiUnitTestBase() {
 
             clickCloseIcon()
         }
+
+        imagesAbility.assertImagesDisplayed()
 
         assertThat(closeClicked).isTrue()
 

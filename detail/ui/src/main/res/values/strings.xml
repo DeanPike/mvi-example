@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="close">Close</string>
-    <string name="property_image">Property image</string>
     <string name="agent_photo">agent photograph</string>
     <string name="email">Email</string>
     <string name="mobile">Mobile</string>

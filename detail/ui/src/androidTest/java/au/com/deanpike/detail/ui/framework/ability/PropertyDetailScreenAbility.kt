@@ -6,7 +6,6 @@ import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_
 import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAIL_CLOSE
 import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAIL_DESCRIPTION
 import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAIL_HEADLINE
-import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAIL_IMAGE_PAGER
 import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAIL_PRICE
 import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAIL_PROGRESS
 import au.com.deanpike.uishared.R
@@ -37,10 +36,6 @@ class PropertyDetailScreenAbility(private val composeTestRule: ComposeContentTes
 
     fun assertCloseIconDisplayed() {
         composeTestRule.assertTagDisplayed(PROPERTY_DETAIL_CLOSE)
-    }
-
-    fun assertImagesDisplayed() {
-        composeTestRule.assertTagDisplayed(PROPERTY_DETAIL_IMAGE_PAGER)
     }
 
     fun assertPriceDisplayed(price: String) {

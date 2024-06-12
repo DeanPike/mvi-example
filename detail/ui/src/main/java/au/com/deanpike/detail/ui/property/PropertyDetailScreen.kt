@@ -1,12 +1,12 @@
 package au.com.deanpike.detail.ui.property
 
-import au.com.deanpike.uishared.R as RShared
 import androidx.activity.compose.BackHandler
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.pager.HorizontalPager
-import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
@@ -20,25 +20,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import au.com.deanpike.commonshared.model.ListingDetails
+import au.com.deanpike.commonshared.model.Media
+import au.com.deanpike.commonshared.type.MediaType
 import au.com.deanpike.datashared.type.ListingType
 import au.com.deanpike.detail.client.model.detail.Advertiser
 import au.com.deanpike.detail.client.model.detail.Agent
-import au.com.deanpike.commonshared.model.Media
 import au.com.deanpike.detail.client.model.detail.PhoneNumber
 import au.com.deanpike.detail.client.model.detail.PropertyDetail
-import au.com.deanpike.commonshared.type.MediaType
 import au.com.deanpike.detail.client.model.type.PhoneNumberType
 import au.com.deanpike.detail.ui.R
 import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAILS_LAYOUT
@@ -46,7 +41,6 @@ import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_
 import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAIL_CLOSE
 import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAIL_DESCRIPTION
 import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAIL_HEADLINE
-import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAIL_IMAGE_PAGER
 import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAIL_PRICE
 import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAIL_PROGRESS
 import au.com.deanpike.detail.ui.shared.AgencyComponent
@@ -54,12 +48,11 @@ import au.com.deanpike.uishared.base.ScreenStateType
 import au.com.deanpike.uishared.base.drawableTestTag
 import au.com.deanpike.uishared.component.ErrorComponent
 import au.com.deanpike.uishared.component.ExpandableText
+import au.com.deanpike.uishared.component.ListingDetailImages
 import au.com.deanpike.uishared.component.PropertyDetailComponent
 import au.com.deanpike.uishared.theme.Dimension.DIM_16
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
 import au.com.deanpike.uishared.theme.MviExampleTheme
-import coil.compose.AsyncImage
-import coil.request.ImageRequest
 
 @Composable
 fun PropertyDetailScreen(
@@ -151,7 +144,7 @@ fun ProjectDetailSuccess(
             .fillMaxSize()
             .verticalScroll(scrollState)
     ) {
-        PropertyDetailImages(
+        ListingDetailImages(
             media = state.propertyDetail?.media ?: emptyList()
         )
         state.propertyDetail?.price?.let {
@@ -223,62 +216,10 @@ fun ProjectDetailSuccess(
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class)
-@Composable
-fun PropertyDetailImages(
-    media: List<Media>
-) {
-    if (media.isNotEmpty()) {
-        val pagerState = rememberPagerState(pageCount = { media.count() })
-        Box {
-            HorizontalPager(
-                modifier = Modifier
-                    .align(Alignment.Center)
-                    .testTag(PROPERTY_DETAIL_IMAGE_PAGER),
-                state = pagerState
-            ) { page ->
-                AsyncImage(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(300.dp),
-                    model = ImageRequest.Builder(LocalContext.current)
-                        .data(media[page].url)
-                        .crossfade(true)
-                        .build(),
-                    placeholder = painterResource(id = RShared.drawable.gallery_placeholder),
-                    contentScale = ContentScale.Crop,
-                    contentDescription = stringResource(id = R.string.property_image),
-                    alignment = Alignment.Center
-                )
-            }
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .wrapContentHeight()
-                    .padding(bottom = DIM_16)
-                    .align(Alignment.BottomCenter),
-                horizontalArrangement = Arrangement.Center
-            ) {
-                repeat(pagerState.pageCount) { iteration ->
-                    val color = if (pagerState.currentPage == iteration) Color.DarkGray else Color.LightGray.copy(alpha = 0.5F)
-                    Box(
-                        modifier = Modifier
-                            .padding(2.dp)
-                            .clip(CircleShape)
-                            .background(color)
-                            .size(16.dp)
-                    )
-                }
-            }
-        }
-    }
-}
-
 object PropertyDetailScreenTestTags {
     private const val PREFIX = "PROPERTY_DETAIL_"
     const val PROPERTY_DETAILS_LAYOUT = "${PREFIX}LAYOUT"
     const val PROPERTY_DETAIL_PROGRESS = "${PREFIX}PROGRESS"
-    const val PROPERTY_DETAIL_IMAGE_PAGER = "${PREFIX}IMAGE_PAGER"
     const val PROPERTY_DETAIL_PRICE = "${PREFIX}PRICE"
     const val PROPERTY_DETAIL_ADDRESS = "${PREFIX}ADDRESS"
     const val PROPERTY_DETAIL_HEADLINE = "${PREFIX}HEADLINE"
