@@ -115,10 +115,12 @@ fun PropertyListItem(
         )
 
         PropertyDetailComponent(
-            modifier = Modifier.constrainAs(propertyDetailRef) {
-                start.linkTo(parent.start)
-                top.linkTo(addressRef.bottom)
-            },
+            modifier = Modifier
+                .constrainAs(propertyDetailRef) {
+                    start.linkTo(parent.start)
+                    top.linkTo(addressRef.bottom)
+                }
+                .padding(start = DIM_16, end = DIM_16),
             parentPosition = position,
             position = position,
             details = property.detail,

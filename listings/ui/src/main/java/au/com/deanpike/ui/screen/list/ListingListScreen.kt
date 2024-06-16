@@ -32,8 +32,8 @@ import au.com.deanpike.ui.screen.list.component.FilterComponent
 import au.com.deanpike.ui.screen.list.component.ProjectListItem
 import au.com.deanpike.ui.screen.list.component.PropertyListItem
 import au.com.deanpike.ui.screen.listingType.ListingTypeScreen
-import au.com.deanpike.uishared.component.ErrorComponent
 import au.com.deanpike.uishared.base.ScreenStateType
+import au.com.deanpike.uishared.component.ErrorComponent
 import au.com.deanpike.uishared.theme.Dimension.DIM_16
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
 import au.com.deanpike.uishared.theme.MviExampleTheme
@@ -41,7 +41,8 @@ import au.com.deanpike.uishared.theme.MviExampleTheme
 @Composable
 fun ListingListScreen(
     viewModel: ListingListViewModel = hiltViewModel<ListingListViewModel>(),
-    onPropertyClicked: (Long) -> Unit = {}
+    onPropertyClicked: (Long) -> Unit = {},
+    onProjectClicked: (Long) -> Unit = {}
 ) {
 
     LaunchedEffect(Unit) {
@@ -66,7 +67,8 @@ fun ListingListScreen(
         onRetryClicked = {
             viewModel.setEvent(ListingListScreenEvent.OnRetryClicked)
         },
-        onPropertyClicked = onPropertyClicked
+        onPropertyClicked = onPropertyClicked,
+        onProjectClicked = onProjectClicked
     )
 }
 
@@ -79,7 +81,8 @@ fun ListingListScreenContent(
     onBottomSheetDismissed: () -> Unit = {},
     onListingTypesApplied: (List<DwellingType>) -> Unit = {},
     onRetryClicked: () -> Unit = {},
-    onPropertyClicked: (Long) -> Unit = {}
+    onPropertyClicked: (Long) -> Unit = {},
+    onProjectClicked: (Long) -> Unit = {}
 ) {
 
     val layoutDirection = LocalLayoutDirection.current
@@ -149,7 +152,13 @@ fun ListingListScreenContent(
                             item(key = listing.id) {
                                 ProjectListItem(
                                     position = index,
-                                    project = listing
+                                    project = listing,
+                                    onProjectClicked = {
+                                        onProjectClicked(it)
+                                    },
+                                    onProjectChildClicked = {
+                                        onPropertyClicked(it)
+                                    }
                                 )
                             }
                         }

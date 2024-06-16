@@ -46,4 +46,8 @@ class PropertyListItemScreen(composeTestRule: ComposeContentTestRule) {
             )
         }
     }
+
+    fun clickProperty(position: Int) {
+        listItemAbility.clickItem(position)
+    }
 }

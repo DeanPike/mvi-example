@@ -1,7 +1,7 @@
 package au.com.deanpike.ui.e2e
 
-import au.com.deanpike.datashared.type.ListingType
 import au.com.deanpike.commonshared.model.ListingDetails
+import au.com.deanpike.datashared.type.ListingType
 import au.com.deanpike.listings.client.model.listing.response.Project
 import au.com.deanpike.listings.client.model.listing.response.ProjectChild
 import au.com.deanpike.listings.client.model.listing.response.Property
@@ -23,6 +23,7 @@ import dagger.hilt.android.testing.HiltAndroidTest
 import java.net.HttpURLConnection
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.RecordedRequest
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
 @HiltAndroidTest
@@ -36,6 +37,9 @@ class ListingListTest : UiE2ETestBase() {
 
     @Test
     fun test_buy_listing_flow() {
+        var propertyClicked: Long? = null
+        var projectClicked: Long? = null
+
         setupResponse(
             listingType = emptyList(),
             statusType = "buy"
@@ -44,7 +48,14 @@ class ListingListTest : UiE2ETestBase() {
         with(composeTestRule) {
             setContent {
                 MviExampleTheme {
-                    ListingListScreen()
+                    ListingListScreen(
+                        onPropertyClicked = {
+                            propertyClicked = it
+                        },
+                        onProjectClicked = {
+                            projectClicked = it
+                        }
+                    )
                 }
             }
             advanceTimeAndWait()
@@ -92,6 +103,15 @@ class ListingListTest : UiE2ETestBase() {
                     )
                 )
             )
+            advanceTimeAndWait()
+
+            projectListScreen.clickProject(0)
+            assertThat(projectClicked).isEqualTo(2842)
+            projectListScreen.clickProjectChild(parentPosition = 0, position = 1)
+            assertThat(propertyClicked).isEqualTo(2019090988)
+
+            projectClicked = null
+            propertyClicked = null
 
             propertyListScreen.assertPropertyDisplayed(
                 position = 1,
@@ -113,6 +133,11 @@ class ListingListTest : UiE2ETestBase() {
                     )
                 )
             )
+            advanceTimeAndWait()
+
+            propertyListScreen.clickProperty(position = 1)
+            assertThat(propertyClicked).isEqualTo(2019150933)
+            assertThat(projectClicked).isNull()
         }
     }
 

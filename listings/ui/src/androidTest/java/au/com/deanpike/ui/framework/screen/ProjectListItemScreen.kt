@@ -82,4 +82,12 @@ class ProjectListItemScreen(private val composeTestRule: ComposeContentTestRule)
             }
         }
     }
+
+    fun clickProject(position: Int) {
+        ability.clickProject(position)
+    }
+
+    fun clickProjectChild(parentPosition: Int, position: Int) {
+        childAbility.clickCard(parentPosition = parentPosition, position = position)
+    }
 }
