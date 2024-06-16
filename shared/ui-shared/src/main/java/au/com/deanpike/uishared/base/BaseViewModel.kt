@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -39,10 +40,13 @@ abstract class BaseViewModel<Event : UiEvent, State : UiState, Effect : UiEffect
         uiState = uiState.reduce()
     }
 
+    @OptIn(DelicateCoroutinesApi::class)
     @ExperimentalCoroutinesApi
     protected fun setEffect(builder: () -> Effect) {
-        val effectValue = builder()
-        viewModelScope.launch { _effect.trySend(effectValue) }
+        if (!_effect.isClosedForSend) {
+            val effectValue = builder()
+            viewModelScope.launch { _effect.send(effectValue) }
+        }
     }
 
     fun setEvent(event: Event) {
