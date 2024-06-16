@@ -46,6 +46,7 @@ import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_
 import au.com.deanpike.detail.ui.shared.AgencyComponent
 import au.com.deanpike.uishared.base.ScreenStateType
 import au.com.deanpike.uishared.base.drawableTestTag
+import au.com.deanpike.uishared.component.AgencyBanner
 import au.com.deanpike.uishared.component.ErrorComponent
 import au.com.deanpike.uishared.component.ExpandableText
 import au.com.deanpike.uishared.component.ListingDetailImages
@@ -99,7 +100,7 @@ fun PropertyDetailScreenContent(
                 )
             }
         } else if (state.screenState == ScreenStateType.SUCCESS) {
-            ProjectDetailSuccess(
+            PropertyDetailSuccess(
                 state = state
             )
         } else if (state.screenState == ScreenStateType.ERROR) {
@@ -135,7 +136,7 @@ fun PropertyDetailScreenContent(
 }
 
 @Composable
-fun ProjectDetailSuccess(
+fun PropertyDetailSuccess(
     state: PropertyDetailScreenState,
 ) {
     val scrollState = rememberScrollState()
@@ -146,6 +147,10 @@ fun ProjectDetailSuccess(
     ) {
         ListingDetailImages(
             media = state.propertyDetail?.media ?: emptyList()
+        )
+        AgencyBanner(
+            agencyColour = state.propertyDetail?.advertiser?.preferredColorHex,
+            logo = state.propertyDetail?.advertiser?.logoUrl
         )
         state.propertyDetail?.price?.let {
             Text(
@@ -175,6 +180,7 @@ fun ProjectDetailSuccess(
             )
         }
         PropertyDetailComponent(
+            modifier = Modifier.padding(start = DIM_16, end = DIM_16),
             parentPosition = 0,
             position = 0,
             details = ListingDetails(
@@ -209,6 +215,15 @@ fun ProjectDetailSuccess(
                 collapsedMaxLine = 3
             )
         }
+
+        HorizontalDivider(
+            modifier = Modifier.padding(top = DIM_8, bottom = DIM_8)
+        )
+        Text(
+            modifier = Modifier.padding(start = DIM_16),
+            text = stringResource(id = R.string.agent),
+            fontWeight = FontWeight.Bold
+        )
 
         state.propertyDetail?.advertiser?.let { advertiser ->
             AgencyComponent(advertiser = advertiser)

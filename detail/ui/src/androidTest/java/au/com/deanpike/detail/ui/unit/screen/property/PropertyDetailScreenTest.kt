@@ -9,6 +9,7 @@ import au.com.deanpike.detail.client.model.detail.PhoneNumber
 import au.com.deanpike.detail.client.model.detail.PropertyDetail
 import au.com.deanpike.detail.client.model.type.PhoneNumberType
 import au.com.deanpike.detail.ui.framework.ability.AgencyComponentAbility
+import au.com.deanpike.detail.ui.framework.ability.AgentComponentAbility
 import au.com.deanpike.detail.ui.framework.ability.PropertyDetailScreenAbility
 import au.com.deanpike.detail.ui.property.PropertyDetailScreenContent
 import au.com.deanpike.detail.ui.property.PropertyDetailScreenState
@@ -26,6 +27,7 @@ class PropertyDetailScreenTest : UiUnitTestBase() {
     private val propertyScreenAbility = PropertyDetailScreenAbility(composeTestRule)
     private val agencyBannerAbility = AgencyBannerAbility(composeTestRule)
     private val agencyAbility = AgencyComponentAbility(composeTestRule)
+    private val agentAbility = AgentComponentAbility(composeTestRule)
     private val errorAbility = ErrorComponentAbility(composeTestRule)
     private val imagesAbility = ListingDetailImagesAbility(composeTestRule)
 
@@ -132,7 +134,9 @@ class PropertyDetailScreenTest : UiUnitTestBase() {
             assertAgencyLayoutDisplayed()
             assertAgencyNameDisplayed("Ray White Wetherill Park")
             assertAgencyAddressDisplayed("Shop 1H, 1183-1187 The Horsley Drive\nWetherill Park NSW 2164")
+        }
 
+        with(agentAbility) {
             scrollToAgent(0)
             assertAgentNameDisplayed(position = 0, name = "Riccardo Romolo")
             assertAgentImageDisplayed(0)
