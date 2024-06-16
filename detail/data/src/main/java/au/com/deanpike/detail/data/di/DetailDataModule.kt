@@ -1,5 +1,6 @@
 package au.com.deanpike.detail.data.di
 
+import au.com.deanpike.detail.client.usecase.ProjectDetailUseCase
 import au.com.deanpike.detail.client.usecase.PropertyDetailUseCase
 import au.com.deanpike.detail.data.cache.ListingCache
 import au.com.deanpike.detail.data.cache.ListingCacheImpl
@@ -17,6 +18,7 @@ import au.com.deanpike.detail.data.repository.ProjectDetailRepository
 import au.com.deanpike.detail.data.repository.ProjectDetailRepositoryImpl
 import au.com.deanpike.detail.data.repository.PropertyDetailRepository
 import au.com.deanpike.detail.data.repository.PropertyDetailRepositoryImpl
+import au.com.deanpike.detail.data.usecase.ProjectDetailUseCaseImpl
 import au.com.deanpike.detail.data.usecase.PropertyDetailUseCaseImpl
 import dagger.Binds
 import dagger.Module
@@ -40,6 +42,12 @@ internal abstract class DetailDataModule {
     abstract fun bindProjectDetailDataSource(impl: ProjectDetailDataSourceImpl): ProjectDetailDataSource
 
     @Binds
+    abstract fun bindProjectDetailRepository(impl: ProjectDetailRepositoryImpl): ProjectDetailRepository
+
+    @Binds
+    abstract fun bindProjectDetailUseCase(impl: ProjectDetailUseCaseImpl): ProjectDetailUseCase
+
+    @Binds
     abstract fun bindListingCache(impl: ListingCacheImpl): ListingCache
 
     @Binds
@@ -50,8 +58,5 @@ internal abstract class DetailDataModule {
 
     @Binds
     abstract fun bindListingConverter(impl: ListingConverterImpl): ListingConverter
-
-    @Binds
-    abstract fun bindProjectDetailRepository(impl: ProjectDetailRepositoryImpl): ProjectDetailRepository
 
 }
