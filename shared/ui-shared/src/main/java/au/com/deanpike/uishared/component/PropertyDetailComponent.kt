@@ -2,8 +2,6 @@ package au.com.deanpike.uishared.component
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -32,8 +30,6 @@ fun PropertyDetailComponent(
 ) {
     Row(
         modifier = modifier
-            .fillMaxWidth()
-            .padding(start = Dimension.DIM_16, end = Dimension.DIM_16, top = Dimension.DIM_4)
             .testTag("${DETAIL_ITEM_GROUP}_${parentPosition}_${position}"),
         verticalAlignment = Alignment.CenterVertically
     ) {
