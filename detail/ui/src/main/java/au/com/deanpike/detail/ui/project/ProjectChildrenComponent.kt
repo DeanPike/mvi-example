@@ -9,7 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import au.com.deanpike.detail.client.model.detail.ProjectChild
-import au.com.deanpike.detail.ui.project.ProjectChildrenComponentTestTags.PROJECT_CHILD
+import au.com.deanpike.detail.ui.project.ProjectChildrenComponentTestTags.PROJECT_CHILDREN
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
 import au.com.deanpike.uishared.theme.MviExampleTheme
 
@@ -21,7 +21,7 @@ fun ProjectChildrenComponent(
     LazyRow(
         modifier = Modifier
             .fillMaxWidth()
-            .testTag(PROJECT_CHILD),
+            .testTag(PROJECT_CHILDREN),
         contentPadding = PaddingValues(horizontal = DIM_8),
         horizontalArrangement = Arrangement.spacedBy(DIM_8)
     ) {
@@ -39,7 +39,7 @@ fun ProjectChildrenComponent(
 
 object ProjectChildrenComponentTestTags {
     private const val PREFIX = "PROJECT_CHILDREN_"
-    const val PROJECT_CHILD = "${PREFIX}PROJECT_CHILD"
+    const val PROJECT_CHILDREN = "${PREFIX}PROJECT_CHILDREN"
 }
 
 @Preview(showBackground = true)
