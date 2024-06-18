@@ -14,6 +14,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import au.com.deanpike.detail.ui.project.ProjectDetailScreen
 import au.com.deanpike.detail.ui.property.PropertyDetailScreen
 import au.com.deanpike.ui.screen.list.ListingListScreen
 import au.com.deanpike.uishared.theme.MviExampleTheme
@@ -44,6 +45,9 @@ fun MviApp(navController: NavHostController) {
             ListingListScreen(
                 onPropertyClicked = { propertyId ->
                     navController.navigate("property-detail/$propertyId")
+                },
+                onProjectClicked = { projectId ->
+                    navController.navigate("project-detail/$projectId")
                 }
             )
         }
@@ -55,6 +59,20 @@ fun MviApp(navController: NavHostController) {
                 propertyId = backStackEntry.arguments!!.getInt("id"),
                 onCloseClicked = {
                     navController.popBackStack()
+                }
+            )
+        }
+        composable(
+            route = "project-detail/{id}",
+            arguments = listOf(navArgument("id") { type = NavType.IntType })
+        ) { backStackEntry ->
+            ProjectDetailScreen(
+                projectId = backStackEntry.arguments!!.getInt("id"),
+                onCloseClicked = {
+                    navController.popBackStack()
+                },
+                onProjectChildClicked = { propertyId ->
+                    navController.navigate("property-detail/$propertyId")
                 }
             )
         }
