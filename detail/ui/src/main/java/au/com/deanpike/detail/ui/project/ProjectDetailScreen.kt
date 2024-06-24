@@ -219,9 +219,13 @@ fun ProjectDetailSuccess(
             )
         }
 
+        HorizontalDivider(
+            modifier = Modifier.padding(top = DIM_8, bottom = DIM_8)
+        )
+
         Text(
             modifier = Modifier
-                .padding(start = DIM_16, top = DIM_16)
+                .padding(start = DIM_16, top = DIM_8, bottom = DIM_8)
                 .testTag(PROJECT_DETAIL_AGENT_LABEL),
             text = stringResource(id = R.string.agent),
             fontWeight = FontWeight.Bold,

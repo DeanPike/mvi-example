@@ -77,7 +77,6 @@ fun AgentComponent(
                         .testTag("${AGENT_NAME}_$position"),
                     text = it,
                     style = MaterialTheme.typography.titleMedium,
-                    fontSize = 20.sp,
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis
                 )

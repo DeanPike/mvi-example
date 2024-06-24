@@ -97,7 +97,7 @@ fun PropertyListItem(
                     .padding(start = DIM_16, end = DIM_16, top = DIM_8)
                     .testTag("${PROPERTY_LIST_ITEM_PRICE}_$position"),
                 text = it,
-                style = MaterialTheme.typography.titleLarge,
+                style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold
             )
         }

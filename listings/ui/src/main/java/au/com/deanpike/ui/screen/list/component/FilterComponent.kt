@@ -61,6 +61,7 @@ fun FilterComponent(
                 Text(
                     modifier = Modifier.testTag("${STATUS_BUTTON}_TEXT"),
                     text = getStatusDescription(selectedStatus),
+                    style = MaterialTheme.typography.bodyMedium
                 )
                 Icon(
                     modifier = Modifier.drawableTestTag(
@@ -84,7 +85,8 @@ fun FilterComponent(
                         text = {
                             Text(
                                 modifier = Modifier.testTag("${STATUS_ITEM}_${it.name}_TEXT"),
-                                text = getStatusDescription(it)
+                                text = getStatusDescription(it),
+                                style = MaterialTheme.typography.bodyMedium
                             )
                         },
                         onClick = {
@@ -107,7 +109,7 @@ fun FilterComponent(
                     .padding(end = DIM_8)
                     .testTag("${LISTING_TYPE}_TEXT"),
                 text = if (selectedListingTypes.isEmpty()) stringResource(id = R.string.no_listing_type) else pluralStringResource(id = R.plurals.listing_types, count = selectedListingTypes.count(), selectedListingTypes.count()),
-                style = MaterialTheme.typography.titleMedium
+                style = MaterialTheme.typography.bodyMedium
             )
         }
     }

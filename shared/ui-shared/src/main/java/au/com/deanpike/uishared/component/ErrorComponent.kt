@@ -12,6 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import au.com.deanpike.uishared.R
 import au.com.deanpike.uishared.component.ErrorComponentTestTags.ERROR_COMPONENT_BUTTON
@@ -52,7 +53,9 @@ fun ErrorComponent(
             onClick = { onRetryClicked() }) {
             Text(
                 modifier = Modifier.testTag("${ERROR_COMPONENT_BUTTON}_TEXT"),
-                text = stringResource(id = R.string.retry)
+                text = stringResource(id = R.string.retry),
+                style = MaterialTheme.typography.bodyMedium,
+                fontWeight = FontWeight.Bold
             )
         }
     }

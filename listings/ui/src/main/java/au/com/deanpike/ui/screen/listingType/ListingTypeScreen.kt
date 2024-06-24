@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
@@ -16,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import au.com.deanpike.listings.client.type.DwellingType
@@ -117,7 +119,11 @@ fun ListingTypeScreenContent(
                 .testTag(LISTING_TYPE_SCREEN_APPLY),
             onClick = { onApplyClicked() }
         ) {
-            Text(text = stringResource(id = R.string.apply))
+            Text(
+                text = stringResource(id = R.string.apply),
+                style = MaterialTheme.typography.bodyMedium,
+                fontWeight = FontWeight.Bold
+            )
         }
     }
 }
@@ -136,7 +142,8 @@ private fun ListingTypeItem(
     ) {
         Text(
             modifier = Modifier.testTag("${testTag}_TEXT"),
-            text = description
+            text = description,
+            style = MaterialTheme.typography.bodyMedium
         )
         Checkbox(
             modifier = Modifier.testTag("${testTag}_CHECKBOX"),

@@ -65,7 +65,7 @@ fun ProjectChildListItemComponent(
                         }
                         .testTag("${PROJECT_CHILD_LIST_ITEM_PRICE}_${parentPosition}_${position}"),
                     text = it,
-                    style = MaterialTheme.typography.titleLarge,
+                    style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Bold
                 )
             }
