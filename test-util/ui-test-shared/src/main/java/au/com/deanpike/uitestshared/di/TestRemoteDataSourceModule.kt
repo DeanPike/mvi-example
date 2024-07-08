@@ -3,6 +3,8 @@ package au.com.deanpike.uitestshared.di
 import au.com.deanpike.network.di.RemoteDataSourceModule
 import au.com.deanpike.network.util.BaseUrl
 import au.com.deanpike.network.api.ListingApi
+import au.com.deanpike.network.api.ProjectDetailApi
+import au.com.deanpike.network.api.PropertyDetailApi
 import au.com.deanpike.uitestshared.util.MockServerCertificates
 import com.google.gson.Gson
 import dagger.Module
@@ -51,4 +53,10 @@ object TestRemoteDataSourceModule {
 
     @Provides
     internal fun providePropertyListingsRemoteDataSourceApi(retrofit: Retrofit): ListingApi = retrofit.create(ListingApi::class.java)
+
+    @Provides
+    internal fun providePropertyDetailsApi(retrofit: Retrofit): PropertyDetailApi = retrofit.create(PropertyDetailApi::class.java)
+
+    @Provides
+    internal fun provideProjectDetailApi(retrofit: Retrofit): ProjectDetailApi = retrofit.create(ProjectDetailApi::class.java)
 }
