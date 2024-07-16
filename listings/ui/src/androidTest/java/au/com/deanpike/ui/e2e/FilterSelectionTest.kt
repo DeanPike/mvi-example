@@ -3,16 +3,21 @@ package au.com.deanpike.ui.e2e
 import au.com.deanpike.ui.framework.screen.FilterComponentScreen
 import au.com.deanpike.ui.screen.list.ListingListScreen
 import au.com.deanpike.uishared.theme.MviExampleTheme
+import au.com.deanpike.uitestshared.HiltTestActivity
 import au.com.deanpike.uitestshared.base.UiE2ETestBase
 import au.com.deanpike.uitestshared.mockserver.HttpMethod
 import au.com.deanpike.uitestshared.util.advanceTimeAndWait
 import au.com.deanpike.uitestshared.util.waitUntilTagExists
 import dagger.hilt.android.testing.HiltAndroidTest
 import java.net.HttpURLConnection
+import org.junit.Rule
 import org.junit.Test
 
 @HiltAndroidTest
 class FilterSelectionTest : UiE2ETestBase() {
+    @get:Rule(order = 1)
+    val composeTestRule = createComposeRuleFor(HiltTestActivity::class.java)
+
     private val filterScreen = FilterComponentScreen(composeTestRule)
 
     @Test

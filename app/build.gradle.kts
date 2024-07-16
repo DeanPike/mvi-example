@@ -22,6 +22,8 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+
+        testInstrumentationRunner = "au.com.deanpike.uitestshared.MainTestApplication"
     }
 
     buildTypes {
@@ -40,10 +42,17 @@ android {
     buildFeatures {
         compose = true
     }
+
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            excludes += "/META-INF/LICENSE.md"
+            excludes += "/META-INF/LICENSE-notice.md"
         }
+    }
+
+    testOptions {
+        animationsDisabled = true
     }
 }
 
@@ -58,6 +67,7 @@ dependencies {
     implementation(project(":shared:data-shared"))
     implementation(project(":network"))
     implementation(project(":shared:ui-shared"))
+    androidTestImplementation(project(":test-util:ui-test-shared"))
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -78,4 +88,8 @@ dependencies {
 
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    kspAndroidTest(libs.hilt.android)
+    androidTestImplementation(libs.hilt.android.testing)
+    androidTestImplementation(libs.androidx.ui.test.junit4)
 }

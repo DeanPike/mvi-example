@@ -14,6 +14,7 @@ import au.com.deanpike.ui.screen.list.ListingListScreen
 import au.com.deanpike.ui.screen.list.ListingListScreenTestTags
 import au.com.deanpike.uishared.component.ErrorComponentTestTags
 import au.com.deanpike.uishared.theme.MviExampleTheme
+import au.com.deanpike.uitestshared.HiltTestActivity
 import au.com.deanpike.uitestshared.base.UiE2ETestBase
 import au.com.deanpike.uitestshared.mockserver.HttpMethod
 import au.com.deanpike.uitestshared.mockserver.MockRequestHandler
@@ -24,10 +25,14 @@ import java.net.HttpURLConnection
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.RecordedRequest
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.Rule
 import org.junit.Test
 
 @HiltAndroidTest
 class ListingListTest : UiE2ETestBase() {
+
+    @get:Rule(order = 1)
+    val composeTestRule = createComposeRuleFor(HiltTestActivity::class.java)
 
     private val listAbility = ListingListScreenAbility(composeTestRule)
     private val propertyListScreen = PropertyListItemScreen(composeTestRule)

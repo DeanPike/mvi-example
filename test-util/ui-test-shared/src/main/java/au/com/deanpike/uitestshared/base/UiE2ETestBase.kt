@@ -1,11 +1,13 @@
 package au.com.deanpike.uitestshared.base
 
+import androidx.activity.ComponentActivity
+import androidx.compose.ui.test.junit4.AndroidComposeTestRule
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.IdlingResource
 import androidx.test.espresso.idling.CountingIdlingResource
+import androidx.test.ext.junit.rules.ActivityScenarioRule
 import au.com.deanpike.datashared.dispatcher.DispatcherProvider
-import au.com.deanpike.uitestshared.HiltTestActivity
 import au.com.deanpike.uitestshared.mockserver.MockWebServerDispatcher
 import au.com.deanpike.uitestshared.util.MockServerCertificates
 import dagger.hilt.android.testing.HiltAndroidRule
@@ -25,9 +27,6 @@ abstract class UiE2ETestBase : UiTestBase() {
     @get:Rule(order = 0)
     var hiltRule = HiltAndroidRule(this)
 
-    @get:Rule(order = 1)
-    val composeTestRule = createAndroidComposeRule<HiltTestActivity>()
-
     private lateinit var espressoIdlingResource: IdlingResource
     private lateinit var mockServer: MockWebServer
 
@@ -39,6 +38,12 @@ abstract class UiE2ETestBase : UiTestBase() {
 
     @Inject
     lateinit var idlingResource: CountingIdlingResource
+
+    fun <T : ComponentActivity> createComposeRuleFor(
+        activityClass: Class<T>
+    ): AndroidComposeTestRule<ActivityScenarioRule<T>, T> {
+        return createAndroidComposeRule(activityClass)
+    }
 
     @Before
     fun setupWebServer() {
