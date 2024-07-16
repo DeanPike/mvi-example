@@ -172,6 +172,7 @@ fun ListingListScreenContent(
                         }
                     }
                 }
+                Spacer(modifier = Modifier.height(DIM_16))
             }
 
             if (state.showListingTypeScreen) {
