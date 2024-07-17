@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -42,8 +43,10 @@ import coil.request.ImageRequest
 fun ProjectChildComponent(
     position: Int,
     child: ProjectChild,
+    screenWidth: Int,
     onProjectChildClicked: (Long) -> Unit = {}
 ) {
+    val density = LocalDensity.current
     Card(
         modifier = Modifier.clickable {
             onProjectChildClicked(child.id)
@@ -55,7 +58,7 @@ fun ProjectChildComponent(
     ) {
         ConstraintLayout(
             modifier = Modifier
-                .width(400.dp)
+                .width(with(density) { (screenWidth * 0.9).toInt().toDp() })
                 .padding(DIM_8)
                 .testTag("${PROJECT_CHILD_LAYOUT}_$position")
         ) {
@@ -154,6 +157,7 @@ fun ProjectChildComponentPreview() {
     MviExampleTheme {
         ProjectChildComponent(
             position = 0,
+            screenWidth = 400,
             child = ProjectChild(
                 id = 2019256252,
                 bedroomCount = 2,

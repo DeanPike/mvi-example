@@ -5,7 +5,12 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import au.com.deanpike.detail.client.model.detail.ProjectChild
@@ -18,9 +23,16 @@ fun ProjectChildrenComponent(
     childListings: List<ProjectChild>,
     onProjectChildClicked: (Long) -> Unit = {}
 ) {
+    var screenWidth by remember{
+        mutableIntStateOf(0)
+
+    }
     LazyRow(
         modifier = Modifier
             .fillMaxWidth()
+            .onGloballyPositioned { coordinates ->
+                screenWidth = coordinates.size.width
+            }
             .testTag(PROJECT_CHILDREN),
         contentPadding = PaddingValues(horizontal = DIM_8),
         horizontalArrangement = Arrangement.spacedBy(DIM_8)
@@ -30,6 +42,7 @@ fun ProjectChildrenComponent(
                 ProjectChildComponent(
                     position = index,
                     child = projectChild,
+                    screenWidth = screenWidth,
                     onProjectChildClicked = onProjectChildClicked
                 )
             }
