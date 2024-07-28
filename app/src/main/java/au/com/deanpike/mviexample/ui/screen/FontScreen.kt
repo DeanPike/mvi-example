@@ -50,14 +50,14 @@ fun FontScreen() {
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text("Title Medium", style = MaterialTheme.typography.titleMedium)
-                Text("Title Medium", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+                Text("Title Medium Bold", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
             }
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text("Title Small", style = MaterialTheme.typography.titleSmall)
-                Text("Title Small", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold)
+                Text("Title Small Bold", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold)
             }
             HorizontalDivider(
                 modifier = Modifier.padding(DIM_8)
@@ -68,21 +68,21 @@ fun FontScreen() {
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text("Body Large", style = MaterialTheme.typography.bodyLarge)
-                Text("Body Large", style = MaterialTheme.typography.bodyLarge, fontWeight = FontWeight.Bold)
+                Text("Body Large Bold", style = MaterialTheme.typography.bodyLarge, fontWeight = FontWeight.Bold)
             }
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text("Body Medium", style = MaterialTheme.typography.bodyMedium)
-                Text("Body Medium", style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.Bold)
+                Text("Body Medium Bold", style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.Bold)
             }
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text("Body Small", style = MaterialTheme.typography.bodySmall)
-                Text("Body Small", style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.Bold)
+                Text("Body Small Bold", style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.Bold)
             }
             HorizontalDivider(
                 modifier = Modifier.padding(DIM_8)
@@ -93,21 +93,21 @@ fun FontScreen() {
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text("Label Large", style = MaterialTheme.typography.labelLarge)
-                Text("Label Large", style = MaterialTheme.typography.labelLarge, fontWeight = FontWeight.Bold)
+                Text("Label Large Bold", style = MaterialTheme.typography.labelLarge, fontWeight = FontWeight.Bold)
             }
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text("Label Medium", style = MaterialTheme.typography.labelMedium)
-                Text("Label Medium", style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.Bold)
+                Text("Label Medium Bold", style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.Bold)
             }
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text("Label Small", style = MaterialTheme.typography.labelSmall)
-                Text("Label Small", style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.Bold)
+                Text("Label Small Bold", style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.Bold)
             }
         }
     }
