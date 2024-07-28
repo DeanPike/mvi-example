@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
@@ -61,7 +62,7 @@ fun PropertyDetailScreen(
     propertyId: Int,
     onCloseClicked: () -> Unit = {}
 ) {
-    LaunchedEffect(Unit) {
+    LaunchedEffect(propertyId) {
         viewModel.setEvent(PropertyDetailScreenEvent.Initialise(propertyId = propertyId))
     }
 
@@ -87,6 +88,7 @@ fun PropertyDetailScreenContent(
 
     Column(
         modifier = Modifier
+            .fillMaxWidth()
             .background(color = MaterialTheme.colorScheme.background)
             .testTag(PROPERTY_DETAILS_LAYOUT)
     ) {

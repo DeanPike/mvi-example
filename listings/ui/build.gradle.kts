@@ -66,6 +66,8 @@ dependencies {
     androidTestImplementation(project(":test-util:unit-test-shared"))
     testImplementation(project(":test-util:unit-test-shared"))
 
+    implementation(libs.androidx.adaptive.android)
+    implementation(libs.androidx.window.core.android)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
