@@ -32,6 +32,7 @@ store = "5.1.0-alpha02"
 turbine = "1.1.0"
 windowCoreAndroid = "1.3.0"
 adaptiveAndroid = "1.0.0-beta04"
+uiTextGoogleFonts = "1.6.8"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -84,6 +85,7 @@ mockwebserver = { group = "com.squareup.okhttp3", name = "mockwebserver", versio
 joda-time = { group = "joda-time", name = "joda-time", version.ref = "jodaTimeVersion" }
 hilt-android-testing = { group = "com.google.dagger", name = "hilt-android-testing", version.ref = "daggerHiltVersion" }
 okhttp-tls = { group = "com.squareup.okhttp3", name = "okhttp-tls", version.ref = "mockwebserverVersion" }
+androidx-ui-text-google-fonts = { group = "androidx.compose.ui", name = "ui-text-google-fonts", version.ref = "uiTextGoogleFonts" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

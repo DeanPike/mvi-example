@@ -47,6 +47,7 @@ dependencies {
     implementation(project(":shared:common-shared"))
     androidTestImplementation(project(":test-util:ui-test-shared"))
 
+    implementation(libs.androidx.ui.text.google.fonts)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.core.ktx)
