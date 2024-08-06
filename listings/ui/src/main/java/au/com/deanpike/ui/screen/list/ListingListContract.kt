@@ -13,7 +13,9 @@ data class ListingListScreenState(
     val listings: List<Listing> = emptyList(),
     val selectedStatus: StatusType = StatusType.BUY,
     val selectedListingTypes: List<DwellingType> = emptyList(),
-    val showListingTypeScreen: Boolean = false
+    val showListingTypeScreen: Boolean = false,
+    val selectedPropertyId: Long? = null,
+    val selectedProjectId: Long? = null
 ) : UiState
 
 sealed class ListingListScreenEvent : UiEvent {
@@ -26,8 +28,12 @@ sealed class ListingListScreenEvent : UiEvent {
     data object OnBottomSheetDismissed : ListingListScreenEvent()
     data class OnListingTypesApplied(val selectedListingTypes: List<DwellingType>) : ListingListScreenEvent()
     data object OnRetryClicked : ListingListScreenEvent()
+    data class OnPropertySelected(val id: Long) : ListingListScreenEvent()
+    data class OnProjectSelected(val id: Long) : ListingListScreenEvent()
 }
 
 sealed class ListingListScreenEffect : UiEffect {
-
+    data class OnPropertySelected(val id: Long) : ListingListScreenEffect()
+    data class OnProjectSelected(val id: Long) : ListingListScreenEffect()
+    data object OnListingsReset : ListingListScreenEffect()
 }

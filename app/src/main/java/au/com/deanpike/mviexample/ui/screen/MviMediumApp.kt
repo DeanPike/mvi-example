@@ -11,7 +11,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableLongStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import au.com.deanpike.detail.ui.project.ProjectDetailScreen
@@ -23,19 +23,21 @@ import au.com.deanpike.uishared.theme.Dimension
 fun MviMediumApp() {
     val unselectedListingId = -1L
 
-    var selectedProjectId by remember {
+    var selectedProjectId by rememberSaveable {
         mutableLongStateOf(unselectedListingId)
     }
-    var selectedProjectChildId by remember {
+    var selectedProjectChildId by rememberSaveable {
         mutableLongStateOf(unselectedListingId)
     }
-    var selectedPropertyId by remember {
+    var selectedPropertyId by rememberSaveable {
         mutableLongStateOf(unselectedListingId)
     }
 
-    Row(modifier = Modifier
-        .fillMaxSize()
-        .background(color = MaterialTheme.colorScheme.surfaceContainerLow)) {
+    Row(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(color = MaterialTheme.colorScheme.surfaceContainerLow)
+    ) {
         Column(modifier = Modifier.fillMaxWidth(0.3F)) {
             ListingListScreen(
                 onPropertyClicked = { propertyId ->
@@ -47,6 +49,11 @@ fun MviMediumApp() {
                     selectedProjectId = projectId
                     selectedPropertyId = unselectedListingId
                     selectedProjectChildId = unselectedListingId
+                },
+                onListingsReset = {
+                    selectedProjectId = -1
+                    selectedProjectChildId = -1
+                    selectedPropertyId = -1
                 }
             )
         }

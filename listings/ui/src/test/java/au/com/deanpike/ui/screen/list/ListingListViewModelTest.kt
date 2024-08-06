@@ -1,9 +1,10 @@
 package au.com.deanpike.ui.screen.list
 
+import app.cash.turbine.test
+import au.com.deanpike.commonshared.model.ListingDetails
 import au.com.deanpike.commonshared.util.ResponseWrapper
 import au.com.deanpike.datashared.dispatcher.DispatcherProvider
 import au.com.deanpike.datashared.type.ListingType
-import au.com.deanpike.commonshared.model.ListingDetails
 import au.com.deanpike.listings.client.model.listing.response.Project
 import au.com.deanpike.listings.client.model.listing.response.ProjectChild
 import au.com.deanpike.listings.client.model.listing.response.Property
@@ -131,6 +132,29 @@ class ListingListViewModelTest {
     }
 
     @Test
+    fun `should try and get listings again if an error had occurred`() = runTest {
+        val property = getProperty()
+        val project = getProject()
+        coEvery {
+            useCase.getListings(
+                ListingSearch(
+                    searchMode = StatusType.BUY,
+                    dwellingTypes = emptyList()
+                )
+            )
+        } returns ResponseWrapper.Success(listOf(property, project))
+
+        viewModel.setEvent(ListingListScreenEvent.OnRetryClicked)
+        advanceUntilIdle()
+
+        with(viewModel.uiState) {
+            assertThat(screenState).isEqualTo(ScreenStateType.SUCCESS)
+            assertThat(listings[0]).isEqualTo(property)
+            assertThat(listings[1]).isEqualTo(project)
+        }
+    }
+
+    @Test
     fun `should handle status change`() = runTest {
         coEvery {
             useCase.getListings(
@@ -148,11 +172,18 @@ class ListingListViewModelTest {
             assertThat(screenState).isEqualTo(ScreenStateType.SUCCESS)
             assertThat(listings.size).isEqualTo(2)
             assertThat(selectedStatus).isEqualTo(StatusType.RENT)
+            assertThat(selectedPropertyId).isNull()
+            assertThat(selectedProjectId).isNull()
         }
 
         // Do nothing if the user selects the same search mode
         viewModel.setEvent(ListingListScreenEvent.OnStatusSelected(StatusType.RENT))
         advanceUntilIdle()
+
+        viewModel.effect.test {
+            val item = awaitItem()
+            assertThat(item).isInstanceOf(ListingListScreenEffect.OnListingsReset::class.java)
+        }
 
         coVerify(exactly = 1) {
             useCase.getListings(
@@ -208,6 +239,13 @@ class ListingListViewModelTest {
             assertThat(selectedListingTypes[0]).isEqualTo(HOUSE)
             assertThat(selectedListingTypes[1]).isEqualTo(TOWNHOUSE)
             assertThat(screenState).isEqualTo(ScreenStateType.SUCCESS)
+            assertThat(selectedPropertyId).isNull()
+            assertThat(selectedProjectId).isNull()
+        }
+
+        viewModel.effect.test {
+            val item = awaitItem()
+            assertThat(item).isInstanceOf(ListingListScreenEffect.OnListingsReset::class.java)
         }
 
         // Do nothing if the user chooses the same listing type
@@ -228,6 +266,40 @@ class ListingListViewModelTest {
                     dwellingTypes = listOf(HOUSE, TOWNHOUSE)
                 )
             )
+        }
+    }
+
+    @Test
+    fun `handle property selected`() = runTest {
+        viewModel.setEvent(ListingListScreenEvent.OnPropertySelected(12))
+        advanceUntilIdle()
+
+        with(viewModel.uiState) {
+            assertThat(selectedPropertyId).isEqualTo(12)
+            assertThat(selectedProjectId).isNull()
+        }
+
+        viewModel.effect.test {
+            val item = awaitItem()
+            assertThat(item).isInstanceOf(ListingListScreenEffect.OnPropertySelected::class.java)
+            assertThat((item as ListingListScreenEffect.OnPropertySelected).id).isEqualTo(12)
+        }
+    }
+
+    @Test
+    fun `handle project selected`() = runTest {
+        viewModel.setEvent(ListingListScreenEvent.OnProjectSelected(23))
+        advanceUntilIdle()
+
+        with(viewModel.uiState) {
+            assertThat(selectedProjectId).isEqualTo(23)
+            assertThat(selectedPropertyId).isNull()
+        }
+
+        viewModel.effect.test {
+            val item = awaitItem()
+            assertThat(item).isInstanceOf(ListingListScreenEffect.OnProjectSelected::class.java)
+            assertThat((item as ListingListScreenEffect.OnProjectSelected).id).isEqualTo(23)
         }
     }
 

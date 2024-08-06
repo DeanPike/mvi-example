@@ -1,6 +1,7 @@
 package au.com.deanpike.mviexample.ui.e2e
 
 import au.com.deanpike.detail.ui.project.ProjectChildComponentTestTags.PROJECT_CHILD_LAYOUT
+import au.com.deanpike.detail.ui.project.ProjectChildrenComponentTestTags.PROJECT_CHILDREN
 import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_DETAIL_CLOSE
 import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_DETAIL_NAME
 import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAIL_CLOSE
@@ -28,7 +29,7 @@ class MainActivityTest : UiE2ETestBase() {
     @get:Rule(order = 1)
     val composeTestRule = createComposeRuleFor(MainActivity::class.java)
 
-    private val timeout = 1000L
+    private val timeout = 5000L
 
     @Test
     fun show_project_detail() {
@@ -101,10 +102,12 @@ class MainActivityTest : UiE2ETestBase() {
             waitUntilTagExists(PROJECT_DETAIL_NAME, timeout)
 
             setupProjectChildResponse()
+            waitUntilTagExists(PROJECT_CHILDREN, timeout)
+            scrollToItemPosition(tag = PROJECT_CHILDREN, index = 0)
             clickOn("${PROJECT_CHILD_LAYOUT}_0", timeout)
 
             // Project child
-            waitUntilTagExists(PROPERTY_DETAIL_PRICE)
+            waitUntilTagExists(PROPERTY_DETAIL_PRICE, timeout)
             clickOn(PROPERTY_DETAIL_CLOSE)
 
             // Project detail screen

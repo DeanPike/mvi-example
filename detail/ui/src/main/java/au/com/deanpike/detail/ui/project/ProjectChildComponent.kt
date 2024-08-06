@@ -48,9 +48,6 @@ fun ProjectChildComponent(
 ) {
     val density = LocalDensity.current
     Card(
-        modifier = Modifier.clickable {
-            onProjectChildClicked(child.id)
-        },
         colors = CardDefaults.cardColors().copy(
             containerColor = Color.Gray.copy(alpha = 0.05F)
         ),
@@ -60,6 +57,9 @@ fun ProjectChildComponent(
             modifier = Modifier
                 .width(with(density) { (screenWidth * 0.9).toInt().toDp() })
                 .padding(DIM_8)
+                .clickable {
+                    onProjectChildClicked(child.id)
+                }
                 .testTag("${PROJECT_CHILD_LAYOUT}_$position")
         ) {
             val (imageRef, priceRef, detailRef, lifecycleRef) = createRefs()

@@ -10,11 +10,14 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
@@ -37,14 +40,37 @@ import au.com.deanpike.uishared.component.ErrorComponent
 import au.com.deanpike.uishared.theme.Dimension.DIM_16
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
 import au.com.deanpike.uishared.theme.MviExampleTheme
+import kotlinx.coroutines.launch
 
 @Composable
 fun ListingListScreen(
     viewModel: ListingListViewModel = hiltViewModel<ListingListViewModel>(),
     onPropertyClicked: (Long) -> Unit = {},
-    onProjectClicked: (Long) -> Unit = {}
+    onProjectClicked: (Long) -> Unit = {},
+    onListingsReset: () -> Unit = {}
 ) {
+    val lifecycleOwner = LocalLifecycleOwner.current
+    val scope = rememberCoroutineScope()
 
+    DisposableEffect(lifecycleOwner) {
+        val job = scope.launch {
+            viewModel.effect.collect { effect ->
+                when (effect) {
+                    is ListingListScreenEffect.OnPropertySelected -> {
+                        onPropertyClicked(effect.id)
+                    }
+
+                    is ListingListScreenEffect.OnProjectSelected -> {
+                        onProjectClicked(effect.id)
+                    }
+                    is ListingListScreenEffect.OnListingsReset -> {
+                        onListingsReset()
+                    }
+                }
+            }
+        }
+        onDispose { job.cancel() }
+    }
     LaunchedEffect(Unit) {
         if (viewModel.uiState.screenState == ScreenStateType.INITIAL) {
             viewModel.setEvent(ListingListScreenEvent.Initialise)
@@ -67,8 +93,12 @@ fun ListingListScreen(
         onRetryClicked = {
             viewModel.setEvent(ListingListScreenEvent.OnRetryClicked)
         },
-        onPropertyClicked = onPropertyClicked,
-        onProjectClicked = onProjectClicked
+        onPropertyClicked = {
+            viewModel.setEvent(ListingListScreenEvent.OnPropertySelected(it))
+        },
+        onProjectClicked = {
+            viewModel.setEvent(ListingListScreenEvent.OnProjectSelected(it))
+        }
     )
 }
 

@@ -10,6 +10,7 @@ import au.com.deanpike.uishared.base.BaseViewModel
 import au.com.deanpike.uishared.base.ScreenStateType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 
 @HiltViewModel
@@ -39,6 +40,12 @@ class ListingListViewModel @Inject constructor(
             is ListingListScreenEvent.OnRetryClicked -> {
                 onRetryClicked()
             }
+            is ListingListScreenEvent.OnPropertySelected -> {
+                onPropertySelected(event)
+            }
+            is ListingListScreenEvent.OnProjectSelected -> {
+                onProjectSelected(event)
+            }
         }
     }
 
@@ -51,13 +58,19 @@ class ListingListViewModel @Inject constructor(
         getListings()
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     private fun onStatusSelected(status: StatusType) {
         if (status != uiState.selectedStatus) {
             setState {
                 copy(
                     screenState = ScreenStateType.LOADING,
-                    selectedStatus = status
+                    selectedStatus = status,
+                    selectedPropertyId = null,
+                    selectedProjectId = null
                 )
+            }
+            setEffect {
+                ListingListScreenEffect.OnListingsReset
             }
             getListings()
         }
@@ -79,6 +92,7 @@ class ListingListViewModel @Inject constructor(
         }
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     private fun onListingTypesApplied(event: ListingListScreenEvent.OnListingTypesApplied) {
         if (event.selectedListingTypes.count() != uiState.selectedListingTypes.count() ||
             !uiState.selectedListingTypes.containsAll(event.selectedListingTypes)
@@ -87,14 +101,19 @@ class ListingListViewModel @Inject constructor(
                 copy(
                     showListingTypeScreen = false,
                     selectedListingTypes = event.selectedListingTypes,
-                    screenState = ScreenStateType.LOADING
+                    screenState = ScreenStateType.LOADING,
+                    selectedPropertyId = null,
+                    selectedProjectId = null
                 )
+            }
+            setEffect {
+                ListingListScreenEffect.OnListingsReset
             }
             getListings()
         } else {
             setState {
                 copy(
-                    showListingTypeScreen = false,
+                    showListingTypeScreen = false
                 )
             }
         }
@@ -108,6 +127,32 @@ class ListingListViewModel @Inject constructor(
         }
 
         getListings()
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    private fun onPropertySelected(event: ListingListScreenEvent.OnPropertySelected) {
+        setState {
+            copy(
+                selectedPropertyId = event.id,
+                selectedProjectId = null
+            )
+        }
+        setEffect {
+            ListingListScreenEffect.OnPropertySelected(event.id)
+        }
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    private fun onProjectSelected(event: ListingListScreenEvent.OnProjectSelected) {
+        setState {
+            copy(
+                selectedProjectId = event.id,
+                selectedPropertyId = null
+            )
+        }
+        setEffect {
+            ListingListScreenEffect.OnProjectSelected(event.id)
+        }
     }
 
     private fun getListings() {

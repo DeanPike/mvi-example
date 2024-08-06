@@ -63,7 +63,7 @@ fun ProjectDetailScreen(
     onCloseClicked: () -> Unit = {},
     onProjectChildClicked: (Long) -> Unit = {}
 ) {
-    LaunchedEffect(Unit) {
+    LaunchedEffect(projectId) {
         viewModel.setEvent(ProjectDetailScreenEvent.Initialise(projectId = projectId))
     }
 
