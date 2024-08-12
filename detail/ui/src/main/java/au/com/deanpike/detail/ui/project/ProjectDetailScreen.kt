@@ -145,6 +145,10 @@ fun ProjectDetailSuccess(
     onProjectChildClicked: (Long) -> Unit = {}
 ) {
     val scrollState = rememberScrollState()
+
+    LaunchedEffect(state.projectId) {
+        scrollState.scrollTo(0)
+    }
     Column(
         modifier = Modifier
             .fillMaxSize()
