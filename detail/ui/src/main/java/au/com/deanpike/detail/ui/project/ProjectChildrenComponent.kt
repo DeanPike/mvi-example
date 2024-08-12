@@ -4,7 +4,9 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
@@ -23,11 +25,17 @@ fun ProjectChildrenComponent(
     childListings: List<ProjectChild>,
     onProjectChildClicked: (Long) -> Unit = {}
 ) {
-    var screenWidth by remember{
+    var screenWidth by remember {
         mutableIntStateOf(0)
 
     }
+    val listState = rememberLazyListState()
+
+    LaunchedEffect(childListings) {
+        listState.scrollToItem(0)
+    }
     LazyRow(
+        state = listState,
         modifier = Modifier
             .fillMaxWidth()
             .onGloballyPositioned { coordinates ->
