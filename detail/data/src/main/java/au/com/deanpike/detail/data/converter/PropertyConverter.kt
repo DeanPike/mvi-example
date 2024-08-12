@@ -15,7 +15,7 @@ object PropertyConverter {
             headline = detail.headline,
             description = detail.description,
             lifecycleStatus = detail.lifecycleStatus,
-            media = mediaConverter(detail.media),
+            media = detail.media?.let { mediaConverter(it) } ?: emptyList(),
             advertiser = detail.advertiser?.let { advertiserConverter(it) },
             schools = schoolConverter(detail.schools),
             dwellingType = detail.dwellingType,

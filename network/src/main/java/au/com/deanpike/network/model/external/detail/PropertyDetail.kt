@@ -10,7 +10,7 @@ data class PropertyDetail(
     @SerializedName("address") var address: String? = null,
     @SerializedName("listing_type") var listingType: String? = null,
     @SerializedName("lifecycle_status") var lifecycleStatus: String? = null,
-    @SerializedName("media") var media: List<Media> = emptyList(),
+    @SerializedName("media") var media: List<Media>? = emptyList(),
     @SerializedName("advertiser") var advertiser: Advertiser? = Advertiser(),
     @SerializedName("geo_location") var geoLocation: GeoLocation? = null,
     @SerializedName("schools") var schools: ArrayList<School> = arrayListOf(),

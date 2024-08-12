@@ -13,7 +13,7 @@ data class ProjectDetail(
     val address: String? = null,
     @SerializedName("listing_type")
     val listingType: String? = null,
-    val media: List<Media> = emptyList(),
+    val media: List<Media>? = emptyList(),
     val advertiser: Advertiser? = null,
     @SerializedName("additional_features")
     val additionalFeatures: List<String> = emptyList(),

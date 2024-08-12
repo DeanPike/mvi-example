@@ -15,7 +15,7 @@ object ProjectConverter {
             address = detail.address,
             headline = detail.headline,
             description = detail.description,
-            media = ConverterShared.mediaConverter(detail.media),
+            media = detail.media?.let { ConverterShared.mediaConverter(it) } ?: emptyList(),
             advertiser = detail.advertiser?.let { advertiserConverter(it) },
             schools = schoolConverter(detail.schools),
             dwellingType = detail.dwellingType,
