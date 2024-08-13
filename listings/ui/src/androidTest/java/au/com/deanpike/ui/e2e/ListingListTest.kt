@@ -44,6 +44,7 @@ class ListingListTest : UiE2ETestBase() {
     fun test_buy_listing_flow() {
         var propertyClicked: Long? = null
         var projectClicked: Long? = null
+        var projectChildClicked: Long? = null
 
         setupResponse(
             listingType = emptyList(),
@@ -59,6 +60,10 @@ class ListingListTest : UiE2ETestBase() {
                         },
                         onProjectClicked = {
                             projectClicked = it
+                        },
+                        onProjectChildClicked = { projectId, childId ->
+                            projectClicked = projectId
+                            projectChildClicked = childId
                         }
                     )
                 }
@@ -113,7 +118,9 @@ class ListingListTest : UiE2ETestBase() {
             projectListScreen.clickProject(0)
             assertThat(projectClicked).isEqualTo(2842)
             projectListScreen.clickProjectChild(parentPosition = 0, position = 1)
-            assertThat(propertyClicked).isEqualTo(2019090988)
+            advanceTimeAndWait()
+            assertThat(projectClicked).isEqualTo(2842)
+            assertThat(projectChildClicked).isEqualTo(2019090988)
 
             projectClicked = null
             propertyClicked = null

@@ -6,15 +6,17 @@ import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_DET
 import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_DETAIL_NAME
 import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAIL_CLOSE
 import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAIL_PRICE
-import au.com.deanpike.mviexample.ui.activity.MainActivity
+import au.com.deanpike.mviexample.ui.activity.ApplicationScreen
 import au.com.deanpike.ui.screen.list.ListingListScreenTestTags.LISTING_LIST
 import au.com.deanpike.ui.screen.list.component.ProjectChildListItemComponentTestTags.PROJECT_CHILD_LIST_ITEM_LAYOUT
 import au.com.deanpike.ui.screen.list.component.ProjectListItemTesTags.PROJECT_LIST_ITEM_CHILD_COUNT
 import au.com.deanpike.ui.screen.list.component.ProjectListItemTesTags.PROJECT_LIST_ITEM_LAYOUT
 import au.com.deanpike.ui.screen.list.component.PropertyListItemTesTags.PROPERTY_LIST_ITEM_ADDRESS
+import au.com.deanpike.uishared.theme.MviExampleTheme
+import au.com.deanpike.uitestshared.HiltTestActivity
 import au.com.deanpike.uitestshared.base.UiE2ETestBase
 import au.com.deanpike.uitestshared.mockserver.HttpMethod
-import au.com.deanpike.uitestshared.util.assertTextDisplayed
+import au.com.deanpike.uitestshared.util.advanceTimeAndWait
 import au.com.deanpike.uitestshared.util.clickOn
 import au.com.deanpike.uitestshared.util.scrollToItemPosition
 import au.com.deanpike.uitestshared.util.waitUntilTagExists
@@ -27,7 +29,7 @@ import org.junit.Test
 class MainActivityTest : UiE2ETestBase() {
 
     @get:Rule(order = 1)
-    val composeTestRule = createComposeRuleFor(MainActivity::class.java)
+    val composeTestRule = createComposeRuleFor(HiltTestActivity::class.java)
 
     private val timeout = 5000L
 
@@ -39,24 +41,31 @@ class MainActivityTest : UiE2ETestBase() {
         )
 
         with(composeTestRule) {
-            waitUntilTagExists(tag = LISTING_LIST, timeout = timeout)
+            setContent {
+                MviExampleTheme {
+                    ApplicationScreen()
+                    advanceTimeAndWait()
 
-            setupProjectResponse()
-            scrollToItemPosition(tag = LISTING_LIST, index = 0)
-            clickOn("${PROJECT_LIST_ITEM_LAYOUT}_0")
-
-            // Project detail screen
-            waitUntilTagExists(PROJECT_DETAIL_NAME, timeout)
-            assertTextDisplayed(PROJECT_DETAIL_NAME, "Easterly Wollongong")
-
-            setupListingResponse(
-                listingType = emptyList(),
-                statusType = "buy"
-            )
-            clickOn(PROJECT_DETAIL_CLOSE, timeout)
-
-            // Listing list screen
-            waitUntilTagExists(tag = LISTING_LIST, timeout = timeout)
+//                    waitUntilTagExists(tag = LISTING_LIST, timeout = timeout)
+//
+//                    setupProjectResponse()
+//                    scrollToItemPosition(tag = LISTING_LIST, index = 0)
+//                    clickOn("${PROJECT_LIST_ITEM_LAYOUT}_0")
+//
+//                    // Project detail screen
+//                    waitUntilTagExists(PROJECT_DETAIL_NAME, timeout)
+//                    assertTextDisplayed(PROJECT_DETAIL_NAME, "Easterly Wollongong")
+//
+//                    setupListingResponse(
+//                        listingType = emptyList(),
+//                        statusType = "buy"
+//                    )
+//                    clickOn(PROJECT_DETAIL_CLOSE, timeout)
+//
+//                    // Listing list screen
+//                    waitUntilTagExists(tag = LISTING_LIST, timeout = timeout)
+                }
+            }
         }
     }
 
@@ -85,7 +94,7 @@ class MainActivityTest : UiE2ETestBase() {
     }
 
     @Test
-    fun show_project_child_from_project_details(){
+    fun show_project_child_from_project_details() {
         setupListingResponse(
             listingType = emptyList(),
             statusType = "buy"

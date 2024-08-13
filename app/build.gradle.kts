@@ -51,6 +51,10 @@ android {
         }
     }
 
+    tasks.withType<Test>() {
+        useJUnitPlatform()
+    }
+
     testOptions {
         animationsDisabled = true
     }
@@ -81,12 +85,15 @@ dependencies {
     implementation(libs.hilt.navigation.compose)
     implementation(libs.androidx.adaptive.android)
     implementation(libs.androidx.window.core.android)
+    implementation(libs.adaptive.layout)
+    implementation(libs.adaptive.navigation)
 
     testImplementation(libs.junit.jupiter)
     testImplementation(libs.kotlinx.coroutines.core.jvm)
 
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(libs.androidx.ui.test.junit4)
 
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)

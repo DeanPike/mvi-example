@@ -12,8 +12,6 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.ui.Modifier
 import androidx.window.core.layout.WindowSizeClass
 import androidx.window.core.layout.WindowWidthSizeClass
-import au.com.deanpike.mviexample.ui.screen.MviCompactApp
-import au.com.deanpike.mviexample.ui.screen.MviMediumApp
 import au.com.deanpike.uishared.theme.MviExampleTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -41,11 +39,7 @@ class MainActivity : ComponentActivity() {
 
             MviExampleTheme {
                 Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-                    if (windowSizeClass.windowWidthSizeClass == WindowWidthSizeClass.COMPACT) {
-                        MviCompactApp()
-                    } else {
-                        MviMediumApp()
-                    }
+                    ApplicationScreen()
                 }
             }
         }

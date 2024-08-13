@@ -54,7 +54,7 @@ class ListingListViewModelTest {
             )
         } returns ResponseWrapper.Success(listOf(getProject(), getProperty()))
 
-        viewModel.setEvent(ListingListScreenEvent.Initialise)
+        viewModel.setEvent(ListingListScreenEvent.Initialise(true))
         advanceUntilIdle()
 
         with(viewModel.uiState) {
@@ -122,7 +122,7 @@ class ListingListViewModelTest {
             )
         } returns ResponseWrapper.Error(IOException("No Internet"))
 
-        viewModel.setEvent(ListingListScreenEvent.Initialise)
+        viewModel.setEvent(ListingListScreenEvent.Initialise(true))
         advanceUntilIdle()
 
         with(viewModel.uiState) {
@@ -180,11 +180,6 @@ class ListingListViewModelTest {
         viewModel.setEvent(ListingListScreenEvent.OnStatusSelected(StatusType.RENT))
         advanceUntilIdle()
 
-        viewModel.effect.test {
-            val item = awaitItem()
-            assertThat(item).isInstanceOf(ListingListScreenEffect.OnListingsReset::class.java)
-        }
-
         coVerify(exactly = 1) {
             useCase.getListings(
                 ListingSearch(
@@ -241,11 +236,6 @@ class ListingListViewModelTest {
             assertThat(screenState).isEqualTo(ScreenStateType.SUCCESS)
             assertThat(selectedPropertyId).isNull()
             assertThat(selectedProjectId).isNull()
-        }
-
-        viewModel.effect.test {
-            val item = awaitItem()
-            assertThat(item).isInstanceOf(ListingListScreenEffect.OnListingsReset::class.java)
         }
 
         // Do nothing if the user chooses the same listing type

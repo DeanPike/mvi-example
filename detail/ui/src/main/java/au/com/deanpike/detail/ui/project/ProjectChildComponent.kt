@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import au.com.deanpike.commonshared.model.ListingDetails
 import au.com.deanpike.detail.client.model.detail.ProjectChild
 import au.com.deanpike.detail.ui.project.ProjectChildComponentTestTags.PROJECT_CHILD_IMAGE
+import au.com.deanpike.detail.ui.project.ProjectChildComponentTestTags.PROJECT_CHILD_LAYOUT
 import au.com.deanpike.detail.ui.project.ProjectChildComponentTestTags.PROJECT_CHILD_LIFECYCLE
 import au.com.deanpike.detail.ui.project.ProjectChildComponentTestTags.PROJECT_CHILD_PRICE
 import au.com.deanpike.uishared.R
@@ -54,6 +55,7 @@ fun ProjectChildComponent(
             .clickable {
                 onProjectChildClicked(child.id)
             }
+            .testTag("${PROJECT_CHILD_LAYOUT}_$position")
         ) {
             child.propertyImage?.let {
                 AsyncImage(

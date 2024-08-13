@@ -3,6 +3,8 @@ package au.com.deanpike.ui.screen.list
 import androidx.lifecycle.viewModelScope
 import au.com.deanpike.commonshared.util.ResponseWrapper
 import au.com.deanpike.datashared.dispatcher.DispatcherProvider
+import au.com.deanpike.listings.client.model.listing.response.Project
+import au.com.deanpike.listings.client.model.listing.response.Property
 import au.com.deanpike.listings.client.model.listing.search.ListingSearch
 import au.com.deanpike.listings.client.type.StatusType
 import au.com.deanpike.listings.client.usecase.ListingUseCase
@@ -13,6 +15,7 @@ import javax.inject.Inject
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 
+@OptIn(ExperimentalCoroutinesApi::class)
 @HiltViewModel
 class ListingListViewModel @Inject constructor(
     private val dispatcher: DispatcherProvider,
@@ -23,7 +26,7 @@ class ListingListViewModel @Inject constructor(
     override fun handleEvent(event: ListingListScreenEvent) {
         when (event) {
             is ListingListScreenEvent.Initialise -> {
-                initialise()
+                initialise(event)
             }
             is ListingListScreenEvent.OnStatusSelected -> {
                 onStatusSelected(event.status)
@@ -46,19 +49,22 @@ class ListingListViewModel @Inject constructor(
             is ListingListScreenEvent.OnProjectSelected -> {
                 onProjectSelected(event)
             }
+            is ListingListScreenEvent.OnProjectChildSelected -> {
+                onProjectChildSelected(event)
+            }
         }
     }
 
-    private fun initialise() {
+    private fun initialise(event: ListingListScreenEvent.Initialise) {
         setState {
             copy(
-                screenState = ScreenStateType.LOADING
+                screenState = ScreenStateType.LOADING,
+                isSinglePane = event.isSinglePane
             )
         }
         getListings()
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     private fun onStatusSelected(status: StatusType) {
         if (status != uiState.selectedStatus) {
             setState {
@@ -68,9 +74,6 @@ class ListingListViewModel @Inject constructor(
                     selectedPropertyId = null,
                     selectedProjectId = null
                 )
-            }
-            setEffect {
-                ListingListScreenEffect.OnListingsReset
             }
             getListings()
         }
@@ -92,7 +95,6 @@ class ListingListViewModel @Inject constructor(
         }
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     private fun onListingTypesApplied(event: ListingListScreenEvent.OnListingTypesApplied) {
         if (event.selectedListingTypes.count() != uiState.selectedListingTypes.count() ||
             !uiState.selectedListingTypes.containsAll(event.selectedListingTypes)
@@ -105,9 +107,6 @@ class ListingListViewModel @Inject constructor(
                     selectedPropertyId = null,
                     selectedProjectId = null
                 )
-            }
-            setEffect {
-                ListingListScreenEffect.OnListingsReset
             }
             getListings()
         } else {
@@ -129,12 +128,12 @@ class ListingListViewModel @Inject constructor(
         getListings()
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     private fun onPropertySelected(event: ListingListScreenEvent.OnPropertySelected) {
         setState {
             copy(
                 selectedPropertyId = event.id,
-                selectedProjectId = null
+                selectedProjectId = null,
+                selectedProjectChild = null
             )
         }
         setEffect {
@@ -142,16 +141,32 @@ class ListingListViewModel @Inject constructor(
         }
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     private fun onProjectSelected(event: ListingListScreenEvent.OnProjectSelected) {
         setState {
             copy(
                 selectedProjectId = event.id,
-                selectedPropertyId = null
+                selectedPropertyId = null,
+                selectedProjectChild = null
             )
         }
         setEffect {
             ListingListScreenEffect.OnProjectSelected(event.id)
+        }
+    }
+
+    private fun onProjectChildSelected(event: ListingListScreenEvent.OnProjectChildSelected) {
+        setState {
+            copy(
+                selectedProjectId = event.projectId,
+                selectedProjectChild = event.projectChildId,
+                selectedPropertyId = null
+            )
+        }
+        setEffect {
+            ListingListScreenEffect.OnProjectChildSelected(
+                projectId = event.projectId,
+                projectChildId = event.projectChildId
+            )
         }
     }
 
@@ -169,6 +184,20 @@ class ListingListViewModel @Inject constructor(
                             screenState = ScreenStateType.SUCCESS,
                             listings = response.data
                         )
+                    }
+                    if (!uiState.isSinglePane) {
+                        if (response.data.isNotEmpty()) {
+                            val listing = response.data[0]
+                            if (listing is Property) {
+                                onPropertySelected(
+                                    event = ListingListScreenEvent.OnPropertySelected(id = listing.id)
+                                )
+                            } else if (listing is Project) {
+                                onProjectSelected(
+                                    event = ListingListScreenEvent.OnProjectSelected(id = listing.id)
+                                )
+                            }
+                        }
                     }
                 }
                 is ResponseWrapper.Error -> {

@@ -54,14 +54,14 @@ class PropertyDetailApiTest {
             assertThat(listingType).isEqualTo("property")
             assertThat(lifecycleStatus).isEqualTo("Sold")
 
-            assertThat(media.count()).isEqualTo(14)
-            assertThat(media[0].mediaType).isEqualTo("video")
-            assertThat(media[0].type).isEqualTo("youtube")
-            assertThat(media[0].imageUrl).isEqualTo("https://bucket-api.domain.com.au/v1/bucket/image/2018868051_1_1_231030_075432-w5000-h3333")
+            assertThat(media!!.count()).isEqualTo(14)
+            assertThat(media!![0].mediaType).isEqualTo("video")
+            assertThat(media!![0].type).isEqualTo("youtube")
+            assertThat(media!![0].imageUrl).isEqualTo("https://bucket-api.domain.com.au/v1/bucket/image/2018868051_1_1_231030_075432-w5000-h3333")
 
-            assertThat(media[13].mediaType).isEqualTo("image")
-            assertThat(media[13].type).isEqualTo("floor_plan")
-            assertThat(media[13].imageUrl).isEqualTo("https://bucket-api.domain.com.au/v1/bucket/image/2018868051_13_3_231030_075432-w2550-h3300")
+            assertThat(media!![13].mediaType).isEqualTo("image")
+            assertThat(media!![13].type).isEqualTo("floor_plan")
+            assertThat(media!![13].imageUrl).isEqualTo("https://bucket-api.domain.com.au/v1/bucket/image/2018868051_13_3_231030_075432-w2550-h3300")
 
             assertThat(advertiser!!.id).isEqualTo(2373)
             assertThat(advertiser!!.name).isEqualTo("Ray White Wetherill Park")

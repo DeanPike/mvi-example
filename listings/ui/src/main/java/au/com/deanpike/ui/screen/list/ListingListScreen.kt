@@ -45,9 +45,10 @@ import kotlinx.coroutines.launch
 @Composable
 fun ListingListScreen(
     viewModel: ListingListViewModel = hiltViewModel<ListingListViewModel>(),
+    isSinglePane: Boolean = true,
     onPropertyClicked: (Long) -> Unit = {},
     onProjectClicked: (Long) -> Unit = {},
-    onListingsReset: () -> Unit = {}
+    onProjectChildClicked: (Long, Long) -> Unit = { _, _ -> },
 ) {
     val lifecycleOwner = LocalLifecycleOwner.current
     val scope = rememberCoroutineScope()
@@ -63,8 +64,8 @@ fun ListingListScreen(
                     is ListingListScreenEffect.OnProjectSelected -> {
                         onProjectClicked(effect.id)
                     }
-                    is ListingListScreenEffect.OnListingsReset -> {
-                        onListingsReset()
+                    is ListingListScreenEffect.OnProjectChildSelected -> {
+                        onProjectChildClicked(effect.projectId, effect.projectChildId)
                     }
                 }
             }
@@ -73,7 +74,11 @@ fun ListingListScreen(
     }
     LaunchedEffect(Unit) {
         if (viewModel.uiState.screenState == ScreenStateType.INITIAL) {
-            viewModel.setEvent(ListingListScreenEvent.Initialise)
+            viewModel.setEvent(
+                ListingListScreenEvent.Initialise(
+                    isSinglePane = isSinglePane
+                )
+            )
         }
     }
     ListingListScreenContent(
@@ -98,6 +103,14 @@ fun ListingListScreen(
         },
         onProjectClicked = {
             viewModel.setEvent(ListingListScreenEvent.OnProjectSelected(it))
+        },
+        onProjectChildClicked = { projectId, projectChildId ->
+            viewModel.setEvent(
+                ListingListScreenEvent.OnProjectChildSelected(
+                    projectId = projectId,
+                    projectChildId = projectChildId
+                )
+            )
         }
     )
 }
@@ -112,7 +125,8 @@ fun ListingListScreenContent(
     onListingTypesApplied: (List<DwellingType>) -> Unit = {},
     onRetryClicked: () -> Unit = {},
     onPropertyClicked: (Long) -> Unit = {},
-    onProjectClicked: (Long) -> Unit = {}
+    onProjectClicked: (Long) -> Unit = {},
+    onProjectChildClicked: (Long, Long) -> Unit = { _, _ -> }
 ) {
 
     val layoutDirection = LocalLayoutDirection.current
@@ -163,8 +177,7 @@ fun ListingListScreenContent(
                 )
                 Spacer(modifier = Modifier.height(DIM_8))
                 LazyColumn(
-                    modifier = Modifier
-                        .testTag(LISTING_LIST),
+                    modifier = Modifier.testTag(LISTING_LIST),
                     verticalArrangement = Arrangement.spacedBy(DIM_16),
                 ) {
                     state.listings.forEachIndexed { index, listing ->
@@ -187,7 +200,7 @@ fun ListingListScreenContent(
                                         onProjectClicked(it)
                                     },
                                     onProjectChildClicked = {
-                                        onPropertyClicked(it)
+                                        onProjectChildClicked(listing.id, it)
                                     }
                                 )
                             }
