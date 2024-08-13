@@ -2,10 +2,11 @@ package au.com.deanpike.detail.ui.project
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
@@ -16,7 +17,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -24,16 +24,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.constraintlayout.compose.Dimension
 import au.com.deanpike.commonshared.model.ListingDetails
 import au.com.deanpike.detail.client.model.detail.ProjectChild
 import au.com.deanpike.detail.ui.project.ProjectChildComponentTestTags.PROJECT_CHILD_IMAGE
-import au.com.deanpike.detail.ui.project.ProjectChildComponentTestTags.PROJECT_CHILD_LAYOUT
 import au.com.deanpike.detail.ui.project.ProjectChildComponentTestTags.PROJECT_CHILD_LIFECYCLE
 import au.com.deanpike.detail.ui.project.ProjectChildComponentTestTags.PROJECT_CHILD_PRICE
 import au.com.deanpike.uishared.R
 import au.com.deanpike.uishared.component.PropertyDetailComponent
+import au.com.deanpike.uishared.theme.Dimension.DIM_16
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
 import au.com.deanpike.uishared.theme.MviExampleTheme
 import coil.compose.AsyncImage
@@ -43,34 +41,23 @@ import coil.request.ImageRequest
 fun ProjectChildComponent(
     position: Int,
     child: ProjectChild,
-    screenWidth: Int,
     onProjectChildClicked: (Long) -> Unit = {}
 ) {
-    val density = LocalDensity.current
     Card(
         colors = CardDefaults.cardColors().copy(
             containerColor = Color.Gray.copy(alpha = 0.05F)
         ),
         border = BorderStroke(width = 1.dp, color = MaterialTheme.colorScheme.outline)
     ) {
-        ConstraintLayout(
-            modifier = Modifier
-                .width(with(density) { (screenWidth * 0.9).toInt().toDp() })
-                .padding(DIM_8)
-                .clickable {
-                    onProjectChildClicked(child.id)
-                }
-                .testTag("${PROJECT_CHILD_LAYOUT}_$position")
+        Row(modifier = Modifier
+            .padding(DIM_16)
+            .clickable {
+                onProjectChildClicked(child.id)
+            }
         ) {
-            val (imageRef, priceRef, detailRef, lifecycleRef) = createRefs()
-
             child.propertyImage?.let {
                 AsyncImage(
                     modifier = Modifier
-                        .constrainAs(imageRef) {
-                            start.linkTo(parent.start)
-                            top.linkTo(parent.top)
-                        }
                         .size(120.dp)
                         .testTag("${PROJECT_CHILD_IMAGE}_$position"),
                     model = ImageRequest.Builder(LocalContext.current)
@@ -83,61 +70,47 @@ fun ProjectChildComponent(
                     alignment = Alignment.Center
                 )
             }
-
-            child.price?.let {
-                Text(
+            Column {
+                PropertyDetailComponent(
                     modifier = Modifier
-                        .constrainAs(priceRef) {
-                            bottom.linkTo(imageRef.bottom)
-                            start.linkTo(imageRef.end)
-                            end.linkTo(parent.end)
-                            width = Dimension.fillToConstraints
-                        }
-                        .padding(
-                            top = DIM_8,
-                            start = DIM_8,
-                            end = DIM_8
-                        )
-                        .fillMaxWidth(0.8F)
-                        .testTag("${PROJECT_CHILD_PRICE}_$position"),
-                    text = it,
-                    style = MaterialTheme.typography.titleMedium,
-                    fontWeight = FontWeight.Bold,
-                    maxLines = 2,
-                    overflow = TextOverflow.Ellipsis
+                        .padding(start = DIM_8, end = DIM_8),
+                    parentPosition = 0,
+                    position = position,
+                    details = ListingDetails(
+                        price = child.price,
+                        numberOfBedrooms = child.bedroomCount,
+                        numberOfBathrooms = child.bathroomCount,
+                        numberOfCarSpaces = child.carSpaceCount
+                    ),
+                    dwellingType = null
                 )
-            }
 
-            PropertyDetailComponent(
-                modifier = Modifier
-                    .constrainAs(detailRef) {
-                        top.linkTo(parent.top)
-                        start.linkTo(imageRef.end)
-                        end.linkTo(parent.end)
-                        width = Dimension.fillToConstraints
-                    }
-                    .padding(start = DIM_8, end = DIM_8),
-                parentPosition = 0,
-                position = position,
-                details = ListingDetails(
-                    price = child.price,
-                    numberOfBedrooms = child.bedroomCount,
-                    numberOfBathrooms = child.bathroomCount,
-                    numberOfCarSpaces = child.carSpaceCount
-                ),
-                dwellingType = null
-            )
+                child.lifecycleStatus?.let {
+                    Text(
+                        modifier = Modifier
+                            .padding(start = DIM_8, top = DIM_8)
+                            .testTag("${PROJECT_CHILD_LIFECYCLE}_$position"),
+                        text = it
+                    )
+                }
 
-            child.lifecycleStatus?.let {
-                Text(
-                    modifier = Modifier
-                        .constrainAs(lifecycleRef) {
-                            start.linkTo(imageRef.end)
-                            top.linkTo(detailRef.bottom)
-                        }
-                        .padding(start = DIM_8, top = DIM_8)
-                        .testTag("${PROJECT_CHILD_LIFECYCLE}_$position"),
-                    text = it)
+                child.price?.let {
+                    Text(
+                        modifier = Modifier
+                            .padding(
+                                top = DIM_8,
+                                start = DIM_8,
+                                end = DIM_8
+                            )
+                            .fillMaxWidth(0.8F)
+                            .testTag("${PROJECT_CHILD_PRICE}_$position"),
+                        text = it,
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Bold,
+                        maxLines = 2,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                }
             }
         }
     }
@@ -157,7 +130,6 @@ fun ProjectChildComponentPreview() {
     MviExampleTheme {
         ProjectChildComponent(
             position = 0,
-            screenWidth = 400,
             child = ProjectChild(
                 id = 2019256252,
                 bedroomCount = 2,
