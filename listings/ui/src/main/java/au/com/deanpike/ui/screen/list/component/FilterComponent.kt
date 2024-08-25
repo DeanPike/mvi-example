@@ -26,9 +26,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import au.com.deanpike.listings.client.type.DwellingType
 import au.com.deanpike.listings.client.type.StatusType
 import au.com.deanpike.ui.R
+import au.com.deanpike.ui.screen.list.component.FilterComponentTestTags.FILTER_COMPONENT_LAYOUT
 import au.com.deanpike.ui.screen.list.component.FilterComponentTestTags.LISTING_TYPE
 import au.com.deanpike.ui.screen.list.component.FilterComponentTestTags.STATUS_BUTTON
 import au.com.deanpike.ui.screen.list.component.FilterComponentTestTags.STATUS_ITEM
+import au.com.deanpike.ui.screen.list.component.FilterComponentTestTags.STATUS_ITEM_MENU
 import au.com.deanpike.ui.screen.util.StringUtils.getStatusDescription
 import au.com.deanpike.uishared.base.drawableTestTag
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
@@ -48,7 +50,8 @@ fun FilterComponent(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .wrapContentHeight(),
+            .wrapContentHeight()
+            .testTag(FILTER_COMPONENT_LAYOUT),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
@@ -73,6 +76,7 @@ fun FilterComponent(
                 )
             }
             DropdownMenu(
+                modifier = Modifier.testTag(STATUS_ITEM_MENU),
                 expanded = statusExpanded,
                 onDismissRequest = {
                     statusExpanded = false
@@ -108,7 +112,11 @@ fun FilterComponent(
                 modifier = Modifier
                     .padding(end = DIM_8)
                     .testTag("${LISTING_TYPE}_TEXT"),
-                text = if (selectedListingTypes.isEmpty()) stringResource(id = R.string.no_listing_type) else pluralStringResource(id = R.plurals.listing_types, count = selectedListingTypes.count(), selectedListingTypes.count()),
+                text = if (selectedListingTypes.isEmpty()) stringResource(id = R.string.no_listing_type) else pluralStringResource(
+                    id = R.plurals.listing_types,
+                    count = selectedListingTypes.count(),
+                    selectedListingTypes.count()
+                ),
                 style = MaterialTheme.typography.bodyMedium
             )
         }
@@ -117,7 +125,9 @@ fun FilterComponent(
 
 object FilterComponentTestTags {
     private const val PREFIX = "FILTER_COMPONENT_"
+    const val FILTER_COMPONENT_LAYOUT = "${PREFIX}LAYOUT"
     const val STATUS_BUTTON = "${PREFIX}STATUS_BUTTON"
+    const val STATUS_ITEM_MENU = "${PREFIX}STATUS_ITEM_MENU"
     const val STATUS_ITEM = "${PREFIX}STATUS_ITEM"
     const val LISTING_TYPE = "${PREFIX}LISTING_TYPE"
 }

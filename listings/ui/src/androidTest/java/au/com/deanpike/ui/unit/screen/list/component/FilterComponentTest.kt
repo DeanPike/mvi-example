@@ -2,100 +2,67 @@ package au.com.deanpike.ui.unit.screen.list.component
 
 import au.com.deanpike.listings.client.type.DwellingType
 import au.com.deanpike.listings.client.type.StatusType
-import au.com.deanpike.ui.framework.ability.list.component.FilterComponentAbility
-import au.com.deanpike.ui.screen.list.component.FilterComponent
-import au.com.deanpike.uishared.theme.MviExampleTheme
+import au.com.deanpike.ui.framework.robot.FilterComponentRobot
+import au.com.deanpike.ui.framework.robot.StatusDropDownMenuRobot
 import au.com.deanpike.uitestshared.base.UiUnitTestBase
-import au.com.deanpike.uitestshared.util.advanceTimeAndWait
-import org.assertj.core.api.Assertions.assertThat
+import org.junit.Before
 import org.junit.Test
 
 class FilterComponentTest : UiUnitTestBase() {
 
-    val ability = FilterComponentAbility(composeTestRule)
+    private lateinit var filterComponentRobot: FilterComponentRobot
+    private lateinit var statusDropDownMenuRobot: StatusDropDownMenuRobot
+
+    @Before
+    fun setUp() {
+        filterComponentRobot = FilterComponentRobot(composeTestRule)
+        statusDropDownMenuRobot = StatusDropDownMenuRobot(composeTestRule)
+    }
 
     @Test
     fun should_show_filter_component() {
-        var statusSelected = StatusType.RENT
-        var propertyTypeSelected = false
-        with(composeTestRule) {
-            setContent {
-                MviExampleTheme {
-                    FilterComponent(
-                        selectedStatus = StatusType.RENT,
-                        selectedListingTypes = listOf(DwellingType.HOUSE),
-                        onStatusSelected = {
-                            statusSelected = it
-                        },
-                        onListingTypeSelected = {
-                            propertyTypeSelected = true
-                        }
-                    )
-                }
-            }
-            advanceTimeAndWait()
-        }
+        filterComponentRobot
+            .setUpLoginScreen()
+            .waitForIdle()
+            .assertLayoutDisplayed()
+            .assertStatusButtonText("Rent")
+            .assertStatusButtonIcon()
+            .assertListingTypeButtonText("1 Property type")
 
-        with(ability) {
-            assertStatusButtonDisplayed("Rent")
-            clickStatusButton()
-            composeTestRule.advanceTimeAndWait()
-
-            assertBuyStatusItemDisplayed()
-            assertRentStatusItemDisplayed()
-            assertSoldStatusItemDisplayed()
-
-            clickBuyStatus()
-            composeTestRule.advanceTimeAndWait()
-
-            assertThat(statusSelected).isEqualTo(StatusType.BUY)
-
-            assertListingTypeButtonDisplayed(text = "1 Property type")
-            clickListingTypeButton()
-            composeTestRule.advanceTimeAndWait()
-            assertThat(propertyTypeSelected).isTrue()
-        }
     }
 
     @Test
-    fun should_show_filter_component_with_no_listing_types() {
-        with(composeTestRule) {
-            setContent {
-                MviExampleTheme {
-                    FilterComponent(
-                        selectedStatus = StatusType.RENT,
-                        selectedListingTypes = emptyList(),
-                        onStatusSelected = { },
-                        onListingTypeSelected = { }
-                    )
-                }
-            }
-            advanceTimeAndWait()
-        }
+    fun change_the_status() {
+        filterComponentRobot
+            .setUpLoginScreen(
+                listingTypes = listOf(DwellingType.HOUSE, DwellingType.TOWNHOUSE)
+            )
+            .waitForIdle()
+            .assertListingTypeButtonText("2 Property types")
+            .selectStatusButton()
+            .waitForIdle()
 
-        with(ability){
-            assertListingTypeButtonDisplayed("Property types")
-        }
+        statusDropDownMenuRobot
+            .assertMenuDisplayed()
+            .assertBuyStatusDisplayed()
+            .assertRentStatusDisplayed()
+            .assertSoldStatusDisplayed()
+            .clickBuy()
+            .waitForIdle()
+            .assertMenuNotDisplayed()
+
+        filterComponentRobot
+            .assertStatusSelected(StatusType.BUY)
     }
 
     @Test
-    fun should_show_filter_component_with_multiple_listing_types() {
-        with(composeTestRule) {
-            setContent {
-                MviExampleTheme {
-                    FilterComponent(
-                        selectedStatus = StatusType.RENT,
-                        selectedListingTypes = listOf(DwellingType.HOUSE, DwellingType.TOWNHOUSE),
-                        onStatusSelected = { },
-                        onListingTypeSelected = { }
-                    )
-                }
-            }
-            advanceTimeAndWait()
-        }
-
-        with(ability){
-            assertListingTypeButtonDisplayed("2 Property types")
-        }
+    fun click_the_listing_type() {
+        filterComponentRobot
+            .setUpLoginScreen()
+            .waitForIdle()
+            .assertListingTypeButtonText("1 Property type")
+            .clickListingTypeButton()
+            .waitForIdle()
+            .assertListingTypeButtonClicked()
     }
 }
