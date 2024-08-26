@@ -21,6 +21,7 @@ import au.com.deanpike.ui.screen.list.component.ProjectChildListItemComponentTes
 import au.com.deanpike.ui.screen.list.component.ProjectChildListItemComponentTestTags.PROJECT_CHILD_LIST_ITEM_LIFECYCLE
 import au.com.deanpike.ui.screen.list.component.ProjectChildListItemComponentTestTags.PROJECT_CHILD_LIST_ITEM_PRICE
 import au.com.deanpike.uishared.component.PropertyDetailComponent
+import au.com.deanpike.uishared.theme.Dimension.DIM_16
 import au.com.deanpike.uishared.theme.Dimension.DIM_4
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
 import au.com.deanpike.uishared.theme.MviExampleTheme
@@ -63,6 +64,7 @@ fun ProjectChildListItemComponent(
                             top.linkTo(parent.top)
                             width = Dimension.fillToConstraints
                         }
+                        .padding(bottom = DIM_16)
                         .testTag("${PROJECT_CHILD_LIST_ITEM_PRICE}_${parentPosition}_${position}"),
                     text = it,
                     style = MaterialTheme.typography.titleMedium,

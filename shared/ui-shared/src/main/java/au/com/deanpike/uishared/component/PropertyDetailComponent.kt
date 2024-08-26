@@ -1,7 +1,10 @@
 package au.com.deanpike.uishared.component
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -18,6 +21,7 @@ import au.com.deanpike.uishared.component.DetailListItemTestTags.DETAIL_ITEM_CAR
 import au.com.deanpike.uishared.component.DetailListItemTestTags.DETAIL_ITEM_DWELLING_TYPE
 import au.com.deanpike.uishared.component.DetailListItemTestTags.DETAIL_ITEM_GROUP
 import au.com.deanpike.uishared.theme.Dimension
+import au.com.deanpike.uishared.theme.Dimension.DIM_8
 import au.com.deanpike.uishared.theme.MviExampleTheme
 
 @Composable
@@ -28,50 +32,56 @@ fun PropertyDetailComponent(
     details: ListingDetails,
     dwellingType: String?
 ) {
-    Row(
-        modifier = modifier
-            .testTag("${DETAIL_ITEM_GROUP}_${parentPosition}_${position}"),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        details.numberOfBedrooms?.let {
-            DetailItemComponent(
-                icon = R.drawable.bed_outline,
-                text = "$it",
-                description = R.string.number_of_bedrooms,
-                testTag = DETAIL_ITEM_BEDROOMS,
-                parentPosition = parentPosition,
-                position = position
-            )
+    Column(modifier = modifier.fillMaxWidth()) {
+        Row(
+            modifier = Modifier
+                .testTag("${DETAIL_ITEM_GROUP}_${parentPosition}_${position}"),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            details.numberOfBedrooms?.let {
+                DetailItemComponent(
+                    icon = R.drawable.bed_outline,
+                    text = "$it",
+                    description = R.string.number_of_bedrooms,
+                    testTag = DETAIL_ITEM_BEDROOMS,
+                    parentPosition = parentPosition,
+                    position = position
+                )
+            }
+            Spacer(modifier = Modifier.width(Dimension.DIM_16))
+            details.numberOfBathrooms?.let {
+                DetailItemComponent(
+                    icon = R.drawable.bath_outline,
+                    text = "$it",
+                    description = R.string.number_of_bathrooms,
+                    testTag = DETAIL_ITEM_BATHROOMS,
+                    parentPosition = parentPosition,
+                    position = position
+                )
+            }
+            Spacer(modifier = Modifier.width(Dimension.DIM_16))
+            details.numberOfCarSpaces?.let {
+                DetailItemComponent(
+                    icon = R.drawable.car_outline,
+                    text = "$it",
+                    description = R.string.number_of_parking_spaces,
+                    testTag = DETAIL_ITEM_CAR_SPACES,
+                    parentPosition = parentPosition,
+                    position = position
+                )
+            }
         }
-        Spacer(modifier = Modifier.width(Dimension.DIM_16))
-        details.numberOfBathrooms?.let {
-            DetailItemComponent(
-                icon = R.drawable.bath_outline,
-                text = "$it",
-                description = R.string.number_of_bathrooms,
-                testTag = DETAIL_ITEM_BATHROOMS,
-                parentPosition = parentPosition,
-                position = position
-            )
-        }
-        Spacer(modifier = Modifier.width(Dimension.DIM_16))
-        details.numberOfCarSpaces?.let {
-            DetailItemComponent(
-                icon = R.drawable.car_outline,
-                text = "$it",
-                description = R.string.number_of_parking_spaces,
-                testTag = DETAIL_ITEM_CAR_SPACES,
-                parentPosition = parentPosition,
-                position = position
-            )
-        }
-        Spacer(modifier = Modifier.weight(1F))
-        dwellingType?.let {
-            Text(
-                modifier = Modifier.testTag("${DETAIL_ITEM_DWELLING_TYPE}_${parentPosition}_${position}"),
-                text = it,
-                style = MaterialTheme.typography.bodyLarge
-            )
+        Row {
+            dwellingType?.let {
+                Text(
+                    modifier = Modifier
+                        .padding(top = DIM_8)
+                        .testTag("${DETAIL_ITEM_DWELLING_TYPE}_${parentPosition}_${position}"),
+                    text = it,
+                    style = MaterialTheme.typography.bodyLarge
+                )
+            }
+
         }
     }
 }
