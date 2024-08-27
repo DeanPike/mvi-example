@@ -47,7 +47,7 @@ import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_
 import au.com.deanpike.detail.ui.shared.AgencyComponent
 import au.com.deanpike.uishared.base.ScreenStateType
 import au.com.deanpike.uishared.base.drawableTestTag
-import au.com.deanpike.uishared.component.AgencyBanner
+import au.com.deanpike.uishared.component.AgencyBannerComponent
 import au.com.deanpike.uishared.component.ErrorComponent
 import au.com.deanpike.uishared.component.ExpandableText
 import au.com.deanpike.uishared.component.ListingDetailImages
@@ -150,7 +150,7 @@ fun PropertyDetailSuccess(
         ListingDetailImages(
             media = state.propertyDetail?.media ?: emptyList()
         )
-        AgencyBanner(
+        AgencyBannerComponent(
             agencyColour = state.propertyDetail?.advertiser?.preferredColorHex,
             logo = state.propertyDetail?.advertiser?.logoUrl
         )

@@ -48,7 +48,7 @@ import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_LAY
 import au.com.deanpike.detail.ui.shared.AgencyComponent
 import au.com.deanpike.uishared.base.ScreenStateType
 import au.com.deanpike.uishared.base.drawableTestTag
-import au.com.deanpike.uishared.component.AgencyBanner
+import au.com.deanpike.uishared.component.AgencyBannerComponent
 import au.com.deanpike.uishared.component.ErrorComponent
 import au.com.deanpike.uishared.component.ExpandableText
 import au.com.deanpike.uishared.component.ListingDetailImages
@@ -158,7 +158,7 @@ fun ProjectDetailSuccess(
         ListingDetailImages(
             media = state.projectDetail?.media ?: emptyList()
         )
-        AgencyBanner(
+        AgencyBannerComponent(
             agencyColour = state.projectDetail?.advertiser?.preferredColorHex,
             logo = state.projectDetail?.advertiser?.logoUrl
         )

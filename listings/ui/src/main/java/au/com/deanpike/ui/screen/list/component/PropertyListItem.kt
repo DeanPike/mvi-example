@@ -25,7 +25,7 @@ import au.com.deanpike.ui.screen.list.component.PropertyListItemTesTags.PROPERTY
 import au.com.deanpike.ui.screen.list.component.PropertyListItemTesTags.PROPERTY_LIST_ITEM_LAYOUT
 import au.com.deanpike.ui.screen.list.component.PropertyListItemTesTags.PROPERTY_LIST_ITEM_PRICE
 import au.com.deanpike.ui.screen.list.component.PropertyListItemTesTags.PROPERTY_LIST_ITEM_PROPERTY_IMAGE
-import au.com.deanpike.uishared.component.AgencyBanner
+import au.com.deanpike.uishared.component.AgencyBannerComponent
 import au.com.deanpike.uishared.component.LifecycleStatus
 import au.com.deanpike.uishared.component.PropertyDetailComponent
 import au.com.deanpike.uishared.theme.Dimension.DIM_16
@@ -76,13 +76,12 @@ fun PropertyListItem(
             lifecycleStatus = property.lifecycleStatus
         )
 
-        AgencyBanner(
+        AgencyBannerComponent(
             modifier = Modifier
                 .constrainAs(agencyRef) {
                     start.linkTo(parent.start)
                     top.linkTo(propertyImageRef.bottom)
                 },
-            position = position,
             agencyColour = property.agencyColour,
             logo = property.agencyImage
         )

@@ -55,7 +55,7 @@ import au.com.deanpike.ui.screen.list.component.ProjectListItemTesTags.PROJECT_L
 import au.com.deanpike.ui.screen.list.component.ProjectListItemTesTags.PROJECT_LIST_ITEM_IMAGE
 import au.com.deanpike.ui.screen.list.component.ProjectListItemTesTags.PROJECT_LIST_ITEM_LAYOUT
 import au.com.deanpike.ui.screen.list.component.ProjectListItemTesTags.PROJECT_LIST_ITEM_PROJECT_NAME
-import au.com.deanpike.uishared.component.AgencyBanner
+import au.com.deanpike.uishared.component.AgencyBannerComponent
 import au.com.deanpike.uishared.theme.Dimension
 import au.com.deanpike.uishared.theme.Dimension.DIM_16
 import au.com.deanpike.uishared.theme.Dimension.DIM_4
@@ -135,13 +135,12 @@ fun ProjectListItem(
             contentDescription = stringResource(id = RShared.string.property_image_description)
         )
 
-        AgencyBanner(
+        AgencyBannerComponent(
             modifier = Modifier
                 .constrainAs(logoRowRef) {
                     start.linkTo(parent.start)
                     top.linkTo(imageRef.bottom)
                 },
-            position = position,
             agencyColour = project.projectColour,
             logo = project.logoImage
         )
