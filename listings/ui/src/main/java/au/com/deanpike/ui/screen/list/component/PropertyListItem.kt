@@ -26,7 +26,7 @@ import au.com.deanpike.ui.screen.list.component.PropertyListItemTesTags.PROPERTY
 import au.com.deanpike.ui.screen.list.component.PropertyListItemTesTags.PROPERTY_LIST_ITEM_PRICE
 import au.com.deanpike.ui.screen.list.component.PropertyListItemTesTags.PROPERTY_LIST_ITEM_PROPERTY_IMAGE
 import au.com.deanpike.uishared.component.AgencyBannerComponent
-import au.com.deanpike.uishared.component.LifecycleStatus
+import au.com.deanpike.uishared.component.LifecycleStatusComponent
 import au.com.deanpike.uishared.component.PropertyDetailComponent
 import au.com.deanpike.uishared.theme.Dimension.DIM_16
 import au.com.deanpike.uishared.theme.Dimension.DIM_4
@@ -67,12 +67,11 @@ fun PropertyListItem(
             contentDescription = stringResource(id = RShared.string.property_image_description)
         )
 
-        LifecycleStatus(
+        LifecycleStatusComponent(
             modifier = Modifier.constrainAs(lifecycleRef) {
                 start.linkTo(parent.start)
                 top.linkTo(parent.top)
             },
-            position = position,
             lifecycleStatus = property.lifecycleStatus
         )
 
@@ -150,7 +149,6 @@ object PropertyListItemTesTags {
     const val PROPERTY_LIST_ITEM_PRICE = "${PREFIX}PRICE"
     const val PROPERTY_LIST_ITEM_HEADLINE = "${PREFIX}HEADLINE"
     const val PROPERTY_LIST_ITEM_ADDRESS = "${PREFIX}ADDRESS"
-    const val PROPERTY_LIST_ITEM_LIFECYCLE = "${PREFIX}LIFECYCLE"
 }
 
 @Composable

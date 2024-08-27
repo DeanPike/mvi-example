@@ -10,13 +10,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
+import au.com.deanpike.uishared.component.LifecycleStatusTestTags.LIFECYCLE_STATUS_LAYOUT
+import au.com.deanpike.uishared.component.LifecycleStatusTestTags.LIFECYCLE_STATUS_TEXT
 import au.com.deanpike.uishared.theme.Dimension.DIM_4
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
 
 @Composable
-fun LifecycleStatus(
+fun LifecycleStatusComponent(
     modifier: Modifier = Modifier,
-    position: Int = 0,
     lifecycleStatus: String?
 ) {
     lifecycleStatus?.let {
@@ -26,13 +27,14 @@ fun LifecycleStatus(
                 .background(
                     color = MaterialTheme.colorScheme.secondaryContainer,
                     shape = RoundedCornerShape(DIM_8)
-                ),
+                )
+                .testTag(LIFECYCLE_STATUS_LAYOUT),
             contentAlignment = Alignment.TopStart
         ) {
             Text(
                 modifier = Modifier
                     .padding(DIM_4)
-                    .testTag("${LifecycleStatusTestTags.LIFECYCLE_STATUS}$position"),
+                    .testTag(LIFECYCLE_STATUS_TEXT),
                 text = it
             )
         }
@@ -40,5 +42,7 @@ fun LifecycleStatus(
 }
 
 object LifecycleStatusTestTags {
-    const val LIFECYCLE_STATUS = "LIFECYCLE_STATUS_"
+    private const val PREFIX = "LIFECYCLE_STATUS_"
+    const val LIFECYCLE_STATUS_LAYOUT = "${PREFIX}LAYOUT"
+    const val LIFECYCLE_STATUS_TEXT = "${PREFIX}TEST"
 }
