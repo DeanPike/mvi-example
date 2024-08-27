@@ -22,27 +22,25 @@ fun DetailItemComponent(
     @DrawableRes icon: Int,
     text: String,
     @StringRes description: Int,
-    testTag: String,
-    parentPosition: Int,
-    position: Int
+    testTag: String
 ) {
     Row(
-        modifier = Modifier.testTag("${testTag}_${parentPosition}_${position}")
+        modifier = Modifier
+            .testTag(testTag)
     ) {
         Icon(
             modifier = Modifier
                 .drawableTestTag(
-                    tag = "${testTag}_ICON_${parentPosition}_${position}",
+                    tag = "${testTag}_ICON",
                     id = icon
                 ),
             painter = painterResource(id = icon),
             contentDescription = stringResource(id = description),
-
-            )
+        )
         Text(
             modifier = Modifier
                 .padding(start = Dimension.DIM_4)
-                .testTag("${testTag}_TEXT_${parentPosition}_${position}"),
+                .testTag("${testTag}_TEXT"),
             text = text
         )
     }
@@ -56,9 +54,7 @@ fun DetailItemComponentPreview() {
             icon = R.drawable.bed_outline,
             text = "Data",
             description = R.string.number_of_bedrooms,
-            testTag = "TEST_TAG",
-            parentPosition = 0,
-            position = 1
+            testTag = "TEST_TAG"
         )
     }
 }
