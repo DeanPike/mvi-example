@@ -5,15 +5,15 @@ import au.com.deanpike.uishared.R
 import au.com.deanpike.uishared.component.DetailItemComponent
 import au.com.deanpike.uishared.theme.MviExampleTheme
 import au.com.deanpike.uitestshared.base.TestRobotBase
+import au.com.deanpike.uitestshared.base.TestRobotInitData
 import au.com.deanpike.uitestshared.util.assertDrawableDisplayed
 import au.com.deanpike.uitestshared.util.assertTagDisplayed
 import au.com.deanpike.uitestshared.util.assertTextDisplayed
 
-class DetailItemComponentRobot(private val composeRule: ComposeContentTestRule) : TestRobotBase<DetailItemComponentRobot>(composeRule) {
+class DetailItemComponentRobot(private val composeRule: ComposeContentTestRule) : TestRobotBase<DetailItemComponentRobot, TestRobotInitData>(composeRule) {
     private val testTag = "BEDROOM_ITEM"
 
-    fun setupComponent(
-    ): DetailItemComponentRobot {
+    override fun setupComponent(data: TestRobotInitData?): DetailItemComponentRobot {
         composeRule.setContent {
             MviExampleTheme {
                 DetailItemComponent(
@@ -27,7 +27,7 @@ class DetailItemComponentRobot(private val composeRule: ComposeContentTestRule) 
         return this
     }
 
-    fun assertLayoutDisplayed(): DetailItemComponentRobot {
+    override fun assertLayoutDisplayed(): DetailItemComponentRobot {
         composeRule.assertTagDisplayed(testTag)
         return this
     }

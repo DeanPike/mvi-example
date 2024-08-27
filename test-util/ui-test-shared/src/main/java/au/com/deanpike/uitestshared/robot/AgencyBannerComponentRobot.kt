@@ -6,23 +6,24 @@ import au.com.deanpike.uishared.component.AgencyBannerTestTags.AGENCY_BANNER_IMA
 import au.com.deanpike.uishared.component.AgencyBannerTestTags.AGENCY_BANNER_LAYOUT
 import au.com.deanpike.uishared.theme.MviExampleTheme
 import au.com.deanpike.uitestshared.base.TestRobotBase
+import au.com.deanpike.uitestshared.base.TestRobotInitData
 import au.com.deanpike.uitestshared.util.assertTagDisplayed
 
-class AgencyBannerComponentRobot(private val composeRule: ComposeContentTestRule) : TestRobotBase<AgencyBannerComponentRobot>(composeRule) {
+class AgencyBannerComponentRobot(private val composeRule: ComposeContentTestRule) : TestRobotBase<AgencyBannerComponentRobot, AgencyBannerComponentRobotInitData>(composeRule) {
 
-    fun setupComponent(logo: String? = null): AgencyBannerComponentRobot {
+    override fun setupComponent(data: AgencyBannerComponentRobotInitData?): AgencyBannerComponentRobot {
         composeRule.setContent {
             MviExampleTheme {
                 AgencyBannerComponent(
                     agencyColour = "#abcdef",
-                    logo = logo
+                    logo = data?.logo
                 )
             }
         }
         return this
     }
 
-    fun assertLayoutDisplayed(): AgencyBannerComponentRobot {
+    override fun assertLayoutDisplayed(): AgencyBannerComponentRobot {
         composeRule.assertTagDisplayed(AGENCY_BANNER_LAYOUT)
         return this
     }
@@ -32,3 +33,7 @@ class AgencyBannerComponentRobot(private val composeRule: ComposeContentTestRule
         return this
     }
 }
+
+data class AgencyBannerComponentRobotInitData(
+    val logo: String? = null
+) : TestRobotInitData

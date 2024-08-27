@@ -10,25 +10,23 @@ import au.com.deanpike.ui.screen.list.component.FilterComponentTestTags.LISTING_
 import au.com.deanpike.ui.screen.list.component.FilterComponentTestTags.STATUS_BUTTON
 import au.com.deanpike.uishared.theme.MviExampleTheme
 import au.com.deanpike.uitestshared.base.TestRobotBase
+import au.com.deanpike.uitestshared.base.TestRobotInitData
 import au.com.deanpike.uitestshared.util.assertDrawableDisplayed
 import au.com.deanpike.uitestshared.util.assertTagDisplayed
 import au.com.deanpike.uitestshared.util.assertTextDisplayed
 import au.com.deanpike.uitestshared.util.clickOn
 import org.assertj.core.api.Assertions.assertThat
 
-class FilterComponentRobot(private val composeRule: ComposeContentTestRule) : TestRobotBase<FilterComponentRobot>(composeRule) {
+class FilterComponentRobot(private val composeRule: ComposeContentTestRule) : TestRobotBase<FilterComponentRobot, FilterComponentRobotInitData>(composeRule) {
     private var statusSelected = StatusType.RENT
     private var listingTypeSelected = false
 
-    fun setUpLoginScreen(
-        status: StatusType = StatusType.RENT,
-        listingTypes: List<DwellingType> = listOf(DwellingType.HOUSE)
-    ): FilterComponentRobot {
+    override fun setupComponent(data: FilterComponentRobotInitData?): FilterComponentRobot {
         composeRule.setContent {
             MviExampleTheme {
                 FilterComponent(
-                    selectedStatus = status,
-                    selectedListingTypes = listingTypes,
+                    selectedStatus = data!!.status,
+                    selectedListingTypes = data.listingTypes,
                     onStatusSelected = {
                         statusSelected = it
                     },
@@ -42,7 +40,7 @@ class FilterComponentRobot(private val composeRule: ComposeContentTestRule) : Te
         return this
     }
 
-    fun assertLayoutDisplayed(): FilterComponentRobot {
+    override fun assertLayoutDisplayed(): FilterComponentRobot {
         composeRule.assertTagDisplayed(FILTER_COMPONENT_LAYOUT)
         return this
     }
@@ -83,3 +81,8 @@ class FilterComponentRobot(private val composeRule: ComposeContentTestRule) : Te
         assertThat(listingTypeSelected).isTrue()
     }
 }
+
+data class FilterComponentRobotInitData(
+    val status: StatusType = StatusType.RENT,
+    val listingTypes: List<DwellingType> = listOf(DwellingType.HOUSE)
+) : TestRobotInitData
