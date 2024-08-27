@@ -63,4 +63,5 @@ dependencies {
     implementation(libs.androidx.ui.test.junit4)
     implementation(libs.coil.compose)
     api(libs.okhttp.tls)
+    implementation(libs.assertj)
 }
