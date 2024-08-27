@@ -43,9 +43,7 @@ fun PropertyDetailComponent(
                     icon = R.drawable.bed_outline,
                     text = "$it",
                     description = R.string.number_of_bedrooms,
-                    testTag = DETAIL_ITEM_BEDROOMS,
-                    parentPosition = parentPosition,
-                    position = position
+                    testTag = DETAIL_ITEM_BEDROOMS
                 )
             }
             Spacer(modifier = Modifier.width(Dimension.DIM_16))
@@ -54,9 +52,7 @@ fun PropertyDetailComponent(
                     icon = R.drawable.bath_outline,
                     text = "$it",
                     description = R.string.number_of_bathrooms,
-                    testTag = DETAIL_ITEM_BATHROOMS,
-                    parentPosition = parentPosition,
-                    position = position
+                    testTag = DETAIL_ITEM_BATHROOMS
                 )
             }
             Spacer(modifier = Modifier.width(Dimension.DIM_16))
@@ -65,9 +61,7 @@ fun PropertyDetailComponent(
                     icon = R.drawable.car_outline,
                     text = "$it",
                     description = R.string.number_of_parking_spaces,
-                    testTag = DETAIL_ITEM_CAR_SPACES,
-                    parentPosition = parentPosition,
-                    position = position
+                    testTag = DETAIL_ITEM_CAR_SPACES
                 )
             }
         }
