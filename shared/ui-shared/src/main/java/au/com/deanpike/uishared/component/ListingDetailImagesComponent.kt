@@ -23,35 +23,47 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import au.com.deanpike.commonshared.model.Media
+import au.com.deanpike.commonshared.type.MediaType
 import au.com.deanpike.uishared.R
+import au.com.deanpike.uishared.component.ListingDetailImagesTestTags.LISTING_DETAIL_IMAGES_IMAGE
 import au.com.deanpike.uishared.component.ListingDetailImagesTestTags.LISTING_DETAIL_IMAGES_PAGER
+import au.com.deanpike.uishared.component.ListingDetailImagesTestTags.LISTING_DETAIL_IMAGES_POSITION_INDICATOR
 import au.com.deanpike.uishared.theme.Dimension.DIM_16
+import au.com.deanpike.uishared.theme.MviExampleTheme
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun ListingDetailImages(media: List<Media>) {
+fun ListingDetailImagesComponent(media: List<Media>) {
     if (media.isNotEmpty()) {
-        val pagerState = rememberPagerState(pageCount = { media.count() })
+        val pagerState = rememberPagerState(
+            initialPage = 0,
+            pageCount = { media.count() }
+        )
         Box {
             HorizontalPager(
                 modifier = Modifier
                     .align(Alignment.Center)
                     .testTag(LISTING_DETAIL_IMAGES_PAGER),
-                state = pagerState
+                state = pagerState,
+                beyondBoundsPageCount = 2
             ) { page ->
                 AsyncImage(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(300.dp),
+                        .height(300.dp)
+                        .testTag("${LISTING_DETAIL_IMAGES_IMAGE}_${page}"),
                     model = ImageRequest.Builder(LocalContext.current)
                         .data(media[page].url)
                         .crossfade(true)
                         .build(),
                     placeholder = painterResource(id = R.drawable.gallery_placeholder),
+                    fallback = painterResource(id = R.drawable.gallery_placeholder),
+                    error = painterResource(id = R.drawable.gallery_placeholder),
                     contentScale = ContentScale.Crop,
                     contentDescription = stringResource(id = R.string.property_image),
                     alignment = Alignment.Center
@@ -62,7 +74,8 @@ fun ListingDetailImages(media: List<Media>) {
                     .fillMaxWidth()
                     .wrapContentHeight()
                     .padding(bottom = DIM_16)
-                    .align(Alignment.BottomCenter),
+                    .align(Alignment.BottomCenter)
+                    .testTag(LISTING_DETAIL_IMAGES_POSITION_INDICATOR),
                 horizontalArrangement = Arrangement.Center
             ) {
                 repeat(pagerState.pageCount) { iteration ->
@@ -83,4 +96,25 @@ fun ListingDetailImages(media: List<Media>) {
 object ListingDetailImagesTestTags {
     private const val PREFIX = "LISTING_DETAIL_IMAGES_"
     const val LISTING_DETAIL_IMAGES_PAGER = "${PREFIX}PAGER"
+    const val LISTING_DETAIL_IMAGES_IMAGE = "${PREFIX}IMAGE"
+    const val LISTING_DETAIL_IMAGES_POSITION_INDICATOR = "${PREFIX}POSITION_INDICATOR"
+}
+
+@Preview
+@Composable
+fun ListingDetailImagesComponentPreview() {
+    MviExampleTheme {
+        ListingDetailImagesComponent(
+            media = listOf(
+                Media(
+                    mediaType = MediaType.PHOTO,
+                    url = "https://bucket-api.domain.com.au/v1/bucket/image/2019096805_1_1_240305_054335-w2048-h1365"
+                ),
+                Media(
+                    mediaType = MediaType.PHOTO,
+                    url = "https://bucket-api.domain.com.au/v1/bucket/image/2019096805_2_1_240305_054335-w2048-h1365"
+                )
+            )
+        )
+    }
 }

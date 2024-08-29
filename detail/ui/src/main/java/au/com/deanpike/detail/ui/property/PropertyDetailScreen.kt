@@ -50,7 +50,7 @@ import au.com.deanpike.uishared.base.drawableTestTag
 import au.com.deanpike.uishared.component.AgencyBannerComponent
 import au.com.deanpike.uishared.component.ErrorComponent
 import au.com.deanpike.uishared.component.ExpandableText
-import au.com.deanpike.uishared.component.ListingDetailImages
+import au.com.deanpike.uishared.component.ListingDetailImagesComponent
 import au.com.deanpike.uishared.component.PropertyDetailComponent
 import au.com.deanpike.uishared.theme.Dimension.DIM_16
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
@@ -147,7 +147,7 @@ fun PropertyDetailSuccess(
             .fillMaxSize()
             .verticalScroll(scrollState)
     ) {
-        ListingDetailImages(
+        ListingDetailImagesComponent(
             media = state.propertyDetail?.media ?: emptyList()
         )
         AgencyBannerComponent(

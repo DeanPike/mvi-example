@@ -87,6 +87,13 @@ fun ComposeContentTestRule.swipeLeft(tag: String) {
     waitForIdle()
 }
 
+fun ComposeContentTestRule.swipeRight(tag: String) {
+    onNodeWithTag(tag, useUnmergedTree = true).performTouchInput {
+        this.swipeRight()
+    }
+    waitForIdle()
+}
+
 fun ComposeContentTestRule.swipeDown(tag: String) {
     onNodeWithTag(tag, useUnmergedTree = true).performTouchInput {
         this.swipeDown()
@@ -217,6 +224,20 @@ fun ComposeContentTestRule.clickTagInParent(
     val childNode = onNodeWithTag(testTag = tag, useUnmergedTree = true)
     val buttonNode = childNode.assert(hasParent(hasTestTag(parentTag)))
     buttonNode.performClick()
+}
+
+fun ComposeContentTestRule.assertDisplayedAtPosition(
+    parentTag: String,
+    tag: String,
+    position: Int,
+    text: String
+) {
+    onNodeWithTag(
+        testTag = parentTag,
+        useUnmergedTree = true
+    ).onChildAt(position)
+        .onChildren()
+        .assertAny(hasTestTag(tag) and hasText(text))
 }
 
 @OptIn(ExperimentalTestApi::class)

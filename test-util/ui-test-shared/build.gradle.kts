@@ -51,6 +51,7 @@ dependencies {
     implementation(project(":network"))
     implementation(project(":test-util:unit-test-shared"))
     implementation(project(":shared:ui-shared"))
+    implementation(project(":shared:common-shared"))
 
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
