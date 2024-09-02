@@ -27,15 +27,12 @@ import au.com.deanpike.uishared.theme.MviExampleTheme
 @Composable
 fun PropertyDetailComponent(
     modifier: Modifier = Modifier,
-    parentPosition: Int,
-    position: Int,
     details: ListingDetails,
     dwellingType: String?
 ) {
     Column(modifier = modifier.fillMaxWidth()) {
         Row(
-            modifier = Modifier
-                .testTag("${DETAIL_ITEM_GROUP}_${parentPosition}_${position}"),
+            modifier = Modifier.testTag(DETAIL_ITEM_GROUP),
             verticalAlignment = Alignment.CenterVertically
         ) {
             details.numberOfBedrooms?.let {
@@ -70,7 +67,7 @@ fun PropertyDetailComponent(
                 Text(
                     modifier = Modifier
                         .padding(top = DIM_8)
-                        .testTag("${DETAIL_ITEM_DWELLING_TYPE}_${parentPosition}_${position}"),
+                        .testTag(DETAIL_ITEM_DWELLING_TYPE),
                     text = it,
                     style = MaterialTheme.typography.bodyLarge
                 )
@@ -94,8 +91,6 @@ object DetailListItemTestTags {
 fun DetailListItemComponentPreview() {
     MviExampleTheme {
         PropertyDetailComponent(
-            parentPosition = 0,
-            position = 1,
             details = ListingDetails(
                 price = "$1,000,500",
                 numberOfBedrooms = 4,

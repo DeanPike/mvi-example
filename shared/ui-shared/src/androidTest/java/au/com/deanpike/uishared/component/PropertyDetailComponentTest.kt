@@ -1,103 +1,133 @@
 package au.com.deanpike.uishared.component
 
 import au.com.deanpike.commonshared.model.ListingDetails
-import au.com.deanpike.uishared.theme.MviExampleTheme
-import au.com.deanpike.uitestshared.ability.PropertyDetailComponentAbility
 import au.com.deanpike.uitestshared.base.UiUnitTestBase
-import au.com.deanpike.uitestshared.util.advanceTimeAndWait
+import au.com.deanpike.uitestshared.robot.PropertyDetailComponentRobot
+import au.com.deanpike.uitestshared.robot.PropertyDetailComponentRobotInitData
 import org.junit.Test
 
 class PropertyDetailComponentTest : UiUnitTestBase() {
 
-    private val ability = PropertyDetailComponentAbility(composeTestRule)
+    private val robot = PropertyDetailComponentRobot(composeTestRule)
 
     @Test
     fun check_that_property_details_are_displayed() {
-        with(composeTestRule) {
-            setContent {
-                MviExampleTheme {
-                    PropertyDetailComponent(
-                        parentPosition = 0,
-                        position = 1,
-                        details = ListingDetails(
-                            price = "$100,000",
-                            numberOfBedrooms = 5,
-                            numberOfBathrooms = 3,
-                            numberOfCarSpaces = 2
-                        ),
-                        dwellingType = "House"
-                    )
-                }
-            }
-            advanceTimeAndWait()
-        }
-
-        with(ability) {
-            assertGroupDisplayed(
-                parentPosition = 0,
-                position = 1
+        robot
+            .setupComponent(
+                data = PropertyDetailComponentRobotInitData(
+                    details = ListingDetails(
+                        price = "$100,000",
+                        numberOfBedrooms = 5,
+                        numberOfBathrooms = 3,
+                        numberOfCarSpaces = 2
+                    ),
+                    dwellingType = "House"
+                )
             )
-            assertBedroomDisplayed(
-                parentPosition = 0,
-                position = 1,
-                text = "5"
-            )
-            assertBathroomDisplayed(
-                parentPosition = 0,
-                position = 1,
-                text = "3"
-            )
-            assertCarSpaceDisplayed(
-                parentPosition = 0,
-                position = 1,
-                text = "2"
-            )
-            assertDwellingTypeDisplayed(
-                parentPosition = 0,
-                position = 1,
-                text = "House"
-            )
-        }
+            .assertLayoutDisplayed()
+            .numberOfBedrooms(5)
+            .numberOfBathrooms(3)
+            .numberOfParkingSpaces(2)
+            .dwellingTypeDisplayed("House")
     }
 
     @Test
     fun check_that_nothing_is_displayed_for_empty_values() {
-        with(composeTestRule) {
-            setContent {
-                MviExampleTheme {
-                    PropertyDetailComponent(
-                        parentPosition = 0,
-                        position = 1,
-                        details = ListingDetails(
-                            price = "100",
-                            numberOfBedrooms = null,
-                            numberOfBathrooms = null,
-                            numberOfCarSpaces = null
-                        ),
-                        dwellingType = null
-                    )
-                }
-            }
-            advanceTimeAndWait()
-        }
+        robot
+            .setupComponent(
+                data = PropertyDetailComponentRobotInitData(
+                    details = ListingDetails(
+                        price = "100",
+                        numberOfBedrooms = null,
+                        numberOfBathrooms = null,
+                        numberOfCarSpaces = null
+                    ),
+                    dwellingType = null
+                )
+            )
+            .bedroomLayoutNotDisplayed()
+            .bathroomLayoutNotDisplayed()
+            .parkingLayoutNotDisplayed()
+            .dwellingTypeNotDisplayed()
+    }
 
-        with(ability) {
-            assertBedroomNotDisplayed(
-                parentPosition = 0,
-                position = 1
+    @Test
+    fun bedroom_should_not_display() {
+        robot
+            .setupComponent(
+                data = PropertyDetailComponentRobotInitData(
+                    details = ListingDetails(
+                        price = "100",
+                        numberOfBedrooms = null,
+                        numberOfBathrooms = 1,
+                        numberOfCarSpaces = 2
+                    ),
+                    dwellingType = "House"
+                )
             )
-            assertBathroomNotDisplayed(
-                parentPosition = 0,
-                position = 1
+            .bedroomLayoutNotDisplayed()
+            .numberOfBathrooms(1)
+            .numberOfParkingSpaces(2)
+            .dwellingTypeDisplayed("House")
+    }
+
+    @Test
+    fun bathroom_should_not_display() {
+        robot
+            .setupComponent(
+                data = PropertyDetailComponentRobotInitData(
+                    details = ListingDetails(
+                        price = "100",
+                        numberOfBedrooms = 1,
+                        numberOfBathrooms = null,
+                        numberOfCarSpaces = 2
+                    ),
+                    dwellingType = "House"
+                )
             )
-            assertCarSpaceNotDisplayed(
-                parentPosition = 0,
-                position = 1
+            .numberOfBedrooms(1)
+            .bathroomLayoutNotDisplayed()
+            .numberOfParkingSpaces(2)
+            .dwellingTypeDisplayed("House")
+    }
+
+    @Test
+    fun parking_should_not_display() {
+        robot
+            .setupComponent(
+                data = PropertyDetailComponentRobotInitData(
+                    details = ListingDetails(
+                        price = "100",
+                        numberOfBedrooms = 1,
+                        numberOfBathrooms = 2,
+                        numberOfCarSpaces = null
+                    ),
+                    dwellingType = "House"
+                )
             )
-            assertDwellingTypeNotDisplayed(
-                parentPosition = 0,
-                position = 1
+            .numberOfBedrooms(1)
+            .numberOfBathrooms(2)
+            .parkingLayoutNotDisplayed()
+            .dwellingTypeDisplayed("House")
+    }
+
+    @Test
+    fun dwelling_type_should_not_display() {
+        robot
+            .setupComponent(
+                data = PropertyDetailComponentRobotInitData(
+                    details = ListingDetails(
+                        price = "100",
+                        numberOfBedrooms = 1,
+                        numberOfBathrooms = 2,
+                        numberOfCarSpaces = 3
+                    ),
+                    dwellingType = null
+                )
             )
-        }
+            .numberOfBedrooms(1)
+            .numberOfBathrooms(2)
+            .numberOfParkingSpaces(3)
+            .dwellingTypeNotDisplayed()
     }
 }

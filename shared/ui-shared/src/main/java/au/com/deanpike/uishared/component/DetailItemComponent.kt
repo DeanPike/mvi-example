@@ -25,8 +25,7 @@ fun DetailItemComponent(
     testTag: String
 ) {
     Row(
-        modifier = Modifier
-            .testTag(testTag)
+        modifier = Modifier.testTag(testTag)
     ) {
         Icon(
             modifier = Modifier
