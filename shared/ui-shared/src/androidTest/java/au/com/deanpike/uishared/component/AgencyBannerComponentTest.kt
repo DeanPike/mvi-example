@@ -3,17 +3,11 @@ package au.com.deanpike.uishared.component
 import au.com.deanpike.uitestshared.base.UiUnitTestBase
 import au.com.deanpike.uitestshared.robot.AgencyBannerComponentRobot
 import au.com.deanpike.uitestshared.robot.AgencyBannerComponentRobotInitData
-import org.junit.Before
 import org.junit.Test
 
 class AgencyBannerComponentTest : UiUnitTestBase() {
 
-    private lateinit var robot: AgencyBannerComponentRobot
-
-    @Before
-    fun setupTest() {
-        robot = AgencyBannerComponentRobot(composeTestRule)
-    }
+    private val robot = AgencyBannerComponentRobot(composeTestRule)
 
     @Test
     fun should_display_agency_banner() {

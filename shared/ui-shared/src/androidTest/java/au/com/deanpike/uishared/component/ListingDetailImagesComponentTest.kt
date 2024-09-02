@@ -9,13 +9,12 @@ import org.junit.Before
 import org.junit.Test
 
 class ListingDetailImagesComponentTest : UiUnitTestBase() {
-    private lateinit var robot: ListingDetailImagesComponentRobot
+    private val robot = ListingDetailImagesComponentRobot(composeTestRule)
 
     @Before
     fun setupTest() {
         // Disable animations
         composeTestRule.mainClock.autoAdvance = false
-        robot = ListingDetailImagesComponentRobot(composeTestRule)
     }
 
     @Test

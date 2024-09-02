@@ -2,16 +2,10 @@ package au.com.deanpike.uishared.component
 
 import au.com.deanpike.uitestshared.base.UiUnitTestBase
 import au.com.deanpike.uitestshared.robot.DetailItemComponentRobot
-import org.junit.Before
 import org.junit.Test
 
 class DetailItemComponentTest : UiUnitTestBase() {
-    private lateinit var robot: DetailItemComponentRobot
-
-    @Before
-    fun setupTest() {
-        robot = DetailItemComponentRobot(composeTestRule)
-    }
+    private val robot = DetailItemComponentRobot(composeTestRule)
 
     @Test
     fun check_that_details_items_are_displayed() {
@@ -21,6 +15,5 @@ class DetailItemComponentTest : UiUnitTestBase() {
             .assertLayoutDisplayed()
             .assertIconDisplayed()
             .assertItemCount()
-
     }
 }
