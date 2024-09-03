@@ -40,6 +40,7 @@ import au.com.deanpike.uishared.component.ErrorComponent
 import au.com.deanpike.uishared.theme.Dimension.DIM_16
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
 import au.com.deanpike.uishared.theme.MviExampleTheme
+import au.com.deanpike.uishared.util.GridOverlayPreviewComponent
 import kotlinx.coroutines.launch
 
 @Composable
@@ -289,11 +290,13 @@ fun ListingListScreenContentLoadingPreview() {
 @Preview
 fun ListingListScreenContentErrorPreview() {
     MviExampleTheme {
-        ListingListScreenContent(
-            state = ListingListScreenState(
-                screenState = ScreenStateType.ERROR,
-                listings = emptyList(),
+        GridOverlayPreviewComponent() {
+            ListingListScreenContent(
+                state = ListingListScreenState(
+                    screenState = ScreenStateType.ERROR,
+                    listings = emptyList(),
+                )
             )
-        )
+        }
     }
 }
