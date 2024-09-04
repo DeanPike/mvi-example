@@ -36,7 +36,6 @@ fun ProjectChildrenComponent(
         childListings.forEachIndexed { index, projectChild ->
             item(key = projectChild.id) {
                 ProjectChildComponent(
-                    position = index,
                     child = projectChild,
                     onProjectChildClicked = onProjectChildClicked
                 )

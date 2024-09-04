@@ -25,10 +25,10 @@ class PropertyDetailComponentTest : UiUnitTestBase() {
                 )
             )
             .assertLayoutDisplayed()
-            .numberOfBedrooms(5)
-            .numberOfBathrooms(3)
-            .numberOfParkingSpaces(2)
-            .dwellingTypeDisplayed("House")
+            .assertNumberOfBedrooms(5)
+            .assertNumberOfBathrooms(3)
+            .assertNumberOfParkingSpaces(2)
+            .assertDwellingTypeDisplayed("House")
     }
 
     @Test
@@ -45,10 +45,10 @@ class PropertyDetailComponentTest : UiUnitTestBase() {
                     dwellingType = null
                 )
             )
-            .bedroomLayoutNotDisplayed()
-            .bathroomLayoutNotDisplayed()
-            .parkingLayoutNotDisplayed()
-            .dwellingTypeNotDisplayed()
+            .assertBedroomLayoutNotDisplayed()
+            .assertBathroomLayoutNotDisplayed()
+            .assertParkingLayoutNotDisplayed()
+            .assertDwellingTypeNotDisplayed()
     }
 
     @Test
@@ -65,10 +65,10 @@ class PropertyDetailComponentTest : UiUnitTestBase() {
                     dwellingType = "House"
                 )
             )
-            .bedroomLayoutNotDisplayed()
-            .numberOfBathrooms(1)
-            .numberOfParkingSpaces(2)
-            .dwellingTypeDisplayed("House")
+            .assertBedroomLayoutNotDisplayed()
+            .assertNumberOfBathrooms(1)
+            .assertNumberOfParkingSpaces(2)
+            .assertDwellingTypeDisplayed("House")
     }
 
     @Test
@@ -85,10 +85,10 @@ class PropertyDetailComponentTest : UiUnitTestBase() {
                     dwellingType = "House"
                 )
             )
-            .numberOfBedrooms(1)
-            .bathroomLayoutNotDisplayed()
-            .numberOfParkingSpaces(2)
-            .dwellingTypeDisplayed("House")
+            .assertNumberOfBedrooms(1)
+            .assertBathroomLayoutNotDisplayed()
+            .assertNumberOfParkingSpaces(2)
+            .assertDwellingTypeDisplayed("House")
     }
 
     @Test
@@ -105,10 +105,10 @@ class PropertyDetailComponentTest : UiUnitTestBase() {
                     dwellingType = "House"
                 )
             )
-            .numberOfBedrooms(1)
-            .numberOfBathrooms(2)
-            .parkingLayoutNotDisplayed()
-            .dwellingTypeDisplayed("House")
+            .assertNumberOfBedrooms(1)
+            .assertNumberOfBathrooms(2)
+            .assertParkingLayoutNotDisplayed()
+            .assertDwellingTypeDisplayed("House")
     }
 
     @Test
@@ -125,9 +125,9 @@ class PropertyDetailComponentTest : UiUnitTestBase() {
                     dwellingType = null
                 )
             )
-            .numberOfBedrooms(1)
-            .numberOfBathrooms(2)
-            .numberOfParkingSpaces(3)
-            .dwellingTypeNotDisplayed()
+            .assertNumberOfBedrooms(1)
+            .assertNumberOfBathrooms(2)
+            .assertNumberOfParkingSpaces(3)
+            .assertDwellingTypeNotDisplayed()
     }
 }

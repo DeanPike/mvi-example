@@ -40,7 +40,6 @@ import coil.request.ImageRequest
 
 @Composable
 fun ProjectChildComponent(
-    position: Int,
     child: ProjectChild,
     onProjectChildClicked: (Long) -> Unit = {}
 ) {
@@ -55,18 +54,20 @@ fun ProjectChildComponent(
             .clickable {
                 onProjectChildClicked(child.id)
             }
-            .testTag("${PROJECT_CHILD_LAYOUT}_$position")
+            .testTag(PROJECT_CHILD_LAYOUT)
         ) {
             child.propertyImage?.let {
                 AsyncImage(
                     modifier = Modifier
                         .size(120.dp)
-                        .testTag("${PROJECT_CHILD_IMAGE}_$position"),
+                        .testTag(PROJECT_CHILD_IMAGE),
                     model = ImageRequest.Builder(LocalContext.current)
                         .data(it)
                         .crossfade(true)
                         .build(),
                     placeholder = painterResource(id = R.drawable.gallery_placeholder),
+                    fallback = painterResource(id = R.drawable.gallery_placeholder),
+                    error = painterResource(id = R.drawable.gallery_placeholder),
                     contentScale = ContentScale.Crop,
                     contentDescription = stringResource(id = R.string.property_image),
                     alignment = Alignment.Center
@@ -74,10 +75,7 @@ fun ProjectChildComponent(
             }
             Column {
                 PropertyDetailComponent(
-                    modifier = Modifier
-                        .padding(start = DIM_8, end = DIM_8),
-                    parentPosition = 0,
-                    position = position,
+                    modifier = Modifier.padding(start = DIM_8, end = DIM_8),
                     details = ListingDetails(
                         price = child.price,
                         numberOfBedrooms = child.bedroomCount,
@@ -91,7 +89,7 @@ fun ProjectChildComponent(
                     Text(
                         modifier = Modifier
                             .padding(start = DIM_8, top = DIM_8)
-                            .testTag("${PROJECT_CHILD_LIFECYCLE}_$position"),
+                            .testTag(PROJECT_CHILD_LIFECYCLE),
                         text = it
                     )
                 }
@@ -105,7 +103,7 @@ fun ProjectChildComponent(
                                 end = DIM_8
                             )
                             .fillMaxWidth(0.8F)
-                            .testTag("${PROJECT_CHILD_PRICE}_$position"),
+                            .testTag(PROJECT_CHILD_PRICE),
                         text = it,
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Bold,
@@ -131,7 +129,6 @@ object ProjectChildComponentTestTags {
 fun ProjectChildComponentPreview() {
     MviExampleTheme {
         ProjectChildComponent(
-            position = 0,
             child = ProjectChild(
                 id = 2019256252,
                 bedroomCount = 2,

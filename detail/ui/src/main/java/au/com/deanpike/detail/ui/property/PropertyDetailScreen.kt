@@ -184,8 +184,6 @@ fun PropertyDetailSuccess(
         }
         PropertyDetailComponent(
             modifier = Modifier.padding(start = DIM_16, end = DIM_16),
-            parentPosition = 0,
-            position = 0,
             details = ListingDetails(
                 price = null,
                 numberOfBedrooms = state.propertyDetail?.bedroomCount,

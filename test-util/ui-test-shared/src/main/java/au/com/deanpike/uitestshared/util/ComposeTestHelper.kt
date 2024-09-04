@@ -226,7 +226,7 @@ fun ComposeContentTestRule.clickTagInParent(
     buttonNode.performClick()
 }
 
-fun ComposeContentTestRule.assertDisplayedAtPosition(
+fun ComposeContentTestRule.assertTextDisplayedAtPosition(
     parentTag: String,
     tag: String,
     position: Int,

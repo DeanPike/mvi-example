@@ -36,17 +36,17 @@ class PropertyDetailComponentRobot(private val composeRule: ComposeContentTestRu
         return this
     }
 
-    fun bedroomsLayoutDisplayed(): PropertyDetailComponentRobot {
+    fun assertBedroomsLayoutDisplayed(): PropertyDetailComponentRobot {
         composeRule.assertTagDisplayed(DETAIL_ITEM_BEDROOMS)
         return this
     }
 
-    fun bedroomLayoutNotDisplayed(): PropertyDetailComponentRobot {
+    fun assertBedroomLayoutNotDisplayed(): PropertyDetailComponentRobot {
         composeRule.assertTagDoesNotExist(DETAIL_ITEM_BEDROOMS)
         return this
     }
 
-    fun numberOfBedrooms(count: Int): PropertyDetailComponentRobot {
+    fun assertNumberOfBedrooms(count: Int): PropertyDetailComponentRobot {
         composeRule.assertTextDisplayed(
             tag = "${DETAIL_ITEM_BEDROOMS}_TEXT",
             text = "$count"
@@ -58,17 +58,17 @@ class PropertyDetailComponentRobot(private val composeRule: ComposeContentTestRu
         return this
     }
 
-    fun bathroomsLayoutDisplayed(): PropertyDetailComponentRobot {
+    fun assertBathroomsLayoutDisplayed(): PropertyDetailComponentRobot {
         composeRule.assertTagDisplayed(DETAIL_ITEM_BATHROOMS)
         return this
     }
 
-    fun bathroomLayoutNotDisplayed(): PropertyDetailComponentRobot {
+    fun assertBathroomLayoutNotDisplayed(): PropertyDetailComponentRobot {
         composeRule.assertTagDoesNotExist(DETAIL_ITEM_BATHROOMS)
         return this
     }
 
-    fun numberOfBathrooms(count: Int): PropertyDetailComponentRobot {
+    fun assertNumberOfBathrooms(count: Int): PropertyDetailComponentRobot {
         composeRule.assertTextDisplayed(
             tag = "${DETAIL_ITEM_BATHROOMS}_TEXT",
             text = "$count"
@@ -81,17 +81,17 @@ class PropertyDetailComponentRobot(private val composeRule: ComposeContentTestRu
         return this
     }
 
-    fun parkingLayoutDisplayed(): PropertyDetailComponentRobot {
+    fun assertParkingLayoutDisplayed(): PropertyDetailComponentRobot {
         composeRule.assertTagDisplayed(DETAIL_ITEM_CAR_SPACES)
         return this
     }
 
-    fun parkingLayoutNotDisplayed(): PropertyDetailComponentRobot {
+    fun assertParkingLayoutNotDisplayed(): PropertyDetailComponentRobot {
         composeRule.assertTagDoesNotExist(DETAIL_ITEM_CAR_SPACES)
         return this
     }
 
-    fun numberOfParkingSpaces(count: Int): PropertyDetailComponentRobot {
+    fun assertNumberOfParkingSpaces(count: Int): PropertyDetailComponentRobot {
         composeRule.assertTextDisplayed(
             tag = "${DETAIL_ITEM_CAR_SPACES}_TEXT",
             text = "$count"
@@ -104,7 +104,7 @@ class PropertyDetailComponentRobot(private val composeRule: ComposeContentTestRu
         return this
     }
 
-    fun dwellingTypeDisplayed(dwellingType: String): PropertyDetailComponentRobot {
+    fun assertDwellingTypeDisplayed(dwellingType: String): PropertyDetailComponentRobot {
         composeRule.assertTextDisplayed(
             tag = DETAIL_ITEM_DWELLING_TYPE,
             text = dwellingType
@@ -112,7 +112,7 @@ class PropertyDetailComponentRobot(private val composeRule: ComposeContentTestRu
         return this
     }
 
-    fun dwellingTypeNotDisplayed(): PropertyDetailComponentRobot {
+    fun assertDwellingTypeNotDisplayed(): PropertyDetailComponentRobot {
         composeRule.assertTagDoesNotExist(DETAIL_ITEM_DWELLING_TYPE)
         return this
     }
