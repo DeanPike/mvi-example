@@ -34,6 +34,8 @@ class ProjectChildComponentTest : UiUnitTestBase() {
             .assertProjectChildImageDisplayed()
             .assertLifecycle("New Home")
             .assertPriceDisplayed("Starting from \$2,000,000 with extra data")
+            .clickProjectChild()
+            .assertClickedProjectChildId(2019256252)
 
         detailRobot
             .assertNumberOfBedrooms(3)

@@ -12,6 +12,7 @@ import au.com.deanpike.uitestshared.base.TestRobotBase
 import au.com.deanpike.uitestshared.base.TestRobotInitData
 import au.com.deanpike.uitestshared.util.assertTagDisplayed
 import au.com.deanpike.uitestshared.util.assertTextDisplayed
+import au.com.deanpike.uitestshared.util.clickOn
 import org.assertj.core.api.Assertions.assertThat
 
 class ProjectChildComponentRobot(private val composeRule: ComposeContentTestRule) : TestRobotBase<ProjectChildComponentRobot, ProjectChildComponentRobotInitData>(composeRule) {
@@ -71,6 +72,11 @@ class ProjectChildComponentRobot(private val composeRule: ComposeContentTestRule
             tag = PROJECT_CHILD_PRICE,
             text = price
         )
+        return this
+    }
+
+    fun clickProjectChild(): ProjectChildComponentRobot {
+        composeRule.clickOn(PROJECT_CHILD_LAYOUT)
         return this
     }
 }
