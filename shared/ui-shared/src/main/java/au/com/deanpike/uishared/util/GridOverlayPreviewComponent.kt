@@ -19,11 +19,15 @@ fun GridOverlayPreviewComponent(
     interval: Dp = 8.dp, // The space between the grid lines
     widthPx: Float = 1080F, // The screen width in pixels to use when not running the preview
     heightPx: Float = 2400F, // The screen height in pixels to use when not running the preview
+    showVerticalMargins: Boolean = true, // Show the vertical margins
+    verticalMarginColour: Color = Color.Blue.copy(alpha = 0.5F), // The vertical line colour
+    verticalMarginSize: Dp = 16.dp, // The space between the edge of the screen and the margin
     content: @Composable () -> Unit = {} // The content to draw the grid over
 ) {
     val density = LocalDensity.current
     val intervalPx = with(density) { interval.toPx() }
     val isPreview = LocalInspectionMode.current
+    val verticalMarginPx = with(density) { verticalMarginSize.toPx() }
 
     Box(
         modifier = Modifier.fillMaxSize()
@@ -62,6 +66,19 @@ fun GridOverlayPreviewComponent(
                             color = colour,
                             start = Offset(x = 0F, y = y),
                             end = Offset(x = width, y = y)
+                        )
+                    }
+
+                    if (showVerticalMargins) {
+                        drawLine(
+                            color = verticalMarginColour,
+                            start = Offset(x = verticalMarginPx, y = 0F),
+                            end = Offset(x = verticalMarginPx, y = height)
+                        )
+                        drawLine(
+                            color = verticalMarginColour,
+                            start = Offset(x = width - verticalMarginPx, y = 0F),
+                            end = Offset(x = width - verticalMarginPx, y = height)
                         )
                     }
                 }
