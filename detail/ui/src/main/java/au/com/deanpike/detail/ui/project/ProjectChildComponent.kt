@@ -31,6 +31,7 @@ import au.com.deanpike.detail.ui.project.ProjectChildComponentTestTags.PROJECT_C
 import au.com.deanpike.detail.ui.project.ProjectChildComponentTestTags.PROJECT_CHILD_LIFECYCLE
 import au.com.deanpike.detail.ui.project.ProjectChildComponentTestTags.PROJECT_CHILD_PRICE
 import au.com.deanpike.uishared.R
+import au.com.deanpike.uishared.base.listingIdTestTag
 import au.com.deanpike.uishared.component.PropertyDetailComponent
 import au.com.deanpike.uishared.theme.Dimension.DIM_16
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
@@ -54,7 +55,10 @@ fun ProjectChildComponent(
             .clickable {
                 onProjectChildClicked(child.id)
             }
-            .testTag(PROJECT_CHILD_LAYOUT)
+            .listingIdTestTag(
+                tag = PROJECT_CHILD_LAYOUT,
+                id = child.id
+            )
         ) {
             child.propertyImage?.let {
                 AsyncImage(

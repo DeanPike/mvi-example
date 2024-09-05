@@ -119,8 +119,6 @@ fun PropertyListItem(
                     top.linkTo(addressRef.bottom)
                 }
                 .padding(start = DIM_16, end = DIM_16),
-            parentPosition = position,
-            position = position,
             details = property.detail,
             dwellingType = property.dwellingType
         )

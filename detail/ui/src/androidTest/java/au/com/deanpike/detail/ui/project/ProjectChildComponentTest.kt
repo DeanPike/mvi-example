@@ -1,4 +1,4 @@
-package au.com.deanpike.detail.ui.unit.screen.project
+package au.com.deanpike.detail.ui.project
 
 import au.com.deanpike.detail.client.model.detail.ProjectChild
 import au.com.deanpike.detail.ui.framework.robot.ProjectChildComponentRobot

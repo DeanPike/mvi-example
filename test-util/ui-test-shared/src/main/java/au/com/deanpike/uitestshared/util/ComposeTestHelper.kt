@@ -7,6 +7,7 @@ import androidx.compose.ui.semantics.getOrNull
 import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import au.com.deanpike.uishared.base.DrawablePropertyKey
+import au.com.deanpike.uishared.base.ListingIdPropertyKey
 
 fun ComposeContentTestRule.advanceTimeAndWait(delay: Long = 1000) {
     mainClock.advanceTimeBy(delay)
@@ -254,4 +255,18 @@ fun ComposeContentTestRule.assertDrawableDisplayed(
         matcher = hasTestTag(tag) and
             SemanticsMatcher.expectValue(key = DrawablePropertyKey, expectedValue = drawable)
     ).assertIsDisplayed()
+}
+
+fun ComposeContentTestRule.assertListingDisplayedAtPosition(
+    parentTag: String,
+    position: Int,
+    childTag: String,
+    listingId: Long
+) {
+    onNodeWithTag(
+        useUnmergedTree = true,
+        testTag = parentTag,
+    ).onChildAt(position)
+        .onChild()
+        .assert(hasTestTag(childTag) and SemanticsMatcher.expectValue(key = ListingIdPropertyKey, expectedValue = listingId))
 }

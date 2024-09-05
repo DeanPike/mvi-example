@@ -92,8 +92,6 @@ fun ProjectChildListItemComponent(
                         top.linkTo(priceRef.bottom)
                     }
                     .fillMaxWidth(),
-                parentPosition = parentPosition,
-                position = position,
                 details = listingDetails,
                 dwellingType = null
             )
