@@ -239,7 +239,6 @@ fun ProjectDetailSuccess(
         state.projectDetail?.advertiser?.let {
             AgencyComponent(advertiser = it)
         }
-
     }
 }
 

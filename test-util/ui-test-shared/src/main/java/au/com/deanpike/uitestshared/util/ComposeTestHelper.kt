@@ -69,6 +69,11 @@ fun ComposeContentTestRule.scrollTo(tag: String, advanceTimeMillis: Long = 500) 
     mainClock.advanceTimeBy(advanceTimeMillis)
 }
 
+fun ComposeContentTestRule.scrollToText(text: String, advanceTimeMillis: Long = 500) {
+    onNodeWithText(text, useUnmergedTree = true).performScrollTo()
+    mainClock.advanceTimeBy(advanceTimeMillis)
+}
+
 fun ComposeContentTestRule.scrollToItemPosition(tag: String, index: Int, advanceTimeMillis: Long = 500) {
     onNodeWithTag(tag, useUnmergedTree = true).performScrollToIndex(index)
     mainClock.advanceTimeBy(advanceTimeMillis)
@@ -225,20 +230,6 @@ fun ComposeContentTestRule.clickTagInParent(
     val childNode = onNodeWithTag(testTag = tag, useUnmergedTree = true)
     val buttonNode = childNode.assert(hasParent(hasTestTag(parentTag)))
     buttonNode.performClick()
-}
-
-fun ComposeContentTestRule.assertTextDisplayedAtPosition(
-    parentTag: String,
-    tag: String,
-    position: Int,
-    text: String
-) {
-    onNodeWithTag(
-        testTag = parentTag,
-        useUnmergedTree = true
-    ).onChildAt(position)
-        .onChildren()
-        .assertAny(hasTestTag(tag) and hasText(text))
 }
 
 @OptIn(ExperimentalTestApi::class)

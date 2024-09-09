@@ -27,6 +27,7 @@ fun ContactComponent(
         modifier = modifier
             .fillMaxWidth()
             .padding(start = DIM_8, end = DIM_4)
+            .testTag(testTag)
     ) {
         Text(
             modifier = Modifier

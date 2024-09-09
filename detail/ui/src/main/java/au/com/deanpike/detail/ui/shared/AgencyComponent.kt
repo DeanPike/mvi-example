@@ -1,7 +1,6 @@
 package au.com.deanpike.detail.ui.shared
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
@@ -27,7 +26,6 @@ fun AgencyComponent(
 ) {
     Column(
         modifier = Modifier
-            .fillMaxSize()
             .padding(bottom = DIM_16)
             .testTag(AGENCY_LAYOUT)
     ) {
@@ -50,11 +48,8 @@ fun AgencyComponent(
                 text = it,
             )
         }
-        advertiser.agencyListingContacts.forEachIndexed { index, agent ->
-            AgentComponent(
-                agent = agent,
-                position = index
-            )
+        advertiser.agencyListingContacts.forEach { agent ->
+            AgentComponent(agent = agent)
         }
     }
 }

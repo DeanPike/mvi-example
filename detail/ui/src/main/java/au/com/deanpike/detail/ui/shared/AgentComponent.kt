@@ -22,7 +22,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import au.com.deanpike.detail.client.model.detail.Agent
@@ -30,6 +29,7 @@ import au.com.deanpike.detail.client.model.detail.PhoneNumber
 import au.com.deanpike.detail.client.model.type.PhoneNumberType
 import au.com.deanpike.detail.ui.R
 import au.com.deanpike.detail.ui.shared.AgentComponentTestTags.AGENT_CARD
+import au.com.deanpike.detail.ui.shared.AgentComponentTestTags.AGENT_CARD_LAYOUT
 import au.com.deanpike.detail.ui.shared.AgentComponentTestTags.AGENT_EMAIL
 import au.com.deanpike.detail.ui.shared.AgentComponentTestTags.AGENT_FAX
 import au.com.deanpike.detail.ui.shared.AgentComponentTestTags.AGENT_GENERAL
@@ -44,13 +44,12 @@ import coil.compose.AsyncImage
 
 @Composable
 fun AgentComponent(
-    position: Int,
     agent: Agent
 ) {
     Card(
         modifier = Modifier
             .padding(top = DIM_8, start = DIM_16, end = DIM_16)
-            .testTag("${AGENT_CARD}_$position"),
+            .testTag(AGENT_CARD),
         colors = CardDefaults.cardColors().copy(
             containerColor = Color.Gray.copy(alpha = 0.05F)
         ),
@@ -61,6 +60,7 @@ fun AgentComponent(
                 .fillMaxWidth()
                 .wrapContentHeight()
                 .padding(DIM_4)
+                .testTag("${AGENT_CARD_LAYOUT}_${agent.id}")
         ) {
             val (nameRef, imageRef, contactDetailsRef) = createRefs()
 
@@ -74,7 +74,7 @@ fun AgentComponent(
                             width = Dimension.fillToConstraints
                         }
                         .padding(start = DIM_8)
-                        .testTag("${AGENT_NAME}_$position"),
+                        .testTag(AGENT_NAME),
                     text = it,
                     style = MaterialTheme.typography.titleMedium,
                     maxLines = 2,
@@ -92,11 +92,13 @@ fun AgentComponent(
                         .padding(top = DIM_4, end = DIM_4)
                         .size(60.dp)
                         .clip(CircleShape)
-                        .testTag("${AGENT_IMAGE}_$position"),
+                        .testTag(AGENT_IMAGE),
                     model = it,
                     contentDescription = stringResource(id = R.string.agent_photo),
                     contentScale = ContentScale.Crop,
-                    placeholder = painterResource(id = au.com.deanpike.uishared.R.drawable.gallery_placeholder)
+                    placeholder = painterResource(id = au.com.deanpike.uishared.R.drawable.gallery_placeholder),
+                    fallback = painterResource(id = au.com.deanpike.uishared.R.drawable.gallery_placeholder),
+                    error = painterResource(id = au.com.deanpike.uishared.R.drawable.gallery_placeholder),
                 )
             }
 
@@ -115,7 +117,7 @@ fun AgentComponent(
                     ContactComponent(
                         label = stringResource(id = R.string.mobile),
                         number = it.number ?: "",
-                        testTag = "${AGENT_MOBILE}_$position"
+                        testTag = AGENT_MOBILE
                     )
                 }
                 agent.phoneNumbers.firstOrNull {
@@ -124,7 +126,7 @@ fun AgentComponent(
                     ContactComponent(
                         label = stringResource(id = R.string.general),
                         number = it.number ?: "",
-                        testTag = "${AGENT_GENERAL}_$position"
+                        testTag = AGENT_GENERAL
                     )
                 }
                 agent.phoneNumbers.firstOrNull {
@@ -133,7 +135,7 @@ fun AgentComponent(
                     ContactComponent(
                         label = stringResource(id = R.string.fax),
                         number = it.number ?: "",
-                        testTag = "${AGENT_FAX}_$position"
+                        testTag = AGENT_FAX
                     )
                 }
 
@@ -141,7 +143,7 @@ fun AgentComponent(
                     ContactComponent(
                         label = stringResource(id = R.string.email),
                         number = it,
-                        testTag = "${AGENT_EMAIL}_$position"
+                        testTag = AGENT_EMAIL
                     )
                 }
             }
@@ -152,6 +154,7 @@ fun AgentComponent(
 object AgentComponentTestTags {
     private const val PREFIX = "AGENT_"
     const val AGENT_CARD = "${PREFIX}CARD"
+    const val AGENT_CARD_LAYOUT = "${PREFIX}CARD_LAYOUT"
     const val AGENT_NAME = "${PREFIX}NAME"
     const val AGENT_IMAGE = "${PREFIX}IMAGE"
     const val AGENT_MOBILE = "${PREFIX}MOBILE"
@@ -165,7 +168,6 @@ object AgentComponentTestTags {
 fun AgentComponentPreview() {
     MviExampleTheme {
         AgentComponent(
-            position = 0,
             agent = Agent(
                 id = "1697102",
                 address = """Shop 1H, 1183-1187 The Horsley Drive\nWetherill Park NSW 2164""",
