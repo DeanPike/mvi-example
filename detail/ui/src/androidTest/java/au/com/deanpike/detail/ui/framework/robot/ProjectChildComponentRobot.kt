@@ -35,6 +35,7 @@ class ProjectChildComponentRobot(private val composeRule: ComposeContentTestRule
                         propertyImage = "https://bucket-api.domain.com.au/v1/bucket/image/2019256252_1_1_240521_034448-w3000-h1875",
                         lifecycleStatus = "New Home"
                     ),
+                    screenWidth = 1000,
                     onProjectChildClicked = {
                         clickedProjectChildId = it
                     }

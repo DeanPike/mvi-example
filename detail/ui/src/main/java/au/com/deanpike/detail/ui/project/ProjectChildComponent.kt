@@ -18,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -43,10 +44,13 @@ import coil.request.ImageRequest
 @Composable
 fun ProjectChildComponent(
     child: ProjectChild,
+    screenWidth: Int,
     onProjectChildClicked: (Long) -> Unit = {}
 ) {
+    val density = LocalDensity.current
+    val width = with(density){(screenWidth * 0.9F).toDp()}
     Card(
-        modifier = Modifier.width(100.dp),
+        modifier = Modifier.width(width),
         colors = CardDefaults.cardColors().copy(
             containerColor = Color.Gray.copy(alpha = 0.05F)
         ),
@@ -145,7 +149,8 @@ fun ProjectChildComponentPreview() {
                 propertyUrl = "https://www.domain.com.au/13-crown-street-wollongong-nsw-2500-2019256252",
                 propertyImage = "https://bucket-api.domain.com.au/v1/bucket/image/2019256252_1_1_240521_034448-w3000-h1875",
                 lifecycleStatus = "New Home"
-            )
+            ),
+            screenWidth = 600
         )
     }
 }

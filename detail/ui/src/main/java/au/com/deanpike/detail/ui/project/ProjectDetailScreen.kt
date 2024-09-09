@@ -18,8 +18,13 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -145,6 +150,7 @@ fun ProjectDetailSuccess(
     onProjectChildClicked: (Long) -> Unit = {}
 ) {
     val scrollState = rememberScrollState()
+    var screenWidth by remember { mutableIntStateOf(0) }
 
     LaunchedEffect(state.projectId) {
         scrollState.scrollTo(0)
@@ -153,6 +159,9 @@ fun ProjectDetailSuccess(
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(scrollState)
+            .onGloballyPositioned { coordinates ->
+                screenWidth = coordinates.size.width
+            }
             .testTag(PROJECT_DETAILS_LAYOUT)
     ) {
         ListingDetailImagesComponent(
@@ -219,6 +228,7 @@ fun ProjectDetailSuccess(
         state.projectDetail?.childListings?.let {
             ProjectChildrenComponent(
                 childListings = it,
+                screenWidth = screenWidth,
                 onProjectChildClicked = onProjectChildClicked
             )
         }

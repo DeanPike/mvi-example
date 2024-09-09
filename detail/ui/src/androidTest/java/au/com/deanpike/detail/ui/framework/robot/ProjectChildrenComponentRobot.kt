@@ -20,6 +20,7 @@ class ProjectChildrenComponentRobot(private val composeRule: ComposeContentTestR
             MviExampleTheme {
                 ProjectChildrenComponent(
                     childListings = data!!.childListings,
+                    screenWidth = 1000,
                     onProjectChildClicked = {
                         clickedProjectChildId = it
                     }

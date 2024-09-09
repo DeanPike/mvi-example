@@ -18,6 +18,7 @@ import au.com.deanpike.uishared.theme.MviExampleTheme
 @Composable
 fun ProjectChildrenComponent(
     childListings: List<ProjectChild>,
+    screenWidth: Int,
     onProjectChildClicked: (Long) -> Unit = {}
 ) {
     val listState = rememberLazyListState()
@@ -37,6 +38,7 @@ fun ProjectChildrenComponent(
             item(key = projectChild.id) {
                 ProjectChildComponent(
                     child = projectChild,
+                    screenWidth = screenWidth,
                     onProjectChildClicked = onProjectChildClicked
                 )
             }
@@ -78,7 +80,8 @@ fun ProjectChildrenComponentPreview() {
     )
     MviExampleTheme {
         ProjectChildrenComponent(
-            childListings = childListings
+            childListings = childListings,
+            screenWidth = 600
         )
     }
 }
