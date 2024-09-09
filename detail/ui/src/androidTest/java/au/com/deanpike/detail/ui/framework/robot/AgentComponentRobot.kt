@@ -18,14 +18,12 @@ import au.com.deanpike.uitestshared.util.assertTagDoesNotExist
 import au.com.deanpike.uitestshared.util.assertTextDisplayed
 
 class AgentComponentRobot(private val composeRule: ComposeContentTestRule) : TestRobotBase<AgentComponentRobot, AgentComponentRobotInitData>(composeRule) {
-    private lateinit var agent: Agent
     override fun setupComponent(data: AgentComponentRobotInitData?): AgentComponentRobot {
-        agent = data!!.agent
 
         composeRule.setContent {
             MviExampleTheme {
                 AgentComponent(
-                    agent = data.agent
+                    agent = data!!.agent
                 )
             }
         }
