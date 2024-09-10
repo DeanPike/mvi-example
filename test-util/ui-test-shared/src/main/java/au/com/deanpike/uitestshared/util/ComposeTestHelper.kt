@@ -9,6 +9,10 @@ import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import au.com.deanpike.uishared.base.DrawablePropertyKey
 import au.com.deanpike.uishared.base.ListingIdPropertyKey
 
+fun ComposeContentTestRule.disableAnimations() {
+    mainClock.autoAdvance = false
+}
+
 fun ComposeContentTestRule.advanceTimeAndWait(delay: Long = 1000) {
     mainClock.advanceTimeBy(delay)
     waitForIdle()
