@@ -1,7 +1,6 @@
-package au.com.deanpike.detail.ui.unit.screen.shared
+package au.com.deanpike.detail.ui.shared
 
 import au.com.deanpike.detail.ui.framework.ability.DetailAppBarComponentAbility
-import au.com.deanpike.detail.ui.shared.DetailAppBarComponent
 import au.com.deanpike.uishared.theme.MviExampleTheme
 import au.com.deanpike.uitestshared.base.UiUnitTestBase
 import au.com.deanpike.uitestshared.util.advanceTimeAndWait
