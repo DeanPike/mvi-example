@@ -6,11 +6,13 @@ import au.com.deanpike.detail.client.model.detail.PhoneNumber
 import au.com.deanpike.detail.client.model.type.PhoneNumberType
 import au.com.deanpike.detail.ui.framework.robot.AgencyComponentRobot
 import au.com.deanpike.detail.ui.framework.robot.AgencyComponentRobotInitData
+import au.com.deanpike.detail.ui.framework.robot.AgentComponentRobot
 import au.com.deanpike.uitestshared.base.UiUnitTestBase
 import org.junit.Test
 
 class AgencyComponentTest : UiUnitTestBase() {
     private val agencyRobot = AgencyComponentRobot(composeTestRule)
+    private val agentRobot = AgentComponentRobot(composeTestRule)
 
     @Test
     fun should_show_agency_component() {
@@ -21,16 +23,19 @@ class AgencyComponentTest : UiUnitTestBase() {
                 )
             )
             .assertLayoutDisplayed()
-            .assertAgentLabel("Agent")
+            .assertAgentLabel()
             .assertAgencyName("Ray White Wetherill Park")
             .assertAgencyAddress("Shop 1H, 1183-1187 The Horsley Drive\nWetherill Park NSW 2164")
+
+        agentRobot
+            .assertLayoutDisplayed()
             .assertAgentName(
-                id = "1697102",
-                name = "Riccardo Romolo"
+                name = "Riccardo Romolo",
+                position = 0
             )
             .assertAgentName(
-                id = "1350251",
-                name = "Marcus Biasetto with added text to make the name wrap over two lines"
+                name = "Marcus Biasetto with added text to make the name wrap over two lines",
+                position = 1
             )
     }
 

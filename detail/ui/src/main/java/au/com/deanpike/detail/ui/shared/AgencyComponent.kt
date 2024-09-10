@@ -61,9 +61,7 @@ fun AgencyComponent(
                 text = it,
             )
         }
-        advertiser.agencyListingContacts.forEach { agent ->
-            AgentComponent(agent = agent)
-        }
+        AgentComponent(agents = advertiser.agencyListingContacts)
     }
 }
 
