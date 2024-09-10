@@ -7,12 +7,12 @@ import au.com.deanpike.uishared.component.DetailItemComponent
 import au.com.deanpike.uishared.theme.MviExampleTheme
 import au.com.deanpike.uitestshared.base.TestRobotBase
 import au.com.deanpike.uitestshared.base.TestRobotInitData
+import au.com.deanpike.uitestshared.util.assertContentDescription
 import au.com.deanpike.uitestshared.util.assertDrawableDisplayed
 import au.com.deanpike.uitestshared.util.assertTagDisplayed
 import au.com.deanpike.uitestshared.util.assertTextDisplayed
 
 class DetailItemComponentRobot(private val composeRule: ComposeContentTestRule) : TestRobotBase<DetailItemComponentRobot, TestRobotInitData>(composeRule) {
-    private val testTag = "BEDROOM_ITEM"
 
     override fun setupComponent(data: TestRobotInitData?): DetailItemComponentRobot {
         composeRule.setContent {
@@ -21,7 +21,7 @@ class DetailItemComponentRobot(private val composeRule: ComposeContentTestRule) 
                     icon = R.drawable.bed_outline,
                     text = "3",
                     description = R.string.number_of_bedrooms,
-                    testTag = testTag
+                    testTag = "DETAIL_ITEM_COMPONENT"
                 )
             }
         }
@@ -29,19 +29,30 @@ class DetailItemComponentRobot(private val composeRule: ComposeContentTestRule) 
     }
 
     override fun assertLayoutDisplayed(): DetailItemComponentRobot {
-        composeRule.assertTagDisplayed(testTag)
+        composeRule.assertTagDisplayed("DETAIL_ITEM_COMPONENT")
         return this
     }
 
-    fun assertIconDisplayed(@DrawableRes drawable: Int): DetailItemComponentRobot {
+    fun assertIconDisplayed(
+        testTag: String,
+        @DrawableRes drawable: Int,
+        contentDescription: String
+    ): DetailItemComponentRobot {
         composeRule.assertDrawableDisplayed(
             tag = "${testTag}_ICON",
             drawable = drawable
         )
+        composeRule.assertContentDescription(
+            tag = "${testTag}_ICON",
+            text = contentDescription
+        )
         return this
     }
 
-    fun assertItemCount(count: String): DetailItemComponentRobot {
+    fun assertItemCount(
+        testTag: String,
+        count: String
+    ): DetailItemComponentRobot {
         composeRule.assertTextDisplayed(
             tag = "${testTag}_TEXT",
             text = count

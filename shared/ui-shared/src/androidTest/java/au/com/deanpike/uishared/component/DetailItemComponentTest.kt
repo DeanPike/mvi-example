@@ -14,7 +14,14 @@ class DetailItemComponentTest : UiUnitTestBase() {
             .setupComponent()
             .waitForIdle()
             .assertLayoutDisplayed()
-            .assertIconDisplayed(drawable = R.drawable.bed_outline)
-            .assertItemCount("3")
+            .assertIconDisplayed(
+                testTag = "DETAIL_ITEM_COMPONENT",
+                drawable = R.drawable.bed_outline,
+                contentDescription = "Number of bedrooms"
+            )
+            .assertItemCount(
+                testTag = "DETAIL_ITEM_COMPONENT",
+                "3"
+            )
     }
 }
