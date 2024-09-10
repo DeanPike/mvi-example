@@ -265,3 +265,14 @@ fun ComposeContentTestRule.assertListingDisplayedAtPosition(
         .onChild()
         .assert(hasTestTag(childTag) and SemanticsMatcher.expectValue(key = ListingIdPropertyKey, expectedValue = listingId))
 }
+
+fun ComposeContentTestRule.clickOnItemAtPosition(
+    parentTag: String,
+    position: Int,
+) {
+    onNodeWithTag(
+        useUnmergedTree = true,
+        testTag = parentTag,
+    ).onChildAt(position)
+        .performClick()
+}

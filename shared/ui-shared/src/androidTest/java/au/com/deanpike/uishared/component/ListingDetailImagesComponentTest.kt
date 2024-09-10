@@ -5,6 +5,7 @@ import au.com.deanpike.commonshared.type.MediaType
 import au.com.deanpike.uitestshared.base.UiUnitTestBase
 import au.com.deanpike.uitestshared.robot.ListingDetailImagesComponentRobot
 import au.com.deanpike.uitestshared.robot.ListingDetailImagesComponentRobotInitData
+import au.com.deanpike.uitestshared.util.disableAnimations
 import org.junit.Before
 import org.junit.Test
 
@@ -13,8 +14,7 @@ class ListingDetailImagesComponentTest : UiUnitTestBase() {
 
     @Before
     fun setupTest() {
-        // Disable animations
-        composeTestRule.mainClock.autoAdvance = false
+        composeTestRule.disableAnimations()
     }
 
     @Test

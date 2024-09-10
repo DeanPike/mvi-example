@@ -10,6 +10,8 @@ import au.com.deanpike.uitestshared.base.TestRobotBase
 import au.com.deanpike.uitestshared.base.TestRobotInitData
 import au.com.deanpike.uitestshared.util.assertListingDisplayedAtPosition
 import au.com.deanpike.uitestshared.util.assertTagDisplayed
+import au.com.deanpike.uitestshared.util.clickOnItemAtPosition
+import au.com.deanpike.uitestshared.util.scrollToItemPosition
 
 class ProjectChildrenComponentRobot(private val composeRule: ComposeContentTestRule) : TestRobotBase<ProjectChildrenComponentRobot, ProjectChildrenComponentRobotInitData>(composeRule) {
     private var clickedProjectChildId: Long? = null
@@ -35,6 +37,14 @@ class ProjectChildrenComponentRobot(private val composeRule: ComposeContentTestR
         return this
     }
 
+    fun scrollToPosition(position: Int): ProjectChildrenComponentRobot {
+        composeRule.scrollToItemPosition(
+            tag = PROJECT_CHILDREN,
+            index = position
+        )
+        return this
+    }
+
     fun assertListingDisplayedAtPosition(
         position: Int,
         listingId: Long
@@ -44,6 +54,14 @@ class ProjectChildrenComponentRobot(private val composeRule: ComposeContentTestR
             position = position,
             childTag = PROJECT_CHILD_LAYOUT,
             listingId = listingId
+        )
+        return this
+    }
+
+    fun clickOnChild(position: Int): ProjectChildrenComponentRobot {
+        composeRule.clickOnItemAtPosition(
+            parentTag = PROJECT_CHILDREN,
+            position = position
         )
         return this
     }

@@ -81,7 +81,7 @@ fun ProjectChildrenComponentPreview() {
     MviExampleTheme {
         ProjectChildrenComponent(
             childListings = childListings,
-            screenWidth = 600
+            screenWidth = 1080
         )
     }
 }

@@ -22,6 +22,7 @@ import au.com.deanpike.uitestshared.base.TestRobotBase
 import au.com.deanpike.uitestshared.base.TestRobotInitData
 import au.com.deanpike.uitestshared.util.assertTagDisplayed
 import au.com.deanpike.uitestshared.util.assertTagDoesNotExist
+import au.com.deanpike.uitestshared.util.scrollTo
 
 class AgentComponentRobot(private val composeRule: ComposeContentTestRule) : TestRobotBase<AgentComponentRobot, AgentComponentRobotInitData>(composeRule) {
     override fun setupComponent(data: AgentComponentRobotInitData?): AgentComponentRobot {
@@ -38,6 +39,11 @@ class AgentComponentRobot(private val composeRule: ComposeContentTestRule) : Tes
 
     override fun assertLayoutDisplayed(): AgentComponentRobot {
         composeRule.assertTagDisplayed("${AGENT_CARD_LAYOUT}_0")
+        return this
+    }
+
+    fun scrollToPosition(position: Int): AgentComponentRobot {
+        composeRule.scrollTo("${AGENT_CARD_LAYOUT}_$position")
         return this
     }
 

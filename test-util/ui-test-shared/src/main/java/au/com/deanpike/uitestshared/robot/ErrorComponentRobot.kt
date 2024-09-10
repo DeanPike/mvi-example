@@ -10,6 +10,7 @@ import au.com.deanpike.uishared.theme.MviExampleTheme
 import au.com.deanpike.uitestshared.base.TestRobotBase
 import au.com.deanpike.uitestshared.base.TestRobotInitData
 import au.com.deanpike.uitestshared.util.assertTagDisplayed
+import au.com.deanpike.uitestshared.util.assertTagDoesNotExist
 import au.com.deanpike.uitestshared.util.assertTextDisplayed
 import au.com.deanpike.uitestshared.util.clickOn
 import org.assertj.core.api.Assertions.assertThat
@@ -32,6 +33,11 @@ class ErrorComponentRobot(private val composeRule: ComposeContentTestRule) : Tes
 
     override fun assertLayoutDisplayed(): ErrorComponentRobot {
         composeRule.assertTagDisplayed(ERROR_COMPONENT_LAYOUT)
+        return this
+    }
+
+    fun assertLayoutNotDisplayed(): ErrorComponentRobot {
+        composeRule.assertTagDoesNotExist(ERROR_COMPONENT_LAYOUT)
         return this
     }
 

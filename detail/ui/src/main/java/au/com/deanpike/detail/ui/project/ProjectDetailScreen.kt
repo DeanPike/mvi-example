@@ -43,7 +43,6 @@ import au.com.deanpike.detail.client.model.type.PhoneNumberType
 import au.com.deanpike.detail.ui.R
 import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_DETAILS_LAYOUT
 import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_DETAIL_ADDRESS
-import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_DETAIL_AGENT_LABEL
 import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_DETAIL_CLOSE
 import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_DETAIL_DESCRIPTION
 import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_DETAIL_HEADLINE
@@ -237,15 +236,6 @@ fun ProjectDetailSuccess(
             modifier = Modifier.padding(top = DIM_8, bottom = DIM_8)
         )
 
-        Text(
-            modifier = Modifier
-                .padding(start = DIM_16, top = DIM_8, bottom = DIM_8)
-                .testTag(PROJECT_DETAIL_AGENT_LABEL),
-            text = stringResource(id = R.string.agent),
-            fontWeight = FontWeight.Bold,
-            style = MaterialTheme.typography.bodyLarge
-        )
-
         state.projectDetail?.advertiser?.let {
             AgencyComponent(advertiser = it)
         }
@@ -262,7 +252,6 @@ object ProjectDetailScreenTestTags {
     const val PROJECT_DETAIL_ADDRESS = "${PREFIX}ADDRESS"
     const val PROJECT_DETAIL_HEADLINE = "${PREFIX}HEADLINE"
     const val PROJECT_DETAIL_DESCRIPTION = "${PREFIX}DESCRIPTION"
-    const val PROJECT_DETAIL_AGENT_LABEL = "${PREFIX}AGENT_LABEL"
 }
 
 @Preview
