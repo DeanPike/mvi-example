@@ -16,16 +16,16 @@ class AgentComponentTest : UiUnitTestBase() {
         robot
             .setupComponent(
                 data = AgentComponentRobotInitData(
-                    agent = agent
+                    agents = listOf(agent)
                 )
             )
             .assertLayoutDisplayed()
-            .assertAgentName("Riccardo Romolo")
-            .assertAgentImage()
-            .assertAgentMobileContact("0452 184 976")
-            .assertAgentGeneralContact("02 9609 7099")
-            .assertAgentFaxContact("02 9609 2370")
-            .assertAgentEmailContact("riccardo.romolo@raywhite.com")
+            .assertAgentName(name = "Riccardo Romolo", position = 0)
+            .assertAgentImage(position = 0)
+            .assertAgentMobileContact(number = "0452 184 976", position = 0)
+            .assertAgentGeneralContact(number = "02 9609 7099", position = 0)
+            .assertAgentFaxContact(number = "02 9609 2370", position = 0)
+            .assertAgentEmailContact(email = "riccardo.romolo@raywhite.com", position = 0)
     }
 
 

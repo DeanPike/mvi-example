@@ -1,7 +1,7 @@
 package au.com.deanpike.detail.ui.framework.ability
 
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
-import au.com.deanpike.detail.ui.shared.AgentComponentTestTags.AGENT_CARD
+import au.com.deanpike.detail.ui.shared.AgentComponentTestTags.AGENT_CARD_LAYOUT
 import au.com.deanpike.detail.ui.shared.AgentComponentTestTags.AGENT_EMAIL
 import au.com.deanpike.detail.ui.shared.AgentComponentTestTags.AGENT_FAX
 import au.com.deanpike.detail.ui.shared.AgentComponentTestTags.AGENT_GENERAL
@@ -15,11 +15,11 @@ import au.com.deanpike.uitestshared.util.scrollTo
 
 class AgentComponentAbility(private val composeTestRule: ComposeContentTestRule) {
     fun scrollToAgent(position: Int) {
-        composeTestRule.scrollTo("${AGENT_CARD}_$position")
+        composeTestRule.scrollTo("${AGENT_CARD_LAYOUT}_$position")
     }
 
     fun assertAgentCardDisplayed(position: Int) {
-        composeTestRule.assertTagDisplayed("${AGENT_CARD}_$position")
+        composeTestRule.assertTagDisplayed("${AGENT_CARD_LAYOUT}_$position")
     }
 
     fun assertAgentNameDisplayed(
