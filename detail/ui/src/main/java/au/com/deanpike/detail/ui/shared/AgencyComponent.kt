@@ -8,14 +8,18 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import au.com.deanpike.detail.client.model.detail.Advertiser
 import au.com.deanpike.detail.client.model.detail.Agent
 import au.com.deanpike.detail.client.model.detail.PhoneNumber
 import au.com.deanpike.detail.client.model.type.PhoneNumberType
+import au.com.deanpike.detail.ui.R
 import au.com.deanpike.detail.ui.shared.AgencyComponentTestTags.AGENCY_ADDRESS
 import au.com.deanpike.detail.ui.shared.AgencyComponentTestTags.AGENCY_LAYOUT
 import au.com.deanpike.detail.ui.shared.AgencyComponentTestTags.AGENCY_NAME
+import au.com.deanpike.detail.ui.shared.AgencyComponentTestTags.AGENT_LABEL
 import au.com.deanpike.uishared.theme.Dimension.DIM_16
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
 import au.com.deanpike.uishared.theme.MviExampleTheme
@@ -29,6 +33,15 @@ fun AgencyComponent(
             .padding(bottom = DIM_16)
             .testTag(AGENCY_LAYOUT)
     ) {
+        Text(
+            modifier = Modifier
+                .padding(start = DIM_16, top = DIM_8, bottom = DIM_8)
+                .testTag(AGENT_LABEL),
+            text = stringResource(id = R.string.agent),
+            fontWeight = FontWeight.Bold,
+            style = MaterialTheme.typography.bodyLarge
+        )
+
         advertiser.name?.let {
             Text(
                 modifier = Modifier
@@ -57,6 +70,7 @@ fun AgencyComponent(
 object AgencyComponentTestTags {
     private const val PREFIX = "AGENCY_"
     const val AGENCY_LAYOUT = "${PREFIX}LAYOUT"
+    const val AGENT_LABEL = "${PREFIX}_LABEL"
     const val AGENCY_NAME = "${PREFIX}NAME"
     const val AGENCY_ADDRESS = "${PREFIX}ADDRESS"
 }

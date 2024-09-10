@@ -11,6 +11,7 @@ import au.com.deanpike.detail.ui.shared.AgencyComponent
 import au.com.deanpike.detail.ui.shared.AgencyComponentTestTags.AGENCY_ADDRESS
 import au.com.deanpike.detail.ui.shared.AgencyComponentTestTags.AGENCY_LAYOUT
 import au.com.deanpike.detail.ui.shared.AgencyComponentTestTags.AGENCY_NAME
+import au.com.deanpike.detail.ui.shared.AgencyComponentTestTags.AGENT_LABEL
 import au.com.deanpike.detail.ui.shared.AgentComponentTestTags.AGENT_CARD_LAYOUT
 import au.com.deanpike.detail.ui.shared.AgentComponentTestTags.AGENT_NAME
 import au.com.deanpike.uishared.theme.MviExampleTheme
@@ -34,6 +35,11 @@ class AgencyComponentRobot(private val composeRule: ComposeContentTestRule) : Te
 
     override fun assertLayoutDisplayed(): AgencyComponentRobot {
         composeRule.assertTagDisplayed(AGENCY_LAYOUT)
+        return this
+    }
+
+    fun assertAgentLabel(label: String): AgencyComponentRobot {
+        composeRule.assertTextDisplayed(tag = AGENT_LABEL, text = label)
         return this
     }
 
