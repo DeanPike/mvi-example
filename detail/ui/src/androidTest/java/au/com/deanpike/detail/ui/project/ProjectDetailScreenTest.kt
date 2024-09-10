@@ -1,4 +1,4 @@
-package au.com.deanpike.detail.ui.unit.screen.project
+package au.com.deanpike.detail.ui.project
 
 import au.com.deanpike.commonshared.model.Media
 import au.com.deanpike.commonshared.type.MediaType
@@ -14,7 +14,6 @@ import au.com.deanpike.detail.ui.framework.robot.AgentComponentRobot
 import au.com.deanpike.detail.ui.framework.robot.ProjectChildrenComponentRobot
 import au.com.deanpike.detail.ui.framework.robot.ProjectDetailScreenRobot
 import au.com.deanpike.detail.ui.framework.robot.ProjectDetailScreenRobotInitData
-import au.com.deanpike.detail.ui.project.ProjectDetailScreenState
 import au.com.deanpike.uishared.base.ScreenStateType
 import au.com.deanpike.uitestshared.base.UiUnitTestBase
 import au.com.deanpike.uitestshared.robot.AgencyBannerComponentRobot
