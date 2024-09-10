@@ -1,5 +1,6 @@
 package au.com.deanpike.uishared.component
 
+import au.com.deanpike.uishared.R
 import au.com.deanpike.uitestshared.base.UiUnitTestBase
 import au.com.deanpike.uitestshared.robot.DetailItemComponentRobot
 import org.junit.Test
@@ -13,7 +14,7 @@ class DetailItemComponentTest : UiUnitTestBase() {
             .setupComponent()
             .waitForIdle()
             .assertLayoutDisplayed()
-            .assertIconDisplayed()
-            .assertItemCount()
+            .assertIconDisplayed(drawable = R.drawable.bed_outline)
+            .assertItemCount("3")
     }
 }

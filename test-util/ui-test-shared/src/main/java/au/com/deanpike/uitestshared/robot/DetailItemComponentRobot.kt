@@ -1,5 +1,6 @@
 package au.com.deanpike.uitestshared.robot
 
+import androidx.annotation.DrawableRes
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import au.com.deanpike.uishared.R
 import au.com.deanpike.uishared.component.DetailItemComponent
@@ -32,18 +33,18 @@ class DetailItemComponentRobot(private val composeRule: ComposeContentTestRule) 
         return this
     }
 
-    fun assertIconDisplayed(): DetailItemComponentRobot {
+    fun assertIconDisplayed(@DrawableRes drawable: Int): DetailItemComponentRobot {
         composeRule.assertDrawableDisplayed(
             tag = "${testTag}_ICON",
-            drawable = R.drawable.bed_outline
+            drawable = drawable
         )
         return this
     }
 
-    fun assertItemCount(): DetailItemComponentRobot {
+    fun assertItemCount(count: String): DetailItemComponentRobot {
         composeRule.assertTextDisplayed(
             tag = "${testTag}_TEXT",
-            text = "3"
+            text = count
         )
         return this
     }
