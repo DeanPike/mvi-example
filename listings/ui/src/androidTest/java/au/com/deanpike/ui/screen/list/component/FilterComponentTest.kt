@@ -1,8 +1,9 @@
-package au.com.deanpike.ui.unit.screen.list.component
+package au.com.deanpike.ui.screen.list.component
 
 import au.com.deanpike.listings.client.type.DwellingType
 import au.com.deanpike.listings.client.type.StatusType
 import au.com.deanpike.ui.framework.robot.FilterComponentRobot
+import au.com.deanpike.ui.framework.robot.FilterComponentRobotInitData
 import au.com.deanpike.ui.framework.robot.StatusDropDownMenuRobot
 import au.com.deanpike.uitestshared.base.UiUnitTestBase
 import org.junit.Before
@@ -22,7 +23,9 @@ class FilterComponentTest : UiUnitTestBase() {
     @Test
     fun should_show_filter_component() {
         filterComponentRobot
-            .setUpLoginScreen()
+            .setupComponent(
+                data = FilterComponentRobotInitData()
+            )
             .waitForIdle()
             .assertLayoutDisplayed()
             .assertStatusButtonText("Rent")
@@ -34,8 +37,10 @@ class FilterComponentTest : UiUnitTestBase() {
     @Test
     fun change_the_status() {
         filterComponentRobot
-            .setUpLoginScreen(
-                listingTypes = listOf(DwellingType.HOUSE, DwellingType.TOWNHOUSE)
+            .setupComponent(
+                data = FilterComponentRobotInitData(
+                    listingTypes = listOf(DwellingType.HOUSE, DwellingType.TOWNHOUSE)
+                )
             )
             .waitForIdle()
             .assertListingTypeButtonText("2 Property types")
@@ -58,7 +63,9 @@ class FilterComponentTest : UiUnitTestBase() {
     @Test
     fun click_the_listing_type() {
         filterComponentRobot
-            .setUpLoginScreen()
+            .setupComponent(
+                data = FilterComponentRobotInitData()
+            )
             .waitForIdle()
             .assertListingTypeButtonText("1 Property type")
             .clickListingTypeButton()
