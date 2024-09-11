@@ -236,8 +236,6 @@ fun ProjectListItem(
                 ) {
                     project.properties.forEachIndexed { index, projectChild ->
                         ProjectChildListItemComponent(
-                            parentPosition = position,
-                            position = index,
                             id = projectChild.id,
                             lifecycleStatus = projectChild.lifecycleStatus,
                             listingDetails = projectChild.listingDetails,

@@ -28,8 +28,6 @@ import au.com.deanpike.uishared.theme.MviExampleTheme
 
 @Composable
 fun ProjectChildListItemComponent(
-    parentPosition: Int,
-    position: Int,
     id: Long,
     lifecycleStatus: String?,
     listingDetails: ListingDetails,
@@ -39,7 +37,7 @@ fun ProjectChildListItemComponent(
         modifier = Modifier
             .wrapContentHeight()
             .padding(top = DIM_4, bottom = DIM_4)
-            .testTag("${PROJECT_CHILD_LIST_ITEM_LAYOUT}_${parentPosition}_${position}"),
+            .testTag(PROJECT_CHILD_LIST_ITEM_LAYOUT),
         colors = CardDefaults.cardColors().copy(
             containerColor = MaterialTheme.colorScheme.surface
         ),
@@ -65,7 +63,7 @@ fun ProjectChildListItemComponent(
                             width = Dimension.fillToConstraints
                         }
                         .padding(bottom = DIM_16)
-                        .testTag("${PROJECT_CHILD_LIST_ITEM_PRICE}_${parentPosition}_${position}"),
+                        .testTag(PROJECT_CHILD_LIST_ITEM_PRICE),
                     text = it,
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Bold
@@ -80,7 +78,7 @@ fun ProjectChildListItemComponent(
                             top.linkTo(parent.top)
 
                         }
-                        .testTag("${PROJECT_CHILD_LIST_ITEM_LIFECYCLE}_${parentPosition}_${position}"),
+                        .testTag(PROJECT_CHILD_LIST_ITEM_LIFECYCLE),
                     text = it,
                     style = MaterialTheme.typography.titleSmall
                 )
@@ -111,8 +109,6 @@ object ProjectChildListItemComponentTestTags {
 fun ProjectChildListItemComponentShortPreview() {
     MviExampleTheme {
         ProjectChildListItemComponent(
-            parentPosition = 0,
-            position = 1,
             id = 2222,
             lifecycleStatus = "New",
             listingDetails = ListingDetails(
@@ -130,8 +126,6 @@ fun ProjectChildListItemComponentShortPreview() {
 fun ProjectChildListItemComponentLongPreview() {
     MviExampleTheme {
         ProjectChildListItemComponent(
-            parentPosition = 0,
-            position = 1,
             id = 2222,
             lifecycleStatus = "New",
             listingDetails = ListingDetails(
