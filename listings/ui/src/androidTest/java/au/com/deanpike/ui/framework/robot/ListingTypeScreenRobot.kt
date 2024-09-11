@@ -28,18 +28,16 @@ class ListingTypeScreenRobot(private val composeRule: ComposeContentTestRule) : 
     override fun setupComponent(data: ListingTypeScreenRobotInitData?): ListingTypeScreenRobot {
         composeRule.setContent {
             MviExampleTheme {
-                MviExampleTheme {
-                    ListingTypeScreenContent(
-                        state = data!!.state,
-                        onItemSelected = { type, selected ->
-                            listingTypeSelected = type
-                            isSelected = selected
-                        },
-                        onApplyClicked = {
-                            applyClicked = true
-                        }
-                    )
-                }
+                ListingTypeScreenContent(
+                    state = data!!.state,
+                    onItemSelected = { type, selected ->
+                        listingTypeSelected = type
+                        isSelected = selected
+                    },
+                    onApplyClicked = {
+                        applyClicked = true
+                    }
+                )
             }
         }
         return this
