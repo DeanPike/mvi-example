@@ -8,12 +8,14 @@ import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import au.com.deanpike.detail.ui.R
 import au.com.deanpike.detail.ui.shared.DetailAppBarComponentTestTags.DETAIL_APP_BAR_CLOSE_ICON
+import au.com.deanpike.detail.ui.shared.DetailAppBarComponentTestTags.DETAIL_APP_BAR_LAYOUT
 import au.com.deanpike.uishared.base.drawableTestTag
 import au.com.deanpike.uishared.theme.MviExampleTheme
 
@@ -24,7 +26,8 @@ fun DetailAppBarComponent(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .height(64.dp),
+            .height(64.dp)
+            .testTag(DETAIL_APP_BAR_LAYOUT),
         verticalAlignment = Alignment.CenterVertically
     ) {
         IconButton(
@@ -44,6 +47,7 @@ fun DetailAppBarComponent(
 
 object DetailAppBarComponentTestTags {
     private const val PREFIX = "DETAIL_APP_BAR_"
+    const val DETAIL_APP_BAR_LAYOUT = "${PREFIX}LAYOUT"
     const val DETAIL_APP_BAR_CLOSE_ICON = "${PREFIX}CLOSE_ICON"
 }
 
