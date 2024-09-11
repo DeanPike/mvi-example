@@ -1,6 +1,5 @@
 package au.com.deanpike.uishared.component
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -36,7 +35,6 @@ import au.com.deanpike.uishared.theme.MviExampleTheme
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ListingDetailImagesComponent(media: List<Media>) {
     if (media.isNotEmpty()) {
@@ -50,7 +48,7 @@ fun ListingDetailImagesComponent(media: List<Media>) {
                     .align(Alignment.Center)
                     .testTag(LISTING_DETAIL_IMAGES_PAGER),
                 state = pagerState,
-                beyondBoundsPageCount = 2
+                beyondViewportPageCount = 2
             ) { page ->
                 AsyncImage(
                     modifier = Modifier

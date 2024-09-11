@@ -100,15 +100,18 @@ class PropertyDetailScreenTest : UiUnitTestBase() {
             .assertLayoutDisplayed()
             .assertImageDisplayed()
 
+        propertyDetailRobot.swipeUp()
+
         agencyRobot
             .assertLayoutDisplayed()
             .assertAgentLabel()
             .assertAgencyName("Ray White Wetherill Park")
             .assertAgencyAddress("Shop 1H, 1183-1187 The Horsley Drive\nWetherill Park NSW 2164")
 
+        propertyDetailRobot.swipeUp()
+
         agentRobot
             .assertLayoutDisplayed()
-            .scrollToPosition(0)
             .assertAgentName(
                 name = "Riccardo Romolo",
                 position = 0

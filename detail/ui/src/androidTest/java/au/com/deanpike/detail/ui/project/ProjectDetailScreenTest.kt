@@ -77,14 +77,17 @@ class ProjectDetailScreenTest : UiUnitTestBase() {
                 listingId = 2019256302
             )
 
+        projectDetailRobot.swipeUp()
+
         agencyRobot
             .assertLayoutDisplayed()
             .assertAgentLabel()
             .assertAgencyName("Ray White Wetherill Park")
             .assertAgencyAddress("Shop 1H, 1183-1187 The Horsley Drive\nWetherill Park NSW 2164")
 
+        projectDetailRobot.swipeUp()
+
         agentRobot
-            .scrollToPosition(0)
             .assertLayoutDisplayed()
             .assertAgentName(
                 name = "Riccardo Romolo",

@@ -18,12 +18,14 @@ import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_LAY
 import au.com.deanpike.uishared.theme.MviExampleTheme
 import au.com.deanpike.uitestshared.base.TestRobotBase
 import au.com.deanpike.uitestshared.base.TestRobotInitData
+import au.com.deanpike.uitestshared.util.advanceTimeAndWait
 import au.com.deanpike.uitestshared.util.assertDrawableDisplayed
 import au.com.deanpike.uitestshared.util.assertTagDisplayed
 import au.com.deanpike.uitestshared.util.assertTagDoesNotExist
 import au.com.deanpike.uitestshared.util.assertTextDisplayed
 import au.com.deanpike.uitestshared.util.clickOn
 import au.com.deanpike.uitestshared.util.scrollToItemPosition
+import au.com.deanpike.uitestshared.util.swipeUp
 
 class ProjectDetailScreenRobot(private val composeRule: ComposeContentTestRule) : TestRobotBase<ProjectDetailScreenRobot, ProjectDetailScreenRobotInitData>(composeRule) {
     var selectedProjectChildId: Long? = null
@@ -50,6 +52,7 @@ class ProjectDetailScreenRobot(private val composeRule: ComposeContentTestRule) 
                 )
             }
         }
+        composeRule.advanceTimeAndWait()
         return this
     }
 
@@ -130,6 +133,11 @@ class ProjectDetailScreenRobot(private val composeRule: ComposeContentTestRule) 
 
     fun clickOnClose(): ProjectDetailScreenRobot {
         composeRule.clickOn(PROJECT_DETAIL_CLOSE)
+        return this
+    }
+
+    fun swipeUp(): ProjectDetailScreenRobot{
+        composeRule.swipeUp(PROJECT_LAYOUT)
         return this
     }
 }

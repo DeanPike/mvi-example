@@ -23,6 +23,7 @@ import au.com.deanpike.uitestshared.util.assertTagDisplayed
 import au.com.deanpike.uitestshared.util.assertTagDoesNotExist
 import au.com.deanpike.uitestshared.util.assertTextDisplayed
 import au.com.deanpike.uitestshared.util.clickOn
+import au.com.deanpike.uitestshared.util.swipeUp
 
 class PropertyDetailScreenRobot(private val composeRule: ComposeContentTestRule) : TestRobotBase<PropertyDetailScreenRobot, PropertyDetailScreenRobotInitData>(composeRule) {
 
@@ -147,6 +148,11 @@ class PropertyDetailScreenRobot(private val composeRule: ComposeContentTestRule)
 
     fun clickCloseIcon(): PropertyDetailScreenRobot {
         composeRule.clickOn(PROPERTY_DETAIL_CLOSE)
+        return this
+    }
+
+    fun swipeUp(): PropertyDetailScreenRobot {
+        composeRule.swipeUp(PROPERTY_DETAILS_LAYOUT)
         return this
     }
 }
