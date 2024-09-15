@@ -195,7 +195,6 @@ fun ListingListScreenContent(
                         } else if (listing is Project) {
                             item(key = listing.id) {
                                 ProjectListItem(
-                                    position = index,
                                     project = listing,
                                     onProjectClicked = {
                                         onProjectClicked(it)

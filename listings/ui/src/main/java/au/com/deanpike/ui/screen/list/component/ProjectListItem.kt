@@ -42,8 +42,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
-import au.com.deanpike.datashared.type.ListingType
 import au.com.deanpike.commonshared.model.ListingDetails
+import au.com.deanpike.datashared.type.ListingType
 import au.com.deanpike.listings.client.model.listing.response.Project
 import au.com.deanpike.listings.client.model.listing.response.ProjectChild
 import au.com.deanpike.ui.R
@@ -64,7 +64,6 @@ import coil.compose.AsyncImage
 
 @Composable
 fun ProjectListItem(
-    position: Int,
     project: Project,
     onProjectClicked: (Long) -> Unit = {},
     onProjectChildClicked: (Long) -> Unit = {}
@@ -96,7 +95,7 @@ fun ProjectListItem(
                 onProjectClicked(project.id)
             }
             .padding(bottom = Dimension.DIM_8)
-            .testTag("${PROJECT_LIST_ITEM_LAYOUT}_$position")
+            .testTag(PROJECT_LIST_ITEM_LAYOUT)
     ) {
         val (imageRef, bannerRef, logoRowRef, projectNameRef, addressRef, projectCountRef, childrenMenuRef) = createRefs()
 
@@ -115,7 +114,7 @@ fun ProjectListItem(
                         MaterialTheme.colorScheme.background
                     }
                 )
-                .testTag("${PROJECT_LIST_ITEM_BANNER_IMAGE}_$position"),
+                .testTag(PROJECT_LIST_ITEM_BANNER_IMAGE),
             placeholder = painterResource(id = RShared.drawable.gallery_placeholder),
             model = project.bannerImage,
             contentDescription = stringResource(id = R.string.project_banner_image_description),
@@ -129,7 +128,7 @@ fun ProjectListItem(
                 }
                 .fillMaxWidth()
                 .defaultMinSize(minHeight = 240.dp)
-                .testTag("${PROJECT_LIST_ITEM_IMAGE}_$position"),
+                .testTag(PROJECT_LIST_ITEM_IMAGE),
             placeholder = painterResource(id = RShared.drawable.gallery_placeholder),
             model = project.listingImage,
             contentDescription = stringResource(id = RShared.string.property_image_description)
@@ -153,7 +152,7 @@ fun ProjectListItem(
                         top.linkTo(logoRowRef.bottom)
                     }
                     .padding(start = DIM_16, end = DIM_16, top = Dimension.DIM_8)
-                    .testTag("${PROJECT_LIST_ITEM_PROJECT_NAME}_$position"),
+                    .testTag(PROJECT_LIST_ITEM_PROJECT_NAME),
                 text = it,
                 style = MaterialTheme.typography.titleMedium
             )
@@ -170,7 +169,7 @@ fun ProjectListItem(
                     top = DIM_4,
                     bottom = DIM_4
                 )
-                .testTag("${PROJECT_LIST_ITEM_ADDRESS}_$position"),
+                .testTag(PROJECT_LIST_ITEM_ADDRESS),
             text = project.address,
             style = MaterialTheme.typography.labelLarge
         )
@@ -182,7 +181,7 @@ fun ProjectListItem(
                 }
                 .fillMaxWidth()
                 .padding(start = DIM_16, end = DIM_16)
-                .testTag("${PROJECT_LIST_ITEM_CHILD_BUTTON}_$position"),
+                .testTag(PROJECT_LIST_ITEM_CHILD_BUTTON),
             onClick = { expandList = !expandList }
         ) {
             Row(
@@ -198,7 +197,7 @@ fun ProjectListItem(
                     contentDescription = ""
                 )
                 Text(
-                    modifier = Modifier.testTag("${PROJECT_LIST_ITEM_CHILD_COUNT}_$position"),
+                    modifier = Modifier.testTag(PROJECT_LIST_ITEM_CHILD_COUNT),
                     text = pluralStringResource(id = R.plurals.project_properties, project.properties.size, project.properties.size)
                 )
                 Icon(
@@ -232,13 +231,11 @@ fun ProjectListItem(
                         .fillMaxWidth()
                         .padding(start = DIM_16, end = DIM_16)
                         .scrollable(state = rememberScrollState(), orientation = Orientation.Vertical)
-                        .testTag("${PROJECT_LIST_ITEM_CHILDREN}_$position")
+                        .testTag(PROJECT_LIST_ITEM_CHILDREN)
                 ) {
-                    project.properties.forEachIndexed { index, projectChild ->
+                    project.properties.forEach { projectChild ->
                         ProjectChildListItemComponent(
-                            id = projectChild.id,
-                            lifecycleStatus = projectChild.lifecycleStatus,
-                            listingDetails = projectChild.listingDetails,
+                            projectChild = projectChild,
                             onProjectChildClicked = onProjectChildClicked
                         )
                     }
@@ -253,7 +250,6 @@ object ProjectListItemTesTags {
     const val PROJECT_LIST_ITEM_LAYOUT = "${PREFIX}LAYOUT"
     const val PROJECT_LIST_ITEM_BANNER_IMAGE = "${PREFIX}BANNER_IMAGE"
     const val PROJECT_LIST_ITEM_IMAGE = "${PREFIX}IMAGE"
-    const val PROJECT_LIST_ITEM_AGENCY_IMAGE = "${PREFIX}AGENCY_IMAGE"
     const val PROJECT_LIST_ITEM_PROJECT_NAME = "${PREFIX}PROJECT_NAME"
     const val PROJECT_LIST_ITEM_ADDRESS = "${PREFIX}ADDRESS"
     const val PROJECT_LIST_ITEM_CHILD_BUTTON = "${PREFIX}CHILD_BUTTON"
@@ -267,7 +263,6 @@ object ProjectListItemTesTags {
 fun ProjectListItemPreview() {
     MviExampleTheme {
         ProjectListItem(
-            position = 0,
             project = Project(
                 id = 1234,
                 listingType = ListingType.PROJECT,

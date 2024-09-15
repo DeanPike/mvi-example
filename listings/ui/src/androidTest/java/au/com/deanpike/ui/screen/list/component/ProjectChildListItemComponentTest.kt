@@ -1,6 +1,8 @@
 package au.com.deanpike.ui.screen.list.component
 
 import au.com.deanpike.commonshared.model.ListingDetails
+import au.com.deanpike.datashared.type.ListingType
+import au.com.deanpike.listings.client.model.listing.response.ProjectChild
 import au.com.deanpike.ui.framework.robot.ProjectChildListItemComponentRobot
 import au.com.deanpike.ui.framework.robot.ProjectChildListItemComponentRobotInitData
 import au.com.deanpike.uitestshared.base.UiUnitTestBase
@@ -18,20 +20,23 @@ class ProjectChildListItemComponentTest : UiUnitTestBase() {
         childRobot
             .setupComponent(
                 data = ProjectChildListItemComponentRobotInitData(
-                    id = 1234,
-                    listingDetails = ListingDetails(
-                        price = "Price",
-                        numberOfBedrooms = 5,
-                        numberOfBathrooms = 3,
-                        numberOfCarSpaces = 2
-                    ),
-                    lifecycleStatus = "New",
+                    projectChild = ProjectChild(
+                        id = 1234,
+                        listingDetails = ListingDetails(
+                            price = "Price",
+                            numberOfBedrooms = 5,
+                            numberOfBathrooms = 3,
+                            numberOfCarSpaces = 2
+                        ),
+                        lifecycleStatus = "New",
+                        listingType = ListingType.PROPERTY
+                    )
                 )
             )
-            .assertLayoutDisplayed()
-            .assertPriceDisplayed("Price")
-            .assertLifecycleDisplayed("New")
-            .clickCard()
+            .assertChildLayoutDisplayed(1234)
+            .assertPriceDisplayed(id = 1234, text = "Price")
+            .assertLifecycleDisplayed(id = 1234, text = "New")
+            .clickCard(1234)
 
         assertThat(childRobot.clickedId).isEqualTo(1234)
 
