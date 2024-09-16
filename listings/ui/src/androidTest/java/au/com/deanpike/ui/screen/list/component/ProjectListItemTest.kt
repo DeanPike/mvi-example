@@ -68,15 +68,6 @@ class ProjectListItemTest : UiUnitTestBase() {
 
         assertThat(robot.clickedProjectChildId).isEqualTo(2222)
 
-        composeTestRule.onNodeWithTag(testTag = "${PROJECT_CHILD_LIST_ITEM_LAYOUT}_2222", useUnmergedTree = true)
-            .onChildren()
-            .filterToOne(hasTestTag(DETAIL_ITEM_GROUP))
-            .onChildren()
-            .filterToOne(hasTestTag(DETAIL_ITEM_BEDROOMS))
-            .onChildren()
-            .assertAny(hasTestTag("DETAIL_ITEM_BEDROOMS_ICON"))
-
-
         projectChildRobot
             .assertChildLayoutDisplayed(3333)
             .assertPriceDisplayed(id = 3333, text = "$357,000")

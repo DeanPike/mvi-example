@@ -185,7 +185,6 @@ fun ListingListScreenContent(
                         if (listing is Property) {
                             item(key = listing.id) {
                                 PropertyListItem(
-                                    position = index,
                                     property = listing,
                                     onItemClicked = {
                                         onPropertyClicked(listing.id)

@@ -36,7 +36,6 @@ import coil.compose.AsyncImage
 
 @Composable
 fun PropertyListItem(
-    position: Int,
     property: Property,
     onItemClicked: (Long) -> Unit = {}
 ) {
@@ -48,7 +47,7 @@ fun PropertyListItem(
                 onItemClicked(property.id)
             }
             .padding(bottom = DIM_8)
-            .testTag("${PROPERTY_LIST_ITEM_LAYOUT}_$position")
+            .testTag(PROPERTY_LIST_ITEM_LAYOUT)
     ) {
 
         val (lifecycleRef, propertyImageRef, agencyRef, priceRef, headlineRef, addressRef, propertyDetailRef) = createRefs()
@@ -61,7 +60,7 @@ fun PropertyListItem(
                 }
                 .fillMaxWidth()
                 .defaultMinSize(minHeight = 240.dp)
-                .testTag("${PROPERTY_LIST_ITEM_PROPERTY_IMAGE}_$position"),
+                .testTag(PROPERTY_LIST_ITEM_PROPERTY_IMAGE),
             placeholder = painterResource(id = RShared.drawable.gallery_placeholder),
             model = property.listingImage,
             contentDescription = stringResource(id = RShared.string.property_image_description)
@@ -93,7 +92,7 @@ fun PropertyListItem(
                         top.linkTo(agencyRef.bottom)
                     }
                     .padding(start = DIM_16, end = DIM_16, top = DIM_8)
-                    .testTag("${PROPERTY_LIST_ITEM_PRICE}_$position"),
+                    .testTag(PROPERTY_LIST_ITEM_PRICE),
                 text = it,
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold
@@ -107,7 +106,7 @@ fun PropertyListItem(
                     top.linkTo(priceRef.bottom)
                 }
                 .padding(start = DIM_16, end = DIM_16, top = DIM_4)
-                .testTag("${PROPERTY_LIST_ITEM_ADDRESS}_$position"),
+                .testTag(PROPERTY_LIST_ITEM_ADDRESS),
             text = property.address,
             style = MaterialTheme.typography.labelLarge
         )
@@ -131,7 +130,7 @@ fun PropertyListItem(
                         top.linkTo(propertyDetailRef.bottom)
                     }
                     .padding(start = DIM_16, end = DIM_16, top = DIM_8)
-                    .testTag("${PROPERTY_LIST_ITEM_HEADLINE}_$position"),
+                    .testTag(PROPERTY_LIST_ITEM_HEADLINE),
                 text = it,
                 style = MaterialTheme.typography.bodyMedium,
                 fontWeight = FontWeight.Bold
@@ -154,7 +153,6 @@ object PropertyListItemTesTags {
 fun PropertyListItemPreview() {
     MviExampleTheme {
         PropertyListItem(
-            position = 0,
             property = Property(
                 id = 1,
                 listingType = ListingType.PROPERTY,
