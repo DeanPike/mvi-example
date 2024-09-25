@@ -23,7 +23,7 @@ android {
             useSupportLibrary = true
         }
 
-        testInstrumentationRunner = "au.com.deanpike.uitestshared.MainTestApplication"
+        testInstrumentationRunner = "au.com.deanpike.uitestshared.MainTestRunner"
     }
 
     buildTypes {

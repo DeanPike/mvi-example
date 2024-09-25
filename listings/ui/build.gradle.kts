@@ -15,7 +15,7 @@ android {
     defaultConfig {
         minSdk = libs.versions.minSdk.get().toInt()
 
-        testInstrumentationRunner = "au.com.deanpike.uitestshared.MainTestApplication"
+        testInstrumentationRunner = "au.com.deanpike.uitestshared.MainTestRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
 
