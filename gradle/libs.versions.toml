@@ -6,24 +6,24 @@ compileSdk = "34"
 minSdk = "29"
 
 #Dependency versions
-activityCompose = "1.9.1"
-agp = "8.6.0"
+activityCompose = "1.9.2"
+agp = "8.6.1"
 assertj = "3.25.3"
 coil = "2.6.0"
-composeBom = "2024.09.01"
+composeBom = "2024.09.02"
 constraintLayout = "1.0.1"
 coreKtx = "1.13.1"
 coroutines = "1.8.1"
-daggerHiltVersion = "2.51.1"
+daggerHiltVersion = "2.52"
 espressoCore = "3.6.1"
 gsonVersion = "2.10.1"
 jetbrainsKotlinJvm = "1.9.23"
 jodaTimeVersion = "2.12.7"
 junitJupiter = "5.10.2"
 hiltNavigationVersion = "1.2.0"
-kotlin = "2.0.0"
-kspVersion = "2.0.0-1.0.21"
-lifecycleRuntimeKtx = "2.8.4"
+kotlin = "2.0.20"
+kspVersion = "2.0.20-1.0.24"
+lifecycleRuntimeKtx = "2.8.6"
 loggingInterceptor = "4.12.0"
 mockk = "1.13.10"
 mockwebserverVersion = "4.12.0"
@@ -31,9 +31,8 @@ retrofit = "2.11.0"
 store = "5.1.0-alpha02"
 turbine = "1.1.0"
 windowCoreAndroid = "1.3.0"
-adaptiveAndroid = "1.0.0-beta04"
-uiTextGoogleFonts = "1.6.8"
-adaptiveLayout = "1.0.0-beta04"
+adaptiveVersion = "1.0.0"
+uiTextGoogleFonts = "1.7.2"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -50,8 +49,8 @@ androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-toolin
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 
 constraintlayout-compose = { group = "androidx.constraintlayout", name = "constraintlayout-compose", version.ref = "constraintLayout" }
-adaptive-layout = { group = "androidx.compose.material3.adaptive", name="adaptive-layout", version.ref="adaptiveLayout"}
-adaptive-navigation = {group = "androidx.compose.material3.adaptive", name= "adaptive-navigation-android", version.ref="adaptiveLayout"}
+adaptive-layout = { group = "androidx.compose.material3.adaptive", name="adaptive-layout", version.ref="adaptiveVersion"}
+adaptive-navigation = {group = "androidx.compose.material3.adaptive", name= "adaptive-navigation-android", version.ref="adaptiveVersion"}
 
 #Compose test
 androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
@@ -75,7 +74,7 @@ store = { group = "org.mobilenativefoundation.store", name = "store5", version.r
 kotlinx-coroutines-core-jvm = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core-jvm", version.ref = "coroutines" }
 #Window size
 androidx-window-core-android = { group = "androidx.window", name = "window-core-android", version.ref = "windowCoreAndroid" }
-androidx-adaptive-android = { group = "androidx.compose.material3.adaptive", name = "adaptive-android", version.ref = "adaptiveAndroid" }
+androidx-adaptive-android = { group = "androidx.compose.material3.adaptive", name = "adaptive-android", version.ref = "adaptiveVersion" }
 
 # Test
 junit-jupiter = { group = "org.junit.jupiter", name = "junit-jupiter", version.ref = "junitJupiter" }
