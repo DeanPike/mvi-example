@@ -110,9 +110,9 @@
             "date_listed": "2024-03-01T16:51:27+11:00",
             "lifecycle_status": "New",
             "price": "$1,999,000",
-            "bathroom_count": 3,
-            "bedroom_count": 4,
-            "carspace_count": 2,
+            "bathroom_count": 2,
+            "bedroom_count": 5,
+            "carspace_count": 1,
             "homepass_enabled": false,
             "property_size": "196m²",
             "earliest_inspections": [

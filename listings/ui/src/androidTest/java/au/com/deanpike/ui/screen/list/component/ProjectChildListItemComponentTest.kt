@@ -33,10 +33,11 @@ class ProjectChildListItemComponentTest : UiUnitTestBase() {
                     )
                 )
             )
-            .assertChildLayoutDisplayed(1234)
-            .assertPriceDisplayed(id = 1234, text = "Price")
-            .assertLifecycleDisplayed(id = 1234, text = "New")
-            .clickCard(1234)
+            .forChild(1234)
+            .assertChildLayoutDisplayed()
+            .assertPriceDisplayed(text = "Price")
+            .assertLifecycleDisplayed(text = "New")
+            .clickCard()
 
         assertThat(childRobot.clickedId).isEqualTo(1234)
 

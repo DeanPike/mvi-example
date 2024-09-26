@@ -1,10 +1,5 @@
 package au.com.deanpike.ui.screen.list.component
 
-import androidx.compose.ui.test.assertAny
-import androidx.compose.ui.test.filterToOne
-import androidx.compose.ui.test.hasTestTag
-import androidx.compose.ui.test.onChildren
-import androidx.compose.ui.test.onNodeWithTag
 import au.com.deanpike.commonshared.model.ListingDetails
 import au.com.deanpike.datashared.type.ListingType
 import au.com.deanpike.listings.client.model.listing.response.Project
@@ -12,9 +7,6 @@ import au.com.deanpike.listings.client.model.listing.response.ProjectChild
 import au.com.deanpike.ui.framework.robot.ProjectChildListItemComponentRobot
 import au.com.deanpike.ui.framework.robot.ProjectListItemRobot
 import au.com.deanpike.ui.framework.robot.ProjectListItemRobotInitData
-import au.com.deanpike.ui.screen.list.component.ProjectChildListItemComponentTestTags.PROJECT_CHILD_LIST_ITEM_LAYOUT
-import au.com.deanpike.uishared.component.DetailListItemTestTags.DETAIL_ITEM_BEDROOMS
-import au.com.deanpike.uishared.component.DetailListItemTestTags.DETAIL_ITEM_GROUP
 import au.com.deanpike.uitestshared.base.UiUnitTestBase
 import au.com.deanpike.uitestshared.robot.AgencyBannerComponentRobot
 import org.assertj.core.api.Assertions.assertThat
@@ -49,42 +41,26 @@ class ProjectListItemTest : UiUnitTestBase() {
         agencyBannerRobot.assertImageDisplayed()
 
         projectChildRobot
-            .assertChildLayoutDisplayed(2222)
-            .assertPriceDisplayed(id = 2222, text = "$100,000")
-            .assertLifecycleDisplayed(id = 2222, text = "New")
-            .assertBedroomDisplayed(
-                id = 2222,
-                bedrooms = "3"
-            )
-            .assertBathroomDisplayed(
-                id = 2222,
-                bathrooms = "1"
-            )
-            .assertCarSpacesDisplayed(
-                id = 2222,
-                carSpaces = "2"
-            )
-            .clickCard(2222)
+            .forChild(2222)
+            .assertChildLayoutDisplayed()
+            .assertPriceDisplayed(text = "$100,000")
+            .assertLifecycleDisplayed(text = "New")
+            .assertBedroomDisplayed(bedrooms = "3")
+            .assertBathroomDisplayed(bathrooms = "1")
+            .assertCarSpacesDisplayed(carSpaces = "2")
+            .clickCard()
 
         assertThat(robot.clickedProjectChildId).isEqualTo(2222)
 
         projectChildRobot
-            .assertChildLayoutDisplayed(3333)
-            .assertPriceDisplayed(id = 3333, text = "$357,000")
-            .assertLifecycleDisplayed(id = 3333, text = "Sold")
-            .assertBedroomDisplayed(
-                id = 3333,
-                bedrooms = "5"
-            )
-            .assertBathroomDisplayed(
-                id = 3333,
-                bathrooms = "2"
-            )
-            .assertCarSpacesDisplayed(
-                id = 3333,
-                carSpaces = "4"
-            )
-            .clickCard(3333)
+            .forChild(3333)
+            .assertChildLayoutDisplayed()
+            .assertPriceDisplayed(text = "$357,000")
+            .assertLifecycleDisplayed(text = "Sold")
+            .assertBedroomDisplayed(bedrooms = "5")
+            .assertBathroomDisplayed(bathrooms = "2")
+            .assertCarSpacesDisplayed(carSpaces = "4")
+            .clickCard()
 
         assertThat(robot.clickedProjectChildId).isEqualTo(3333)
     }

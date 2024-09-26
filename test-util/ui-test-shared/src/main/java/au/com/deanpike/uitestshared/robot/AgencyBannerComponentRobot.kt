@@ -1,6 +1,11 @@
 package au.com.deanpike.uitestshared.robot
 
+import androidx.compose.ui.test.assertAny
+import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
+import androidx.compose.ui.test.onChildAt
+import androidx.compose.ui.test.onChildren
+import androidx.compose.ui.test.onNodeWithTag
 import au.com.deanpike.uishared.component.AgencyBannerComponent
 import au.com.deanpike.uishared.component.AgencyBannerTestTags.AGENCY_BANNER_IMAGE
 import au.com.deanpike.uishared.component.AgencyBannerTestTags.AGENCY_BANNER_LAYOUT
@@ -30,6 +35,17 @@ class AgencyBannerComponentRobot(private val composeRule: ComposeContentTestRule
 
     fun assertImageDisplayed(): AgencyBannerComponentRobot {
         composeRule.assertTagDisplayed(AGENCY_BANNER_IMAGE)
+        return this
+    }
+
+    fun assertImageDisplayedAtPosition(
+        parentTag: String,
+        position: Int
+    ): AgencyBannerComponentRobot {
+        composeRule.onNodeWithTag(useUnmergedTree = true, testTag = parentTag)
+            .onChildAt(position)
+            .onChildren()
+            .assertAny(hasTestTag(AGENCY_BANNER_LAYOUT))
         return this
     }
 }

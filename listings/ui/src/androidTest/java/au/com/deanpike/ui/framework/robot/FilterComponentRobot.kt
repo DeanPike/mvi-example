@@ -11,10 +11,12 @@ import au.com.deanpike.ui.screen.list.component.FilterComponentTestTags.STATUS_B
 import au.com.deanpike.uishared.theme.MviExampleTheme
 import au.com.deanpike.uitestshared.base.TestRobotBase
 import au.com.deanpike.uitestshared.base.TestRobotInitData
+import au.com.deanpike.uitestshared.util.advanceTimeAndWait
 import au.com.deanpike.uitestshared.util.assertDrawableDisplayed
 import au.com.deanpike.uitestshared.util.assertTagDisplayed
 import au.com.deanpike.uitestshared.util.assertTextDisplayed
 import au.com.deanpike.uitestshared.util.clickOn
+import au.com.deanpike.uitestshared.util.waitUntilTagExists
 import org.assertj.core.api.Assertions.assertThat
 
 class FilterComponentRobot(private val composeRule: ComposeContentTestRule) : TestRobotBase<FilterComponentRobot, FilterComponentRobotInitData>(composeRule) {
@@ -58,7 +60,7 @@ class FilterComponentRobot(private val composeRule: ComposeContentTestRule) : Te
         return this
     }
 
-    fun selectStatusButton(): FilterComponentRobot {
+    fun clickStatusButton(): FilterComponentRobot {
         composeRule.clickOn(STATUS_BUTTON)
         return this
     }
@@ -79,6 +81,12 @@ class FilterComponentRobot(private val composeRule: ComposeContentTestRule) : Te
 
     fun assertListingTypeButtonClicked() {
         assertThat(listingTypeSelected).isTrue()
+    }
+
+    fun waitUntilLayoutShown(): FilterComponentRobot {
+        composeRule.advanceTimeAndWait()
+        composeRule.waitUntilTagExists(tag = FILTER_COMPONENT_LAYOUT, timeout = 2000)
+        return this
     }
 }
 

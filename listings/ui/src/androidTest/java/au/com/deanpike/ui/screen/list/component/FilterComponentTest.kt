@@ -44,7 +44,7 @@ class FilterComponentTest : UiUnitTestBase() {
             )
             .waitForIdle()
             .assertListingTypeButtonText("2 Property types")
-            .selectStatusButton()
+            .clickStatusButton()
             .waitForIdle()
 
         statusDropDownMenuRobot

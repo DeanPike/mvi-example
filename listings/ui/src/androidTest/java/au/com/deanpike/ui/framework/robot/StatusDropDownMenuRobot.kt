@@ -51,6 +51,11 @@ class StatusDropDownMenuRobot(private val composeRule: ComposeContentTestRule) :
         return this
     }
 
+    fun clickSold(): StatusDropDownMenuRobot {
+        composeRule.clickOn("${STATUS_ITEM}_${StatusType.SOLD.name}_TEXT")
+        return this
+    }
+
     override fun setupComponent(data: TestRobotInitData?): StatusDropDownMenuRobot {
         return this
     }

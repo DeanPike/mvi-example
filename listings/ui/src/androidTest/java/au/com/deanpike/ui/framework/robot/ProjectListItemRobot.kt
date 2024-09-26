@@ -5,6 +5,7 @@ import au.com.deanpike.listings.client.model.listing.response.Project
 import au.com.deanpike.ui.screen.list.component.ProjectListItem
 import au.com.deanpike.ui.screen.list.component.ProjectListItemTesTags.PROJECT_LIST_ITEM_ADDRESS
 import au.com.deanpike.ui.screen.list.component.ProjectListItemTesTags.PROJECT_LIST_ITEM_BANNER_IMAGE
+import au.com.deanpike.ui.screen.list.component.ProjectListItemTesTags.PROJECT_LIST_ITEM_CHILDREN
 import au.com.deanpike.ui.screen.list.component.ProjectListItemTesTags.PROJECT_LIST_ITEM_CHILD_BUTTON
 import au.com.deanpike.ui.screen.list.component.ProjectListItemTesTags.PROJECT_LIST_ITEM_CHILD_COUNT
 import au.com.deanpike.ui.screen.list.component.ProjectListItemTesTags.PROJECT_LIST_ITEM_IMAGE
@@ -88,9 +89,14 @@ class ProjectListItemRobot(private val composeRule: ComposeContentTestRule) : Te
 
     fun clickProject(): ProjectListItemRobot {
         composeRule.clickOn(PROJECT_LIST_ITEM_LAYOUT)
+        composeRule.advanceTimeAndWait()
         return this
     }
 
+    fun assertChildrenDisplayed(): ProjectListItemRobot{
+        composeRule.assertTagDisplayed(PROJECT_LIST_ITEM_CHILDREN)
+        return this
+    }
 }
 
 data class ProjectListItemRobotInitData(

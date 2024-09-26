@@ -25,6 +25,7 @@ import au.com.deanpike.uitestshared.util.clickOn
 import org.junit.Assert
 
 class ProjectChildListItemComponentRobot(private val composeRule: ComposeContentTestRule) : TestRobotBase<ProjectChildListItemComponentRobot, ProjectChildListItemComponentRobotInitData>(composeRule) {
+    private var childId: Long = 0L
     var clickedId: Long? = null
         private set
 
@@ -48,43 +49,43 @@ class ProjectChildListItemComponentRobot(private val composeRule: ComposeContent
         return this
     }
 
-    fun assertChildLayoutDisplayed(id: Long): ProjectChildListItemComponentRobot {
-        composeRule.assertTagDisplayed("${PROJECT_CHILD_LIST_ITEM_LAYOUT}_$id")
+    fun forChild(id: Long): ProjectChildListItemComponentRobot {
+        childId = id
+        return this
+    }
+
+    fun assertChildLayoutDisplayed(): ProjectChildListItemComponentRobot {
+        composeRule.assertTagDisplayed("${PROJECT_CHILD_LIST_ITEM_LAYOUT}_$childId")
         return this
     }
 
     fun assertPriceDisplayed(
-        id: Long,
         text: String
     ): ProjectChildListItemComponentRobot {
         composeRule.assertTextDisplayed(
-            tag = "${PROJECT_CHILD_LIST_ITEM_PRICE}_$id",
+            tag = "${PROJECT_CHILD_LIST_ITEM_PRICE}_$childId",
             text = text
         )
         return this
     }
 
     fun assertLifecycleDisplayed(
-        id: Long,
         text: String
     ): ProjectChildListItemComponentRobot {
         composeRule.assertTextDisplayed(
-            tag = "${PROJECT_CHILD_LIST_ITEM_LIFECYCLE}_$id",
+            tag = "${PROJECT_CHILD_LIST_ITEM_LIFECYCLE}_$childId",
             text = text
         )
         return this
     }
 
-    fun clickCard(id: Long): ProjectChildListItemComponentRobot {
-        composeRule.clickOn(tag = "${PROJECT_CHILD_LIST_ITEM_LAYOUT}_$id")
+    fun clickCard(): ProjectChildListItemComponentRobot {
+        composeRule.clickOn(tag = "${PROJECT_CHILD_LIST_ITEM_LAYOUT}_$childId")
         return this
     }
 
-    fun assertBedroomDisplayed(
-        id: Long,
-        bedrooms: String
-    ): ProjectChildListItemComponentRobot {
-        composeRule.onNodeWithTag(testTag = "${PROJECT_CHILD_LIST_ITEM_LAYOUT}_$id", useUnmergedTree = true)
+    fun assertBedroomDisplayed(bedrooms: String): ProjectChildListItemComponentRobot {
+        composeRule.onNodeWithTag(testTag = "${PROJECT_CHILD_LIST_ITEM_LAYOUT}_$childId", useUnmergedTree = true)
             .onChildren()
             .filterToOne(hasTestTag(DETAIL_ITEM_GROUP))
             .onChildren()
@@ -92,7 +93,7 @@ class ProjectChildListItemComponentRobot(private val composeRule: ComposeContent
             .onChildren()
             .assertAny(hasTestTag("DETAIL_ITEM_BEDROOMS_ICON"))
 
-        composeRule.onNodeWithTag(testTag = "${PROJECT_CHILD_LIST_ITEM_LAYOUT}_$id", useUnmergedTree = true)
+        composeRule.onNodeWithTag(testTag = "${PROJECT_CHILD_LIST_ITEM_LAYOUT}_$childId", useUnmergedTree = true)
             .onChildren()
             .filterToOne(hasTestTag(DETAIL_ITEM_GROUP))
             .onChildren()
@@ -102,11 +103,8 @@ class ProjectChildListItemComponentRobot(private val composeRule: ComposeContent
         return this
     }
 
-    fun assertBathroomDisplayed(
-        id: Long,
-        bathrooms: String
-    ): ProjectChildListItemComponentRobot {
-        composeRule.onNodeWithTag(testTag = "${PROJECT_CHILD_LIST_ITEM_LAYOUT}_$id", useUnmergedTree = true)
+    fun assertBathroomDisplayed(bathrooms: String): ProjectChildListItemComponentRobot {
+        composeRule.onNodeWithTag(testTag = "${PROJECT_CHILD_LIST_ITEM_LAYOUT}_$childId", useUnmergedTree = true)
             .onChildren()
             .filterToOne(hasTestTag(DETAIL_ITEM_GROUP))
             .onChildren()
@@ -114,7 +112,7 @@ class ProjectChildListItemComponentRobot(private val composeRule: ComposeContent
             .onChildren()
             .assertAny(hasTestTag("DETAIL_ITEM_BATHROOMS_ICON"))
 
-        composeRule.onNodeWithTag(testTag = "${PROJECT_CHILD_LIST_ITEM_LAYOUT}_$id", useUnmergedTree = true)
+        composeRule.onNodeWithTag(testTag = "${PROJECT_CHILD_LIST_ITEM_LAYOUT}_$childId", useUnmergedTree = true)
             .onChildren()
             .filterToOne(hasTestTag(DETAIL_ITEM_GROUP))
             .onChildren()
@@ -124,11 +122,8 @@ class ProjectChildListItemComponentRobot(private val composeRule: ComposeContent
         return this
     }
 
-    fun assertCarSpacesDisplayed(
-        id: Long,
-        carSpaces: String
-    ): ProjectChildListItemComponentRobot {
-        composeRule.onNodeWithTag(testTag = "${PROJECT_CHILD_LIST_ITEM_LAYOUT}_$id", useUnmergedTree = true)
+    fun assertCarSpacesDisplayed(carSpaces: String): ProjectChildListItemComponentRobot {
+        composeRule.onNodeWithTag(testTag = "${PROJECT_CHILD_LIST_ITEM_LAYOUT}_$childId", useUnmergedTree = true)
             .onChildren()
             .filterToOne(hasTestTag(DETAIL_ITEM_GROUP))
             .onChildren()
@@ -136,7 +131,7 @@ class ProjectChildListItemComponentRobot(private val composeRule: ComposeContent
             .onChildren()
             .assertAny(hasTestTag("DETAIL_ITEM_CAR_SPACES_ICON"))
 
-        composeRule.onNodeWithTag(testTag = "${PROJECT_CHILD_LIST_ITEM_LAYOUT}_$id", useUnmergedTree = true)
+        composeRule.onNodeWithTag(testTag = "${PROJECT_CHILD_LIST_ITEM_LAYOUT}_$childId", useUnmergedTree = true)
             .onChildren()
             .filterToOne(hasTestTag(DETAIL_ITEM_GROUP))
             .onChildren()

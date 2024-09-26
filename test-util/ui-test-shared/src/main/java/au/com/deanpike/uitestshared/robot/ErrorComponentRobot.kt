@@ -9,10 +9,12 @@ import au.com.deanpike.uishared.component.ErrorComponentTestTags.ERROR_COMPONENT
 import au.com.deanpike.uishared.theme.MviExampleTheme
 import au.com.deanpike.uitestshared.base.TestRobotBase
 import au.com.deanpike.uitestshared.base.TestRobotInitData
+import au.com.deanpike.uitestshared.util.advanceTimeAndWait
 import au.com.deanpike.uitestshared.util.assertTagDisplayed
 import au.com.deanpike.uitestshared.util.assertTagDoesNotExist
 import au.com.deanpike.uitestshared.util.assertTextDisplayed
 import au.com.deanpike.uitestshared.util.clickOn
+import au.com.deanpike.uitestshared.util.waitUntilTagExists
 import org.assertj.core.api.Assertions.assertThat
 
 class ErrorComponentRobot(private val composeRule: ComposeContentTestRule) : TestRobotBase<ErrorComponentRobot, TestRobotInitData>(composeRule) {
@@ -73,6 +75,12 @@ class ErrorComponentRobot(private val composeRule: ComposeContentTestRule) : Tes
 
     fun assertRetryClicked(): ErrorComponentRobot {
         assertThat(retryClicked).isTrue()
+        return this
+    }
+
+    fun waitUntilListShown(): ErrorComponentRobot {
+        composeRule.advanceTimeAndWait()
+        composeRule.waitUntilTagExists(tag = ERROR_COMPONENT_LAYOUT, timeout = 2000)
         return this
     }
 }
