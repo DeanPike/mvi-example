@@ -9,7 +9,7 @@ plugins {
 val compatibilityVersion = libs.versions.javaCompileVersion.get()
 
 android {
-    namespace = "au.com.deanpike.ui"
+    namespace = "au.com.deanpike.listings.ui"
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {

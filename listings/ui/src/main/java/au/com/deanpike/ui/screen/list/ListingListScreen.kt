@@ -28,7 +28,7 @@ import au.com.deanpike.listings.client.model.listing.response.Project
 import au.com.deanpike.listings.client.model.listing.response.Property
 import au.com.deanpike.listings.client.type.DwellingType
 import au.com.deanpike.listings.client.type.StatusType
-import au.com.deanpike.ui.R
+import au.com.deanpike.listings.ui.R
 import au.com.deanpike.ui.screen.list.ListingListScreenTestTags.LISTING_LIST
 import au.com.deanpike.ui.screen.list.ListingListScreenTestTags.LISTING_LIST_HEADING
 import au.com.deanpike.ui.screen.list.component.FilterComponent

@@ -25,7 +25,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import au.com.deanpike.listings.client.type.DwellingType
 import au.com.deanpike.listings.client.type.StatusType
-import au.com.deanpike.ui.R
+import au.com.deanpike.listings.ui.R
 import au.com.deanpike.ui.screen.list.component.FilterComponentTestTags.FILTER_COMPONENT_LAYOUT
 import au.com.deanpike.ui.screen.list.component.FilterComponentTestTags.LISTING_TYPE
 import au.com.deanpike.ui.screen.list.component.FilterComponentTestTags.STATUS_BUTTON

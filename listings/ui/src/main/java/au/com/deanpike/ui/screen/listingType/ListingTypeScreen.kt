@@ -21,7 +21,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import au.com.deanpike.listings.client.type.DwellingType
-import au.com.deanpike.ui.R
+import au.com.deanpike.listings.ui.R
 import au.com.deanpike.ui.screen.listingType.ListingTypeScreenTestTags.LISTING_TYPE_SCREEN_ALL
 import au.com.deanpike.ui.screen.listingType.ListingTypeScreenTestTags.LISTING_TYPE_SCREEN_APARTMENT
 import au.com.deanpike.ui.screen.listingType.ListingTypeScreenTestTags.LISTING_TYPE_SCREEN_APPLY

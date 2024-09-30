@@ -2,7 +2,7 @@ package au.com.deanpike.ui.screen.util
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
-import au.com.deanpike.ui.R
+import au.com.deanpike.listings.ui.R
 import au.com.deanpike.listings.client.type.DwellingType
 import au.com.deanpike.listings.client.type.StatusType
 

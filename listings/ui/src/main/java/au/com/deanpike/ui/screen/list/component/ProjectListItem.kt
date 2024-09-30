@@ -46,7 +46,7 @@ import au.com.deanpike.commonshared.model.ListingDetails
 import au.com.deanpike.datashared.type.ListingType
 import au.com.deanpike.listings.client.model.listing.response.Project
 import au.com.deanpike.listings.client.model.listing.response.ProjectChild
-import au.com.deanpike.ui.R
+import au.com.deanpike.listings.ui.R
 import au.com.deanpike.ui.screen.list.component.ProjectListItemTesTags.PROJECT_LIST_ITEM_ADDRESS
 import au.com.deanpike.ui.screen.list.component.ProjectListItemTesTags.PROJECT_LIST_ITEM_BANNER_IMAGE
 import au.com.deanpike.ui.screen.list.component.ProjectListItemTesTags.PROJECT_LIST_ITEM_CHILDREN
