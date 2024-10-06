@@ -1,4 +1,4 @@
-package au.com.deanpike.ui.framework.robot
+package au.com.deanpike.listings.ui.framework.robot
 
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import au.com.deanpike.listings.client.model.listing.response.Project
@@ -93,7 +93,7 @@ class ProjectListItemRobot(private val composeRule: ComposeContentTestRule) : Te
         return this
     }
 
-    fun assertChildrenDisplayed(): ProjectListItemRobot{
+    fun assertChildrenDisplayed(): ProjectListItemRobot {
         composeRule.assertTagDisplayed(PROJECT_LIST_ITEM_CHILDREN)
         return this
     }

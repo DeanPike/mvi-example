@@ -1,4 +1,4 @@
-package au.com.deanpike.ui.framework.robot
+package au.com.deanpike.listings.ui.framework.robot
 
 import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.hasTestTag

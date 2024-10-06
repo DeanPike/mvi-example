@@ -1,9 +1,9 @@
-package au.com.deanpike.ui.screen.listingType
+package au.com.deanpike.listings.ui.screen.listingType
 
 import au.com.deanpike.listings.client.type.DwellingType
 import au.com.deanpike.listings.ui.listingType.ListingTypeState
-import au.com.deanpike.ui.framework.robot.ListingTypeScreenRobot
-import au.com.deanpike.ui.framework.robot.ListingTypeScreenRobotInitData
+import au.com.deanpike.listings.ui.framework.robot.ListingTypeScreenRobot
+import au.com.deanpike.listings.ui.framework.robot.ListingTypeScreenRobotInitData
 import au.com.deanpike.uitestshared.base.UiUnitTestBase
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test

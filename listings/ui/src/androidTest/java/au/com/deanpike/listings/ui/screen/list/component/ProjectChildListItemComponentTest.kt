@@ -1,10 +1,10 @@
-package au.com.deanpike.ui.screen.list.component
+package au.com.deanpike.listings.ui.screen.list.component
 
 import au.com.deanpike.commonshared.model.ListingDetails
 import au.com.deanpike.datashared.type.ListingType
 import au.com.deanpike.listings.client.model.listing.response.ProjectChild
-import au.com.deanpike.ui.framework.robot.ProjectChildListItemComponentRobot
-import au.com.deanpike.ui.framework.robot.ProjectChildListItemComponentRobotInitData
+import au.com.deanpike.listings.ui.framework.robot.ProjectChildListItemComponentRobot
+import au.com.deanpike.listings.ui.framework.robot.ProjectChildListItemComponentRobotInitData
 import au.com.deanpike.uitestshared.base.UiUnitTestBase
 import au.com.deanpike.uitestshared.robot.PropertyDetailComponentRobot
 import org.assertj.core.api.Assertions.assertThat

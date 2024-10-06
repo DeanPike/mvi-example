@@ -1,10 +1,10 @@
-package au.com.deanpike.ui.screen.list.component
+package au.com.deanpike.listings.ui.screen.list.component
 
 import au.com.deanpike.listings.client.type.DwellingType
 import au.com.deanpike.listings.client.type.StatusType
-import au.com.deanpike.ui.framework.robot.FilterComponentRobot
-import au.com.deanpike.ui.framework.robot.FilterComponentRobotInitData
-import au.com.deanpike.ui.framework.robot.StatusDropDownMenuRobot
+import au.com.deanpike.listings.ui.framework.robot.FilterComponentRobot
+import au.com.deanpike.listings.ui.framework.robot.FilterComponentRobotInitData
+import au.com.deanpike.listings.ui.framework.robot.StatusDropDownMenuRobot
 import au.com.deanpike.uitestshared.base.UiUnitTestBase
 import org.junit.Before
 import org.junit.Test

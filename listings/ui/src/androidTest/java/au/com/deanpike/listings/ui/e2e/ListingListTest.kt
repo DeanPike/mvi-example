@@ -1,9 +1,9 @@
-package au.com.deanpike.ui.e2e
+package au.com.deanpike.listings.ui.e2e
 
-import au.com.deanpike.ui.framework.robot.ListingListScreenRobot
-import au.com.deanpike.ui.framework.robot.ProjectChildListItemComponentRobot
-import au.com.deanpike.ui.framework.robot.ProjectListItemRobot
-import au.com.deanpike.ui.framework.robot.PropertyListItemRobot
+import au.com.deanpike.listings.ui.framework.robot.ListingListScreenRobot
+import au.com.deanpike.listings.ui.framework.robot.ProjectChildListItemComponentRobot
+import au.com.deanpike.listings.ui.framework.robot.ProjectListItemRobot
+import au.com.deanpike.listings.ui.framework.robot.PropertyListItemRobot
 import au.com.deanpike.listings.ui.list.ListingListScreen
 import au.com.deanpike.listings.ui.list.ListingListScreenTestTags.LISTING_LIST
 import au.com.deanpike.uishared.theme.MviExampleTheme
