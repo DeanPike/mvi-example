@@ -1,4 +1,4 @@
-package au.com.deanpike.ui.screen.list
+package au.com.deanpike.listings.ui.list
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -29,12 +29,12 @@ import au.com.deanpike.listings.client.model.listing.response.Property
 import au.com.deanpike.listings.client.type.DwellingType
 import au.com.deanpike.listings.client.type.StatusType
 import au.com.deanpike.listings.ui.R
-import au.com.deanpike.ui.screen.list.ListingListScreenTestTags.LISTING_LIST
-import au.com.deanpike.ui.screen.list.ListingListScreenTestTags.LISTING_LIST_HEADING
-import au.com.deanpike.ui.screen.list.component.FilterComponent
-import au.com.deanpike.ui.screen.list.component.ProjectListItem
-import au.com.deanpike.ui.screen.list.component.PropertyListItem
-import au.com.deanpike.ui.screen.listingType.ListingTypeScreen
+import au.com.deanpike.listings.ui.list.ListingListScreenTestTags.LISTING_LIST
+import au.com.deanpike.listings.ui.list.ListingListScreenTestTags.LISTING_LIST_HEADING
+import au.com.deanpike.listings.ui.list.component.FilterComponent
+import au.com.deanpike.listings.ui.list.component.ProjectListItem
+import au.com.deanpike.listings.ui.list.component.PropertyListItem
+import au.com.deanpike.listings.ui.listingType.ListingTypeScreen
 import au.com.deanpike.uishared.base.ScreenStateType
 import au.com.deanpike.uishared.component.ErrorComponent
 import au.com.deanpike.uishared.theme.Dimension.DIM_16

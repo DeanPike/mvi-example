@@ -1,4 +1,4 @@
-package au.com.deanpike.ui.screen.list
+package au.com.deanpike.listings.ui.list
 
 import au.com.deanpike.listings.client.model.listing.response.Listing
 import au.com.deanpike.listings.client.type.DwellingType

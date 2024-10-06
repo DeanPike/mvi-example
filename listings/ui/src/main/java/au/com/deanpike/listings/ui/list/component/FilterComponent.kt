@@ -1,4 +1,4 @@
-package au.com.deanpike.ui.screen.list.component
+package au.com.deanpike.listings.ui.list.component
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -26,12 +26,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import au.com.deanpike.listings.client.type.DwellingType
 import au.com.deanpike.listings.client.type.StatusType
 import au.com.deanpike.listings.ui.R
-import au.com.deanpike.ui.screen.list.component.FilterComponentTestTags.FILTER_COMPONENT_LAYOUT
-import au.com.deanpike.ui.screen.list.component.FilterComponentTestTags.LISTING_TYPE
-import au.com.deanpike.ui.screen.list.component.FilterComponentTestTags.STATUS_BUTTON
-import au.com.deanpike.ui.screen.list.component.FilterComponentTestTags.STATUS_ITEM
-import au.com.deanpike.ui.screen.list.component.FilterComponentTestTags.STATUS_ITEM_MENU
-import au.com.deanpike.ui.screen.util.StringUtils.getStatusDescription
+import au.com.deanpike.listings.ui.list.component.FilterComponentTestTags.FILTER_COMPONENT_LAYOUT
+import au.com.deanpike.listings.ui.list.component.FilterComponentTestTags.LISTING_TYPE
+import au.com.deanpike.listings.ui.list.component.FilterComponentTestTags.STATUS_BUTTON
+import au.com.deanpike.listings.ui.list.component.FilterComponentTestTags.STATUS_ITEM
+import au.com.deanpike.listings.ui.list.component.FilterComponentTestTags.STATUS_ITEM_MENU
+import au.com.deanpike.listings.ui.util.StringUtils.getStatusDescription
 import au.com.deanpike.uishared.base.drawableTestTag
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
 import au.com.deanpike.uishared.theme.MviExampleTheme

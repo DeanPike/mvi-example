@@ -1,4 +1,4 @@
-package au.com.deanpike.ui.screen.listingType
+package au.com.deanpike.listings.ui.listingType
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -22,12 +22,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import au.com.deanpike.listings.client.type.DwellingType
 import au.com.deanpike.listings.ui.R
-import au.com.deanpike.ui.screen.listingType.ListingTypeScreenTestTags.LISTING_TYPE_SCREEN_ALL
-import au.com.deanpike.ui.screen.listingType.ListingTypeScreenTestTags.LISTING_TYPE_SCREEN_APARTMENT
-import au.com.deanpike.ui.screen.listingType.ListingTypeScreenTestTags.LISTING_TYPE_SCREEN_APPLY
-import au.com.deanpike.ui.screen.listingType.ListingTypeScreenTestTags.LISTING_TYPE_SCREEN_HOUSE
-import au.com.deanpike.ui.screen.listingType.ListingTypeScreenTestTags.LISTING_TYPE_SCREEN_LAYOUT
-import au.com.deanpike.ui.screen.listingType.ListingTypeScreenTestTags.LISTING_TYPE_SCREEN_TOWNHOUSE
+import au.com.deanpike.listings.ui.listingType.ListingTypeScreenTestTags.LISTING_TYPE_SCREEN_ALL
+import au.com.deanpike.listings.ui.listingType.ListingTypeScreenTestTags.LISTING_TYPE_SCREEN_APARTMENT
+import au.com.deanpike.listings.ui.listingType.ListingTypeScreenTestTags.LISTING_TYPE_SCREEN_APPLY
+import au.com.deanpike.listings.ui.listingType.ListingTypeScreenTestTags.LISTING_TYPE_SCREEN_HOUSE
+import au.com.deanpike.listings.ui.listingType.ListingTypeScreenTestTags.LISTING_TYPE_SCREEN_LAYOUT
+import au.com.deanpike.listings.ui.listingType.ListingTypeScreenTestTags.LISTING_TYPE_SCREEN_TOWNHOUSE
 import au.com.deanpike.uishared.theme.Dimension.DIM_16
 import au.com.deanpike.uishared.theme.MviExampleTheme
 import kotlinx.coroutines.launch

@@ -8,9 +8,9 @@ import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import androidx.compose.ui.test.onChildren
 import androidx.compose.ui.test.onNodeWithTag
 import au.com.deanpike.listings.client.model.listing.response.Property
-import au.com.deanpike.ui.screen.list.component.PropertyListItem
-import au.com.deanpike.ui.screen.list.component.PropertyListItemTesTags
-import au.com.deanpike.ui.screen.list.component.PropertyListItemTesTags.PROPERTY_LIST_ITEM_LAYOUT
+import au.com.deanpike.listings.ui.list.component.PropertyListItem
+import au.com.deanpike.listings.ui.list.component.PropertyListItemTesTags
+import au.com.deanpike.listings.ui.list.component.PropertyListItemTesTags.PROPERTY_LIST_ITEM_LAYOUT
 import au.com.deanpike.uishared.component.DetailListItemTestTags.DETAIL_ITEM_BATHROOMS
 import au.com.deanpike.uishared.component.DetailListItemTestTags.DETAIL_ITEM_BEDROOMS
 import au.com.deanpike.uishared.component.DetailListItemTestTags.DETAIL_ITEM_CAR_SPACES

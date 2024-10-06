@@ -2,8 +2,8 @@ package au.com.deanpike.ui.framework.robot
 
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import au.com.deanpike.listings.client.type.StatusType
-import au.com.deanpike.ui.screen.list.component.FilterComponentTestTags.STATUS_ITEM
-import au.com.deanpike.ui.screen.list.component.FilterComponentTestTags.STATUS_ITEM_MENU
+import au.com.deanpike.listings.ui.list.component.FilterComponentTestTags.STATUS_ITEM
+import au.com.deanpike.listings.ui.list.component.FilterComponentTestTags.STATUS_ITEM_MENU
 import au.com.deanpike.uitestshared.base.TestRobotBase
 import au.com.deanpike.uitestshared.base.TestRobotInitData
 import au.com.deanpike.uitestshared.util.assertTagDisplayed

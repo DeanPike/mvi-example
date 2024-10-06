@@ -11,7 +11,7 @@ import androidx.compose.runtime.Composable
 import au.com.deanpike.detail.ui.project.ProjectDetailScreen
 import au.com.deanpike.detail.ui.property.PropertyDetailScreen
 import au.com.deanpike.mviexample.ui.util.customPaneScaffoldDirective
-import au.com.deanpike.ui.screen.list.ListingListScreen
+import au.com.deanpike.listings.ui.list.ListingListScreen
 
 @OptIn(ExperimentalMaterial3AdaptiveApi::class)
 @Composable

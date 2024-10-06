@@ -1,4 +1,4 @@
-package au.com.deanpike.ui.screen.listingType
+package au.com.deanpike.listings.ui.listingType
 
 import au.com.deanpike.listings.client.type.DwellingType
 import au.com.deanpike.uishared.base.BaseViewModel

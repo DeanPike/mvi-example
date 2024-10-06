@@ -4,7 +4,7 @@ import au.com.deanpike.ui.framework.robot.FilterComponentRobot
 import au.com.deanpike.ui.framework.robot.ListingListScreenRobot
 import au.com.deanpike.ui.framework.robot.ListingTypeScreenRobot
 import au.com.deanpike.ui.framework.robot.StatusDropDownMenuRobot
-import au.com.deanpike.ui.screen.list.ListingListScreen
+import au.com.deanpike.listings.ui.list.ListingListScreen
 import au.com.deanpike.uishared.theme.MviExampleTheme
 import au.com.deanpike.uitestshared.HiltTestActivity
 import au.com.deanpike.uitestshared.base.UiE2ETestBase

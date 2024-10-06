@@ -1,4 +1,4 @@
-package au.com.deanpike.ui.screen.util
+package au.com.deanpike.listings.ui.util
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource

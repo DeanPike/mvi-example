@@ -2,11 +2,11 @@ package au.com.deanpike.ui.framework.robot
 
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import au.com.deanpike.listings.client.type.DwellingType
-import au.com.deanpike.ui.screen.listingType.ListingTypeScreenContent
-import au.com.deanpike.ui.screen.listingType.ListingTypeScreenTestTags
-import au.com.deanpike.ui.screen.listingType.ListingTypeScreenTestTags.LISTING_TYPE_SCREEN_ALL
-import au.com.deanpike.ui.screen.listingType.ListingTypeScreenTestTags.LISTING_TYPE_SCREEN_LAYOUT
-import au.com.deanpike.ui.screen.listingType.ListingTypeState
+import au.com.deanpike.listings.ui.listingType.ListingTypeScreenContent
+import au.com.deanpike.listings.ui.listingType.ListingTypeScreenTestTags
+import au.com.deanpike.listings.ui.listingType.ListingTypeScreenTestTags.LISTING_TYPE_SCREEN_ALL
+import au.com.deanpike.listings.ui.listingType.ListingTypeScreenTestTags.LISTING_TYPE_SCREEN_LAYOUT
+import au.com.deanpike.listings.ui.listingType.ListingTypeState
 import au.com.deanpike.uishared.theme.MviExampleTheme
 import au.com.deanpike.uitestshared.base.TestRobotBase
 import au.com.deanpike.uitestshared.base.TestRobotInitData

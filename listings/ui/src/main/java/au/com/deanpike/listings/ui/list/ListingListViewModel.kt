@@ -1,4 +1,4 @@
-package au.com.deanpike.ui.screen.list
+package au.com.deanpike.listings.ui.list
 
 import androidx.lifecycle.viewModelScope
 import au.com.deanpike.commonshared.util.ResponseWrapper

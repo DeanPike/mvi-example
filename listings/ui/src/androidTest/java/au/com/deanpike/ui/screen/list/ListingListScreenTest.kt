@@ -5,6 +5,7 @@ import au.com.deanpike.datashared.type.ListingType
 import au.com.deanpike.listings.client.model.listing.response.Project
 import au.com.deanpike.listings.client.model.listing.response.ProjectChild
 import au.com.deanpike.listings.client.model.listing.response.Property
+import au.com.deanpike.listings.ui.list.ListingListScreenState
 import au.com.deanpike.ui.framework.robot.ListingListScreenRobot
 import au.com.deanpike.ui.framework.robot.ListingListScreenRobotInitData
 import au.com.deanpike.uishared.base.ScreenStateType

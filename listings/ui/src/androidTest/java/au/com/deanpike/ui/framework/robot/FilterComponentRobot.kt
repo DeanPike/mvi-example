@@ -4,10 +4,10 @@ import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import au.com.deanpike.listings.client.type.DwellingType
 import au.com.deanpike.listings.client.type.StatusType
 import au.com.deanpike.listings.ui.R
-import au.com.deanpike.ui.screen.list.component.FilterComponent
-import au.com.deanpike.ui.screen.list.component.FilterComponentTestTags.FILTER_COMPONENT_LAYOUT
-import au.com.deanpike.ui.screen.list.component.FilterComponentTestTags.LISTING_TYPE
-import au.com.deanpike.ui.screen.list.component.FilterComponentTestTags.STATUS_BUTTON
+import au.com.deanpike.listings.ui.list.component.FilterComponent
+import au.com.deanpike.listings.ui.list.component.FilterComponentTestTags.FILTER_COMPONENT_LAYOUT
+import au.com.deanpike.listings.ui.list.component.FilterComponentTestTags.LISTING_TYPE
+import au.com.deanpike.listings.ui.list.component.FilterComponentTestTags.STATUS_BUTTON
 import au.com.deanpike.uishared.theme.MviExampleTheme
 import au.com.deanpike.uitestshared.base.TestRobotBase
 import au.com.deanpike.uitestshared.base.TestRobotInitData
