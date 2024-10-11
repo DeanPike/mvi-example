@@ -9,6 +9,7 @@ import au.com.deanpike.listings.ui.framework.robot.ProjectListItemRobot
 import au.com.deanpike.listings.ui.framework.robot.ProjectListItemRobotInitData
 import au.com.deanpike.uitestshared.base.UiUnitTestBase
 import au.com.deanpike.uitestshared.robot.AgencyBannerComponentRobot
+import kotlinx.coroutines.test.runTest
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
@@ -19,14 +20,14 @@ class ProjectListItemTest : UiUnitTestBase() {
     private val projectChildRobot = ProjectChildListItemComponentRobot(composeTestRule)
 
     @Test
-    fun should_show_project_list_item() {
-
+    fun should_show_project_list_item() = runTest {
         robot
             .setupComponent(
                 data = ProjectListItemRobotInitData(
                     project = getProject()
                 )
             )
+            .waitForIdle()
             .assertLayoutDisplayed()
             .assertBannerImageDisplayed()
             .assertProjectImageDisplayed()

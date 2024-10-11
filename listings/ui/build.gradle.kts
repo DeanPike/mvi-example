@@ -20,6 +20,9 @@ android {
     }
 
     buildTypes {
+        debug {
+            isMinifyEnabled = false
+        }
         release {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
@@ -87,7 +90,7 @@ dependencies {
     implementation(libs.hilt.navigation.compose)
 
     androidTestImplementation(libs.hilt.android)
-    kspAndroidTest(libs.hilt.compiler)
+    kspAndroidTest(libs.hilt.android.compiler)
     androidTestImplementation(libs.hilt.android.testing)
 
     implementation(libs.coil.compose)
@@ -101,5 +104,7 @@ dependencies {
     testImplementation(libs.assertj)
     testImplementation(libs.coroutines.test)
     testImplementation(libs.turbine)
+
+    implementation(libs.tracing)
 
 }

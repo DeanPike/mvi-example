@@ -27,6 +27,10 @@ android {
     }
 
     buildTypes {
+        debug {
+            isMinifyEnabled = false
+            isDebuggable = true
+        }
         release {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
@@ -41,6 +45,13 @@ android {
     }
     buildFeatures {
         compose = true
+    }
+
+    sourceSets {
+        getByName("androidTest") {
+            java.srcDir("${project.rootDir}/listings/ui/src/androidTest/java")
+            java.srcDir("${project.rootDir}/detail/ui/src/androidTest/java")
+        }
     }
 
     packaging {
@@ -72,6 +83,7 @@ dependencies {
     implementation(project(":network"))
     implementation(project(":shared:ui-shared"))
     androidTestImplementation(project(":test-util:ui-test-shared"))
+    androidTestImplementation(project(":shared:common-shared"))
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -94,11 +106,13 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
-
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
-    kspAndroidTest(libs.hilt.android)
+    androidTestImplementation(libs.hilt.android)
     androidTestImplementation(libs.hilt.android.testing)
-    androidTestImplementation(libs.androidx.ui.test.junit4)
+    kspAndroidTest(libs.hilt.android.compiler)
+
+    androidTestImplementation(libs.mockwebserver)
+    androidTestImplementation(libs.assertj)
 }

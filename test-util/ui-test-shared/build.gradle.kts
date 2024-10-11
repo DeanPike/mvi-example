@@ -65,4 +65,6 @@ dependencies {
     implementation(libs.coil.compose)
     api(libs.okhttp.tls)
     implementation(libs.assertj)
+
+    implementation(libs.coil.test)
 }

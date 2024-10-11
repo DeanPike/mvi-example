@@ -1,4 +1,4 @@
-package au.com.deanpike.listings.ui.e2e
+package au.com.deanpike.mviexample.ui.activity
 
 import au.com.deanpike.listings.ui.framework.robot.ListingListScreenRobot
 import au.com.deanpike.listings.ui.framework.robot.ProjectChildListItemComponentRobot
@@ -6,8 +6,8 @@ import au.com.deanpike.listings.ui.framework.robot.ProjectListItemRobot
 import au.com.deanpike.listings.ui.framework.robot.PropertyListItemRobot
 import au.com.deanpike.listings.ui.list.ListingListScreen
 import au.com.deanpike.listings.ui.list.ListingListScreenTestTags.LISTING_LIST
+import au.com.deanpike.mviexample.ui.util.HiltE2ETestActivity
 import au.com.deanpike.uishared.theme.MviExampleTheme
-import au.com.deanpike.uitestshared.HiltTestActivity
 import au.com.deanpike.uitestshared.base.UiE2ETestBase
 import au.com.deanpike.uitestshared.mockserver.HttpMethod
 import au.com.deanpike.uitestshared.mockserver.MockRequestHandler
@@ -27,7 +27,7 @@ import org.junit.Test
 class ListingListTest : UiE2ETestBase() {
 
     @get:Rule(order = 1)
-    val composeTestRule = createComposeRuleFor(HiltTestActivity::class.java)
+    val composeTestRule = createComposeRuleFor(HiltE2ETestActivity::class.java)
 
     private val listingListScreenRobot = ListingListScreenRobot(composeTestRule)
     private val propertyRobot = PropertyListItemRobot(composeTestRule)
@@ -90,7 +90,7 @@ class ListingListTest : UiE2ETestBase() {
                 .assertChildrenDisplayed()
 
             projectChildRobot
-                .forChild(2019090910)
+                .forChild(2019256252)
                 .assertChildLayoutDisplayed()
                 .assertPriceDisplayed(text = "$3,250,000")
                 .assertLifecycleDisplayed(text = "New Home")
@@ -98,7 +98,7 @@ class ListingListTest : UiE2ETestBase() {
                 .assertBathroomDisplayed(bathrooms = "3")
                 .assertCarSpacesDisplayed(carSpaces = "2")
                 .clickCard()
-            assertThat(projectChildClicked).isEqualTo(2019090910)
+            assertThat(projectChildClicked).isEqualTo(2019256252)
 
             projectChildRobot
                 .forChild(2019090988)

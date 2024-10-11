@@ -21,6 +21,7 @@ import au.com.deanpike.uitestshared.base.TestRobotInitData
 import au.com.deanpike.uitestshared.util.assertTagDisplayed
 import au.com.deanpike.uitestshared.util.assertTextDisplayed
 import au.com.deanpike.uitestshared.util.clickOn
+import au.com.deanpike.uitestshared.util.waitUntilTagExists
 
 class PropertyListItemRobot(private val composeRule: ComposeContentTestRule) : TestRobotBase<PropertyListItemRobot, PropertyListItemRobotInitData>(composeRule) {
     var clickedId: Long? = null
@@ -124,6 +125,11 @@ class PropertyListItemRobot(private val composeRule: ComposeContentTestRule) : T
             .filterToOne(hasTestTag(DETAIL_ITEM_CAR_SPACES))
             .onChildren()
             .assertAny(hasTestTag("DETAIL_ITEM_CAR_SPACES_TEXT") and hasText(carSpaces))
+        return this
+    }
+
+    fun waitForLayoutToBeDisplayed(): PropertyListItemRobot {
+        composeRule.waitUntilTagExists(PROPERTY_LIST_ITEM_LAYOUT)
         return this
     }
 }

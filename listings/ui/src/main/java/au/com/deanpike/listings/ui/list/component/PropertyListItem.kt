@@ -62,6 +62,7 @@ fun PropertyListItem(
                 .defaultMinSize(minHeight = 240.dp)
                 .testTag(PROPERTY_LIST_ITEM_PROPERTY_IMAGE),
             placeholder = painterResource(id = RShared.drawable.gallery_placeholder),
+            error = painterResource(id = RShared.drawable.gallery_placeholder),
             model = property.listingImage,
             contentDescription = stringResource(id = RShared.string.property_image_description)
         )

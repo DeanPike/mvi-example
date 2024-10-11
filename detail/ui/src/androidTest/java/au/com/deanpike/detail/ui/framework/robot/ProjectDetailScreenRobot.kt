@@ -3,6 +3,7 @@ package au.com.deanpike.detail.ui.framework.robot
 import androidx.compose.ui.test.assertTextContains
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import androidx.compose.ui.test.onNodeWithTag
+import androidx.test.espresso.Espresso
 import au.com.deanpike.detail.ui.R
 import au.com.deanpike.detail.ui.project.ProjectChildrenComponentTestTags.PROJECT_CHILDREN
 import au.com.deanpike.detail.ui.project.ProjectDetailScreenContent
@@ -26,6 +27,7 @@ import au.com.deanpike.uitestshared.util.assertTextDisplayed
 import au.com.deanpike.uitestshared.util.clickOn
 import au.com.deanpike.uitestshared.util.scrollToItemPosition
 import au.com.deanpike.uitestshared.util.swipeUp
+import au.com.deanpike.uitestshared.util.waitUntilTagExists
 
 class ProjectDetailScreenRobot(private val composeRule: ComposeContentTestRule) : TestRobotBase<ProjectDetailScreenRobot, ProjectDetailScreenRobotInitData>(composeRule) {
     var selectedProjectChildId: Long? = null
@@ -58,6 +60,12 @@ class ProjectDetailScreenRobot(private val composeRule: ComposeContentTestRule) 
 
     override fun assertLayoutDisplayed(): ProjectDetailScreenRobot {
         composeRule.assertTagDisplayed(PROJECT_LAYOUT)
+        return this
+    }
+
+    fun waitUntilScreenDisplayed(): ProjectDetailScreenRobot {
+        composeRule.advanceTimeAndWait()
+        composeRule.waitUntilTagExists(PROJECT_DETAIL_NAME)
         return this
     }
 
@@ -136,8 +144,13 @@ class ProjectDetailScreenRobot(private val composeRule: ComposeContentTestRule) 
         return this
     }
 
-    fun swipeUp(): ProjectDetailScreenRobot{
+    fun swipeUp(): ProjectDetailScreenRobot {
         composeRule.swipeUp(PROJECT_LAYOUT)
+        return this
+    }
+
+    fun swipeBack(): ProjectDetailScreenRobot {
+        Espresso.pressBack()
         return this
     }
 }

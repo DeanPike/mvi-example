@@ -23,6 +23,7 @@ class PropertyListItemTest : UiUnitTestBase() {
                     property = getProperty()
                 )
             )
+            .waitForIdle()
             .assertLayoutDisplayed()
             .assertPropertyImageDisplayed()
             .assertPriceDisplayed("$1000000")

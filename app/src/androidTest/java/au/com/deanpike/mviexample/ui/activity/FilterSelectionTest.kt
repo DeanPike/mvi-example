@@ -1,12 +1,12 @@
-package au.com.deanpike.listings.ui.e2e
+package au.com.deanpike.mviexample.ui.activity
 
 import au.com.deanpike.listings.ui.framework.robot.FilterComponentRobot
 import au.com.deanpike.listings.ui.framework.robot.ListingListScreenRobot
 import au.com.deanpike.listings.ui.framework.robot.ListingTypeScreenRobot
 import au.com.deanpike.listings.ui.framework.robot.StatusDropDownMenuRobot
 import au.com.deanpike.listings.ui.list.ListingListScreen
+import au.com.deanpike.mviexample.ui.util.HiltE2ETestActivity
 import au.com.deanpike.uishared.theme.MviExampleTheme
-import au.com.deanpike.uitestshared.HiltTestActivity
 import au.com.deanpike.uitestshared.base.UiE2ETestBase
 import au.com.deanpike.uitestshared.mockserver.HttpMethod
 import dagger.hilt.android.testing.HiltAndroidTest
@@ -17,7 +17,7 @@ import org.junit.Test
 @HiltAndroidTest
 class FilterSelectionTest : UiE2ETestBase() {
     @get:Rule(order = 1)
-    val composeTestRule = createComposeRuleFor(HiltTestActivity::class.java)
+    val composeTestRule = createComposeRuleFor(HiltE2ETestActivity::class.java)
 
     private val filterRobot = FilterComponentRobot(composeTestRule)
     private val dropDownMenuRobot = StatusDropDownMenuRobot(composeTestRule)

@@ -116,6 +116,7 @@ fun ProjectListItem(
                 )
                 .testTag(PROJECT_LIST_ITEM_BANNER_IMAGE),
             placeholder = painterResource(id = RShared.drawable.gallery_placeholder),
+            error = painterResource(id = RShared.drawable.gallery_placeholder),
             model = project.bannerImage,
             contentDescription = stringResource(id = R.string.project_banner_image_description),
         )
@@ -130,6 +131,7 @@ fun ProjectListItem(
                 .defaultMinSize(minHeight = 240.dp)
                 .testTag(PROJECT_LIST_ITEM_IMAGE),
             placeholder = painterResource(id = RShared.drawable.gallery_placeholder),
+            error = painterResource(id = RShared.drawable.gallery_placeholder),
             model = project.listingImage,
             contentDescription = stringResource(id = RShared.string.property_image_description)
         )

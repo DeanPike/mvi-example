@@ -1,10 +1,10 @@
 package au.com.deanpike.uitestshared.di
 
-import au.com.deanpike.network.di.RemoteDataSourceModule
-import au.com.deanpike.network.util.BaseUrl
 import au.com.deanpike.network.api.ListingApi
 import au.com.deanpike.network.api.ProjectDetailApi
 import au.com.deanpike.network.api.PropertyDetailApi
+import au.com.deanpike.network.di.RemoteDataSourceModule
+import au.com.deanpike.network.util.BaseUrl
 import au.com.deanpike.uitestshared.util.MockServerCertificates
 import com.google.gson.Gson
 import dagger.Module
@@ -44,9 +44,9 @@ object TestRemoteDataSourceModule {
         okHttpClient: OkHttpClient,
         gson: Gson,
         @BaseUrl baseUrl: String
-    ) =
+    ): Retrofit =
         Retrofit.Builder()
-            .baseUrl("https://localhost:8080/")
+            .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .client(okHttpClient)
             .build()

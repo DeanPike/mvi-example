@@ -1,6 +1,7 @@
 package au.com.deanpike.detail.ui.framework.robot
 
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
+import androidx.test.espresso.Espresso
 import au.com.deanpike.detail.ui.property.PropertyDetailScreenContent
 import au.com.deanpike.detail.ui.property.PropertyDetailScreenState
 import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAILS_LAYOUT
@@ -24,6 +25,7 @@ import au.com.deanpike.uitestshared.util.assertTagDoesNotExist
 import au.com.deanpike.uitestshared.util.assertTextDisplayed
 import au.com.deanpike.uitestshared.util.clickOn
 import au.com.deanpike.uitestshared.util.swipeUp
+import au.com.deanpike.uitestshared.util.waitUntilTagExists
 
 class PropertyDetailScreenRobot(private val composeRule: ComposeContentTestRule) : TestRobotBase<PropertyDetailScreenRobot, PropertyDetailScreenRobotInitData>(composeRule) {
 
@@ -153,6 +155,16 @@ class PropertyDetailScreenRobot(private val composeRule: ComposeContentTestRule)
 
     fun swipeUp(): PropertyDetailScreenRobot {
         composeRule.swipeUp(PROPERTY_DETAILS_LAYOUT)
+        return this
+    }
+
+    fun waitForSuccessScreenToBeDisplayed(): PropertyDetailScreenRobot {
+        composeRule.waitUntilTagExists(PROPERTY_DETAIL_PRICE)
+        return this
+    }
+
+    fun swipeBack(): PropertyDetailScreenRobot {
+        Espresso.pressBack()
         return this
     }
 }
