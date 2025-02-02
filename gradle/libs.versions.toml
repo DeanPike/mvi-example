@@ -7,7 +7,7 @@ minSdk = "29"
 
 #Dependency versions
 activityCompose = "1.9.2"
-agp = "8.6.1"
+agp = "8.8.0"
 assertj = "3.25.3"
 coil = "2.7.0"
 composeBom = "2024.09.03"
