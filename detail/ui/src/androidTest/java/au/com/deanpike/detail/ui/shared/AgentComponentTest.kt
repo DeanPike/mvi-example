@@ -22,9 +22,9 @@ class AgentComponentTest : UiUnitTestBase() {
             .assertLayoutDisplayed()
             .assertAgentName(name = "Riccardo Romolo", position = 0)
             .assertAgentImage(position = 0)
-            .assertAgentMobileContact(number = "0452 184 976", position = 0)
-            .assertAgentGeneralContact(number = "02 9609 7099", position = 0)
-            .assertAgentFaxContact(number = "02 9609 2370", position = 0)
+            .assertAgentMobileContact(value = "0452 184 976", position = 0)
+            .assertAgentGeneralContact(value = "02 9609 7099", position = 0)
+            .assertAgentFaxContact(value = "02 9609 2370", position = 0)
             .assertAgentEmailContact(email = "riccardo.romolo@raywhite.com", position = 0)
     }
 

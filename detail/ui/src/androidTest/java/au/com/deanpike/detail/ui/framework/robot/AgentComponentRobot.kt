@@ -21,7 +21,6 @@ import au.com.deanpike.uishared.theme.MviExampleTheme
 import au.com.deanpike.uitestshared.base.TestRobotBase
 import au.com.deanpike.uitestshared.base.TestRobotInitData
 import au.com.deanpike.uitestshared.util.assertTagDisplayed
-import au.com.deanpike.uitestshared.util.assertTagDoesNotExist
 
 class AgentComponentRobot(private val composeRule: ComposeContentTestRule) : TestRobotBase<AgentComponentRobot, AgentComponentRobotInitData>(composeRule) {
     override fun setupComponent(data: AgentComponentRobotInitData?): AgentComponentRobot {
@@ -63,7 +62,7 @@ class AgentComponentRobot(private val composeRule: ComposeContentTestRule) : Tes
     }
 
     fun assertAgentMobileContact(
-        number: String,
+        value: String,
         position: Int
     ): AgentComponentRobot {
         composeRule.onNodeWithTag(
@@ -75,20 +74,13 @@ class AgentComponentRobot(private val composeRule: ComposeContentTestRule) : Tes
             testTag = "${AGENT_MOBILE}_${position}"
         ).onChildren()
             .filterToOne(hasTestTag("${AGENT_MOBILE}_${position}_VALUE"))
-            .assertTextEquals(number)
+            .assertTextEquals(value)
 
-        return this
-    }
-
-    fun assertAgentMobileContactNotDisplayed(
-        position: Int
-    ): AgentComponentRobot {
-        composeRule.assertTagDoesNotExist(tag = "${AGENT_MOBILE}_$position")
         return this
     }
 
     fun assertAgentGeneralContact(
-        number: String,
+        value: String,
         position: Int
     ): AgentComponentRobot {
         composeRule.onNodeWithTag(
@@ -100,18 +92,13 @@ class AgentComponentRobot(private val composeRule: ComposeContentTestRule) : Tes
             testTag = "${AGENT_GENERAL}_${position}"
         ).onChildren()
             .filterToOne(hasTestTag("${AGENT_GENERAL}_${position}_VALUE"))
-            .assertTextEquals(number)
+            .assertTextEquals(value)
 
-        return this
-    }
-
-    fun assertAgentGeneralContactNotDisplayed(position: Int): AgentComponentRobot {
-        composeRule.assertTagDoesNotExist(tag = "${AGENT_GENERAL}_$position")
         return this
     }
 
     fun assertAgentFaxContact(
-        number: String,
+        value: String,
         position: Int
     ): AgentComponentRobot {
         composeRule.onNodeWithTag(
@@ -123,13 +110,8 @@ class AgentComponentRobot(private val composeRule: ComposeContentTestRule) : Tes
             testTag = "${AGENT_FAX}_${position}"
         ).onChildren()
             .filterToOne(hasTestTag("${AGENT_FAX}_${position}_VALUE"))
-            .assertTextEquals(number)
+            .assertTextEquals(value)
 
-        return this
-    }
-
-    fun assertAgentFaxContactNotDisplayed(position: Int): AgentComponentRobot {
-        composeRule.assertTagDoesNotExist(tag = "${AGENT_FAX}_$position")
         return this
     }
 
@@ -147,11 +129,6 @@ class AgentComponentRobot(private val composeRule: ComposeContentTestRule) : Tes
         ).onChildren()
             .filterToOne(hasTestTag("${AGENT_EMAIL}_${position}_VALUE"))
             .assertTextEquals(email)
-        return this
-    }
-
-    fun assertAgentEmailContactNotDisplayed(position: Int): AgentComponentRobot {
-        composeRule.assertTagDoesNotExist(tag = "${AGENT_EMAIL}_$position")
         return this
     }
 }

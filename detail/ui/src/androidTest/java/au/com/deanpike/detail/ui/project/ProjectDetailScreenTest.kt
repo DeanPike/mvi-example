@@ -95,11 +95,17 @@ class ProjectDetailScreenTest : UiUnitTestBase() {
             )
             .assertAgentImage(0)
             .assertAgentMobileContact(
-                number = "0452 184 976",
+                value = "0452 184 976",
                 position = 0
             )
-            .assertAgentGeneralContactNotDisplayed(0)
-            .assertAgentFaxContactNotDisplayed(0)
+            .assertAgentGeneralContact(
+                value = "",
+                position = 0
+            )
+            .assertAgentFaxContact(
+                value = "",
+                position = 0
+            )
             .assertAgentEmailContact(
                 email = "riccardo.romolo@raywhite.com",
                 position = 0

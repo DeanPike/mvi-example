@@ -2,7 +2,6 @@ package au.com.deanpike.detail.ui.shared
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.defaultMinSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -20,12 +19,11 @@ import au.com.deanpike.uishared.theme.MviExampleTheme
 fun ContactComponent(
     modifier: Modifier = Modifier,
     label: String,
-    number: String,
+    value: String?,
     testTag: String
 ) {
     Row(
         modifier = modifier
-            .fillMaxWidth()
             .padding(start = DIM_8, end = DIM_4)
             .testTag(testTag)
     ) {
@@ -41,7 +39,7 @@ fun ContactComponent(
             modifier = Modifier
                 .padding(start = DIM_4)
                 .testTag("${testTag}_VALUE"),
-            text = number,
+            text = value ?: "",
             style = MaterialTheme.typography.bodyMedium
         )
     }
@@ -53,7 +51,19 @@ fun ContactComponentPreview() {
     MviExampleTheme {
         ContactComponent(
             label = "Label",
-            number = "Number",
+            value = "Number",
+            testTag = "TestTag"
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ContactComponentWithNoValuePreview() {
+    MviExampleTheme {
+        ContactComponent(
+            label = "Label",
+            value = null,
             testTag = "TestTag"
         )
     }

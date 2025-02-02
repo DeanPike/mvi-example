@@ -118,15 +118,15 @@ class PropertyDetailScreenTest : UiUnitTestBase() {
             )
             .assertAgentImage(position = 0)
             .assertAgentMobileContact(
-                number = "0452 184 976",
+                value = "0452 184 976",
                 position = 0
             )
             .assertAgentGeneralContact(
-                number = "02 9609 7099",
+                value = "02 9609 7099",
                 position = 0
             )
             .assertAgentFaxContact(
-                number = "02 9609 2370",
+                value = "02 9609 2370",
                 position = 0
             )
             .assertAgentEmailContact(
@@ -140,15 +140,15 @@ class PropertyDetailScreenTest : UiUnitTestBase() {
             )
             .assertAgentImage(position = 1)
             .assertAgentMobileContact(
-                number = "0414 246 947",
+                value = "0414 246 947",
                 position = 1
             )
             .assertAgentGeneralContact(
-                number = "02 9609 7099",
+                value = "02 9609 7099",
                 position = 1
             )
             .assertAgentFaxContact(
-                number = "02 9609 2370",
+                value = "02 9609 2370",
                 position = 1
             )
             .assertAgentEmailContact(

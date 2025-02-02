@@ -220,12 +220,6 @@ fun PropertyDetailSuccess(
         HorizontalDivider(
             modifier = Modifier.padding(top = DIM_8, bottom = DIM_8)
         )
-        Text(
-            modifier = Modifier.padding(start = DIM_16, top = DIM_8, bottom = DIM_8),
-            text = stringResource(id = R.string.agent),
-            style = MaterialTheme.typography.bodyLarge,
-            fontWeight = FontWeight.Bold
-        )
 
         state.propertyDetail?.advertiser?.let { advertiser ->
             AgencyComponent(advertiser = advertiser)

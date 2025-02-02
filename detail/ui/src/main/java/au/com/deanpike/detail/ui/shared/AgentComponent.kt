@@ -1,7 +1,9 @@
 package au.com.deanpike.detail.ui.shared
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -63,23 +65,21 @@ fun AgentComponent(
             ) {
                 val (nameRef, imageRef, contactDetailsRef) = createRefs()
 
-                agent.name?.let {
-                    Text(
-                        modifier = Modifier
-                            .constrainAs(nameRef) {
-                                top.linkTo(parent.top)
-                                start.linkTo(parent.start)
-                                end.linkTo(imageRef.start)
-                                width = Dimension.fillToConstraints
-                            }
-                            .padding(start = DIM_8)
-                            .testTag("${AGENT_NAME}_$index"),
-                        text = it,
-                        style = MaterialTheme.typography.titleMedium,
-                        maxLines = 2,
-                        overflow = TextOverflow.Ellipsis
-                    )
-                }
+                Text(
+                    modifier = Modifier
+                        .constrainAs(nameRef) {
+                            top.linkTo(parent.top)
+                            start.linkTo(parent.start)
+                            end.linkTo(imageRef.start)
+                            width = Dimension.fillToConstraints
+                        }
+                        .padding(start = DIM_8)
+                        .testTag("${AGENT_NAME}_$index"),
+                    text = agent.name ?: "",
+                    style = MaterialTheme.typography.titleMedium,
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis
+                )
 
                 agent.imageUrl?.let {
                     AsyncImage(
@@ -99,52 +99,57 @@ fun AgentComponent(
                         fallback = painterResource(id = au.com.deanpike.uishared.R.drawable.gallery_placeholder),
                         error = painterResource(id = au.com.deanpike.uishared.R.drawable.gallery_placeholder),
                     )
+                } ?: run {
+                    Spacer(
+                        modifier = Modifier
+                            .constrainAs(imageRef) {
+                                top.linkTo(parent.top)
+                                end.linkTo(parent.end)
+                            }
+                            .padding(top = DIM_4, end = DIM_4)
+                            .size(60.dp)
+                            .clip(CircleShape)
+                            .border(width = 0.5.dp, color = Color.Gray, shape = CircleShape)
+                            .testTag("${AGENT_IMAGE}_$index"),
+                    )
                 }
 
-                Column(modifier = Modifier
-                    .constrainAs(contactDetailsRef) {
-                        start.linkTo(parent.start)
-                        top.linkTo(nameRef.bottom)
-                        end.linkTo(imageRef.start)
-                        width = Dimension.fillToConstraints
-                    }
-                    .padding(top = DIM_8)
+                Column(
+                    modifier = Modifier
+                        .constrainAs(contactDetailsRef) {
+                            start.linkTo(parent.start)
+                            top.linkTo(nameRef.bottom)
+                            end.linkTo(imageRef.start)
+                            width = Dimension.fillToConstraints
+                        }
+                        .padding(top = DIM_8)
                 ) {
-                    agent.phoneNumbers.firstOrNull {
-                        it.type == PhoneNumberType.MOBILE
-                    }?.let {
-                        ContactComponent(
-                            label = stringResource(id = R.string.mobile),
-                            number = it.number ?: "",
-                            testTag = "${AGENT_MOBILE}_$index"
-                        )
-                    }
-                    agent.phoneNumbers.firstOrNull {
-                        it.type == PhoneNumberType.GENERAL
-                    }?.let {
-                        ContactComponent(
-                            label = stringResource(id = R.string.general),
-                            number = it.number ?: "",
-                            testTag = "${AGENT_GENERAL}_$index"
-                        )
-                    }
-                    agent.phoneNumbers.firstOrNull {
-                        it.type == PhoneNumberType.FAX
-                    }?.let {
-                        ContactComponent(
-                            label = stringResource(id = R.string.fax),
-                            number = it.number ?: "",
-                            testTag = "${AGENT_FAX}_$index"
-                        )
-                    }
-
-                    agent.emailAddress?.let {
-                        ContactComponent(
-                            label = stringResource(id = R.string.email),
-                            number = it,
-                            testTag = "${AGENT_EMAIL}_$index"
-                        )
-                    }
+                    ContactComponent(
+                        label = stringResource(id = R.string.mobile),
+                        value = agent.phoneNumbers.firstOrNull {
+                            it.type == PhoneNumberType.MOBILE
+                        }?.number ?: "",
+                        testTag = "${AGENT_MOBILE}_$index"
+                    )
+                    ContactComponent(
+                        label = stringResource(id = R.string.general),
+                        value = agent.phoneNumbers.firstOrNull {
+                            it.type == PhoneNumberType.GENERAL
+                        }?.number ?: "",
+                        testTag = "${AGENT_GENERAL}_$index"
+                    )
+                    ContactComponent(
+                        label = stringResource(id = R.string.fax),
+                        value = agent.phoneNumbers.firstOrNull {
+                            it.type == PhoneNumberType.FAX
+                        }?.number ?: "",
+                        testTag = "${AGENT_FAX}_$index"
+                    )
+                    ContactComponent(
+                        label = stringResource(id = R.string.email),
+                        value = agent.emailAddress ?: "",
+                        testTag = "${AGENT_EMAIL}_$index"
+                    )
                 }
             }
         }
