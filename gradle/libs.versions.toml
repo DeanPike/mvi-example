@@ -2,7 +2,8 @@
 #Configuration versions
 jvmTargetVersion = "17"
 javaCompileVersion = "VERSION_17"
-compileSdk = "34"
+compileSdk = "35"
+targetSdk = "35"
 minSdk = "29"
 
 #Dependency versions

@@ -15,7 +15,7 @@ android {
     defaultConfig {
         applicationId = "au.com.deanpike.mviexample"
         minSdk = libs.versions.minSdk.get().toInt()
-        targetSdk = 34
+        targetSdk = libs.versions.targetSdk.get().toInt()
         versionCode = 1
         versionName = "1.0"
 
