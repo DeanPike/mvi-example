@@ -1,14 +1,19 @@
 package au.com.deanpike.listings.ui.list.component
 
-import au.com.deanpike.uishared.R as RShared
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
@@ -16,7 +21,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.constraintlayout.compose.ConstraintLayout
 import au.com.deanpike.commonshared.model.ListingDetails
 import au.com.deanpike.datashared.type.ListingType
 import au.com.deanpike.listings.client.model.listing.response.Property
@@ -25,6 +29,7 @@ import au.com.deanpike.listings.ui.list.component.PropertyListItemTesTags.PROPER
 import au.com.deanpike.listings.ui.list.component.PropertyListItemTesTags.PROPERTY_LIST_ITEM_LAYOUT
 import au.com.deanpike.listings.ui.list.component.PropertyListItemTesTags.PROPERTY_LIST_ITEM_PRICE
 import au.com.deanpike.listings.ui.list.component.PropertyListItemTesTags.PROPERTY_LIST_ITEM_PROPERTY_IMAGE
+import au.com.deanpike.uishared.R as RShared
 import au.com.deanpike.uishared.component.AgencyBannerComponent
 import au.com.deanpike.uishared.component.LifecycleStatusComponent
 import au.com.deanpike.uishared.component.PropertyDetailComponent
@@ -32,6 +37,7 @@ import au.com.deanpike.uishared.theme.Dimension.DIM_16
 import au.com.deanpike.uishared.theme.Dimension.DIM_4
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
 import au.com.deanpike.uishared.theme.MviExampleTheme
+import au.com.deanpike.uishared.theme.outlineLight
 import coil.compose.AsyncImage
 
 @Composable
@@ -39,104 +45,79 @@ fun PropertyListItem(
     property: Property,
     onItemClicked: (Long) -> Unit = {}
 ) {
-    ConstraintLayout(
+    Card(
         modifier = Modifier
-            .background(color = MaterialTheme.colorScheme.background)
+            .padding(start = DIM_16, end = DIM_16, top = DIM_8, bottom = DIM_8)
             .fillMaxWidth()
             .clickable {
                 onItemClicked(property.id)
             }
-            .padding(bottom = DIM_8)
-            .testTag(PROPERTY_LIST_ITEM_LAYOUT)
+            .testTag(PROPERTY_LIST_ITEM_LAYOUT),
+        shape = RoundedCornerShape(DIM_8),
+        border = BorderStroke(width = 0.5.dp, color = outlineLight),
     ) {
-
-        val (lifecycleRef, propertyImageRef, agencyRef, priceRef, headlineRef, addressRef, propertyDetailRef) = createRefs()
-
-        AsyncImage(
-            modifier = Modifier
-                .constrainAs(propertyImageRef) {
-                    start.linkTo(parent.start)
-                    end.linkTo(parent.end)
-                }
-                .fillMaxWidth()
-                .defaultMinSize(minHeight = 240.dp)
-                .testTag(PROPERTY_LIST_ITEM_PROPERTY_IMAGE),
-            placeholder = painterResource(id = RShared.drawable.gallery_placeholder),
-            error = painterResource(id = RShared.drawable.gallery_placeholder),
-            model = property.listingImage,
-            contentDescription = stringResource(id = RShared.string.property_image_description)
-        )
-
-        LifecycleStatusComponent(
-            modifier = Modifier.constrainAs(lifecycleRef) {
-                start.linkTo(parent.start)
-                top.linkTo(parent.top)
-            },
-            lifecycleStatus = property.lifecycleStatus
-        )
-
-        AgencyBannerComponent(
-            modifier = Modifier
-                .constrainAs(agencyRef) {
-                    start.linkTo(parent.start)
-                    top.linkTo(propertyImageRef.bottom)
-                },
-            agencyColour = property.agencyColour,
-            logo = property.agencyImage
-        )
-
-        property.detail.price?.let {
-            Text(
+        Box(modifier = Modifier.background(color = MaterialTheme.colorScheme.background)) {
+            Column(
                 modifier = Modifier
-                    .constrainAs(priceRef) {
-                        start.linkTo(parent.start)
-                        top.linkTo(agencyRef.bottom)
-                    }
-                    .padding(start = DIM_16, end = DIM_16, top = DIM_8)
-                    .testTag(PROPERTY_LIST_ITEM_PRICE),
-                text = it,
-                style = MaterialTheme.typography.titleMedium,
-                fontWeight = FontWeight.Bold
-            )
+                    .fillMaxWidth()
+                    .align(Alignment.TopCenter)
+            ) {
+                AsyncImage(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .defaultMinSize(minHeight = 240.dp)
+                        .testTag(PROPERTY_LIST_ITEM_PROPERTY_IMAGE),
+                    placeholder = painterResource(id = RShared.drawable.gallery_placeholder),
+                    error = painterResource(id = RShared.drawable.gallery_placeholder),
+                    model = property.listingImage,
+                    contentDescription = stringResource(id = RShared.string.property_image_description)
+                )
+
+                AgencyBannerComponent(
+                    agencyColour = property.agencyColour,
+                    logo = property.agencyImage
+                )
+
+                property.detail.price?.let {
+                    Text(
+                        modifier = Modifier
+                            .padding(start = DIM_16, end = DIM_16, top = DIM_8)
+                            .testTag(PROPERTY_LIST_ITEM_PRICE),
+                        text = it,
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+
+                Text(
+                    modifier = Modifier
+                        .padding(start = DIM_16, end = DIM_16, top = DIM_4)
+                        .testTag(PROPERTY_LIST_ITEM_ADDRESS),
+                    text = property.address,
+                    style = MaterialTheme.typography.labelLarge
+                )
+
+                PropertyDetailComponent(
+                    modifier = Modifier
+                        .padding(start = DIM_16, end = DIM_16, top = DIM_8),
+                    details = property.detail,
+                    dwellingType = property.dwellingType
+                )
+
+                property.headLine?.let {
+                    Text(
+                        modifier = Modifier
+                            .padding(start = DIM_16, end = DIM_16, top = DIM_8)
+                            .testTag(PROPERTY_LIST_ITEM_HEADLINE),
+                        text = it,
+                        style = MaterialTheme.typography.bodyMedium,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+            }
+            LifecycleStatusComponent(lifecycleStatus = property.lifecycleStatus)
         }
 
-        Text(
-            modifier = Modifier
-                .constrainAs(addressRef) {
-                    start.linkTo(parent.start)
-                    top.linkTo(priceRef.bottom)
-                }
-                .padding(start = DIM_16, end = DIM_16, top = DIM_4)
-                .testTag(PROPERTY_LIST_ITEM_ADDRESS),
-            text = property.address,
-            style = MaterialTheme.typography.labelLarge
-        )
-
-        PropertyDetailComponent(
-            modifier = Modifier
-                .constrainAs(propertyDetailRef) {
-                    start.linkTo(parent.start)
-                    top.linkTo(addressRef.bottom)
-                }
-                .padding(start = DIM_16, end = DIM_16),
-            details = property.detail,
-            dwellingType = property.dwellingType
-        )
-
-        property.headLine?.let {
-            Text(
-                modifier = Modifier
-                    .constrainAs(headlineRef) {
-                        start.linkTo(parent.start)
-                        top.linkTo(propertyDetailRef.bottom)
-                    }
-                    .padding(start = DIM_16, end = DIM_16, top = DIM_8)
-                    .testTag(PROPERTY_LIST_ITEM_HEADLINE),
-                text = it,
-                style = MaterialTheme.typography.bodyMedium,
-                fontWeight = FontWeight.Bold
-            )
-        }
     }
 }
 
@@ -151,7 +132,7 @@ object PropertyListItemTesTags {
 
 @Composable
 @Preview
-fun PropertyListItemPreview() {
+fun PropertyListItemPreview1() {
     MviExampleTheme {
         PropertyListItem(
             property = Property(

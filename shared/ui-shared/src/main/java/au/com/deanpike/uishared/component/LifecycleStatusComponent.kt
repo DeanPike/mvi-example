@@ -3,6 +3,7 @@ package au.com.deanpike.uishared.component
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -24,6 +25,7 @@ fun LifecycleStatusComponent(
         Box(
             modifier = modifier
                 .padding(start = DIM_4, top = DIM_4)
+                .wrapContentWidth()
                 .background(
                     color = MaterialTheme.colorScheme.secondaryContainer,
                     shape = RoundedCornerShape(DIM_8)
