@@ -20,6 +20,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         val activity = this
 
@@ -40,7 +41,6 @@ class MainActivity : ComponentActivity() {
             }
 
             MviExampleTheme {
-                enableEdgeToEdge()
                 SetStatusBarAppearance(useDarkIcons = true)
                 Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
                     ApplicationScreen()

@@ -17,13 +17,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalLayoutDirection
-import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import au.com.deanpike.listings.client.model.listing.response.Project
 import au.com.deanpike.listings.client.model.listing.response.Property
 import au.com.deanpike.listings.client.type.DwellingType
@@ -41,6 +41,7 @@ import au.com.deanpike.uishared.theme.Dimension.DIM_16
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
 import au.com.deanpike.uishared.theme.MviExampleTheme
 import au.com.deanpike.uishared.util.GridOverlayPreviewComponent
+import au.com.deanpike.uishared.util.SetStatusBarAppearance
 import kotlinx.coroutines.launch
 
 @Composable
@@ -53,6 +54,8 @@ fun ListingListScreen(
 ) {
     val lifecycleOwner = LocalLifecycleOwner.current
     val scope = rememberCoroutineScope()
+
+    SetStatusBarAppearance(useDarkIcons = true)
 
     DisposableEffect(lifecycleOwner) {
         val job = scope.launch {
@@ -181,7 +184,7 @@ fun ListingListScreenContent(
                     modifier = Modifier.testTag(LISTING_LIST),
                     verticalArrangement = Arrangement.spacedBy(DIM_16),
                 ) {
-                    state.listings.forEachIndexed { index, listing ->
+                    state.listings.forEachIndexed { _, listing ->
                         if (listing is Property) {
                             item(key = listing.id) {
                                 PropertyListItem(
@@ -288,7 +291,7 @@ fun ListingListScreenContentLoadingPreview() {
 @Preview
 fun ListingListScreenContentErrorPreview() {
     MviExampleTheme {
-        GridOverlayPreviewComponent() {
+        GridOverlayPreviewComponent {
             ListingListScreenContent(
                 state = ListingListScreenState(
                     screenState = ScreenStateType.ERROR,

@@ -55,6 +55,7 @@ import au.com.deanpike.uishared.component.PropertyDetailComponent
 import au.com.deanpike.uishared.theme.Dimension.DIM_16
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
 import au.com.deanpike.uishared.theme.MviExampleTheme
+import au.com.deanpike.uishared.util.SetStatusBarAppearance
 
 @Composable
 fun PropertyDetailScreen(
@@ -65,6 +66,8 @@ fun PropertyDetailScreen(
     LaunchedEffect(propertyId) {
         viewModel.setEvent(PropertyDetailScreenEvent.Initialise(propertyId = propertyId))
     }
+
+    SetStatusBarAppearance(useDarkIcons = false)
 
     PropertyDetailScreenContent(
         state = viewModel.uiState,

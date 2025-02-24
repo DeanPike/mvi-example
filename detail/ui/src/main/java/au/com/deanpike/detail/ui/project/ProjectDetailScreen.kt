@@ -59,6 +59,7 @@ import au.com.deanpike.uishared.component.ListingDetailImagesComponent
 import au.com.deanpike.uishared.theme.Dimension.DIM_16
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
 import au.com.deanpike.uishared.theme.MviExampleTheme
+import au.com.deanpike.uishared.util.SetStatusBarAppearance
 
 @Composable
 fun ProjectDetailScreen(
@@ -70,6 +71,8 @@ fun ProjectDetailScreen(
     LaunchedEffect(projectId) {
         viewModel.setEvent(ProjectDetailScreenEvent.Initialise(projectId = projectId))
     }
+
+    SetStatusBarAppearance(useDarkIcons = false)
 
     ProjectDetailScreenContent(
         state = viewModel.uiState,
