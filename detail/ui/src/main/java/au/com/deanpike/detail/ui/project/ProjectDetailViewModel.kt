@@ -30,7 +30,7 @@ class ProjectDetailViewModel @Inject constructor(
         }
     }
 
-    private fun initialiseScreen(projectId: Int) {
+    private fun initialiseScreen(projectId: Long) {
         viewModelScope.launch(dispatcher.getIoDispatcher()) {
             when (val response = useCase.getProjectDetails(projectId)) {
                 is ResponseWrapper.Success -> {

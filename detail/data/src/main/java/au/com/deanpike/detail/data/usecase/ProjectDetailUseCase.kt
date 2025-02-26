@@ -9,7 +9,7 @@ import javax.inject.Inject
 internal class ProjectDetailUseCaseImpl @Inject constructor(
     private val repo: ProjectDetailRepository
 ) : ProjectDetailUseCase {
-    override suspend fun getProjectDetails(id: Int): ResponseWrapper<ProjectDetail> {
+    override suspend fun getProjectDetails(id: Long): ResponseWrapper<ProjectDetail> {
         return repo.getDetails(id)
     }
 }

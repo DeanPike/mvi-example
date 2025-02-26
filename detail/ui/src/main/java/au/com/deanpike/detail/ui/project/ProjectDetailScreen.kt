@@ -64,7 +64,7 @@ import au.com.deanpike.uishared.util.SetStatusBarAppearance
 @Composable
 fun ProjectDetailScreen(
     viewModel: ProjectDetailViewModel = hiltViewModel<ProjectDetailViewModel>(),
-    projectId: Int,
+    projectId: Long,
     onCloseClicked: () -> Unit = {},
     onProjectChildClicked: (Long) -> Unit = {}
 ) {

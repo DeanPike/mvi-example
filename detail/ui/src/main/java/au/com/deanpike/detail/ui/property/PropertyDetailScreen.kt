@@ -60,7 +60,7 @@ import au.com.deanpike.uishared.util.SetStatusBarAppearance
 @Composable
 fun PropertyDetailScreen(
     viewModel: PropertyDetailViewModel = hiltViewModel<PropertyDetailViewModel>(),
-    propertyId: Int,
+    propertyId: Long,
     onCloseClicked: () -> Unit = {}
 ) {
     LaunchedEffect(propertyId) {

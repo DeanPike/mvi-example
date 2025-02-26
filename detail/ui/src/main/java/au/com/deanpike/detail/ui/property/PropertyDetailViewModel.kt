@@ -30,7 +30,7 @@ class PropertyDetailViewModel @Inject constructor(
         }
     }
 
-    private fun initialiseScreen(propertyId: Int) {
+    private fun initialiseScreen(propertyId: Long) {
         viewModelScope.launch(dispatcher.getIoDispatcher()) {
             when (val response = useCase.getPropertyDetails(propertyId)) {
                 is ResponseWrapper.Success -> {

@@ -10,8 +10,8 @@ import androidx.compose.material3.adaptive.navigation.rememberListDetailPaneScaf
 import androidx.compose.runtime.Composable
 import au.com.deanpike.detail.ui.project.ProjectDetailScreen
 import au.com.deanpike.detail.ui.property.PropertyDetailScreen
-import au.com.deanpike.mviexample.ui.util.customPaneScaffoldDirective
 import au.com.deanpike.listings.ui.list.ListingListScreen
+import au.com.deanpike.mviexample.ui.util.customPaneScaffoldDirective
 
 @OptIn(ExperimentalMaterial3AdaptiveApi::class)
 @Composable
@@ -68,7 +68,7 @@ fun ApplicationScreen() {
                     SelectedListingType.PROPERTY -> {
                         item.propertyId?.let { propertyId ->
                             PropertyDetailScreen(
-                                propertyId = propertyId.toInt(),
+                                propertyId = propertyId,
                                 onCloseClicked = {
                                     navigator.navigateBack()
                                 }
@@ -78,7 +78,7 @@ fun ApplicationScreen() {
                     SelectedListingType.PROJECT -> {
                         item.projectId?.let { projectId ->
                             ProjectDetailScreen(
-                                projectId = projectId.toInt(),
+                                projectId = projectId,
                                 onCloseClicked = {
                                     navigator.navigateBack()
                                 },
@@ -98,7 +98,7 @@ fun ApplicationScreen() {
                     SelectedListingType.PROJECT_CHILD -> {
                         item.propertyId?.let { propertyId ->
                             PropertyDetailScreen(
-                                propertyId = propertyId.toInt(),
+                                propertyId = propertyId,
                                 onCloseClicked = {
                                     navigator.navigateBack(BackNavigationBehavior.PopLatest)
                                 }

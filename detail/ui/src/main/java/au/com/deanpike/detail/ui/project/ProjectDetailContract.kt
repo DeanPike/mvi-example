@@ -8,13 +8,13 @@ import au.com.deanpike.uishared.base.UiState
 
 data class ProjectDetailScreenState(
     val screenState: ScreenStateType = ScreenStateType.INITIAL,
-    val projectId: Int? = null,
+    val projectId: Long? = null,
     val projectDetail: ProjectDetail? = null
 ) : UiState
 
 sealed class ProjectDetailScreenEvent : UiEvent {
     data class Initialise(
-        val projectId: Int
+        val projectId: Long
     ) : ProjectDetailScreenEvent()
 
     data object OnRetryClicked : ProjectDetailScreenEvent()

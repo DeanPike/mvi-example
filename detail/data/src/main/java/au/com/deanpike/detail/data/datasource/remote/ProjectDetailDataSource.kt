@@ -7,13 +7,13 @@ import au.com.deanpike.network.util.DataSourceBase
 import javax.inject.Inject
 
 internal interface ProjectDetailDataSource {
-    suspend fun getProjectDetails(id: Int): ResponseWrapper<ProjectDetail>
+    suspend fun getProjectDetails(id: Long): ResponseWrapper<ProjectDetail>
 }
 
 internal class ProjectDetailDataSourceImpl @Inject constructor(
     private val api: ProjectDetailApi
 ) : ProjectDetailDataSource, DataSourceBase() {
-    override suspend fun getProjectDetails(id: Int): ResponseWrapper<ProjectDetail> {
+    override suspend fun getProjectDetails(id: Long): ResponseWrapper<ProjectDetail> {
         return safeApiCall {
             api.getProjectDetails(
                 contentType = "application/json",

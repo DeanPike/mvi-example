@@ -28,7 +28,7 @@ class ProjectDetailRepositoryImplTest {
     @BeforeEach
     fun setupTest() {
         val fetcher = Fetcher.of<ListingKey, ListingDetail> { key ->
-            if (key.type == ListingCacheType.PROJECT && key.id == 1234) {
+            if (key.type == ListingCacheType.PROJECT && key.id == 1234L) {
                 getProjectDetail()
             } else {
                 throw Exception()

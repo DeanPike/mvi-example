@@ -27,7 +27,7 @@ class PropertyDetailRepositoryImplTest {
     @BeforeEach
     fun setupTest() {
         val fetcher = Fetcher.of<ListingKey, ListingDetail> { key ->
-            if (key.type == ListingCacheType.PROPERTY && key.id == 1234) {
+            if (key.type == ListingCacheType.PROPERTY && key.id == 1234L) {
                 getPropertyDetail()
             } else {
                 throw Exception()

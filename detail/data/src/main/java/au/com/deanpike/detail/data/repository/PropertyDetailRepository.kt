@@ -9,13 +9,13 @@ import javax.inject.Inject
 import org.mobilenativefoundation.store.store5.impl.extensions.get
 
 internal interface PropertyDetailRepository {
-    suspend fun getDetails(id: Int): ResponseWrapper<PropertyDetail>
+    suspend fun getDetails(id: Long): ResponseWrapper<PropertyDetail>
 }
 
 internal class PropertyDetailRepositoryImpl @Inject constructor(
     private val cache: ListingCache
 ) : PropertyDetailRepository {
-    override suspend fun getDetails(id: Int): ResponseWrapper<PropertyDetail> {
+    override suspend fun getDetails(id: Long): ResponseWrapper<PropertyDetail> {
         return try {
             val detail = cache.getStore().get(
                 ListingKey(

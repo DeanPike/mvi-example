@@ -8,13 +8,13 @@ import au.com.deanpike.uishared.base.UiState
 
 data class PropertyDetailScreenState(
     val screenState: ScreenStateType = ScreenStateType.INITIAL,
-    val propertyId: Int? = null,
+    val propertyId: Long? = null,
     val propertyDetail: PropertyDetail? = null
 ) : UiState
 
 sealed class PropertyDetailScreenEvent : UiEvent {
     data class Initialise(
-        val propertyId: Int
+        val propertyId: Long
     ) : PropertyDetailScreenEvent()
 
     data object OnRetryClicked : PropertyDetailScreenEvent()
