@@ -61,6 +61,7 @@ fun PropertyListItem(
                 modifier = Modifier
                     .fillMaxWidth()
                     .align(Alignment.TopCenter)
+                    .padding(bottom = DIM_16)
             ) {
                 AsyncImage(
                     modifier = Modifier

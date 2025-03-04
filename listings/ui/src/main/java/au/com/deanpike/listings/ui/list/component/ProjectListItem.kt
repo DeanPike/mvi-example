@@ -1,6 +1,5 @@
 package au.com.deanpike.listings.ui.list.component
 
-import au.com.deanpike.uishared.R as RShared
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -8,11 +7,13 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.togetherWith
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.defaultMinSize
@@ -20,6 +21,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
@@ -32,6 +35,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
@@ -41,7 +45,7 @@ import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.core.graphics.toColorInt
 import au.com.deanpike.commonshared.model.ListingDetails
 import au.com.deanpike.datashared.type.ListingType
 import au.com.deanpike.listings.client.model.listing.response.Project
@@ -55,11 +59,13 @@ import au.com.deanpike.listings.ui.list.component.ProjectListItemTesTags.PROJECT
 import au.com.deanpike.listings.ui.list.component.ProjectListItemTesTags.PROJECT_LIST_ITEM_IMAGE
 import au.com.deanpike.listings.ui.list.component.ProjectListItemTesTags.PROJECT_LIST_ITEM_LAYOUT
 import au.com.deanpike.listings.ui.list.component.ProjectListItemTesTags.PROJECT_LIST_ITEM_PROJECT_NAME
+import au.com.deanpike.uishared.R as RShared
 import au.com.deanpike.uishared.component.AgencyBannerComponent
-import au.com.deanpike.uishared.theme.Dimension
 import au.com.deanpike.uishared.theme.Dimension.DIM_16
 import au.com.deanpike.uishared.theme.Dimension.DIM_4
+import au.com.deanpike.uishared.theme.Dimension.DIM_8
 import au.com.deanpike.uishared.theme.MviExampleTheme
+import au.com.deanpike.uishared.theme.outlineLight
 import coil.compose.AsyncImage
 
 @Composable
@@ -75,7 +81,8 @@ fun ProjectListItem(
     var targetRotation by remember {
         mutableFloatStateOf(0F)
     }
-    val r = animateFloatAsState(
+
+    val rotation = animateFloatAsState(
         label = "Arrow animation",
         targetValue = targetRotation,
         animationSpec = tween(
@@ -87,159 +94,142 @@ fun ProjectListItem(
         targetRotation = if (expandList) 180F else 0F
     }
 
-    ConstraintLayout(
+    Card(
         modifier = Modifier
-            .background(color = MaterialTheme.colorScheme.background)
+            .padding(start = DIM_16, end = DIM_16, top = DIM_8, bottom = DIM_8)
             .fillMaxWidth()
             .clickable {
                 onProjectClicked(project.id)
             }
-            .padding(bottom = Dimension.DIM_8)
-            .testTag(PROJECT_LIST_ITEM_LAYOUT)
+            .testTag(PROJECT_LIST_ITEM_LAYOUT),
+        shape = RoundedCornerShape(DIM_8),
+        border = BorderStroke(width = 0.5.dp, color = outlineLight),
     ) {
-        val (imageRef, bannerRef, logoRowRef, projectNameRef, addressRef, projectCountRef, childrenMenuRef) = createRefs()
-
-        AsyncImage(
-            modifier = Modifier
-                .constrainAs(bannerRef) {
-                    start.linkTo(parent.start)
-                    top.linkTo(parent.top)
-                }
-                .fillMaxWidth()
-                .height(40.dp)
-                .background(
-                    color = if ((project.projectColour?.length ?: 0) == 7) {
-                        Color(android.graphics.Color.parseColor(project.projectColour))
-                    } else {
-                        MaterialTheme.colorScheme.background
-                    }
-                )
-                .testTag(PROJECT_LIST_ITEM_BANNER_IMAGE),
-            placeholder = painterResource(id = RShared.drawable.gallery_placeholder),
-            error = painterResource(id = RShared.drawable.gallery_placeholder),
-            model = project.bannerImage,
-            contentDescription = stringResource(id = R.string.project_banner_image_description),
-        )
-
-        AsyncImage(
-            modifier = Modifier
-                .constrainAs(imageRef) {
-                    start.linkTo(parent.start)
-                    top.linkTo(bannerRef.bottom)
-                }
-                .fillMaxWidth()
-                .defaultMinSize(minHeight = 240.dp)
-                .testTag(PROJECT_LIST_ITEM_IMAGE),
-            placeholder = painterResource(id = RShared.drawable.gallery_placeholder),
-            error = painterResource(id = RShared.drawable.gallery_placeholder),
-            model = project.listingImage,
-            contentDescription = stringResource(id = RShared.string.property_image_description)
-        )
-
-        AgencyBannerComponent(
-            modifier = Modifier
-                .constrainAs(logoRowRef) {
-                    start.linkTo(parent.start)
-                    top.linkTo(imageRef.bottom)
-                },
-            agencyColour = project.projectColour,
-            logo = project.logoImage
-        )
-
-        project.projectName?.let {
-            Text(
+        Box(modifier = Modifier.background(color = MaterialTheme.colorScheme.background)) {
+            Column(
                 modifier = Modifier
-                    .constrainAs(projectNameRef) {
-                        start.linkTo(parent.start)
-                        top.linkTo(logoRowRef.bottom)
-                    }
-                    .padding(start = DIM_16, end = DIM_16, top = Dimension.DIM_8)
-                    .testTag(PROJECT_LIST_ITEM_PROJECT_NAME),
-                text = it,
-                style = MaterialTheme.typography.titleMedium
-            )
-        }
-        Text(
-            modifier = Modifier
-                .constrainAs(addressRef) {
-                    start.linkTo(parent.start)
-                    top.linkTo(projectNameRef.bottom)
-                }
-                .padding(
-                    start = DIM_16,
-                    end = DIM_16,
-                    top = DIM_4,
-                    bottom = DIM_4
-                )
-                .testTag(PROJECT_LIST_ITEM_ADDRESS),
-            text = project.address,
-            style = MaterialTheme.typography.labelLarge
-        )
-        OutlinedButton(
-            modifier = Modifier
-                .constrainAs(projectCountRef) {
-                    start.linkTo(parent.start)
-                    top.linkTo(addressRef.bottom)
-                }
-                .fillMaxWidth()
-                .padding(start = DIM_16, end = DIM_16)
-                .testTag(PROJECT_LIST_ITEM_CHILD_BUTTON),
-            onClick = { expandList = !expandList }
-        ) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
+                    .fillMaxWidth()
+                    .align(Alignment.TopCenter)
+                    .padding(bottom = DIM_16)
             ) {
-                Icon(
+                AsyncImage(
                     modifier = Modifier
-                        .graphicsLayer {
-                            rotationZ = r.value
-                        },
-                    painter = painterResource(id = R.drawable.arrow_drop_down),
-                    contentDescription = ""
+                        .fillMaxWidth()
+                        .height(40.dp)
+                        .background(
+                            color = project.projectColour?.let {
+                                if (it.length == 7) {
+                                    Color(it.toColorInt())
+                                } else {
+                                    MaterialTheme.colorScheme.background
+                                }
+                            } ?: MaterialTheme.colorScheme.background
+                        )
+                        .testTag(PROJECT_LIST_ITEM_BANNER_IMAGE),
+                    placeholder = painterResource(id = RShared.drawable.gallery_placeholder),
+                    error = painterResource(id = RShared.drawable.gallery_placeholder),
+                    model = project.bannerImage,
+                    contentDescription = stringResource(id = R.string.project_banner_image_description),
                 )
+
+                AsyncImage(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .defaultMinSize(minHeight = 240.dp)
+                        .testTag(PROJECT_LIST_ITEM_IMAGE),
+                    placeholder = painterResource(id = RShared.drawable.gallery_placeholder),
+                    error = painterResource(id = RShared.drawable.gallery_placeholder),
+                    model = project.listingImage,
+                    contentDescription = stringResource(id = RShared.string.property_image_description)
+                )
+
+                AgencyBannerComponent(
+                    agencyColour = project.projectColour,
+                    logo = project.logoImage
+                )
+
                 Text(
-                    modifier = Modifier.testTag(PROJECT_LIST_ITEM_CHILD_COUNT),
-                    text = pluralStringResource(id = R.plurals.project_properties, project.properties.size, project.properties.size)
-                )
-                Icon(
                     modifier = Modifier
-                        .graphicsLayer {
-                            rotationZ = r.value * -1
-                        },
-                    painter = painterResource(id = R.drawable.arrow_drop_down),
-                    contentDescription = ""
+                        .padding(start = DIM_16, end = DIM_16, top = DIM_8)
+                        .testTag(PROJECT_LIST_ITEM_PROJECT_NAME),
+                    text = project.projectName ?: "",
+                    style = MaterialTheme.typography.titleMedium
                 )
-            }
-        }
-        AnimatedContent(
-            label = "project listings",
-            modifier = Modifier
-                .constrainAs(childrenMenuRef) {
-                    start.linkTo(parent.start)
-                    top.linkTo(projectCountRef.bottom)
-                }
-                .fillMaxWidth(),
-            targetState = expandList,
-            transitionSpec = {
-                fadeIn() + slideInVertically(animationSpec = tween(500),
-                    initialOffsetY = { fullHeight -> -fullHeight }) togetherWith
-                    fadeOut(animationSpec = tween(200))
-            }
-        ) {
-            if (it) {
-                Column(
+
+                Text(
+                    modifier = Modifier
+                        .padding(
+                            start = DIM_16,
+                            end = DIM_16,
+                            top = DIM_4,
+                            bottom = DIM_4
+                        )
+                        .testTag(PROJECT_LIST_ITEM_ADDRESS),
+                    text = project.address,
+                    style = MaterialTheme.typography.labelLarge
+                )
+
+                OutlinedButton(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(start = DIM_16, end = DIM_16)
-                        .scrollable(state = rememberScrollState(), orientation = Orientation.Vertical)
-                        .testTag(PROJECT_LIST_ITEM_CHILDREN)
+                        .testTag(PROJECT_LIST_ITEM_CHILD_BUTTON),
+                    onClick = { expandList = !expandList }
                 ) {
-                    project.properties.forEach { projectChild ->
-                        ProjectChildListItemComponent(
-                            projectChild = projectChild,
-                            onProjectChildClicked = onProjectChildClicked
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        Icon(
+                            modifier = Modifier
+                                .graphicsLayer {
+                                    rotationZ = rotation.value
+                                },
+                            painter = painterResource(id = R.drawable.arrow_drop_down),
+                            contentDescription = ""
                         )
+                        Text(
+                            modifier = Modifier.testTag(PROJECT_LIST_ITEM_CHILD_COUNT),
+                            text = pluralStringResource(id = R.plurals.project_properties, project.properties.size, project.properties.size)
+                        )
+                        Icon(
+                            modifier = Modifier
+                                .graphicsLayer {
+                                    rotationZ = rotation.value * -1
+                                },
+                            painter = painterResource(id = R.drawable.arrow_drop_down),
+                            contentDescription = ""
+                        )
+                    }
+                }
+
+                AnimatedContent(
+                    label = "project listings",
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    targetState = expandList,
+                    transitionSpec = {
+                        fadeIn() + slideInVertically(
+                            animationSpec = tween(500),
+                            initialOffsetY = { fullHeight -> -fullHeight }) togetherWith
+                            fadeOut(animationSpec = tween(200))
+                    }
+                ) {
+                    if (it) {
+                        Column(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(start = DIM_16, end = DIM_16)
+                                .scrollable(state = rememberScrollState(), orientation = Orientation.Vertical)
+                                .testTag(PROJECT_LIST_ITEM_CHILDREN)
+                        ) {
+                            project.properties.forEach { projectChild ->
+                                ProjectChildListItemComponent(
+                                    projectChild = projectChild,
+                                    onProjectChildClicked = onProjectChildClicked
+                                )
+                            }
+                        }
                     }
                 }
             }
