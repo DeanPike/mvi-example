@@ -1,6 +1,5 @@
 package au.com.deanpike.mviexample.ui.activity
 
-import androidx.activity.compose.BackHandler
 import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 import androidx.compose.material3.adaptive.layout.ListDetailPaneScaffold
@@ -8,6 +7,10 @@ import androidx.compose.material3.adaptive.layout.ListDetailPaneScaffoldRole
 import androidx.compose.material3.adaptive.navigation.BackNavigationBehavior
 import androidx.compose.material3.adaptive.navigation.rememberListDetailPaneScaffoldNavigator
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import au.com.deanpike.detail.ui.project.ProjectDetailScreen
 import au.com.deanpike.detail.ui.property.PropertyDetailScreen
 import au.com.deanpike.listings.ui.list.ListingListScreen
@@ -20,16 +23,16 @@ fun ApplicationScreen() {
         scaffoldDirective = customPaneScaffoldDirective(windowAdaptiveInfo = currentWindowAdaptiveInfo())
     )
 
-    BackHandler(navigator.canNavigateBack()) {
-        navigator.navigateBack()
+    var refreshStatusBar by remember {
+        mutableStateOf(false)
     }
-
     ListDetailPaneScaffold(
         directive = navigator.scaffoldDirective,
         value = navigator.scaffoldValue,
         listPane = {
             ListingListScreen(
                 isSinglePane = navigator.scaffoldDirective.maxHorizontalPartitions == 1,
+                refreshStatusBar = refreshStatusBar,
                 onPropertyClicked = { propertyId ->
                     navigator.navigateTo(
                         pane = ListDetailPaneScaffoldRole.Detail,
@@ -64,6 +67,7 @@ fun ApplicationScreen() {
         },
         detailPane = {
             navigator.currentDestination?.content?.let { item ->
+                refreshStatusBar = false
                 when (item.listingType) {
                     SelectedListingType.PROPERTY -> {
                         item.propertyId?.let { propertyId ->
@@ -71,6 +75,7 @@ fun ApplicationScreen() {
                                 propertyId = propertyId,
                                 onCloseClicked = {
                                     navigator.navigateBack()
+                                    refreshStatusBar = true
                                 }
                             )
                         }
@@ -81,6 +86,7 @@ fun ApplicationScreen() {
                                 projectId = projectId,
                                 onCloseClicked = {
                                     navigator.navigateBack()
+                                    refreshStatusBar = true
                                 },
                                 onProjectChildClicked = { propertyId ->
                                     navigator.navigateTo(
@@ -101,6 +107,7 @@ fun ApplicationScreen() {
                                 propertyId = propertyId,
                                 onCloseClicked = {
                                     navigator.navigateBack(BackNavigationBehavior.PopLatest)
+                                    refreshStatusBar = true
                                 }
                             )
                         }

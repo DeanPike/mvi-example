@@ -18,7 +18,9 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
@@ -52,6 +54,7 @@ import kotlinx.coroutines.launch
 fun ListingListScreen(
     viewModel: ListingListViewModel = hiltViewModel<ListingListViewModel>(),
     isSinglePane: Boolean = true,
+    refreshStatusBar: Boolean = false,
     onPropertyClicked: (Long) -> Unit = {},
     onProjectClicked: (Long) -> Unit = {},
     onProjectChildClicked: (Long, Long) -> Unit = { _, _ -> },
@@ -59,7 +62,11 @@ fun ListingListScreen(
     val lifecycleOwner = LocalLifecycleOwner.current
     val scope = rememberCoroutineScope()
 
-    SetStatusBarAppearance(useDarkIcons = true)
+    val refresh by rememberUpdatedState(refreshStatusBar)
+
+    if (refresh) {
+        SetStatusBarAppearance(useDarkIcons = true)
+    }
 
     DisposableEffect(lifecycleOwner) {
         val job = scope.launch {
