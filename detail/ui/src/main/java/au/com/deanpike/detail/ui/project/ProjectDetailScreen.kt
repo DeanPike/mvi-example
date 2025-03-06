@@ -64,6 +64,7 @@ import au.com.deanpike.uishared.util.SetStatusBarAppearance
 @Composable
 fun ProjectDetailScreen(
     viewModel: ProjectDetailViewModel = hiltViewModel<ProjectDetailViewModel>(),
+    isSinglePane: Boolean,
     projectId: Long,
     onCloseClicked: () -> Unit = {},
     onProjectChildClicked: (Long) -> Unit = {}
@@ -72,7 +73,9 @@ fun ProjectDetailScreen(
         viewModel.setEvent(ProjectDetailScreenEvent.Initialise(projectId = projectId))
     }
 
-    SetStatusBarAppearance(useDarkIcons = false)
+    if (isSinglePane) {
+        SetStatusBarAppearance(useDarkIcons = false)
+    }
 
     ProjectDetailScreenContent(
         state = viewModel.uiState,

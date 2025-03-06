@@ -1,5 +1,6 @@
 package au.com.deanpike.mviexample.ui.activity
 
+import android.os.Parcelable
 import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 import androidx.compose.material3.adaptive.layout.ListDetailPaneScaffold
@@ -7,6 +8,7 @@ import androidx.compose.material3.adaptive.layout.ListDetailPaneScaffoldRole
 import androidx.compose.material3.adaptive.navigation.BackNavigationBehavior
 import androidx.compose.material3.adaptive.navigation.rememberListDetailPaneScaffoldNavigator
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -15,6 +17,7 @@ import au.com.deanpike.detail.ui.project.ProjectDetailScreen
 import au.com.deanpike.detail.ui.property.PropertyDetailScreen
 import au.com.deanpike.listings.ui.list.ListingListScreen
 import au.com.deanpike.mviexample.ui.util.customPaneScaffoldDirective
+import kotlinx.parcelize.Parcelize
 
 @OptIn(ExperimentalMaterial3AdaptiveApi::class)
 @Composable
@@ -26,12 +29,20 @@ fun ApplicationScreen() {
     var refreshStatusBar by remember {
         mutableStateOf(false)
     }
+    var isSinglePane by remember {
+        mutableStateOf(true)
+    }
+
+    LaunchedEffect(navigator) {
+        isSinglePane = navigator.scaffoldDirective.maxHorizontalPartitions == 1
+    }
+
     ListDetailPaneScaffold(
         directive = navigator.scaffoldDirective,
         value = navigator.scaffoldValue,
         listPane = {
             ListingListScreen(
-                isSinglePane = navigator.scaffoldDirective.maxHorizontalPartitions == 1,
+                isSinglePane = isSinglePane,
                 refreshStatusBar = refreshStatusBar,
                 onPropertyClicked = { propertyId ->
                     navigator.navigateTo(
@@ -72,9 +83,12 @@ fun ApplicationScreen() {
                     SelectedListingType.PROPERTY -> {
                         item.propertyId?.let { propertyId ->
                             PropertyDetailScreen(
+                                isSinglePane = isSinglePane,
                                 propertyId = propertyId,
                                 onCloseClicked = {
-                                    navigator.navigateBack()
+                                    if (navigator.canNavigateBack()) {
+                                        navigator.navigateBack()
+                                    }
                                     refreshStatusBar = true
                                 }
                             )
@@ -83,9 +97,12 @@ fun ApplicationScreen() {
                     SelectedListingType.PROJECT -> {
                         item.projectId?.let { projectId ->
                             ProjectDetailScreen(
+                                isSinglePane = isSinglePane,
                                 projectId = projectId,
                                 onCloseClicked = {
-                                    navigator.navigateBack()
+                                    if (navigator.canNavigateBack()) {
+                                        navigator.navigateBack()
+                                    }
                                     refreshStatusBar = true
                                 },
                                 onProjectChildClicked = { propertyId ->
@@ -104,6 +121,7 @@ fun ApplicationScreen() {
                     SelectedListingType.PROJECT_CHILD -> {
                         item.propertyId?.let { propertyId ->
                             PropertyDetailScreen(
+                                isSinglePane = isSinglePane,
                                 propertyId = propertyId,
                                 onCloseClicked = {
                                     navigator.navigateBack(BackNavigationBehavior.PopLatest)
@@ -124,8 +142,9 @@ private enum class SelectedListingType {
     PROJECT_CHILD
 }
 
+@Parcelize
 private class SelectedItem(
     val projectId: Long? = null,
     val propertyId: Long? = null,
     val listingType: SelectedListingType
-)
+) : Parcelable

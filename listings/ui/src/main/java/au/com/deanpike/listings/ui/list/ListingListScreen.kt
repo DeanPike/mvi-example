@@ -87,14 +87,12 @@ fun ListingListScreen(
         }
         onDispose { job.cancel() }
     }
-    LaunchedEffect(Unit) {
-        if (viewModel.uiState.screenState == ScreenStateType.INITIAL) {
-            viewModel.setEvent(
-                ListingListScreenEvent.Initialise(
-                    isSinglePane = isSinglePane
-                )
+    LaunchedEffect(isSinglePane) {
+        viewModel.setEvent(
+            ListingListScreenEvent.Initialise(
+                isSinglePane = isSinglePane
             )
-        }
+        )
     }
     ListingListScreenContent(
         state = viewModel.uiState,

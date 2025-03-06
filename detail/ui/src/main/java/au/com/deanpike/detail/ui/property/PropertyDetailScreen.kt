@@ -60,6 +60,7 @@ import au.com.deanpike.uishared.util.SetStatusBarAppearance
 @Composable
 fun PropertyDetailScreen(
     viewModel: PropertyDetailViewModel = hiltViewModel<PropertyDetailViewModel>(),
+    isSinglePane: Boolean,
     propertyId: Long,
     onCloseClicked: () -> Unit = {}
 ) {
@@ -67,7 +68,9 @@ fun PropertyDetailScreen(
         viewModel.setEvent(PropertyDetailScreenEvent.Initialise(propertyId = propertyId))
     }
 
-    SetStatusBarAppearance(useDarkIcons = false)
+    if (isSinglePane) {
+        SetStatusBarAppearance(useDarkIcons = false)
+    }
 
     PropertyDetailScreenContent(
         state = viewModel.uiState,

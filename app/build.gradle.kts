@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.daggerHiltPlugin)
     alias(libs.plugins.ksp)
     alias(libs.plugins.compose.compiler)
+    id("kotlin-parcelize")
 }
 
 val compatibilityVersion = libs.versions.javaCompileVersion.get()
