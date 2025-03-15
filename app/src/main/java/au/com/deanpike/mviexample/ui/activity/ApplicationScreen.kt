@@ -1,8 +1,13 @@
 package au.com.deanpike.mviexample.ui.activity
 
 import android.os.Parcelable
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
+import androidx.compose.animation.slideIn
+import androidx.compose.animation.slideOut
 import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
+import androidx.compose.material3.adaptive.layout.AnimatedPane
 import androidx.compose.material3.adaptive.layout.ListDetailPaneScaffold
 import androidx.compose.material3.adaptive.layout.ListDetailPaneScaffoldRole
 import androidx.compose.material3.adaptive.navigation.BackNavigationBehavior
@@ -12,16 +17,20 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.unit.IntOffset
 import au.com.deanpike.detail.ui.project.ProjectDetailScreen
 import au.com.deanpike.detail.ui.property.PropertyDetailScreen
 import au.com.deanpike.listings.ui.list.ListingListScreen
 import au.com.deanpike.mviexample.ui.util.customPaneScaffoldDirective
+import kotlinx.coroutines.launch
 import kotlinx.parcelize.Parcelize
 
 @OptIn(ExperimentalMaterial3AdaptiveApi::class)
 @Composable
 fun ApplicationScreen() {
+    val scope = rememberCoroutineScope()
     val navigator = rememberListDetailPaneScaffoldNavigator<SelectedItem>(
         scaffoldDirective = customPaneScaffoldDirective(windowAdaptiveInfo = currentWindowAdaptiveInfo())
     )
@@ -41,93 +50,127 @@ fun ApplicationScreen() {
         directive = navigator.scaffoldDirective,
         value = navigator.scaffoldValue,
         listPane = {
-            ListingListScreen(
-                isSinglePane = isSinglePane,
-                refreshStatusBar = refreshStatusBar,
-                onPropertyClicked = { propertyId ->
-                    navigator.navigateTo(
-                        pane = ListDetailPaneScaffoldRole.Detail,
-                        content = SelectedItem(
-                            propertyId = propertyId,
-                            projectId = null,
-                            listingType = SelectedListingType.PROPERTY
-                        )
-                    )
-                },
-                onProjectClicked = { projectId ->
-                    navigator.navigateTo(
-                        pane = ListDetailPaneScaffoldRole.Detail,
-                        content = SelectedItem(
-                            projectId = projectId,
-                            propertyId = null,
-                            listingType = SelectedListingType.PROJECT
-                        )
-                    )
-                },
-                onProjectChildClicked = { projectId, projectChildId ->
-                    navigator.navigateTo(
-                        pane = ListDetailPaneScaffoldRole.Detail,
-                        content = SelectedItem(
-                            projectId = projectId,
-                            propertyId = projectChildId,
-                            listingType = SelectedListingType.PROJECT_CHILD
-                        )
-                    )
-                }
-            )
+            AnimatedPane(
+                enterTransition = slideInFromRight(),
+                exitTransition = slideOutToRight()
+            ) {
+                ListingListScreen(
+                    isSinglePane = isSinglePane,
+                    refreshStatusBar = refreshStatusBar,
+                    onPropertyClicked = { propertyId ->
+                        scope.launch {
+                            navigator.navigateTo(
+                                pane = ListDetailPaneScaffoldRole.Detail,
+                                contentKey = SelectedItem(
+                                    propertyId = propertyId,
+                                    projectId = null,
+                                    listingType = SelectedListingType.PROPERTY
+                                )
+                            )
+                        }
+                    },
+                    onProjectClicked = { projectId ->
+                        scope.launch {
+                            navigator.navigateTo(
+                                pane = ListDetailPaneScaffoldRole.Detail,
+                                contentKey = SelectedItem(
+                                    projectId = projectId,
+                                    propertyId = null,
+                                    listingType = SelectedListingType.PROJECT
+                                )
+                            )
+                        }
+                    },
+                    onProjectChildClicked = { projectId, projectChildId ->
+                        scope.launch {
+                            navigator.navigateTo(
+                                pane = ListDetailPaneScaffoldRole.Detail,
+                                contentKey = SelectedItem(
+                                    projectId = projectId,
+                                    propertyId = projectChildId,
+                                    listingType = SelectedListingType.PROJECT_CHILD
+                                )
+                            )
+                        }
+                    }
+                )
+            }
         },
         detailPane = {
-            navigator.currentDestination?.content?.let { item ->
+            navigator.currentDestination?.contentKey?.let { item ->
                 refreshStatusBar = false
                 when (item.listingType) {
                     SelectedListingType.PROPERTY -> {
                         item.propertyId?.let { propertyId ->
-                            PropertyDetailScreen(
-                                isSinglePane = isSinglePane,
-                                propertyId = propertyId,
-                                onCloseClicked = {
-                                    if (navigator.canNavigateBack()) {
-                                        navigator.navigateBack()
+                            AnimatedPane(
+                                enterTransition = slideInFromLeft(),
+                                exitTransition = slideOutToLeft()
+                            ) {
+                                PropertyDetailScreen(
+                                    isSinglePane = isSinglePane,
+                                    propertyId = propertyId,
+                                    onCloseClicked = {
+                                        if (navigator.canNavigateBack()) {
+                                            scope.launch {
+                                                navigator.navigateBack()
+                                            }
+                                        }
+                                        refreshStatusBar = true
                                     }
-                                    refreshStatusBar = true
-                                }
-                            )
+                                )
+                            }
                         }
                     }
                     SelectedListingType.PROJECT -> {
                         item.projectId?.let { projectId ->
-                            ProjectDetailScreen(
-                                isSinglePane = isSinglePane,
-                                projectId = projectId,
-                                onCloseClicked = {
-                                    if (navigator.canNavigateBack()) {
-                                        navigator.navigateBack()
+                            AnimatedPane(
+                                enterTransition = slideInFromLeft(),
+                                exitTransition = slideOutToLeft()
+                            ) {
+                                ProjectDetailScreen(
+                                    isSinglePane = isSinglePane,
+                                    projectId = projectId,
+                                    onCloseClicked = {
+                                        if (navigator.canNavigateBack()) {
+                                            scope.launch {
+                                                navigator.navigateBack()
+                                            }
+                                        }
+                                        refreshStatusBar = true
+                                    },
+                                    onProjectChildClicked = { propertyId ->
+                                        scope.launch {
+                                            navigator.navigateTo(
+                                                pane = ListDetailPaneScaffoldRole.Detail,
+                                                contentKey = SelectedItem(
+                                                    projectId = projectId,
+                                                    propertyId = propertyId,
+                                                    listingType = SelectedListingType.PROJECT_CHILD
+                                                )
+                                            )
+                                        }
                                     }
-                                    refreshStatusBar = true
-                                },
-                                onProjectChildClicked = { propertyId ->
-                                    navigator.navigateTo(
-                                        pane = ListDetailPaneScaffoldRole.Detail,
-                                        content = SelectedItem(
-                                            projectId = projectId,
-                                            propertyId = propertyId,
-                                            listingType = SelectedListingType.PROJECT_CHILD
-                                        )
-                                    )
-                                }
-                            )
+                                )
+                            }
                         }
                     }
                     SelectedListingType.PROJECT_CHILD -> {
                         item.propertyId?.let { propertyId ->
-                            PropertyDetailScreen(
-                                isSinglePane = isSinglePane,
-                                propertyId = propertyId,
-                                onCloseClicked = {
-                                    navigator.navigateBack(BackNavigationBehavior.PopLatest)
-                                    refreshStatusBar = true
-                                }
-                            )
+                            AnimatedPane(
+                                enterTransition = slideInFromLeft(),
+                                exitTransition = slideOutToLeft()
+                            ) {
+                                PropertyDetailScreen(
+                                    isSinglePane = isSinglePane,
+                                    propertyId = propertyId,
+                                    onCloseClicked = {
+                                        scope.launch {
+                                            navigator.navigateBack(BackNavigationBehavior.PopLatest)
+                                            refreshStatusBar = true
+                                        }
+                                    }
+                                )
+                            }
                         }
                     }
                 }
@@ -135,6 +178,31 @@ fun ApplicationScreen() {
         }
     )
 }
+
+fun slideInFromLeft(): EnterTransition {
+    return slideIn(initialOffset = { size ->
+        IntOffset(x = -size.width, y = 0)
+    })
+}
+
+fun slideInFromRight(): EnterTransition {
+    return slideIn(initialOffset = { size ->
+        IntOffset(x = size.width, y = 0)
+    })
+}
+
+fun slideOutToLeft(): ExitTransition {
+    return slideOut(targetOffset = { size ->
+        IntOffset(x = 0, y = 0)
+    })
+}
+
+fun slideOutToRight(): ExitTransition {
+    return slideOut(targetOffset = { size ->
+        IntOffset(x = 0, y = 0)
+    })
+}
+
 
 private enum class SelectedListingType {
     PROPERTY,
