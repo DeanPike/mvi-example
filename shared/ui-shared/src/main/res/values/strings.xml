@@ -7,6 +7,7 @@
     <string name="back">Back</string>
 
     <string name="property_image">Property image</string>
+    <string name="price">Price</string>
 
     <!-- Error -->
     <string name="error_title">Something went wrong</string>
