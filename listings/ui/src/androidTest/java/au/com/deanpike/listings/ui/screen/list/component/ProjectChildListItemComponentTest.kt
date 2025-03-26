@@ -6,14 +6,14 @@ import au.com.deanpike.listings.client.model.listing.response.ProjectChild
 import au.com.deanpike.listings.ui.framework.robot.ProjectChildListItemComponentRobot
 import au.com.deanpike.listings.ui.framework.robot.ProjectChildListItemComponentRobotInitData
 import au.com.deanpike.uitestshared.base.UiUnitTestBase
-import au.com.deanpike.uitestshared.robot.PropertyDetailComponentRobot
+import au.com.deanpike.uitestshared.robot.BedBathCarComponentRobot
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
 class ProjectChildListItemComponentTest : UiUnitTestBase() {
 
     private val childRobot = ProjectChildListItemComponentRobot(composeTestRule)
-    private val detailRobot = PropertyDetailComponentRobot(composeTestRule)
+    private val detailRobot = BedBathCarComponentRobot(composeTestRule)
 
     @Test
     fun should_show_project_child_list_item() {
@@ -45,6 +45,6 @@ class ProjectChildListItemComponentTest : UiUnitTestBase() {
             .assertLayoutDisplayed()
             .assertNumberOfBedrooms(5)
             .assertNumberOfBathrooms(3)
-            .assertNumberOfParkingSpaces(2)
+            .assertNumberOfCarSpaces(2)
     }
 }

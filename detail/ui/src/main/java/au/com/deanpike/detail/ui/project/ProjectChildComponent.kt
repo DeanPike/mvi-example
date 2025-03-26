@@ -26,7 +26,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import au.com.deanpike.commonshared.model.ListingDetails
 import au.com.deanpike.detail.client.model.detail.ProjectChild
 import au.com.deanpike.detail.ui.project.ProjectChildComponentTestTags.PROJECT_CHILD_IMAGE
 import au.com.deanpike.detail.ui.project.ProjectChildComponentTestTags.PROJECT_CHILD_LAYOUT
@@ -34,7 +33,7 @@ import au.com.deanpike.detail.ui.project.ProjectChildComponentTestTags.PROJECT_C
 import au.com.deanpike.detail.ui.project.ProjectChildComponentTestTags.PROJECT_CHILD_PRICE
 import au.com.deanpike.uishared.R
 import au.com.deanpike.uishared.base.listingIdTestTag
-import au.com.deanpike.uishared.component.PropertyDetailComponent
+import au.com.deanpike.uishared.component.BedBathCarComponent
 import au.com.deanpike.uishared.theme.Dimension.DIM_16
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
 import au.com.deanpike.uishared.theme.MviExampleTheme
@@ -48,7 +47,7 @@ fun ProjectChildComponent(
     onProjectChildClicked: (Long) -> Unit = {}
 ) {
     val density = LocalDensity.current
-    val width = with(density){(screenWidth * 0.9F).toDp()}
+    val width = with(density) { (screenWidth * 0.9F).toDp() }
     Card(
         modifier = Modifier.width(width),
         colors = CardDefaults.cardColors().copy(
@@ -56,15 +55,16 @@ fun ProjectChildComponent(
         ),
         border = BorderStroke(width = 1.dp, color = MaterialTheme.colorScheme.outline)
     ) {
-        Row(modifier = Modifier
-            .padding(DIM_16)
-            .clickable {
-                onProjectChildClicked(child.id)
-            }
-            .listingIdTestTag(
-                tag = PROJECT_CHILD_LAYOUT,
-                id = child.id
-            )
+        Row(
+            modifier = Modifier
+                .padding(DIM_16)
+                .clickable {
+                    onProjectChildClicked(child.id)
+                }
+                .listingIdTestTag(
+                    tag = PROJECT_CHILD_LAYOUT,
+                    id = child.id
+                )
         ) {
             child.propertyImage?.let {
                 AsyncImage(
@@ -84,15 +84,11 @@ fun ProjectChildComponent(
                 )
             }
             Column {
-                PropertyDetailComponent(
+                BedBathCarComponent(
                     modifier = Modifier.padding(start = DIM_8, end = DIM_8),
-                    details = ListingDetails(
-                        price = child.price,
-                        numberOfBedrooms = child.bedroomCount,
-                        numberOfBathrooms = child.bathroomCount,
-                        numberOfCarSpaces = child.carSpaceCount
-                    ),
-                    dwellingType = null
+                    bedrooms = child.bedroomCount,
+                    bathrooms = child.bathroomCount,
+                    carSpaces = child.carSpaceCount,
                 )
 
                 child.lifecycleStatus?.let {

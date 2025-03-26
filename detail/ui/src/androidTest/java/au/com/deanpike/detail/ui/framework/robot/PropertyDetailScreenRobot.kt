@@ -15,7 +15,6 @@ import au.com.deanpike.uishared.R
 import au.com.deanpike.uishared.component.DetailListItemTestTags.DETAIL_ITEM_BATHROOMS
 import au.com.deanpike.uishared.component.DetailListItemTestTags.DETAIL_ITEM_BEDROOMS
 import au.com.deanpike.uishared.component.DetailListItemTestTags.DETAIL_ITEM_CAR_SPACES
-import au.com.deanpike.uishared.component.DetailListItemTestTags.DETAIL_ITEM_DWELLING_TYPE
 import au.com.deanpike.uishared.theme.MviExampleTheme
 import au.com.deanpike.uitestshared.base.TestRobotBase
 import au.com.deanpike.uitestshared.base.TestRobotInitData
@@ -123,14 +122,6 @@ class PropertyDetailScreenRobot(private val composeRule: ComposeContentTestRule)
         detailItemRobot.assertItemCount(
             testTag = DETAIL_ITEM_CAR_SPACES,
             count = text
-        )
-        return this
-    }
-
-    fun assertDwellingDisplayed(dwellingType: String): PropertyDetailScreenRobot {
-        composeRule.assertTextDisplayed(
-            tag = DETAIL_ITEM_DWELLING_TYPE,
-            text = dwellingType
         )
         return this
     }

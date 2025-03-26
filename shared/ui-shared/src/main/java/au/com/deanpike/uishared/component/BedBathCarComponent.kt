@@ -4,38 +4,33 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
-import au.com.deanpike.commonshared.model.ListingDetails
 import au.com.deanpike.uishared.R
 import au.com.deanpike.uishared.component.DetailListItemTestTags.DETAIL_ITEM_BATHROOMS
 import au.com.deanpike.uishared.component.DetailListItemTestTags.DETAIL_ITEM_BEDROOMS
 import au.com.deanpike.uishared.component.DetailListItemTestTags.DETAIL_ITEM_CAR_SPACES
-import au.com.deanpike.uishared.component.DetailListItemTestTags.DETAIL_ITEM_DWELLING_TYPE
 import au.com.deanpike.uishared.component.DetailListItemTestTags.DETAIL_ITEM_GROUP
 import au.com.deanpike.uishared.theme.Dimension
-import au.com.deanpike.uishared.theme.Dimension.DIM_8
 import au.com.deanpike.uishared.theme.MviExampleTheme
 
 @Composable
-fun PropertyDetailComponent(
+fun BedBathCarComponent(
     modifier: Modifier = Modifier,
-    details: ListingDetails,
-    dwellingType: String?
+    bedrooms: Int? = null,
+    bathrooms: Int? = null,
+    carSpaces: Int? = null,
 ) {
     Column(modifier = modifier.fillMaxWidth()) {
         Row(
             modifier = Modifier.testTag(DETAIL_ITEM_GROUP),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            details.numberOfBedrooms?.let {
+            bedrooms?.let {
                 DetailItemComponent(
                     icon = R.drawable.baseline_bed_24,
                     text = "$it",
@@ -43,8 +38,8 @@ fun PropertyDetailComponent(
                     testTag = DETAIL_ITEM_BEDROOMS
                 )
             }
-            Spacer(modifier = Modifier.width(Dimension.DIM_16))
-            details.numberOfBathrooms?.let {
+            Spacer(modifier = Modifier.width(Dimension.DIM_24))
+            bathrooms?.let {
                 DetailItemComponent(
                     icon = R.drawable.baseline_bathtub_24,
                     text = "$it",
@@ -52,8 +47,8 @@ fun PropertyDetailComponent(
                     testTag = DETAIL_ITEM_BATHROOMS
                 )
             }
-            Spacer(modifier = Modifier.width(Dimension.DIM_16))
-            details.numberOfCarSpaces?.let {
+            Spacer(modifier = Modifier.width(Dimension.DIM_24))
+            carSpaces?.let {
                 DetailItemComponent(
                     icon = R.drawable.baseline_directions_car_24,
                     text = "$it",
@@ -61,18 +56,6 @@ fun PropertyDetailComponent(
                     testTag = DETAIL_ITEM_CAR_SPACES
                 )
             }
-        }
-        Row {
-            dwellingType?.let {
-                Text(
-                    modifier = Modifier
-                        .padding(top = DIM_8)
-                        .testTag(DETAIL_ITEM_DWELLING_TYPE),
-                    text = it,
-                    style = MaterialTheme.typography.bodyLarge
-                )
-            }
-
         }
     }
 }
@@ -83,21 +66,16 @@ object DetailListItemTestTags {
     const val DETAIL_ITEM_BEDROOMS = "${PREFIX}BEDROOMS"
     const val DETAIL_ITEM_BATHROOMS = "${PREFIX}BATHROOMS"
     const val DETAIL_ITEM_CAR_SPACES = "${PREFIX}CAR_SPACES"
-    const val DETAIL_ITEM_DWELLING_TYPE = "${PREFIX}DWELLING_TYPE"
 }
 
 @Preview(showBackground = true)
 @Composable
 fun DetailListItemComponentPreview() {
     MviExampleTheme {
-        PropertyDetailComponent(
-            details = ListingDetails(
-                price = "$1,000,500",
-                numberOfBedrooms = 4,
-                numberOfBathrooms = 3,
-                numberOfCarSpaces = 2
-            ),
-            dwellingType = "House"
+        BedBathCarComponent(
+            bedrooms = 4,
+            bathrooms = 3,
+            carSpaces = 2
         )
     }
 }

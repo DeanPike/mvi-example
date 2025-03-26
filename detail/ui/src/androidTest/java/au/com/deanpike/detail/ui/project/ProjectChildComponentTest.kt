@@ -4,13 +4,13 @@ import au.com.deanpike.detail.client.model.detail.ProjectChild
 import au.com.deanpike.detail.ui.framework.robot.ProjectChildComponentRobot
 import au.com.deanpike.detail.ui.framework.robot.ProjectChildComponentRobotInitData
 import au.com.deanpike.uitestshared.base.UiUnitTestBase
-import au.com.deanpike.uitestshared.robot.PropertyDetailComponentRobot
+import au.com.deanpike.uitestshared.robot.BedBathCarComponentRobot
 import org.junit.Test
 
 class ProjectChildComponentTest : UiUnitTestBase() {
 
     private val projectChildRobot = ProjectChildComponentRobot(composeTestRule)
-    private val detailRobot = PropertyDetailComponentRobot(composeTestRule)
+    private val detailRobot = BedBathCarComponentRobot(composeTestRule)
 
     @Test
     fun should_display_project_child() {
@@ -40,6 +40,6 @@ class ProjectChildComponentTest : UiUnitTestBase() {
         detailRobot
             .assertNumberOfBedrooms(3)
             .assertNumberOfBathrooms(2)
-            .assertNumberOfParkingSpaces(1)
+            .assertNumberOfCarSpaces(1)
     }
 }

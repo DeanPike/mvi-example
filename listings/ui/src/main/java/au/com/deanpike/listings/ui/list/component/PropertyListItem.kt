@@ -31,8 +31,8 @@ import au.com.deanpike.listings.ui.list.component.PropertyListItemTesTags.PROPER
 import au.com.deanpike.listings.ui.list.component.PropertyListItemTesTags.PROPERTY_LIST_ITEM_PROPERTY_IMAGE
 import au.com.deanpike.uishared.R as RShared
 import au.com.deanpike.uishared.component.AgencyBannerComponent
+import au.com.deanpike.uishared.component.BedBathCarComponent
 import au.com.deanpike.uishared.component.LifecycleStatusComponent
-import au.com.deanpike.uishared.component.PropertyDetailComponent
 import au.com.deanpike.uishared.theme.Dimension.DIM_16
 import au.com.deanpike.uishared.theme.Dimension.DIM_4
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
@@ -98,11 +98,12 @@ fun PropertyListItem(
                     style = MaterialTheme.typography.labelLarge
                 )
 
-                PropertyDetailComponent(
+                BedBathCarComponent(
                     modifier = Modifier
                         .padding(start = DIM_16, end = DIM_16, top = DIM_8),
-                    details = property.detail,
-                    dwellingType = property.dwellingType
+                    bedrooms = property.detail.numberOfBedrooms,
+                    bathrooms = property.detail.numberOfBathrooms,
+                    carSpaces = property.detail.numberOfCarSpaces
                 )
 
                 property.headLine?.let {

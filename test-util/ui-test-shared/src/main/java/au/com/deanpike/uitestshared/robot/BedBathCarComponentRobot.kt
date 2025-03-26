@@ -1,14 +1,12 @@
 package au.com.deanpike.uitestshared.robot
 
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
-import au.com.deanpike.commonshared.model.ListingDetails
 import au.com.deanpike.uishared.R
+import au.com.deanpike.uishared.component.BedBathCarComponent
 import au.com.deanpike.uishared.component.DetailListItemTestTags.DETAIL_ITEM_BATHROOMS
 import au.com.deanpike.uishared.component.DetailListItemTestTags.DETAIL_ITEM_BEDROOMS
 import au.com.deanpike.uishared.component.DetailListItemTestTags.DETAIL_ITEM_CAR_SPACES
-import au.com.deanpike.uishared.component.DetailListItemTestTags.DETAIL_ITEM_DWELLING_TYPE
 import au.com.deanpike.uishared.component.DetailListItemTestTags.DETAIL_ITEM_GROUP
-import au.com.deanpike.uishared.component.PropertyDetailComponent
 import au.com.deanpike.uishared.theme.MviExampleTheme
 import au.com.deanpike.uitestshared.base.TestRobotBase
 import au.com.deanpike.uitestshared.base.TestRobotInitData
@@ -17,36 +15,36 @@ import au.com.deanpike.uitestshared.util.assertTagDisplayed
 import au.com.deanpike.uitestshared.util.assertTagDoesNotExist
 import au.com.deanpike.uitestshared.util.assertTextDisplayed
 
-class PropertyDetailComponentRobot(private val composeRule: ComposeContentTestRule) : TestRobotBase<PropertyDetailComponentRobot, PropertyDetailComponentRobotInitData>(composeRule) {
-    override fun setupComponent(data: PropertyDetailComponentRobotInitData?): PropertyDetailComponentRobot {
+class BedBathCarComponentRobot(private val composeRule: ComposeContentTestRule) : TestRobotBase<BedBathCarComponentRobot, BedBathCarComponentRobotInitData>(composeRule) {
+    override fun setupComponent(data: BedBathCarComponentRobotInitData?): BedBathCarComponentRobot {
         composeRule.setContent {
             MviExampleTheme {
-                PropertyDetailComponent(
-                    details = data!!.details,
-                    dwellingType = data.dwellingType
-
+                BedBathCarComponent(
+                    bedrooms = data!!.bedrooms,
+                    bathrooms = data!!.bathrooms,
+                    carSpaces = data!!.carSpaces
                 )
             }
         }
         return this
     }
 
-    override fun assertLayoutDisplayed(): PropertyDetailComponentRobot {
+    override fun assertLayoutDisplayed(): BedBathCarComponentRobot {
         composeRule.assertTagDisplayed(DETAIL_ITEM_GROUP)
         return this
     }
 
-    fun assertBedroomsLayoutDisplayed(): PropertyDetailComponentRobot {
+    fun assertBedroomsLayoutDisplayed(): BedBathCarComponentRobot {
         composeRule.assertTagDisplayed(DETAIL_ITEM_BEDROOMS)
         return this
     }
 
-    fun assertBedroomLayoutNotDisplayed(): PropertyDetailComponentRobot {
+    fun assertBedroomLayoutNotDisplayed(): BedBathCarComponentRobot {
         composeRule.assertTagDoesNotExist(DETAIL_ITEM_BEDROOMS)
         return this
     }
 
-    fun assertNumberOfBedrooms(count: Int): PropertyDetailComponentRobot {
+    fun assertNumberOfBedrooms(count: Int): BedBathCarComponentRobot {
         composeRule.assertTextDisplayed(
             tag = "${DETAIL_ITEM_BEDROOMS}_TEXT",
             text = "$count"
@@ -58,17 +56,17 @@ class PropertyDetailComponentRobot(private val composeRule: ComposeContentTestRu
         return this
     }
 
-    fun assertBathroomsLayoutDisplayed(): PropertyDetailComponentRobot {
+    fun assertBathroomsLayoutDisplayed(): BedBathCarComponentRobot {
         composeRule.assertTagDisplayed(DETAIL_ITEM_BATHROOMS)
         return this
     }
 
-    fun assertBathroomLayoutNotDisplayed(): PropertyDetailComponentRobot {
+    fun assertBathroomLayoutNotDisplayed(): BedBathCarComponentRobot {
         composeRule.assertTagDoesNotExist(DETAIL_ITEM_BATHROOMS)
         return this
     }
 
-    fun assertNumberOfBathrooms(count: Int): PropertyDetailComponentRobot {
+    fun assertNumberOfBathrooms(count: Int): BedBathCarComponentRobot {
         composeRule.assertTextDisplayed(
             tag = "${DETAIL_ITEM_BATHROOMS}_TEXT",
             text = "$count"
@@ -81,17 +79,17 @@ class PropertyDetailComponentRobot(private val composeRule: ComposeContentTestRu
         return this
     }
 
-    fun assertParkingLayoutDisplayed(): PropertyDetailComponentRobot {
+    fun assertCarSpaceLayoutDisplayed(): BedBathCarComponentRobot {
         composeRule.assertTagDisplayed(DETAIL_ITEM_CAR_SPACES)
         return this
     }
 
-    fun assertParkingLayoutNotDisplayed(): PropertyDetailComponentRobot {
+    fun assertCarSpaceLayoutNotDisplayed(): BedBathCarComponentRobot {
         composeRule.assertTagDoesNotExist(DETAIL_ITEM_CAR_SPACES)
         return this
     }
 
-    fun assertNumberOfParkingSpaces(count: Int): PropertyDetailComponentRobot {
+    fun assertNumberOfCarSpaces(count: Int): BedBathCarComponentRobot {
         composeRule.assertTextDisplayed(
             tag = "${DETAIL_ITEM_CAR_SPACES}_TEXT",
             text = "$count"
@@ -103,22 +101,10 @@ class PropertyDetailComponentRobot(private val composeRule: ComposeContentTestRu
 
         return this
     }
-
-    fun assertDwellingTypeDisplayed(dwellingType: String): PropertyDetailComponentRobot {
-        composeRule.assertTextDisplayed(
-            tag = DETAIL_ITEM_DWELLING_TYPE,
-            text = dwellingType
-        )
-        return this
-    }
-
-    fun assertDwellingTypeNotDisplayed(): PropertyDetailComponentRobot {
-        composeRule.assertTagDoesNotExist(DETAIL_ITEM_DWELLING_TYPE)
-        return this
-    }
 }
 
-data class PropertyDetailComponentRobotInitData(
-    val details: ListingDetails,
-    val dwellingType: String?
+data class BedBathCarComponentRobotInitData(
+    val bedrooms: Int? = null,
+    val bathrooms: Int? = null,
+    val carSpaces: Int? = null
 ) : TestRobotInitData

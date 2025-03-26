@@ -27,7 +27,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
-import au.com.deanpike.commonshared.model.ListingDetails
 import au.com.deanpike.commonshared.model.Media
 import au.com.deanpike.commonshared.type.MediaType
 import au.com.deanpike.datashared.type.ListingType
@@ -48,10 +47,10 @@ import au.com.deanpike.detail.ui.shared.AgencyComponent
 import au.com.deanpike.uishared.base.ScreenStateType
 import au.com.deanpike.uishared.base.drawableTestTag
 import au.com.deanpike.uishared.component.AgencyBannerComponent
+import au.com.deanpike.uishared.component.BedBathCarComponent
 import au.com.deanpike.uishared.component.ErrorComponent
 import au.com.deanpike.uishared.component.ExpandableText
 import au.com.deanpike.uishared.component.ListingDetailImagesComponent
-import au.com.deanpike.uishared.component.PropertyDetailComponent
 import au.com.deanpike.uishared.theme.Dimension.DIM_16
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
 import au.com.deanpike.uishared.theme.MviExampleTheme
@@ -188,16 +187,11 @@ fun PropertyDetailSuccess(
                 style = MaterialTheme.typography.labelLarge
             )
         }
-        PropertyDetailComponent(
+        BedBathCarComponent(
             modifier = Modifier.padding(start = DIM_16, end = DIM_16),
-            details = ListingDetails(
-                price = null,
-                numberOfBedrooms = state.propertyDetail?.bedroomCount,
-                numberOfBathrooms = state.propertyDetail?.bathroomCount,
-                numberOfCarSpaces = state.propertyDetail?.carSpaceCount,
-            ),
-            dwellingType = state.propertyDetail?.dwellingType
-
+            bedrooms = state.propertyDetail?.bedroomCount,
+            bathrooms = state.propertyDetail?.bathroomCount,
+            carSpaces = state.propertyDetail?.carSpaceCount
         )
         HorizontalDivider(
             modifier = Modifier.padding(top = DIM_8, bottom = DIM_8)

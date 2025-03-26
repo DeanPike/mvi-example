@@ -23,7 +23,7 @@ import au.com.deanpike.listings.client.model.listing.response.ProjectChild
 import au.com.deanpike.listings.ui.list.component.ProjectChildListItemComponentTestTags.PROJECT_CHILD_LIST_ITEM_LAYOUT
 import au.com.deanpike.listings.ui.list.component.ProjectChildListItemComponentTestTags.PROJECT_CHILD_LIST_ITEM_LIFECYCLE
 import au.com.deanpike.listings.ui.list.component.ProjectChildListItemComponentTestTags.PROJECT_CHILD_LIST_ITEM_PRICE
-import au.com.deanpike.uishared.component.PropertyDetailComponent
+import au.com.deanpike.uishared.component.BedBathCarComponent
 import au.com.deanpike.uishared.theme.Dimension.DIM_16
 import au.com.deanpike.uishared.theme.Dimension.DIM_4
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
@@ -75,12 +75,13 @@ fun ProjectChildListItemComponent(
             }
         }
 
-        PropertyDetailComponent(
+        BedBathCarComponent(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = DIM_16, end = DIM_16, bottom = DIM_8),
-            details = projectChild.listingDetails,
-            dwellingType = null
+            bedrooms = projectChild.listingDetails.numberOfBedrooms,
+            bathrooms = projectChild.listingDetails.numberOfBathrooms,
+            carSpaces = projectChild.listingDetails.numberOfCarSpaces,
         )
     }
 }

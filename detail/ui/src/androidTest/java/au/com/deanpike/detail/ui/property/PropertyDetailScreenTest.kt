@@ -87,7 +87,6 @@ class PropertyDetailScreenTest : UiUnitTestBase() {
             .assertBedroomDisplayed("4")
             .assertBathroomDisplayed("3")
             .assertCarSpaceDisplayed("2")
-            .assertDwellingDisplayed("House")
             .assertHeadlineDisplayed("Neat Corner Block Home on 657sqm")
             .assertDescriptionDisplayed()
             .clickCloseIcon()

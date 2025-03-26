@@ -1,133 +1,102 @@
 package au.com.deanpike.uishared.component
 
-import au.com.deanpike.commonshared.model.ListingDetails
 import au.com.deanpike.uitestshared.base.UiUnitTestBase
-import au.com.deanpike.uitestshared.robot.PropertyDetailComponentRobot
-import au.com.deanpike.uitestshared.robot.PropertyDetailComponentRobotInitData
+import au.com.deanpike.uitestshared.robot.BedBathCarComponentRobot
+import au.com.deanpike.uitestshared.robot.BedBathCarComponentRobotInitData
 import org.junit.Test
 
 class PropertyDetailComponentTest : UiUnitTestBase() {
 
-    private val robot = PropertyDetailComponentRobot(composeTestRule)
+    private val robot = BedBathCarComponentRobot(composeTestRule)
 
     @Test
     fun check_that_property_details_are_displayed() {
         robot
             .setupComponent(
-                data = PropertyDetailComponentRobotInitData(
-                    details = ListingDetails(
-                        price = "$100,000",
-                        numberOfBedrooms = 5,
-                        numberOfBathrooms = 3,
-                        numberOfCarSpaces = 2
-                    ),
-                    dwellingType = "House"
+                data = BedBathCarComponentRobotInitData(
+                    bedrooms = 5,
+                    bathrooms = 3,
+                    carSpaces = 2,
                 )
             )
             .assertLayoutDisplayed()
             .assertNumberOfBedrooms(5)
             .assertNumberOfBathrooms(3)
-            .assertNumberOfParkingSpaces(2)
-            .assertDwellingTypeDisplayed("House")
+            .assertNumberOfCarSpaces(2)
     }
 
     @Test
     fun check_that_nothing_is_displayed_for_empty_values() {
         robot
             .setupComponent(
-                data = PropertyDetailComponentRobotInitData(
-                    details = ListingDetails(
-                        price = "100",
-                        numberOfBedrooms = null,
-                        numberOfBathrooms = null,
-                        numberOfCarSpaces = null
-                    ),
-                    dwellingType = null
+                data = BedBathCarComponentRobotInitData(
+                    bedrooms = null,
+                    bathrooms = null,
+                    carSpaces = null,
                 )
             )
             .assertBedroomLayoutNotDisplayed()
             .assertBathroomLayoutNotDisplayed()
-            .assertParkingLayoutNotDisplayed()
-            .assertDwellingTypeNotDisplayed()
+            .assertCarSpaceLayoutNotDisplayed()
     }
 
     @Test
     fun bedroom_should_not_display() {
         robot
             .setupComponent(
-                data = PropertyDetailComponentRobotInitData(
-                    details = ListingDetails(
-                        price = "100",
-                        numberOfBedrooms = null,
-                        numberOfBathrooms = 1,
-                        numberOfCarSpaces = 2
-                    ),
-                    dwellingType = "House"
+                data = BedBathCarComponentRobotInitData(
+                    bedrooms = null,
+                    bathrooms = 1,
+                    carSpaces = 2,
                 )
             )
             .assertBedroomLayoutNotDisplayed()
             .assertNumberOfBathrooms(1)
-            .assertNumberOfParkingSpaces(2)
-            .assertDwellingTypeDisplayed("House")
+            .assertNumberOfCarSpaces(2)
     }
 
     @Test
     fun bathroom_should_not_display() {
         robot
             .setupComponent(
-                data = PropertyDetailComponentRobotInitData(
-                    details = ListingDetails(
-                        price = "100",
-                        numberOfBedrooms = 1,
-                        numberOfBathrooms = null,
-                        numberOfCarSpaces = 2
-                    ),
-                    dwellingType = "House"
+                data = BedBathCarComponentRobotInitData(
+                    bedrooms = 1,
+                    bathrooms = null,
+                    carSpaces = 2,
                 )
             )
             .assertNumberOfBedrooms(1)
             .assertBathroomLayoutNotDisplayed()
-            .assertNumberOfParkingSpaces(2)
-            .assertDwellingTypeDisplayed("House")
+            .assertNumberOfCarSpaces(2)
     }
 
     @Test
     fun parking_should_not_display() {
         robot
             .setupComponent(
-                data = PropertyDetailComponentRobotInitData(
-                    details = ListingDetails(
-                        price = "100",
-                        numberOfBedrooms = 1,
-                        numberOfBathrooms = 2,
-                        numberOfCarSpaces = null
-                    ),
-                    dwellingType = "House"
+                data = BedBathCarComponentRobotInitData(
+                    bedrooms = 1,
+                    bathrooms = 2,
+                    carSpaces = null,
                 )
             )
             .assertNumberOfBedrooms(1)
             .assertNumberOfBathrooms(2)
-            .assertParkingLayoutNotDisplayed()
-            .assertDwellingTypeDisplayed("House")
+            .assertCarSpaceLayoutNotDisplayed()
     }
 
     @Test
     fun dwelling_type_should_not_display() {
         robot
             .setupComponent(
-                data = PropertyDetailComponentRobotInitData(
-                    details = ListingDetails(
-                        price = "100",
-                        numberOfBedrooms = 1,
-                        numberOfBathrooms = 2,
-                        numberOfCarSpaces = 3
-                    ),
-                    dwellingType = null
+                data = BedBathCarComponentRobotInitData(
+                    bedrooms = 1,
+                    bathrooms = 2,
+                    carSpaces = 3,
                 )
             )
             .assertNumberOfBedrooms(1)
             .assertNumberOfBathrooms(2)
-            .assertNumberOfParkingSpaces(3)
-            .assertDwellingTypeNotDisplayed()
+            .assertNumberOfCarSpaces(3)
     }
 }

@@ -12,9 +12,9 @@ import au.com.deanpike.uitestshared.base.UiE2ETestBase
 import au.com.deanpike.uitestshared.mockserver.HttpMethod
 import au.com.deanpike.uitestshared.mockserver.MockRequestHandler
 import au.com.deanpike.uitestshared.robot.AgencyBannerComponentRobot
+import au.com.deanpike.uitestshared.robot.BedBathCarComponentRobot
 import au.com.deanpike.uitestshared.robot.ErrorComponentRobot
 import au.com.deanpike.uitestshared.robot.LifecycleStatusComponentRobot
-import au.com.deanpike.uitestshared.robot.PropertyDetailComponentRobot
 import dagger.hilt.android.testing.HiltAndroidTest
 import java.net.HttpURLConnection
 import okhttp3.mockwebserver.MockResponse
@@ -31,7 +31,7 @@ class ListingListTest : UiE2ETestBase() {
 
     private val listingListScreenRobot = ListingListScreenRobot(composeTestRule)
     private val propertyRobot = PropertyListItemRobot(composeTestRule)
-    private val propertyDetailRobot = PropertyDetailComponentRobot(composeTestRule)
+    private val propertyDetailRobot = BedBathCarComponentRobot(composeTestRule)
     private val projectRobot = ProjectListItemRobot(composeTestRule)
     private val projectChildRobot = ProjectChildListItemComponentRobot(composeTestRule)
     private val errorRobot = ErrorComponentRobot(composeTestRule)
@@ -134,8 +134,6 @@ class ListingListTest : UiE2ETestBase() {
                     parentTag = LISTING_LIST,
                     position = 1
                 )
-
-            propertyDetailRobot.assertDwellingTypeDisplayed("House")
         }
     }
 
