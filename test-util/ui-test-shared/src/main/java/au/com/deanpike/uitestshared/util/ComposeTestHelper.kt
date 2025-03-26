@@ -14,8 +14,8 @@ fun ComposeContentTestRule.disableAnimations() {
 }
 
 fun ComposeContentTestRule.advanceTimeAndWait(delay: Long = 1000) {
-    mainClock.advanceTimeBy(delay)
-    waitForIdle()
+    this.mainClock.advanceTimeBy(delay)
+    this.waitForIdle()
 }
 
 fun ComposeContentTestRule.assertTextDisplayed(text: String) {
