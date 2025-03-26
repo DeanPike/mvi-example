@@ -91,7 +91,7 @@ class PropertyDetailScreenRobot(private val composeRule: ComposeContentTestRule)
     fun assertBedroomDisplayed(text: String): PropertyDetailScreenRobot {
         detailItemRobot.assertIconDisplayed(
             testTag = DETAIL_ITEM_BEDROOMS,
-            drawable = R.drawable.bed_outline,
+            drawable = R.drawable.baseline_bed_24,
             contentDescription = "Number of bedrooms"
         )
         detailItemRobot.assertItemCount(
@@ -104,7 +104,7 @@ class PropertyDetailScreenRobot(private val composeRule: ComposeContentTestRule)
     fun assertBathroomDisplayed(text: String): PropertyDetailScreenRobot {
         detailItemRobot.assertIconDisplayed(
             testTag = DETAIL_ITEM_BATHROOMS,
-            drawable = R.drawable.bath_outline,
+            drawable = R.drawable.baseline_bathtub_24,
             contentDescription = "Number of bathrooms"
         )
         detailItemRobot.assertItemCount(
@@ -117,7 +117,7 @@ class PropertyDetailScreenRobot(private val composeRule: ComposeContentTestRule)
     fun assertCarSpaceDisplayed(text: String): PropertyDetailScreenRobot {
         detailItemRobot.assertIconDisplayed(
             testTag = DETAIL_ITEM_CAR_SPACES,
-            drawable = R.drawable.car_outline,
+            drawable = R.drawable.baseline_directions_car_24,
             contentDescription = "Number of parking spaces"
         )
         detailItemRobot.assertItemCount(

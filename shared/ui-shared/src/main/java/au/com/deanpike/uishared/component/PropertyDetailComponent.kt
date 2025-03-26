@@ -37,7 +37,7 @@ fun PropertyDetailComponent(
         ) {
             details.numberOfBedrooms?.let {
                 DetailItemComponent(
-                    icon = R.drawable.bed_outline,
+                    icon = R.drawable.baseline_bed_24,
                     text = "$it",
                     description = R.string.number_of_bedrooms,
                     testTag = DETAIL_ITEM_BEDROOMS
@@ -46,7 +46,7 @@ fun PropertyDetailComponent(
             Spacer(modifier = Modifier.width(Dimension.DIM_16))
             details.numberOfBathrooms?.let {
                 DetailItemComponent(
-                    icon = R.drawable.bath_outline,
+                    icon = R.drawable.baseline_bathtub_24,
                     text = "$it",
                     description = R.string.number_of_bathrooms,
                     testTag = DETAIL_ITEM_BATHROOMS
@@ -55,7 +55,7 @@ fun PropertyDetailComponent(
             Spacer(modifier = Modifier.width(Dimension.DIM_16))
             details.numberOfCarSpaces?.let {
                 DetailItemComponent(
-                    icon = R.drawable.car_outline,
+                    icon = R.drawable.baseline_directions_car_24,
                     text = "$it",
                     description = R.string.number_of_parking_spaces,
                     testTag = DETAIL_ITEM_CAR_SPACES

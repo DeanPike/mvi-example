@@ -53,7 +53,7 @@ class PropertyDetailComponentRobot(private val composeRule: ComposeContentTestRu
         )
         composeRule.assertDrawableDisplayed(
             tag = "${DETAIL_ITEM_BEDROOMS}_ICON",
-            drawable = R.drawable.bed_outline
+            drawable = R.drawable.baseline_bed_24
         )
         return this
     }
@@ -75,7 +75,7 @@ class PropertyDetailComponentRobot(private val composeRule: ComposeContentTestRu
         )
         composeRule.assertDrawableDisplayed(
             tag = "${DETAIL_ITEM_BATHROOMS}_ICON",
-            drawable = R.drawable.bath_outline
+            drawable = R.drawable.baseline_bathtub_24
         )
 
         return this
@@ -98,7 +98,7 @@ class PropertyDetailComponentRobot(private val composeRule: ComposeContentTestRu
         )
         composeRule.assertDrawableDisplayed(
             tag = "${DETAIL_ITEM_CAR_SPACES}_ICON",
-            drawable = R.drawable.car_outline
+            drawable = R.drawable.baseline_directions_car_24
         )
 
         return this

@@ -18,7 +18,7 @@ class DetailItemComponentRobot(private val composeRule: ComposeContentTestRule) 
         composeRule.setContent {
             MviExampleTheme {
                 DetailItemComponent(
-                    icon = R.drawable.bed_outline,
+                    icon = R.drawable.baseline_bed_24,
                     text = "3",
                     description = R.string.number_of_bedrooms,
                     testTag = "DETAIL_ITEM_COMPONENT"

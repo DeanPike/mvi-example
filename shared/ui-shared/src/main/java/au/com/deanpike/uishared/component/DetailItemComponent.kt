@@ -50,7 +50,7 @@ fun DetailItemComponent(
 fun DetailItemComponentPreview() {
     MviExampleTheme {
         DetailItemComponent(
-            icon = R.drawable.bed_outline,
+            icon = R.drawable.baseline_bed_24,
             text = "Data",
             description = R.string.number_of_bedrooms,
             testTag = "TEST_TAG"

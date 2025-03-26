@@ -16,7 +16,7 @@ class DetailItemComponentTest : UiUnitTestBase() {
             .assertLayoutDisplayed()
             .assertIconDisplayed(
                 testTag = "DETAIL_ITEM_COMPONENT",
-                drawable = R.drawable.bed_outline,
+                drawable = R.drawable.baseline_bed_24,
                 contentDescription = "Number of bedrooms"
             )
             .assertItemCount(
