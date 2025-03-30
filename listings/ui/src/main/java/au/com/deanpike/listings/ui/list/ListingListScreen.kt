@@ -1,5 +1,6 @@
 package au.com.deanpike.listings.ui.list
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -23,6 +24,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.pluralStringResource
@@ -168,7 +170,7 @@ fun ListingListScreenContent(
 
         }
     ) { padding ->
-        if (state.screenState == ScreenStateType.SUCCESS) {
+        if (state.screenState != ScreenStateType.ERROR && state.screenState != ScreenStateType.INITIAL) {
             Column(
                 modifier = Modifier.padding(
                     start = padding.calculateStartPadding(layoutDirection),
@@ -244,17 +246,21 @@ fun ListingListScreenContent(
                     onRetryClicked = onRetryClicked
                 )
             }
-        } else if (state.screenState == ScreenStateType.LOADING || state.screenState == ScreenStateType.REFRESHING) {
+        } else {
+            // We need to have a composable or the scaffold will crash the app
+            Text(text = "")
+        }
+
+        if (state.screenState == ScreenStateType.LOADING || state.screenState == ScreenStateType.REFRESHING) {
             Box(
-                modifier = Modifier.fillMaxSize(),
-                contentAlignment = Alignment.Center
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(color = Color.Gray.copy(alpha = 0.2F)),
+                contentAlignment = Alignment.Center,
             ) {
                 CircularProgressIndicator(
                 )
             }
-        } else {
-            // We need to have a composable or the scaffold will crash the app
-            Text(text = "")
         }
     }
 }
