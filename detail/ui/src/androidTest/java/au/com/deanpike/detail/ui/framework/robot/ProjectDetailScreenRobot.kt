@@ -4,13 +4,10 @@ import androidx.compose.ui.test.assertTextContains
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.test.espresso.Espresso
-import au.com.deanpike.detail.ui.R
 import au.com.deanpike.detail.ui.project.ProjectChildrenComponentTestTags.PROJECT_CHILDREN
 import au.com.deanpike.detail.ui.project.ProjectDetailScreenContent
 import au.com.deanpike.detail.ui.project.ProjectDetailScreenState
 import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_DETAILS_LAYOUT
-import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_DETAIL_ADDRESS
-import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_DETAIL_CLOSE
 import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_DETAIL_DESCRIPTION
 import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_DETAIL_HEADLINE
 import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_DETAIL_LOADING_ADDRESS
@@ -22,11 +19,9 @@ import au.com.deanpike.uishared.theme.MviExampleTheme
 import au.com.deanpike.uitestshared.base.TestRobotBase
 import au.com.deanpike.uitestshared.base.TestRobotInitData
 import au.com.deanpike.uitestshared.util.advanceTimeAndWait
-import au.com.deanpike.uitestshared.util.assertDrawableDisplayed
 import au.com.deanpike.uitestshared.util.assertTagDisplayed
 import au.com.deanpike.uitestshared.util.assertTagDoesNotExist
 import au.com.deanpike.uitestshared.util.assertTextDisplayed
-import au.com.deanpike.uitestshared.util.clickOn
 import au.com.deanpike.uitestshared.util.scrollToItemPosition
 import au.com.deanpike.uitestshared.util.swipeUp
 import au.com.deanpike.uitestshared.util.waitUntilTagExists
@@ -100,26 +95,10 @@ class ProjectDetailScreenRobot(private val composeRule: ComposeContentTestRule) 
         return this
     }
 
-    fun assertCloseDisplayed(): ProjectDetailScreenRobot {
-        composeRule.assertDrawableDisplayed(
-            tag = PROJECT_DETAIL_CLOSE,
-            drawable = R.drawable.clear_24
-        )
-        return this
-    }
-
     fun assertProjectName(name: String): ProjectDetailScreenRobot {
         composeRule.assertTextDisplayed(
             tag = PROJECT_DETAIL_NAME,
             text = name
-        )
-        return this
-    }
-
-    fun assertProjectAddress(text: String): ProjectDetailScreenRobot {
-        composeRule.assertTextDisplayed(
-            tag = PROJECT_DETAIL_ADDRESS,
-            text = text
         )
         return this
     }
@@ -139,11 +118,6 @@ class ProjectDetailScreenRobot(private val composeRule: ComposeContentTestRule) 
                 value = description,
                 substring = true
             )
-        return this
-    }
-
-    fun clickOnClose(): ProjectDetailScreenRobot {
-        composeRule.clickOn(PROJECT_DETAIL_CLOSE)
         return this
     }
 

@@ -11,25 +11,24 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -46,8 +45,6 @@ import au.com.deanpike.detail.client.model.detail.ProjectDetail
 import au.com.deanpike.detail.client.model.type.PhoneNumberType
 import au.com.deanpike.detail.ui.R
 import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_DETAILS_LAYOUT
-import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_DETAIL_ADDRESS
-import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_DETAIL_CLOSE
 import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_DETAIL_DESCRIPTION
 import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_DETAIL_HEADLINE
 import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_DETAIL_LOADING_ADDRESS
@@ -57,11 +54,11 @@ import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_DET
 import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_LAYOUT
 import au.com.deanpike.detail.ui.shared.AgencyComponent
 import au.com.deanpike.uishared.base.ScreenStateType
-import au.com.deanpike.uishared.base.drawableTestTag
 import au.com.deanpike.uishared.component.AgencyBannerComponent
 import au.com.deanpike.uishared.component.ErrorComponent
 import au.com.deanpike.uishared.component.ExpandableText
-import au.com.deanpike.uishared.component.ListingDetailImagesComponent
+import au.com.deanpike.uishared.component.ListingImagesComponent
+import au.com.deanpike.uishared.component.ToolbarComponent
 import au.com.deanpike.uishared.theme.Dimension.DIM_16
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
 import au.com.deanpike.uishared.theme.MviExampleTheme
@@ -150,7 +147,8 @@ fun ProjectDetailScreenContent(
         } else if (state.screenState == ScreenStateType.SUCCESS) {
             ProjectDetailSuccess(
                 state = state,
-                onProjectChildClicked = onProjectChildClicked
+                onProjectChildClicked = onProjectChildClicked,
+                onBackClicked = onCloseClicked
             )
         } else if (state.screenState == ScreenStateType.ERROR) {
             Column(
@@ -164,133 +162,117 @@ fun ProjectDetailScreenContent(
             }
         }
     }
-
-    Box(
-        contentAlignment = Alignment.TopStart
-    ) {
-        IconButton(
-            onClick = { onCloseClicked() }) {
-            Icon(
-                modifier = Modifier
-                    .drawableTestTag(
-                        tag = PROJECT_DETAIL_CLOSE,
-                        id = R.drawable.clear_24
-                    )
-                    .background(color = MaterialTheme.colorScheme.background, shape = CircleShape),
-                painter = painterResource(id = R.drawable.clear_24),
-                contentDescription = stringResource(id = R.string.close)
-            )
-        }
-    }
 }
 
 @Composable
 fun ProjectDetailSuccess(
     state: ProjectDetailScreenState,
-    onProjectChildClicked: (Long) -> Unit = {}
+    onProjectChildClicked: (Long) -> Unit = {},
+    onBackClicked: () -> Unit = {}
 ) {
     val scrollState = rememberScrollState()
+    val scope = rememberCoroutineScope()
     var screenWidth by remember { mutableIntStateOf(0) }
 
-    LaunchedEffect(state.projectId) {
-        scrollState.scrollTo(0)
-    }
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .verticalScroll(scrollState)
-            .onGloballyPositioned { coordinates ->
-                screenWidth = coordinates.size.width
+    SetStatusBarAppearance(useDarkIcons = true)
+    Scaffold(
+        containerColor = Color.Transparent,
+        topBar = {
+            ToolbarComponent(
+                title = state.projectDetail?.address ?: "",
+                onBackClicked = onBackClicked
+            )
+        }
+    ) { innerPadding ->
+        Column(
+            modifier = Modifier
+                .padding(innerPadding)
+                .verticalScroll(scrollState)
+                .onGloballyPositioned { coordinates ->
+                    screenWidth = coordinates.size.width
+                }
+                .testTag(PROJECT_DETAILS_LAYOUT)
+        ) {
+            ListingImagesComponent(
+                screenState = state.screenState,
+                scope = scope,
+                media = state.projectDetail?.media ?: emptyList()
+            )
+
+            AgencyBannerComponent(
+                agencyColour = state.projectDetail?.advertiser?.preferredColorHex,
+                logo = state.projectDetail?.advertiser?.logoUrl
+            )
+
+            state.projectDetail?.projectName?.let {
+                Text(
+                    modifier = Modifier
+                        .padding(
+                            start = DIM_16,
+                            end = DIM_16,
+                            top = DIM_8
+                        )
+                        .testTag(PROJECT_DETAIL_NAME),
+                    text = it,
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.Bold
+                )
             }
-            .testTag(PROJECT_DETAILS_LAYOUT)
-    ) {
-        ListingDetailImagesComponent(
-            media = state.projectDetail?.media ?: emptyList()
-        )
-        AgencyBannerComponent(
-            agencyColour = state.projectDetail?.advertiser?.preferredColorHex,
-            logo = state.projectDetail?.advertiser?.logoUrl
-        )
-        state.projectDetail?.projectName?.let {
-            Text(
-                modifier = Modifier
-                    .padding(
-                        start = DIM_16,
-                        end = DIM_16,
-                        top = DIM_8
-                    )
-                    .testTag(PROJECT_DETAIL_NAME),
-                text = it,
-                style = MaterialTheme.typography.titleMedium,
-                fontWeight = FontWeight.Bold
-            )
-        }
-        state.projectDetail?.address?.let {
-            Text(
-                modifier = Modifier
-                    .padding(
-                        start = DIM_16,
-                        end = DIM_16,
-                        top = DIM_8
-                    )
-                    .testTag(PROJECT_DETAIL_ADDRESS),
-                text = it,
-                style = MaterialTheme.typography.labelLarge
-            )
-        }
-        HorizontalDivider(
-            modifier = Modifier.padding(top = DIM_8, bottom = DIM_8)
-        )
-        state.projectDetail?.headline?.let {
-            Text(
-                modifier = Modifier
-                    .padding(start = DIM_16, end = DIM_16, top = DIM_8)
-                    .testTag(PROJECT_DETAIL_HEADLINE),
-                text = it,
-                style = MaterialTheme.typography.bodyMedium,
-                fontWeight = FontWeight.Bold
-            )
-        }
-        state.projectDetail?.description?.let {
-            ExpandableText(
-                modifier = Modifier
-                    .padding(start = DIM_16, end = DIM_16, top = DIM_8, bottom = DIM_8)
-                    .testTag(PROJECT_DETAIL_DESCRIPTION),
-                text = it,
-                fontSize = MaterialTheme.typography.bodyMedium.fontSize,
-                collapsedMaxLine = 3
-            )
-        }
-        HorizontalDivider(
-            modifier = Modifier.padding(top = DIM_8, bottom = DIM_8)
-        )
 
-        state.projectDetail?.childListings?.let {
-            ProjectChildrenComponent(
-                childListings = it,
-                screenWidth = screenWidth,
-                onProjectChildClicked = onProjectChildClicked
+            HorizontalDivider(
+                modifier = Modifier.padding(top = DIM_8, bottom = DIM_8)
             )
-        }
 
-        HorizontalDivider(
-            modifier = Modifier.padding(top = DIM_8, bottom = DIM_8)
-        )
+            state.projectDetail?.headline?.let {
+                Text(
+                    modifier = Modifier
+                        .padding(start = DIM_16, end = DIM_16, top = DIM_8)
+                        .testTag(PROJECT_DETAIL_HEADLINE),
+                    text = it,
+                    style = MaterialTheme.typography.bodyMedium,
+                    fontWeight = FontWeight.Bold
+                )
+            }
+            state.projectDetail?.description?.let {
+                ExpandableText(
+                    modifier = Modifier
+                        .padding(start = DIM_16, end = DIM_16, top = DIM_8, bottom = DIM_8)
+                        .testTag(PROJECT_DETAIL_DESCRIPTION),
+                    text = it,
+                    fontSize = MaterialTheme.typography.bodyMedium.fontSize,
+                    collapsedMaxLine = 3
+                )
+            }
 
-        state.projectDetail?.advertiser?.let {
-            AgencyComponent(advertiser = it)
+            HorizontalDivider(
+                modifier = Modifier.padding(top = DIM_8, bottom = DIM_8)
+            )
+
+            state.projectDetail?.childListings?.let {
+                ProjectChildrenComponent(
+                    childListings = it,
+                    screenWidth = screenWidth,
+                    onProjectChildClicked = onProjectChildClicked
+                )
+            }
+
+            HorizontalDivider(
+                modifier = Modifier.padding(top = DIM_8, bottom = DIM_8)
+            )
+
+            state.projectDetail?.advertiser?.let {
+                AgencyComponent(advertiser = it)
+            }
         }
     }
 }
 
 object ProjectDetailScreenTestTags {
     private const val PREFIX = "PROJECT_DETAIL_"
-    const val PROJECT_DETAIL_CLOSE = "${PREFIX}CLOSE"
     const val PROJECT_LAYOUT = "${PREFIX}LAYOUT"
     const val PROJECT_DETAIL_PROGRESS = "${PREFIX}PROGRESS"
     const val PROJECT_DETAILS_LAYOUT = "${PREFIX}_DETAIL_LAYOUT"
     const val PROJECT_DETAIL_NAME = "${PREFIX}NAME"
-    const val PROJECT_DETAIL_ADDRESS = "${PREFIX}ADDRESS"
     const val PROJECT_DETAIL_HEADLINE = "${PREFIX}HEADLINE"
     const val PROJECT_DETAIL_DESCRIPTION = "${PREFIX}DESCRIPTION"
     const val PROJECT_DETAIL_LOADING_TITLE = "${PREFIX}LOADING_TITLE"

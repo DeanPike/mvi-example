@@ -88,7 +88,7 @@ class ApplicationScreenTest : UiE2ETestBase() {
                 .waitUntilScreenDisplayed()
                 .assertLayoutDisplayed()
                 .assertProjectName("Easterly Wollongong")
-                .clickOnClose()
+            toolbarRobot.clickBack()
             advanceTimeAndWait()
 
             setupListingResponse(

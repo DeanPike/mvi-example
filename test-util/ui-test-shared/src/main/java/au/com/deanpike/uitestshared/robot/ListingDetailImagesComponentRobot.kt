@@ -10,6 +10,7 @@ import au.com.deanpike.uishared.theme.MviExampleTheme
 import au.com.deanpike.uitestshared.base.TestRobotBase
 import au.com.deanpike.uitestshared.base.TestRobotInitData
 import au.com.deanpike.uitestshared.util.assertTagDisplayed
+import au.com.deanpike.uitestshared.util.assertTagDoesNotExist
 import au.com.deanpike.uitestshared.util.swipeLeft
 import au.com.deanpike.uitestshared.util.swipeRight
 
@@ -32,6 +33,11 @@ class ListingDetailImagesComponentRobot(private val composeRule: ComposeContentT
 
     fun assertImageIndicator(): ListingDetailImagesComponentRobot {
         composeRule.assertTagDisplayed(LISTING_DETAIL_IMAGES_POSITION_INDICATOR)
+        return this
+    }
+
+    fun assertImageIndicatorNotDisplayed(): ListingDetailImagesComponentRobot {
+        composeRule.assertTagDoesNotExist(LISTING_DETAIL_IMAGES_POSITION_INDICATOR)
         return this
     }
 

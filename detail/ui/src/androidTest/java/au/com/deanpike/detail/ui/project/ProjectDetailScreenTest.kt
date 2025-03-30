@@ -19,6 +19,7 @@ import au.com.deanpike.uitestshared.base.UiUnitTestBase
 import au.com.deanpike.uitestshared.robot.AgencyBannerComponentRobot
 import au.com.deanpike.uitestshared.robot.ErrorComponentRobot
 import au.com.deanpike.uitestshared.robot.ListingDetailImagesComponentRobot
+import au.com.deanpike.uitestshared.robot.ToolbarComponentRobot
 import au.com.deanpike.uitestshared.util.disableAnimations
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
@@ -31,6 +32,7 @@ class ProjectDetailScreenTest : UiUnitTestBase() {
     private val projectChildrenRobot = ProjectChildrenComponentRobot(composeTestRule)
     private val agencyRobot = AgencyComponentRobot(composeTestRule)
     private val agentRobot = AgentComponentRobot(composeTestRule)
+    private val toolbarRobot = ToolbarComponentRobot(composeTestRule)
 
     @Test
     fun should_display_project_details() {
@@ -46,17 +48,19 @@ class ProjectDetailScreenTest : UiUnitTestBase() {
             .scrollProjectChildToPosition(0)
             .assertLoadingScreenNotDisplayed()
             .assertDetailsLayoutDisplayed()
-            .assertCloseDisplayed()
             .assertProjectName("Easterly Wollongong")
-            .assertProjectAddress("13 Crown Street, Wollongong")
             .assertProjectHeadline("Easterly Wollongong Headline")
             .assertProjectDetailDescription("Introducing Easterly, a prestigious collection of 21 elegantly designed 2 & 3 bedroom residences")
+
+        toolbarRobot
+            .assertNavigationIconDisplayed()
+            .assertToolbarTitle("13 Crown Street, Wollongong")
 
         errorRobot.assertLayoutNotDisplayed()
 
         imageRobot
             .assertImage(position = 0)
-            .assertImageIndicator()
+            .assertImageIndicatorNotDisplayed()
 
         agencyBannerRobot
             .assertLayoutDisplayed()
@@ -89,7 +93,6 @@ class ProjectDetailScreenTest : UiUnitTestBase() {
         projectDetailRobot.swipeUp()
 
         agentRobot
-            .assertLayoutDisplayed()
             .assertAgentName(
                 name = "Riccardo Romolo",
                 position = 0
@@ -112,7 +115,7 @@ class ProjectDetailScreenTest : UiUnitTestBase() {
                 position = 0
             )
 
-        projectDetailRobot.clickOnClose()
+        toolbarRobot.clickBack()
 
         assertThat(projectDetailRobot.closeClicked).isTrue()
 

@@ -162,6 +162,8 @@ fun ListingImagesComponent(
                 model = ImageRequest.Builder(LocalContext.current)
                     .data(media[page].url)
                     .crossfade(true)
+                    .error(R.drawable.gallery_placeholder)
+                    .placeholder(R.drawable.gallery_placeholder)
                     .build(),
                 placeholder = painterResource(id = R.drawable.gallery_placeholder),
                 fallback = painterResource(id = R.drawable.gallery_placeholder),
@@ -179,7 +181,7 @@ fun ListingImagesComponent(
                 .background(color = MaterialTheme.colorScheme.outline.copy(alpha = 0.5F))
                 .testTag(LISTING_DETAIL_IMAGES_IMAGE_COUNT),
             color = MaterialTheme.colorScheme.surface,
-            text = "${pagerState.currentPage + 1} of ${media.count()}",
+            text = if (media.count() != 0) "${pagerState.currentPage + 1} of ${media.count()}" else "",
         )
 
         if (pagerState.currentPage > 0) {

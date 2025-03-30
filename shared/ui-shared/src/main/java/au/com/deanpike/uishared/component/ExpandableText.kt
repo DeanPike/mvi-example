@@ -52,7 +52,8 @@ fun ExpandableText(
     showLessText: String = " Show Less",
     showLessStyle: SpanStyle = showMoreStyle,
     textAlign: TextAlign? = null,
-    fontSize: TextUnit
+    fontSize: TextUnit,
+    minimumTextLength: Int = 500
 ) {
     // State variables to track the expanded state, clickable state, and last character index.
     var isExpanded by remember { mutableStateOf(false) }
@@ -60,11 +61,12 @@ fun ExpandableText(
     var lastCharIndex by remember { mutableStateOf(0) }
 
     // Box composable containing the Text composable.
-    Box(modifier = Modifier
-        .clickable(clickable) {
-            isExpanded = !isExpanded
-        }
-        .then(modifier)
+    Box(
+        modifier = Modifier
+            .clickable(clickable) {
+                isExpanded = !isExpanded
+            }
+            .then(modifier)
     ) {
         // Text composable with buildAnnotatedString to handle "Show More" and "Show Less" buttons.
         Text(
@@ -79,11 +81,15 @@ fun ExpandableText(
                         withStyle(style = showLessStyle) { append(showLessText) }
                     } else {
                         // Display truncated text and "Show More" button when collapsed.
-                        val adjustText = text.substring(startIndex = 0, endIndex = lastCharIndex)
-                            .dropLast(showMoreText.length)
-                            .dropLastWhile { Character.isWhitespace(it) || it == '.' }
-                        append(adjustText)
-                        withStyle(style = showMoreStyle) { append(showMoreText) }
+                        if (text.length > minimumTextLength) {
+                            val adjustText = text.substring(startIndex = 0, endIndex = lastCharIndex)
+                                .dropLast(showMoreText.length)
+                                .dropLastWhile { Character.isWhitespace(it) || it == '.' }
+                            append(adjustText)
+                            withStyle(style = showMoreStyle) { append(showMoreText) }
+                        } else {
+                            append(text)
+                        }
                     }
                 } else {
                     // Display the full text when not clickable.
