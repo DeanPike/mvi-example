@@ -17,6 +17,8 @@ import au.com.deanpike.uitestshared.base.UiUnitTestBase
 import au.com.deanpike.uitestshared.robot.AgencyBannerComponentRobot
 import au.com.deanpike.uitestshared.robot.ErrorComponentRobot
 import au.com.deanpike.uitestshared.robot.ListingDetailImagesComponentRobot
+import au.com.deanpike.uitestshared.robot.PriceComponentRobot
+import au.com.deanpike.uitestshared.robot.ToolbarComponentRobot
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
@@ -28,6 +30,8 @@ class PropertyDetailScreenTest : UiUnitTestBase() {
     private val agencyBannerRobot = AgencyBannerComponentRobot(composeTestRule)
     private val agencyRobot = AgencyComponentRobot(composeTestRule)
     private val agentRobot = AgentComponentRobot(composeTestRule)
+    private val priceRobot = PriceComponentRobot(composeTestRule)
+    private val toolbarRobot = ToolbarComponentRobot(composeTestRule)
 
     @Test
     fun should_display_progress() {
@@ -81,15 +85,18 @@ class PropertyDetailScreenTest : UiUnitTestBase() {
             )
             .assertLayoutDisplayed()
             .assertProgressNotDisplayed()
-            .assertCloseIconDisplayed()
-            .assertPriceDisplayed("$1,000,000")
-            .assertAddressDisplayed("2 Glenton Street, Abbotsbury")
             .assertBedroomDisplayed("4")
             .assertBathroomDisplayed("3")
             .assertCarSpaceDisplayed("2")
             .assertHeadlineDisplayed("Neat Corner Block Home on 657sqm")
             .assertDescriptionDisplayed()
-            .clickCloseIcon()
+
+        priceRobot.assertPriceDataDisplayed("$1,000,000")
+
+        toolbarRobot
+            .assertNavigationIconDisplayed()
+            .assertToolbarTitle("2 Glenton Street, Abbotsbury")
+            .clickBack()
 
         assertThat(propertyDetailRobot.closeClicked).isTrue()
 

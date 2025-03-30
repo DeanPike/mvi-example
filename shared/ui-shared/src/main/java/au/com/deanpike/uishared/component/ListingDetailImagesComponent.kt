@@ -1,6 +1,7 @@
 package au.com.deanpike.uishared.component
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.snapping.SnapPosition
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -10,13 +11,21 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.PageSize
+import androidx.compose.foundation.pager.PagerDefaults
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
@@ -24,16 +33,26 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.util.lerp
 import au.com.deanpike.commonshared.model.Media
 import au.com.deanpike.commonshared.type.MediaType
 import au.com.deanpike.uishared.R
+import au.com.deanpike.uishared.base.ScreenStateType
+import au.com.deanpike.uishared.base.drawableTestTag
 import au.com.deanpike.uishared.component.ListingDetailImagesTestTags.LISTING_DETAIL_IMAGES_IMAGE
+import au.com.deanpike.uishared.component.ListingDetailImagesTestTags.LISTING_DETAIL_IMAGES_IMAGE_COUNT
+import au.com.deanpike.uishared.component.ListingDetailImagesTestTags.LISTING_DETAIL_IMAGES_NEXT_IMAGE
 import au.com.deanpike.uishared.component.ListingDetailImagesTestTags.LISTING_DETAIL_IMAGES_PAGER
 import au.com.deanpike.uishared.component.ListingDetailImagesTestTags.LISTING_DETAIL_IMAGES_POSITION_INDICATOR
+import au.com.deanpike.uishared.component.ListingDetailImagesTestTags.LISTING_DETAIL_IMAGES_PREVIOUS_IMAGE
 import au.com.deanpike.uishared.theme.Dimension.DIM_16
+import au.com.deanpike.uishared.theme.Dimension.DIM_8
 import au.com.deanpike.uishared.theme.MviExampleTheme
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
+import kotlin.math.absoluteValue
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
 @Composable
 fun ListingDetailImagesComponent(media: List<Media>) {
@@ -91,11 +110,136 @@ fun ListingDetailImagesComponent(media: List<Media>) {
     }
 }
 
+@Composable
+fun ListingImagesComponent(
+    screenState: ScreenStateType,
+    scope: CoroutineScope,
+    media: List<Media>
+) {
+    val pagerState = rememberPagerState(initialPage = 0, pageCount = { media.count() })
+
+    LaunchedEffect(key1 = screenState) {
+        if (screenState == ScreenStateType.LOADING || screenState == ScreenStateType.REFRESHING) {
+            pagerState.scrollToPage(0)
+        }
+    }
+
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(300.dp)
+    ) {
+        HorizontalPager(
+            modifier = Modifier
+                .align(Alignment.Center)
+                .testTag(LISTING_DETAIL_IMAGES_PAGER),
+            state = pagerState,
+            pageSize = PageSize.Fill,
+            pageSpacing = 4.dp,
+            beyondViewportPageCount = 2,
+            snapPosition = SnapPosition.Center,
+            flingBehavior = PagerDefaults.flingBehavior(state = pagerState)
+        ) { page ->
+            AsyncImage(
+                modifier = Modifier
+                    .graphicsLayer {
+                        // Calculate the absolute offset for the current page from the
+                        // scroll position. We use the absolute value which allows us to mirror
+                        // any effects for both directions
+                        val pageOffset = (
+                            (pagerState.currentPage - page) + pagerState
+                                .currentPageOffsetFraction
+                            ).absoluteValue
+
+                        // We animate the alpha, between 50% and 100%
+                        alpha = lerp(
+                            start = 0.5f,
+                            stop = 1f,
+                            fraction = 1f - pageOffset.coerceIn(0f, 1f)
+                        )
+                    }
+                    .testTag("${LISTING_DETAIL_IMAGES_IMAGE}_${page}"),
+                model = ImageRequest.Builder(LocalContext.current)
+                    .data(media[page].url)
+                    .crossfade(true)
+                    .build(),
+                placeholder = painterResource(id = R.drawable.gallery_placeholder),
+                fallback = painterResource(id = R.drawable.gallery_placeholder),
+                error = painterResource(id = R.drawable.gallery_placeholder),
+                contentScale = ContentScale.Crop,
+                contentDescription = stringResource(id = R.string.property_image),
+                alignment = Alignment.Center
+            )
+        }
+
+        Text(
+            modifier = Modifier
+                .align(alignment = Alignment.BottomCenter)
+                .padding(DIM_8)
+                .background(color = MaterialTheme.colorScheme.outline.copy(alpha = 0.5F))
+                .testTag(LISTING_DETAIL_IMAGES_IMAGE_COUNT),
+            color = MaterialTheme.colorScheme.surface,
+            text = "${pagerState.currentPage + 1} of ${media.count()}",
+        )
+
+        if (pagerState.currentPage > 0) {
+            IconButton(
+                modifier = Modifier
+                    .align(Alignment.CenterStart)
+                    .padding(start = DIM_16)
+                    .background(color = MaterialTheme.colorScheme.outline.copy(alpha = 0.5F), shape = CircleShape),
+                onClick = {
+                    scope.launch {
+                        pagerState.scrollToPage(pagerState.currentPage - 1)
+                    }
+                }
+            ) {
+                Icon(
+                    modifier = Modifier.drawableTestTag(
+                        tag = LISTING_DETAIL_IMAGES_PREVIOUS_IMAGE,
+                        id = R.drawable.chevron_left_24
+                    ),
+                    painter = painterResource(id = R.drawable.chevron_left_24),
+                    contentDescription = "Previous image",
+                    tint = MaterialTheme.colorScheme.surface
+                )
+            }
+        }
+
+        if (pagerState.currentPage < media.count() - 1) {
+            IconButton(
+                modifier = Modifier
+                    .align(Alignment.CenterEnd)
+                    .padding(end = DIM_16)
+                    .background(color = MaterialTheme.colorScheme.outline.copy(alpha = 0.5F), shape = CircleShape),
+                onClick = {
+                    scope.launch {
+                        pagerState.scrollToPage(pagerState.currentPage + 1)
+                    }
+                }
+            ) {
+                Icon(
+                    modifier = Modifier.drawableTestTag(
+                        tag = LISTING_DETAIL_IMAGES_NEXT_IMAGE,
+                        id = R.drawable.chevron_right_24
+                    ),
+                    painter = painterResource(id = R.drawable.chevron_right_24),
+                    contentDescription = "Next image",
+                    tint = MaterialTheme.colorScheme.surface
+                )
+            }
+        }
+    }
+}
+
 object ListingDetailImagesTestTags {
     private const val PREFIX = "LISTING_DETAIL_IMAGES_"
     const val LISTING_DETAIL_IMAGES_PAGER = "${PREFIX}PAGER"
     const val LISTING_DETAIL_IMAGES_IMAGE = "${PREFIX}IMAGE"
     const val LISTING_DETAIL_IMAGES_POSITION_INDICATOR = "${PREFIX}POSITION_INDICATOR"
+    const val LISTING_DETAIL_IMAGES_IMAGE_COUNT = "${PREFIX}IMAGE_COUNT"
+    const val LISTING_DETAIL_IMAGES_PREVIOUS_IMAGE = "${PREFIX}PREVIOUS_IMAGE"
+    const val LISTING_DETAIL_IMAGES_NEXT_IMAGE = "${PREFIX}NEXT_IMAGE"
 }
 
 @Preview

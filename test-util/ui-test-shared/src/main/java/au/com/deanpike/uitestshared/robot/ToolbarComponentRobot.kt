@@ -12,6 +12,7 @@ import au.com.deanpike.uitestshared.base.TestRobotInitData
 import au.com.deanpike.uitestshared.util.assertDrawableDisplayed
 import au.com.deanpike.uitestshared.util.assertTagDisplayed
 import au.com.deanpike.uitestshared.util.assertTextDisplayed
+import au.com.deanpike.uitestshared.util.clickOn
 
 class ToolbarComponentRobot(private val composeRule: ComposeContentTestRule) : TestRobotBase<ToolbarComponentRobot, ToolbarComponentRobotInitData>(composeRule) {
     override fun setupComponent(data: ToolbarComponentRobotInitData?): ToolbarComponentRobot {
@@ -37,6 +38,11 @@ class ToolbarComponentRobot(private val composeRule: ComposeContentTestRule) : T
 
     fun assertToolbarTitle(title: String): ToolbarComponentRobot {
         composeRule.assertTextDisplayed(tag = TOOLBAR_TITLE, text = title)
+        return this
+    }
+
+    fun clickBack(): ToolbarComponentRobot {
+        composeRule.clickOn(TOOLBAR_ICON)
         return this
     }
 }

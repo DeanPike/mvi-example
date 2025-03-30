@@ -25,4 +25,15 @@ class ToolbarComponentTest : UiUnitTestBase() {
             .assertNavigationIconDisplayed()
             .assertToolbarTitle("Toolbar Title")
     }
+
+    @Test
+    fun should_show_long_title(){
+        robot
+            .setupComponent(
+                data = ToolbarComponentRobotInitData(title = "Toolbar Title that is very long to make sure that the data can be displayed over two lines")
+            )
+            .assertLayoutDisplayed()
+            .assertNavigationIconDisplayed()
+            .assertToolbarTitle("Toolbar Title that is very long to make sure that the data can be displayed over two lines")
+    }
 }

@@ -9,21 +9,19 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -35,22 +33,19 @@ import au.com.deanpike.detail.client.model.detail.Agent
 import au.com.deanpike.detail.client.model.detail.PhoneNumber
 import au.com.deanpike.detail.client.model.detail.PropertyDetail
 import au.com.deanpike.detail.client.model.type.PhoneNumberType
-import au.com.deanpike.detail.ui.R
 import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAILS_LAYOUT
-import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAIL_ADDRESS
-import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAIL_CLOSE
 import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAIL_DESCRIPTION
 import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAIL_HEADLINE
-import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAIL_PRICE
 import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAIL_PROGRESS
 import au.com.deanpike.detail.ui.shared.AgencyComponent
 import au.com.deanpike.uishared.base.ScreenStateType
-import au.com.deanpike.uishared.base.drawableTestTag
 import au.com.deanpike.uishared.component.AgencyBannerComponent
 import au.com.deanpike.uishared.component.BedBathCarComponent
 import au.com.deanpike.uishared.component.ErrorComponent
 import au.com.deanpike.uishared.component.ExpandableText
-import au.com.deanpike.uishared.component.ListingDetailImagesComponent
+import au.com.deanpike.uishared.component.ListingImagesComponent
+import au.com.deanpike.uishared.component.PriceComponent
+import au.com.deanpike.uishared.component.ToolbarComponent
 import au.com.deanpike.uishared.theme.Dimension.DIM_16
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
 import au.com.deanpike.uishared.theme.MviExampleTheme
@@ -108,7 +103,8 @@ fun PropertyDetailScreenContent(
             }
         } else if (state.screenState == ScreenStateType.SUCCESS) {
             PropertyDetailSuccess(
-                state = state
+                state = state,
+                onBackClicked = onCloseClicked
             )
         } else if (state.screenState == ScreenStateType.ERROR) {
             Column(
@@ -122,107 +118,87 @@ fun PropertyDetailScreenContent(
             }
         }
     }
-
-    Box(
-        contentAlignment = Alignment.TopStart
-    ) {
-        IconButton(
-            onClick = { onCloseClicked() }) {
-            Icon(
-                modifier = Modifier
-                    .drawableTestTag(
-                        tag = PROPERTY_DETAIL_CLOSE,
-                        id = R.drawable.clear_24
-                    )
-                    .background(color = MaterialTheme.colorScheme.background, shape = CircleShape),
-                painter = painterResource(id = R.drawable.clear_24),
-                contentDescription = stringResource(id = R.string.close)
-            )
-        }
-    }
 }
 
 @Composable
 fun PropertyDetailSuccess(
     state: PropertyDetailScreenState,
+    onBackClicked: () -> Unit = {}
 ) {
     val scrollState = rememberScrollState()
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .verticalScroll(scrollState)
-    ) {
-        ListingDetailImagesComponent(
-            media = state.propertyDetail?.media ?: emptyList()
-        )
-        AgencyBannerComponent(
-            agencyColour = state.propertyDetail?.advertiser?.preferredColorHex,
-            logo = state.propertyDetail?.advertiser?.logoUrl
-        )
-        state.propertyDetail?.price?.let {
-            Text(
-                modifier = Modifier
-                    .padding(
-                        start = DIM_16,
-                        end = DIM_16,
-                        top = DIM_8
-                    )
-                    .testTag(PROPERTY_DETAIL_PRICE),
-                text = it,
-                style = MaterialTheme.typography.titleMedium,
-                fontWeight = FontWeight.Bold
-            )
-        }
-        state.propertyDetail?.address?.let {
-            Text(
-                modifier = Modifier
-                    .padding(
-                        start = DIM_16,
-                        end = DIM_16,
-                        top = DIM_8,
-                        bottom = DIM_8
-                    )
-                    .testTag(PROPERTY_DETAIL_ADDRESS),
-                text = it,
-                style = MaterialTheme.typography.labelLarge
-            )
-        }
-        BedBathCarComponent(
-            modifier = Modifier.padding(start = DIM_16, end = DIM_16),
-            bedrooms = state.propertyDetail?.bedroomCount,
-            bathrooms = state.propertyDetail?.bathroomCount,
-            carSpaces = state.propertyDetail?.carSpaceCount
-        )
-        HorizontalDivider(
-            modifier = Modifier.padding(top = DIM_8, bottom = DIM_8)
-        )
-        state.propertyDetail?.headline?.let {
-            Text(
-                modifier = Modifier
-                    .padding(start = DIM_16, end = DIM_16, top = DIM_8)
-                    .testTag(PROPERTY_DETAIL_HEADLINE),
-                text = it,
-                style = MaterialTheme.typography.bodyMedium,
-                fontWeight = FontWeight.Bold
-            )
-        }
-        state.propertyDetail?.description?.let {
-            ExpandableText(
-                modifier = Modifier
-                    .padding(start = DIM_16, end = DIM_16, top = DIM_8, bottom = DIM_8)
-                    .testTag(PROPERTY_DETAIL_DESCRIPTION),
-                text = it,
-                fontSize = MaterialTheme.typography.bodyMedium.fontSize,
-                collapsedMaxLine = 3
-            )
-        }
+    val scope = rememberCoroutineScope()
 
-        HorizontalDivider(
-            modifier = Modifier.padding(top = DIM_8, bottom = DIM_8)
-        )
+    SetStatusBarAppearance(useDarkIcons = true)
+    Scaffold(
+        containerColor = Color.Transparent,
+        topBar = {
+            ToolbarComponent(
+                title = state.propertyDetail?.address ?: "",
+                onBackClicked = onBackClicked
+            )
+        }
+    ) { innerPadding ->
+        Column(
+            modifier = Modifier
+                .padding(innerPadding)
+                .verticalScroll(scrollState)
+        ) {
+            ListingImagesComponent(
+                screenState = state.screenState,
+                scope = scope,
+                media = state.propertyDetail?.media ?: emptyList()
+            )
 
-        state.propertyDetail?.advertiser?.let { advertiser ->
-            AgencyComponent(advertiser = advertiser)
+            AgencyBannerComponent(
+                agencyColour = state.propertyDetail?.advertiser?.preferredColorHex,
+                logo = state.propertyDetail?.advertiser?.logoUrl
+            )
+
+            PriceComponent(
+                modifier = Modifier.padding(horizontal = DIM_16, vertical = DIM_8),
+                price = state.propertyDetail?.price ?: ""
+            )
+            BedBathCarComponent(
+                modifier = Modifier.padding(start = DIM_16, end = DIM_16),
+                bedrooms = state.propertyDetail?.bedroomCount,
+                bathrooms = state.propertyDetail?.bathroomCount,
+                carSpaces = state.propertyDetail?.carSpaceCount
+            )
+            HorizontalDivider(
+                modifier = Modifier.padding(top = DIM_8, bottom = DIM_8)
+            )
+            state.propertyDetail?.headline?.let {
+                Text(
+                    modifier = Modifier
+                        .padding(start = DIM_16, end = DIM_16, top = DIM_8)
+                        .testTag(PROPERTY_DETAIL_HEADLINE),
+                    text = it,
+                    style = MaterialTheme.typography.bodyMedium,
+                    fontWeight = FontWeight.Bold
+                )
+            }
+            state.propertyDetail?.description?.let {
+                ExpandableText(
+                    modifier = Modifier
+                        .padding(start = DIM_16, end = DIM_16, top = DIM_8, bottom = DIM_8)
+                        .testTag(PROPERTY_DETAIL_DESCRIPTION),
+                    text = it,
+                    style = MaterialTheme.typography.bodyMedium,
+                    fontStyle = MaterialTheme.typography.bodyMedium.fontStyle,
+                    fontSize = MaterialTheme.typography.bodyMedium.fontSize,
+                    collapsedMaxLine = 3,
+                    showMoreStyle = MaterialTheme.typography.titleMedium.toSpanStyle(),
+                    showLessStyle = MaterialTheme.typography.titleMedium.toSpanStyle()
+                )
+            }
+
+            HorizontalDivider(
+                modifier = Modifier.padding(top = DIM_8, bottom = DIM_8)
+            )
+
+            state.propertyDetail?.advertiser?.let { advertiser ->
+                AgencyComponent(advertiser = advertiser)
+            }
         }
     }
 }
@@ -232,10 +208,8 @@ object PropertyDetailScreenTestTags {
     const val PROPERTY_DETAILS_LAYOUT = "${PREFIX}LAYOUT"
     const val PROPERTY_DETAIL_PROGRESS = "${PREFIX}PROGRESS"
     const val PROPERTY_DETAIL_PRICE = "${PREFIX}PRICE"
-    const val PROPERTY_DETAIL_ADDRESS = "${PREFIX}ADDRESS"
     const val PROPERTY_DETAIL_HEADLINE = "${PREFIX}HEADLINE"
     const val PROPERTY_DETAIL_DESCRIPTION = "${PREFIX}DESCRIPTION"
-    const val PROPERTY_DETAIL_CLOSE = "${PREFIX}CLOSE"
 }
 
 @Preview

@@ -12,6 +12,8 @@ import au.com.deanpike.mviexample.ui.util.HiltE2ETestActivity
 import au.com.deanpike.uishared.theme.MviExampleTheme
 import au.com.deanpike.uitestshared.base.UiE2ETestBase
 import au.com.deanpike.uitestshared.mockserver.HttpMethod
+import au.com.deanpike.uitestshared.robot.PriceComponentRobot
+import au.com.deanpike.uitestshared.robot.ToolbarComponentRobot
 import au.com.deanpike.uitestshared.util.waitUntilTagExists
 import dagger.hilt.android.testing.HiltAndroidTest
 import java.net.HttpURLConnection
@@ -31,6 +33,9 @@ class ApplicationScreenTest : UiE2ETestBase() {
     private val projectChildListItemRobot = ProjectChildListItemComponentRobot(composeTestRule)
     private val propertyListItemRobot = PropertyListItemRobot(composeTestRule)
     private var propertyRobot = PropertyDetailScreenRobot(composeTestRule)
+    private val priceRobot = PriceComponentRobot(composeTestRule)
+    private val toolbarRobot = ToolbarComponentRobot(composeTestRule)
+
 
     @Test
     fun show_project_child_via_project_details() = runTest {
@@ -73,10 +78,12 @@ class ApplicationScreenTest : UiE2ETestBase() {
             waitForIdle()
 
             // Project detail
+            toolbarRobot
+                .assertNavigationIconDisplayed()
+                .assertToolbarTitle("13 Crown Street, Wollongong")
             propertyRobot
                 .waitForSuccessScreenToBeDisplayed()
                 .assertDescriptionDisplayed()
-                .assertAddressDisplayed("13 Crown Street, Wollongong")
                 .swipeBack()
             waitForIdle()
 
@@ -123,10 +130,12 @@ class ApplicationScreenTest : UiE2ETestBase() {
                 .clickCard()
 
             // Show the project detail
+            toolbarRobot
+                .assertNavigationIconDisplayed()
+                .assertToolbarTitle("13 Crown Street, Wollongong")
             propertyRobot
                 .waitForSuccessScreenToBeDisplayed()
                 .assertDescriptionDisplayed()
-                .assertAddressDisplayed("13 Crown Street, Wollongong")
                 .swipeBack()
             waitForIdle()
 
@@ -163,10 +172,12 @@ class ApplicationScreenTest : UiE2ETestBase() {
                 .clickProperty()
 
             // Property
+            toolbarRobot
+                .assertNavigationIconDisplayed()
+                .assertToolbarTitle("2 Glenton Street, Abbotsbury")
             propertyRobot
                 .waitForSuccessScreenToBeDisplayed()
                 .assertDescriptionDisplayed()
-                .assertAddressDisplayed("2 Glenton Street, Abbotsbury")
                 .swipeBack()
 
             // List

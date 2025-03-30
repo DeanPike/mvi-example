@@ -32,6 +32,11 @@ class PropertyDetailViewModel @Inject constructor(
 
     private fun initialiseScreen(propertyId: Long) {
         viewModelScope.launch(dispatcher.getIoDispatcher()) {
+            setState {
+                copy(
+                    screenState = ScreenStateType.LOADING
+                )
+            }
             when (val response = useCase.getPropertyDetails(propertyId)) {
                 is ResponseWrapper.Success -> {
                     setState {

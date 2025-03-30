@@ -5,8 +5,6 @@ import androidx.test.espresso.Espresso
 import au.com.deanpike.detail.ui.property.PropertyDetailScreenContent
 import au.com.deanpike.detail.ui.property.PropertyDetailScreenState
 import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAILS_LAYOUT
-import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAIL_ADDRESS
-import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAIL_CLOSE
 import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAIL_DESCRIPTION
 import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAIL_HEADLINE
 import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAIL_PRICE
@@ -22,7 +20,6 @@ import au.com.deanpike.uitestshared.robot.DetailItemComponentRobot
 import au.com.deanpike.uitestshared.util.assertTagDisplayed
 import au.com.deanpike.uitestshared.util.assertTagDoesNotExist
 import au.com.deanpike.uitestshared.util.assertTextDisplayed
-import au.com.deanpike.uitestshared.util.clickOn
 import au.com.deanpike.uitestshared.util.swipeUp
 import au.com.deanpike.uitestshared.util.waitUntilTagExists
 
@@ -66,23 +63,10 @@ class PropertyDetailScreenRobot(private val composeRule: ComposeContentTestRule)
         return this
     }
 
-    fun assertCloseIconDisplayed(): PropertyDetailScreenRobot {
-        composeRule.assertTagDisplayed(PROPERTY_DETAIL_CLOSE)
-        return this
-    }
-
     fun assertPriceDisplayed(price: String): PropertyDetailScreenRobot {
         composeRule.assertTextDisplayed(
             tag = PROPERTY_DETAIL_PRICE,
             text = price
-        )
-        return this
-    }
-
-    fun assertAddressDisplayed(address: String): PropertyDetailScreenRobot {
-        composeRule.assertTextDisplayed(
-            tag = PROPERTY_DETAIL_ADDRESS,
-            text = address
         )
         return this
     }
@@ -136,11 +120,6 @@ class PropertyDetailScreenRobot(private val composeRule: ComposeContentTestRule)
 
     fun assertDescriptionDisplayed(): PropertyDetailScreenRobot {
         composeRule.assertTagDisplayed(tag = PROPERTY_DETAIL_DESCRIPTION)
-        return this
-    }
-
-    fun clickCloseIcon(): PropertyDetailScreenRobot {
-        composeRule.clickOn(PROPERTY_DETAIL_CLOSE)
         return this
     }
 
