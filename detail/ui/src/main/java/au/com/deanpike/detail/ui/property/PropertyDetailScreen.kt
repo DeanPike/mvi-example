@@ -223,8 +223,12 @@ fun PropertyDetailSuccess(
                     fontStyle = MaterialTheme.typography.bodyMedium.fontStyle,
                     fontSize = MaterialTheme.typography.bodyMedium.fontSize,
                     collapsedMaxLine = 3,
-                    showMoreStyle = MaterialTheme.typography.titleMedium.toSpanStyle(),
-                    showLessStyle = MaterialTheme.typography.titleMedium.toSpanStyle()
+                    showMoreStyle = MaterialTheme.typography.labelLarge.copy(
+                        fontWeight = FontWeight.Bold
+                    ).toSpanStyle(),
+                    showLessStyle = MaterialTheme.typography.labelLarge.copy(
+                        fontWeight = FontWeight.Bold
+                    ).toSpanStyle()
                 )
             }
 

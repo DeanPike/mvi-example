@@ -240,7 +240,13 @@ fun ProjectDetailSuccess(
                         .testTag(PROJECT_DETAIL_DESCRIPTION),
                     text = it,
                     fontSize = MaterialTheme.typography.bodyMedium.fontSize,
-                    collapsedMaxLine = 3
+                    collapsedMaxLine = 3,
+                    showMoreStyle = MaterialTheme.typography.labelLarge.copy(
+                        fontWeight = FontWeight.Bold
+                    ).toSpanStyle(),
+                    showLessStyle = MaterialTheme.typography.labelLarge.copy(
+                        fontWeight = FontWeight.Bold
+                    ).toSpanStyle()
                 )
             }
 
