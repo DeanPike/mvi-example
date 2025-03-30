@@ -176,7 +176,6 @@ fun ListingListScreenContent(
                     start = padding.calculateStartPadding(layoutDirection),
                     end = padding.calculateEndPadding(layoutDirection),
                     top = padding.calculateTopPadding(),
-                    bottom = padding.calculateBottomPadding()
                 )
             ) {
                 HorizontalDivider()
