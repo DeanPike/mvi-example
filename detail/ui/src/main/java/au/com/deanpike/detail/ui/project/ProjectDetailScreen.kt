@@ -5,7 +5,10 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
@@ -29,6 +32,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import au.com.deanpike.commonshared.model.Media
@@ -46,6 +50,8 @@ import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_DET
 import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_DETAIL_CLOSE
 import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_DETAIL_DESCRIPTION
 import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_DETAIL_HEADLINE
+import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_DETAIL_LOADING_ADDRESS
+import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_DETAIL_LOADING_TITLE
 import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_DETAIL_NAME
 import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_DETAIL_PROGRESS
 import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_LAYOUT
@@ -66,6 +72,7 @@ fun ProjectDetailScreen(
     viewModel: ProjectDetailViewModel = hiltViewModel<ProjectDetailViewModel>(),
     isSinglePane: Boolean,
     projectId: Long,
+    loadingAddress: String,
     onCloseClicked: () -> Unit = {},
     onProjectChildClicked: (Long) -> Unit = {}
 ) {
@@ -79,6 +86,7 @@ fun ProjectDetailScreen(
 
     ProjectDetailScreenContent(
         state = viewModel.uiState,
+        loadingAddress = loadingAddress,
         onCloseClicked = onCloseClicked,
         onRetryClicked = {
             viewModel.setEvent(ProjectDetailScreenEvent.OnRetryClicked)
@@ -90,6 +98,7 @@ fun ProjectDetailScreen(
 @Composable
 fun ProjectDetailScreenContent(
     state: ProjectDetailScreenState,
+    loadingAddress: String,
     onCloseClicked: () -> Unit = {},
     onRetryClicked: () -> Unit = {},
     onProjectChildClicked: (Long) -> Unit = {}
@@ -108,9 +117,35 @@ fun ProjectDetailScreenContent(
                 modifier = Modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center
             ) {
-                CircularProgressIndicator(
-                    modifier = Modifier.testTag(PROJECT_DETAIL_PROGRESS)
-                )
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .align(Alignment.Center),
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    Text(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .testTag(PROJECT_DETAIL_LOADING_TITLE),
+                        text = stringResource(R.string.loading_data_for),
+                        textAlign = TextAlign.Center
+                    )
+                    Spacer(modifier = Modifier.height(DIM_16))
+                    Text(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .testTag(PROJECT_DETAIL_LOADING_ADDRESS),
+                        text = loadingAddress,
+                        textAlign = TextAlign.Center,
+                        style = MaterialTheme.typography.labelLarge
+                    )
+                    Spacer(modifier = Modifier.height(DIM_16))
+                    CircularProgressIndicator(
+                        modifier = Modifier
+                            .align(Alignment.CenterHorizontally)
+                            .testTag(PROJECT_DETAIL_PROGRESS)
+                    )
+                }
             }
         } else if (state.screenState == ScreenStateType.SUCCESS) {
             ProjectDetailSuccess(
@@ -258,6 +293,8 @@ object ProjectDetailScreenTestTags {
     const val PROJECT_DETAIL_ADDRESS = "${PREFIX}ADDRESS"
     const val PROJECT_DETAIL_HEADLINE = "${PREFIX}HEADLINE"
     const val PROJECT_DETAIL_DESCRIPTION = "${PREFIX}DESCRIPTION"
+    const val PROJECT_DETAIL_LOADING_TITLE = "${PREFIX}LOADING_TITLE"
+    const val PROJECT_DETAIL_LOADING_ADDRESS = "${PREFIX}LOADING_ADDRESS"
 }
 
 @Preview
@@ -335,7 +372,8 @@ fun ProjectDetailScreenContentPreview() {
                     projectLogoImageUrl = "https://images.domain.com.au/img/Agencys/devproject/logo_6303_240606_070452",
                     showroomAddress = "49 Denison Street, Wollongong"
                 )
-            )
+            ),
+            loadingAddress = ""
         )
     }
 }
@@ -347,7 +385,8 @@ fun ProjectDetailScreenProgressPreview() {
         ProjectDetailScreenContent(
             state = ProjectDetailScreenState(
                 screenState = ScreenStateType.LOADING
-            )
+            ),
+            loadingAddress = "13 Crown Street, Wollongong"
         )
     }
 }

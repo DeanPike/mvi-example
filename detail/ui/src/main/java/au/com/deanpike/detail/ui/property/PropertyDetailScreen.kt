@@ -5,8 +5,10 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -22,7 +24,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import au.com.deanpike.commonshared.model.Media
@@ -33,9 +37,12 @@ import au.com.deanpike.detail.client.model.detail.Agent
 import au.com.deanpike.detail.client.model.detail.PhoneNumber
 import au.com.deanpike.detail.client.model.detail.PropertyDetail
 import au.com.deanpike.detail.client.model.type.PhoneNumberType
+import au.com.deanpike.detail.ui.R
 import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAILS_LAYOUT
 import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAIL_DESCRIPTION
 import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAIL_HEADLINE
+import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAIL_LOADING_ADDRESS
+import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAIL_LOADING_TITLE
 import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAIL_PROGRESS
 import au.com.deanpike.detail.ui.shared.AgencyComponent
 import au.com.deanpike.uishared.base.ScreenStateType
@@ -56,6 +63,7 @@ fun PropertyDetailScreen(
     viewModel: PropertyDetailViewModel = hiltViewModel<PropertyDetailViewModel>(),
     isSinglePane: Boolean,
     propertyId: Long,
+    loadingAddress: String,
     onCloseClicked: () -> Unit = {}
 ) {
     LaunchedEffect(propertyId) {
@@ -68,6 +76,7 @@ fun PropertyDetailScreen(
 
     PropertyDetailScreenContent(
         state = viewModel.uiState,
+        loadingAddress = loadingAddress,
         onCloseClicked = onCloseClicked,
         onRetryClicked = {
             viewModel.setEvent(PropertyDetailScreenEvent.OnRetryClicked)
@@ -78,6 +87,7 @@ fun PropertyDetailScreen(
 @Composable
 fun PropertyDetailScreenContent(
     state: PropertyDetailScreenState,
+    loadingAddress: String,
     onCloseClicked: () -> Unit = {},
     onRetryClicked: () -> Unit = {}
 ) {
@@ -97,9 +107,35 @@ fun PropertyDetailScreenContent(
                 modifier = Modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center
             ) {
-                CircularProgressIndicator(
-                    modifier = Modifier.testTag(PROPERTY_DETAIL_PROGRESS)
-                )
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .align(Alignment.Center),
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    Text(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .testTag(PROPERTY_DETAIL_LOADING_TITLE),
+                        text = stringResource(R.string.loading_data_for),
+                        textAlign = TextAlign.Center
+                    )
+                    Spacer(modifier = Modifier.height(DIM_16))
+                    Text(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .testTag(PROPERTY_DETAIL_LOADING_ADDRESS),
+                        text = loadingAddress,
+                        textAlign = TextAlign.Center,
+                        style = MaterialTheme.typography.labelLarge
+                    )
+                    Spacer(modifier = Modifier.height(DIM_16))
+                    CircularProgressIndicator(
+                        modifier = Modifier
+                            .align(Alignment.CenterHorizontally)
+                            .testTag(PROPERTY_DETAIL_PROGRESS)
+                    )
+                }
             }
         } else if (state.screenState == ScreenStateType.SUCCESS) {
             PropertyDetailSuccess(
@@ -207,9 +243,11 @@ object PropertyDetailScreenTestTags {
     private const val PREFIX = "PROPERTY_DETAIL_"
     const val PROPERTY_DETAILS_LAYOUT = "${PREFIX}LAYOUT"
     const val PROPERTY_DETAIL_PROGRESS = "${PREFIX}PROGRESS"
-    const val PROPERTY_DETAIL_PRICE = "${PREFIX}PRICE"
     const val PROPERTY_DETAIL_HEADLINE = "${PREFIX}HEADLINE"
     const val PROPERTY_DETAIL_DESCRIPTION = "${PREFIX}DESCRIPTION"
+    const val PROPERTY_DETAIL_LOADING_TITLE = "${PREFIX}LOADING_TITLE"
+    const val PROPERTY_DETAIL_LOADING_ADDRESS = "${PREFIX}LOADING_ADDRESS"
+
 }
 
 @Preview
@@ -217,6 +255,7 @@ object PropertyDetailScreenTestTags {
 fun PropertyDetailScreenContentPreview() {
     MviExampleTheme {
         PropertyDetailScreenContent(
+            loadingAddress = "",
             state = PropertyDetailScreenState(
                 screenState = ScreenStateType.SUCCESS,
                 propertyDetail = PropertyDetail(
@@ -275,6 +314,7 @@ fun PropertyDetailScreenContentPreview() {
 fun PropertyDetailScreenProgressPreview() {
     MviExampleTheme {
         PropertyDetailScreenContent(
+            loadingAddress = "2 Glenton Street, Abbotsbury",
             state = PropertyDetailScreenState(
                 screenState = ScreenStateType.LOADING
             )

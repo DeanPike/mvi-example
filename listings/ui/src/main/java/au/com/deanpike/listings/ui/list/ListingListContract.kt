@@ -33,19 +33,37 @@ sealed class ListingListScreenEvent : UiEvent {
     data object OnBottomSheetDismissed : ListingListScreenEvent()
     data class OnListingTypesApplied(val selectedListingTypes: List<DwellingType>) : ListingListScreenEvent()
     data object OnRetryClicked : ListingListScreenEvent()
-    data class OnPropertySelected(val id: Long) : ListingListScreenEvent()
-    data class OnProjectSelected(val id: Long) : ListingListScreenEvent()
+    data class OnPropertySelected(
+        val id: Long,
+        val address: String
+    ) : ListingListScreenEvent()
+
+    data class OnProjectSelected(
+        val id: Long,
+        val address: String
+    ) : ListingListScreenEvent()
+
     data class OnProjectChildSelected(
         val projectId: Long,
-        val projectChildId: Long
+        val projectChildId: Long,
+        val address: String
     ) : ListingListScreenEvent()
 }
 
 sealed class ListingListScreenEffect : UiEffect {
-    data class OnPropertySelected(val id: Long) : ListingListScreenEffect()
-    data class OnProjectSelected(val id: Long) : ListingListScreenEffect()
+    data class OnPropertySelected(
+        val id: Long,
+        val address: String
+    ) : ListingListScreenEffect()
+
+    data class OnProjectSelected(
+        val id: Long,
+        val address: String
+    ) : ListingListScreenEffect()
+
     data class OnProjectChildSelected(
         val projectId: Long,
         val projectChildId: Long,
+        val address: String
     ) : ListingListScreenEffect()
 }

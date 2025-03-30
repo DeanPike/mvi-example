@@ -40,11 +40,14 @@ class PropertyDetailScreenTest : UiUnitTestBase() {
                 data = PropertyDetailScreenRobotInitData(
                     state = PropertyDetailScreenState(
                         screenState = ScreenStateType.LOADING
-                    )
+                    ),
+                    loadingAddress = "Loading address"
                 )
             )
             .assertLayoutDisplayed()
             .assertProgressDisplayed()
+            .assertLoadingTitleDisplayed()
+            .assertLoadingAddressDisplayed("Loading address")
     }
 
     @Test
@@ -56,7 +59,8 @@ class PropertyDetailScreenTest : UiUnitTestBase() {
                         screenState = ScreenStateType.ERROR,
                         propertyId = 1234,
                         propertyDetail = null
-                    )
+                    ),
+                    loadingAddress = "Loading address"
                 )
             )
             .assertLayoutDisplayed()
@@ -80,7 +84,8 @@ class PropertyDetailScreenTest : UiUnitTestBase() {
                         screenState = ScreenStateType.SUCCESS,
                         propertyId = 1234,
                         propertyDetail = getPropertyDetail()
-                    )
+                    ),
+                    loadingAddress = "Loading address"
                 )
             )
             .assertLayoutDisplayed()

@@ -13,6 +13,8 @@ import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_DET
 import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_DETAIL_CLOSE
 import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_DETAIL_DESCRIPTION
 import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_DETAIL_HEADLINE
+import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_DETAIL_LOADING_ADDRESS
+import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_DETAIL_LOADING_TITLE
 import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_DETAIL_NAME
 import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_DETAIL_PROGRESS
 import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_LAYOUT
@@ -42,6 +44,7 @@ class ProjectDetailScreenRobot(private val composeRule: ComposeContentTestRule) 
             MviExampleTheme {
                 ProjectDetailScreenContent(
                     state = data!!.project,
+                    loadingAddress = data.loadingAddress,
                     onCloseClicked = {
                         closeClicked = true
                     },
@@ -153,8 +156,25 @@ class ProjectDetailScreenRobot(private val composeRule: ComposeContentTestRule) 
         Espresso.pressBack()
         return this
     }
+
+    fun assertLoadingTitleDisplayed(): ProjectDetailScreenRobot {
+        composeRule.assertTextDisplayed(
+            tag = PROJECT_DETAIL_LOADING_TITLE,
+            text = "Loading data for"
+        )
+        return this
+    }
+
+    fun assertLoadingAddressDisplayed(address: String): ProjectDetailScreenRobot {
+        composeRule.assertTextDisplayed(
+            tag = PROJECT_DETAIL_LOADING_ADDRESS,
+            text = address
+        )
+        return this
+    }
 }
 
 data class ProjectDetailScreenRobotInitData(
-    val project: ProjectDetailScreenState
+    val project: ProjectDetailScreenState,
+    var loadingAddress: String
 ) : TestRobotInitData

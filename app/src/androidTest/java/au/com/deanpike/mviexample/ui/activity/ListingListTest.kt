@@ -43,6 +43,7 @@ class ListingListTest : UiE2ETestBase() {
         var propertyClicked: Long? = null
         var projectClicked: Long? = null
         var projectChildClicked: Long? = null
+        var addressClicked: String? = null
 
         setupResponse(
             listingType = emptyList(),
@@ -53,15 +54,18 @@ class ListingListTest : UiE2ETestBase() {
             setContent {
                 MviExampleTheme {
                     ListingListScreen(
-                        onPropertyClicked = {
-                            propertyClicked = it
+                        onPropertyClicked = { id, address ->
+                            propertyClicked = id
+                            addressClicked = address
                         },
-                        onProjectClicked = {
-                            projectClicked = it
+                        onProjectClicked = { id, address ->
+                            projectClicked = id
+                            addressClicked = address
                         },
-                        onProjectChildClicked = { projectId, childId ->
+                        onProjectChildClicked = { projectId, childId, address ->
                             projectClicked = projectId
                             projectChildClicked = childId
+                            addressClicked = address
                         }
                     )
                 }

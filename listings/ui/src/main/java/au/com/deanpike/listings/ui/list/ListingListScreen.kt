@@ -55,9 +55,9 @@ fun ListingListScreen(
     viewModel: ListingListViewModel = hiltViewModel<ListingListViewModel>(),
     isSinglePane: Boolean = true,
     refreshStatusBar: Boolean = false,
-    onPropertyClicked: (Long) -> Unit = {},
-    onProjectClicked: (Long) -> Unit = {},
-    onProjectChildClicked: (Long, Long) -> Unit = { _, _ -> },
+    onPropertyClicked: (Long, String) -> Unit = { _, _ -> },
+    onProjectClicked: (Long, String) -> Unit = { _, _ -> },
+    onProjectChildClicked: (Long, Long, String) -> Unit = { _, _, _ -> },
 ) {
     val lifecycleOwner = LocalLifecycleOwner.current
     val scope = rememberCoroutineScope()
@@ -73,14 +73,14 @@ fun ListingListScreen(
             viewModel.effect.collect { effect ->
                 when (effect) {
                     is ListingListScreenEffect.OnPropertySelected -> {
-                        onPropertyClicked(effect.id)
+                        onPropertyClicked(effect.id, effect.address)
                     }
 
                     is ListingListScreenEffect.OnProjectSelected -> {
-                        onProjectClicked(effect.id)
+                        onProjectClicked(effect.id, effect.address)
                     }
                     is ListingListScreenEffect.OnProjectChildSelected -> {
-                        onProjectChildClicked(effect.projectId, effect.projectChildId)
+                        onProjectChildClicked(effect.projectId, effect.projectChildId, effect.address)
                     }
                 }
             }
@@ -111,17 +111,18 @@ fun ListingListScreen(
         onRetryClicked = {
             viewModel.setEvent(ListingListScreenEvent.OnRetryClicked)
         },
-        onPropertyClicked = {
-            viewModel.setEvent(ListingListScreenEvent.OnPropertySelected(it))
+        onPropertyClicked = { id, address ->
+            viewModel.setEvent(ListingListScreenEvent.OnPropertySelected(id, address))
         },
-        onProjectClicked = {
-            viewModel.setEvent(ListingListScreenEvent.OnProjectSelected(it))
+        onProjectClicked = { id, address ->
+            viewModel.setEvent(ListingListScreenEvent.OnProjectSelected(id, address))
         },
-        onProjectChildClicked = { projectId, projectChildId ->
+        onProjectChildClicked = { projectId, projectChildId, address ->
             viewModel.setEvent(
                 ListingListScreenEvent.OnProjectChildSelected(
                     projectId = projectId,
-                    projectChildId = projectChildId
+                    projectChildId = projectChildId,
+                    address = address
                 )
             )
         }
@@ -137,9 +138,9 @@ fun ListingListScreenContent(
     onBottomSheetDismissed: () -> Unit = {},
     onListingTypesApplied: (List<DwellingType>) -> Unit = {},
     onRetryClicked: () -> Unit = {},
-    onPropertyClicked: (Long) -> Unit = {},
-    onProjectClicked: (Long) -> Unit = {},
-    onProjectChildClicked: (Long, Long) -> Unit = { _, _ -> }
+    onPropertyClicked: (Long, String) -> Unit = { _, _ -> },
+    onProjectClicked: (Long, String) -> Unit = { _, _ -> },
+    onProjectChildClicked: (Long, Long, String) -> Unit = { _, _, _ -> }
 ) {
 
     val layoutDirection = LocalLayoutDirection.current
@@ -199,7 +200,10 @@ fun ListingListScreenContent(
                                 PropertyListItem(
                                     property = listing,
                                     onItemClicked = {
-                                        onPropertyClicked(listing.id)
+                                        onPropertyClicked(
+                                            listing.id,
+                                            listing.address
+                                        )
                                     }
                                 )
                             }
@@ -208,10 +212,10 @@ fun ListingListScreenContent(
                                 ProjectListItem(
                                     project = listing,
                                     onProjectClicked = {
-                                        onProjectClicked(it)
+                                        onProjectClicked(it, listing.address)
                                     },
                                     onProjectChildClicked = {
-                                        onProjectChildClicked(listing.id, it)
+                                        onProjectChildClicked(listing.id, it, listing.address)
                                     }
                                 )
                             }

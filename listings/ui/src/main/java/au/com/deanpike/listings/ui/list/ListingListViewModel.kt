@@ -137,7 +137,10 @@ class ListingListViewModel @Inject constructor(
             )
         }
         setEffect {
-            ListingListScreenEffect.OnPropertySelected(event.id)
+            ListingListScreenEffect.OnPropertySelected(
+                id = event.id,
+                address = event.address
+            )
         }
     }
 
@@ -150,7 +153,7 @@ class ListingListViewModel @Inject constructor(
             )
         }
         setEffect {
-            ListingListScreenEffect.OnProjectSelected(event.id)
+            ListingListScreenEffect.OnProjectSelected(event.id, event.address)
         }
     }
 
@@ -165,7 +168,8 @@ class ListingListViewModel @Inject constructor(
         setEffect {
             ListingListScreenEffect.OnProjectChildSelected(
                 projectId = event.projectId,
-                projectChildId = event.projectChildId
+                projectChildId = event.projectChildId,
+                address = event.address
             )
         }
     }
@@ -190,11 +194,17 @@ class ListingListViewModel @Inject constructor(
                             val listing = response.data[0]
                             if (listing is Property) {
                                 onPropertySelected(
-                                    event = ListingListScreenEvent.OnPropertySelected(id = listing.id)
+                                    event = ListingListScreenEvent.OnPropertySelected(
+                                        id = listing.id,
+                                        address = listing.address
+                                    )
                                 )
                             } else if (listing is Project) {
                                 onProjectSelected(
-                                    event = ListingListScreenEvent.OnProjectSelected(id = listing.id)
+                                    event = ListingListScreenEvent.OnProjectSelected(
+                                        id = listing.id,
+                                        address = listing.address
+                                    )
                                 )
                             }
                         }

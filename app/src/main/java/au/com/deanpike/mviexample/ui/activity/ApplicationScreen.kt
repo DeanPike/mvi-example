@@ -57,38 +57,41 @@ fun ApplicationScreen() {
                 ListingListScreen(
                     isSinglePane = isSinglePane,
                     refreshStatusBar = refreshStatusBar,
-                    onPropertyClicked = { propertyId ->
+                    onPropertyClicked = { propertyId, address ->
                         scope.launch {
                             navigator.navigateTo(
                                 pane = ListDetailPaneScaffoldRole.Detail,
                                 contentKey = SelectedItem(
                                     propertyId = propertyId,
                                     projectId = null,
-                                    listingType = SelectedListingType.PROPERTY
+                                    listingType = SelectedListingType.PROPERTY,
+                                    address = address
                                 )
                             )
                         }
                     },
-                    onProjectClicked = { projectId ->
+                    onProjectClicked = { projectId, address ->
                         scope.launch {
                             navigator.navigateTo(
                                 pane = ListDetailPaneScaffoldRole.Detail,
                                 contentKey = SelectedItem(
                                     projectId = projectId,
                                     propertyId = null,
-                                    listingType = SelectedListingType.PROJECT
+                                    listingType = SelectedListingType.PROJECT,
+                                    address = address
                                 )
                             )
                         }
                     },
-                    onProjectChildClicked = { projectId, projectChildId ->
+                    onProjectChildClicked = { projectId, projectChildId, address ->
                         scope.launch {
                             navigator.navigateTo(
                                 pane = ListDetailPaneScaffoldRole.Detail,
                                 contentKey = SelectedItem(
                                     projectId = projectId,
                                     propertyId = projectChildId,
-                                    listingType = SelectedListingType.PROJECT_CHILD
+                                    listingType = SelectedListingType.PROJECT_CHILD,
+                                    address = address
                                 )
                             )
                         }
@@ -109,6 +112,7 @@ fun ApplicationScreen() {
                                 PropertyDetailScreen(
                                     isSinglePane = isSinglePane,
                                     propertyId = propertyId,
+                                    loadingAddress = item.address,
                                     onCloseClicked = {
                                         if (navigator.canNavigateBack()) {
                                             scope.launch {
@@ -130,6 +134,7 @@ fun ApplicationScreen() {
                                 ProjectDetailScreen(
                                     isSinglePane = isSinglePane,
                                     projectId = projectId,
+                                    loadingAddress = item.address,
                                     onCloseClicked = {
                                         if (navigator.canNavigateBack()) {
                                             scope.launch {
@@ -145,7 +150,8 @@ fun ApplicationScreen() {
                                                 contentKey = SelectedItem(
                                                     projectId = projectId,
                                                     propertyId = propertyId,
-                                                    listingType = SelectedListingType.PROJECT_CHILD
+                                                    listingType = SelectedListingType.PROJECT_CHILD,
+                                                    address = item.address
                                                 )
                                             )
                                         }
@@ -163,6 +169,7 @@ fun ApplicationScreen() {
                                 PropertyDetailScreen(
                                     isSinglePane = isSinglePane,
                                     propertyId = propertyId,
+                                    loadingAddress = item.address,
                                     onCloseClicked = {
                                         scope.launch {
                                             navigator.navigateBack(BackNavigationBehavior.PopLatest)
@@ -214,5 +221,6 @@ private enum class SelectedListingType {
 private class SelectedItem(
     val projectId: Long? = null,
     val propertyId: Long? = null,
-    val listingType: SelectedListingType
+    val listingType: SelectedListingType,
+    val address: String
 ) : Parcelable

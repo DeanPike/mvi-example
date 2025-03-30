@@ -38,7 +38,8 @@ class ProjectDetailScreenTest : UiUnitTestBase() {
         projectDetailRobot
             .setupComponent(
                 data = ProjectDetailScreenRobotInitData(
-                    project = projectDetail
+                    project = projectDetail,
+                    loadingAddress = "Loading address"
                 )
             )
             .assertLayoutDisplayed()
@@ -131,11 +132,14 @@ class ProjectDetailScreenTest : UiUnitTestBase() {
                         screenState = ScreenStateType.LOADING,
                         projectId = 6303,
                         projectDetail = null
-                    )
+                    ),
+                    loadingAddress = "Loading address"
                 )
             )
             .assertLayoutDisplayed()
             .assertLoadingScreenDisplayed()
+            .assertLoadingTitleDisplayed()
+            .assertLoadingAddressDisplayed("Loading address")
             .assertDetailsLayoutNotDisplayed()
 
         errorRobot
@@ -151,7 +155,8 @@ class ProjectDetailScreenTest : UiUnitTestBase() {
                         screenState = ScreenStateType.ERROR,
                         projectId = 6303,
                         projectDetail = null
-                    )
+                    ),
+                    loadingAddress = "Loading address"
                 )
             )
             .assertLayoutDisplayed()

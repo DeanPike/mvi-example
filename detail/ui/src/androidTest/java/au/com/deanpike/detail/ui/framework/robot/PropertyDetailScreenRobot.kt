@@ -7,12 +7,14 @@ import au.com.deanpike.detail.ui.property.PropertyDetailScreenState
 import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAILS_LAYOUT
 import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAIL_DESCRIPTION
 import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAIL_HEADLINE
-import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAIL_PRICE
+import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAIL_LOADING_ADDRESS
+import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAIL_LOADING_TITLE
 import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAIL_PROGRESS
 import au.com.deanpike.uishared.R
 import au.com.deanpike.uishared.component.DetailListItemTestTags.DETAIL_ITEM_BATHROOMS
 import au.com.deanpike.uishared.component.DetailListItemTestTags.DETAIL_ITEM_BEDROOMS
 import au.com.deanpike.uishared.component.DetailListItemTestTags.DETAIL_ITEM_CAR_SPACES
+import au.com.deanpike.uishared.component.PriceComponentTestTags.PRICE_COMPONENT_LABEL
 import au.com.deanpike.uishared.theme.MviExampleTheme
 import au.com.deanpike.uitestshared.base.TestRobotBase
 import au.com.deanpike.uitestshared.base.TestRobotInitData
@@ -36,6 +38,7 @@ class PropertyDetailScreenRobot(private val composeRule: ComposeContentTestRule)
             MviExampleTheme {
                 PropertyDetailScreenContent(
                     state = data!!.state,
+                    loadingAddress = data.loadingAddress,
                     onCloseClicked = {
                         closeClicked = true
                     },
@@ -60,14 +63,6 @@ class PropertyDetailScreenRobot(private val composeRule: ComposeContentTestRule)
 
     fun assertProgressNotDisplayed(): PropertyDetailScreenRobot {
         composeRule.assertTagDoesNotExist(PROPERTY_DETAIL_PROGRESS)
-        return this
-    }
-
-    fun assertPriceDisplayed(price: String): PropertyDetailScreenRobot {
-        composeRule.assertTextDisplayed(
-            tag = PROPERTY_DETAIL_PRICE,
-            text = price
-        )
         return this
     }
 
@@ -129,7 +124,7 @@ class PropertyDetailScreenRobot(private val composeRule: ComposeContentTestRule)
     }
 
     fun waitForSuccessScreenToBeDisplayed(): PropertyDetailScreenRobot {
-        composeRule.waitUntilTagExists(PROPERTY_DETAIL_PRICE)
+        composeRule.waitUntilTagExists(PRICE_COMPONENT_LABEL)
         return this
     }
 
@@ -137,8 +132,26 @@ class PropertyDetailScreenRobot(private val composeRule: ComposeContentTestRule)
         Espresso.pressBack()
         return this
     }
+
+    fun assertLoadingTitleDisplayed(): PropertyDetailScreenRobot {
+        composeRule.assertTextDisplayed(
+            tag = PROPERTY_DETAIL_LOADING_TITLE,
+            text = "Loading data for"
+        )
+        return this
+    }
+
+    fun assertLoadingAddressDisplayed(address: String): PropertyDetailScreenRobot {
+        composeRule.assertTextDisplayed(
+
+            tag = PROPERTY_DETAIL_LOADING_ADDRESS,
+            text = address
+        )
+        return this
+    }
 }
 
 data class PropertyDetailScreenRobotInitData(
-    val state: PropertyDetailScreenState
+    val state: PropertyDetailScreenState,
+    val loadingAddress: String
 ) : TestRobotInitData

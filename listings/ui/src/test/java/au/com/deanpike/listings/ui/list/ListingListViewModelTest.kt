@@ -261,7 +261,12 @@ class ListingListViewModelTest {
 
     @Test
     fun `handle property selected`() = runTest {
-        viewModel.setEvent(ListingListScreenEvent.OnPropertySelected(12))
+        viewModel.setEvent(
+            ListingListScreenEvent.OnPropertySelected(
+                id = 12,
+                address = "Loading Address"
+            )
+        )
         advanceUntilIdle()
 
         with(viewModel.uiState) {
@@ -273,12 +278,18 @@ class ListingListViewModelTest {
             val item = awaitItem()
             assertThat(item).isInstanceOf(ListingListScreenEffect.OnPropertySelected::class.java)
             assertThat((item as ListingListScreenEffect.OnPropertySelected).id).isEqualTo(12)
+            assertThat(item.address).isEqualTo("Loading Address")
         }
     }
 
     @Test
     fun `handle project selected`() = runTest {
-        viewModel.setEvent(ListingListScreenEvent.OnProjectSelected(23))
+        viewModel.setEvent(
+            ListingListScreenEvent.OnProjectSelected(
+                id = 23,
+                address = "Loading Address"
+            )
+        )
         advanceUntilIdle()
 
         with(viewModel.uiState) {
@@ -290,6 +301,7 @@ class ListingListViewModelTest {
             val item = awaitItem()
             assertThat(item).isInstanceOf(ListingListScreenEffect.OnProjectSelected::class.java)
             assertThat((item as ListingListScreenEffect.OnProjectSelected).id).isEqualTo(23)
+            assertThat(item.address).isEqualTo("Loading Address")
         }
     }
 
