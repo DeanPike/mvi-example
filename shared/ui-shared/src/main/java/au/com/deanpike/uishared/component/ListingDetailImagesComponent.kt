@@ -15,10 +15,6 @@ import androidx.compose.foundation.pager.PageSize
 import androidx.compose.foundation.pager.PagerDefaults
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
@@ -38,13 +34,9 @@ import au.com.deanpike.commonshared.model.Media
 import au.com.deanpike.commonshared.type.MediaType
 import au.com.deanpike.uishared.R
 import au.com.deanpike.uishared.base.ScreenStateType
-import au.com.deanpike.uishared.base.drawableTestTag
 import au.com.deanpike.uishared.component.ListingDetailImagesTestTags.LISTING_DETAIL_IMAGES_IMAGE
-import au.com.deanpike.uishared.component.ListingDetailImagesTestTags.LISTING_DETAIL_IMAGES_IMAGE_COUNT
-import au.com.deanpike.uishared.component.ListingDetailImagesTestTags.LISTING_DETAIL_IMAGES_NEXT_IMAGE
 import au.com.deanpike.uishared.component.ListingDetailImagesTestTags.LISTING_DETAIL_IMAGES_PAGER
 import au.com.deanpike.uishared.component.ListingDetailImagesTestTags.LISTING_DETAIL_IMAGES_POSITION_INDICATOR
-import au.com.deanpike.uishared.component.ListingDetailImagesTestTags.LISTING_DETAIL_IMAGES_PREVIOUS_IMAGE
 import au.com.deanpike.uishared.theme.Dimension.DIM_16
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
 import au.com.deanpike.uishared.theme.MviExampleTheme
@@ -52,7 +44,6 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import kotlin.math.absoluteValue
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
 
 @Composable
 fun ListingDetailImagesComponent(media: List<Media>) {
@@ -174,63 +165,13 @@ fun ListingImagesComponent(
             )
         }
 
-        Text(
+        AnimatedPagerIndicator(
             modifier = Modifier
                 .align(alignment = Alignment.BottomCenter)
-                .padding(DIM_8)
-                .background(color = MaterialTheme.colorScheme.outline.copy(alpha = 0.5F))
-                .testTag(LISTING_DETAIL_IMAGES_IMAGE_COUNT),
-            color = MaterialTheme.colorScheme.surface,
-            text = if (media.count() != 0) "${pagerState.currentPage + 1} of ${media.count()}" else "",
+                .padding(DIM_16),
+            pagerState = pagerState,
+            pageCount = pagerState.pageCount
         )
-
-        if (pagerState.currentPage > 0) {
-            IconButton(
-                modifier = Modifier
-                    .align(Alignment.CenterStart)
-                    .padding(start = DIM_16)
-                    .background(color = MaterialTheme.colorScheme.outline.copy(alpha = 0.5F), shape = CircleShape),
-                onClick = {
-                    scope.launch {
-                        pagerState.scrollToPage(pagerState.currentPage - 1)
-                    }
-                }
-            ) {
-                Icon(
-                    modifier = Modifier.drawableTestTag(
-                        tag = LISTING_DETAIL_IMAGES_PREVIOUS_IMAGE,
-                        id = R.drawable.chevron_left_24
-                    ),
-                    painter = painterResource(id = R.drawable.chevron_left_24),
-                    contentDescription = "Previous image",
-                    tint = MaterialTheme.colorScheme.surface
-                )
-            }
-        }
-
-        if (pagerState.currentPage < media.count() - 1) {
-            IconButton(
-                modifier = Modifier
-                    .align(Alignment.CenterEnd)
-                    .padding(end = DIM_16)
-                    .background(color = MaterialTheme.colorScheme.outline.copy(alpha = 0.5F), shape = CircleShape),
-                onClick = {
-                    scope.launch {
-                        pagerState.scrollToPage(pagerState.currentPage + 1)
-                    }
-                }
-            ) {
-                Icon(
-                    modifier = Modifier.drawableTestTag(
-                        tag = LISTING_DETAIL_IMAGES_NEXT_IMAGE,
-                        id = R.drawable.chevron_right_24
-                    ),
-                    painter = painterResource(id = R.drawable.chevron_right_24),
-                    contentDescription = "Next image",
-                    tint = MaterialTheme.colorScheme.surface
-                )
-            }
-        }
     }
 }
 
