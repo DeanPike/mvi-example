@@ -17,8 +17,8 @@ android {
         applicationId = "au.com.deanpike.mviexample"
         minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = libs.versions.targetSdk.get().toInt()
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 211
+        versionName = "2.0.1"
 
         vectorDrawables {
             useSupportLibrary = true
