@@ -1,3 +1,6 @@
+import java.text.SimpleDateFormat
+import java.util.Date
+
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
@@ -17,8 +20,8 @@ android {
         applicationId = "au.com.deanpike.mviexample"
         minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = libs.versions.targetSdk.get().toInt()
-        versionCode = 211
-        versionName = "2.0.1"
+        versionCode = getCustomVersionCode()
+        versionName = "2.2.0"
 
         vectorDrawables {
             useSupportLibrary = true
@@ -116,4 +119,10 @@ dependencies {
 
     androidTestImplementation(libs.mockwebserver)
     androidTestImplementation(libs.assertj)
+}
+
+fun getCustomVersionCode(): Int {
+    val dateFormat = SimpleDateFormat("yyyyMMddHH")
+    val dateString = dateFormat.format(Date())
+    return dateString.toInt()
 }
