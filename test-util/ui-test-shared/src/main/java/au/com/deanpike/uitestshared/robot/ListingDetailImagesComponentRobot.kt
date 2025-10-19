@@ -14,7 +14,7 @@ import au.com.deanpike.uitestshared.util.assertTagDoesNotExist
 import au.com.deanpike.uitestshared.util.swipeLeft
 import au.com.deanpike.uitestshared.util.swipeRight
 
-class ListingDetailImagesComponentRobot(private val composeRule: ComposeContentTestRule) : TestRobotBase<ListingDetailImagesComponentRobot, ListingDetailImagesComponentRobotInitData>(composeRule) {
+class ListingDetailImagesComponentRobot(composeRule: ComposeContentTestRule) : TestRobotBase<ListingDetailImagesComponentRobot, ListingDetailImagesComponentRobotInitData>(composeRule) {
     override fun setupComponent(data: ListingDetailImagesComponentRobotInitData?): ListingDetailImagesComponentRobot {
         composeRule.setContent {
             MviExampleTheme {

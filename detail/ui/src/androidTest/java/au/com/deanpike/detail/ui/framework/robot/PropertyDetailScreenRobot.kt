@@ -25,7 +25,7 @@ import au.com.deanpike.uitestshared.util.assertTextDisplayed
 import au.com.deanpike.uitestshared.util.swipeUp
 import au.com.deanpike.uitestshared.util.waitUntilTagExists
 
-class PropertyDetailScreenRobot(private val composeRule: ComposeContentTestRule) : TestRobotBase<PropertyDetailScreenRobot, PropertyDetailScreenRobotInitData>(composeRule) {
+class PropertyDetailScreenRobot(composeRule: ComposeContentTestRule) : TestRobotBase<PropertyDetailScreenRobot, PropertyDetailScreenRobotInitData>(composeRule) {
 
     private val detailItemRobot = DetailItemComponentRobot(composeRule)
     var closeClicked = false

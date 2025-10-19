@@ -24,7 +24,7 @@ import au.com.deanpike.uitestshared.util.assertTextDisplayed
 import au.com.deanpike.uitestshared.util.clickOn
 import org.junit.Assert
 
-class ProjectChildListItemComponentRobot(private val composeRule: ComposeContentTestRule) : TestRobotBase<ProjectChildListItemComponentRobot, ProjectChildListItemComponentRobotInitData>(composeRule) {
+class ProjectChildListItemComponentRobot(composeRule: ComposeContentTestRule) : TestRobotBase<ProjectChildListItemComponentRobot, ProjectChildListItemComponentRobotInitData>(composeRule) {
     private var childId: Long = 0L
     var clickedId: Long? = null
         private set

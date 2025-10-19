@@ -19,7 +19,7 @@ import au.com.deanpike.uitestshared.util.assertTextDisplayed
 import au.com.deanpike.uitestshared.util.swipeLeft
 import au.com.deanpike.uitestshared.util.swipeRight
 
-class ListingImagesComponentRobot(private val composeRule: ComposeContentTestRule) : TestRobotBase<ListingImagesComponentRobot, ListingImagesComponentRobotInitData>(composeRule) {
+class ListingImagesComponentRobot(composeRule: ComposeContentTestRule) : TestRobotBase<ListingImagesComponentRobot, ListingImagesComponentRobotInitData>(composeRule) {
     override fun setupComponent(data: ListingImagesComponentRobotInitData?): ListingImagesComponentRobot {
         composeRule.setContent {
             MviExampleTheme {

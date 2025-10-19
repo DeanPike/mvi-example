@@ -15,7 +15,7 @@ import au.com.deanpike.uitestshared.util.assertTextDisplayed
 import au.com.deanpike.uitestshared.util.clickOn
 import org.assertj.core.api.Assertions.assertThat
 
-class ProjectChildComponentRobot(private val composeRule: ComposeContentTestRule) : TestRobotBase<ProjectChildComponentRobot, ProjectChildComponentRobotInitData>(composeRule) {
+class ProjectChildComponentRobot(composeRule: ComposeContentTestRule) : TestRobotBase<ProjectChildComponentRobot, ProjectChildComponentRobotInitData>(composeRule) {
     private var clickedProjectChildId: Long? = null
 
     override fun setupComponent(data: ProjectChildComponentRobotInitData?): ProjectChildComponentRobot {

@@ -11,7 +11,7 @@ import au.com.deanpike.uitestshared.util.assertTagDisplayed
 import au.com.deanpike.uitestshared.util.assertTextDisplayed
 import au.com.deanpike.uitestshared.util.waitUntilTagExists
 
-class PriceComponentRobot(private val composeRule: ComposeContentTestRule) : TestRobotBase<PriceComponentRobot, PriceComponentRobotInitData>(composeRule) {
+class PriceComponentRobot(composeRule: ComposeContentTestRule) : TestRobotBase<PriceComponentRobot, PriceComponentRobotInitData>(composeRule) {
     override fun setupComponent(data: PriceComponentRobotInitData?): PriceComponentRobot {
         composeRule.setContent {
             MviExampleTheme {

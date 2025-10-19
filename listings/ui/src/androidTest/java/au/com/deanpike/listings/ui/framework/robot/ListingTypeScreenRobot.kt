@@ -17,7 +17,7 @@ import au.com.deanpike.uitestshared.util.assertTagDisplayed
 import au.com.deanpike.uitestshared.util.assertTextDisplayed
 import au.com.deanpike.uitestshared.util.clickOn
 
-class ListingTypeScreenRobot(private val composeRule: ComposeContentTestRule) : TestRobotBase<ListingTypeScreenRobot, ListingTypeScreenRobotInitData>(composeRule) {
+class ListingTypeScreenRobot(composeRule: ComposeContentTestRule) : TestRobotBase<ListingTypeScreenRobot, ListingTypeScreenRobotInitData>(composeRule) {
     var listingTypeSelected: DwellingType = DwellingType.ALL
         private set
     var isSelected = false

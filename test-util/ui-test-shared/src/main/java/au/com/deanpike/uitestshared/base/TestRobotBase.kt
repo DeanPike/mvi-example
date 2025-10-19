@@ -4,7 +4,7 @@ import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import au.com.deanpike.uitestshared.util.advanceTimeAndWait
 
 @Suppress("UNCHECKED_CAST")
-abstract class TestRobotBase<R, D : TestRobotInitData>(private val composeRule: ComposeContentTestRule) {
+abstract class TestRobotBase<R, D : TestRobotInitData>(protected val composeRule: ComposeContentTestRule) {
 
     fun waitForIdle(): R {
         composeRule.advanceTimeAndWait()

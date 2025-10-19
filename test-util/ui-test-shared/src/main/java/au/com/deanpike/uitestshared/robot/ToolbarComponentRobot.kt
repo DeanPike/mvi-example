@@ -14,7 +14,7 @@ import au.com.deanpike.uitestshared.util.assertTagDisplayed
 import au.com.deanpike.uitestshared.util.assertTextDisplayed
 import au.com.deanpike.uitestshared.util.clickOn
 
-class ToolbarComponentRobot(private val composeRule: ComposeContentTestRule) : TestRobotBase<ToolbarComponentRobot, ToolbarComponentRobotInitData>(composeRule) {
+class ToolbarComponentRobot(composeRule: ComposeContentTestRule) : TestRobotBase<ToolbarComponentRobot, ToolbarComponentRobotInitData>(composeRule) {
     override fun setupComponent(data: ToolbarComponentRobotInitData?): ToolbarComponentRobot {
         composeRule.setContent {
             MviExampleTheme {

@@ -13,7 +13,7 @@ import au.com.deanpike.uitestshared.util.assertTagDisplayed
 import au.com.deanpike.uitestshared.util.clickOnItemAtPosition
 import au.com.deanpike.uitestshared.util.scrollToItemPosition
 
-class ProjectChildrenComponentRobot(private val composeRule: ComposeContentTestRule) : TestRobotBase<ProjectChildrenComponentRobot, ProjectChildrenComponentRobotInitData>(composeRule) {
+class ProjectChildrenComponentRobot(composeRule: ComposeContentTestRule) : TestRobotBase<ProjectChildrenComponentRobot, ProjectChildrenComponentRobotInitData>(composeRule) {
     private var clickedProjectChildId: Long? = null
     override fun setupComponent(data: ProjectChildrenComponentRobotInitData?): ProjectChildrenComponentRobot {
         clickedProjectChildId = null

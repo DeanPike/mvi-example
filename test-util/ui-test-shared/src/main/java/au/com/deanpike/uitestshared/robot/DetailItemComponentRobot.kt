@@ -12,7 +12,7 @@ import au.com.deanpike.uitestshared.util.assertDrawableDisplayed
 import au.com.deanpike.uitestshared.util.assertTagDisplayed
 import au.com.deanpike.uitestshared.util.assertTextDisplayed
 
-class DetailItemComponentRobot(private val composeRule: ComposeContentTestRule) : TestRobotBase<DetailItemComponentRobot, TestRobotInitData>(composeRule) {
+class DetailItemComponentRobot(composeRule: ComposeContentTestRule) : TestRobotBase<DetailItemComponentRobot, TestRobotInitData>(composeRule) {
 
     override fun setupComponent(data: TestRobotInitData?): DetailItemComponentRobot {
         composeRule.setContent {

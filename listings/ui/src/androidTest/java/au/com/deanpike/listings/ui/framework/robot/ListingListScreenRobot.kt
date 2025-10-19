@@ -20,7 +20,7 @@ import au.com.deanpike.uitestshared.util.assertTextDisplayed
 import au.com.deanpike.uitestshared.util.scrollToItemPosition
 import au.com.deanpike.uitestshared.util.waitUntilTagExists
 
-class ListingListScreenRobot(private val composeRule: ComposeContentTestRule) : TestRobotBase<ListingListScreenRobot, ListingListScreenRobotInitData>(composeRule) {
+class ListingListScreenRobot(composeRule: ComposeContentTestRule) : TestRobotBase<ListingListScreenRobot, ListingListScreenRobotInitData>(composeRule) {
     override fun setupComponent(data: ListingListScreenRobotInitData?): ListingListScreenRobot {
         composeRule.setContent {
             MviExampleTheme {

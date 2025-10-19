@@ -19,7 +19,7 @@ import au.com.deanpike.uitestshared.util.assertTagDisplayed
 import au.com.deanpike.uitestshared.util.assertTextDisplayed
 import au.com.deanpike.uitestshared.util.clickOn
 
-class ProjectListItemRobot(private val composeRule: ComposeContentTestRule) : TestRobotBase<ProjectListItemRobot, ProjectListItemRobotInitData>(composeRule) {
+class ProjectListItemRobot(composeRule: ComposeContentTestRule) : TestRobotBase<ProjectListItemRobot, ProjectListItemRobotInitData>(composeRule) {
     var clickedProjectId: Long? = null
         private set
     var clickedProjectChildId: Long? = null

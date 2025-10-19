@@ -15,7 +15,7 @@ import au.com.deanpike.uitestshared.util.assertTagDisplayed
 import au.com.deanpike.uitestshared.util.assertTagDoesNotExist
 import au.com.deanpike.uitestshared.util.assertTextDisplayed
 
-class BedBathCarComponentRobot(private val composeRule: ComposeContentTestRule) : TestRobotBase<BedBathCarComponentRobot, BedBathCarComponentRobotInitData>(composeRule) {
+class BedBathCarComponentRobot(composeRule: ComposeContentTestRule) : TestRobotBase<BedBathCarComponentRobot, BedBathCarComponentRobotInitData>(composeRule) {
     override fun setupComponent(data: BedBathCarComponentRobotInitData?): BedBathCarComponentRobot {
         composeRule.setContent {
             MviExampleTheme {

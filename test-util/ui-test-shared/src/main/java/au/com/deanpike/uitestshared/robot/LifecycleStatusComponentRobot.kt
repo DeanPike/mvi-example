@@ -10,7 +10,7 @@ import au.com.deanpike.uitestshared.base.TestRobotInitData
 import au.com.deanpike.uitestshared.util.assertTagDisplayed
 import au.com.deanpike.uitestshared.util.assertTextDisplayed
 
-class LifecycleStatusComponentRobot(private val composeRule: ComposeContentTestRule) : TestRobotBase<LifecycleStatusComponentRobot, LifecycleStatusComponentRobotInitData>(composeRule) {
+class LifecycleStatusComponentRobot(composeRule: ComposeContentTestRule) : TestRobotBase<LifecycleStatusComponentRobot, LifecycleStatusComponentRobotInitData>(composeRule) {
 
     override fun setupComponent(data: LifecycleStatusComponentRobotInitData?): LifecycleStatusComponentRobot {
         composeRule.setContent {

@@ -26,7 +26,7 @@ import au.com.deanpike.uitestshared.util.scrollToItemPosition
 import au.com.deanpike.uitestshared.util.swipeUp
 import au.com.deanpike.uitestshared.util.waitUntilTagExists
 
-class ProjectDetailScreenRobot(private val composeRule: ComposeContentTestRule) : TestRobotBase<ProjectDetailScreenRobot, ProjectDetailScreenRobotInitData>(composeRule) {
+class ProjectDetailScreenRobot(composeRule: ComposeContentTestRule) : TestRobotBase<ProjectDetailScreenRobot, ProjectDetailScreenRobotInitData>(composeRule) {
     var selectedProjectChildId: Long? = null
     var closeClicked = false
     var retryClicked = false

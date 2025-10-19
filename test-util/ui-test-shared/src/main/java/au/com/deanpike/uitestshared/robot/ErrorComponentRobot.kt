@@ -17,7 +17,7 @@ import au.com.deanpike.uitestshared.util.clickOn
 import au.com.deanpike.uitestshared.util.waitUntilTagExists
 import org.assertj.core.api.Assertions.assertThat
 
-class ErrorComponentRobot(private val composeRule: ComposeContentTestRule) : TestRobotBase<ErrorComponentRobot, TestRobotInitData>(composeRule) {
+class ErrorComponentRobot(composeRule: ComposeContentTestRule) : TestRobotBase<ErrorComponentRobot, TestRobotInitData>(composeRule) {
     private var retryClicked = false
 
     override fun setupComponent(data: TestRobotInitData?): ErrorComponentRobot {

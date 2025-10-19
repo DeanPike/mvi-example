@@ -10,7 +10,7 @@ import au.com.deanpike.uitestshared.base.TestRobotInitData
 import au.com.deanpike.uitestshared.util.assertTagDisplayed
 import au.com.deanpike.uitestshared.util.clickOn
 
-class DetailAppBarComponentRobot(private val composeRule: ComposeContentTestRule) : TestRobotBase<DetailAppBarComponentRobot, TestRobotInitData>(composeRule) {
+class DetailAppBarComponentRobot(composeRule: ComposeContentTestRule) : TestRobotBase<DetailAppBarComponentRobot, TestRobotInitData>(composeRule) {
     var closeClicked = false
         private set
 

@@ -11,7 +11,7 @@ import au.com.deanpike.uitestshared.util.assertTagDoesNotExist
 import au.com.deanpike.uitestshared.util.assertTextDisplayed
 import au.com.deanpike.uitestshared.util.clickOn
 
-class StatusDropDownMenuRobot(private val composeRule: ComposeContentTestRule) : TestRobotBase<StatusDropDownMenuRobot, TestRobotInitData>(composeRule) {
+class StatusDropDownMenuRobot(composeRule: ComposeContentTestRule) : TestRobotBase<StatusDropDownMenuRobot, TestRobotInitData>(composeRule) {
     fun assertMenuDisplayed(): StatusDropDownMenuRobot {
         composeRule.assertTagDisplayed(STATUS_ITEM_MENU)
         return this

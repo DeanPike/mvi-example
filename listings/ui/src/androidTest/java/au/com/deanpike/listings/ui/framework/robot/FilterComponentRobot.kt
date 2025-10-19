@@ -19,7 +19,7 @@ import au.com.deanpike.uitestshared.util.clickOn
 import au.com.deanpike.uitestshared.util.waitUntilTagExists
 import org.assertj.core.api.Assertions.assertThat
 
-class FilterComponentRobot(private val composeRule: ComposeContentTestRule) : TestRobotBase<FilterComponentRobot, FilterComponentRobotInitData>(composeRule) {
+class FilterComponentRobot(composeRule: ComposeContentTestRule) : TestRobotBase<FilterComponentRobot, FilterComponentRobotInitData>(composeRule) {
     private var statusSelected = StatusType.RENT
     private var listingTypeSelected = false
 

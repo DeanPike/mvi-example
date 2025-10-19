@@ -14,7 +14,7 @@ import au.com.deanpike.uitestshared.base.TestRobotBase
 import au.com.deanpike.uitestshared.base.TestRobotInitData
 import au.com.deanpike.uitestshared.util.assertTagDisplayed
 
-class AgencyBannerComponentRobot(private val composeRule: ComposeContentTestRule) : TestRobotBase<AgencyBannerComponentRobot, AgencyBannerComponentRobotInitData>(composeRule) {
+class AgencyBannerComponentRobot(composeRule: ComposeContentTestRule) : TestRobotBase<AgencyBannerComponentRobot, AgencyBannerComponentRobotInitData>(composeRule) {
 
     override fun setupComponent(data: AgencyBannerComponentRobotInitData?): AgencyBannerComponentRobot {
         composeRule.setContent {

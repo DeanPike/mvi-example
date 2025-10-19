@@ -23,7 +23,7 @@ import au.com.deanpike.uitestshared.util.assertTextDisplayed
 import au.com.deanpike.uitestshared.util.clickOn
 import au.com.deanpike.uitestshared.util.waitUntilTagExists
 
-class PropertyListItemRobot(private val composeRule: ComposeContentTestRule) : TestRobotBase<PropertyListItemRobot, PropertyListItemRobotInitData>(composeRule) {
+class PropertyListItemRobot(composeRule: ComposeContentTestRule) : TestRobotBase<PropertyListItemRobot, PropertyListItemRobotInitData>(composeRule) {
     var clickedId: Long? = null
         private set
 

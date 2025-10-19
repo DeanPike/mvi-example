@@ -14,7 +14,7 @@ import au.com.deanpike.uitestshared.util.assertTagDisplayed
 import au.com.deanpike.uitestshared.util.assertTextDisplayed
 import au.com.deanpike.uitestshared.util.scrollTo
 
-class AgencyComponentRobot(private val composeRule: ComposeContentTestRule) : TestRobotBase<AgencyComponentRobot, AgencyComponentRobotInitData>(composeRule) {
+class AgencyComponentRobot(composeRule: ComposeContentTestRule) : TestRobotBase<AgencyComponentRobot, AgencyComponentRobotInitData>(composeRule) {
     override fun setupComponent(data: AgencyComponentRobotInitData?): AgencyComponentRobot {
         composeRule.setContent {
             MviExampleTheme {
