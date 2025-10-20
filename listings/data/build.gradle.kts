@@ -27,7 +27,8 @@ dependencies {
     implementation(libs.retrofit)
     api(libs.retrofit.converter.gson)
 
-    testImplementation(libs.junit.jupiter)
+    testImplementation(platform(libs.junit.bom))
+    testImplementation(libs.bundles.junit.jupiter)
     testImplementation(libs.assertj)
     testImplementation(libs.mockk)
     testImplementation(libs.coroutines.test)

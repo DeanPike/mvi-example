@@ -20,28 +20,28 @@ class TestDispatcherExtension(private val testDispatcher: TestDispatcher = Uncon
 
     private lateinit var dispatcherProvider: DispatcherProvider
 
-    override fun beforeEach(context: ExtensionContext?) {
+    override fun beforeEach(context: ExtensionContext) {
         Dispatchers.setMain(testDispatcher)
     }
 
-    override fun afterEach(context: ExtensionContext?) {
+    override fun afterEach(context: ExtensionContext) {
         Dispatchers.resetMain()
     }
 
-    override fun beforeAll(context: ExtensionContext?) {
+    override fun beforeAll(context: ExtensionContext) {
         dispatcherProvider = DispatcherTestHelper.getTestDispatcher(testDispatcher)
         Dispatchers.setMain(dispatcherProvider.getMainDispatcher())
     }
 
-    override fun afterAll(context: ExtensionContext?) {
+    override fun afterAll(context: ExtensionContext) {
         Dispatchers.resetMain()
     }
 
-    override fun supportsParameter(parameterContext: ParameterContext?, extensionContext: ExtensionContext?): Boolean {
-        return parameterContext?.parameter?.type == DispatcherProvider::class.java
+    override fun supportsParameter(parameterContext: ParameterContext, extensionContext: ExtensionContext): Boolean {
+        return parameterContext.parameter.type == DispatcherProvider::class.java
     }
 
-    override fun resolveParameter(parameterContext: ParameterContext?, extensionContext: ExtensionContext?): Any {
+    override fun resolveParameter(parameterContext: ParameterContext, extensionContext: ExtensionContext): Any {
         return dispatcherProvider
     }
 }

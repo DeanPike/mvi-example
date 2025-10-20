@@ -1,12 +1,13 @@
 package au.com.deanpike.listings.ui.framework.robot
 
+import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.assertAny
-import androidx.compose.ui.test.filterToOne
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
-import androidx.compose.ui.test.onChildren
+import androidx.compose.ui.test.onAncestors
 import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.onParent
 import au.com.deanpike.listings.client.model.listing.response.Property
 import au.com.deanpike.listings.ui.list.component.PropertyListItem
 import au.com.deanpike.listings.ui.list.component.PropertyListItemTesTags
@@ -72,59 +73,68 @@ class PropertyListItemRobot(composeRule: ComposeContentTestRule) : TestRobotBase
     }
 
     fun assertBedroomDisplayed(bedrooms: String): PropertyListItemRobot {
-        composeRule.onNodeWithTag(testTag = PROPERTY_LIST_ITEM_LAYOUT, useUnmergedTree = true)
-            .onChildren()
-            .filterToOne(hasTestTag(DETAIL_ITEM_GROUP))
-            .onChildren()
-            .filterToOne(hasTestTag(DETAIL_ITEM_BEDROOMS))
-            .onChildren()
-            .assertAny(hasTestTag("DETAIL_ITEM_BEDROOMS_ICON"))
+        composeRule.onNodeWithTag(testTag = "DETAIL_ITEM_BEDROOMS_ICON", useUnmergedTree = true)
+            .assertExists()
+            .onParent()
+            .assert(hasTestTag(DETAIL_ITEM_BEDROOMS))
+            .onParent()
+            .assert(hasTestTag(DETAIL_ITEM_GROUP))
+            .onAncestors()
+            .assertAny(hasTestTag(PROPERTY_LIST_ITEM_LAYOUT))
 
-        composeRule.onNodeWithTag(testTag = PROPERTY_LIST_ITEM_LAYOUT, useUnmergedTree = true)
-            .onChildren()
-            .filterToOne(hasTestTag(DETAIL_ITEM_GROUP))
-            .onChildren()
-            .filterToOne(hasTestTag(DETAIL_ITEM_BEDROOMS))
-            .onChildren()
-            .assertAny(hasTestTag("DETAIL_ITEM_BEDROOMS_TEXT") and hasText(bedrooms))
+        composeRule.onNodeWithTag("DETAIL_ITEM_BEDROOMS_TEXT", useUnmergedTree = true)
+            .assert(hasText(bedrooms))
+            .onParent()
+            .assert(hasTestTag(DETAIL_ITEM_BEDROOMS))
+            .onParent()
+            .assert(hasTestTag(DETAIL_ITEM_GROUP))
+            .onAncestors()
+            .assertAny(hasTestTag(PROPERTY_LIST_ITEM_LAYOUT))
+
         return this
     }
 
     fun assertBathroomDisplayed(bathrooms: String): PropertyListItemRobot {
-        composeRule.onNodeWithTag(testTag = PROPERTY_LIST_ITEM_LAYOUT, useUnmergedTree = true)
-            .onChildren()
-            .filterToOne(hasTestTag(DETAIL_ITEM_GROUP))
-            .onChildren()
-            .filterToOne(hasTestTag(DETAIL_ITEM_BATHROOMS))
-            .onChildren()
-            .assertAny(hasTestTag("DETAIL_ITEM_BATHROOMS_ICON"))
+        composeRule.onNodeWithTag("DETAIL_ITEM_BATHROOMS_ICON", useUnmergedTree = true)
+            .assertExists()
+            .onParent()
+            .assert(hasTestTag(DETAIL_ITEM_BATHROOMS))
+            .onParent()
+            .assert(hasTestTag(DETAIL_ITEM_GROUP))
+            .onAncestors()
+            .assertAny(hasTestTag(PROPERTY_LIST_ITEM_LAYOUT))
 
-        composeRule.onNodeWithTag(testTag = PROPERTY_LIST_ITEM_LAYOUT, useUnmergedTree = true)
-            .onChildren()
-            .filterToOne(hasTestTag(DETAIL_ITEM_GROUP))
-            .onChildren()
-            .filterToOne(hasTestTag(DETAIL_ITEM_BATHROOMS))
-            .onChildren()
-            .assertAny(hasTestTag("DETAIL_ITEM_BATHROOMS_TEXT") and hasText(bathrooms))
+        composeRule.onNodeWithTag(testTag = "DETAIL_ITEM_BATHROOMS_TEXT", useUnmergedTree = true)
+            .assert(hasText(bathrooms))
+            .onParent()
+            .assert(hasTestTag(DETAIL_ITEM_BATHROOMS))
+            .onParent()
+            .assert(hasTestTag(DETAIL_ITEM_GROUP))
+            .onAncestors()
+            .assertAny(hasTestTag(PROPERTY_LIST_ITEM_LAYOUT))
+
         return this
     }
 
     fun assertCarSpacesDisplayed(carSpaces: String): PropertyListItemRobot {
-        composeRule.onNodeWithTag(testTag = PROPERTY_LIST_ITEM_LAYOUT, useUnmergedTree = true)
-            .onChildren()
-            .filterToOne(hasTestTag(DETAIL_ITEM_GROUP))
-            .onChildren()
-            .filterToOne(hasTestTag(DETAIL_ITEM_CAR_SPACES))
-            .onChildren()
-            .assertAny(hasTestTag("DETAIL_ITEM_CAR_SPACES_ICON"))
+        composeRule.onNodeWithTag(testTag = "DETAIL_ITEM_CAR_SPACES_ICON", useUnmergedTree = true)
+            .assertExists()
+            .onParent()
+            .assert(hasTestTag(DETAIL_ITEM_CAR_SPACES))
+            .onParent()
+            .assert(hasTestTag(DETAIL_ITEM_GROUP))
+            .onAncestors()
+            .assertAny(hasTestTag(PROPERTY_LIST_ITEM_LAYOUT))
 
-        composeRule.onNodeWithTag(testTag = PROPERTY_LIST_ITEM_LAYOUT, useUnmergedTree = true)
-            .onChildren()
-            .filterToOne(hasTestTag(DETAIL_ITEM_GROUP))
-            .onChildren()
-            .filterToOne(hasTestTag(DETAIL_ITEM_CAR_SPACES))
-            .onChildren()
-            .assertAny(hasTestTag("DETAIL_ITEM_CAR_SPACES_TEXT") and hasText(carSpaces))
+        composeRule.onNodeWithTag(testTag = "DETAIL_ITEM_CAR_SPACES_TEXT", useUnmergedTree = true)
+            .assert(hasText(carSpaces))
+            .onParent()
+            .assert(hasTestTag(DETAIL_ITEM_CAR_SPACES))
+            .onParent()
+            .assert(hasTestTag(DETAIL_ITEM_GROUP))
+            .onAncestors()
+            .assertAny(hasTestTag(PROPERTY_LIST_ITEM_LAYOUT))
+
         return this
     }
 

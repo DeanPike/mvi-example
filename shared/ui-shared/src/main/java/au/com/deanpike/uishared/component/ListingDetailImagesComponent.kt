@@ -38,7 +38,6 @@ import au.com.deanpike.uishared.component.ListingDetailImagesTestTags.LISTING_DE
 import au.com.deanpike.uishared.component.ListingDetailImagesTestTags.LISTING_DETAIL_IMAGES_PAGER
 import au.com.deanpike.uishared.component.ListingDetailImagesTestTags.LISTING_DETAIL_IMAGES_POSITION_INDICATOR
 import au.com.deanpike.uishared.theme.Dimension.DIM_16
-import au.com.deanpike.uishared.theme.Dimension.DIM_8
 import au.com.deanpike.uishared.theme.MviExampleTheme
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
@@ -180,9 +179,6 @@ object ListingDetailImagesTestTags {
     const val LISTING_DETAIL_IMAGES_PAGER = "${PREFIX}PAGER"
     const val LISTING_DETAIL_IMAGES_IMAGE = "${PREFIX}IMAGE"
     const val LISTING_DETAIL_IMAGES_POSITION_INDICATOR = "${PREFIX}POSITION_INDICATOR"
-    const val LISTING_DETAIL_IMAGES_IMAGE_COUNT = "${PREFIX}IMAGE_COUNT"
-    const val LISTING_DETAIL_IMAGES_PREVIOUS_IMAGE = "${PREFIX}PREVIOUS_IMAGE"
-    const val LISTING_DETAIL_IMAGES_NEXT_IMAGE = "${PREFIX}NEXT_IMAGE"
 }
 
 @Preview

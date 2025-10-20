@@ -58,13 +58,15 @@ dependencies {
     implementation(project(":shared:ui-shared"))
     implementation(project(":shared:data-shared"))
     implementation(project(":shared:common-shared"))
+
+    testImplementation(project(":test-util:unit-test-shared"))
+
     androidTestImplementation(project(":detail:client"))
     androidTestImplementation(project(":detail:data"))
     androidTestImplementation(project(":test-util:ui-test-shared"))
     androidTestImplementation(project(":shared:ui-shared"))
     androidTestImplementation(project(":network"))
     androidTestImplementation(project(":test-util:unit-test-shared"))
-    testImplementation(project(":test-util:unit-test-shared"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -74,9 +76,8 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
-    androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.ui.test.junit4)
+    implementation(libs.coil.compose)
+    implementation(libs.constraintlayout.compose)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
@@ -84,19 +85,20 @@ dependencies {
     ksp(libs.hilt.compiler)
     implementation(libs.hilt.navigation.compose)
 
-    androidTestImplementation(libs.hilt.android)
-    kspAndroidTest(libs.hilt.compiler)
-    androidTestImplementation(libs.hilt.android.testing)
-
-    implementation(libs.coil.compose)
-    implementation(libs.constraintlayout.compose)
-
-    androidTestImplementation(libs.mockwebserver)
-    androidTestImplementation(libs.assertj)
-
-    testImplementation(libs.junit.jupiter)
+    testImplementation(platform(libs.junit.bom))
+    testImplementation(libs.bundles.junit.jupiter)
     testImplementation(libs.mockk)
     testImplementation(libs.assertj)
     testImplementation(libs.coroutines.test)
     testImplementation(libs.turbine)
+
+    androidTestImplementation(libs.hilt.android)
+    kspAndroidTest(libs.hilt.compiler)
+    androidTestImplementation(libs.hilt.android.testing)
+
+    androidTestImplementation(libs.mockwebserver)
+    androidTestImplementation(libs.assertj)
+    androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(libs.androidx.ui.test.junit4)
 }

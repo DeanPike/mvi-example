@@ -8,6 +8,7 @@ abstract class TestRobotBase<R, D : TestRobotInitData>(protected val composeRule
 
     fun waitForIdle(): R {
         composeRule.advanceTimeAndWait()
+        composeRule.waitForIdle()
         return this as R
     }
 

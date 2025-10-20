@@ -12,6 +12,7 @@ java {
 
 dependencies {
     implementation(project(":shared:data-shared"))
+    implementation(platform(libs.junit.bom))
     implementation(libs.junit.jupiter)
     implementation(libs.kotlinx.coroutines.test.jvm)
     implementation(libs.kotlinx.coroutines.core.jvm)
