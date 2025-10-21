@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -55,6 +56,7 @@ fun PropertyListItem(
             .testTag(PROPERTY_LIST_ITEM_LAYOUT),
         shape = RoundedCornerShape(DIM_8),
         border = BorderStroke(width = 0.5.dp, color = outlineLight),
+        elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
     ) {
         Box(modifier = Modifier.background(color = MaterialTheme.colorScheme.background)) {
             Column(
