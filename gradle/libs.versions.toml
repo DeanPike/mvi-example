@@ -4,7 +4,7 @@ jvmTargetVersion = "17"
 javaCompileVersion = "VERSION_17"
 compileSdk = "36"
 targetSdk = "36"
-minSdk = "29"
+minSdk = "30"
 
 #Dependency versions
 activityCompose = "1.11.0"
