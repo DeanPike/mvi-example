@@ -24,7 +24,7 @@ import au.com.deanpike.uishared.theme.MviExampleTheme
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ToolbarComponent(
-    title: String,
+    title: String = "",
     onBackClicked: () -> Unit = {}
 ) {
     TopAppBar(

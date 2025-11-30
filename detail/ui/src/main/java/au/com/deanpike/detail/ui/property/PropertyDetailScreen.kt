@@ -1,21 +1,18 @@
 package au.com.deanpike.detail.ui.property
 
 import androidx.activity.compose.BackHandler
+import androidx.activity.compose.LocalActivity
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -24,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -52,11 +50,15 @@ import au.com.deanpike.uishared.component.ErrorComponent
 import au.com.deanpike.uishared.component.ExpandableText
 import au.com.deanpike.uishared.component.ListingImagesComponent
 import au.com.deanpike.uishared.component.PriceComponent
-import au.com.deanpike.uishared.component.ToolbarComponent
+import au.com.deanpike.uishared.component.ToolbarComponentTestTags.TOOLBAR_TITLE
 import au.com.deanpike.uishared.theme.Dimension.DIM_16
+import au.com.deanpike.uishared.theme.Dimension.DIM_4
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
 import au.com.deanpike.uishared.theme.MviExampleTheme
+import au.com.deanpike.uishared.util.NavigationBarScrim
 import au.com.deanpike.uishared.util.SetStatusBarAppearance
+import au.com.deanpike.uishared.util.SetupStatusBar
+import au.com.deanpike.uishared.util.StatusBarGradient
 
 @Composable
 fun PropertyDetailScreen(
@@ -163,21 +165,15 @@ fun PropertyDetailSuccess(
 ) {
     val scrollState = rememberScrollState()
     val scope = rememberCoroutineScope()
+    val activity = LocalActivity.current
 
     SetStatusBarAppearance(useDarkIcons = true)
-    Scaffold(
-        containerColor = Color.Transparent,
-        topBar = {
-            ToolbarComponent(
-                title = state.propertyDetail?.address ?: "",
-                onBackClicked = onBackClicked
-            )
-        }
-    ) { innerPadding ->
+
+    Box(modifier = Modifier.fillMaxSize()) {
         Column(
             modifier = Modifier
-                .padding(innerPadding)
                 .verticalScroll(scrollState)
+                .align(Alignment.Center)
         ) {
             ListingImagesComponent(
                 screenState = state.screenState,
@@ -189,6 +185,23 @@ fun PropertyDetailSuccess(
                 agencyColour = state.propertyDetail?.advertiser?.preferredColorHex,
                 logo = state.propertyDetail?.advertiser?.logoUrl
             )
+
+            Text(
+                modifier = Modifier
+                    .padding(
+                        start = DIM_16,
+                        end = DIM_16,
+                        top = DIM_4
+                    )
+                    .testTag(TOOLBAR_TITLE),
+                text = state.propertyDetail?.address ?: "",
+                style = MaterialTheme.typography.labelLarge
+            )
+
+            HorizontalDivider(
+                modifier = Modifier.padding(top = DIM_8, bottom = DIM_8)
+            )
+
 
             PriceComponent(
                 modifier = Modifier.padding(horizontal = DIM_16, vertical = DIM_8),
@@ -239,6 +252,29 @@ fun PropertyDetailSuccess(
             state.propertyDetail?.advertiser?.let { advertiser ->
                 AgencyComponent(advertiser = advertiser)
             }
+        }
+
+        activity?.let {
+            SetupStatusBar(it)
+        }
+        StatusBarGradient()
+        NavigationBarScrim()
+
+        IconButton(
+            modifier = Modifier
+                .windowInsetsPadding(WindowInsets.statusBars)
+                .align(Alignment.TopStart),
+            onClick = { onBackClicked() },
+            shape = CircleShape,
+            colors = IconButtonDefaults.iconButtonColors().copy(
+                containerColor = Color.White.copy(alpha = 0.3F)
+            )
+        ) {
+            Icon(
+                painter = painterResource(au.com.deanpike.uishared.R.drawable.arrow_back_24),
+                contentDescription = stringResource(au.com.deanpike.uishared.R.string.back),
+                tint = MaterialTheme.colorScheme.background,
+            )
         }
     }
 }

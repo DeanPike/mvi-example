@@ -40,9 +40,9 @@ fun ProjectChildListItemComponent(
             .padding(top = DIM_4, bottom = DIM_4)
             .testTag("${PROJECT_CHILD_LIST_ITEM_LAYOUT}_${projectChild.id}"),
         colors = CardDefaults.cardColors().copy(
-            containerColor = MaterialTheme.colorScheme.surface
+            containerColor = MaterialTheme.colorScheme.surface,
         ),
-        border = BorderStroke(width = 1.dp, color = MaterialTheme.colorScheme.outline),
+        border = BorderStroke(width = 0.5.dp, color = MaterialTheme.colorScheme.outlineVariant),
         onClick = {
             onProjectChildClicked(projectChild.id)
         }

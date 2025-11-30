@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <plurals name="project_properties">
-        <item quantity="one">1 Property</item>
-        <item quantity="other">%d Properties</item>
+        <item quantity="one">1 Property found</item>
+        <item quantity="other">%d Properties found</item>
     </plurals>
     <plurals name="listing_types">
         <item quantity="one">1 Property type</item>

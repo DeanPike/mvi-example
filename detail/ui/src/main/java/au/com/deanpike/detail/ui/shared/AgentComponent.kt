@@ -54,7 +54,7 @@ fun AgentComponent(
             colors = CardDefaults.cardColors().copy(
                 containerColor = Color.Gray.copy(alpha = 0.05F)
             ),
-            border = BorderStroke(width = 1.dp, color = MaterialTheme.colorScheme.outline)
+            border = BorderStroke(width = 0.5.dp, color = MaterialTheme.colorScheme.outlineVariant)
         ) {
             ConstraintLayout(
                 modifier = Modifier

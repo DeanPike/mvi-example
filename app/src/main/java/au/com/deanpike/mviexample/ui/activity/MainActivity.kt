@@ -11,10 +11,12 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.ui.Modifier
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.window.core.layout.WindowSizeClass
 import androidx.window.core.layout.WindowWidthSizeClass
 import au.com.deanpike.uishared.theme.MviExampleTheme
-import au.com.deanpike.uishared.util.SetStatusBarAppearance
+import au.com.deanpike.uishared.util.SetupStatusBar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,7 +26,19 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         val activity = this
 
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+
+        // Adjust status and navigation bar appearance
+        val insetsController = WindowInsetsControllerCompat(window, window.decorView)
+        insetsController.isAppearanceLightStatusBars = true
+        insetsController.isAppearanceLightNavigationBars = true
+
+        // Optional: Set specific colors for status and navigation bars
+        window.statusBarColor = android.graphics.Color.TRANSPARENT
+        window.navigationBarColor = android.graphics.Color.TRANSPARENT
+
         setContent {
+            SetupStatusBar(this)
             val windowSizeClass: WindowSizeClass = currentWindowAdaptiveInfo().windowSizeClass
 
             DisposableEffect(windowSizeClass) {
@@ -41,8 +55,10 @@ class MainActivity : ComponentActivity() {
             }
 
             MviExampleTheme {
-                SetStatusBarAppearance(useDarkIcons = true)
-                Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
                     ApplicationScreen()
                 }
             }

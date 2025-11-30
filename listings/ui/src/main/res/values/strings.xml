@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="mvi_example">Property</string>
+    <string name="list_heading">Property Search Example</string>
 
     <string name="project_banner_image_description">Project banner image</string>
 

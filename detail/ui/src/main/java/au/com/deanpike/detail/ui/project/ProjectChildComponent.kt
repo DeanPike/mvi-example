@@ -15,7 +15,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
@@ -51,9 +50,9 @@ fun ProjectChildComponent(
     Card(
         modifier = Modifier.width(width),
         colors = CardDefaults.cardColors().copy(
-            containerColor = Color.Gray.copy(alpha = 0.05F)
+            containerColor = MaterialTheme.colorScheme.background
         ),
-        border = BorderStroke(width = 1.dp, color = MaterialTheme.colorScheme.outline)
+        border = BorderStroke(width = 0.5.dp, color = MaterialTheme.colorScheme.outlineVariant),
     ) {
         Row(
             modifier = Modifier

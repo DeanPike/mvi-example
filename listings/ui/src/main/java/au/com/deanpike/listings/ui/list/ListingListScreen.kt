@@ -7,11 +7,13 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -30,6 +32,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import au.com.deanpike.listings.client.model.listing.response.Project
@@ -39,6 +42,7 @@ import au.com.deanpike.listings.client.type.StatusType
 import au.com.deanpike.listings.ui.R
 import au.com.deanpike.listings.ui.list.ListingListScreenTestTags.LISTING_LIST
 import au.com.deanpike.listings.ui.list.ListingListScreenTestTags.LISTING_LIST_HEADING
+import au.com.deanpike.listings.ui.list.ListingListScreenTestTags.LISTING_LIST_TITLE
 import au.com.deanpike.listings.ui.list.component.FilterComponent
 import au.com.deanpike.listings.ui.list.component.ProjectListItem
 import au.com.deanpike.listings.ui.list.component.PropertyListItem
@@ -148,35 +152,51 @@ fun ListingListScreenContent(
     val layoutDirection = LocalLayoutDirection.current
 
     Scaffold(
+        modifier = Modifier
+            .fillMaxSize(),
+        containerColor = Color.Transparent,
         topBar = {
             TopAppBar(
                 title = {
-                    Text(
-                        modifier = Modifier.testTag(LISTING_LIST_HEADING),
-                        text = when (state.screenState) {
-                            ScreenStateType.LOADING -> {
-                                stringResource(id = R.string.loading)
-                            }
-                            ScreenStateType.SUCCESS -> {
-                                pluralStringResource(id = R.plurals.project_properties, state.listings.count(), state.listings.count())
-                            }
-                            else -> {
-                                ""
-                            }
-                        }
-                    )
+                    Column(modifier = Modifier.fillMaxWidth()) {
+                        Text(
+                            modifier = Modifier
+                                .align(alignment = Alignment.CenterHorizontally)
+                                .testTag(LISTING_LIST_TITLE),
+                            text = stringResource(id = R.string.list_heading)
+                        )
+                        Text(
+                            modifier = Modifier
+                                .padding(top = DIM_8)
+                                .testTag(LISTING_LIST_HEADING),
+                            text = when (state.screenState) {
+                                ScreenStateType.LOADING -> {
+                                    stringResource(id = R.string.loading)
+                                }
+                                ScreenStateType.SUCCESS -> {
+                                    pluralStringResource(id = R.plurals.project_properties, state.listings.count(), state.listings.count())
+                                }
+                                else -> {
+                                    ""
+                                }
+                            },
+                            style = MaterialTheme.typography.bodySmall
+                        )
+                    }
                 }
             )
 
         }
-    ) { padding ->
+    ) { innerPadding ->
         if (state.screenState != ScreenStateType.ERROR && state.screenState != ScreenStateType.INITIAL) {
             Column(
-                modifier = Modifier.padding(
-                    start = padding.calculateStartPadding(layoutDirection),
-                    end = padding.calculateEndPadding(layoutDirection),
-                    top = padding.calculateTopPadding(),
-                )
+                modifier = Modifier
+                    .padding(
+                        top = innerPadding.calculateTopPadding(),
+                        bottom = 0.dp,
+                        start = innerPadding.calculateStartPadding(layoutDirection),
+                        end = innerPadding.calculateEndPadding(layoutDirection)
+                    )
             ) {
                 HorizontalDivider()
                 FilterComponent(
@@ -254,7 +274,7 @@ fun ListingListScreenContent(
             Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(color = Color.Gray.copy(alpha = 0.2F)),
+                    .background(color = MaterialTheme.colorScheme.background.copy(alpha = 0.2F)),
                 contentAlignment = Alignment.Center,
             ) {
                 CircularProgressIndicator(
@@ -266,7 +286,8 @@ fun ListingListScreenContent(
 
 object ListingListScreenTestTags {
     private const val PREFIX = "LISTING_LIST_SCREEN_"
-    const val LISTING_LIST_HEADING = "${PREFIX}_HEADING"
+    const val LISTING_LIST_TITLE = "${PREFIX}TITLE"
+    const val LISTING_LIST_HEADING = "${PREFIX}HEADING"
     const val LISTING_LIST = "${PREFIX}LIST"
 }
 

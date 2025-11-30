@@ -1,21 +1,18 @@
 package au.com.deanpike.detail.ui.project
 
 import androidx.activity.compose.BackHandler
+import androidx.activity.compose.LocalActivity
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -29,10 +26,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import au.com.deanpike.commonshared.model.Media
 import au.com.deanpike.commonshared.type.MediaType
@@ -58,11 +57,15 @@ import au.com.deanpike.uishared.component.AgencyBannerComponent
 import au.com.deanpike.uishared.component.ErrorComponent
 import au.com.deanpike.uishared.component.ExpandableText
 import au.com.deanpike.uishared.component.ListingImagesComponent
-import au.com.deanpike.uishared.component.ToolbarComponent
+import au.com.deanpike.uishared.component.ToolbarComponentTestTags.TOOLBAR_TITLE
 import au.com.deanpike.uishared.theme.Dimension.DIM_16
+import au.com.deanpike.uishared.theme.Dimension.DIM_4
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
 import au.com.deanpike.uishared.theme.MviExampleTheme
+import au.com.deanpike.uishared.util.NavigationBarScrim
 import au.com.deanpike.uishared.util.SetStatusBarAppearance
+import au.com.deanpike.uishared.util.SetupStatusBar
+import au.com.deanpike.uishared.util.StatusBarGradient
 
 @Composable
 fun ProjectDetailScreen(
@@ -173,24 +176,26 @@ fun ProjectDetailSuccess(
     val scrollState = rememberScrollState()
     val scope = rememberCoroutineScope()
     var screenWidth by remember { mutableIntStateOf(0) }
+    val activity = LocalActivity.current
 
     SetStatusBarAppearance(useDarkIcons = true)
-    Scaffold(
-        containerColor = Color.Transparent,
-        topBar = {
-            ToolbarComponent(
-                title = state.projectDetail?.address ?: "",
-                onBackClicked = onBackClicked
-            )
-        }
-    ) { innerPadding ->
+
+    Box(modifier = Modifier.fillMaxSize()) {
         Column(
             modifier = Modifier
-                .padding(innerPadding)
+                .fillMaxSize()
+                .background(MaterialTheme.colorScheme.background)
+                .padding(
+                    start = 0.dp,
+                    end = 0.dp,
+                    top = 0.dp,
+                    bottom = 0.dp
+                )
                 .verticalScroll(scrollState)
                 .onGloballyPositioned { coordinates ->
                     screenWidth = coordinates.size.width
                 }
+                .align(Alignment.Center)
                 .testTag(PROJECT_DETAILS_LAYOUT)
         ) {
             ListingImagesComponent(
@@ -202,6 +207,22 @@ fun ProjectDetailSuccess(
             AgencyBannerComponent(
                 agencyColour = state.projectDetail?.advertiser?.preferredColorHex,
                 logo = state.projectDetail?.advertiser?.logoUrl
+            )
+
+            Text(
+                modifier = Modifier
+                    .padding(
+                        start = DIM_16,
+                        end = DIM_16,
+                        top = DIM_4
+                    )
+                    .testTag(TOOLBAR_TITLE),
+                text = state.projectDetail?.address ?: "",
+                style = MaterialTheme.typography.labelLarge
+            )
+
+            HorizontalDivider(
+                modifier = Modifier.padding(top = DIM_8, bottom = DIM_8)
             )
 
             state.projectDetail?.projectName?.let {
@@ -218,10 +239,6 @@ fun ProjectDetailSuccess(
                     fontWeight = FontWeight.Bold
                 )
             }
-
-            HorizontalDivider(
-                modifier = Modifier.padding(top = DIM_8, bottom = DIM_8)
-            )
 
             state.projectDetail?.headline?.let {
                 Text(
@@ -269,6 +286,31 @@ fun ProjectDetailSuccess(
             state.projectDetail?.advertiser?.let {
                 AgencyComponent(advertiser = it)
             }
+        }
+
+        activity?.let {
+            SetupStatusBar(it)
+        }
+        StatusBarGradient()
+        NavigationBarScrim()
+
+        // Here set the back button to be on the scrim
+
+        IconButton(
+            modifier = Modifier
+                .windowInsetsPadding(WindowInsets.statusBars)
+                .align(Alignment.TopStart),
+            onClick = { onBackClicked() },
+            shape = CircleShape,
+            colors = IconButtonDefaults.iconButtonColors().copy(
+                containerColor = Color.White.copy(alpha = 0.3F)
+            )
+        ) {
+            Icon(
+                painter = painterResource(au.com.deanpike.uishared.R.drawable.arrow_back_24),
+                contentDescription = stringResource(au.com.deanpike.uishared.R.string.back),
+                tint = MaterialTheme.colorScheme.background,
+            )
         }
     }
 }

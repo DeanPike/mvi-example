@@ -21,6 +21,7 @@ import au.com.deanpike.detail.ui.shared.AgencyComponentTestTags.AGENCY_LAYOUT
 import au.com.deanpike.detail.ui.shared.AgencyComponentTestTags.AGENCY_NAME
 import au.com.deanpike.detail.ui.shared.AgencyComponentTestTags.AGENT_LABEL
 import au.com.deanpike.uishared.theme.Dimension.DIM_16
+import au.com.deanpike.uishared.theme.Dimension.DIM_4
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
 import au.com.deanpike.uishared.theme.MviExampleTheme
 
@@ -46,7 +47,7 @@ fun AgencyComponent(
             Text(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(start = DIM_16, end = DIM_16, top = DIM_8)
+                    .padding(start = DIM_16, end = DIM_16, top = DIM_4)
                     .testTag(AGENCY_NAME),
                 text = it,
                 style = MaterialTheme.typography.titleMedium
