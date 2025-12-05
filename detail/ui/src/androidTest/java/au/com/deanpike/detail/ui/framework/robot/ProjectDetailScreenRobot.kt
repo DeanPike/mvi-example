@@ -8,12 +8,14 @@ import au.com.deanpike.detail.ui.project.ProjectChildrenComponentTestTags.PROJEC
 import au.com.deanpike.detail.ui.project.ProjectDetailScreenContent
 import au.com.deanpike.detail.ui.project.ProjectDetailScreenState
 import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_DETAILS_LAYOUT
+import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_DETAIL_BACK_BUTTON
 import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_DETAIL_DESCRIPTION
 import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_DETAIL_HEADLINE
 import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_DETAIL_LOADING_ADDRESS
 import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_DETAIL_LOADING_TITLE
 import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_DETAIL_NAME
 import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_DETAIL_PROGRESS
+import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_DETAIL_SUCCESS_ADDRESS
 import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_LAYOUT
 import au.com.deanpike.uishared.theme.MviExampleTheme
 import au.com.deanpike.uitestshared.base.TestRobotBase
@@ -22,6 +24,7 @@ import au.com.deanpike.uitestshared.util.advanceTimeAndWait
 import au.com.deanpike.uitestshared.util.assertTagDisplayed
 import au.com.deanpike.uitestshared.util.assertTagDoesNotExist
 import au.com.deanpike.uitestshared.util.assertTextDisplayed
+import au.com.deanpike.uitestshared.util.clickOn
 import au.com.deanpike.uitestshared.util.scrollToItemPosition
 import au.com.deanpike.uitestshared.util.swipeUp
 import au.com.deanpike.uitestshared.util.waitUntilTagExists
@@ -144,6 +147,24 @@ class ProjectDetailScreenRobot(composeRule: ComposeContentTestRule) : TestRobotB
             tag = PROJECT_DETAIL_LOADING_ADDRESS,
             text = address
         )
+        return this
+    }
+
+    fun assertSuccessAddressDisplayed(address: String): ProjectDetailScreenRobot {
+        composeRule.assertTextDisplayed(
+            tag = PROJECT_DETAIL_SUCCESS_ADDRESS,
+            text = address
+        )
+        return this
+    }
+
+    fun assertBackButtonDisplayed(): ProjectDetailScreenRobot {
+        composeRule.assertTagDisplayed(PROJECT_DETAIL_BACK_BUTTON)
+        return this
+    }
+
+    fun clickBack(): ProjectDetailScreenRobot {
+        composeRule.clickOn(PROJECT_DETAIL_BACK_BUTTON)
         return this
     }
 }

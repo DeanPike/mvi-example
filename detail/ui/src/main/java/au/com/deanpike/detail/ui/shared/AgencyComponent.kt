@@ -57,7 +57,7 @@ fun AgencyComponent(
             Text(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(start = DIM_16, end = DIM_16)
+                    .padding(start = DIM_16, end = DIM_16, bottom = DIM_4)
                     .testTag(AGENCY_ADDRESS),
                 text = it,
             )

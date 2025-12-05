@@ -33,7 +33,7 @@ class ProjectListItemTest : UiUnitTestBase() {
             .assertProjectImageDisplayed()
             .assertProjectName(text = "Project name")
             .assertAddress(text = "Project address")
-            .assertProjectChildrenButtonText(text = "2 Properties")
+            .assertProjectChildrenButtonText(text = "2 Properties found")
             .clickProject()
             .clickProjectChildButton()
 

@@ -34,6 +34,7 @@ class ListingListScreenRobot(composeRule: ComposeContentTestRule) : TestRobotBas
     }
 
     override fun assertLayoutDisplayed(): ListingListScreenRobot {
+        composeRule.advanceTimeAndWait()
         composeRule.assertTagDisplayed(LISTING_LIST_HEADING)
         return this
     }

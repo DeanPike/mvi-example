@@ -44,12 +44,14 @@ import au.com.deanpike.detail.client.model.detail.ProjectDetail
 import au.com.deanpike.detail.client.model.type.PhoneNumberType
 import au.com.deanpike.detail.ui.R
 import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_DETAILS_LAYOUT
+import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_DETAIL_BACK_BUTTON
 import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_DETAIL_DESCRIPTION
 import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_DETAIL_HEADLINE
 import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_DETAIL_LOADING_ADDRESS
 import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_DETAIL_LOADING_TITLE
 import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_DETAIL_NAME
 import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_DETAIL_PROGRESS
+import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_DETAIL_SUCCESS_ADDRESS
 import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_LAYOUT
 import au.com.deanpike.detail.ui.shared.AgencyComponent
 import au.com.deanpike.uishared.base.ScreenStateType
@@ -57,7 +59,6 @@ import au.com.deanpike.uishared.component.AgencyBannerComponent
 import au.com.deanpike.uishared.component.ErrorComponent
 import au.com.deanpike.uishared.component.ExpandableText
 import au.com.deanpike.uishared.component.ListingImagesComponent
-import au.com.deanpike.uishared.component.ToolbarComponentTestTags.TOOLBAR_TITLE
 import au.com.deanpike.uishared.theme.Dimension.DIM_16
 import au.com.deanpike.uishared.theme.Dimension.DIM_4
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
@@ -216,7 +217,7 @@ fun ProjectDetailSuccess(
                         end = DIM_16,
                         top = DIM_4
                     )
-                    .testTag(TOOLBAR_TITLE),
+                    .testTag(PROJECT_DETAIL_SUCCESS_ADDRESS),
                 text = state.projectDetail?.address ?: "",
                 style = MaterialTheme.typography.labelLarge
             )
@@ -294,8 +295,6 @@ fun ProjectDetailSuccess(
         StatusBarGradient()
         NavigationBarScrim()
 
-        // Here set the back button to be on the scrim
-
         IconButton(
             modifier = Modifier
                 .windowInsetsPadding(WindowInsets.statusBars)
@@ -303,10 +302,11 @@ fun ProjectDetailSuccess(
             onClick = { onBackClicked() },
             shape = CircleShape,
             colors = IconButtonDefaults.iconButtonColors().copy(
-                containerColor = Color.White.copy(alpha = 0.3F)
+                containerColor = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.4F)
             )
         ) {
             Icon(
+                modifier = Modifier.testTag(PROJECT_DETAIL_BACK_BUTTON),
                 painter = painterResource(au.com.deanpike.uishared.R.drawable.arrow_back_24),
                 contentDescription = stringResource(au.com.deanpike.uishared.R.string.back),
                 tint = MaterialTheme.colorScheme.background,
@@ -325,6 +325,8 @@ object ProjectDetailScreenTestTags {
     const val PROJECT_DETAIL_DESCRIPTION = "${PREFIX}DESCRIPTION"
     const val PROJECT_DETAIL_LOADING_TITLE = "${PREFIX}LOADING_TITLE"
     const val PROJECT_DETAIL_LOADING_ADDRESS = "${PREFIX}LOADING_ADDRESS"
+    const val PROJECT_DETAIL_BACK_BUTTON = "${PREFIX}BACK_BUTTON"
+    const val PROJECT_DETAIL_SUCCESS_ADDRESS = "${PREFIX}SUCCESS_ADDRESS"
 }
 
 @Preview

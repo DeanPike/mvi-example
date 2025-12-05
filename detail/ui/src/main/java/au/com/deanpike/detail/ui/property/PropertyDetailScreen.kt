@@ -26,6 +26,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import au.com.deanpike.commonshared.model.Media
 import au.com.deanpike.commonshared.type.MediaType
@@ -37,11 +38,13 @@ import au.com.deanpike.detail.client.model.detail.PropertyDetail
 import au.com.deanpike.detail.client.model.type.PhoneNumberType
 import au.com.deanpike.detail.ui.R
 import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAILS_LAYOUT
+import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAIL_BACK_BUTTON
 import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAIL_DESCRIPTION
 import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAIL_HEADLINE
 import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAIL_LOADING_ADDRESS
 import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAIL_LOADING_TITLE
 import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAIL_PROGRESS
+import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAIL_SUCCESS_ADDRESS
 import au.com.deanpike.detail.ui.shared.AgencyComponent
 import au.com.deanpike.uishared.base.ScreenStateType
 import au.com.deanpike.uishared.component.AgencyBannerComponent
@@ -50,7 +53,6 @@ import au.com.deanpike.uishared.component.ErrorComponent
 import au.com.deanpike.uishared.component.ExpandableText
 import au.com.deanpike.uishared.component.ListingImagesComponent
 import au.com.deanpike.uishared.component.PriceComponent
-import au.com.deanpike.uishared.component.ToolbarComponentTestTags.TOOLBAR_TITLE
 import au.com.deanpike.uishared.theme.Dimension.DIM_16
 import au.com.deanpike.uishared.theme.Dimension.DIM_4
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
@@ -172,6 +174,14 @@ fun PropertyDetailSuccess(
     Box(modifier = Modifier.fillMaxSize()) {
         Column(
             modifier = Modifier
+                .fillMaxSize()
+                .background(MaterialTheme.colorScheme.background)
+                .padding(
+                    start = 0.dp,
+                    end = 0.dp,
+                    top = 0.dp,
+                    bottom = 0.dp
+                )
                 .verticalScroll(scrollState)
                 .align(Alignment.Center)
         ) {
@@ -193,7 +203,7 @@ fun PropertyDetailSuccess(
                         end = DIM_16,
                         top = DIM_4
                     )
-                    .testTag(TOOLBAR_TITLE),
+                    .testTag(PROPERTY_DETAIL_SUCCESS_ADDRESS),
                 text = state.propertyDetail?.address ?: "",
                 style = MaterialTheme.typography.labelLarge
             )
@@ -267,10 +277,11 @@ fun PropertyDetailSuccess(
             onClick = { onBackClicked() },
             shape = CircleShape,
             colors = IconButtonDefaults.iconButtonColors().copy(
-                containerColor = Color.White.copy(alpha = 0.3F)
+                containerColor = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.4F)
             )
         ) {
             Icon(
+                modifier = Modifier.testTag(PROPERTY_DETAIL_BACK_BUTTON),
                 painter = painterResource(au.com.deanpike.uishared.R.drawable.arrow_back_24),
                 contentDescription = stringResource(au.com.deanpike.uishared.R.string.back),
                 tint = MaterialTheme.colorScheme.background,
@@ -287,6 +298,9 @@ object PropertyDetailScreenTestTags {
     const val PROPERTY_DETAIL_DESCRIPTION = "${PREFIX}DESCRIPTION"
     const val PROPERTY_DETAIL_LOADING_TITLE = "${PREFIX}LOADING_TITLE"
     const val PROPERTY_DETAIL_LOADING_ADDRESS = "${PREFIX}LOADING_ADDRESS"
+    const val PROPERTY_DETAIL_BACK_BUTTON = "${PREFIX}BACK_BUTTON"
+    const val PROPERTY_DETAIL_SUCCESS_ADDRESS = "${PREFIX}SUCCESS_ADDRESS"
+
 
 }
 

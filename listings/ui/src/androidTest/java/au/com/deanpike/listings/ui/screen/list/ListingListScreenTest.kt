@@ -35,7 +35,7 @@ class ListingListScreenTest : UiUnitTestBase() {
                 )
             )
             .assertLayoutDisplayed()
-            .assertHeaderText("3 Properties")
+            .assertHeaderText("3 Properties found")
             .assertListDisplayed()
             .scrollToPosition(0)
             .assertPropertyDisplayedAtPosition(0)

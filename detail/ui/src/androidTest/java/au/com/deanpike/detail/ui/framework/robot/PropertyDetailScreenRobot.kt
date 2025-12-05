@@ -5,11 +5,13 @@ import androidx.test.espresso.Espresso
 import au.com.deanpike.detail.ui.property.PropertyDetailScreenContent
 import au.com.deanpike.detail.ui.property.PropertyDetailScreenState
 import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAILS_LAYOUT
+import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAIL_BACK_BUTTON
 import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAIL_DESCRIPTION
 import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAIL_HEADLINE
 import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAIL_LOADING_ADDRESS
 import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAIL_LOADING_TITLE
 import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAIL_PROGRESS
+import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAIL_SUCCESS_ADDRESS
 import au.com.deanpike.uishared.R
 import au.com.deanpike.uishared.component.DetailListItemTestTags.DETAIL_ITEM_BATHROOMS
 import au.com.deanpike.uishared.component.DetailListItemTestTags.DETAIL_ITEM_BEDROOMS
@@ -22,6 +24,7 @@ import au.com.deanpike.uitestshared.robot.DetailItemComponentRobot
 import au.com.deanpike.uitestshared.util.assertTagDisplayed
 import au.com.deanpike.uitestshared.util.assertTagDoesNotExist
 import au.com.deanpike.uitestshared.util.assertTextDisplayed
+import au.com.deanpike.uitestshared.util.clickOn
 import au.com.deanpike.uitestshared.util.swipeUp
 import au.com.deanpike.uitestshared.util.waitUntilTagExists
 
@@ -147,6 +150,24 @@ class PropertyDetailScreenRobot(composeRule: ComposeContentTestRule) : TestRobot
             tag = PROPERTY_DETAIL_LOADING_ADDRESS,
             text = address
         )
+        return this
+    }
+
+    fun assertSuccessAddressDisplayed(address: String): PropertyDetailScreenRobot {
+        composeRule.assertTextDisplayed(
+            tag = PROPERTY_DETAIL_SUCCESS_ADDRESS,
+            text = address
+        )
+        return this
+    }
+
+    fun assertBackButtonDisplayed(): PropertyDetailScreenRobot {
+        composeRule.assertTagDisplayed(PROPERTY_DETAIL_BACK_BUTTON)
+        return this
+    }
+
+    fun clickBack(): PropertyDetailScreenRobot {
+        composeRule.clickOn(PROPERTY_DETAIL_BACK_BUTTON)
         return this
     }
 }

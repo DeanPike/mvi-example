@@ -55,7 +55,7 @@ fun PropertyListItem(
             }
             .testTag(PROPERTY_LIST_ITEM_LAYOUT),
         shape = RoundedCornerShape(DIM_8),
-        border = BorderStroke(width = 0.5.dp, color = outlineLight),
+        border = BorderStroke(width = 0.5.dp, color = MaterialTheme.colorScheme.outline),
         elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
     ) {
         Box(modifier = Modifier.background(color = MaterialTheme.colorScheme.background)) {
@@ -87,7 +87,7 @@ fun PropertyListItem(
                             .padding(start = DIM_16, end = DIM_16, top = DIM_8)
                             .testTag(PROPERTY_LIST_ITEM_PRICE),
                         text = it,
-                        style = MaterialTheme.typography.titleMedium,
+                        style = MaterialTheme.typography.titleSmall,
                         fontWeight = FontWeight.Bold
                     )
                 }
@@ -115,7 +115,6 @@ fun PropertyListItem(
                             .testTag(PROPERTY_LIST_ITEM_HEADLINE),
                         text = it,
                         style = MaterialTheme.typography.bodyMedium,
-                        fontWeight = FontWeight.Bold
                     )
                 }
             }

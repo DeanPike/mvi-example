@@ -59,7 +59,7 @@ fun ProjectChildListItemComponent(
                         .weight(0.8F)
                         .testTag("${PROJECT_CHILD_LIST_ITEM_PRICE}_${projectChild.id}"),
                     text = it,
-                    style = MaterialTheme.typography.titleMedium,
+                    style = MaterialTheme.typography.titleSmall,
                     fontWeight = FontWeight.Bold
                 )
             }

@@ -51,10 +51,8 @@ class ProjectDetailScreenTest : UiUnitTestBase() {
             .assertProjectName("Easterly Wollongong")
             .assertProjectHeadline("Easterly Wollongong Headline")
             .assertProjectDetailDescription("Introducing Easterly, a prestigious collection of 21 elegantly designed 2 & 3 bedroom residences")
-
-        toolbarRobot
-            .assertNavigationIconDisplayed()
-            .assertToolbarTitle("13 Crown Street, Wollongong")
+            .assertSuccessAddressDisplayed("13 Crown Street, Wollongong")
+            .assertBackButtonDisplayed()
 
         errorRobot.assertLayoutNotDisplayed()
 
@@ -115,7 +113,7 @@ class ProjectDetailScreenTest : UiUnitTestBase() {
                 position = 0
             )
 
-        toolbarRobot.clickBack()
+        projectDetailRobot.clickBack()
 
         assertThat(projectDetailRobot.closeClicked).isTrue()
 
