@@ -3,11 +3,9 @@ plugins {
     alias(libs.plugins.jetbrainsKotlinJvm)
 }
 
-val compatibilityVersion = libs.versions.javaCompileVersion.get()
-
 java {
-    sourceCompatibility = JavaVersion.valueOf(compatibilityVersion)
-    targetCompatibility = JavaVersion.valueOf(compatibilityVersion)
+    sourceCompatibility = JavaVersion.valueOf(libs.versions.javaCompileVersion.get())
+    targetCompatibility = JavaVersion.valueOf(libs.versions.javaCompileVersion.get())
 }
 dependencies {
     implementation(project(":shared:data-shared"))

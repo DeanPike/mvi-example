@@ -8,8 +8,6 @@ plugins {
     alias(libs.plugins.compose.compiler)
 }
 
-val compatibilityVersion = libs.versions.javaCompileVersion.get()
-
 android {
     namespace = "au.com.deanpike.listings.ui"
     compileSdk = libs.versions.compileSdk.get().toInt()
@@ -31,8 +29,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.valueOf(compatibilityVersion)
-        targetCompatibility = JavaVersion.valueOf(compatibilityVersion)
+        sourceCompatibility = JavaVersion.valueOf(libs.versions.javaCompileVersion.get())
+        targetCompatibility = JavaVersion.valueOf(libs.versions.javaCompileVersion.get())
     }
     kotlin {
         compilerOptions {

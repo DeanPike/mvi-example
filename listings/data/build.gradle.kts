@@ -4,11 +4,9 @@ plugins {
     alias(libs.plugins.ksp)
 }
 
-val compatibilityVersion = libs.versions.javaCompileVersion.get()
-
 java {
-    sourceCompatibility = JavaVersion.valueOf(compatibilityVersion)
-    targetCompatibility = JavaVersion.valueOf(compatibilityVersion)
+    sourceCompatibility = JavaVersion.valueOf(libs.versions.javaCompileVersion.get())
+    targetCompatibility = JavaVersion.valueOf(libs.versions.javaCompileVersion.get())
 }
 
 dependencies {
