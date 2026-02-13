@@ -1,8 +1,5 @@
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-
 plugins {
     alias(libs.plugins.androidLibrary)
-    alias(libs.plugins.jetbrainsKotlinAndroid)
     alias(libs.plugins.daggerHiltPlugin)
     alias(libs.plugins.ksp)
     alias(libs.plugins.compose.compiler)
@@ -30,10 +27,9 @@ android {
         targetCompatibility = JavaVersion.valueOf(libs.versions.javaCompileVersion.get())
     }
     kotlin {
-        compilerOptions {
-            jvmTarget.set(JvmTarget.valueOf(libs.versions.jvmTargetVersion.get()))
-        }
+        jvmToolchain(libs.versions.jvmToolChainVersion.get().toInt())
     }
+
     buildFeatures {
         compose = true
     }

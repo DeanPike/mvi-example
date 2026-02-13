@@ -4,6 +4,10 @@ plugins {
     alias(libs.plugins.ksp)
 }
 
+kotlin {
+    jvmToolchain(libs.versions.jvmToolChainVersion.get().toInt())
+}
+
 java {
     sourceCompatibility = JavaVersion.valueOf(libs.versions.javaCompileVersion.get())
     targetCompatibility = JavaVersion.valueOf(libs.versions.javaCompileVersion.get())

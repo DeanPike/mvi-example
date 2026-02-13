@@ -1,10 +1,8 @@
 import java.text.SimpleDateFormat
 import java.util.Date
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.androidApplication)
-    alias(libs.plugins.jetbrainsKotlinAndroid)
     alias(libs.plugins.daggerHiltPlugin)
     alias(libs.plugins.ksp)
     alias(libs.plugins.compose.compiler)
@@ -39,36 +37,16 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
-    compileOptions {
-        sourceCompatibility = JavaVersion.valueOf(libs.versions.javaCompileVersion.get())
-        targetCompatibility = JavaVersion.valueOf(libs.versions.javaCompileVersion.get())
-    }
-    kotlin {
-        compilerOptions {
-            jvmTarget.set(JvmTarget.valueOf(libs.versions.jvmTargetVersion.get()))
-        }
-    }
+
     buildFeatures {
         compose = true
     }
-
-    sourceSets {
-        getByName("androidTest") {
-            java.srcDir("${project.rootDir}/listings/ui/src/androidTest/java")
-            java.srcDir("${project.rootDir}/detail/ui/src/androidTest/java")
-        }
-    }
-
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
             excludes += "/META-INF/LICENSE.md"
             excludes += "/META-INF/LICENSE-notice.md"
         }
-    }
-
-    tasks.withType<Test>() {
-        useJUnitPlatform()
     }
 
     testOptions {
