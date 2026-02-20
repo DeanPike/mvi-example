@@ -42,12 +42,13 @@ android {
         }
     }
 
-    tasks.withType<Test>() {
-        useJUnitPlatform()
-    }
-
     testOptions {
         animationsDisabled = true
+        unitTests {
+            all {
+                it.useJUnitPlatform()
+            }
+        }
     }
 }
 
@@ -98,7 +99,8 @@ dependencies {
     androidTestImplementation(libs.mockwebserver)
     androidTestImplementation(libs.assertj)
 
-    testImplementation(libs.junit.jupiter)
+    testImplementation(platform(libs.junit.bom))
+    testImplementation(libs.bundles.junit.jupiter)
     testImplementation(libs.mockk)
     testImplementation(libs.assertj)
     testImplementation(libs.coroutines.test)

@@ -4,6 +4,7 @@ import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import au.com.deanpike.listings.client.type.DwellingType
 import au.com.deanpike.listings.client.type.StatusType
 import au.com.deanpike.listings.ui.R
+import au.com.deanpike.listings.ui.list.ListingListScreenEvent
 import au.com.deanpike.listings.ui.list.component.FilterComponent
 import au.com.deanpike.listings.ui.list.component.FilterComponentTestTags.FILTER_COMPONENT_LAYOUT
 import au.com.deanpike.listings.ui.list.component.FilterComponentTestTags.LISTING_TYPE
@@ -20,8 +21,8 @@ import au.com.deanpike.uitestshared.util.waitUntilTagExists
 import org.assertj.core.api.Assertions.assertThat
 
 class FilterComponentRobot(composeRule: ComposeContentTestRule) : TestRobotBase<FilterComponentRobot, FilterComponentRobotInitData>(composeRule) {
-    private var statusSelected = StatusType.RENT
     private var listingTypeSelected = false
+    private var event: ListingListScreenEvent? = null
 
     override fun setupComponent(data: FilterComponentRobotInitData?): FilterComponentRobot {
         composeRule.setContent {
@@ -29,8 +30,8 @@ class FilterComponentRobot(composeRule: ComposeContentTestRule) : TestRobotBase<
                 FilterComponent(
                     selectedStatus = data!!.status,
                     selectedListingTypes = data.listingTypes,
-                    onStatusSelected = {
-                        statusSelected = it
+                    onEvent = {
+                        event = it
                     },
                     onListingTypeSelected = {
                         listingTypeSelected = true
@@ -76,7 +77,8 @@ class FilterComponentRobot(composeRule: ComposeContentTestRule) : TestRobotBase<
     }
 
     fun assertStatusSelected(status: StatusType) {
-        assertThat(statusSelected).isEqualTo(status)
+        assertThat(event).isInstanceOf(ListingListScreenEvent.OnStatusSelected::class.java)
+        assertThat((event as ListingListScreenEvent.OnStatusSelected).status).isEqualTo(status)
     }
 
     fun assertListingTypeButtonClicked() {

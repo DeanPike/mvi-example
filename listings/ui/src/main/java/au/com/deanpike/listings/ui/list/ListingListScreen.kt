@@ -38,7 +38,6 @@ import androidx.lifecycle.compose.LocalLifecycleOwner
 import au.com.deanpike.listings.client.model.listing.response.Project
 import au.com.deanpike.listings.client.model.listing.response.Property
 import au.com.deanpike.listings.client.type.DwellingType
-import au.com.deanpike.listings.client.type.StatusType
 import au.com.deanpike.listings.ui.R
 import au.com.deanpike.listings.ui.list.ListingListScreenTestTags.LISTING_LIST
 import au.com.deanpike.listings.ui.list.ListingListScreenTestTags.LISTING_LIST_HEADING
@@ -102,9 +101,7 @@ fun ListingListScreen(
     }
     ListingListScreenContent(
         state = viewModel.uiState,
-        onStatusSelected = {
-            viewModel.setEvent(ListingListScreenEvent.OnStatusSelected(it))
-        },
+        onEvent = { viewModel.setEvent(it) },
         onListingTypeSelected = {
             viewModel.setEvent(ListingListScreenEvent.OnListingTypeClicked)
         },
@@ -139,7 +136,7 @@ fun ListingListScreen(
 @Composable
 fun ListingListScreenContent(
     state: ListingListScreenState,
-    onStatusSelected: (StatusType) -> Unit = {},
+    onEvent: (ListingListScreenEvent) -> Unit = {},
     onListingTypeSelected: () -> Unit = {},
     onBottomSheetDismissed: () -> Unit = {},
     onListingTypesApplied: (List<DwellingType>) -> Unit = {},
@@ -208,7 +205,7 @@ fun ListingListScreenContent(
                     ),
                     selectedStatus = state.selectedStatus,
                     selectedListingTypes = state.selectedListingTypes,
-                    onStatusSelected = onStatusSelected,
+                    onEvent = onEvent,
                     onListingTypeSelected = onListingTypeSelected
                 )
                 HorizontalDivider()

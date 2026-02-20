@@ -26,6 +26,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import au.com.deanpike.listings.client.type.DwellingType
 import au.com.deanpike.listings.client.type.StatusType
 import au.com.deanpike.listings.ui.R
+import au.com.deanpike.listings.ui.list.ListingListScreenEvent
 import au.com.deanpike.listings.ui.list.component.FilterComponentTestTags.FILTER_COMPONENT_LAYOUT
 import au.com.deanpike.listings.ui.list.component.FilterComponentTestTags.LISTING_TYPE
 import au.com.deanpike.listings.ui.list.component.FilterComponentTestTags.STATUS_BUTTON
@@ -41,7 +42,7 @@ fun FilterComponent(
     modifier: Modifier = Modifier,
     selectedStatus: StatusType,
     selectedListingTypes: List<DwellingType>,
-    onStatusSelected: (StatusType) -> Unit,
+    onEvent: (ListingListScreenEvent) -> Unit = {},
     onListingTypeSelected: () -> Unit
 ) {
     var statusExpanded by remember {
@@ -94,7 +95,7 @@ fun FilterComponent(
                             )
                         },
                         onClick = {
-                            onStatusSelected(it)
+                            onEvent(ListingListScreenEvent.OnStatusSelected(it))
                             statusExpanded = false
                         }
                     )
@@ -139,7 +140,6 @@ fun FilterComponentPreview() {
         FilterComponent(
             selectedStatus = StatusType.BUY,
             selectedListingTypes = listOf(DwellingType.HOUSE, DwellingType.TOWNHOUSE, DwellingType.APARTMENT_UNIT_FLAT),
-            onStatusSelected = {},
             onListingTypeSelected = {}
         )
     }
