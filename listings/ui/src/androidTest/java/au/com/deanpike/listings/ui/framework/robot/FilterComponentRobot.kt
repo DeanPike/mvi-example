@@ -21,7 +21,6 @@ import au.com.deanpike.uitestshared.util.waitUntilTagExists
 import org.assertj.core.api.Assertions.assertThat
 
 class FilterComponentRobot(composeRule: ComposeContentTestRule) : TestRobotBase<FilterComponentRobot, FilterComponentRobotInitData>(composeRule) {
-    private var listingTypeSelected = false
     private var event: ListingListScreenEvent? = null
 
     override fun setupComponent(data: FilterComponentRobotInitData?): FilterComponentRobot {
@@ -33,9 +32,6 @@ class FilterComponentRobot(composeRule: ComposeContentTestRule) : TestRobotBase<
                     onEvent = {
                         event = it
                     },
-                    onListingTypeSelected = {
-                        listingTypeSelected = true
-                    }
                 )
 
             }
@@ -82,7 +78,7 @@ class FilterComponentRobot(composeRule: ComposeContentTestRule) : TestRobotBase<
     }
 
     fun assertListingTypeButtonClicked() {
-        assertThat(listingTypeSelected).isTrue()
+        assertThat(event).isInstanceOf(ListingListScreenEvent.OnListingTypeClicked::class.java)
     }
 
     fun waitUntilLayoutShown(): FilterComponentRobot {

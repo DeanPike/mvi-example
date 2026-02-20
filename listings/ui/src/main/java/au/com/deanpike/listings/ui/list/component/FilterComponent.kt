@@ -42,8 +42,7 @@ fun FilterComponent(
     modifier: Modifier = Modifier,
     selectedStatus: StatusType,
     selectedListingTypes: List<DwellingType>,
-    onEvent: (ListingListScreenEvent) -> Unit = {},
-    onListingTypeSelected: () -> Unit
+    onEvent: (ListingListScreenEvent) -> Unit = {}
 ) {
     var statusExpanded by remember {
         mutableStateOf(false)
@@ -106,7 +105,7 @@ fun FilterComponent(
         OutlinedButton(
             modifier = Modifier.testTag(LISTING_TYPE),
             onClick = {
-                onListingTypeSelected()
+                onEvent(ListingListScreenEvent.OnListingTypeClicked)
             }
         ) {
             Text(
@@ -139,8 +138,7 @@ fun FilterComponentPreview() {
     MviExampleTheme {
         FilterComponent(
             selectedStatus = StatusType.BUY,
-            selectedListingTypes = listOf(DwellingType.HOUSE, DwellingType.TOWNHOUSE, DwellingType.APARTMENT_UNIT_FLAT),
-            onListingTypeSelected = {}
+            selectedListingTypes = listOf(DwellingType.HOUSE, DwellingType.TOWNHOUSE, DwellingType.APARTMENT_UNIT_FLAT)
         )
     }
 }

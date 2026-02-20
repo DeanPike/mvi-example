@@ -102,9 +102,6 @@ fun ListingListScreen(
     ListingListScreenContent(
         state = viewModel.uiState,
         onEvent = { viewModel.setEvent(it) },
-        onListingTypeSelected = {
-            viewModel.setEvent(ListingListScreenEvent.OnListingTypeClicked)
-        },
         onBottomSheetDismissed = {
             viewModel.setEvent(ListingListScreenEvent.OnBottomSheetDismissed)
         },
@@ -137,7 +134,6 @@ fun ListingListScreen(
 fun ListingListScreenContent(
     state: ListingListScreenState,
     onEvent: (ListingListScreenEvent) -> Unit = {},
-    onListingTypeSelected: () -> Unit = {},
     onBottomSheetDismissed: () -> Unit = {},
     onListingTypesApplied: (List<DwellingType>) -> Unit = {},
     onRetryClicked: () -> Unit = {},
@@ -205,8 +201,7 @@ fun ListingListScreenContent(
                     ),
                     selectedStatus = state.selectedStatus,
                     selectedListingTypes = state.selectedListingTypes,
-                    onEvent = onEvent,
-                    onListingTypeSelected = onListingTypeSelected
+                    onEvent = onEvent
                 )
                 HorizontalDivider()
                 LazyColumn(
