@@ -102,9 +102,6 @@ fun ListingListScreen(
     ListingListScreenContent(
         state = viewModel.uiState,
         onEvent = { viewModel.setEvent(it) },
-        onBottomSheetDismissed = {
-            viewModel.setEvent(ListingListScreenEvent.OnBottomSheetDismissed)
-        },
         onListingTypesApplied = {
             viewModel.setEvent(ListingListScreenEvent.OnListingTypesApplied(it))
         },
@@ -134,7 +131,6 @@ fun ListingListScreen(
 fun ListingListScreenContent(
     state: ListingListScreenState,
     onEvent: (ListingListScreenEvent) -> Unit = {},
-    onBottomSheetDismissed: () -> Unit = {},
     onListingTypesApplied: (List<DwellingType>) -> Unit = {},
     onRetryClicked: () -> Unit = {},
     onPropertyClicked: (Long, String) -> Unit = { _, _ -> },
@@ -239,7 +235,9 @@ fun ListingListScreenContent(
 
             if (state.showListingTypeScreen) {
                 ModalBottomSheet(
-                    onDismissRequest = { onBottomSheetDismissed() }
+                    onDismissRequest = {
+                        onEvent(ListingListScreenEvent.OnBottomSheetDismissed)
+                    }
                 ) {
                     ListingTypeScreen(
                         selectedListingTypes = state.selectedListingTypes,
