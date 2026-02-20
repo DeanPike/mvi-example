@@ -101,9 +101,6 @@ fun ListingListScreen(
     ListingListScreenContent(
         state = viewModel.uiState,
         onEvent = { viewModel.setEvent(it) },
-        onRetryClicked = {
-            viewModel.setEvent(ListingListScreenEvent.OnRetryClicked)
-        },
         onPropertyClicked = { id, address ->
             viewModel.setEvent(ListingListScreenEvent.OnPropertySelected(id, address))
         },
@@ -127,7 +124,6 @@ fun ListingListScreen(
 fun ListingListScreenContent(
     state: ListingListScreenState,
     onEvent: (ListingListScreenEvent) -> Unit = {},
-    onRetryClicked: () -> Unit = {},
     onPropertyClicked: (Long, String) -> Unit = { _, _ -> },
     onProjectClicked: (Long, String) -> Unit = { _, _ -> },
     onProjectChildClicked: (Long, Long, String) -> Unit = { _, _, _ -> }
@@ -247,7 +243,9 @@ fun ListingListScreenContent(
                 verticalArrangement = Arrangement.Center
             ) {
                 ErrorComponent(
-                    onRetryClicked = onRetryClicked
+                    onRetryClicked = {
+                        onEvent(ListingListScreenEvent.OnRetryClicked)
+                    }
                 )
             }
         } else {
