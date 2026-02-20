@@ -7,6 +7,7 @@ import au.com.deanpike.listings.client.model.listing.response.ProjectChild
 import au.com.deanpike.listings.ui.framework.robot.ProjectChildListItemComponentRobot
 import au.com.deanpike.listings.ui.framework.robot.ProjectListItemRobot
 import au.com.deanpike.listings.ui.framework.robot.ProjectListItemRobotInitData
+import au.com.deanpike.listings.ui.list.ListingListScreenEvent
 import au.com.deanpike.uitestshared.base.UiUnitTestBase
 import au.com.deanpike.uitestshared.robot.AgencyBannerComponentRobot
 import kotlinx.coroutines.test.runTest
@@ -37,7 +38,10 @@ class ProjectListItemTest : UiUnitTestBase() {
             .clickProject()
             .clickProjectChildButton()
 
-        assertThat(robot.clickedProjectId).isEqualTo(1234)
+        assertThat(robot.event).isInstanceOf(ListingListScreenEvent.OnProjectSelected::class.java)
+        val data = robot.event as ListingListScreenEvent.OnProjectSelected
+        assertThat(data.id).isEqualTo(1234)
+        assertThat(data.address).isEqualTo("Project address")
 
         agencyBannerRobot.assertImageDisplayed()
 

@@ -2,6 +2,7 @@ package au.com.deanpike.listings.ui.framework.robot
 
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import au.com.deanpike.listings.client.model.listing.response.Project
+import au.com.deanpike.listings.ui.list.ListingListScreenEvent
 import au.com.deanpike.listings.ui.list.component.ProjectListItem
 import au.com.deanpike.listings.ui.list.component.ProjectListItemTesTags.PROJECT_LIST_ITEM_ADDRESS
 import au.com.deanpike.listings.ui.list.component.ProjectListItemTesTags.PROJECT_LIST_ITEM_BANNER_IMAGE
@@ -20,18 +21,18 @@ import au.com.deanpike.uitestshared.util.assertTextDisplayed
 import au.com.deanpike.uitestshared.util.clickOn
 
 class ProjectListItemRobot(composeRule: ComposeContentTestRule) : TestRobotBase<ProjectListItemRobot, ProjectListItemRobotInitData>(composeRule) {
-    var clickedProjectId: Long? = null
-        private set
     var clickedProjectChildId: Long? = null
         private set
+    var event: ListingListScreenEvent? = null
+    private set
 
     override fun setupComponent(data: ProjectListItemRobotInitData?): ProjectListItemRobot {
         composeRule.setContent {
             MviExampleTheme {
                 ProjectListItem(
                     project = data!!.project,
-                    onProjectClicked = {
-                        clickedProjectId = it
+                    onEvent = {
+                        event = it
                     },
                     onProjectChildClicked = {
                         clickedProjectChildId = it

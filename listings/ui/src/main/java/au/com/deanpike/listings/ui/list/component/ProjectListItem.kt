@@ -52,6 +52,7 @@ import au.com.deanpike.datashared.type.ListingType
 import au.com.deanpike.listings.client.model.listing.response.Project
 import au.com.deanpike.listings.client.model.listing.response.ProjectChild
 import au.com.deanpike.listings.ui.R
+import au.com.deanpike.listings.ui.list.ListingListScreenEvent
 import au.com.deanpike.listings.ui.list.component.ProjectListItemTesTags.PROJECT_LIST_ITEM_ADDRESS
 import au.com.deanpike.listings.ui.list.component.ProjectListItemTesTags.PROJECT_LIST_ITEM_BANNER_IMAGE
 import au.com.deanpike.listings.ui.list.component.ProjectListItemTesTags.PROJECT_LIST_ITEM_CHILDREN
@@ -72,7 +73,7 @@ import coil.compose.AsyncImage
 @Composable
 fun ProjectListItem(
     project: Project,
-    onProjectClicked: (Long) -> Unit = {},
+    onEvent: (ListingListScreenEvent) -> Unit = {},
     onProjectChildClicked: (Long) -> Unit = {}
 ) {
     var expandList by rememberSaveable {
@@ -100,7 +101,12 @@ fun ProjectListItem(
             .padding(start = DIM_16, end = DIM_16, top = DIM_8, bottom = DIM_8)
             .fillMaxWidth()
             .clickable {
-                onProjectClicked(project.id)
+                onEvent(
+                    ListingListScreenEvent.OnProjectSelected(
+                        id = project.id,
+                        address = project.address
+                    )
+                )
             }
             .testTag(PROJECT_LIST_ITEM_LAYOUT),
         shape = RoundedCornerShape(DIM_8),
