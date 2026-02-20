@@ -3,6 +3,7 @@ package au.com.deanpike.detail.ui.project
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.LocalActivity
 import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
@@ -82,7 +83,7 @@ fun ProjectDetailScreen(
     }
 
     if (isSinglePane) {
-        SetStatusBarAppearance(useDarkIcons = false)
+        SetStatusBarAppearance(useDarkIcons = !isSystemInDarkTheme())
     }
 
     ProjectDetailScreenContent(
@@ -178,8 +179,6 @@ fun ProjectDetailSuccess(
     val scope = rememberCoroutineScope()
     var screenWidth by remember { mutableIntStateOf(0) }
     val activity = LocalActivity.current
-
-    SetStatusBarAppearance(useDarkIcons = true)
 
     Box(modifier = Modifier.fillMaxSize()) {
         Column(

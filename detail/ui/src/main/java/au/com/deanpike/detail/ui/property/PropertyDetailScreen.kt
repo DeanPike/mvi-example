@@ -3,6 +3,7 @@ package au.com.deanpike.detail.ui.property
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.LocalActivity
 import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
@@ -19,7 +20,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -75,7 +75,7 @@ fun PropertyDetailScreen(
     }
 
     if (isSinglePane) {
-        SetStatusBarAppearance(useDarkIcons = false)
+        SetStatusBarAppearance(useDarkIcons = !isSystemInDarkTheme())
     }
 
     PropertyDetailScreenContent(
@@ -168,8 +168,6 @@ fun PropertyDetailSuccess(
     val scrollState = rememberScrollState()
     val scope = rememberCoroutineScope()
     val activity = LocalActivity.current
-
-    SetStatusBarAppearance(useDarkIcons = true)
 
     Box(modifier = Modifier.fillMaxSize()) {
         Column(
