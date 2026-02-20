@@ -1,6 +1,7 @@
 package au.com.deanpike.listings.ui.list
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -68,9 +69,7 @@ fun ListingListScreen(
 
     val refresh by rememberUpdatedState(refreshStatusBar)
 
-    if (refresh) {
-        SetStatusBarAppearance(useDarkIcons = true)
-    }
+    SetStatusBarAppearance(useDarkIcons = !isSystemInDarkTheme())
 
     DisposableEffect(lifecycleOwner) {
         val job = scope.launch {
