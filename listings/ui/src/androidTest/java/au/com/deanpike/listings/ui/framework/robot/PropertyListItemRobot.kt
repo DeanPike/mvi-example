@@ -9,6 +9,7 @@ import androidx.compose.ui.test.onAncestors
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onParent
 import au.com.deanpike.listings.client.model.listing.response.Property
+import au.com.deanpike.listings.ui.list.ListingListScreenEvent
 import au.com.deanpike.listings.ui.list.component.PropertyListItem
 import au.com.deanpike.listings.ui.list.component.PropertyListItemTesTags
 import au.com.deanpike.listings.ui.list.component.PropertyListItemTesTags.PROPERTY_LIST_ITEM_LAYOUT
@@ -25,7 +26,7 @@ import au.com.deanpike.uitestshared.util.clickOn
 import au.com.deanpike.uitestshared.util.waitUntilTagExists
 
 class PropertyListItemRobot(composeRule: ComposeContentTestRule) : TestRobotBase<PropertyListItemRobot, PropertyListItemRobotInitData>(composeRule) {
-    var clickedId: Long? = null
+    var event: ListingListScreenEvent? = null
         private set
 
     override fun setupComponent(data: PropertyListItemRobotInitData?): PropertyListItemRobot {
@@ -33,9 +34,9 @@ class PropertyListItemRobot(composeRule: ComposeContentTestRule) : TestRobotBase
             MviExampleTheme {
                 PropertyListItem(
                     property = data!!.property,
-                    onItemClicked = {
-                        clickedId = it
-                    }
+                    onEvent = {
+                        event = it
+                    },
                 )
             }
         }

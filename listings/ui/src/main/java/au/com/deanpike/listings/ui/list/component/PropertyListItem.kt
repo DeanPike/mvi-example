@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import au.com.deanpike.commonshared.model.ListingDetails
 import au.com.deanpike.datashared.type.ListingType
 import au.com.deanpike.listings.client.model.listing.response.Property
+import au.com.deanpike.listings.ui.list.ListingListScreenEvent
 import au.com.deanpike.listings.ui.list.component.PropertyListItemTesTags.PROPERTY_LIST_ITEM_ADDRESS
 import au.com.deanpike.listings.ui.list.component.PropertyListItemTesTags.PROPERTY_LIST_ITEM_HEADLINE
 import au.com.deanpike.listings.ui.list.component.PropertyListItemTesTags.PROPERTY_LIST_ITEM_LAYOUT
@@ -38,20 +39,24 @@ import au.com.deanpike.uishared.theme.Dimension.DIM_16
 import au.com.deanpike.uishared.theme.Dimension.DIM_4
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
 import au.com.deanpike.uishared.theme.MviExampleTheme
-import au.com.deanpike.uishared.theme.outlineLight
 import coil.compose.AsyncImage
 
 @Composable
 fun PropertyListItem(
     property: Property,
-    onItemClicked: (Long) -> Unit = {}
+    onEvent: (ListingListScreenEvent) -> Unit = {}
 ) {
     Card(
         modifier = Modifier
             .padding(start = DIM_16, end = DIM_16, top = DIM_8, bottom = DIM_8)
             .fillMaxWidth()
             .clickable {
-                onItemClicked(property.id)
+                onEvent(
+                    ListingListScreenEvent.OnPropertySelected(
+                        id = property.id,
+                        address = property.address
+                    )
+                )
             }
             .testTag(PROPERTY_LIST_ITEM_LAYOUT),
         shape = RoundedCornerShape(DIM_8),

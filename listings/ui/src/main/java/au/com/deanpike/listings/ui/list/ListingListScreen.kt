@@ -101,9 +101,6 @@ fun ListingListScreen(
     ListingListScreenContent(
         state = viewModel.uiState,
         onEvent = { viewModel.setEvent(it) },
-        onPropertyClicked = { id, address ->
-            viewModel.setEvent(ListingListScreenEvent.OnPropertySelected(id, address))
-        },
         onProjectClicked = { id, address ->
             viewModel.setEvent(ListingListScreenEvent.OnProjectSelected(id, address))
         },
@@ -124,7 +121,6 @@ fun ListingListScreen(
 fun ListingListScreenContent(
     state: ListingListScreenState,
     onEvent: (ListingListScreenEvent) -> Unit = {},
-    onPropertyClicked: (Long, String) -> Unit = { _, _ -> },
     onProjectClicked: (Long, String) -> Unit = { _, _ -> },
     onProjectChildClicked: (Long, Long, String) -> Unit = { _, _, _ -> }
 ) {
@@ -199,12 +195,7 @@ fun ListingListScreenContent(
                             item(key = listing.id) {
                                 PropertyListItem(
                                     property = listing,
-                                    onItemClicked = {
-                                        onPropertyClicked(
-                                            listing.id,
-                                            listing.address
-                                        )
-                                    }
+                                    onEvent = onEvent
                                 )
                             }
                         } else if (listing is Project) {

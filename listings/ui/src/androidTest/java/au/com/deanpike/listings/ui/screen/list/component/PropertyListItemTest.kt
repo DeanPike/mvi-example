@@ -5,6 +5,7 @@ import au.com.deanpike.datashared.type.ListingType
 import au.com.deanpike.listings.client.model.listing.response.Property
 import au.com.deanpike.listings.ui.framework.robot.PropertyListItemRobot
 import au.com.deanpike.listings.ui.framework.robot.PropertyListItemRobotInitData
+import au.com.deanpike.listings.ui.list.ListingListScreenEvent
 import au.com.deanpike.uitestshared.base.UiUnitTestBase
 import au.com.deanpike.uitestshared.robot.LifecycleStatusComponentRobot
 import org.assertj.core.api.Assertions.assertThat
@@ -36,7 +37,10 @@ class PropertyListItemTest : UiUnitTestBase() {
 
         lifecycleRobot.assertLifecycle("New")
 
-        assertThat(robot.clickedId).isEqualTo(1)
+        assertThat(robot.event).isInstanceOf(ListingListScreenEvent.OnPropertySelected::class.java)
+        val data = robot.event as ListingListScreenEvent.OnPropertySelected
+        assertThat(data.id).isEqualTo(1)
+        assertThat(data.address).isEqualTo("Property address")
     }
 
     private fun getProperty(): Property {
