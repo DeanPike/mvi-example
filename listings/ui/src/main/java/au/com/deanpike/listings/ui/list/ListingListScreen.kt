@@ -37,7 +37,6 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import au.com.deanpike.listings.client.model.listing.response.Project
 import au.com.deanpike.listings.client.model.listing.response.Property
-import au.com.deanpike.listings.client.type.DwellingType
 import au.com.deanpike.listings.ui.R
 import au.com.deanpike.listings.ui.list.ListingListScreenTestTags.LISTING_LIST
 import au.com.deanpike.listings.ui.list.ListingListScreenTestTags.LISTING_LIST_HEADING
@@ -102,9 +101,6 @@ fun ListingListScreen(
     ListingListScreenContent(
         state = viewModel.uiState,
         onEvent = { viewModel.setEvent(it) },
-        onListingTypesApplied = {
-            viewModel.setEvent(ListingListScreenEvent.OnListingTypesApplied(it))
-        },
         onRetryClicked = {
             viewModel.setEvent(ListingListScreenEvent.OnRetryClicked)
         },
@@ -131,7 +127,6 @@ fun ListingListScreen(
 fun ListingListScreenContent(
     state: ListingListScreenState,
     onEvent: (ListingListScreenEvent) -> Unit = {},
-    onListingTypesApplied: (List<DwellingType>) -> Unit = {},
     onRetryClicked: () -> Unit = {},
     onPropertyClicked: (Long, String) -> Unit = { _, _ -> },
     onProjectClicked: (Long, String) -> Unit = { _, _ -> },
@@ -241,7 +236,7 @@ fun ListingListScreenContent(
                 ) {
                     ListingTypeScreen(
                         selectedListingTypes = state.selectedListingTypes,
-                        onApplyClicked = onListingTypesApplied
+                        onEvent = onEvent
                     )
                 }
             }

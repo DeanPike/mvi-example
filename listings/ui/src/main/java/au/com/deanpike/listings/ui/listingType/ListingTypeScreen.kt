@@ -22,6 +22,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import au.com.deanpike.listings.client.type.DwellingType
 import au.com.deanpike.listings.ui.R
+import au.com.deanpike.listings.ui.list.ListingListScreenEvent
 import au.com.deanpike.listings.ui.listingType.ListingTypeScreenTestTags.LISTING_TYPE_SCREEN_ALL
 import au.com.deanpike.listings.ui.listingType.ListingTypeScreenTestTags.LISTING_TYPE_SCREEN_APARTMENT
 import au.com.deanpike.listings.ui.listingType.ListingTypeScreenTestTags.LISTING_TYPE_SCREEN_APPLY
@@ -36,7 +37,7 @@ import kotlinx.coroutines.launch
 fun ListingTypeScreen(
     viewModel: ListingTypeViewModel = viewModel(),
     selectedListingTypes: List<DwellingType>,
-    onApplyClicked: (List<DwellingType>) -> Unit = {}
+    onEvent: (ListingListScreenEvent) -> Unit = {}
 ) {
     val scope = rememberCoroutineScope()
 
@@ -49,7 +50,7 @@ fun ListingTypeScreen(
             viewModel.effect.collect { effect ->
                 when (effect) {
                     is ListingTypeEffect.OnApplyClicked -> {
-                        onApplyClicked(effect.listingTypes)
+                        onEvent(ListingListScreenEvent.OnListingTypesApplied(effect.listingTypes))
                     }
                 }
             }
