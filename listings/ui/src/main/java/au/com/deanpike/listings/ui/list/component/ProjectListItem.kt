@@ -74,7 +74,6 @@ import coil.compose.AsyncImage
 fun ProjectListItem(
     project: Project,
     onEvent: (ListingListScreenEvent) -> Unit = {},
-    onProjectChildClicked: (Long) -> Unit = {}
 ) {
     var expandList by rememberSaveable {
         mutableStateOf(false)
@@ -234,7 +233,15 @@ fun ProjectListItem(
                             project.properties.forEach { projectChild ->
                                 ProjectChildListItemComponent(
                                     projectChild = projectChild,
-                                    onProjectChildClicked = onProjectChildClicked
+                                    onProjectChildClicked = { childId ->
+                                        onEvent(
+                                            ListingListScreenEvent.OnProjectChildSelected(
+                                                projectId = project.id,
+                                                projectChildId = childId,
+                                                address = project.address
+                                            )
+                                        )
+                                    }
                                 )
                             }
                         }

@@ -21,8 +21,6 @@ import au.com.deanpike.uitestshared.util.assertTextDisplayed
 import au.com.deanpike.uitestshared.util.clickOn
 
 class ProjectListItemRobot(composeRule: ComposeContentTestRule) : TestRobotBase<ProjectListItemRobot, ProjectListItemRobotInitData>(composeRule) {
-    var clickedProjectChildId: Long? = null
-        private set
     var event: ListingListScreenEvent? = null
     private set
 
@@ -33,9 +31,6 @@ class ProjectListItemRobot(composeRule: ComposeContentTestRule) : TestRobotBase<
                     project = data!!.project,
                     onEvent = {
                         event = it
-                    },
-                    onProjectChildClicked = {
-                        clickedProjectChildId = it
                     }
                 )
             }

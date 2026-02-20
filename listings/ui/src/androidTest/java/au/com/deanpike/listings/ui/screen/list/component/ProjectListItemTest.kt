@@ -55,7 +55,11 @@ class ProjectListItemTest : UiUnitTestBase() {
             .assertCarSpacesDisplayed(carSpaces = "2")
             .clickCard()
 
-        assertThat(robot.clickedProjectChildId).isEqualTo(2222)
+        assertThat(robot.event).isInstanceOf(ListingListScreenEvent.OnProjectChildSelected::class.java)
+        var childData = robot.event as ListingListScreenEvent.OnProjectChildSelected
+        assertThat(childData.projectId).isEqualTo(1234)
+        assertThat(childData.projectChildId).isEqualTo(2222)
+        assertThat(childData.address).isEqualTo("Project address")
 
         projectChildRobot
             .forChild(3333)
@@ -67,7 +71,10 @@ class ProjectListItemTest : UiUnitTestBase() {
             .assertCarSpacesDisplayed(carSpaces = "4")
             .clickCard()
 
-        assertThat(robot.clickedProjectChildId).isEqualTo(3333)
+        childData = robot.event as ListingListScreenEvent.OnProjectChildSelected
+        assertThat(childData.projectId).isEqualTo(1234)
+        assertThat(childData.projectChildId).isEqualTo(3333)
+        assertThat(childData.address).isEqualTo("Project address")
     }
 
     private fun getProject(): Project {

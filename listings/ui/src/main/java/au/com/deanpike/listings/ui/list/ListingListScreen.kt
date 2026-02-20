@@ -100,16 +100,7 @@ fun ListingListScreen(
     }
     ListingListScreenContent(
         state = viewModel.uiState,
-        onEvent = { viewModel.setEvent(it) },
-        onProjectChildClicked = { projectId, projectChildId, address ->
-            viewModel.setEvent(
-                ListingListScreenEvent.OnProjectChildSelected(
-                    projectId = projectId,
-                    projectChildId = projectChildId,
-                    address = address
-                )
-            )
-        }
+        onEvent = { viewModel.setEvent(it) }
     )
 }
 
@@ -117,8 +108,7 @@ fun ListingListScreen(
 @Composable
 fun ListingListScreenContent(
     state: ListingListScreenState,
-    onEvent: (ListingListScreenEvent) -> Unit = {},
-    onProjectChildClicked: (Long, Long, String) -> Unit = { _, _, _ -> }
+    onEvent: (ListingListScreenEvent) -> Unit = {}
 ) {
 
     val layoutDirection = LocalLayoutDirection.current
@@ -198,10 +188,7 @@ fun ListingListScreenContent(
                             item(key = listing.id) {
                                 ProjectListItem(
                                     project = listing,
-                                    onEvent = onEvent,
-                                    onProjectChildClicked = {
-                                        onProjectChildClicked(listing.id, it, listing.address)
-                                    }
+                                    onEvent = onEvent
                                 )
                             }
                         }
