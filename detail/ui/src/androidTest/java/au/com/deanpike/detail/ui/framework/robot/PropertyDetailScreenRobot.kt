@@ -3,6 +3,7 @@ package au.com.deanpike.detail.ui.framework.robot
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import androidx.test.espresso.Espresso
 import au.com.deanpike.detail.ui.property.PropertyDetailScreenContent
+import au.com.deanpike.detail.ui.property.PropertyDetailScreenEvent
 import au.com.deanpike.detail.ui.property.PropertyDetailScreenState
 import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAILS_LAYOUT
 import au.com.deanpike.detail.ui.property.PropertyDetailScreenTestTags.PROPERTY_DETAIL_BACK_BUTTON
@@ -33,8 +34,7 @@ class PropertyDetailScreenRobot(composeRule: ComposeContentTestRule) : TestRobot
     private val detailItemRobot = DetailItemComponentRobot(composeRule)
     var closeClicked = false
         private set
-    var retryClicked = false
-        private set
+    var event: PropertyDetailScreenEvent? = null
 
     override fun setupComponent(data: PropertyDetailScreenRobotInitData?): PropertyDetailScreenRobot {
         composeRule.setContent {
@@ -42,12 +42,12 @@ class PropertyDetailScreenRobot(composeRule: ComposeContentTestRule) : TestRobot
                 PropertyDetailScreenContent(
                     state = data!!.state,
                     loadingAddress = data.loadingAddress,
+                    onEvent = {
+                        event = it
+                    },
                     onCloseClicked = {
                         closeClicked = true
                     },
-                    onRetryClicked = {
-                        retryClicked = true
-                    }
                 )
             }
         }

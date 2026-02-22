@@ -69,7 +69,8 @@ class PropertyDetailScreenTest : UiUnitTestBase() {
             .assertButtonText("Retry")
             .clickRetryButton()
 
-        assertThat(propertyDetailRobot.retryClicked).isTrue()
+        val event = propertyDetailRobot.event
+        assertThat(event).isInstanceOf(PropertyDetailScreenEvent.OnRetryClicked::class.java)
     }
 
     @Test

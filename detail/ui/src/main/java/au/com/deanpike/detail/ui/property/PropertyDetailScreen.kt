@@ -80,11 +80,11 @@ fun PropertyDetailScreen(
 
     PropertyDetailScreenContent(
         state = viewModel.uiState,
+        onEvent = {
+            viewModel.setEvent(it)
+        },
         loadingAddress = loadingAddress,
-        onCloseClicked = onCloseClicked,
-        onRetryClicked = {
-            viewModel.setEvent(PropertyDetailScreenEvent.OnRetryClicked)
-        }
+        onCloseClicked = onCloseClicked
     )
 }
 
@@ -92,8 +92,8 @@ fun PropertyDetailScreen(
 fun PropertyDetailScreenContent(
     state: PropertyDetailScreenState,
     loadingAddress: String,
-    onCloseClicked: () -> Unit = {},
-    onRetryClicked: () -> Unit = {}
+    onEvent: (PropertyDetailScreenEvent) -> Unit = {},
+    onCloseClicked: () -> Unit = {}
 ) {
 
     BackHandler {
@@ -153,7 +153,9 @@ fun PropertyDetailScreenContent(
                 verticalArrangement = Arrangement.Center
             ) {
                 ErrorComponent(
-                    onRetryClicked = onRetryClicked
+                    onRetryClicked = {
+                        onEvent(PropertyDetailScreenEvent.OnRetryClicked)
+                    }
                 )
             }
         }
