@@ -6,6 +6,7 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.test.espresso.Espresso
 import au.com.deanpike.detail.ui.project.ProjectChildrenComponentTestTags.PROJECT_CHILDREN
 import au.com.deanpike.detail.ui.project.ProjectDetailScreenContent
+import au.com.deanpike.detail.ui.project.ProjectDetailScreenEvent
 import au.com.deanpike.detail.ui.project.ProjectDetailScreenState
 import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_DETAILS_LAYOUT
 import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_DETAIL_BACK_BUTTON
@@ -32,7 +33,7 @@ import au.com.deanpike.uitestshared.util.waitUntilTagExists
 class ProjectDetailScreenRobot(composeRule: ComposeContentTestRule) : TestRobotBase<ProjectDetailScreenRobot, ProjectDetailScreenRobotInitData>(composeRule) {
     var selectedProjectChildId: Long? = null
     var closeClicked = false
-    var retryClicked = false
+    var event: ProjectDetailScreenEvent? = null
 
     override fun setupComponent(data: ProjectDetailScreenRobotInitData?): ProjectDetailScreenRobot {
         selectedProjectChildId = null
@@ -43,11 +44,11 @@ class ProjectDetailScreenRobot(composeRule: ComposeContentTestRule) : TestRobotB
                 ProjectDetailScreenContent(
                     state = data!!.project,
                     loadingAddress = data.loadingAddress,
+                    onEvent = {
+                        event = it
+                    },
                     onCloseClicked = {
                         closeClicked = true
-                    },
-                    onRetryClicked = {
-                        retryClicked = true
                     },
                     onProjectChildClicked = {
                         selectedProjectChildId = it

@@ -171,7 +171,8 @@ class ProjectDetailScreenTest : UiUnitTestBase() {
             .assertButtonText("Retry")
             .clickRetryButton()
 
-        assertThat(projectDetailRobot.retryClicked).isTrue()
+        val event = projectDetailRobot.event
+        assertThat(event).isInstanceOf(ProjectDetailScreenEvent.OnRetryClicked::class.java)
     }
 
     private val projectDetail = ProjectDetailScreenState(

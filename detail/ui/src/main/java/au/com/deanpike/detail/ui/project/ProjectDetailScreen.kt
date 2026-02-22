@@ -24,7 +24,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
@@ -89,10 +88,8 @@ fun ProjectDetailScreen(
     ProjectDetailScreenContent(
         state = viewModel.uiState,
         loadingAddress = loadingAddress,
+        onEvent = { viewModel.setEvent(it) },
         onCloseClicked = onCloseClicked,
-        onRetryClicked = {
-            viewModel.setEvent(ProjectDetailScreenEvent.OnRetryClicked)
-        },
         onProjectChildClicked = onProjectChildClicked
     )
 }
@@ -101,8 +98,8 @@ fun ProjectDetailScreen(
 fun ProjectDetailScreenContent(
     state: ProjectDetailScreenState,
     loadingAddress: String,
+    onEvent: (ProjectDetailScreenEvent) -> Unit = {},
     onCloseClicked: () -> Unit = {},
-    onRetryClicked: () -> Unit = {},
     onProjectChildClicked: (Long) -> Unit = {}
 ) {
     BackHandler {
@@ -162,7 +159,9 @@ fun ProjectDetailScreenContent(
                 verticalArrangement = Arrangement.Center
             ) {
                 ErrorComponent(
-                    onRetryClicked = onRetryClicked
+                    onRetryClicked = {
+                        onEvent(ProjectDetailScreenEvent.OnRetryClicked)
+                    }
                 )
             }
         }
