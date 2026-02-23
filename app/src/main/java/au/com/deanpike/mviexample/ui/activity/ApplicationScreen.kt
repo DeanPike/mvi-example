@@ -35,9 +35,6 @@ fun ApplicationScreen() {
         scaffoldDirective = customPaneScaffoldDirective(windowAdaptiveInfo = currentWindowAdaptiveInfo())
     )
 
-    var refreshStatusBar by remember {
-        mutableStateOf(false)
-    }
     var isSinglePane by remember {
         mutableStateOf(true)
     }
@@ -56,7 +53,6 @@ fun ApplicationScreen() {
             ) {
                 ListingListScreen(
                     isSinglePane = isSinglePane,
-                    refreshStatusBar = refreshStatusBar,
                     onPropertyClicked = { propertyId, address ->
                         scope.launch {
                             navigator.navigateTo(
@@ -101,7 +97,6 @@ fun ApplicationScreen() {
         },
         detailPane = {
             navigator.currentDestination?.contentKey?.let { item ->
-                refreshStatusBar = false
                 when (item.listingType) {
                     SelectedListingType.PROPERTY -> {
                         item.propertyId?.let { propertyId ->
@@ -119,7 +114,6 @@ fun ApplicationScreen() {
                                                 navigator.navigateBack()
                                             }
                                         }
-                                        refreshStatusBar = true
                                     }
                                 )
                             }
@@ -141,7 +135,6 @@ fun ApplicationScreen() {
                                                 navigator.navigateBack()
                                             }
                                         }
-                                        refreshStatusBar = true
                                     },
                                     onProjectChildClicked = { propertyId ->
                                         scope.launch {
@@ -173,7 +166,6 @@ fun ApplicationScreen() {
                                     onCloseClicked = {
                                         scope.launch {
                                             navigator.navigateBack(BackNavigationBehavior.PopLatest)
-                                            refreshStatusBar = true
                                         }
                                     }
                                 )
