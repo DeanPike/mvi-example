@@ -55,8 +55,7 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun ListingListScreen(
-    viewModel: ListingListViewModel = hiltViewModel<ListingListViewModel>(),
-    isSinglePane: Boolean = true,
+    viewModel: ListingListViewModel,
     onPropertyClicked: (Long, String) -> Unit = { _, _ -> },
     onProjectClicked: (Long, String) -> Unit = { _, _ -> },
     onProjectChildClicked: (Long, Long, String) -> Unit = { _, _, _ -> },
@@ -84,13 +83,6 @@ fun ListingListScreen(
             }
         }
         onDispose { job.cancel() }
-    }
-    LaunchedEffect(isSinglePane) {
-        viewModel.setEvent(
-            ListingListScreenEvent.Initialise(
-                isSinglePane = isSinglePane
-            )
-        )
     }
     ListingListScreenContent(
         state = viewModel.uiState,

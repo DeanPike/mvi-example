@@ -20,9 +20,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.unit.IntOffset
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import au.com.deanpike.detail.ui.project.ProjectDetailScreen
 import au.com.deanpike.detail.ui.property.PropertyDetailScreen
 import au.com.deanpike.listings.ui.list.ListingListScreen
+import au.com.deanpike.listings.ui.list.ListingListScreenEvent
+import au.com.deanpike.listings.ui.list.ListingListViewModel
 import au.com.deanpike.mviexample.ui.util.customPaneScaffoldDirective
 import kotlinx.coroutines.launch
 import kotlinx.parcelize.Parcelize
@@ -43,6 +46,16 @@ fun ApplicationScreen() {
         isSinglePane = navigator.scaffoldDirective.maxHorizontalPartitions == 1
     }
 
+    // Create the ViewModel at this level so it survives navigation
+    val listingListViewModel: ListingListViewModel = hiltViewModel<ListingListViewModel>()
+    LaunchedEffect(Unit) {
+        listingListViewModel.setEvent(
+            ListingListScreenEvent.Initialise(
+                isSinglePane = isSinglePane
+            )
+        )
+    }
+
     ListDetailPaneScaffold(
         directive = navigator.scaffoldDirective,
         value = navigator.scaffoldValue,
@@ -52,7 +65,7 @@ fun ApplicationScreen() {
                 exitTransition = slideOutToRight()
             ) {
                 ListingListScreen(
-                    isSinglePane = isSinglePane,
+                    viewModel = listingListViewModel,
                     onPropertyClicked = { propertyId, address ->
                         scope.launch {
                             navigator.navigateTo(
