@@ -39,7 +39,7 @@ import au.com.deanpike.uishared.theme.Dimension.DIM_16
 import au.com.deanpike.uishared.theme.Dimension.DIM_4
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
 import au.com.deanpike.uishared.theme.MviExampleTheme
-import coil.compose.AsyncImage
+import coil3.compose.AsyncImage
 
 @Composable
 fun AgentComponent(

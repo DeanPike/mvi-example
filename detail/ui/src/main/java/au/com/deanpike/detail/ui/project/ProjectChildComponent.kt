@@ -36,8 +36,9 @@ import au.com.deanpike.uishared.component.BedBathCarComponent
 import au.com.deanpike.uishared.theme.Dimension.DIM_16
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
 import au.com.deanpike.uishared.theme.MviExampleTheme
-import coil.compose.AsyncImage
-import coil.request.ImageRequest
+import coil3.compose.AsyncImage
+import coil3.request.ImageRequest
+import coil3.request.crossfade
 
 @Composable
 fun ProjectChildComponent(
@@ -77,7 +78,7 @@ fun ProjectChildComponent(
                     placeholder = painterResource(id = R.drawable.gallery_placeholder),
                     fallback = painterResource(id = R.drawable.gallery_placeholder),
                     error = painterResource(id = R.drawable.gallery_placeholder),
-                    contentScale = ContentScale.Crop,
+                    contentScale = ContentScale.Fit,
                     contentDescription = stringResource(id = R.string.property_image),
                     alignment = Alignment.Center
                 )

@@ -40,6 +40,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.pluralStringResource
@@ -68,7 +69,7 @@ import au.com.deanpike.uishared.theme.Dimension.DIM_4
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
 import au.com.deanpike.uishared.theme.MviExampleTheme
 import au.com.deanpike.uishared.theme.outlineLight
-import coil.compose.AsyncImage
+import coil3.compose.AsyncImage
 
 @Composable
 fun ProjectListItem(
@@ -147,7 +148,8 @@ fun ProjectListItem(
                     placeholder = painterResource(id = RShared.drawable.gallery_placeholder),
                     error = painterResource(id = RShared.drawable.gallery_placeholder),
                     model = project.listingImage,
-                    contentDescription = stringResource(id = RShared.string.property_image_description)
+                    contentDescription = stringResource(id = RShared.string.property_image_description),
+                    contentScale = ContentScale.Fit,
                 )
 
                 AgencyBannerComponent(

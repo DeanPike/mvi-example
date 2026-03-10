@@ -4,10 +4,11 @@ import android.content.Context
 import androidx.core.content.ContextCompat
 import androidx.test.platform.app.InstrumentationRegistry
 import au.com.deanpike.uitestshared.R
-import coil.Coil
-import coil.ImageLoader
-import coil.annotation.ExperimentalCoilApi
-import coil.test.FakeImageLoaderEngine
+import coil3.ImageLoader
+import coil3.SingletonImageLoader
+import coil3.annotation.ExperimentalCoilApi
+import coil3.test.FakeImageLoaderEngine
+import coil3.test.intercept
 import org.junit.Before
 
 abstract class UiTestBase {
@@ -24,6 +25,6 @@ abstract class UiTestBase {
         val imageLoader = ImageLoader.Builder(context)
             .components { add(engine) }
             .build()
-        Coil.setImageLoader(imageLoader)
+        SingletonImageLoader. setSafe{imageLoader}
     }
 }

@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 import au.com.deanpike.uishared.R
 import au.com.deanpike.uishared.component.AgencyBannerTestTags.AGENCY_BANNER_LAYOUT
 import au.com.deanpike.uishared.theme.MviExampleTheme
-import coil.compose.AsyncImage
+import coil3.compose.AsyncImage
 
 @Composable
 fun AgencyBannerComponent(

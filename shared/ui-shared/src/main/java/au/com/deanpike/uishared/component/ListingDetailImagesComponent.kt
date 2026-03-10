@@ -39,8 +39,11 @@ import au.com.deanpike.uishared.component.ListingDetailImagesTestTags.LISTING_DE
 import au.com.deanpike.uishared.component.ListingDetailImagesTestTags.LISTING_DETAIL_IMAGES_POSITION_INDICATOR
 import au.com.deanpike.uishared.theme.Dimension.DIM_16
 import au.com.deanpike.uishared.theme.MviExampleTheme
-import coil.compose.AsyncImage
-import coil.request.ImageRequest
+import coil3.compose.AsyncImage
+import coil3.request.ImageRequest
+import coil3.request.crossfade
+import coil3.request.error
+import coil3.request.placeholder
 import kotlin.math.absoluteValue
 import kotlinx.coroutines.CoroutineScope
 
@@ -71,7 +74,7 @@ fun ListingDetailImagesComponent(media: List<Media>) {
                     placeholder = painterResource(id = R.drawable.gallery_placeholder),
                     fallback = painterResource(id = R.drawable.gallery_placeholder),
                     error = painterResource(id = R.drawable.gallery_placeholder),
-                    contentScale = ContentScale.Crop,
+                    contentScale = ContentScale.Fit,
                     contentDescription = stringResource(id = R.string.property_image),
                     alignment = Alignment.Center
                 )
@@ -158,7 +161,7 @@ fun ListingImagesComponent(
                 placeholder = painterResource(id = R.drawable.gallery_placeholder),
                 fallback = painterResource(id = R.drawable.gallery_placeholder),
                 error = painterResource(id = R.drawable.gallery_placeholder),
-                contentScale = ContentScale.Crop,
+                contentScale = ContentScale.Fit,
                 contentDescription = stringResource(id = R.string.property_image),
                 alignment = Alignment.Center
             )
