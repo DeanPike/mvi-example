@@ -25,10 +25,6 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
-    compileOptions {
-        sourceCompatibility = JavaVersion.valueOf(libs.versions.javaCompileVersion.get())
-        targetCompatibility = JavaVersion.valueOf(libs.versions.javaCompileVersion.get())
-    }
 
     buildFeatures {
         compose = true
@@ -50,10 +46,6 @@ android {
             }
         }
     }
-}
-
-kotlin {
-    jvmToolchain(libs.versions.jvmToolChainVersion.get().toInt())
 }
 
 dependencies {

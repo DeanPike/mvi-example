@@ -7,3 +7,14 @@ plugins {
     alias(libs.plugins.ksp) apply false
     alias(libs.plugins.compose.compiler) apply false
 }
+
+subprojects {
+    afterEvaluate {
+        extensions.findByType<com.android.build.gradle.BaseExtension>()?.compileOptions {
+            sourceCompatibility = JavaVersion.valueOf(libs.versions.javaCompileVersion.get())
+            targetCompatibility = JavaVersion.valueOf(libs.versions.javaCompileVersion.get())
+        }
+        extensions.findByType<org.jetbrains.kotlin.gradle.dsl.KotlinProjectExtension>()
+            ?.jvmToolchain(libs.versions.jvmToolChainVersion.get().toInt())
+    }
+}

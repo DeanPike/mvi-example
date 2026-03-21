@@ -4,10 +4,6 @@ plugins {
     alias(libs.plugins.ksp)
 }
 
-kotlin {
-    jvmToolchain(libs.versions.jvmToolChainVersion.get().toInt())
-}
-
 dependencies {
     implementation(project(":network"))
     implementation(project(":shared:common-shared"))
