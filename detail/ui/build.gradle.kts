@@ -35,12 +35,13 @@ android {
         }
     }
 
-    tasks.withType<Test>() {
-        useJUnitPlatform()
-    }
-
     testOptions {
         animationsDisabled = true
+        unitTests {
+            all {
+                it.useJUnitPlatform()
+            }
+        }
     }
 }
 

@@ -16,9 +16,9 @@ dependencies {
     ksp(libs.hilt.compiler)
 
     // Retrofit
-    api(libs.logging.interceptor)
+    implementation(libs.logging.interceptor)
     implementation(libs.retrofit)
-    api(libs.retrofit.converter.gson)
+    implementation(libs.retrofit.converter.gson)
 
     testImplementation(platform(libs.junit.bom))
     testImplementation(libs.bundles.junit.jupiter)

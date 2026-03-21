@@ -50,6 +50,10 @@ dependencies {
     api(libs.androidx.espresso.core)
     api(libs.mockwebserver)
 
+    implementation(libs.logging.interceptor)
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter.gson)
+
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui.test.junit4)
