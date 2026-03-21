@@ -20,7 +20,6 @@ class ListingImagesComponentRobot(composeRule: ComposeContentTestRule) : TestRob
             MviExampleTheme {
                 ListingImagesComponent(
                     screenState = data!!.screenStateType,
-                    scope = rememberCoroutineScope(),
                     media = data.images
                 )
             }

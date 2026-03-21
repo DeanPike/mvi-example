@@ -4,7 +4,17 @@ import androidx.activity.compose.BackHandler
 import androidx.activity.compose.LocalActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBars
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
@@ -17,7 +27,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
@@ -68,7 +77,8 @@ fun PropertyDetailScreen(
     isSinglePane: Boolean,
     propertyId: Long,
     loadingAddress: String,
-    onCloseClicked: () -> Unit = {}
+    onCloseClicked: () -> Unit = {},
+    onImageClicked: (String) -> Unit
 ) {
     LaunchedEffect(propertyId) {
         viewModel.setEvent(PropertyDetailScreenEvent.Initialise(propertyId = propertyId))
@@ -84,7 +94,8 @@ fun PropertyDetailScreen(
             viewModel.setEvent(it)
         },
         loadingAddress = loadingAddress,
-        onCloseClicked = onCloseClicked
+        onCloseClicked = onCloseClicked,
+        onImageClicked = onImageClicked
     )
 }
 
@@ -93,7 +104,8 @@ fun PropertyDetailScreenContent(
     state: PropertyDetailScreenState,
     loadingAddress: String,
     onEvent: (PropertyDetailScreenEvent) -> Unit = {},
-    onCloseClicked: () -> Unit = {}
+    onCloseClicked: () -> Unit = {},
+    onImageClicked: (String) -> Unit = {}
 ) {
 
     BackHandler {
@@ -144,7 +156,8 @@ fun PropertyDetailScreenContent(
         } else if (state.screenState == ScreenStateType.SUCCESS) {
             PropertyDetailSuccess(
                 state = state,
-                onBackClicked = onCloseClicked
+                onBackClicked = onCloseClicked,
+                onImageClicked = onImageClicked
             )
         } else if (state.screenState == ScreenStateType.ERROR) {
             Column(
@@ -165,10 +178,10 @@ fun PropertyDetailScreenContent(
 @Composable
 fun PropertyDetailSuccess(
     state: PropertyDetailScreenState,
-    onBackClicked: () -> Unit = {}
+    onBackClicked: () -> Unit = {},
+    onImageClicked: (String) -> Unit = {}
 ) {
     val scrollState = rememberScrollState()
-    val scope = rememberCoroutineScope()
     val activity = LocalActivity.current
 
     Box(modifier = Modifier.fillMaxSize()) {
@@ -187,8 +200,8 @@ fun PropertyDetailSuccess(
         ) {
             ListingImagesComponent(
                 screenState = state.screenState,
-                scope = scope,
-                media = state.propertyDetail?.media ?: emptyList()
+                media = state.propertyDetail?.media ?: emptyList(),
+                onImageClicked = onImageClicked
             )
 
             AgencyBannerComponent(

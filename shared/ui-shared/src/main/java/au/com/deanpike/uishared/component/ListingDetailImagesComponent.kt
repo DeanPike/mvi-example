@@ -1,6 +1,7 @@
 package au.com.deanpike.uishared.component
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.snapping.SnapPosition
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -27,25 +28,21 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.lerp
 import au.com.deanpike.commonshared.model.Media
-import au.com.deanpike.commonshared.type.MediaType
 import au.com.deanpike.uishared.R
 import au.com.deanpike.uishared.base.ScreenStateType
 import au.com.deanpike.uishared.component.ListingDetailImagesTestTags.LISTING_DETAIL_IMAGES_IMAGE
 import au.com.deanpike.uishared.component.ListingDetailImagesTestTags.LISTING_DETAIL_IMAGES_PAGER
 import au.com.deanpike.uishared.component.ListingDetailImagesTestTags.LISTING_DETAIL_IMAGES_POSITION_INDICATOR
 import au.com.deanpike.uishared.theme.Dimension.DIM_16
-import au.com.deanpike.uishared.theme.MviExampleTheme
 import coil3.compose.AsyncImage
 import coil3.request.ImageRequest
 import coil3.request.crossfade
 import coil3.request.error
 import coil3.request.placeholder
 import kotlin.math.absoluteValue
-import kotlinx.coroutines.CoroutineScope
 
 @Composable
 fun ListingDetailImagesComponent(media: List<Media>) {
@@ -106,8 +103,8 @@ fun ListingDetailImagesComponent(media: List<Media>) {
 @Composable
 fun ListingImagesComponent(
     screenState: ScreenStateType,
-    scope: CoroutineScope,
-    media: List<Media>
+    media: List<Media>,
+    onImageClicked: (String) -> Unit = {}
 ) {
     val pagerState = rememberPagerState(initialPage = 0, pageCount = { media.count() })
 
@@ -151,6 +148,9 @@ fun ListingImagesComponent(
                             fraction = 1f - pageOffset.coerceIn(0f, 1f)
                         )
                     }
+                    .clickable(onClick = {
+                        onImageClicked(media[page].url)
+                    })
                     .testTag("${LISTING_DETAIL_IMAGES_IMAGE}_${page}"),
                 model = ImageRequest.Builder(LocalContext.current)
                     .data(media[page].url)
@@ -184,21 +184,21 @@ object ListingDetailImagesTestTags {
     const val LISTING_DETAIL_IMAGES_POSITION_INDICATOR = "${PREFIX}POSITION_INDICATOR"
 }
 
-@Preview
-@Composable
-fun ListingDetailImagesComponentPreview() {
-    MviExampleTheme {
-        ListingDetailImagesComponent(
-            media = listOf(
-                Media(
-                    mediaType = MediaType.PHOTO,
-                    url = "https://bucket-api.domain.com.au/v1/bucket/image/2019096805_1_1_240305_054335-w2048-h1365"
-                ),
-                Media(
-                    mediaType = MediaType.PHOTO,
-                    url = "https://bucket-api.domain.com.au/v1/bucket/image/2019096805_2_1_240305_054335-w2048-h1365"
-                )
-            )
-        )
-    }
-}
+//@Preview
+//@Composable
+//fun ListingDetailImagesComponentPreview() {
+//    MviExampleTheme {
+//        ListingDetailImagesComponent(
+//            media = listOf(
+//                Media(
+//                    mediaType = MediaType.PHOTO,
+//                    url = "https://bucket-api.domain.com.au/v1/bucket/image/2019096805_1_1_240305_054335-w2048-h1365"
+//                ),
+//                Media(
+//                    mediaType = MediaType.PHOTO,
+//                    url = "https://bucket-api.domain.com.au/v1/bucket/image/2019096805_2_1_240305_054335-w2048-h1365"
+//                )
+//            )
+//        )
+//    }
+//}

@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import au.com.deanpike.detail.ui.project.ProjectDetailScreen
 import au.com.deanpike.detail.ui.property.PropertyDetailScreen
+import au.com.deanpike.detail.ui.shared.FullSizeImageComponent
 import au.com.deanpike.listings.ui.list.ListingListScreen
 import au.com.deanpike.listings.ui.list.ListingListScreenEvent
 import au.com.deanpike.listings.ui.list.ListingListViewModel
@@ -127,6 +128,17 @@ fun ApplicationScreen() {
                                                 navigator.navigateBack()
                                             }
                                         }
+                                    },
+                                    onImageClicked = { url ->
+                                        scope.launch {
+                                            navigator.navigateTo(
+                                                pane = ListDetailPaneScaffoldRole.Detail,
+                                                contentKey = SelectedItem(
+                                                    listingType = SelectedListingType.IMAGE,
+                                                    imageUrl = url
+                                                )
+                                            )
+                                        }
                                     }
                                 )
                             }
@@ -161,6 +173,17 @@ fun ApplicationScreen() {
                                                 )
                                             )
                                         }
+                                    },
+                                    onImageClicked = { url ->
+                                        scope.launch {
+                                            navigator.navigateTo(
+                                                pane = ListDetailPaneScaffoldRole.Detail,
+                                                contentKey = SelectedItem(
+                                                    listingType = SelectedListingType.IMAGE,
+                                                    imageUrl = url
+                                                )
+                                            )
+                                        }
                                     }
                                 )
                             }
@@ -177,6 +200,34 @@ fun ApplicationScreen() {
                                     propertyId = propertyId,
                                     loadingAddress = item.address,
                                     onCloseClicked = {
+                                        scope.launch {
+                                            navigator.navigateBack(BackNavigationBehavior.PopLatest)
+                                        }
+                                    },
+                                    onImageClicked = { url ->
+                                        scope.launch {
+                                            navigator.navigateTo(
+                                                pane = ListDetailPaneScaffoldRole.Detail,
+                                                contentKey = SelectedItem(
+                                                    listingType = SelectedListingType.IMAGE,
+                                                    imageUrl = url
+                                                )
+                                            )
+                                        }
+                                    }
+                                )
+                            }
+                        }
+                    }
+                    SelectedListingType.IMAGE -> {
+                        AnimatedPane(
+                            enterTransition = slideInFromLeft(),
+                            exitTransition = slideOutToLeft()
+                        ) {
+                            item.imageUrl?.let {
+                                FullSizeImageComponent(
+                                    url = it,
+                                    onBackClicked = {
                                         scope.launch {
                                             navigator.navigateBack(BackNavigationBehavior.PopLatest)
                                         }
@@ -219,7 +270,8 @@ fun slideOutToRight(): ExitTransition {
 private enum class SelectedListingType {
     PROPERTY,
     PROJECT,
-    PROJECT_CHILD
+    PROJECT_CHILD,
+    IMAGE
 }
 
 @Parcelize
@@ -227,5 +279,6 @@ private class SelectedItem(
     val projectId: Long? = null,
     val propertyId: Long? = null,
     val listingType: SelectedListingType,
-    val address: String
+    val address: String = "",
+    val imageUrl: String? = null
 ) : Parcelable

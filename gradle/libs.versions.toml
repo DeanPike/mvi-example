@@ -35,6 +35,7 @@ tracingVersion = "1.3.0"
 turbine = "1.2.1"
 windowCoreAndroid = "1.5.1"
 uiTextGoogleFonts = "1.10.3"
+zoomableVersion = "0.18.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -75,6 +76,7 @@ coil-compose = { group = "io.coil-kt.coil3", name = "coil-compose", version.ref 
 coil-network = { group = "io.coil-kt.coil3", name = "coil-network-okhttp", version.ref = "coil" }
 store = { group = "org.mobilenativefoundation.store", name = "store5", version.ref = "store" }
 kotlinx-coroutines-core-jvm = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core-jvm", version.ref = "coroutines" }
+zoomable-coil = { group = "me.saket.telephoto", name = "zoomable-image-coil3", version.ref = "zoomableVersion" }
 
 #Window size
 androidx-window-core-android = { group = "androidx.window", name = "window-core-android", version.ref = "windowCoreAndroid" }

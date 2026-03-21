@@ -4,7 +4,17 @@ import androidx.activity.compose.BackHandler
 import androidx.activity.compose.LocalActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBars
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
@@ -20,7 +30,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -75,7 +84,8 @@ fun ProjectDetailScreen(
     projectId: Long,
     loadingAddress: String,
     onCloseClicked: () -> Unit = {},
-    onProjectChildClicked: (Long) -> Unit = {}
+    onProjectChildClicked: (Long) -> Unit = {},
+    onImageClicked: (String) -> Unit = {}
 ) {
     LaunchedEffect(projectId) {
         viewModel.setEvent(ProjectDetailScreenEvent.Initialise(projectId = projectId))
@@ -90,7 +100,8 @@ fun ProjectDetailScreen(
         loadingAddress = loadingAddress,
         onEvent = { viewModel.setEvent(it) },
         onCloseClicked = onCloseClicked,
-        onProjectChildClicked = onProjectChildClicked
+        onProjectChildClicked = onProjectChildClicked,
+        onImageClicked = onImageClicked
     )
 }
 
@@ -100,7 +111,8 @@ fun ProjectDetailScreenContent(
     loadingAddress: String,
     onEvent: (ProjectDetailScreenEvent) -> Unit = {},
     onCloseClicked: () -> Unit = {},
-    onProjectChildClicked: (Long) -> Unit = {}
+    onProjectChildClicked: (Long) -> Unit = {},
+    onImageClicked: (String) -> Unit = {}
 ) {
     BackHandler {
         onCloseClicked()
@@ -150,7 +162,8 @@ fun ProjectDetailScreenContent(
             ProjectDetailSuccess(
                 state = state,
                 onProjectChildClicked = onProjectChildClicked,
-                onBackClicked = onCloseClicked
+                onBackClicked = onCloseClicked,
+                onImageClicked = onImageClicked
             )
         } else if (state.screenState == ScreenStateType.ERROR) {
             Column(
@@ -172,10 +185,10 @@ fun ProjectDetailScreenContent(
 fun ProjectDetailSuccess(
     state: ProjectDetailScreenState,
     onProjectChildClicked: (Long) -> Unit = {},
-    onBackClicked: () -> Unit = {}
+    onBackClicked: () -> Unit = {},
+    onImageClicked: (String) -> Unit = {}
 ) {
     val scrollState = rememberScrollState()
-    val scope = rememberCoroutineScope()
     var screenWidth by remember { mutableIntStateOf(0) }
     val activity = LocalActivity.current
 
@@ -199,8 +212,8 @@ fun ProjectDetailSuccess(
         ) {
             ListingImagesComponent(
                 screenState = state.screenState,
-                scope = scope,
-                media = state.projectDetail?.media ?: emptyList()
+                media = state.projectDetail?.media ?: emptyList(),
+                onImageClicked = onImageClicked
             )
 
             AgencyBannerComponent(

@@ -14,7 +14,6 @@ import androidx.compose.ui.Modifier
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.window.core.layout.WindowSizeClass
-import androidx.window.core.layout.WindowWidthSizeClass
 import au.com.deanpike.uishared.theme.MviExampleTheme
 import au.com.deanpike.uishared.util.SetupStatusBar
 import dagger.hilt.android.AndroidEntryPoint
@@ -42,12 +41,6 @@ class MainActivity : ComponentActivity() {
             val windowSizeClass: WindowSizeClass = currentWindowAdaptiveInfo().windowSizeClass
 
             DisposableEffect(windowSizeClass) {
-
-                if (windowSizeClass.windowWidthSizeClass == WindowWidthSizeClass.COMPACT) {
-                    activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
-                } else {
-                    activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
-                }
 
                 onDispose {
                     activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
