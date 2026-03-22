@@ -2,6 +2,7 @@ package au.com.deanpike.detail.ui.project
 
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.LocalActivity
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
@@ -117,10 +118,13 @@ fun ProjectDetailScreenContent(
 
     Column(
         modifier = Modifier
+            .fillMaxWidth()
             .background(color = MaterialTheme.colorScheme.background)
             .testTag(PROJECT_LAYOUT)
     ) {
-        if (state.screenState == ScreenStateType.LOADING) {
+        AnimatedVisibility(
+            modifier = Modifier.fillMaxSize(),
+            visible = state.screenState == ScreenStateType.LOADING) {
             Box(
                 modifier = Modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center
@@ -155,14 +159,16 @@ fun ProjectDetailScreenContent(
                     )
                 }
             }
-        } else if (state.screenState == ScreenStateType.SUCCESS) {
+        }
+        AnimatedVisibility(state.screenState == ScreenStateType.SUCCESS) {
             ProjectDetailSuccess(
                 state = state,
                 onProjectChildClicked = onProjectChildClicked,
                 onBackClicked = onCloseClicked,
                 onImageClicked = onImageClicked
             )
-        } else if (state.screenState == ScreenStateType.ERROR) {
+        }
+        AnimatedVisibility(state.screenState == ScreenStateType.ERROR) {
             Column(
                 modifier = Modifier.fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally,

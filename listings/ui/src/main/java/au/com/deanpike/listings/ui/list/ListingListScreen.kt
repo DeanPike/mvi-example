@@ -1,5 +1,6 @@
 package au.com.deanpike.listings.ui.list
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
@@ -127,7 +128,7 @@ fun ListingListScreenContent(
 
         }
     ) { innerPadding ->
-        if (state.screenState != ScreenStateType.ERROR && state.screenState != ScreenStateType.INITIAL) {
+        AnimatedVisibility(state.screenState != ScreenStateType.ERROR && state.screenState != ScreenStateType.INITIAL) {
             Column(
                 modifier = Modifier
                     .padding(
@@ -185,7 +186,8 @@ fun ListingListScreenContent(
                     )
                 }
             }
-        } else if (state.screenState == ScreenStateType.ERROR) {
+        }
+        AnimatedVisibility(state.screenState == ScreenStateType.ERROR) {
             Column(
                 modifier = Modifier.fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally,
@@ -197,12 +199,9 @@ fun ListingListScreenContent(
                     }
                 )
             }
-        } else {
-            // We need to have a composable or the scaffold will crash the app
-            Text(text = "")
         }
 
-        if (state.screenState == ScreenStateType.LOADING || state.screenState == ScreenStateType.REFRESHING) {
+        AnimatedVisibility(state.screenState == ScreenStateType.LOADING || state.screenState == ScreenStateType.REFRESHING) {
             Box(
                 modifier = Modifier
                     .fillMaxSize()

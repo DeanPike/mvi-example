@@ -31,6 +31,11 @@ class ProjectDetailViewModel @Inject constructor(
     }
 
     private fun initialiseScreen(projectId: Long) {
+        setState {
+            copy(
+                screenState = ScreenStateType.LOADING,
+            )
+        }
         viewModelScope.launch(dispatcher.getIoDispatcher()) {
             when (val response = useCase.getProjectDetails(projectId)) {
                 is ResponseWrapper.Success -> {
