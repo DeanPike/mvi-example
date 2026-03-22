@@ -24,39 +24,50 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 internal abstract class DetailDataModule {
 
     @Binds
+    @Singleton
     abstract fun bindPropertyDetailDataSource(impl: PropertyDetailDataSourceImpl): PropertyDetailDataSource
 
     @Binds
+    @Singleton
     abstract fun bindPropertyDetailRepository(impl: PropertyDetailRepositoryImpl): PropertyDetailRepository
 
     @Binds
+    @Singleton
     abstract fun bindPropertyDetailUseCase(impl: PropertyDetailUseCaseImpl): PropertyDetailUseCase
 
     @Binds
+    @Singleton
     abstract fun bindProjectDetailDataSource(impl: ProjectDetailDataSourceImpl): ProjectDetailDataSource
 
     @Binds
+    @Singleton
     abstract fun bindProjectDetailRepository(impl: ProjectDetailRepositoryImpl): ProjectDetailRepository
 
     @Binds
+    @Singleton
     abstract fun bindProjectDetailUseCase(impl: ProjectDetailUseCaseImpl): ProjectDetailUseCase
 
     @Binds
+    @Singleton
     abstract fun bindListingCache(impl: ListingCacheImpl): ListingCache
 
     @Binds
+    @Singleton
     abstract fun bindListingFetcher(impl: ListingFetcherImpl): ListingFetcher
 
     @Binds
+    @Singleton
     abstract fun bindListingTruth(impl: ListingTruthImpl): ListingTruth
 
     @Binds
+    @Singleton
     abstract fun bindListingConverter(impl: ListingConverterImpl): ListingConverter
 
 }

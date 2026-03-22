@@ -12,20 +12,25 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 internal abstract class ListingDataModule {
 
     @Binds
+    @Singleton
     abstract fun bindListingDataSource(dataSource: ListingDataSourceImpl): ListingDataSource
 
     @Binds
+    @Singleton
     abstract fun bindListingRepository(repository: ListingRepositoryImpl): ListingRepository
 
     @Binds
+    @Singleton
     abstract fun bindListingConverterFactory(factory: ListingConverterFactoryImpl): ListingConverterFactory
 
     @Binds
+    @Singleton
     abstract fun bindListingUseCase(useCase: ListingUseCaseImpl): ListingUseCase
 }
