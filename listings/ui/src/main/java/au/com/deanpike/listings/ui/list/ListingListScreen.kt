@@ -20,9 +20,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -33,7 +31,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import androidx.lifecycle.compose.LocalLifecycleOwner
 import au.com.deanpike.listings.client.model.listing.response.Project
 import au.com.deanpike.listings.client.model.listing.response.Property
 import au.com.deanpike.listings.ui.R
@@ -51,42 +48,36 @@ import au.com.deanpike.uishared.theme.Dimension.DIM_8
 import au.com.deanpike.uishared.theme.MviExampleTheme
 import au.com.deanpike.uishared.util.GridOverlayPreviewComponent
 import au.com.deanpike.uishared.util.SetStatusBarAppearance
-import kotlinx.coroutines.launch
 
 @Composable
 fun ListingListScreen(
-    viewModel: ListingListViewModel,
+    viewModel: ListingListViewModel = hiltViewModel(),
     onPropertyClicked: (Long, String) -> Unit = { _, _ -> },
-    onProjectClicked: (Long, String) -> Unit = { _, _ -> },
-    onProjectChildClicked: (Long, Long, String) -> Unit = { _, _, _ -> },
+    onProjectClicked: (Long, String) -> Unit = { _, _ -> }
 ) {
-    val lifecycleOwner = LocalLifecycleOwner.current
-    val scope = rememberCoroutineScope()
+    LaunchedEffect(Unit) {
+        viewModel.setEvent(
+            ListingListScreenEvent.Initialise
+        )
+    }
 
     SetStatusBarAppearance(useDarkIcons = !isSystemInDarkTheme())
 
-    DisposableEffect(lifecycleOwner) {
-        val job = scope.launch {
-            viewModel.effect.collect { effect ->
-                when (effect) {
-                    is ListingListScreenEffect.OnPropertySelected -> {
-                        onPropertyClicked(effect.id, effect.address)
-                    }
-
-                    is ListingListScreenEffect.OnProjectSelected -> {
-                        onProjectClicked(effect.id, effect.address)
-                    }
-                    is ListingListScreenEffect.OnProjectChildSelected -> {
-                        onProjectChildClicked(effect.projectId, effect.projectChildId, effect.address)
-                    }
+    ListingListScreenContent(
+        state = viewModel.uiState,
+        onEvent = {
+            when (it) {
+                is ListingListScreenEvent.OnPropertySelected -> {
+                    onPropertyClicked(it.id, it.address)
+                }
+                is ListingListScreenEvent.OnProjectSelected -> {
+                    onProjectClicked(it.id, it.address)
+                }
+                else -> {
+                    viewModel.setEvent(it)
                 }
             }
         }
-        onDispose { job.cancel() }
-    }
-    ListingListScreenContent(
-        state = viewModel.uiState,
-        onEvent = { viewModel.setEvent(it) }
     )
 }
 

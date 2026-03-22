@@ -50,6 +50,7 @@ dependencies {
     implementation(project(":shared:ui-shared"))
     implementation(project(":shared:data-shared"))
     implementation(project(":shared:common-shared"))
+    implementation(project(":shared:navigation"))
 
     testImplementation(project(":test-util:unit-test-shared"))
 
@@ -72,6 +73,7 @@ dependencies {
     implementation(libs.constraintlayout.compose)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+    implementation(libs.androidx.navigation3.runtime)
 
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)

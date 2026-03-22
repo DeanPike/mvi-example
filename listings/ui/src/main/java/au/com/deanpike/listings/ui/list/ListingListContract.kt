@@ -4,7 +4,6 @@ import au.com.deanpike.listings.client.model.listing.response.Listing
 import au.com.deanpike.listings.client.type.DwellingType
 import au.com.deanpike.listings.client.type.StatusType
 import au.com.deanpike.uishared.base.ScreenStateType
-import au.com.deanpike.uishared.base.UiEffect
 import au.com.deanpike.uishared.base.UiEvent
 import au.com.deanpike.uishared.base.UiState
 
@@ -14,16 +13,10 @@ data class ListingListScreenState(
     val selectedStatus: StatusType = StatusType.BUY,
     val selectedListingTypes: List<DwellingType> = emptyList(),
     val showListingTypeScreen: Boolean = false,
-    val selectedPropertyId: Long? = null,
-    val selectedProjectId: Long? = null,
-    val selectedProjectChild: Long? = null,
-    val isSinglePane: Boolean = true
 ) : UiState
 
 sealed class ListingListScreenEvent : UiEvent {
-    data class Initialise(
-        val isSinglePane: Boolean
-    ) : ListingListScreenEvent()
+    data object Initialise : ListingListScreenEvent()
 
     data class OnStatusSelected(
         val status: StatusType
@@ -42,28 +35,4 @@ sealed class ListingListScreenEvent : UiEvent {
         val id: Long,
         val address: String
     ) : ListingListScreenEvent()
-
-    data class OnProjectChildSelected(
-        val projectId: Long,
-        val projectChildId: Long,
-        val address: String
-    ) : ListingListScreenEvent()
-}
-
-sealed class ListingListScreenEffect : UiEffect {
-    data class OnPropertySelected(
-        val id: Long,
-        val address: String
-    ) : ListingListScreenEffect()
-
-    data class OnProjectSelected(
-        val id: Long,
-        val address: String
-    ) : ListingListScreenEffect()
-
-    data class OnProjectChildSelected(
-        val projectId: Long,
-        val projectChildId: Long,
-        val address: String
-    ) : ListingListScreenEffect()
 }

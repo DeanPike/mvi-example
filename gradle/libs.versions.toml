@@ -24,6 +24,7 @@ jodaTimeVersion = "2.14.1"
 junitBomVersion = "6.0.3"
 hiltNavigationVersion = "1.3.0"
 kotlin = "2.3.20"
+kotlinSerialization = "2.3.20"
 kotlinxSerializationCore = "1.10.0"
 kspVersion = "2.3.5"
 lifecycleRuntimeKtx = "2.10.0"
@@ -96,7 +97,6 @@ zoomable-coil = { group = "me.saket.telephoto", name = "zoomable-image-coil3", v
 
 #Window size
 androidx-window-core-android = { group = "androidx.window", name = "window-core-android", version.ref = "windowCoreAndroid" }
-androidx-adaptive-android = { group = "androidx.compose.material3.adaptive", name = "adaptive-android", version.ref = "adaptiveVersion" }
 
 # Test
 coil-test = { group = "io.coil-kt.coil3", name = "coil-test", version.ref = "coil" }
@@ -127,6 +127,7 @@ junit-jupiter = ["junit-jupiter", "junit-jupiter-engine", "junit-platform-launch
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 jetbrainsKotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+jetbrains-kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlinSerialization"}
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 daggerHiltPlugin = { id = "com.google.dagger.hilt.android", version.ref = "daggerHiltVersion" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }

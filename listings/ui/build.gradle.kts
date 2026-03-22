@@ -53,6 +53,7 @@ dependencies {
     implementation(project(":shared:ui-shared"))
     implementation(project(":shared:data-shared"))
     implementation(project(":shared:common-shared"))
+    implementation(project(":shared:navigation"))
     androidTestImplementation(project(":listings:client"))
     androidTestImplementation(project(":listings:data"))
     androidTestImplementation(project(":test-util:ui-test-shared"))
@@ -61,7 +62,6 @@ dependencies {
     androidTestImplementation(project(":test-util:unit-test-shared"))
     testImplementation(project(":test-util:unit-test-shared"))
 
-    implementation(libs.androidx.adaptive.android)
     implementation(libs.androidx.window.core.android)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -80,6 +80,8 @@ dependencies {
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
     implementation(libs.hilt.navigation.compose)
+
+    implementation(libs.androidx.navigation3.runtime)
 
     androidTestImplementation(libs.hilt.android)
     kspAndroidTest(libs.hilt.android.compiler)

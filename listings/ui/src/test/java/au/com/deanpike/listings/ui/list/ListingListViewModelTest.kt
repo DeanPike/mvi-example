@@ -1,6 +1,5 @@
 package au.com.deanpike.listings.ui.list
 
-import app.cash.turbine.test
 import au.com.deanpike.commonshared.model.ListingDetails
 import au.com.deanpike.commonshared.util.ResponseWrapper
 import au.com.deanpike.datashared.dispatcher.DispatcherProvider
@@ -54,7 +53,7 @@ class ListingListViewModelTest {
             )
         } returns ResponseWrapper.Success(listOf(getProject(), getProperty()))
 
-        viewModel.setEvent(ListingListScreenEvent.Initialise(true))
+        viewModel.setEvent(ListingListScreenEvent.Initialise)
         advanceUntilIdle()
 
         with(viewModel.uiState) {
@@ -122,7 +121,7 @@ class ListingListViewModelTest {
             )
         } returns ResponseWrapper.Error(IOException("No Internet"))
 
-        viewModel.setEvent(ListingListScreenEvent.Initialise(true))
+        viewModel.setEvent(ListingListScreenEvent.Initialise)
         advanceUntilIdle()
 
         with(viewModel.uiState) {
@@ -172,8 +171,6 @@ class ListingListViewModelTest {
             assertThat(screenState).isEqualTo(ScreenStateType.SUCCESS)
             assertThat(listings.size).isEqualTo(2)
             assertThat(selectedStatus).isEqualTo(StatusType.RENT)
-            assertThat(selectedPropertyId).isNull()
-            assertThat(selectedProjectId).isNull()
         }
 
         // Do nothing if the user selects the same search mode
@@ -234,8 +231,6 @@ class ListingListViewModelTest {
             assertThat(selectedListingTypes[0]).isEqualTo(HOUSE)
             assertThat(selectedListingTypes[1]).isEqualTo(TOWNHOUSE)
             assertThat(screenState).isEqualTo(ScreenStateType.SUCCESS)
-            assertThat(selectedPropertyId).isNull()
-            assertThat(selectedProjectId).isNull()
         }
 
         // Do nothing if the user chooses the same listing type
@@ -268,18 +263,6 @@ class ListingListViewModelTest {
             )
         )
         advanceUntilIdle()
-
-        with(viewModel.uiState) {
-            assertThat(selectedPropertyId).isEqualTo(12)
-            assertThat(selectedProjectId).isNull()
-        }
-
-        viewModel.effect.test {
-            val item = awaitItem()
-            assertThat(item).isInstanceOf(ListingListScreenEffect.OnPropertySelected::class.java)
-            assertThat((item as ListingListScreenEffect.OnPropertySelected).id).isEqualTo(12)
-            assertThat(item.address).isEqualTo("Loading Address")
-        }
     }
 
     @Test
@@ -291,18 +274,6 @@ class ListingListViewModelTest {
             )
         )
         advanceUntilIdle()
-
-        with(viewModel.uiState) {
-            assertThat(selectedProjectId).isEqualTo(23)
-            assertThat(selectedPropertyId).isNull()
-        }
-
-        viewModel.effect.test {
-            val item = awaitItem()
-            assertThat(item).isInstanceOf(ListingListScreenEffect.OnProjectSelected::class.java)
-            assertThat((item as ListingListScreenEffect.OnProjectSelected).id).isEqualTo(23)
-            assertThat(item.address).isEqualTo("Loading Address")
-        }
     }
 
     private fun getProperty(): Property {

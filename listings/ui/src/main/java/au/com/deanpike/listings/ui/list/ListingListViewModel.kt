@@ -3,13 +3,12 @@ package au.com.deanpike.listings.ui.list
 import androidx.lifecycle.viewModelScope
 import au.com.deanpike.commonshared.util.ResponseWrapper
 import au.com.deanpike.datashared.dispatcher.DispatcherProvider
-import au.com.deanpike.listings.client.model.listing.response.Project
-import au.com.deanpike.listings.client.model.listing.response.Property
 import au.com.deanpike.listings.client.model.listing.search.ListingSearch
 import au.com.deanpike.listings.client.type.StatusType
 import au.com.deanpike.listings.client.usecase.ListingUseCase
 import au.com.deanpike.uishared.base.BaseViewModel
 import au.com.deanpike.uishared.base.ScreenStateType
+import au.com.deanpike.uishared.base.UiEffect
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -20,13 +19,13 @@ import kotlinx.coroutines.launch
 class ListingListViewModel @Inject constructor(
     private val dispatcher: DispatcherProvider,
     private val listingUseCase: ListingUseCase
-) : BaseViewModel<ListingListScreenEvent, ListingListScreenState, ListingListScreenEffect>() {
+) : BaseViewModel<ListingListScreenEvent, ListingListScreenState, UiEffect>() {
     override fun createInitialState() = ListingListScreenState()
 
     override fun handleEvent(event: ListingListScreenEvent) {
         when (event) {
             is ListingListScreenEvent.Initialise -> {
-                initialise(event)
+                initialise()
             }
             is ListingListScreenEvent.OnStatusSelected -> {
                 onStatusSelected(event.status)
@@ -44,22 +43,16 @@ class ListingListViewModel @Inject constructor(
                 onRetryClicked()
             }
             is ListingListScreenEvent.OnPropertySelected -> {
-                onPropertySelected(event)
             }
             is ListingListScreenEvent.OnProjectSelected -> {
-                onProjectSelected(event)
-            }
-            is ListingListScreenEvent.OnProjectChildSelected -> {
-                onProjectChildSelected(event)
             }
         }
     }
 
-    private fun initialise(event: ListingListScreenEvent.Initialise) {
+    private fun initialise() {
         setState {
             copy(
-                screenState = ScreenStateType.LOADING,
-                isSinglePane = event.isSinglePane
+                screenState = ScreenStateType.LOADING
             )
         }
         getListings()
@@ -70,9 +63,7 @@ class ListingListViewModel @Inject constructor(
             setState {
                 copy(
                     screenState = ScreenStateType.LOADING,
-                    selectedStatus = status,
-                    selectedPropertyId = null,
-                    selectedProjectId = null
+                    selectedStatus = status
                 )
             }
             getListings()
@@ -103,9 +94,7 @@ class ListingListViewModel @Inject constructor(
                 copy(
                     showListingTypeScreen = false,
                     selectedListingTypes = event.selectedListingTypes,
-                    screenState = ScreenStateType.LOADING,
-                    selectedPropertyId = null,
-                    selectedProjectId = null
+                    screenState = ScreenStateType.LOADING
                 )
             }
             getListings()
@@ -128,52 +117,6 @@ class ListingListViewModel @Inject constructor(
         getListings()
     }
 
-    private fun onPropertySelected(event: ListingListScreenEvent.OnPropertySelected) {
-        setState {
-            copy(
-                selectedPropertyId = event.id,
-                selectedProjectId = null,
-                selectedProjectChild = null
-            )
-        }
-        setEffect {
-            ListingListScreenEffect.OnPropertySelected(
-                id = event.id,
-                address = event.address
-            )
-        }
-    }
-
-    private fun onProjectSelected(event: ListingListScreenEvent.OnProjectSelected) {
-        setState {
-            copy(
-                selectedProjectId = event.id,
-                selectedPropertyId = null,
-                selectedProjectChild = null
-            )
-        }
-        setEffect {
-            ListingListScreenEffect.OnProjectSelected(event.id, event.address)
-        }
-    }
-
-    private fun onProjectChildSelected(event: ListingListScreenEvent.OnProjectChildSelected) {
-        setState {
-            copy(
-                selectedProjectId = event.projectId,
-                selectedProjectChild = event.projectChildId,
-                selectedPropertyId = null
-            )
-        }
-        setEffect {
-            ListingListScreenEffect.OnProjectChildSelected(
-                projectId = event.projectId,
-                projectChildId = event.projectChildId,
-                address = event.address
-            )
-        }
-    }
-
     private fun getListings() {
         viewModelScope.launch(dispatcher.getIoDispatcher()) {
             when (val response = listingUseCase.getListings(
@@ -188,26 +131,6 @@ class ListingListViewModel @Inject constructor(
                             screenState = ScreenStateType.SUCCESS,
                             listings = response.data
                         )
-                    }
-                    if (!uiState.isSinglePane) {
-                        if (response.data.isNotEmpty()) {
-                            val listing = response.data[0]
-                            if (listing is Property) {
-                                onPropertySelected(
-                                    event = ListingListScreenEvent.OnPropertySelected(
-                                        id = listing.id,
-                                        address = listing.address
-                                    )
-                                )
-                            } else if (listing is Project) {
-                                onProjectSelected(
-                                    event = ListingListScreenEvent.OnProjectSelected(
-                                        id = listing.id,
-                                        address = listing.address
-                                    )
-                                )
-                            }
-                        }
                     }
                 }
                 is ResponseWrapper.Error -> {

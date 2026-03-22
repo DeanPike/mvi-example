@@ -13,13 +13,24 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.ui.Modifier
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsControllerCompat
+import androidx.navigation3.runtime.EntryProviderScope
+import androidx.navigation3.runtime.NavBackStack
+import androidx.navigation3.runtime.NavKey
 import androidx.window.core.layout.WindowSizeClass
 import au.com.deanpike.uishared.theme.MviExampleTheme
 import au.com.deanpike.uishared.util.SetupStatusBar
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    @Inject
+    lateinit var backStack: NavBackStack<NavKey>
+
+    @Inject
+    lateinit var appEntryBuilder: Set<@JvmSuppressWildcards EntryProviderScope<NavKey>.() -> Unit>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
@@ -52,7 +63,10 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    ApplicationScreen()
+                    ApplicationScreen(
+                        backStack = backStack,
+                        appEntryBuilder = appEntryBuilder
+                    )
                 }
             }
         }

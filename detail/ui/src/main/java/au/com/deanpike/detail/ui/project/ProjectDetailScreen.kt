@@ -80,7 +80,6 @@ import au.com.deanpike.uishared.util.StatusBarGradient
 @Composable
 fun ProjectDetailScreen(
     viewModel: ProjectDetailViewModel = hiltViewModel<ProjectDetailViewModel>(),
-    isSinglePane: Boolean,
     projectId: Long,
     loadingAddress: String,
     onCloseClicked: () -> Unit = {},
@@ -91,9 +90,7 @@ fun ProjectDetailScreen(
         viewModel.setEvent(ProjectDetailScreenEvent.Initialise(projectId = projectId))
     }
 
-    if (isSinglePane) {
-        SetStatusBarAppearance(useDarkIcons = !isSystemInDarkTheme())
-    }
+    SetStatusBarAppearance(useDarkIcons = !isSystemInDarkTheme())
 
     ProjectDetailScreenContent(
         state = viewModel.uiState,

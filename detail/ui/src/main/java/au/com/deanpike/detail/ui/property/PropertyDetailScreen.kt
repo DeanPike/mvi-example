@@ -74,7 +74,6 @@ import au.com.deanpike.uishared.util.StatusBarGradient
 @Composable
 fun PropertyDetailScreen(
     viewModel: PropertyDetailViewModel = hiltViewModel<PropertyDetailViewModel>(),
-    isSinglePane: Boolean,
     propertyId: Long,
     loadingAddress: String,
     onCloseClicked: () -> Unit = {},
@@ -84,9 +83,7 @@ fun PropertyDetailScreen(
         viewModel.setEvent(PropertyDetailScreenEvent.Initialise(propertyId = propertyId))
     }
 
-    if (isSinglePane) {
-        SetStatusBarAppearance(useDarkIcons = !isSystemInDarkTheme())
-    }
+    SetStatusBarAppearance(useDarkIcons = !isSystemInDarkTheme())
 
     PropertyDetailScreenContent(
         state = viewModel.uiState,

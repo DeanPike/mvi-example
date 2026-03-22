@@ -237,9 +237,8 @@ fun ProjectListItem(
                                     projectChild = projectChild,
                                     onProjectChildClicked = { childId ->
                                         onEvent(
-                                            ListingListScreenEvent.OnProjectChildSelected(
-                                                projectId = project.id,
-                                                projectChildId = childId,
+                                            ListingListScreenEvent.OnPropertySelected(
+                                                id = childId,
                                                 address = project.address
                                             )
                                         )
