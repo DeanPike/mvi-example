@@ -56,10 +56,12 @@ fun ListingListScreen(
     onPropertyClicked: (Long, String) -> Unit = { _, _ -> },
     onProjectClicked: (Long, String) -> Unit = { _, _ -> }
 ) {
-    LaunchedEffect(Unit) {
-        viewModel.setEvent(
-            ListingListScreenEvent.Initialise
-        )
+    LaunchedEffect(viewModel.uiState.screenState) {
+        if (viewModel.uiState.screenState == ScreenStateType.INITIAL) {
+            viewModel.setEvent(
+                ListingListScreenEvent.Initialise
+            )
+        }
     }
 
     SetStatusBarAppearance(useDarkIcons = !isSystemInDarkTheme())
