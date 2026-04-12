@@ -82,12 +82,13 @@ dependencies {
     implementation(libs.hilt.navigation.compose)
 
     implementation(libs.androidx.window.core.android)
-    implementation(libs.adaptive.layout)
 
-    implementation(libs.adaptive.navigation)
+    // Navigation
     implementation(libs.androidx.navigation3.runtime)
     implementation(libs.androidx.navigation3.ui)
     implementation(libs.androidx.lifecycle.viewmodel.navigation3)
+    implementation(libs.androidx.material3.adaptive.navigation3)
+    implementation(libs.kotlinx.serialization.core)
 
     testImplementation(libs.junit.jupiter)
     testImplementation(libs.kotlinx.coroutines.core.jvm)
