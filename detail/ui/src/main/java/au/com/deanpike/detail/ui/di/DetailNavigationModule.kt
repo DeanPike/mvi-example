@@ -3,7 +3,7 @@ package au.com.deanpike.detail.ui.di
 import androidx.navigation3.runtime.EntryProviderScope
 import androidx.navigation3.runtime.NavBackStack
 import androidx.navigation3.runtime.NavKey
-import au.com.deanpike.detail.ui.provider.detailEntryBuilder
+import au.com.deanpike.detail.ui.navigationprovider.detailEntryBuilder
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

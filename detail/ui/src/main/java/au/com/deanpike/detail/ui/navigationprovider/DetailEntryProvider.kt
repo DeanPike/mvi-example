@@ -1,4 +1,4 @@
-package au.com.deanpike.detail.ui.provider
+package au.com.deanpike.detail.ui.navigationprovider
 
 import androidx.navigation3.runtime.EntryProviderScope
 import androidx.navigation3.runtime.NavKey
