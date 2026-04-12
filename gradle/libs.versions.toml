@@ -1,7 +1,7 @@
 [versions]
 #Configuration versions
-javaCompileVersion = "VERSION_17"
-jvmToolChainVersion = "17"
+javaCompileVersion = "VERSION_21"
+jvmToolChainVersion = "21"
 
 compileSdk = "36"
 targetSdk = "36"

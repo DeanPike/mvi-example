@@ -9,6 +9,12 @@ plugins {
     id("kotlin-parcelize")
 }
 
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(libs.versions.jvmToolChainVersion.get()))
+    }
+}
+
 android {
     namespace = "au.com.deanpike.mviexample"
     compileSdk = libs.versions.compileSdk.get().toInt()
