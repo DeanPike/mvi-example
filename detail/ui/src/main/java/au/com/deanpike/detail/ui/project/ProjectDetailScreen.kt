@@ -73,6 +73,7 @@ import au.com.deanpike.uishared.theme.Dimension.DIM_16
 import au.com.deanpike.uishared.theme.Dimension.DIM_4
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
 import au.com.deanpike.uishared.theme.MviExampleTheme
+import au.com.deanpike.uishared.util.MviWindowWidthSizeClassProvider
 import au.com.deanpike.uishared.util.NavigationBarScrim
 import au.com.deanpike.uishared.util.SetStatusBarAppearance
 import au.com.deanpike.uishared.util.SetupStatusBar
@@ -112,8 +113,12 @@ fun ProjectDetailScreenContent(
     onProjectChildClicked: (Long) -> Unit = {},
     onImageClicked: (String) -> Unit = {}
 ) {
+
+    val isCompactDevice = MviWindowWidthSizeClassProvider.isCompactWidth()
     BackHandler {
-        onCloseClicked()
+        if (isCompactDevice) {
+            onCloseClicked()
+        }
     }
 
     Column(
@@ -124,7 +129,8 @@ fun ProjectDetailScreenContent(
     ) {
         AnimatedVisibility(
             modifier = Modifier.fillMaxSize(),
-            visible = state.screenState == ScreenStateType.LOADING) {
+            visible = state.screenState == ScreenStateType.LOADING
+        ) {
             Box(
                 modifier = Modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center
@@ -309,22 +315,24 @@ fun ProjectDetailSuccess(
         StatusBarGradient()
         NavigationBarScrim()
 
-        IconButton(
-            modifier = Modifier
-                .windowInsetsPadding(WindowInsets.statusBars)
-                .align(Alignment.TopStart),
-            onClick = { onBackClicked() },
-            shape = CircleShape,
-            colors = IconButtonDefaults.iconButtonColors().copy(
-                containerColor = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.4F)
-            )
-        ) {
-            Icon(
-                modifier = Modifier.testTag(PROJECT_DETAIL_BACK_BUTTON),
-                painter = painterResource(au.com.deanpike.uishared.R.drawable.arrow_back_24),
-                contentDescription = stringResource(au.com.deanpike.uishared.R.string.back),
-                tint = MaterialTheme.colorScheme.background,
-            )
+        AnimatedVisibility(visible = MviWindowWidthSizeClassProvider.isCompactWidth()) {
+            IconButton(
+                modifier = Modifier
+                    .windowInsetsPadding(WindowInsets.statusBars)
+                    .align(Alignment.TopStart),
+                onClick = { onBackClicked() },
+                shape = CircleShape,
+                colors = IconButtonDefaults.iconButtonColors().copy(
+                    containerColor = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.4F)
+                )
+            ) {
+                Icon(
+                    modifier = Modifier.testTag(PROJECT_DETAIL_BACK_BUTTON),
+                    painter = painterResource(au.com.deanpike.uishared.R.drawable.arrow_back_24),
+                    contentDescription = stringResource(au.com.deanpike.uishared.R.string.back),
+                    tint = MaterialTheme.colorScheme.background,
+                )
+            }
         }
     }
 }

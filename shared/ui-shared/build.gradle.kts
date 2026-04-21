@@ -43,6 +43,9 @@ dependencies {
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.window.core.android)
+    implementation(libs.androidx.compose.adaptive)
+    implementation(libs.androidx.compose.material3.window.size.class1)
 
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
