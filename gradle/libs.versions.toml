@@ -10,6 +10,7 @@ minSdk = "30"
 #Dependency versions
 activityCompose = "1.13.0"
 agp = "9.2.0"
+androidTestComposeVersion = "2.0.1"
 assertj = "3.27.7"
 coil = "3.4.0"
 composeBom = "2026.03.00"
@@ -30,10 +31,13 @@ lifecycleRuntimeKtx = "2.10.0"
 lifecycleViewmodelNav3 = "2.11.0-alpha03"
 loggingInterceptor = "5.3.2"
 material3AdaptiveNav3 = "1.3.0-alpha09"
-mockk = "1.14.9
+materialIconsCoreVersion = "1.7.8"
+mockk = "1.14.9"
 mockwebserverVersion = "5.3.2"
 nav3Core = "1.1.0"
 retrofit = "3.0.0"
+robolectricVersion = "4.16.1"
+roborazziVersion = "1.60.0"
 store = "5.1.0-alpha08"
 tracingVersion = "1.3.0"
 turbine = "1.2.1"
@@ -41,9 +45,6 @@ windowCoreAndroid = "1.5.1"
 uiTextGoogleFonts = "1.10.6"
 zoomableVersion = "0.19.0"
 junit = "4.13.2"
-junitVersion = "1.3.0"
-appcompat = "1.7.1"
-material = "1.13.0"
 adaptive = "1.2.0"
 material3WindowSizeClass = "1.4.0"
 
@@ -73,6 +74,10 @@ hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref
 hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "daggerHiltVersion" }
 hilt-core = { group = "com.google.dagger", name = "hilt-core", version.ref = "daggerHiltVersion" }
 hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hiltNavigationVersion" }
+
+#Icons
+material-icons-core = { group = "androidx.compose.material", name = "material-icons-core", version.ref = "materialIconsCoreVersion" }
+material-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended", version.ref = "materialIconsCoreVersion" }
 
 #Retrofit
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
@@ -104,6 +109,7 @@ junit-bom = { module = "org.junit:junit-bom", version.ref = "junitBomVersion" }
 junit-jupiter = { module = "org.junit.jupiter:junit-jupiter" }
 junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine" }
 junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher" }
+junit-vintage-engine = {module="org.junit.vintage:junit-vintage-engine"}
 turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
 assertj = { group = "org.assertj", name = "assertj-core", version.ref = "assertj" }
 mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
@@ -117,19 +123,26 @@ androidx-ui-text-google-fonts = { group = "androidx.compose.ui", name = "ui-text
 hilt-android-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "daggerHiltVersion" }
 tracing = { group = "androidx.tracing", name = "tracing", version.ref = "tracingVersion" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
-androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
-androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
-material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-compose-material3-window-size-class1 = { group = "androidx.compose.material3", name = "material3-window-size-class", version.ref = "material3WindowSizeClass" }
+robolectric = { group = "org.robolectric", name = "robolectric", version.ref = "robolectricVersion" }
+roborazzi = { module = "io.github.takahirom.roborazzi:roborazzi", version.ref = "roborazziVersion" }
+roborazzi-compose = { module = "io.github.takahirom.roborazzi:roborazzi-compose", version.ref = "roborazziVersion" }
+roborazzi-rule = { group = "io.github.takahirom.roborazzi", name = "roborazzi-junit-rule", version.ref = "roborazziVersion" }
+android-test-core = {group = "de.mannodermaus.junit5", name = "android-test-core", version.ref = "androidTestComposeVersion"}
+android-test-compose = {group="de.mannodermaus.junit5", name = "android-test-compose", version.ref = "androidTestComposeVersion"}
 
 [bundles]
 junit-jupiter = ["junit-jupiter", "junit-jupiter-engine", "junit-platform-launcher"]
+junit4 = ["junit", "junit-vintage-engine"]
+robolectric-parent = ["robolectric", "roborazzi", "roborazzi-compose", "roborazzi-rule", "androidx-ui-test-junit4", "android-test-core", "android-test-compose"]
+robolectric-tests = ["androidx-ui-test-junit4", "android-test-core", "android-test-compose"]
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 jetbrainsKotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
-jetbrains-kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlinSerialization"}
+jetbrains-kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlinSerialization" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 daggerHiltPlugin = { id = "com.google.dagger.hilt.android", version.ref = "daggerHiltVersion" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "kspVersion" }
+roborazzi = { id = "io.github.takahirom.roborazzi", version.ref = "roborazziVersion" }

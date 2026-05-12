@@ -8,6 +8,7 @@ import au.com.deanpike.listings.client.model.listing.response.Project
 import au.com.deanpike.listings.client.model.listing.response.ProjectChild
 import au.com.deanpike.listings.client.model.listing.response.Property
 import au.com.deanpike.listings.client.model.listing.search.ListingSearch
+import au.com.deanpike.listings.client.type.DwellingType
 import au.com.deanpike.listings.client.type.DwellingType.HOUSE
 import au.com.deanpike.listings.client.type.DwellingType.TOWNHOUSE
 import au.com.deanpike.listings.client.type.StatusType
@@ -17,7 +18,6 @@ import au.com.deanpike.uishared.base.ScreenStateType
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
-import java.io.IOException
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
@@ -25,6 +25,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
+import java.io.IOException
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @ExtendWith(TestDispatcherExtension::class)
@@ -48,7 +49,7 @@ class ListingListViewModelTest {
             useCase.getListings(
                 ListingSearch(
                     searchMode = StatusType.BUY,
-                    dwellingTypes = emptyList()
+                    dwellingTypes = listOf(DwellingType.ALL)
                 )
             )
         } returns ResponseWrapper.Success(listOf(getProject(), getProperty()))
@@ -116,7 +117,7 @@ class ListingListViewModelTest {
             useCase.getListings(
                 ListingSearch(
                     searchMode = StatusType.BUY,
-                    dwellingTypes = emptyList()
+                    dwellingTypes = listOf(DwellingType.ALL)
                 )
             )
         } returns ResponseWrapper.Error(IOException("No Internet"))
@@ -138,7 +139,7 @@ class ListingListViewModelTest {
             useCase.getListings(
                 ListingSearch(
                     searchMode = StatusType.BUY,
-                    dwellingTypes = emptyList()
+                    dwellingTypes = listOf(DwellingType.ALL)
                 )
             )
         } returns ResponseWrapper.Success(listOf(property, project))
@@ -154,101 +155,47 @@ class ListingListViewModelTest {
     }
 
     @Test
-    fun `should handle status change`() = runTest {
+    fun `should handle status and dwelling type change`() = runTest {
         coEvery {
             useCase.getListings(
                 ListingSearch(
                     searchMode = StatusType.RENT,
-                    dwellingTypes = emptyList()
+                    dwellingTypes = listOf(TOWNHOUSE, HOUSE)
                 )
             )
         } returns ResponseWrapper.Success(listOf(getProject(), getProperty()))
 
-        viewModel.setEvent(ListingListScreenEvent.OnStatusSelected(StatusType.RENT))
+        viewModel.setEvent(
+            ListingListScreenEvent.OnFilterApplied(
+                status = StatusType.RENT,
+                dwellingTypes = listOf(TOWNHOUSE, HOUSE)
+            )
+        )
         advanceUntilIdle()
 
         with(viewModel.uiState) {
             assertThat(screenState).isEqualTo(ScreenStateType.SUCCESS)
             assertThat(listings.size).isEqualTo(2)
             assertThat(selectedStatus).isEqualTo(StatusType.RENT)
+            assertThat(2).isEqualTo(selectedDwellingTypes.size)
+            assertThat(selectedDwellingTypes[0]).isEqualTo(TOWNHOUSE)
+            assertThat(selectedDwellingTypes[1]).isEqualTo(HOUSE)
         }
 
         // Do nothing if the user selects the same search mode
-        viewModel.setEvent(ListingListScreenEvent.OnStatusSelected(StatusType.RENT))
+        viewModel.setEvent(
+            ListingListScreenEvent.OnFilterApplied(
+                status = StatusType.RENT,
+                dwellingTypes = listOf(TOWNHOUSE, HOUSE)
+            )
+        )
         advanceUntilIdle()
 
         coVerify(exactly = 1) {
             useCase.getListings(
                 ListingSearch(
                     searchMode = StatusType.RENT,
-                    dwellingTypes = emptyList()
-                )
-            )
-        }
-    }
-
-    @Test
-    fun `handle listing type clicked`() = runTest {
-        viewModel.setEvent(ListingListScreenEvent.OnListingTypeClicked)
-        advanceUntilIdle()
-
-        assertThat(viewModel.uiState.showListingTypeScreen).isTrue()
-
-    }
-
-    @Test
-    fun `handle bottom sheet dismissed`() = runTest {
-        viewModel.setEvent(ListingListScreenEvent.OnBottomSheetDismissed)
-        advanceUntilIdle()
-
-        assertThat(viewModel.uiState.showListingTypeScreen).isFalse()
-    }
-
-    @Test
-    fun `handle listing types applied`() = runTest {
-        coEvery {
-            useCase.getListings(
-                ListingSearch(
-                    searchMode = StatusType.BUY,
-                    dwellingTypes = listOf(HOUSE, TOWNHOUSE)
-                )
-            )
-        } returns ResponseWrapper.Success(emptyList())
-
-        viewModel.setEvent(
-            ListingListScreenEvent.OnListingTypesApplied(
-                listOf(
-                    HOUSE,
-                    TOWNHOUSE
-                )
-            )
-        )
-        advanceUntilIdle()
-
-        with(viewModel.uiState) {
-            assertThat(showListingTypeScreen).isFalse()
-            assertThat(selectedListingTypes.size).isEqualTo(2)
-            assertThat(selectedListingTypes[0]).isEqualTo(HOUSE)
-            assertThat(selectedListingTypes[1]).isEqualTo(TOWNHOUSE)
-            assertThat(screenState).isEqualTo(ScreenStateType.SUCCESS)
-        }
-
-        // Do nothing if the user chooses the same listing type
-        viewModel.setEvent(
-            ListingListScreenEvent.OnListingTypesApplied(
-                listOf(
-                    HOUSE,
-                    TOWNHOUSE
-                )
-            )
-        )
-        advanceUntilIdle()
-
-        coVerify(exactly = 1) {
-            useCase.getListings(
-                ListingSearch(
-                    searchMode = StatusType.BUY,
-                    dwellingTypes = listOf(HOUSE, TOWNHOUSE)
+                    dwellingTypes = listOf(TOWNHOUSE, HOUSE)
                 )
             )
         }

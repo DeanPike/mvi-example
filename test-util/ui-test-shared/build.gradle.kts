@@ -7,7 +7,9 @@ plugins {
 
 android {
     namespace = "au.com.deanpike.uitestshared"
-    compileSdk = libs.versions.compileSdk.get().toInt()
+    compileSdk {
+        version = release(libs.versions.compileSdk.get().toInt())
+    }
 
     defaultConfig {
         minSdk = libs.versions.minSdk.get().toInt()
@@ -56,10 +58,13 @@ dependencies {
 
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.ui.test.junit4)
+    implementation(libs.bundles.junit.jupiter)
+    implementation(libs.bundles.junit4)
     implementation(libs.coil.compose)
     api(libs.okhttp.tls)
     implementation(libs.assertj)
 
     implementation(libs.coil.test)
+
+    implementation(libs.bundles.robolectric.parent)
 }

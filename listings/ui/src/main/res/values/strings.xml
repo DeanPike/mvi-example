@@ -18,8 +18,12 @@
     <string name="sold">Sold</string>
 
     <!-- Listing Type-->
-    <string name="all">All</string>
+    <string name="all">All property types</string>
     <string name="apartment_unit_flat">Apartment / Unit / Flat</string>
     <string name="house">House</string>
     <string name="townhouse">Townhouse</string>
+
+    <string name="multiple_property_types">Multiple property types</string>
+    <string name="filter">Filter</string>
+    <string name="status">Status</string>
 </resources>

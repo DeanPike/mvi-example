@@ -3,11 +3,14 @@ plugins {
     alias(libs.plugins.daggerHiltPlugin)
     alias(libs.plugins.ksp)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.roborazzi)
 }
 
 android {
     namespace = "au.com.deanpike.listings.ui"
-    compileSdk = libs.versions.compileSdk.get().toInt()
+    compileSdk {
+        version = release(libs.versions.compileSdk.get().toInt())
+    }
 
     defaultConfig {
         minSdk = libs.versions.minSdk.get().toInt()
@@ -41,9 +44,8 @@ android {
     testOptions {
         animationsDisabled = true
         unitTests {
-            all {
-                it.useJUnitPlatform()
-            }
+            isIncludeAndroidResources = true
+            all { it.useJUnitPlatform() }
         }
     }
 }
@@ -54,13 +56,8 @@ dependencies {
     implementation(project(":shared:data-shared"))
     implementation(project(":shared:common-shared"))
     implementation(project(":shared:navigation"))
-    androidTestImplementation(project(":listings:client"))
-    androidTestImplementation(project(":listings:data"))
-    androidTestImplementation(project(":test-util:ui-test-shared"))
-    androidTestImplementation(project(":shared:ui-shared"))
-    androidTestImplementation(project(":network"))
-    androidTestImplementation(project(":test-util:unit-test-shared"))
     testImplementation(project(":test-util:unit-test-shared"))
+    testImplementation(project(":test-util:ui-test-shared"))
 
     implementation(libs.androidx.window.core.android)
     implementation(libs.androidx.core.ktx)
@@ -71,9 +68,6 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
-    androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
@@ -83,15 +77,11 @@ dependencies {
 
     implementation(libs.androidx.navigation3.runtime)
 
-    androidTestImplementation(libs.hilt.android)
-    kspAndroidTest(libs.hilt.android.compiler)
-    androidTestImplementation(libs.hilt.android.testing)
-
     implementation(libs.coil.compose)
     implementation(libs.constraintlayout.compose)
 
-    androidTestImplementation(libs.mockwebserver)
-    androidTestImplementation(libs.assertj)
+    implementation(libs.material.icons.core)
+    implementation(libs.material.icons.extended)
 
     testImplementation(platform(libs.junit.bom))
     testImplementation(libs.bundles.junit.jupiter)
@@ -100,6 +90,7 @@ dependencies {
     testImplementation(libs.coroutines.test)
     testImplementation(libs.turbine)
 
+    testImplementation(libs.bundles.robolectric.tests)
     implementation(libs.tracing)
 
 }

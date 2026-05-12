@@ -2,9 +2,9 @@ package au.com.deanpike.listings.ui.util
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
-import au.com.deanpike.listings.ui.R
 import au.com.deanpike.listings.client.type.DwellingType
 import au.com.deanpike.listings.client.type.StatusType
+import au.com.deanpike.listings.ui.R
 
 object StringUtils {
     @Composable
@@ -24,5 +24,19 @@ object StringUtils {
             DwellingType.TOWNHOUSE -> stringResource(id = R.string.townhouse)
             DwellingType.APARTMENT_UNIT_FLAT -> stringResource(id = R.string.apartment_unit_flat)
         }
+    }
+
+    fun createDetailsText(
+        dwellingType: String?,
+        numberOfBedrooms: Int?,
+        numberOfBathrooms: Int?,
+        numberOfCarSpaces: Int?
+    ): String {
+        val details = mutableListOf<String>()
+        dwellingType?.let { details.add(it) }
+        numberOfBedrooms?.let { details.add("$it Bed") }
+        numberOfBathrooms?.let { details.add("$it Bath") }
+        numberOfCarSpaces?.let { details.add("$it Car") }
+        return details.joinToString(" • ")
     }
 }

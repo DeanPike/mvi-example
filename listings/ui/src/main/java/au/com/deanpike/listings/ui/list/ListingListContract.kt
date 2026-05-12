@@ -11,20 +11,17 @@ data class ListingListScreenState(
     val screenState: ScreenStateType = ScreenStateType.INITIAL,
     val listings: List<Listing> = emptyList(),
     val selectedStatus: StatusType = StatusType.BUY,
-    val selectedListingTypes: List<DwellingType> = emptyList(),
-    val showListingTypeScreen: Boolean = false,
+    val selectedDwellingTypes: List<DwellingType> = listOf(DwellingType.ALL),
 ) : UiState
 
 sealed class ListingListScreenEvent : UiEvent {
     data object Initialise : ListingListScreenEvent()
 
-    data class OnStatusSelected(
-        val status: StatusType
+    data class OnFilterApplied(
+        val status: StatusType,
+        val dwellingTypes: List<DwellingType>
     ) : ListingListScreenEvent()
 
-    data object OnListingTypeClicked : ListingListScreenEvent()
-    data object OnBottomSheetDismissed : ListingListScreenEvent()
-    data class OnListingTypesApplied(val selectedListingTypes: List<DwellingType>) : ListingListScreenEvent()
     data object OnRetryClicked : ListingListScreenEvent()
     data class OnPropertySelected(
         val id: Long,

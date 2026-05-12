@@ -1,4 +1,4 @@
-package au.com.deanpike.listings.ui.framework.robot
+package au.com.deanpike.listings.ui.robot
 
 import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.hasTestTag
@@ -9,8 +9,8 @@ import au.com.deanpike.listings.ui.list.ListingListScreenContent
 import au.com.deanpike.listings.ui.list.ListingListScreenState
 import au.com.deanpike.listings.ui.list.ListingListScreenTestTags.LISTING_LIST
 import au.com.deanpike.listings.ui.list.ListingListScreenTestTags.LISTING_LIST_HEADING
-import au.com.deanpike.listings.ui.list.component.ProjectListItemTesTags.PROJECT_LIST_ITEM_LAYOUT
-import au.com.deanpike.listings.ui.list.component.PropertyListItemTesTags.PROPERTY_LIST_ITEM_LAYOUT
+import au.com.deanpike.listings.ui.list.component.ProjectCardTesTags.PROJECT_CARD_LAYOUT
+import au.com.deanpike.listings.ui.list.component.PropertyCardTestTags.PROPERTY_CARD_LAYOUT
 import au.com.deanpike.uishared.theme.MviExampleTheme
 import au.com.deanpike.uitestshared.base.TestRobotBase
 import au.com.deanpike.uitestshared.base.TestRobotInitData
@@ -58,7 +58,7 @@ class ListingListScreenRobot(composeRule: ComposeContentTestRule) : TestRobotBas
             useUnmergedTree = true
         )
             .onChildAt(position)
-            .assert(hasTestTag(PROJECT_LIST_ITEM_LAYOUT))
+            .assert(hasTestTag(PROJECT_CARD_LAYOUT))
         return this
     }
 
@@ -68,7 +68,7 @@ class ListingListScreenRobot(composeRule: ComposeContentTestRule) : TestRobotBas
             testTag = LISTING_LIST
         )
             .onChildAt(position)
-            .assert(hasTestTag(PROPERTY_LIST_ITEM_LAYOUT))
+            .assert(hasTestTag(PROPERTY_CARD_LAYOUT))
         return this
     }
 

@@ -1,19 +1,18 @@
-package au.com.deanpike.listings.ui.screen.list
+package au.com.deanpike.listings.ui.list
 
 import au.com.deanpike.commonshared.model.ListingDetails
 import au.com.deanpike.datashared.type.ListingType
 import au.com.deanpike.listings.client.model.listing.response.Project
 import au.com.deanpike.listings.client.model.listing.response.ProjectChild
 import au.com.deanpike.listings.client.model.listing.response.Property
-import au.com.deanpike.listings.ui.list.ListingListScreenState
-import au.com.deanpike.listings.ui.framework.robot.ListingListScreenRobot
-import au.com.deanpike.listings.ui.framework.robot.ListingListScreenRobotInitData
+import au.com.deanpike.listings.ui.robot.ListingListScreenRobot
+import au.com.deanpike.listings.ui.robot.ListingListScreenRobotInitData
 import au.com.deanpike.uishared.base.ScreenStateType
-import au.com.deanpike.uitestshared.base.UiUnitTestBase
+import au.com.deanpike.uitestshared.base.RobolectricTestBase
 import au.com.deanpike.uitestshared.util.disableAnimations
 import org.junit.Test
 
-class ListingListScreenTest : UiUnitTestBase() {
+class ListingListScreenTest : RobolectricTestBase() {
 
     private val robot = ListingListScreenRobot(composeTestRule)
 
@@ -40,9 +39,9 @@ class ListingListScreenTest : UiUnitTestBase() {
             .scrollToPosition(0)
             .assertPropertyDisplayedAtPosition(0)
             .scrollToPosition(1)
-            .assertPropertyDisplayedAtPosition(0) // We have scrolled so this is now the first visible property
-            .scrollToPosition(1)
-            .assertProjectDisplayedAtPosition(1)
+            .assertPropertyDisplayedAtPosition(1) // We have scrolled so this is now the first visible property
+            .scrollToPosition(2)
+            .assertProjectDisplayedAtPosition(2)
     }
 
     private fun getPropertyOne(): Property {
@@ -123,4 +122,5 @@ class ListingListScreenTest : UiUnitTestBase() {
 
         return project
     }
+
 }

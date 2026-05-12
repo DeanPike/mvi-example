@@ -10,9 +10,9 @@ import au.com.deanpike.uishared.base.BaseViewModel
 import au.com.deanpike.uishared.base.ScreenStateType
 import au.com.deanpike.uishared.base.UiEffect
 import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @HiltViewModel
@@ -27,23 +27,17 @@ class ListingListViewModel @Inject constructor(
             is ListingListScreenEvent.Initialise -> {
                 initialise()
             }
-            is ListingListScreenEvent.OnStatusSelected -> {
-                onStatusSelected(event.status)
-            }
-            is ListingListScreenEvent.OnListingTypeClicked -> {
-                onListingTypeClicked()
-            }
-            is ListingListScreenEvent.OnBottomSheetDismissed -> {
-                onBottomSheetDismissed()
-            }
-            is ListingListScreenEvent.OnListingTypesApplied -> {
-                onListingTypesApplied(event)
+
+            is ListingListScreenEvent.OnFilterApplied -> {
+                onFilterChanged(event)
             }
             is ListingListScreenEvent.OnRetryClicked -> {
                 onRetryClicked()
             }
+
             is ListingListScreenEvent.OnPropertySelected -> {
             }
+
             is ListingListScreenEvent.OnProjectSelected -> {
             }
         }
@@ -70,40 +64,16 @@ class ListingListViewModel @Inject constructor(
         }
     }
 
-    private fun onListingTypeClicked() {
-        setState {
-            copy(
-                showListingTypeScreen = true
-            )
-        }
-    }
-
-    private fun onBottomSheetDismissed() {
-        setState {
-            copy(
-                showListingTypeScreen = false
-            )
-        }
-    }
-
-    private fun onListingTypesApplied(event: ListingListScreenEvent.OnListingTypesApplied) {
-        if (event.selectedListingTypes.count() != uiState.selectedListingTypes.count() ||
-            !uiState.selectedListingTypes.containsAll(event.selectedListingTypes)
-        ) {
+    private fun onFilterChanged(event: ListingListScreenEvent.OnFilterApplied) {
+        if (uiState.selectedStatus != event.status || uiState.selectedDwellingTypes != event.dwellingTypes) {
             setState {
                 copy(
-                    showListingTypeScreen = false,
-                    selectedListingTypes = event.selectedListingTypes,
+                    selectedDwellingTypes = event.dwellingTypes,
+                    selectedStatus = event.status,
                     screenState = ScreenStateType.LOADING
                 )
             }
             getListings()
-        } else {
-            setState {
-                copy(
-                    showListingTypeScreen = false
-                )
-            }
         }
     }
 
@@ -122,7 +92,7 @@ class ListingListViewModel @Inject constructor(
             when (val response = listingUseCase.getListings(
                 ListingSearch(
                     searchMode = uiState.selectedStatus,
-                    dwellingTypes = uiState.selectedListingTypes
+                    dwellingTypes = uiState.selectedDwellingTypes
                 )
             )) {
                 is ResponseWrapper.Success -> {
@@ -133,6 +103,7 @@ class ListingListViewModel @Inject constructor(
                         )
                     }
                 }
+
                 is ResponseWrapper.Error -> {
                     setState {
                         copy(
