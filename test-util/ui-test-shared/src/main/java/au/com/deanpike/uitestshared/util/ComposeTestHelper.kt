@@ -4,8 +4,39 @@ import androidx.annotation.DrawableRes
 import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.semantics.getOrNull
-import androidx.compose.ui.test.*
+import androidx.compose.ui.test.ExperimentalTestApi
+import androidx.compose.ui.test.SemanticsMatcher
+import androidx.compose.ui.test.assert
+import androidx.compose.ui.test.assertContentDescriptionEquals
+import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.assertIsNotSelected
+import androidx.compose.ui.test.assertIsOff
+import androidx.compose.ui.test.assertIsOn
+import androidx.compose.ui.test.assertIsSelected
+import androidx.compose.ui.test.assertTextEquals
+import androidx.compose.ui.test.hasAnyChild
+import androidx.compose.ui.test.hasAnyDescendant
+import androidx.compose.ui.test.hasContentDescription
+import androidx.compose.ui.test.hasParent
+import androidx.compose.ui.test.hasTestTag
+import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
+import androidx.compose.ui.test.onAllNodesWithTag
+import androidx.compose.ui.test.onChild
+import androidx.compose.ui.test.onChildAt
+import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performScrollTo
+import androidx.compose.ui.test.performScrollToIndex
+import androidx.compose.ui.test.performSemanticsAction
+import androidx.compose.ui.test.performTextClearance
+import androidx.compose.ui.test.performTextInput
+import androidx.compose.ui.test.performTouchInput
+import androidx.compose.ui.test.swipeDown
+import androidx.compose.ui.test.swipeLeft
+import androidx.compose.ui.test.swipeRight
+import androidx.compose.ui.test.swipeUp
 import au.com.deanpike.uishared.base.DrawablePropertyKey
 import au.com.deanpike.uishared.base.ListingIdPropertyKey
 
@@ -131,10 +162,10 @@ fun ComposeContentTestRule.setRangeSliderMinimumValue(tag: String, value: Float,
     onNode(
         useUnmergedTree = true,
         matcher = hasContentDescription("Range start")
-            and
-            hasParent(
-                hasTestTag(tag)
-            )
+                and
+                hasParent(
+                    hasTestTag(tag)
+                )
     ).assertExists()
         .performSemanticsAction(SemanticsActions.SetProgress) {
             it.invoke(value)
@@ -147,10 +178,10 @@ fun ComposeContentTestRule.setRangeSliderMaximumValue(tag: String, value: Float,
     onNode(
         useUnmergedTree = true,
         matcher = hasContentDescription("Range end")
-            and
-            hasParent(
-                hasTestTag(tag)
-            )
+                and
+                hasParent(
+                    hasTestTag(tag)
+                )
     ).assertExists()
         .performSemanticsAction(SemanticsActions.SetProgress) {
             it.invoke(value)
@@ -163,7 +194,7 @@ fun ComposeContentTestRule.assertRangeSliderMinimumValue(tag: String, value: Flo
     onNode(
         useUnmergedTree = true,
         matcher = hasTestTag(tag)
-            and hasAnyChild(
+                and hasAnyChild(
             SemanticsMatcher(description = "Range slider minimum value = $value") {
                 val rangeInfo = it.config.getOrNull(SemanticsProperties.ProgressBarRangeInfo)
 
@@ -178,7 +209,7 @@ fun ComposeContentTestRule.assertRangeSliderMaximumValue(tag: String, value: Flo
     onNode(
         useUnmergedTree = true,
         matcher = hasTestTag(tag)
-            and hasAnyChild(
+                and hasAnyChild(
             SemanticsMatcher(description = "Range slider maximum value = $value") {
                 val rangeInfo = it.config.getOrNull(SemanticsProperties.ProgressBarRangeInfo)
 
@@ -193,7 +224,7 @@ fun ComposeContentTestRule.assertRangeSliderStepCount(tag: String, stepCount: Fl
     onNode(
         useUnmergedTree = true,
         matcher = hasTestTag(tag)
-            and hasAnyChild(
+                and hasAnyChild(
             SemanticsMatcher(description = "Range slider step count = $stepCount") {
                 val rangeInfo = it.config.getOrNull(SemanticsProperties.ProgressBarRangeInfo)
                 rangeInfo!!.range.endInclusive == stepCount
@@ -248,7 +279,7 @@ fun ComposeContentTestRule.assertDrawableDisplayed(
     onNode(
         useUnmergedTree = true,
         matcher = hasTestTag(tag) and
-            SemanticsMatcher.expectValue(key = DrawablePropertyKey, expectedValue = drawable)
+                SemanticsMatcher.expectValue(key = DrawablePropertyKey, expectedValue = drawable)
     ).assertIsDisplayed()
 }
 
@@ -275,4 +306,19 @@ fun ComposeContentTestRule.clickOnItemAtPosition(
         testTag = parentTag,
     ).onChildAt(position)
         .performClick()
+}
+
+fun ComposeContentTestRule.assertTagDisplayedAtPosition(
+    tag: String,
+    position: Int
+) {
+    onAllNodesWithTag(tag, useUnmergedTree = true)[position].assertIsDisplayed()
+}
+
+fun ComposeContentTestRule.assertTextDisplayedAtPosition(
+    tag: String,
+    text: String,
+    position: Int
+) {
+    onAllNodesWithTag(tag, useUnmergedTree = true)[position].assertTextEquals(text).assertIsDisplayed()
 }
