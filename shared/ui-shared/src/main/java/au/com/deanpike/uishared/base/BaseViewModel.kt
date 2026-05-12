@@ -50,8 +50,7 @@ abstract class BaseViewModel<Event : UiEvent, State : UiState, Effect : UiEffect
     }
 
     fun setEvent(event: Event) {
-        val newEvent = event
-        viewModelScope.launch { _event.emit(newEvent) }
+        viewModelScope.launch { _event.emit(event) }
     }
 
     private fun subscribeEvents() {
