@@ -18,10 +18,9 @@ import au.com.deanpike.uitestshared.util.advanceTimeAndWait
 import au.com.deanpike.uitestshared.util.assertTagDisplayed
 import au.com.deanpike.uitestshared.util.assertTextDisplayed
 import au.com.deanpike.uitestshared.util.scrollToItemPosition
-import au.com.deanpike.uitestshared.util.waitUntilTagExists
 
 class ListingListScreenRobot(composeRule: ComposeContentTestRule) : TestRobotBase<ListingListScreenRobot, ListingListScreenRobotInitData>(composeRule) {
-    override fun setupComponent(data: ListingListScreenRobotInitData?): ListingListScreenRobot {
+    override fun setupComponent(data: ListingListScreenRobotInitData?) = apply {
         composeRule.setContent {
             MviExampleTheme {
                 ListingListScreenContent(
@@ -29,58 +28,44 @@ class ListingListScreenRobot(composeRule: ComposeContentTestRule) : TestRobotBas
                 )
             }
         }
-
-        return this
     }
 
-    override fun assertLayoutDisplayed(): ListingListScreenRobot {
+    override fun assertLayoutDisplayed() = apply {
         composeRule.advanceTimeAndWait()
         composeRule.assertTagDisplayed(LISTING_LIST_HEADING)
-        return this
     }
 
-    fun assertHeaderText(text: String): ListingListScreenRobot {
+    fun assertHeaderText(text: String) = apply {
         composeRule.assertTextDisplayed(
             tag = LISTING_LIST_HEADING,
             text = text
         )
-        return this
     }
 
-    fun assertListDisplayed(): ListingListScreenRobot {
+    fun assertListDisplayed() = apply {
         composeRule.assertTagDisplayed(LISTING_LIST)
-        return this
     }
 
-    fun assertProjectDisplayedAtPosition(position: Int): ListingListScreenRobot {
+    fun assertProjectDisplayedAtPosition(position: Int) = apply {
         composeRule.onNodeWithTag(
             testTag = LISTING_LIST,
             useUnmergedTree = true
         )
             .onChildAt(position)
             .assert(hasTestTag(PROJECT_CARD_LAYOUT))
-        return this
     }
 
-    fun assertPropertyDisplayedAtPosition(position: Int): ListingListScreenRobot {
+    fun assertPropertyDisplayedAtPosition(position: Int) = apply {
         composeRule.onNodeWithTag(
             useUnmergedTree = true,
             testTag = LISTING_LIST
         )
             .onChildAt(position)
             .assert(hasTestTag(PROPERTY_CARD_LAYOUT))
-        return this
     }
 
-    fun scrollToPosition(position: Int): ListingListScreenRobot {
+    fun scrollToPosition(position: Int) = apply {
         composeRule.scrollToItemPosition(tag = LISTING_LIST, index = position)
-        return this
-    }
-
-    fun waitUntilListShown(): ListingListScreenRobot {
-        composeRule.advanceTimeAndWait()
-        composeRule.waitUntilTagExists(tag = LISTING_LIST, timeout = 2000)
-        return this
     }
 }
 

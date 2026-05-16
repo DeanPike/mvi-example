@@ -5,14 +5,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 import androidx.compose.runtime.DisposableEffect
-import androidx.compose.ui.Modifier
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.navigation3.runtime.EntryProviderScope
@@ -66,17 +60,10 @@ class MainActivity : ComponentActivity() {
             }
 
             MviExampleTheme {
-                Scaffold(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .background(color = MaterialTheme.colorScheme.background)
-                ) { paddingValues ->
-                    ApplicationScreen(
-                        modifier = Modifier.padding(paddingValues),
-                        backStack = backStack,
-                        appEntryBuilder = appEntryBuilder
-                    )
-                }
+                ApplicationScreen(
+                    backStack = backStack,
+                    appEntryBuilder = appEntryBuilder
+                )
             }
         }
     }

@@ -5,6 +5,8 @@ import au.com.deanpike.datashared.type.ListingType
 import au.com.deanpike.listings.client.model.listing.response.Project
 import au.com.deanpike.listings.client.model.listing.response.ProjectChild
 import au.com.deanpike.listings.client.model.listing.response.Property
+import au.com.deanpike.listings.ui.robot.FilterBottomSheetRobot
+import au.com.deanpike.listings.ui.robot.FilterComponentRobot
 import au.com.deanpike.listings.ui.robot.ListingListScreenRobot
 import au.com.deanpike.listings.ui.robot.ListingListScreenRobotInitData
 import au.com.deanpike.uishared.base.ScreenStateType
@@ -15,6 +17,8 @@ import org.junit.Test
 class ListingListScreenTest : RobolectricTestBase() {
 
     private val robot = ListingListScreenRobot(composeTestRule)
+    private val filterRobot = FilterComponentRobot(composeTestRule)
+    private val bottomSheetRobot = FilterBottomSheetRobot(composeTestRule)
 
     @Test
     fun show_listings() {
@@ -42,6 +46,33 @@ class ListingListScreenTest : RobolectricTestBase() {
             .assertPropertyDisplayedAtPosition(1) // We have scrolled so this is now the first visible property
             .scrollToPosition(2)
             .assertProjectDisplayedAtPosition(2)
+    }
+
+    @Test
+    fun `show and hide filter options`() {
+        val propertyOne = getPropertyOne()
+        composeTestRule.disableAnimations()
+
+        robot
+            .setupComponent(
+                data = ListingListScreenRobotInitData(
+                    state = ListingListScreenState(
+                        screenState = ScreenStateType.SUCCESS,
+                        listings = listOf(propertyOne)
+                    )
+                )
+            )
+            .assertLayoutDisplayed()
+
+        filterRobot
+            .clickFilterButton()
+            .assertFilterButtonDisplayed()
+            .clickFilterButton()
+
+        bottomSheetRobot
+            .assertLayoutDisplayed()
+            .clickApplyButton()
+            .assertLayoutHidden()
     }
 
     private fun getPropertyOne(): Property {

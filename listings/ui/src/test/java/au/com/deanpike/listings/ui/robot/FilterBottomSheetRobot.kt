@@ -20,6 +20,7 @@ import au.com.deanpike.uitestshared.util.advanceTimeAndWait
 import au.com.deanpike.uitestshared.util.assertIsOff
 import au.com.deanpike.uitestshared.util.assertIsOn
 import au.com.deanpike.uitestshared.util.assertTagDisplayed
+import au.com.deanpike.uitestshared.util.assertTagDoesNotExist
 import au.com.deanpike.uitestshared.util.assertTextDisplayed
 import au.com.deanpike.uitestshared.util.clickOn
 import au.com.deanpike.uitestshared.util.disableAnimations
@@ -49,6 +50,11 @@ class FilterBottomSheetRobot(composeRule: ComposeContentTestRule) : TestRobotBas
     override fun assertLayoutDisplayed() = apply {
         composeRule.advanceTimeAndWait()
         composeRule.assertTagDisplayed(FILTER_BOTTOM_SHEET_LAYOUT)
+    }
+
+    fun assertLayoutHidden() = apply {
+        composeRule.advanceTimeAndWait()
+        composeRule.assertTagDoesNotExist(FILTER_BOTTOM_SHEET_LAYOUT)
     }
 
     fun assertBuyButtonDisplayed() = apply {

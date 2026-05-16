@@ -4,7 +4,6 @@ import androidx.lifecycle.viewModelScope
 import au.com.deanpike.commonshared.util.ResponseWrapper
 import au.com.deanpike.datashared.dispatcher.DispatcherProvider
 import au.com.deanpike.listings.client.model.listing.search.ListingSearch
-import au.com.deanpike.listings.client.type.StatusType
 import au.com.deanpike.listings.client.usecase.ListingUseCase
 import au.com.deanpike.uishared.base.BaseViewModel
 import au.com.deanpike.uishared.base.ScreenStateType
@@ -31,6 +30,7 @@ class ListingListViewModel @Inject constructor(
             is ListingListScreenEvent.OnFilterApplied -> {
                 onFilterChanged(event)
             }
+
             is ListingListScreenEvent.OnRetryClicked -> {
                 onRetryClicked()
             }
@@ -50,18 +50,6 @@ class ListingListViewModel @Inject constructor(
             )
         }
         getListings()
-    }
-
-    private fun onStatusSelected(status: StatusType) {
-        if (status != uiState.selectedStatus) {
-            setState {
-                copy(
-                    screenState = ScreenStateType.LOADING,
-                    selectedStatus = status
-                )
-            }
-            getListings()
-        }
     }
 
     private fun onFilterChanged(event: ListingListScreenEvent.OnFilterApplied) {
