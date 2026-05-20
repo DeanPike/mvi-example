@@ -6,6 +6,8 @@ import androidx.compose.foundation.gestures.snapping.SnapPosition
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -116,8 +118,7 @@ fun ListingImagesComponent(
 
     Box(
         modifier = Modifier
-            .fillMaxWidth()
-            .height(300.dp)
+            .fillMaxSize()
     ) {
         HorizontalPager(
             modifier = Modifier
@@ -132,6 +133,8 @@ fun ListingImagesComponent(
         ) { page ->
             AsyncImage(
                 modifier = Modifier
+                    .fillMaxSize()
+                    .aspectRatio(16F / 9F)
                     .graphicsLayer {
                         // Calculate the absolute offset for the current page from the
                         // scroll position. We use the absolute value which allows us to mirror
@@ -161,7 +164,7 @@ fun ListingImagesComponent(
                 placeholder = painterResource(id = R.drawable.gallery_placeholder),
                 fallback = painterResource(id = R.drawable.gallery_placeholder),
                 error = painterResource(id = R.drawable.gallery_placeholder),
-                contentScale = ContentScale.Fit,
+                contentScale = ContentScale.FillBounds,
                 contentDescription = stringResource(id = R.string.property_image),
                 alignment = Alignment.Center
             )

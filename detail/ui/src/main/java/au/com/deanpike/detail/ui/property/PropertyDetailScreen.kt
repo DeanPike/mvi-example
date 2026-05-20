@@ -1,7 +1,6 @@
 package au.com.deanpike.detail.ui.property
 
 import androidx.activity.compose.BackHandler
-import androidx.activity.compose.LocalActivity
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -36,7 +35,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import au.com.deanpike.commonshared.model.Media
 import au.com.deanpike.commonshared.type.MediaType
@@ -68,9 +66,7 @@ import au.com.deanpike.uishared.theme.Dimension.DIM_4
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
 import au.com.deanpike.uishared.theme.MviExampleTheme
 import au.com.deanpike.uishared.util.MviWindowWidthSizeClassProvider
-import au.com.deanpike.uishared.util.NavigationBarScrim
 import au.com.deanpike.uishared.util.SetStatusBarAppearance
-import au.com.deanpike.uishared.util.SetupStatusBar
 import au.com.deanpike.uishared.util.StatusBarGradient
 
 @Composable
@@ -122,40 +118,7 @@ fun PropertyDetailScreenContent(
             .testTag(PROPERTY_DETAILS_LAYOUT)
     ) {
         AnimatedVisibility(state.screenState == ScreenStateType.LOADING) {
-            Box(
-                modifier = Modifier.fillMaxSize(),
-                contentAlignment = Alignment.Center
-            ) {
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .align(Alignment.Center),
-                    verticalArrangement = Arrangement.Center
-                ) {
-                    Text(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .testTag(PROPERTY_DETAIL_LOADING_TITLE),
-                        text = stringResource(R.string.loading_data_for),
-                        textAlign = TextAlign.Center
-                    )
-                    Spacer(modifier = Modifier.height(DIM_16))
-                    Text(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .testTag(PROPERTY_DETAIL_LOADING_ADDRESS),
-                        text = loadingAddress,
-                        textAlign = TextAlign.Center,
-                        style = MaterialTheme.typography.labelLarge
-                    )
-                    Spacer(modifier = Modifier.height(DIM_16))
-                    CircularProgressIndicator(
-                        modifier = Modifier
-                            .align(Alignment.CenterHorizontally)
-                            .testTag(PROPERTY_DETAIL_PROGRESS)
-                    )
-                }
-            }
+            PropertyLoadingContent(address = loadingAddress)
         }
         AnimatedVisibility(state.screenState == ScreenStateType.SUCCESS) {
             PropertyDetailSuccess(
@@ -165,18 +128,65 @@ fun PropertyDetailScreenContent(
             )
         }
         AnimatedVisibility(state.screenState == ScreenStateType.ERROR) {
-            Column(
-                modifier = Modifier.fillMaxSize(),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
-            ) {
-                ErrorComponent(
-                    onRetryClicked = {
-                        onEvent(PropertyDetailScreenEvent.OnRetryClicked)
-                    }
-                )
-            }
+            PropertyErrorContent(onEvent = onEvent)
         }
+    }
+}
+
+@Composable
+fun PropertyLoadingContent(
+    address: String
+) {
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .align(Alignment.Center),
+            verticalArrangement = Arrangement.Center
+        ) {
+            Text(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .testTag(PROPERTY_DETAIL_LOADING_TITLE),
+                text = stringResource(R.string.loading_data_for),
+                textAlign = TextAlign.Center
+            )
+            Spacer(modifier = Modifier.height(DIM_16))
+            Text(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .testTag(PROPERTY_DETAIL_LOADING_ADDRESS),
+                text = address,
+                textAlign = TextAlign.Center,
+                style = MaterialTheme.typography.labelLarge
+            )
+            Spacer(modifier = Modifier.height(DIM_16))
+            CircularProgressIndicator(
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .testTag(PROPERTY_DETAIL_PROGRESS)
+            )
+        }
+    }
+}
+
+@Composable
+fun PropertyErrorContent(
+    onEvent: (PropertyDetailScreenEvent) -> Unit = {},
+) {
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        ErrorComponent(
+            onRetryClicked = {
+                onEvent(PropertyDetailScreenEvent.OnRetryClicked)
+            }
+        )
     }
 }
 
@@ -187,19 +197,13 @@ fun PropertyDetailSuccess(
     onImageClicked: (String) -> Unit = {}
 ) {
     val scrollState = rememberScrollState()
-    val activity = LocalActivity.current
+    StatusBarGradient()
 
     Box(modifier = Modifier.fillMaxSize()) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .background(MaterialTheme.colorScheme.background)
-                .padding(
-                    start = 0.dp,
-                    end = 0.dp,
-                    top = 0.dp,
-                    bottom = 0.dp
-                )
                 .verticalScroll(scrollState)
                 .align(Alignment.Center)
         ) {
@@ -282,11 +286,7 @@ fun PropertyDetailSuccess(
             }
         }
 
-        activity?.let {
-            SetupStatusBar(it)
-        }
         StatusBarGradient()
-        NavigationBarScrim()
 
         AnimatedVisibility(visible = MviWindowWidthSizeClassProvider.isCompactWidth()) {
             IconButton(
