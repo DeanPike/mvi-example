@@ -140,9 +140,9 @@ fun ListingImagesComponent(
                         // scroll position. We use the absolute value which allows us to mirror
                         // any effects for both directions
                         val pageOffset = (
-                            (pagerState.currentPage - page) + pagerState
-                                .currentPageOffsetFraction
-                            ).absoluteValue
+                                (pagerState.currentPage - page) + pagerState
+                                    .currentPageOffsetFraction
+                                ).absoluteValue
 
                         // We animate the alpha, between 50% and 100%
                         alpha = lerp(
@@ -156,6 +156,7 @@ fun ListingImagesComponent(
                     })
                     .testTag("${LISTING_DETAIL_IMAGES_IMAGE}_${page}"),
                 model = ImageRequest.Builder(LocalContext.current)
+                    .diskCachePolicy(coil3.request.CachePolicy.ENABLED)
                     .data(media[page].url)
                     .crossfade(true)
                     .error(R.drawable.gallery_placeholder)

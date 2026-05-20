@@ -19,6 +19,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -41,6 +42,10 @@ import au.com.deanpike.uishared.theme.Dimension.DIM_16
 import au.com.deanpike.uishared.theme.Dimension.DIM_4
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
 import coil3.compose.AsyncImage
+import coil3.request.ImageRequest
+import coil3.request.crossfade
+import coil3.request.error
+import coil3.request.placeholder
 
 @Composable
 fun ProjectCard(
@@ -83,7 +88,13 @@ fun ProjectCard(
                         .testTag(PROJECT_CARD_IMAGE),
                     placeholder = painterResource(id = R.drawable.gallery_placeholder),
                     error = painterResource(id = R.drawable.gallery_placeholder),
-                    model = project.listingImage,
+                    model = ImageRequest.Builder(LocalContext.current)
+                        .diskCachePolicy(coil3.request.CachePolicy.ENABLED)
+                        .data(project.listingImage)
+                        .crossfade(true)
+                        .error(R.drawable.gallery_placeholder)
+                        .placeholder(R.drawable.gallery_placeholder)
+                        .build(),
                     contentDescription = stringResource(id = R.string.property_image_description),
                     contentScale = ContentScale.FillBounds
                 )
