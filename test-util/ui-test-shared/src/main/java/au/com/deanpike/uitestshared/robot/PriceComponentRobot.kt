@@ -12,7 +12,7 @@ import au.com.deanpike.uitestshared.util.assertTextDisplayed
 import au.com.deanpike.uitestshared.util.waitUntilTagExists
 
 class PriceComponentRobot(composeRule: ComposeContentTestRule) : TestRobotBase<PriceComponentRobot, PriceComponentRobotInitData>(composeRule) {
-    override fun setupComponent(data: PriceComponentRobotInitData?): PriceComponentRobot {
+    override fun setupComponent(data: PriceComponentRobotInitData?) = apply {
         composeRule.setContent {
             MviExampleTheme {
                 PriceComponent(
@@ -20,27 +20,22 @@ class PriceComponentRobot(composeRule: ComposeContentTestRule) : TestRobotBase<P
                 )
             }
         }
-        return this
     }
 
-    override fun assertLayoutDisplayed(): PriceComponentRobot {
+    override fun assertLayoutDisplayed() = apply {
         composeRule.assertTagDisplayed(PRICE_COMPONENT_LABEL)
-        return this
     }
 
-    fun waitForLayoutToBeDisplayed(): PriceComponentRobot {
+    fun waitForLayoutToBeDisplayed() = apply {
         composeRule.waitUntilTagExists(PRICE_COMPONENT_LABEL)
-        return this
     }
 
-    fun assertPriceLabelDisplayed(): PriceComponentRobot {
+    fun assertPriceLabelDisplayed() = apply {
         composeRule.assertTextDisplayed(tag = PRICE_COMPONENT_LABEL, text = "Price")
-        return this
     }
 
-    fun assertPriceDataDisplayed(price: String): PriceComponentRobot {
+    fun assertPriceDataDisplayed(price: String) = apply {
         composeRule.assertTextDisplayed(tag = PRICE_COMPONENT_DATA, text = price)
-        return this
     }
 }
 

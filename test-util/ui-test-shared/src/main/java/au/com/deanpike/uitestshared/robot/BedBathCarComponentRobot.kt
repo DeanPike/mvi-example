@@ -16,35 +16,31 @@ import au.com.deanpike.uitestshared.util.assertTagDoesNotExist
 import au.com.deanpike.uitestshared.util.assertTextDisplayed
 
 class BedBathCarComponentRobot(composeRule: ComposeContentTestRule) : TestRobotBase<BedBathCarComponentRobot, BedBathCarComponentRobotInitData>(composeRule) {
-    override fun setupComponent(data: BedBathCarComponentRobotInitData?): BedBathCarComponentRobot {
+    override fun setupComponent(data: BedBathCarComponentRobotInitData?) = apply {
         composeRule.setContent {
             MviExampleTheme {
                 BedBathCarComponent(
                     bedrooms = data!!.bedrooms,
-                    bathrooms = data!!.bathrooms,
-                    carSpaces = data!!.carSpaces
+                    bathrooms = data.bathrooms,
+                    carSpaces = data.carSpaces
                 )
             }
         }
-        return this
     }
 
-    override fun assertLayoutDisplayed(): BedBathCarComponentRobot {
+    override fun assertLayoutDisplayed() = apply {
         composeRule.assertTagDisplayed(DETAIL_ITEM_GROUP)
-        return this
     }
 
-    fun assertBedroomsLayoutDisplayed(): BedBathCarComponentRobot {
+    fun assertBedroomsLayoutDisplayed() = apply {
         composeRule.assertTagDisplayed(DETAIL_ITEM_BEDROOMS)
-        return this
     }
 
-    fun assertBedroomLayoutNotDisplayed(): BedBathCarComponentRobot {
+    fun assertBedroomLayoutNotDisplayed() = apply {
         composeRule.assertTagDoesNotExist(DETAIL_ITEM_BEDROOMS)
-        return this
     }
 
-    fun assertNumberOfBedrooms(count: Int): BedBathCarComponentRobot {
+    fun assertNumberOfBedrooms(count: Int) = apply {
         composeRule.assertTextDisplayed(
             tag = "${DETAIL_ITEM_BEDROOMS}_TEXT",
             text = "$count"
@@ -53,20 +49,17 @@ class BedBathCarComponentRobot(composeRule: ComposeContentTestRule) : TestRobotB
             tag = "${DETAIL_ITEM_BEDROOMS}_ICON",
             drawable = R.drawable.baseline_bed_24
         )
-        return this
     }
 
-    fun assertBathroomsLayoutDisplayed(): BedBathCarComponentRobot {
+    fun assertBathroomsLayoutDisplayed() = apply {
         composeRule.assertTagDisplayed(DETAIL_ITEM_BATHROOMS)
-        return this
     }
 
-    fun assertBathroomLayoutNotDisplayed(): BedBathCarComponentRobot {
+    fun assertBathroomLayoutNotDisplayed() = apply {
         composeRule.assertTagDoesNotExist(DETAIL_ITEM_BATHROOMS)
-        return this
     }
 
-    fun assertNumberOfBathrooms(count: Int): BedBathCarComponentRobot {
+    fun assertNumberOfBathrooms(count: Int) = apply {
         composeRule.assertTextDisplayed(
             tag = "${DETAIL_ITEM_BATHROOMS}_TEXT",
             text = "$count"
@@ -75,21 +68,17 @@ class BedBathCarComponentRobot(composeRule: ComposeContentTestRule) : TestRobotB
             tag = "${DETAIL_ITEM_BATHROOMS}_ICON",
             drawable = R.drawable.baseline_bathtub_24
         )
-
-        return this
     }
 
-    fun assertCarSpaceLayoutDisplayed(): BedBathCarComponentRobot {
+    fun assertCarSpaceLayoutDisplayed() = apply {
         composeRule.assertTagDisplayed(DETAIL_ITEM_CAR_SPACES)
-        return this
     }
 
-    fun assertCarSpaceLayoutNotDisplayed(): BedBathCarComponentRobot {
+    fun assertCarSpaceLayoutNotDisplayed() = apply {
         composeRule.assertTagDoesNotExist(DETAIL_ITEM_CAR_SPACES)
-        return this
     }
 
-    fun assertNumberOfCarSpaces(count: Int): BedBathCarComponentRobot {
+    fun assertNumberOfCarSpaces(count: Int) = apply {
         composeRule.assertTextDisplayed(
             tag = "${DETAIL_ITEM_CAR_SPACES}_TEXT",
             text = "$count"
@@ -98,8 +87,6 @@ class BedBathCarComponentRobot(composeRule: ComposeContentTestRule) : TestRobotB
             tag = "${DETAIL_ITEM_CAR_SPACES}_ICON",
             drawable = R.drawable.baseline_directions_car_24
         )
-
-        return this
     }
 }
 

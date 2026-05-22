@@ -1,11 +1,12 @@
 package au.com.deanpike.uishared.component
 
 import au.com.deanpike.uishared.R
+import au.com.deanpike.uitestshared.base.RobolectricTestBase
 import au.com.deanpike.uitestshared.base.UiUnitTestBase
 import au.com.deanpike.uitestshared.robot.DetailItemComponentRobot
 import org.junit.Test
 
-class DetailItemComponentTest : UiUnitTestBase() {
+class DetailItemComponentTest : RobolectricTestBase() {
     private val robot = DetailItemComponentRobot(composeTestRule)
 
     @Test

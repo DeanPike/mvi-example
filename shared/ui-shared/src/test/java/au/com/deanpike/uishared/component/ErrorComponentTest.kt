@@ -1,10 +1,10 @@
 package au.com.deanpike.uishared.component
 
-import au.com.deanpike.uitestshared.base.UiUnitTestBase
+import au.com.deanpike.uitestshared.base.RobolectricTestBase
 import au.com.deanpike.uitestshared.robot.ErrorComponentRobot
 import org.junit.Test
 
-class ErrorComponentTest : UiUnitTestBase() {
+class ErrorComponentTest : RobolectricTestBase() {
     private val robot = ErrorComponentRobot(composeTestRule)
 
     @Test

@@ -3,6 +3,7 @@ package au.com.deanpike.uishared.component
 import au.com.deanpike.commonshared.model.Media
 import au.com.deanpike.commonshared.type.MediaType
 import au.com.deanpike.uishared.base.ScreenStateType
+import au.com.deanpike.uitestshared.base.RobolectricTestBase
 import au.com.deanpike.uitestshared.base.UiUnitTestBase
 import au.com.deanpike.uitestshared.robot.ListingDetailImagesComponentRobot
 import au.com.deanpike.uitestshared.robot.ListingDetailImagesComponentRobotInitData
@@ -12,7 +13,7 @@ import au.com.deanpike.uitestshared.util.disableAnimations
 import org.junit.Before
 import org.junit.Test
 
-class ListingDetailImagesComponentTest : UiUnitTestBase() {
+class ListingDetailImagesComponentTest : RobolectricTestBase() {
     private val robot = ListingDetailImagesComponentRobot(composeTestRule)
     private val listingImagesRobot = ListingImagesComponentRobot(composeTestRule)
 

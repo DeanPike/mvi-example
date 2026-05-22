@@ -20,7 +20,7 @@ import org.assertj.core.api.Assertions.assertThat
 class ErrorComponentRobot(composeRule: ComposeContentTestRule) : TestRobotBase<ErrorComponentRobot, TestRobotInitData>(composeRule) {
     private var retryClicked = false
 
-    override fun setupComponent(data: TestRobotInitData?): ErrorComponentRobot {
+    override fun setupComponent(data: TestRobotInitData?) = apply {
         composeRule.setContent {
             MviExampleTheme {
                 ErrorComponent(
@@ -30,57 +30,48 @@ class ErrorComponentRobot(composeRule: ComposeContentTestRule) : TestRobotBase<E
                 )
             }
         }
-        return this
     }
 
-    override fun assertLayoutDisplayed(): ErrorComponentRobot {
+    override fun assertLayoutDisplayed() = apply {
         composeRule.assertTagDisplayed(ERROR_COMPONENT_LAYOUT)
-        return this
     }
 
-    fun assertLayoutNotDisplayed(): ErrorComponentRobot {
+    fun assertLayoutNotDisplayed() = apply {
         composeRule.assertTagDoesNotExist(ERROR_COMPONENT_LAYOUT)
-        return this
     }
 
-    fun assertTitle(title: String): ErrorComponentRobot {
+    fun assertTitle(title: String) = apply {
         composeRule.assertTextDisplayed(
             tag = ERROR_COMPONENT_TITLE,
             text = title
         )
-        return this
     }
 
-    fun assertMessage(message: String): ErrorComponentRobot {
+    fun assertMessage(message: String) = apply {
         composeRule.assertTextDisplayed(
             tag = ERROR_COMPONENT_MESSAGE,
             text = message
         )
-        return this
     }
 
-    fun assertButtonText(text: String): ErrorComponentRobot {
+    fun assertButtonText(text: String) = apply {
         composeRule.assertTagDisplayed(ERROR_COMPONENT_BUTTON)
         composeRule.assertTextDisplayed(
             tag = "${ERROR_COMPONENT_BUTTON}_TEXT",
             text = text
         )
-        return this
     }
 
-    fun clickRetryButton(): ErrorComponentRobot {
+    fun clickRetryButton() = apply {
         composeRule.clickOn(ERROR_COMPONENT_BUTTON)
-        return this
     }
 
-    fun assertRetryClicked(): ErrorComponentRobot {
+    fun assertRetryClicked() = apply {
         assertThat(retryClicked).isTrue()
-        return this
     }
 
-    fun waitUntilListShown(): ErrorComponentRobot {
+    fun waitUntilListShown() = apply {
         composeRule.advanceTimeAndWait()
         composeRule.waitUntilTagExists(tag = ERROR_COMPONENT_LAYOUT, timeout = 2000)
-        return this
     }
 }

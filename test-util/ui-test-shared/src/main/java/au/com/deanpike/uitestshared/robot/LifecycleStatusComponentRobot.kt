@@ -12,7 +12,7 @@ import au.com.deanpike.uitestshared.util.assertTextDisplayed
 
 class LifecycleStatusComponentRobot(composeRule: ComposeContentTestRule) : TestRobotBase<LifecycleStatusComponentRobot, LifecycleStatusComponentRobotInitData>(composeRule) {
 
-    override fun setupComponent(data: LifecycleStatusComponentRobotInitData?): LifecycleStatusComponentRobot {
+    override fun setupComponent(data: LifecycleStatusComponentRobotInitData?) = apply {
         composeRule.setContent {
             MviExampleTheme {
                 LifecycleStatusComponent(
@@ -20,20 +20,17 @@ class LifecycleStatusComponentRobot(composeRule: ComposeContentTestRule) : TestR
                 )
             }
         }
-        return this
     }
 
-    override fun assertLayoutDisplayed(): LifecycleStatusComponentRobot {
+    override fun assertLayoutDisplayed() = apply {
         composeRule.assertTagDisplayed(LIFECYCLE_STATUS_LAYOUT)
-        return this
     }
 
-    fun assertLifecycle(lifecycle: String): LifecycleStatusComponentRobot {
+    fun assertLifecycle(lifecycle: String) = apply {
         composeRule.assertTextDisplayed(
             tag = LIFECYCLE_STATUS_TEXT,
             text = lifecycle
         )
-        return this
     }
 }
 

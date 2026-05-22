@@ -2,11 +2,14 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.ksp)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.roborazzi)
 }
 
 android {
     namespace = "au.com.deanpike.uishared"
-    compileSdk = libs.versions.compileSdk.get().toInt()
+    compileSdk {
+        version = release(libs.versions.compileSdk.get().toInt())
+    }
 
     defaultConfig {
         minSdk = libs.versions.minSdk.get().toInt()
@@ -31,12 +34,23 @@ android {
             excludes += "META-INF/LICENSE-notice.md"
         }
     }
+
+    testOptions {
+        animationsDisabled = true
+        unitTests {
+            isIncludeAndroidResources = true
+            all {
+                it.useJUnitPlatform()
+            }
+        }
+    }
 }
 
 dependencies {
     implementation(project(":shared:data-shared"))
     implementation(project(":shared:common-shared"))
-    androidTestImplementation(project(":test-util:ui-test-shared"))
+
+    testImplementation(project(":test-util:ui-test-shared"))
 
     implementation(libs.androidx.ui.text.google.fonts)
     implementation(platform(libs.androidx.compose.bom))
@@ -59,7 +73,5 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
-    androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(libs.androidx.ui.test.junit4)
-    androidTestImplementation(libs.assertj)
+    testImplementation(libs.bundles.robolectric.tests)
 }

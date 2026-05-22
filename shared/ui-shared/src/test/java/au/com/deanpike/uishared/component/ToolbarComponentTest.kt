@@ -1,13 +1,13 @@
 package au.com.deanpike.uishared.component
 
-import au.com.deanpike.uitestshared.base.UiUnitTestBase
+import au.com.deanpike.uitestshared.base.RobolectricTestBase
 import au.com.deanpike.uitestshared.robot.ToolbarComponentRobot
 import au.com.deanpike.uitestshared.robot.ToolbarComponentRobotInitData
 import au.com.deanpike.uitestshared.util.disableAnimations
 import org.junit.Before
 import org.junit.Test
 
-class ToolbarComponentTest : UiUnitTestBase() {
+class ToolbarComponentTest : RobolectricTestBase() {
     private val robot = ToolbarComponentRobot(composeTestRule)
 
     @Before
@@ -27,7 +27,7 @@ class ToolbarComponentTest : UiUnitTestBase() {
     }
 
     @Test
-    fun should_show_long_title(){
+    fun should_show_long_title() {
         robot
             .setupComponent(
                 data = ToolbarComponentRobotInitData(title = "Toolbar Title that is very long to make sure that the data can be displayed over two lines")

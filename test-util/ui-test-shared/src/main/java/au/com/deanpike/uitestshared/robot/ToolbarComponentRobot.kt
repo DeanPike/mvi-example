@@ -15,7 +15,7 @@ import au.com.deanpike.uitestshared.util.assertTextDisplayed
 import au.com.deanpike.uitestshared.util.clickOn
 
 class ToolbarComponentRobot(composeRule: ComposeContentTestRule) : TestRobotBase<ToolbarComponentRobot, ToolbarComponentRobotInitData>(composeRule) {
-    override fun setupComponent(data: ToolbarComponentRobotInitData?): ToolbarComponentRobot {
+    override fun setupComponent(data: ToolbarComponentRobotInitData?) = apply {
         composeRule.setContent {
             MviExampleTheme {
                 ToolbarComponent(
@@ -23,27 +23,22 @@ class ToolbarComponentRobot(composeRule: ComposeContentTestRule) : TestRobotBase
                 )
             }
         }
-        return this
     }
 
-    override fun assertLayoutDisplayed(): ToolbarComponentRobot {
+    override fun assertLayoutDisplayed() = apply {
         composeRule.assertTagDisplayed(TOOLBAR_LAYOUT)
-        return this
     }
 
-    fun assertNavigationIconDisplayed(): ToolbarComponentRobot {
+    fun assertNavigationIconDisplayed() = apply {
         composeRule.assertDrawableDisplayed(tag = TOOLBAR_ICON, drawable = R.drawable.arrow_back_24)
-        return this
     }
 
-    fun assertToolbarTitle(title: String): ToolbarComponentRobot {
+    fun assertToolbarTitle(title: String) = apply {
         composeRule.assertTextDisplayed(tag = TOOLBAR_TITLE, text = title)
-        return this
     }
 
-    fun clickBack(): ToolbarComponentRobot {
+    fun clickBack() = apply {
         composeRule.clickOn(TOOLBAR_ICON)
-        return this
     }
 }
 

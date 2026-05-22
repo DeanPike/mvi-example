@@ -14,7 +14,7 @@ import au.com.deanpike.uitestshared.util.assertTextDisplayed
 
 class DetailItemComponentRobot(composeRule: ComposeContentTestRule) : TestRobotBase<DetailItemComponentRobot, TestRobotInitData>(composeRule) {
 
-    override fun setupComponent(data: TestRobotInitData?): DetailItemComponentRobot {
+    override fun setupComponent(data: TestRobotInitData?) = apply {
         composeRule.setContent {
             MviExampleTheme {
                 DetailItemComponent(
@@ -25,19 +25,17 @@ class DetailItemComponentRobot(composeRule: ComposeContentTestRule) : TestRobotB
                 )
             }
         }
-        return this
     }
 
-    override fun assertLayoutDisplayed(): DetailItemComponentRobot {
+    override fun assertLayoutDisplayed() = apply {
         composeRule.assertTagDisplayed("DETAIL_ITEM_COMPONENT")
-        return this
     }
 
     fun assertIconDisplayed(
         testTag: String,
         @DrawableRes drawable: Int,
         contentDescription: String
-    ): DetailItemComponentRobot {
+    ) = apply {
         composeRule.assertDrawableDisplayed(
             tag = "${testTag}_ICON",
             drawable = drawable
@@ -46,17 +44,15 @@ class DetailItemComponentRobot(composeRule: ComposeContentTestRule) : TestRobotB
             tag = "${testTag}_ICON",
             text = contentDescription
         )
-        return this
     }
 
     fun assertItemCount(
         testTag: String,
         count: String
-    ): DetailItemComponentRobot {
+    ) = apply {
         composeRule.assertTextDisplayed(
             tag = "${testTag}_TEXT",
             text = count
         )
-        return this
     }
 }

@@ -1,6 +1,5 @@
 package au.com.deanpike.uitestshared.robot
 
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import au.com.deanpike.commonshared.model.Media
 import au.com.deanpike.uishared.base.ScreenStateType
@@ -15,7 +14,7 @@ import au.com.deanpike.uitestshared.util.swipeLeft
 import au.com.deanpike.uitestshared.util.swipeRight
 
 class ListingImagesComponentRobot(composeRule: ComposeContentTestRule) : TestRobotBase<ListingImagesComponentRobot, ListingImagesComponentRobotInitData>(composeRule) {
-    override fun setupComponent(data: ListingImagesComponentRobotInitData?): ListingImagesComponentRobot {
+    override fun setupComponent(data: ListingImagesComponentRobotInitData?) = apply {
         composeRule.setContent {
             MviExampleTheme {
                 ListingImagesComponent(
@@ -24,27 +23,22 @@ class ListingImagesComponentRobot(composeRule: ComposeContentTestRule) : TestRob
                 )
             }
         }
-        return this
     }
 
-    override fun assertLayoutDisplayed(): ListingImagesComponentRobot {
+    override fun assertLayoutDisplayed() = apply {
         composeRule.assertTagDisplayed(LISTING_DETAIL_IMAGES_PAGER)
-        return this
     }
 
-    fun assertImage(position: Int): ListingImagesComponentRobot {
+    fun assertImage(position: Int) = apply {
         composeRule.assertTagDisplayed(tag = "${LISTING_DETAIL_IMAGES_IMAGE}_$position")
-        return this
     }
 
-    fun swipeLeft(): ListingImagesComponentRobot {
+    fun swipeLeft() = apply {
         composeRule.swipeLeft(tag = LISTING_DETAIL_IMAGES_PAGER)
-        return this
     }
 
-    fun swipeRight(): ListingImagesComponentRobot {
+    fun swipeRight() = apply {
         composeRule.swipeRight(tag = LISTING_DETAIL_IMAGES_PAGER)
-        return this
     }
 }
 

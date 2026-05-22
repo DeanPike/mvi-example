@@ -16,7 +16,7 @@ import au.com.deanpike.uitestshared.util.assertTagDisplayed
 
 class AgencyBannerComponentRobot(composeRule: ComposeContentTestRule) : TestRobotBase<AgencyBannerComponentRobot, AgencyBannerComponentRobotInitData>(composeRule) {
 
-    override fun setupComponent(data: AgencyBannerComponentRobotInitData?): AgencyBannerComponentRobot {
+    override fun setupComponent(data: AgencyBannerComponentRobotInitData?) = apply {
         composeRule.setContent {
             MviExampleTheme {
                 AgencyBannerComponent(
@@ -25,28 +25,24 @@ class AgencyBannerComponentRobot(composeRule: ComposeContentTestRule) : TestRobo
                 )
             }
         }
-        return this
     }
 
-    override fun assertLayoutDisplayed(): AgencyBannerComponentRobot {
+    override fun assertLayoutDisplayed() = apply {
         composeRule.assertTagDisplayed(AGENCY_BANNER_LAYOUT)
-        return this
     }
 
-    fun assertImageDisplayed(): AgencyBannerComponentRobot {
+    fun assertImageDisplayed() = apply {
         composeRule.assertTagDisplayed(AGENCY_BANNER_IMAGE)
-        return this
     }
 
     fun assertImageDisplayedAtPosition(
         parentTag: String,
         position: Int
-    ): AgencyBannerComponentRobot {
+    ) = apply {
         composeRule.onNodeWithTag(useUnmergedTree = true, testTag = parentTag)
             .onChildAt(position)
             .onChildren()
             .assertAny(hasTestTag(AGENCY_BANNER_LAYOUT))
-        return this
     }
 }
 

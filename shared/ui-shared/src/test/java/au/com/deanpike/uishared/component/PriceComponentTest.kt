@@ -1,5 +1,6 @@
 package au.com.deanpike.uishared.component
 
+import au.com.deanpike.uitestshared.base.RobolectricTestBase
 import au.com.deanpike.uitestshared.base.UiUnitTestBase
 import au.com.deanpike.uitestshared.robot.PriceComponentRobot
 import au.com.deanpike.uitestshared.robot.PriceComponentRobotInitData
@@ -7,7 +8,7 @@ import au.com.deanpike.uitestshared.util.disableAnimations
 import org.junit.Before
 import org.junit.Test
 
-class PriceComponentTest : UiUnitTestBase() {
+class PriceComponentTest : RobolectricTestBase() {
     private val robot = PriceComponentRobot(composeTestRule)
 
     @Before

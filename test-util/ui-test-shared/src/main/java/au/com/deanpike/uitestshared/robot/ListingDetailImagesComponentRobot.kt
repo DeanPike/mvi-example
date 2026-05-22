@@ -15,7 +15,7 @@ import au.com.deanpike.uitestshared.util.swipeLeft
 import au.com.deanpike.uitestshared.util.swipeRight
 
 class ListingDetailImagesComponentRobot(composeRule: ComposeContentTestRule) : TestRobotBase<ListingDetailImagesComponentRobot, ListingDetailImagesComponentRobotInitData>(composeRule) {
-    override fun setupComponent(data: ListingDetailImagesComponentRobotInitData?): ListingDetailImagesComponentRobot {
+    override fun setupComponent(data: ListingDetailImagesComponentRobotInitData?) = apply {
         composeRule.setContent {
             MviExampleTheme {
                 ListingDetailImagesComponent(
@@ -23,39 +23,32 @@ class ListingDetailImagesComponentRobot(composeRule: ComposeContentTestRule) : T
                 )
             }
         }
-        return this
     }
 
-    override fun assertLayoutDisplayed(): ListingDetailImagesComponentRobot {
+    override fun assertLayoutDisplayed() = apply {
         composeRule.assertTagDisplayed(LISTING_DETAIL_IMAGES_PAGER)
-        return this
     }
 
-    fun assertImageIndicator(): ListingDetailImagesComponentRobot {
+    fun assertImageIndicator() = apply {
         composeRule.assertTagDisplayed(LISTING_DETAIL_IMAGES_POSITION_INDICATOR)
-        return this
     }
 
-    fun assertImageIndicatorNotDisplayed(): ListingDetailImagesComponentRobot {
+    fun assertImageIndicatorNotDisplayed() = apply {
         composeRule.assertTagDoesNotExist(LISTING_DETAIL_IMAGES_POSITION_INDICATOR)
-        return this
     }
 
-    fun assertImage(position: Int): ListingDetailImagesComponentRobot {
+    fun assertImage(position: Int) = apply {
         composeRule.assertTagDisplayed(
             tag = "${LISTING_DETAIL_IMAGES_IMAGE}_$position"
         )
-        return this
     }
 
-    fun swipeLeft(): ListingDetailImagesComponentRobot {
+    fun swipeLeft() = apply {
         composeRule.swipeLeft(tag = LISTING_DETAIL_IMAGES_PAGER)
-        return this
     }
 
-    fun swipeRight(): ListingDetailImagesComponentRobot {
+    fun swipeRight() = apply {
         composeRule.swipeRight(tag = LISTING_DETAIL_IMAGES_PAGER)
-        return this
     }
 }
 
