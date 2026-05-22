@@ -1,4 +1,4 @@
-package au.com.deanpike.detail.ui.framework.robot
+package au.com.deanpike.detail.ui.robot
 
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import au.com.deanpike.detail.client.model.detail.ProjectChild
@@ -18,7 +18,7 @@ import org.assertj.core.api.Assertions.assertThat
 class ProjectChildComponentRobot(composeRule: ComposeContentTestRule) : TestRobotBase<ProjectChildComponentRobot, ProjectChildComponentRobotInitData>(composeRule) {
     private var clickedProjectChildId: Long? = null
 
-    override fun setupComponent(data: ProjectChildComponentRobotInitData?): ProjectChildComponentRobot {
+    override fun setupComponent(data: ProjectChildComponentRobotInitData?) = apply {
         clickedProjectChildId = null
 
         composeRule.setContent {
@@ -42,43 +42,36 @@ class ProjectChildComponentRobot(composeRule: ComposeContentTestRule) : TestRobo
                 )
             }
         }
-        return this
     }
 
-    override fun assertLayoutDisplayed(): ProjectChildComponentRobot {
+    override fun assertLayoutDisplayed() = apply {
         composeRule.assertTagDisplayed(PROJECT_CHILD_LAYOUT)
-        return this
     }
 
-    fun assertClickedProjectChildId(id: Long): ProjectChildComponentRobot {
+    fun assertClickedProjectChildId(id: Long) = apply {
         assertThat(clickedProjectChildId).isEqualTo(id)
-        return this
     }
 
-    fun assertProjectChildImageDisplayed(): ProjectChildComponentRobot {
+    fun assertProjectChildImageDisplayed() = apply {
         composeRule.assertTagDisplayed(PROJECT_CHILD_IMAGE)
-        return this
     }
 
-    fun assertLifecycle(lifecycle: String): ProjectChildComponentRobot {
+    fun assertLifecycle(lifecycle: String) = apply {
         composeRule.assertTextDisplayed(
             tag = PROJECT_CHILD_LIFECYCLE,
             text = lifecycle
         )
-        return this
     }
 
-    fun assertPriceDisplayed(price: String): ProjectChildComponentRobot {
+    fun assertPriceDisplayed(price: String) = apply {
         composeRule.assertTextDisplayed(
             tag = PROJECT_CHILD_PRICE,
             text = price
         )
-        return this
     }
 
-    fun clickProjectChild(): ProjectChildComponentRobot {
+    fun clickProjectChild() = apply {
         composeRule.clickOn(PROJECT_CHILD_LAYOUT)
-        return this
     }
 }
 

@@ -1,4 +1,4 @@
-package au.com.deanpike.detail.ui.framework.robot
+package au.com.deanpike.detail.ui.robot
 
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import androidx.test.espresso.Espresso
@@ -36,7 +36,7 @@ class PropertyDetailScreenRobot(composeRule: ComposeContentTestRule) : TestRobot
         private set
     var event: PropertyDetailScreenEvent? = null
 
-    override fun setupComponent(data: PropertyDetailScreenRobotInitData?): PropertyDetailScreenRobot {
+    override fun setupComponent(data: PropertyDetailScreenRobotInitData?) = apply {
         composeRule.setContent {
             MviExampleTheme {
                 PropertyDetailScreenContent(
@@ -51,25 +51,21 @@ class PropertyDetailScreenRobot(composeRule: ComposeContentTestRule) : TestRobot
                 )
             }
         }
-        return this
     }
 
-    override fun assertLayoutDisplayed(): PropertyDetailScreenRobot {
+    override fun assertLayoutDisplayed() = apply {
         composeRule.assertTagDisplayed(PROPERTY_DETAILS_LAYOUT)
-        return this
     }
 
-    fun assertProgressDisplayed(): PropertyDetailScreenRobot {
+    fun assertProgressDisplayed() = apply {
         composeRule.assertTagDisplayed(PROPERTY_DETAIL_PROGRESS)
-        return this
     }
 
-    fun assertProgressNotDisplayed(): PropertyDetailScreenRobot {
+    fun assertProgressNotDisplayed() = apply {
         composeRule.assertTagDoesNotExist(PROPERTY_DETAIL_PROGRESS)
-        return this
     }
 
-    fun assertBedroomDisplayed(text: String): PropertyDetailScreenRobot {
+    fun assertBedroomDisplayed(text: String) = apply {
         detailItemRobot.assertIconDisplayed(
             testTag = DETAIL_ITEM_BEDROOMS,
             drawable = R.drawable.baseline_bed_24,
@@ -79,10 +75,9 @@ class PropertyDetailScreenRobot(composeRule: ComposeContentTestRule) : TestRobot
             testTag = DETAIL_ITEM_BEDROOMS,
             count = text
         )
-        return this
     }
 
-    fun assertBathroomDisplayed(text: String): PropertyDetailScreenRobot {
+    fun assertBathroomDisplayed(text: String) = apply {
         detailItemRobot.assertIconDisplayed(
             testTag = DETAIL_ITEM_BATHROOMS,
             drawable = R.drawable.baseline_bathtub_24,
@@ -92,10 +87,9 @@ class PropertyDetailScreenRobot(composeRule: ComposeContentTestRule) : TestRobot
             testTag = DETAIL_ITEM_BATHROOMS,
             count = text
         )
-        return this
     }
 
-    fun assertCarSpaceDisplayed(text: String): PropertyDetailScreenRobot {
+    fun assertCarSpaceDisplayed(text: String) = apply {
         detailItemRobot.assertIconDisplayed(
             testTag = DETAIL_ITEM_CAR_SPACES,
             drawable = R.drawable.baseline_directions_car_24,
@@ -105,70 +99,59 @@ class PropertyDetailScreenRobot(composeRule: ComposeContentTestRule) : TestRobot
             testTag = DETAIL_ITEM_CAR_SPACES,
             count = text
         )
-        return this
     }
 
-    fun assertHeadlineDisplayed(headline: String): PropertyDetailScreenRobot {
+    fun assertHeadlineDisplayed(headline: String) = apply {
         composeRule.assertTextDisplayed(
             tag = PROPERTY_DETAIL_HEADLINE,
             text = headline
         )
-        return this
     }
 
-    fun assertDescriptionDisplayed(): PropertyDetailScreenRobot {
+    fun assertDescriptionDisplayed() = apply {
         composeRule.assertTagDisplayed(tag = PROPERTY_DETAIL_DESCRIPTION)
-        return this
     }
 
-    fun swipeUp(): PropertyDetailScreenRobot {
+    fun swipeUp() = apply {
         composeRule.swipeUp(PROPERTY_DETAILS_LAYOUT)
-        return this
     }
 
-    fun waitForSuccessScreenToBeDisplayed(): PropertyDetailScreenRobot {
+    fun waitForSuccessScreenToBeDisplayed() = apply {
         composeRule.waitUntilTagExists(PRICE_COMPONENT_LABEL)
-        return this
     }
 
-    fun swipeBack(): PropertyDetailScreenRobot {
+    fun swipeBack() = apply {
         Espresso.pressBack()
-        return this
     }
 
-    fun assertLoadingTitleDisplayed(): PropertyDetailScreenRobot {
+    fun assertLoadingTitleDisplayed() = apply {
         composeRule.assertTextDisplayed(
             tag = PROPERTY_DETAIL_LOADING_TITLE,
             text = "Loading data for"
         )
-        return this
     }
 
-    fun assertLoadingAddressDisplayed(address: String): PropertyDetailScreenRobot {
+    fun assertLoadingAddressDisplayed(address: String) = apply {
         composeRule.assertTextDisplayed(
 
             tag = PROPERTY_DETAIL_LOADING_ADDRESS,
             text = address
         )
-        return this
     }
 
-    fun assertSuccessAddressDisplayed(address: String): PropertyDetailScreenRobot {
+    fun assertSuccessAddressDisplayed(address: String) = apply {
         composeRule.assertTextDisplayed(
             tag = PROPERTY_DETAIL_SUCCESS_ADDRESS,
             text = address
         )
-        return this
     }
 
-    fun assertBackButtonDisplayed(): PropertyDetailScreenRobot {
+    fun assertBackButtonDisplayed() = apply {
         composeRule.assertTagDisplayed(PROPERTY_DETAIL_BACK_BUTTON)
-        return this
     }
 
-    fun clickBack(): PropertyDetailScreenRobot {
+    fun clickBack() = apply {
         composeRule.clickOn(PROPERTY_DETAIL_BACK_BUTTON)
-        return this
     }
 }
 

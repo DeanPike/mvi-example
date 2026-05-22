@@ -1,4 +1,4 @@
-package au.com.deanpike.detail.ui.framework.robot
+package au.com.deanpike.detail.ui.robot
 
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import au.com.deanpike.detail.client.model.detail.ProjectChild
@@ -15,7 +15,7 @@ import au.com.deanpike.uitestshared.util.scrollToItemPosition
 
 class ProjectChildrenComponentRobot(composeRule: ComposeContentTestRule) : TestRobotBase<ProjectChildrenComponentRobot, ProjectChildrenComponentRobotInitData>(composeRule) {
     private var clickedProjectChildId: Long? = null
-    override fun setupComponent(data: ProjectChildrenComponentRobotInitData?): ProjectChildrenComponentRobot {
+    override fun setupComponent(data: ProjectChildrenComponentRobotInitData?) = apply {
         clickedProjectChildId = null
 
         composeRule.setContent {
@@ -29,41 +29,36 @@ class ProjectChildrenComponentRobot(composeRule: ComposeContentTestRule) : TestR
                 )
             }
         }
-        return this
     }
 
-    override fun assertLayoutDisplayed(): ProjectChildrenComponentRobot {
+    override fun assertLayoutDisplayed() = apply {
         composeRule.assertTagDisplayed(PROJECT_CHILDREN)
-        return this
     }
 
-    fun scrollToPosition(position: Int): ProjectChildrenComponentRobot {
+    fun scrollToPosition(position: Int) = apply {
         composeRule.scrollToItemPosition(
             tag = PROJECT_CHILDREN,
             index = position
         )
-        return this
     }
 
     fun assertListingDisplayedAtPosition(
         position: Int,
         listingId: Long
-    ): ProjectChildrenComponentRobot {
+    ) = apply {
         composeRule.assertListingDisplayedAtPosition(
             parentTag = PROJECT_CHILDREN,
             position = position,
             childTag = PROJECT_CHILD_LAYOUT,
             listingId = listingId
         )
-        return this
     }
 
-    fun clickOnChild(position: Int): ProjectChildrenComponentRobot {
+    fun clickOnChild(position: Int) = apply {
         composeRule.clickOnItemAtPosition(
             parentTag = PROJECT_CHILDREN,
             position = position
         )
-        return this
     }
 }
 

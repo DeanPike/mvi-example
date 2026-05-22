@@ -1,4 +1,4 @@
-package au.com.deanpike.detail.ui.framework.robot
+package au.com.deanpike.detail.ui.robot
 
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import au.com.deanpike.detail.client.model.detail.Advertiser
@@ -15,7 +15,7 @@ import au.com.deanpike.uitestshared.util.assertTextDisplayed
 import au.com.deanpike.uitestshared.util.scrollTo
 
 class AgencyComponentRobot(composeRule: ComposeContentTestRule) : TestRobotBase<AgencyComponentRobot, AgencyComponentRobotInitData>(composeRule) {
-    override fun setupComponent(data: AgencyComponentRobotInitData?): AgencyComponentRobot {
+    override fun setupComponent(data: AgencyComponentRobotInitData?) = apply {
         composeRule.setContent {
             MviExampleTheme {
                 AgencyComponent(
@@ -23,38 +23,32 @@ class AgencyComponentRobot(composeRule: ComposeContentTestRule) : TestRobotBase<
                 )
             }
         }
-        return this
     }
 
-    override fun assertLayoutDisplayed(): AgencyComponentRobot {
+    override fun assertLayoutDisplayed() = apply {
         composeRule.assertTagDisplayed(AGENCY_LAYOUT)
-        return this
     }
 
-    fun assertAgentLabel(): AgencyComponentRobot {
+    fun assertAgentLabel() = apply {
         composeRule.assertTextDisplayed(tag = AGENT_LABEL, text = "Agent")
-        return this
     }
 
-    fun scrollToAgency(): AgencyComponentRobot {
+    fun scrollToAgency() = apply {
         composeRule.scrollTo(AGENCY_LAYOUT)
-        return this
     }
 
-    fun assertAgencyName(name: String): AgencyComponentRobot {
+    fun assertAgencyName(name: String) = apply {
         composeRule.assertTextDisplayed(
             tag = AGENCY_NAME,
             text = name
         )
-        return this
     }
 
-    fun assertAgencyAddress(address: String): AgencyComponentRobot {
+    fun assertAgencyAddress(address: String) = apply {
         composeRule.assertTextDisplayed(
             tag = AGENCY_ADDRESS,
             text = address
         )
-        return this
     }
 }
 

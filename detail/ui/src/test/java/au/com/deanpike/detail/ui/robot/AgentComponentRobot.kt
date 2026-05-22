@@ -1,4 +1,4 @@
-package au.com.deanpike.detail.ui.framework.robot
+package au.com.deanpike.detail.ui.robot
 
 import androidx.compose.ui.test.assertAny
 import androidx.compose.ui.test.assertTextEquals
@@ -23,7 +23,7 @@ import au.com.deanpike.uitestshared.base.TestRobotInitData
 import au.com.deanpike.uitestshared.util.assertTagDisplayed
 
 class AgentComponentRobot(composeRule: ComposeContentTestRule) : TestRobotBase<AgentComponentRobot, AgentComponentRobotInitData>(composeRule) {
-    override fun setupComponent(data: AgentComponentRobotInitData?): AgentComponentRobot {
+    override fun setupComponent(data: AgentComponentRobotInitData?) = apply {
 
         composeRule.setContent {
             MviExampleTheme {
@@ -32,39 +32,35 @@ class AgentComponentRobot(composeRule: ComposeContentTestRule) : TestRobotBase<A
                 )
             }
         }
-        return this
     }
 
-    override fun assertLayoutDisplayed(): AgentComponentRobot {
+    override fun assertLayoutDisplayed() = apply {
         composeRule.assertTagDisplayed("${AGENT_CARD_LAYOUT}_0")
-        return this
     }
 
     fun assertAgentName(
         name: String,
         position: Int
-    ): AgentComponentRobot {
+    ) = apply {
         composeRule.onNodeWithTag(
             testTag = "${AGENT_CARD_LAYOUT}_$position"
         ).onChildren()
             .assertAny(hasTestTag("${AGENT_NAME}_$position") and hasText(name))
-        return this
     }
 
     fun assertAgentImage(
         position: Int
-    ): AgentComponentRobot {
+    ) = apply {
         composeRule.onNodeWithTag(
             testTag = "${AGENT_CARD_LAYOUT}_$position"
         ).onChildren()
             .assertAny(hasTestTag("${AGENT_IMAGE}_$position"))
-        return this
     }
 
     fun assertAgentMobileContact(
         value: String,
         position: Int
-    ): AgentComponentRobot {
+    ) = apply {
         composeRule.onNodeWithTag(
             testTag = "${AGENT_MOBILE}_${position}"
         ).onChildren()
@@ -76,13 +72,12 @@ class AgentComponentRobot(composeRule: ComposeContentTestRule) : TestRobotBase<A
             .filterToOne(hasTestTag("${AGENT_MOBILE}_${position}_VALUE"))
             .assertTextEquals(value)
 
-        return this
     }
 
     fun assertAgentGeneralContact(
         value: String,
         position: Int
-    ): AgentComponentRobot {
+    ) = apply {
         composeRule.onNodeWithTag(
             testTag = "${AGENT_GENERAL}_${position}"
         ).onChildren()
@@ -93,14 +88,12 @@ class AgentComponentRobot(composeRule: ComposeContentTestRule) : TestRobotBase<A
         ).onChildren()
             .filterToOne(hasTestTag("${AGENT_GENERAL}_${position}_VALUE"))
             .assertTextEquals(value)
-
-        return this
     }
 
     fun assertAgentFaxContact(
         value: String,
         position: Int
-    ): AgentComponentRobot {
+    ) = apply {
         composeRule.onNodeWithTag(
             testTag = "${AGENT_FAX}_${position}"
         ).onChildren()
@@ -111,14 +104,12 @@ class AgentComponentRobot(composeRule: ComposeContentTestRule) : TestRobotBase<A
         ).onChildren()
             .filterToOne(hasTestTag("${AGENT_FAX}_${position}_VALUE"))
             .assertTextEquals(value)
-
-        return this
     }
 
     fun assertAgentEmailContact(
         email: String,
         position: Int
-    ): AgentComponentRobot {
+    ) = apply {
         composeRule.onNodeWithTag(
             testTag = "${AGENT_EMAIL}_${position}"
         ).onChildren()
@@ -129,7 +120,6 @@ class AgentComponentRobot(composeRule: ComposeContentTestRule) : TestRobotBase<A
         ).onChildren()
             .filterToOne(hasTestTag("${AGENT_EMAIL}_${position}_VALUE"))
             .assertTextEquals(email)
-        return this
     }
 }
 

@@ -4,13 +4,15 @@ import au.com.deanpike.detail.client.model.detail.Advertiser
 import au.com.deanpike.detail.client.model.detail.Agent
 import au.com.deanpike.detail.client.model.detail.PhoneNumber
 import au.com.deanpike.detail.client.model.type.PhoneNumberType
-import au.com.deanpike.detail.ui.framework.robot.AgencyComponentRobot
-import au.com.deanpike.detail.ui.framework.robot.AgencyComponentRobotInitData
-import au.com.deanpike.detail.ui.framework.robot.AgentComponentRobot
+import au.com.deanpike.detail.ui.robot.AgencyComponentRobot
+import au.com.deanpike.detail.ui.robot.AgencyComponentRobotInitData
+import au.com.deanpike.detail.ui.robot.AgentComponentRobot
+import au.com.deanpike.uitestshared.base.RobolectricTestBase
 import au.com.deanpike.uitestshared.base.UiUnitTestBase
+import org.junit.Assert.*
 import org.junit.Test
 
-class AgencyComponentTest : UiUnitTestBase() {
+class AgencyComponentTest : RobolectricTestBase() {
     private val agencyRobot = AgencyComponentRobot(composeTestRule)
     private val agentRobot = AgentComponentRobot(composeTestRule)
 

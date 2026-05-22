@@ -9,13 +9,13 @@ import au.com.deanpike.detail.client.model.detail.PhoneNumber
 import au.com.deanpike.detail.client.model.detail.ProjectChild
 import au.com.deanpike.detail.client.model.detail.ProjectDetail
 import au.com.deanpike.detail.client.model.type.PhoneNumberType
-import au.com.deanpike.detail.ui.framework.robot.AgencyComponentRobot
-import au.com.deanpike.detail.ui.framework.robot.AgentComponentRobot
-import au.com.deanpike.detail.ui.framework.robot.ProjectChildrenComponentRobot
-import au.com.deanpike.detail.ui.framework.robot.ProjectDetailScreenRobot
-import au.com.deanpike.detail.ui.framework.robot.ProjectDetailScreenRobotInitData
+import au.com.deanpike.detail.ui.robot.AgencyComponentRobot
+import au.com.deanpike.detail.ui.robot.AgentComponentRobot
+import au.com.deanpike.detail.ui.robot.ProjectChildrenComponentRobot
+import au.com.deanpike.detail.ui.robot.ProjectDetailScreenRobot
+import au.com.deanpike.detail.ui.robot.ProjectDetailScreenRobotInitData
 import au.com.deanpike.uishared.base.ScreenStateType
-import au.com.deanpike.uitestshared.base.UiUnitTestBase
+import au.com.deanpike.uitestshared.base.RobolectricTestBase
 import au.com.deanpike.uitestshared.robot.AgencyBannerComponentRobot
 import au.com.deanpike.uitestshared.robot.ErrorComponentRobot
 import au.com.deanpike.uitestshared.robot.ListingDetailImagesComponentRobot
@@ -24,7 +24,7 @@ import au.com.deanpike.uitestshared.util.disableAnimations
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
-class ProjectDetailScreenTest : UiUnitTestBase() {
+class ProjectDetailScreenTest : RobolectricTestBase() {
     private val projectDetailRobot = ProjectDetailScreenRobot(composeTestRule)
     private val agencyBannerRobot = AgencyBannerComponentRobot(composeTestRule)
     private val imageRobot = ListingDetailImagesComponentRobot(composeTestRule)

@@ -3,12 +3,12 @@ package au.com.deanpike.detail.ui.shared
 import au.com.deanpike.detail.client.model.detail.Agent
 import au.com.deanpike.detail.client.model.detail.PhoneNumber
 import au.com.deanpike.detail.client.model.type.PhoneNumberType
-import au.com.deanpike.detail.ui.framework.robot.AgentComponentRobot
-import au.com.deanpike.detail.ui.framework.robot.AgentComponentRobotInitData
-import au.com.deanpike.uitestshared.base.UiUnitTestBase
+import au.com.deanpike.detail.ui.robot.AgentComponentRobot
+import au.com.deanpike.detail.ui.robot.AgentComponentRobotInitData
+import au.com.deanpike.uitestshared.base.RobolectricTestBase
 import org.junit.Test
 
-class AgentComponentTest : UiUnitTestBase() {
+class AgentComponentTest : RobolectricTestBase() {
     private val robot = AgentComponentRobot(composeTestRule)
 
     @Test

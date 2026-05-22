@@ -1,9 +1,9 @@
-package au.com.deanpike.detail.ui.framework.robot
+package au.com.deanpike.detail.ui.robot
 
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import au.com.deanpike.detail.ui.shared.FullSizeImageComponent
-import au.com.deanpike.detail.ui.shared.FullSizeImageTestTags.FULL_SIZE_IMAGE_BACK_BUTTON
-import au.com.deanpike.detail.ui.shared.FullSizeImageTestTags.FULL_SIZE_IMAGE_IMAGE
+import au.com.deanpike.detail.ui.shared.FullSizeImageTestTags
+import au.com.deanpike.uishared.R
 import au.com.deanpike.uishared.theme.MviExampleTheme
 import au.com.deanpike.uitestshared.base.TestRobotBase
 import au.com.deanpike.uitestshared.base.TestRobotInitData
@@ -16,7 +16,7 @@ class FullSizeImageComponentRobot(composeRule: ComposeContentTestRule) : TestRob
     var backClicked = false
         private set
 
-    override fun setupComponent(data: FullSizeImageComponentRobotInitData?): FullSizeImageComponentRobot {
+    override fun setupComponent(data: FullSizeImageComponentRobotInitData?) = apply {
         composeRule.setContent {
             MviExampleTheme {
                 FullSizeImageComponent(
@@ -27,24 +27,21 @@ class FullSizeImageComponentRobot(composeRule: ComposeContentTestRule) : TestRob
                 )
             }
         }
-        return this
     }
 
-    override fun assertLayoutDisplayed(): FullSizeImageComponentRobot {
-        composeRule.assertTagDisplayed(FULL_SIZE_IMAGE_IMAGE)
-        return this
+    override fun assertLayoutDisplayed() = apply {
+        composeRule.assertTagDisplayed(FullSizeImageTestTags.FULL_SIZE_IMAGE_IMAGE)
     }
 
-    fun assertBackButtonDisplayed(): FullSizeImageComponentRobot {
+    fun assertBackButtonDisplayed() = apply {
         composeRule.assertDrawableDisplayed(
-            tag = FULL_SIZE_IMAGE_BACK_BUTTON,
-            drawable = au.com.deanpike.uishared.R.drawable.arrow_back_24
+            tag = FullSizeImageTestTags.FULL_SIZE_IMAGE_BACK_BUTTON,
+            drawable = R.drawable.arrow_back_24
         )
-        return this
     }
 
     fun clickBackButton() {
-        composeRule.clickOn(FULL_SIZE_IMAGE_BACK_BUTTON)
+        composeRule.clickOn(FullSizeImageTestTags.FULL_SIZE_IMAGE_BACK_BUTTON)
     }
 
     data class FullSizeImageComponentRobotInitData(

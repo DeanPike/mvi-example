@@ -1,12 +1,12 @@
 package au.com.deanpike.detail.ui.project
 
 import au.com.deanpike.detail.client.model.detail.ProjectChild
-import au.com.deanpike.detail.ui.framework.robot.ProjectChildrenComponentRobot
-import au.com.deanpike.detail.ui.framework.robot.ProjectChildrenComponentRobotInitData
-import au.com.deanpike.uitestshared.base.UiUnitTestBase
+import au.com.deanpike.detail.ui.robot.ProjectChildrenComponentRobot
+import au.com.deanpike.detail.ui.robot.ProjectChildrenComponentRobotInitData
+import au.com.deanpike.uitestshared.base.RobolectricTestBase
 import org.junit.Test
 
-class ProjectChildrenComponentTest : UiUnitTestBase() {
+class ProjectChildrenComponentTest : RobolectricTestBase() {
     private val childrenRobot = ProjectChildrenComponentRobot(composeTestRule)
 
     @Test
@@ -31,6 +31,7 @@ class ProjectChildrenComponentTest : UiUnitTestBase() {
                 position = 0,
                 listingId = 100L
             )
+            .scrollToPosition(1)
             .assertListingDisplayedAtPosition(
                 position = 1,
                 listingId = 200L

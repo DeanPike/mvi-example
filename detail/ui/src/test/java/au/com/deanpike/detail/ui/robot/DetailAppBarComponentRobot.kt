@@ -1,9 +1,8 @@
-package au.com.deanpike.detail.ui.framework.robot
+package au.com.deanpike.detail.ui.robot
 
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import au.com.deanpike.detail.ui.shared.DetailAppBarComponent
-import au.com.deanpike.detail.ui.shared.DetailAppBarComponentTestTags.DETAIL_APP_BAR_CLOSE_ICON
-import au.com.deanpike.detail.ui.shared.DetailAppBarComponentTestTags.DETAIL_APP_BAR_LAYOUT
+import au.com.deanpike.detail.ui.shared.DetailAppBarComponentTestTags
 import au.com.deanpike.uishared.theme.MviExampleTheme
 import au.com.deanpike.uitestshared.base.TestRobotBase
 import au.com.deanpike.uitestshared.base.TestRobotInitData
@@ -14,7 +13,7 @@ class DetailAppBarComponentRobot(composeRule: ComposeContentTestRule) : TestRobo
     var closeClicked = false
         private set
 
-    override fun setupComponent(data: TestRobotInitData?): DetailAppBarComponentRobot {
+    override fun setupComponent(data: TestRobotInitData?) = apply {
         composeRule.setContent {
             MviExampleTheme {
                 DetailAppBarComponent(
@@ -24,22 +23,17 @@ class DetailAppBarComponentRobot(composeRule: ComposeContentTestRule) : TestRobo
                 )
             }
         }
-
-        return this
     }
 
-    override fun assertLayoutDisplayed(): DetailAppBarComponentRobot {
-        composeRule.assertTagDisplayed(DETAIL_APP_BAR_LAYOUT)
-        return this
+    override fun assertLayoutDisplayed() = apply {
+        composeRule.assertTagDisplayed(DetailAppBarComponentTestTags.DETAIL_APP_BAR_LAYOUT)
     }
 
-    fun assertCloseIconDisplayed(): DetailAppBarComponentRobot {
-        composeRule.assertTagDisplayed(DETAIL_APP_BAR_CLOSE_ICON)
-        return this
+    fun assertCloseIconDisplayed() = apply {
+        composeRule.assertTagDisplayed(DetailAppBarComponentTestTags.DETAIL_APP_BAR_CLOSE_ICON)
     }
 
-    fun clickOnClose(): DetailAppBarComponentRobot {
-        composeRule.clickOn(DETAIL_APP_BAR_CLOSE_ICON)
-        return this
+    fun clickOnClose() = apply {
+        composeRule.clickOn(DetailAppBarComponentTestTags.DETAIL_APP_BAR_CLOSE_ICON)
     }
 }

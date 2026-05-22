@@ -1,13 +1,13 @@
 package au.com.deanpike.detail.ui.project
 
 import au.com.deanpike.detail.client.model.detail.ProjectChild
-import au.com.deanpike.detail.ui.framework.robot.ProjectChildComponentRobot
-import au.com.deanpike.detail.ui.framework.robot.ProjectChildComponentRobotInitData
-import au.com.deanpike.uitestshared.base.UiUnitTestBase
+import au.com.deanpike.detail.ui.robot.ProjectChildComponentRobot
+import au.com.deanpike.detail.ui.robot.ProjectChildComponentRobotInitData
+import au.com.deanpike.uitestshared.base.RobolectricTestBase
 import au.com.deanpike.uitestshared.robot.BedBathCarComponentRobot
 import org.junit.Test
 
-class ProjectChildComponentTest : UiUnitTestBase() {
+class ProjectChildComponentTest : RobolectricTestBase() {
 
     private val projectChildRobot = ProjectChildComponentRobot(composeTestRule)
     private val detailRobot = BedBathCarComponentRobot(composeTestRule)

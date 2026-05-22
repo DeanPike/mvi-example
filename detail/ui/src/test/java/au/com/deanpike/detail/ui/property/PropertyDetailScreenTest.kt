@@ -8,12 +8,12 @@ import au.com.deanpike.detail.client.model.detail.Agent
 import au.com.deanpike.detail.client.model.detail.PhoneNumber
 import au.com.deanpike.detail.client.model.detail.PropertyDetail
 import au.com.deanpike.detail.client.model.type.PhoneNumberType
-import au.com.deanpike.detail.ui.framework.robot.AgencyComponentRobot
-import au.com.deanpike.detail.ui.framework.robot.AgentComponentRobot
-import au.com.deanpike.detail.ui.framework.robot.PropertyDetailScreenRobot
-import au.com.deanpike.detail.ui.framework.robot.PropertyDetailScreenRobotInitData
+import au.com.deanpike.detail.ui.robot.AgencyComponentRobot
+import au.com.deanpike.detail.ui.robot.AgentComponentRobot
+import au.com.deanpike.detail.ui.robot.PropertyDetailScreenRobot
+import au.com.deanpike.detail.ui.robot.PropertyDetailScreenRobotInitData
 import au.com.deanpike.uishared.base.ScreenStateType
-import au.com.deanpike.uitestshared.base.UiUnitTestBase
+import au.com.deanpike.uitestshared.base.RobolectricTestBase
 import au.com.deanpike.uitestshared.robot.AgencyBannerComponentRobot
 import au.com.deanpike.uitestshared.robot.ErrorComponentRobot
 import au.com.deanpike.uitestshared.robot.ListingDetailImagesComponentRobot
@@ -21,7 +21,7 @@ import au.com.deanpike.uitestshared.robot.PriceComponentRobot
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
-class PropertyDetailScreenTest : UiUnitTestBase() {
+class PropertyDetailScreenTest : RobolectricTestBase() {
 
     private val propertyDetailRobot = PropertyDetailScreenRobot(composeTestRule)
     private val errorRobot = ErrorComponentRobot(composeTestRule)

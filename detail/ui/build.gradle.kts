@@ -7,7 +7,9 @@ plugins {
 
 android {
     namespace = "au.com.deanpike.detail.ui"
-    compileSdk = libs.versions.compileSdk.get().toInt()
+    compileSdk {
+        version = release(libs.versions.compileSdk.get().toInt())
+    }
 
     defaultConfig {
         minSdk = libs.versions.minSdk.get().toInt()
@@ -38,6 +40,7 @@ android {
     testOptions {
         animationsDisabled = true
         unitTests {
+            isIncludeAndroidResources = true
             all {
                 it.useJUnitPlatform()
             }
@@ -53,13 +56,7 @@ dependencies {
     implementation(project(":shared:navigation"))
 
     testImplementation(project(":test-util:unit-test-shared"))
-
-    androidTestImplementation(project(":detail:client"))
-    androidTestImplementation(project(":detail:data"))
-    androidTestImplementation(project(":test-util:ui-test-shared"))
-    androidTestImplementation(project(":shared:ui-shared"))
-    androidTestImplementation(project(":network"))
-    androidTestImplementation(project(":test-util:unit-test-shared"))
+    testImplementation(project(":test-util:ui-test-shared"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -87,14 +84,5 @@ dependencies {
     testImplementation(libs.assertj)
     testImplementation(libs.coroutines.test)
     testImplementation(libs.turbine)
-
-    androidTestImplementation(libs.hilt.android)
-    kspAndroidTest(libs.hilt.compiler)
-    androidTestImplementation(libs.hilt.android.testing)
-
-    androidTestImplementation(libs.mockwebserver)
-    androidTestImplementation(libs.assertj)
-    androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.ui.test.junit4)
+    testImplementation(libs.bundles.robolectric.tests)
 }
