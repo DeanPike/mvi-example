@@ -41,10 +41,6 @@ class MainActivity : ComponentActivity() {
         insetsController.isAppearanceLightStatusBars = true
         insetsController.isAppearanceLightNavigationBars = true
 
-        // Optional: Set specific colors for status and navigation bars
-        window.statusBarColor = android.graphics.Color.TRANSPARENT
-        window.navigationBarColor = android.graphics.Color.TRANSPARENT
-
         setContent {
             SetupStatusBar(this)
             val windowSizeClass: WindowSizeClass = currentWindowAdaptiveInfo().windowSizeClass
