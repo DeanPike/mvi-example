@@ -35,7 +35,7 @@ object RemoteDataSourceModule {
         okHttpClient: OkHttpClient,
         gson: Gson,
         @BaseUrl baseUrl: String
-    ) =
+    ) : Retrofit =
         Retrofit.Builder()
             .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create(gson))
@@ -43,11 +43,11 @@ object RemoteDataSourceModule {
             .build()
 
     @Provides
-    internal fun providePropertyListingsRemoteDataSourceApi(retrofit: Retrofit): ListingApi = retrofit.create(ListingApi::class.java)
+    fun provideListingApi(retrofit: Retrofit): ListingApi = retrofit.create(ListingApi::class.java)
 
     @Provides
-    internal fun providePropertyDetailsApi(retrofit: Retrofit): PropertyDetailApi = retrofit.create(PropertyDetailApi::class.java)
+    fun providePropertyDetailsApi(retrofit: Retrofit): PropertyDetailApi = retrofit.create(PropertyDetailApi::class.java)
 
     @Provides
-    internal fun provideProjectDetailApi(retrofit: Retrofit): ProjectDetailApi = retrofit.create(ProjectDetailApi::class.java)
+    fun provideProjectDetailApi(retrofit: Retrofit): ProjectDetailApi = retrofit.create(ProjectDetailApi::class.java)
 }
