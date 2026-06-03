@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
+import androidx.compose.material3.adaptive.currentWindowAdaptiveInfoV2
 import androidx.compose.runtime.DisposableEffect
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsControllerCompat
@@ -43,7 +43,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             SetupStatusBar(this)
-            val windowSizeClass: WindowSizeClass = currentWindowAdaptiveInfo().windowSizeClass
+            val windowSizeClass: WindowSizeClass = currentWindowAdaptiveInfoV2().windowSizeClass
 
             DisposableEffect(windowSizeClass) {
                 onDispose {
