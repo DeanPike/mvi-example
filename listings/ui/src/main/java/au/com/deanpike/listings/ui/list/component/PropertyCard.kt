@@ -41,7 +41,7 @@ import au.com.deanpike.listings.ui.list.component.PropertyCardTestTags.PROPERTY_
 import au.com.deanpike.listings.ui.list.component.PropertyCardTestTags.PROPERTY_CARD_PRICE
 import au.com.deanpike.listings.ui.util.StringUtils
 import au.com.deanpike.uishared.R
-import au.com.deanpike.uishared.theme.MviExampleTheme
+import au.com.deanpike.uishared.theme.AppTheme
 import coil3.compose.AsyncImage
 import coil3.request.ImageRequest
 import coil3.request.crossfade
@@ -174,7 +174,7 @@ object PropertyCardTestTags {
 @Preview(device = Devices.PIXEL_8_PRO, showBackground = true)
 @Composable
 fun PropertyCardPreview() {
-    MviExampleTheme() {
+    AppTheme {
         PropertyCard(
             property = Property(
                 id = 1,

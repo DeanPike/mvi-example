@@ -69,10 +69,10 @@ import au.com.deanpike.uishared.component.AgencyBannerComponent
 import au.com.deanpike.uishared.component.ErrorComponent
 import au.com.deanpike.uishared.component.ExpandableText
 import au.com.deanpike.uishared.component.ListingImagesComponent
+import au.com.deanpike.uishared.theme.AppTheme
 import au.com.deanpike.uishared.theme.Dimension.DIM_16
 import au.com.deanpike.uishared.theme.Dimension.DIM_4
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
-import au.com.deanpike.uishared.theme.MviExampleTheme
 import au.com.deanpike.uishared.util.MviWindowWidthSizeClassProvider
 import au.com.deanpike.uishared.util.NavigationBarScrim
 import au.com.deanpike.uishared.util.SetStatusBarAppearance
@@ -146,7 +146,8 @@ fun ProjectDetailScreenContent(
                             .fillMaxWidth()
                             .testTag(PROJECT_DETAIL_LOADING_TITLE),
                         text = stringResource(R.string.loading_data_for),
-                        textAlign = TextAlign.Center
+                        textAlign = TextAlign.Center,
+                        color = MaterialTheme.colorScheme.primary
                     )
                     Spacer(modifier = Modifier.height(DIM_16))
                     Text(
@@ -155,13 +156,15 @@ fun ProjectDetailScreenContent(
                             .testTag(PROJECT_DETAIL_LOADING_ADDRESS),
                         text = loadingAddress,
                         textAlign = TextAlign.Center,
-                        style = MaterialTheme.typography.labelLarge
+                        style = MaterialTheme.typography.labelLarge,
+                        color = MaterialTheme.colorScheme.primary
                     )
                     Spacer(modifier = Modifier.height(DIM_16))
                     CircularProgressIndicator(
                         modifier = Modifier
                             .align(Alignment.CenterHorizontally)
-                            .testTag(PROJECT_DETAIL_PROGRESS)
+                            .testTag(PROJECT_DETAIL_PROGRESS),
+                        color = MaterialTheme.colorScheme.primary
                     )
                 }
             }
@@ -239,7 +242,8 @@ fun ProjectDetailSuccess(
                     )
                     .testTag(PROJECT_DETAIL_SUCCESS_ADDRESS),
                 text = state.projectDetail?.address ?: "",
-                style = MaterialTheme.typography.labelLarge
+                style = MaterialTheme.typography.labelLarge,
+                color = MaterialTheme.colorScheme.primary
             )
 
             HorizontalDivider(
@@ -257,7 +261,8 @@ fun ProjectDetailSuccess(
                         .testTag(PROJECT_DETAIL_NAME),
                     text = it,
                     style = MaterialTheme.typography.titleMedium,
-                    fontWeight = FontWeight.Bold
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.primary
                 )
             }
 
@@ -268,7 +273,8 @@ fun ProjectDetailSuccess(
                         .testTag(PROJECT_DETAIL_HEADLINE),
                     text = it,
                     style = MaterialTheme.typography.bodyMedium,
-                    fontWeight = FontWeight.Bold
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.primary
                 )
             }
             state.projectDetail?.description?.let {
@@ -277,14 +283,18 @@ fun ProjectDetailSuccess(
                         .padding(start = DIM_16, end = DIM_16, top = DIM_8, bottom = DIM_8)
                         .testTag(PROJECT_DETAIL_DESCRIPTION),
                     text = it,
-                    fontSize = MaterialTheme.typography.bodyMedium.fontSize,
                     collapsedMaxLine = 3,
                     showMoreStyle = MaterialTheme.typography.labelLarge.copy(
-                        fontWeight = FontWeight.Bold
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.primary
                     ).toSpanStyle(),
                     showLessStyle = MaterialTheme.typography.labelLarge.copy(
-                        fontWeight = FontWeight.Bold
-                    ).toSpanStyle()
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.primary
+                    ).toSpanStyle(),
+                    style = MaterialTheme.typography.bodyMedium.copy(
+                        color = MaterialTheme.colorScheme.primary
+                    )
                 )
             }
 
@@ -354,7 +364,7 @@ object ProjectDetailScreenTestTags {
 @Preview
 @Composable
 fun ProjectDetailScreenContentPreview() {
-    MviExampleTheme {
+    AppTheme {
         ProjectDetailScreenContent(
             state = ProjectDetailScreenState(
                 screenState = ScreenStateType.SUCCESS,
@@ -435,7 +445,7 @@ fun ProjectDetailScreenContentPreview() {
 @Preview
 @Composable
 fun ProjectDetailScreenProgressPreview() {
-    MviExampleTheme {
+    AppTheme {
         ProjectDetailScreenContent(
             state = ProjectDetailScreenState(
                 screenState = ScreenStateType.LOADING

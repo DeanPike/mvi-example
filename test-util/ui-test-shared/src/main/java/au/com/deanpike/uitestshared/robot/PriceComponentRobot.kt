@@ -4,17 +4,18 @@ import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import au.com.deanpike.uishared.component.PriceComponent
 import au.com.deanpike.uishared.component.PriceComponentTestTags.PRICE_COMPONENT_DATA
 import au.com.deanpike.uishared.component.PriceComponentTestTags.PRICE_COMPONENT_LABEL
-import au.com.deanpike.uishared.theme.MviExampleTheme
+import au.com.deanpike.uishared.theme.AppTheme
 import au.com.deanpike.uitestshared.base.TestRobotBase
 import au.com.deanpike.uitestshared.base.TestRobotInitData
 import au.com.deanpike.uitestshared.util.assertTagDisplayed
 import au.com.deanpike.uitestshared.util.assertTextDisplayed
 import au.com.deanpike.uitestshared.util.waitUntilTagExists
 
-class PriceComponentRobot(composeRule: ComposeContentTestRule) : TestRobotBase<PriceComponentRobot, PriceComponentRobotInitData>(composeRule) {
+class PriceComponentRobot(composeRule: ComposeContentTestRule) :
+    TestRobotBase<PriceComponentRobot, PriceComponentRobotInitData>(composeRule) {
     override fun setupComponent(data: PriceComponentRobotInitData?) = apply {
         composeRule.setContent {
-            MviExampleTheme {
+            AppTheme {
                 PriceComponent(
                     price = data!!.price
                 )

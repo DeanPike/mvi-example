@@ -17,7 +17,7 @@ import au.com.deanpike.detail.ui.R
 import au.com.deanpike.detail.ui.shared.DetailAppBarComponentTestTags.DETAIL_APP_BAR_CLOSE_ICON
 import au.com.deanpike.detail.ui.shared.DetailAppBarComponentTestTags.DETAIL_APP_BAR_LAYOUT
 import au.com.deanpike.uishared.base.drawableTestTag
-import au.com.deanpike.uishared.theme.MviExampleTheme
+import au.com.deanpike.uishared.theme.AppTheme
 
 @Composable
 fun DetailAppBarComponent(
@@ -54,7 +54,7 @@ object DetailAppBarComponentTestTags {
 @Preview(showBackground = true)
 @Composable
 fun DetailAppBarPreview() {
-    MviExampleTheme {
+    AppTheme {
         DetailAppBarComponent()
     }
 }

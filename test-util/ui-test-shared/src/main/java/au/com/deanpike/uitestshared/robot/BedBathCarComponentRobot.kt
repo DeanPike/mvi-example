@@ -7,7 +7,7 @@ import au.com.deanpike.uishared.component.DetailListItemTestTags.DETAIL_ITEM_BAT
 import au.com.deanpike.uishared.component.DetailListItemTestTags.DETAIL_ITEM_BEDROOMS
 import au.com.deanpike.uishared.component.DetailListItemTestTags.DETAIL_ITEM_CAR_SPACES
 import au.com.deanpike.uishared.component.DetailListItemTestTags.DETAIL_ITEM_GROUP
-import au.com.deanpike.uishared.theme.MviExampleTheme
+import au.com.deanpike.uishared.theme.AppTheme
 import au.com.deanpike.uitestshared.base.TestRobotBase
 import au.com.deanpike.uitestshared.base.TestRobotInitData
 import au.com.deanpike.uitestshared.util.assertDrawableDisplayed
@@ -15,10 +15,11 @@ import au.com.deanpike.uitestshared.util.assertTagDisplayed
 import au.com.deanpike.uitestshared.util.assertTagDoesNotExist
 import au.com.deanpike.uitestshared.util.assertTextDisplayed
 
-class BedBathCarComponentRobot(composeRule: ComposeContentTestRule) : TestRobotBase<BedBathCarComponentRobot, BedBathCarComponentRobotInitData>(composeRule) {
+class BedBathCarComponentRobot(composeRule: ComposeContentTestRule) :
+    TestRobotBase<BedBathCarComponentRobot, BedBathCarComponentRobotInitData>(composeRule) {
     override fun setupComponent(data: BedBathCarComponentRobotInitData?) = apply {
         composeRule.setContent {
-            MviExampleTheme {
+            AppTheme {
                 BedBathCarComponent(
                     bedrooms = data!!.bedrooms,
                     bathrooms = data.bathrooms,

@@ -6,7 +6,7 @@ import au.com.deanpike.uishared.component.ListingDetailImagesComponent
 import au.com.deanpike.uishared.component.ListingDetailImagesTestTags.LISTING_DETAIL_IMAGES_IMAGE
 import au.com.deanpike.uishared.component.ListingDetailImagesTestTags.LISTING_DETAIL_IMAGES_PAGER
 import au.com.deanpike.uishared.component.ListingDetailImagesTestTags.LISTING_DETAIL_IMAGES_POSITION_INDICATOR
-import au.com.deanpike.uishared.theme.MviExampleTheme
+import au.com.deanpike.uishared.theme.AppTheme
 import au.com.deanpike.uitestshared.base.TestRobotBase
 import au.com.deanpike.uitestshared.base.TestRobotInitData
 import au.com.deanpike.uitestshared.util.assertTagDisplayed
@@ -14,10 +14,13 @@ import au.com.deanpike.uitestshared.util.assertTagDoesNotExist
 import au.com.deanpike.uitestshared.util.swipeLeft
 import au.com.deanpike.uitestshared.util.swipeRight
 
-class ListingDetailImagesComponentRobot(composeRule: ComposeContentTestRule) : TestRobotBase<ListingDetailImagesComponentRobot, ListingDetailImagesComponentRobotInitData>(composeRule) {
+class ListingDetailImagesComponentRobot(composeRule: ComposeContentTestRule) :
+    TestRobotBase<ListingDetailImagesComponentRobot, ListingDetailImagesComponentRobotInitData>(
+        composeRule
+    ) {
     override fun setupComponent(data: ListingDetailImagesComponentRobotInitData?) = apply {
         composeRule.setContent {
-            MviExampleTheme {
+            AppTheme {
                 ListingDetailImagesComponent(
                     media = data!!.images
                 )

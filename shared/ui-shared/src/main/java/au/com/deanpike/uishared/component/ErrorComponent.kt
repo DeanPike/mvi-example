@@ -13,15 +13,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import au.com.deanpike.uishared.R
 import au.com.deanpike.uishared.component.ErrorComponentTestTags.ERROR_COMPONENT_BUTTON
 import au.com.deanpike.uishared.component.ErrorComponentTestTags.ERROR_COMPONENT_LAYOUT
 import au.com.deanpike.uishared.component.ErrorComponentTestTags.ERROR_COMPONENT_MESSAGE
 import au.com.deanpike.uishared.component.ErrorComponentTestTags.ERROR_COMPONENT_TITLE
+import au.com.deanpike.uishared.theme.AppTheme
 import au.com.deanpike.uishared.theme.Dimension.DIM_16
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
-import au.com.deanpike.uishared.theme.MviExampleTheme
+import au.com.deanpike.uishared.util.ThemePreviews
 
 @Composable
 fun ErrorComponent(
@@ -38,12 +38,14 @@ fun ErrorComponent(
         Text(
             modifier = Modifier.testTag(ERROR_COMPONENT_TITLE),
             text = stringResource(id = R.string.error_title),
-            style = MaterialTheme.typography.titleLarge
+            style = MaterialTheme.typography.titleLarge,
+            color = MaterialTheme.colorScheme.onBackground
         )
         Text(
             modifier = Modifier.testTag(ERROR_COMPONENT_MESSAGE),
             text = stringResource(id = R.string.error_message),
-            style = MaterialTheme.typography.bodyMedium
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onBackground
         )
 
         Button(
@@ -55,7 +57,8 @@ fun ErrorComponent(
                 modifier = Modifier.testTag("${ERROR_COMPONENT_BUTTON}_TEXT"),
                 text = stringResource(id = R.string.retry),
                 style = MaterialTheme.typography.bodyMedium,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.onPrimary
             )
         }
     }
@@ -69,10 +72,10 @@ object ErrorComponentTestTags {
     const val ERROR_COMPONENT_BUTTON = "${PREFIX}BUTTON"
 }
 
-@Preview(showBackground = true)
+@ThemePreviews
 @Composable
 fun ErrorComponentPreview() {
-    MviExampleTheme {
+    AppTheme {
         ErrorComponent()
     }
 }

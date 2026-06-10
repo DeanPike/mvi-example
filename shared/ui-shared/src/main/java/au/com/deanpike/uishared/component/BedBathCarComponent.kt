@@ -9,14 +9,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.tooling.preview.Preview
 import au.com.deanpike.uishared.R
 import au.com.deanpike.uishared.component.DetailListItemTestTags.DETAIL_ITEM_BATHROOMS
 import au.com.deanpike.uishared.component.DetailListItemTestTags.DETAIL_ITEM_BEDROOMS
 import au.com.deanpike.uishared.component.DetailListItemTestTags.DETAIL_ITEM_CAR_SPACES
 import au.com.deanpike.uishared.component.DetailListItemTestTags.DETAIL_ITEM_GROUP
+import au.com.deanpike.uishared.theme.AppTheme
 import au.com.deanpike.uishared.theme.Dimension
-import au.com.deanpike.uishared.theme.MviExampleTheme
+import au.com.deanpike.uishared.util.ThemePreviews
 
 @Composable
 fun BedBathCarComponent(
@@ -68,10 +68,10 @@ object DetailListItemTestTags {
     const val DETAIL_ITEM_CAR_SPACES = "${PREFIX}CAR_SPACES"
 }
 
-@Preview(showBackground = true)
+@ThemePreviews
 @Composable
 fun DetailListItemComponentPreview() {
-    MviExampleTheme {
+    AppTheme {
         BedBathCarComponent(
             bedrooms = 4,
             bathrooms = 3,

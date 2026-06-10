@@ -9,7 +9,7 @@ import androidx.compose.ui.test.onNodeWithTag
 import au.com.deanpike.uishared.component.AgencyBannerComponent
 import au.com.deanpike.uishared.component.AgencyBannerTestTags.AGENCY_BANNER_IMAGE
 import au.com.deanpike.uishared.component.AgencyBannerTestTags.AGENCY_BANNER_LAYOUT
-import au.com.deanpike.uishared.theme.MviExampleTheme
+import au.com.deanpike.uishared.theme.AppTheme
 import au.com.deanpike.uitestshared.base.TestRobotBase
 import au.com.deanpike.uitestshared.base.TestRobotInitData
 import au.com.deanpike.uitestshared.util.assertTagDisplayed
@@ -18,7 +18,7 @@ class AgencyBannerComponentRobot(composeRule: ComposeContentTestRule) : TestRobo
 
     override fun setupComponent(data: AgencyBannerComponentRobotInitData?) = apply {
         composeRule.setContent {
-            MviExampleTheme {
+            AppTheme {
                 AgencyBannerComponent(
                     agencyColour = "#abcdef",
                     logo = data?.logo

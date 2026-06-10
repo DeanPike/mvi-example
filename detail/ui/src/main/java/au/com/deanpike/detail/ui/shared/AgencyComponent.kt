@@ -20,10 +20,10 @@ import au.com.deanpike.detail.ui.shared.AgencyComponentTestTags.AGENCY_ADDRESS
 import au.com.deanpike.detail.ui.shared.AgencyComponentTestTags.AGENCY_LAYOUT
 import au.com.deanpike.detail.ui.shared.AgencyComponentTestTags.AGENCY_NAME
 import au.com.deanpike.detail.ui.shared.AgencyComponentTestTags.AGENT_LABEL
+import au.com.deanpike.uishared.theme.AppTheme
 import au.com.deanpike.uishared.theme.Dimension.DIM_16
 import au.com.deanpike.uishared.theme.Dimension.DIM_4
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
-import au.com.deanpike.uishared.theme.MviExampleTheme
 
 @Composable
 fun AgencyComponent(
@@ -40,7 +40,9 @@ fun AgencyComponent(
                 .testTag(AGENT_LABEL),
             text = stringResource(id = R.string.agent),
             fontWeight = FontWeight.Bold,
-            style = MaterialTheme.typography.bodyLarge
+            style = MaterialTheme.typography.bodyLarge.copy(
+                color = MaterialTheme.colorScheme.secondary
+            ),
         )
 
         advertiser.name?.let {
@@ -50,7 +52,10 @@ fun AgencyComponent(
                     .padding(start = DIM_16, end = DIM_16, top = DIM_4)
                     .testTag(AGENCY_NAME),
                 text = it,
-                style = MaterialTheme.typography.titleMedium
+                style = MaterialTheme.typography.titleMedium.copy(
+                    fontWeight = FontWeight.Medium,
+                    color = MaterialTheme.colorScheme.secondary
+                )
             )
         }
         advertiser.address?.let {
@@ -59,6 +64,10 @@ fun AgencyComponent(
                     .fillMaxWidth()
                     .padding(start = DIM_16, end = DIM_16, bottom = DIM_4)
                     .testTag(AGENCY_ADDRESS),
+                style = MaterialTheme.typography.titleMedium.copy(
+                    fontWeight = FontWeight.Medium,
+                    color = MaterialTheme.colorScheme.secondary
+                ),
                 text = it,
             )
         }
@@ -136,7 +145,7 @@ fun AgencyComponentPreview() {
         ),
     )
 
-    MviExampleTheme {
+    AppTheme {
         AgencyComponent(
             advertiser = advertiser
         )

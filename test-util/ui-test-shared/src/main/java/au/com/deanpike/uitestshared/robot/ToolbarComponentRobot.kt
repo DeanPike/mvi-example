@@ -6,7 +6,7 @@ import au.com.deanpike.uishared.component.ToolbarComponent
 import au.com.deanpike.uishared.component.ToolbarComponentTestTags.TOOLBAR_ICON
 import au.com.deanpike.uishared.component.ToolbarComponentTestTags.TOOLBAR_LAYOUT
 import au.com.deanpike.uishared.component.ToolbarComponentTestTags.TOOLBAR_TITLE
-import au.com.deanpike.uishared.theme.MviExampleTheme
+import au.com.deanpike.uishared.theme.AppTheme
 import au.com.deanpike.uitestshared.base.TestRobotBase
 import au.com.deanpike.uitestshared.base.TestRobotInitData
 import au.com.deanpike.uitestshared.util.assertDrawableDisplayed
@@ -14,10 +14,11 @@ import au.com.deanpike.uitestshared.util.assertTagDisplayed
 import au.com.deanpike.uitestshared.util.assertTextDisplayed
 import au.com.deanpike.uitestshared.util.clickOn
 
-class ToolbarComponentRobot(composeRule: ComposeContentTestRule) : TestRobotBase<ToolbarComponentRobot, ToolbarComponentRobotInitData>(composeRule) {
+class ToolbarComponentRobot(composeRule: ComposeContentTestRule) :
+    TestRobotBase<ToolbarComponentRobot, ToolbarComponentRobotInitData>(composeRule) {
     override fun setupComponent(data: ToolbarComponentRobotInitData?) = apply {
         composeRule.setContent {
-            MviExampleTheme {
+            AppTheme {
                 ToolbarComponent(
                     title = data!!.title,
                 )

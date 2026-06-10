@@ -49,10 +49,10 @@ import au.com.deanpike.listings.ui.list.component.ProjectCard
 import au.com.deanpike.listings.ui.list.component.PropertyCard
 import au.com.deanpike.uishared.base.ScreenStateType
 import au.com.deanpike.uishared.component.ErrorComponent
+import au.com.deanpike.uishared.theme.AppTheme
 import au.com.deanpike.uishared.theme.Dimension.DIM_16
 import au.com.deanpike.uishared.theme.Dimension.DIM_4
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
-import au.com.deanpike.uishared.theme.MviExampleTheme
 import au.com.deanpike.uishared.util.SetStatusBarAppearance
 
 @Composable
@@ -149,7 +149,8 @@ private fun TopBar(
                 .align(alignment = Alignment.CenterHorizontally)
                 .testTag(LISTING_LIST_TITLE),
             text = stringResource(id = R.string.list_heading),
-            fontWeight = FontWeight.Bold
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.colorScheme.primary
         )
         Text(
             modifier = Modifier
@@ -168,7 +169,8 @@ private fun TopBar(
                     ""
                 }
             },
-            style = MaterialTheme.typography.bodySmall
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.primary
         )
     }
 }
@@ -285,7 +287,7 @@ object ListingListScreenTestTags {
 @Composable
 @Preview
 fun ListingListScreen1ContentSuccessPreview() {
-    MviExampleTheme {
+    AppTheme {
         ListingListScreenContent(
             state = ListingListScreenState(
                 screenState = ScreenStateType.SUCCESS,
@@ -298,7 +300,7 @@ fun ListingListScreen1ContentSuccessPreview() {
 @Composable
 @Preview
 fun ListingListScreen1ContentLoadingPreview() {
-    MviExampleTheme {
+    AppTheme {
         ListingListScreenContent(
             state = ListingListScreenState(
                 screenState = ScreenStateType.LOADING,
@@ -311,7 +313,7 @@ fun ListingListScreen1ContentLoadingPreview() {
 @Composable
 @Preview(showBackground = true)
 fun TopBarPreview() {
-    MviExampleTheme {
+    AppTheme {
         TopBar(
             screenState = ScreenStateType.SUCCESS,
             listingCount = 10

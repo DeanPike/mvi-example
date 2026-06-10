@@ -13,6 +13,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -66,7 +67,7 @@ fun ProjectChildCard(
                     text = projectChild.listingDetails.price ?: "",
                     style = MaterialTheme.typography.bodyLarge,
                     fontWeight = FontWeight.Bold,
-                    color = Color(0xFF111111)
+                    color = MaterialTheme.colorScheme.onBackground
                 )
             }
 
@@ -81,7 +82,7 @@ fun ProjectChildCard(
                         numberOfBathrooms = projectChild.listingDetails.numberOfBathrooms,
                         numberOfCarSpaces = projectChild.listingDetails.numberOfCarSpaces
                     ),
-                    color = Color(0xFF333333),
+                    color = MaterialTheme.colorScheme.primary,
                     style = MaterialTheme.typography.labelLarge
                 )
                 Spacer(modifier = Modifier.weight(1F))
@@ -97,7 +98,7 @@ fun ProjectChildCard(
                             .padding(4.dp)
                             .testTag(PROJECT_CHILD_CARD_LIFECYCLE_STATUS),
                         text = projectChild.lifecycleStatus ?: "",
-                        color = Color(0xFF2B2B2B),
+                        color = MaterialTheme.colorScheme.primary,
                         style = MaterialTheme.typography.bodyMedium,
                         textAlign = TextAlign.Start
                     )

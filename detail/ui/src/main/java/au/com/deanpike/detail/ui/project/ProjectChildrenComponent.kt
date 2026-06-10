@@ -12,8 +12,8 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import au.com.deanpike.detail.client.model.detail.ProjectChild
 import au.com.deanpike.detail.ui.project.ProjectChildrenComponentTestTags.PROJECT_CHILDREN
+import au.com.deanpike.uishared.theme.AppTheme
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
-import au.com.deanpike.uishared.theme.MviExampleTheme
 
 @Composable
 fun ProjectChildrenComponent(
@@ -78,7 +78,7 @@ fun ProjectChildrenComponentPreview() {
             lifecycleStatus = "New Home"
         )
     )
-    MviExampleTheme {
+    AppTheme {
         ProjectChildrenComponent(
             childListings = childListings,
             screenWidth = 1080

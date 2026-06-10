@@ -35,10 +35,10 @@ import au.com.deanpike.detail.ui.shared.AgentComponentTestTags.AGENT_GENERAL
 import au.com.deanpike.detail.ui.shared.AgentComponentTestTags.AGENT_IMAGE
 import au.com.deanpike.detail.ui.shared.AgentComponentTestTags.AGENT_MOBILE
 import au.com.deanpike.detail.ui.shared.AgentComponentTestTags.AGENT_NAME
+import au.com.deanpike.uishared.theme.AppTheme
 import au.com.deanpike.uishared.theme.Dimension.DIM_16
 import au.com.deanpike.uishared.theme.Dimension.DIM_4
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
-import au.com.deanpike.uishared.theme.MviExampleTheme
 import coil3.compose.AsyncImage
 
 @Composable
@@ -148,7 +148,7 @@ object AgentComponentTestTags {
 @Preview(showBackground = true)
 @Composable
 fun AgentComponentPreview() {
-    MviExampleTheme {
+    AppTheme {
         AgentComponent(
             agents = listOf(
                 Agent(
@@ -183,7 +183,7 @@ fun AgentComponentPreview() {
 @Preview(showBackground = true)
 @Composable
 fun AgentComponentNoImagePreview() {
-    MviExampleTheme {
+    AppTheme {
         AgentComponent(
             agents = listOf(
                 Agent(

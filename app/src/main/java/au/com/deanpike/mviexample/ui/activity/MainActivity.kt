@@ -14,7 +14,7 @@ import androidx.navigation3.runtime.NavBackStack
 import androidx.navigation3.runtime.NavKey
 import androidx.window.core.layout.WindowSizeClass
 import au.com.deanpike.navigation.keys.DefaultDetailScreenKey
-import au.com.deanpike.uishared.theme.MviExampleTheme
+import au.com.deanpike.uishared.theme.AppTheme
 import au.com.deanpike.uishared.util.MviWindowWidthSizeClassProvider
 import au.com.deanpike.uishared.util.SetupStatusBar
 import dagger.hilt.android.AndroidEntryPoint
@@ -55,7 +55,7 @@ class MainActivity : ComponentActivity() {
                 backStack.add(DefaultDetailScreenKey)
             }
 
-            MviExampleTheme {
+            AppTheme {
                 ApplicationScreen(
                     backStack = backStack,
                     appEntryBuilder = appEntryBuilder

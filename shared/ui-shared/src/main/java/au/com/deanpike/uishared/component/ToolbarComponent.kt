@@ -12,14 +12,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import au.com.deanpike.uishared.R
 import au.com.deanpike.uishared.base.drawableTestTag
 import au.com.deanpike.uishared.component.ToolbarComponentTestTags.TOOLBAR_ICON
 import au.com.deanpike.uishared.component.ToolbarComponentTestTags.TOOLBAR_LAYOUT
 import au.com.deanpike.uishared.component.ToolbarComponentTestTags.TOOLBAR_TITLE
+import au.com.deanpike.uishared.theme.AppTheme
 import au.com.deanpike.uishared.theme.Dimension.DIM_16
-import au.com.deanpike.uishared.theme.MviExampleTheme
+import au.com.deanpike.uishared.util.ThemePreviews
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -50,7 +50,8 @@ fun ToolbarComponent(
                             tag = TOOLBAR_ICON,
                             id = R.drawable.arrow_back_24
                         ),
-                    painter = painterResource(R.drawable.arrow_back_24), contentDescription = stringResource(R.string.back)
+                    painter = painterResource(R.drawable.arrow_back_24),
+                    contentDescription = stringResource(R.string.back)
                 )
             }
         }
@@ -64,10 +65,10 @@ object ToolbarComponentTestTags {
     const val TOOLBAR_ICON = "${PREFIX}ICON"
 }
 
-@Preview
+@ThemePreviews
 @Composable
 fun ToolbarComponentPreview() {
-    MviExampleTheme {
+    AppTheme {
         ToolbarComponent(title = "Title")
     }
 }

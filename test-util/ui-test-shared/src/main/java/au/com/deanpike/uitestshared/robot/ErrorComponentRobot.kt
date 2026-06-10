@@ -6,7 +6,7 @@ import au.com.deanpike.uishared.component.ErrorComponentTestTags.ERROR_COMPONENT
 import au.com.deanpike.uishared.component.ErrorComponentTestTags.ERROR_COMPONENT_LAYOUT
 import au.com.deanpike.uishared.component.ErrorComponentTestTags.ERROR_COMPONENT_MESSAGE
 import au.com.deanpike.uishared.component.ErrorComponentTestTags.ERROR_COMPONENT_TITLE
-import au.com.deanpike.uishared.theme.MviExampleTheme
+import au.com.deanpike.uishared.theme.AppTheme
 import au.com.deanpike.uitestshared.base.TestRobotBase
 import au.com.deanpike.uitestshared.base.TestRobotInitData
 import au.com.deanpike.uitestshared.util.advanceTimeAndWait
@@ -22,7 +22,7 @@ class ErrorComponentRobot(composeRule: ComposeContentTestRule) : TestRobotBase<E
 
     override fun setupComponent(data: TestRobotInitData?) = apply {
         composeRule.setContent {
-            MviExampleTheme {
+            AppTheme {
                 ErrorComponent(
                     onRetryClicked = {
                         retryClicked = true

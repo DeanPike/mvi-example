@@ -61,10 +61,10 @@ import au.com.deanpike.uishared.component.ErrorComponent
 import au.com.deanpike.uishared.component.ExpandableText
 import au.com.deanpike.uishared.component.ListingImagesComponent
 import au.com.deanpike.uishared.component.PriceComponent
+import au.com.deanpike.uishared.theme.AppTheme
 import au.com.deanpike.uishared.theme.Dimension.DIM_16
 import au.com.deanpike.uishared.theme.Dimension.DIM_4
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
-import au.com.deanpike.uishared.theme.MviExampleTheme
 import au.com.deanpike.uishared.util.MviWindowWidthSizeClassProvider
 import au.com.deanpike.uishared.util.SetStatusBarAppearance
 import au.com.deanpike.uishared.util.StatusBarGradient
@@ -227,7 +227,9 @@ fun PropertyDetailSuccess(
                     )
                     .testTag(PROPERTY_DETAIL_SUCCESS_ADDRESS),
                 text = state.propertyDetail?.address ?: "",
-                style = MaterialTheme.typography.labelLarge
+                style = MaterialTheme.typography.labelLarge.copy(
+                    color = MaterialTheme.colorScheme.secondary
+                )
             )
 
             HorizontalDivider(
@@ -266,7 +268,6 @@ fun PropertyDetailSuccess(
                     text = it,
                     style = MaterialTheme.typography.bodyMedium,
                     fontStyle = MaterialTheme.typography.bodyMedium.fontStyle,
-                    fontSize = MaterialTheme.typography.bodyMedium.fontSize,
                     collapsedMaxLine = 3,
                     showMoreStyle = MaterialTheme.typography.labelLarge.copy(
                         fontWeight = FontWeight.Bold
@@ -327,7 +328,7 @@ object PropertyDetailScreenTestTags {
 @Preview
 @Composable
 fun PropertyDetailScreenContentPreview() {
-    MviExampleTheme {
+    AppTheme {
         PropertyDetailScreenContent(
             loadingAddress = "",
             state = PropertyDetailScreenState(
@@ -386,7 +387,7 @@ fun PropertyDetailScreenContentPreview() {
 @Preview
 @Composable
 fun PropertyDetailScreenProgressPreview() {
-    MviExampleTheme {
+    AppTheme {
         PropertyDetailScreenContent(
             loadingAddress = "2 Glenton Street, Abbotsbury",
             state = PropertyDetailScreenState(

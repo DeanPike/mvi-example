@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -52,14 +53,16 @@ fun FilterComponent(
                 .testTag(FILTER_COMPONENT_STATUS_LABEL),
             text = stringResource(id = R.string.status),
             style = MaterialTheme.typography.bodyMedium,
-            fontWeight = FontWeight.Bold
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.colorScheme.primary
         )
         Text(
             modifier = Modifier
                 .padding(end = DIM_16)
                 .testTag(FILTER_COMPONENT_STATUS_TEXT),
             text = getStatusDescription(selectedStatus),
-            style = MaterialTheme.typography.bodyMedium
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.primary
         )
         Text(
             modifier = Modifier
@@ -67,7 +70,8 @@ fun FilterComponent(
                 .testTag(FILTER_COMPONENT_DWELLING_TYPE_LABEL),
             text = stringResource(id = R.string.property_type),
             style = MaterialTheme.typography.bodyMedium,
-            fontWeight = FontWeight.Bold
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.colorScheme.primary
         )
         Text(
             modifier = Modifier.testTag(FILTER_COMPONENT_DWELLING_TYPE_TEXT),
@@ -78,17 +82,26 @@ fun FilterComponent(
             },
             style = MaterialTheme.typography.bodyMedium,
             overflow = TextOverflow.Ellipsis,
-            maxLines = 1
+            maxLines = 1,
+            color = MaterialTheme.colorScheme.primary
         )
         Spacer(modifier = Modifier.weight(1f))
 
         IconButton(
             modifier = Modifier
+//                .clip(RoundedCornerShape(48.dp))
+//                .background(color = Color.Red)
                 .testTag(FILTER_COMPONENT_FILTER_BUTTON),
+            colors = IconButtonDefaults.iconButtonColors().copy(
+                containerColor = MaterialTheme.colorScheme.primaryContainer
+            ),
             onClick = onEvent
         ) {
             Image(
-                modifier = Modifier.drawableTestTag(tag = FILTER_COMPONENT_FILTER_IMAGE, id = R.drawable.outline_format_list_bulleted_24),
+                modifier = Modifier.drawableTestTag(
+                    tag = FILTER_COMPONENT_FILTER_IMAGE,
+                    id = R.drawable.outline_format_list_bulleted_24
+                ),
                 painter = painterResource(R.drawable.outline_format_list_bulleted_24),
                 contentDescription = stringResource(id = R.string.filter)
             )
@@ -126,7 +139,10 @@ fun FilterComponent1MultipleListingTypesPreview() {
     MaterialTheme {
         FilterComponent(
             selectedStatus = StatusType.BUY,
-            selectedDwellingTypes = listOf(DwellingType.APARTMENT_UNIT_FLAT, DwellingType.TOWNHOUSE),
+            selectedDwellingTypes = listOf(
+                DwellingType.APARTMENT_UNIT_FLAT,
+                DwellingType.TOWNHOUSE
+            ),
             onEvent = {}
         )
     }

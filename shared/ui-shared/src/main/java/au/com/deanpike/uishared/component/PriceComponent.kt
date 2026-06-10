@@ -10,13 +10,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import au.com.deanpike.uishared.R
 import au.com.deanpike.uishared.component.PriceComponentTestTags.PRICE_COMPONENT_DATA
 import au.com.deanpike.uishared.component.PriceComponentTestTags.PRICE_COMPONENT_LABEL
+import au.com.deanpike.uishared.theme.AppTheme
 import au.com.deanpike.uishared.theme.Dimension.DIM_16
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
-import au.com.deanpike.uishared.theme.MviExampleTheme
+import au.com.deanpike.uishared.util.ThemePreviews
 
 @Composable
 fun PriceComponent(
@@ -30,8 +30,10 @@ fun PriceComponent(
         Text(
             modifier = Modifier.testTag(PRICE_COMPONENT_LABEL),
             text = stringResource(R.string.price),
-            fontWeight = FontWeight.Bold,
-            style = MaterialTheme.typography.bodyLarge
+            style = MaterialTheme.typography.bodyLarge.copy(
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.onBackground
+            )
         )
 
         Text(
@@ -39,7 +41,9 @@ fun PriceComponent(
                 .padding(end = DIM_16, start = DIM_8)
                 .testTag(PRICE_COMPONENT_DATA),
             text = price,
-            style = MaterialTheme.typography.bodyLarge,
+            style = MaterialTheme.typography.bodyLarge.copy(
+                color = MaterialTheme.colorScheme.onBackground,
+            ),
         )
     }
 }
@@ -50,10 +54,10 @@ object PriceComponentTestTags {
     const val PRICE_COMPONENT_DATA = "${PREFIX}DATA"
 }
 
-@Preview(showBackground = true)
+@ThemePreviews
 @Composable
 fun PriceComponentPreview() {
-    MviExampleTheme {
+    AppTheme {
         PriceComponent(price = "$1,000,000")
     }
 }

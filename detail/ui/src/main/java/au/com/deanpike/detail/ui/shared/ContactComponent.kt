@@ -11,9 +11,9 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import au.com.deanpike.uishared.theme.AppTheme
 import au.com.deanpike.uishared.theme.Dimension.DIM_4
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
-import au.com.deanpike.uishared.theme.MviExampleTheme
 
 @Composable
 fun ContactComponent(
@@ -48,7 +48,7 @@ fun ContactComponent(
 @Preview(showBackground = true)
 @Composable
 fun ContactComponentPreview() {
-    MviExampleTheme {
+    AppTheme {
         ContactComponent(
             label = "Label",
             value = "Number",
@@ -60,7 +60,7 @@ fun ContactComponentPreview() {
 @Preview(showBackground = true)
 @Composable
 fun ContactComponentWithNoValuePreview() {
-    MviExampleTheme {
+    AppTheme {
         ContactComponent(
             label = "Label",
             value = null,

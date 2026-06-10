@@ -5,9 +5,11 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.LocalTextStyle
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -20,6 +22,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.TextUnit
+import au.com.deanpike.uishared.theme.AppTheme
+import au.com.deanpike.uishared.util.ThemePreviews
 
 const val DEFAULT_MINIMUM_TEXT_LINE = 3
 
@@ -52,13 +56,13 @@ fun ExpandableText(
     showLessText: String = " Show Less",
     showLessStyle: SpanStyle = showMoreStyle,
     textAlign: TextAlign? = null,
-    fontSize: TextUnit,
+    fontSize: TextUnit = MaterialTheme.typography.bodyMedium.fontSize,
     minimumTextLength: Int = 500
 ) {
     // State variables to track the expanded state, clickable state, and last character index.
     var isExpanded by remember { mutableStateOf(false) }
     var clickable by remember { mutableStateOf(false) }
-    var lastCharIndex by remember { mutableStateOf(0) }
+    var lastCharIndex by remember { mutableIntStateOf(0) }
 
     // Box composable containing the Text composable.
     Box(
@@ -82,9 +86,10 @@ fun ExpandableText(
                     } else {
                         // Display truncated text and "Show More" button when collapsed.
                         if (text.length > minimumTextLength) {
-                            val adjustText = text.substring(startIndex = 0, endIndex = lastCharIndex)
-                                .dropLast(showMoreText.length)
-                                .dropLastWhile { Character.isWhitespace(it) || it == '.' }
+                            val adjustText =
+                                text.substring(startIndex = 0, endIndex = lastCharIndex)
+                                    .dropLast(showMoreText.length)
+                                    .dropLastWhile { Character.isWhitespace(it) || it == '.' }
                             append(adjustText)
                             withStyle(style = showMoreStyle) { append(showMoreText) }
                         } else {
@@ -108,7 +113,18 @@ fun ExpandableText(
             },
             style = style,
             textAlign = textAlign,
-            fontSize = fontSize
+            fontSize = fontSize,
+            color = MaterialTheme.colorScheme.onBackground
+        )
+    }
+}
+
+@ThemePreviews
+@Composable
+fun ExpandableTextPreview() {
+    AppTheme {
+        ExpandableText(
+            text = "Very long text"
         )
     }
 }

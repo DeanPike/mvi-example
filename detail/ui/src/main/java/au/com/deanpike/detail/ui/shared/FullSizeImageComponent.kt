@@ -21,7 +21,7 @@ import au.com.deanpike.detail.ui.shared.FullSizeImageTestTags.FULL_SIZE_IMAGE_BA
 import au.com.deanpike.detail.ui.shared.FullSizeImageTestTags.FULL_SIZE_IMAGE_IMAGE
 import au.com.deanpike.uishared.R
 import au.com.deanpike.uishared.base.drawableTestTag
-import au.com.deanpike.uishared.theme.MviExampleTheme
+import au.com.deanpike.uishared.theme.AppTheme
 import me.saket.telephoto.zoomable.EnabledZoomGestures
 import me.saket.telephoto.zoomable.coil3.ZoomableAsyncImage
 import me.saket.telephoto.zoomable.rememberZoomableImageState
@@ -77,7 +77,7 @@ object FullSizeImageTestTags {
 @Preview
 @Composable
 fun ImageComponentListPreview() {
-    MviExampleTheme {
+    AppTheme {
         FullSizeImageComponent(
             url = """https://rimh2.domain.com.au/50GrKuJN8m91NGgoT4um2phagCU=/1440x0/filters:quality(70):format(jpeg):no_upscale()/https://bucket-api.domain.com.au/v1/bucket/image/2020651916_1_1_260303_113932-w1080-h1080"""
         )

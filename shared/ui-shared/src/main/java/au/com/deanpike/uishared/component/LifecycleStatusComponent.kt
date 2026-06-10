@@ -11,12 +11,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.tooling.preview.Preview
 import au.com.deanpike.uishared.component.LifecycleStatusTestTags.LIFECYCLE_STATUS_LAYOUT
 import au.com.deanpike.uishared.component.LifecycleStatusTestTags.LIFECYCLE_STATUS_TEXT
+import au.com.deanpike.uishared.theme.AppTheme
 import au.com.deanpike.uishared.theme.Dimension.DIM_4
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
-import au.com.deanpike.uishared.theme.MviExampleTheme
+import au.com.deanpike.uishared.util.ThemePreviews
 
 @Composable
 fun LifecycleStatusComponent(
@@ -40,7 +40,8 @@ fun LifecycleStatusComponent(
                     .padding(DIM_4)
                     .testTag(LIFECYCLE_STATUS_TEXT),
                 text = it,
-                style = MaterialTheme.typography.labelSmall
+                style = MaterialTheme.typography.labelSmall,
+                color = MaterialTheme.colorScheme.onBackground
             )
         }
     }
@@ -52,10 +53,10 @@ object LifecycleStatusTestTags {
     const val LIFECYCLE_STATUS_TEXT = "${PREFIX}TEST"
 }
 
-@Preview
+@ThemePreviews
 @Composable
-fun LifecycleStatusComponentPreview(){
-    MviExampleTheme() {
+fun LifecycleStatusComponentPreview() {
+    AppTheme {
         LifecycleStatusComponent(
             lifecycleStatus = "New"
         )

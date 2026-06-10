@@ -6,17 +6,18 @@ import au.com.deanpike.uishared.base.ScreenStateType
 import au.com.deanpike.uishared.component.ListingDetailImagesTestTags.LISTING_DETAIL_IMAGES_IMAGE
 import au.com.deanpike.uishared.component.ListingDetailImagesTestTags.LISTING_DETAIL_IMAGES_PAGER
 import au.com.deanpike.uishared.component.ListingImagesComponent
-import au.com.deanpike.uishared.theme.MviExampleTheme
+import au.com.deanpike.uishared.theme.AppTheme
 import au.com.deanpike.uitestshared.base.TestRobotBase
 import au.com.deanpike.uitestshared.base.TestRobotInitData
 import au.com.deanpike.uitestshared.util.assertTagDisplayed
 import au.com.deanpike.uitestshared.util.swipeLeft
 import au.com.deanpike.uitestshared.util.swipeRight
 
-class ListingImagesComponentRobot(composeRule: ComposeContentTestRule) : TestRobotBase<ListingImagesComponentRobot, ListingImagesComponentRobotInitData>(composeRule) {
+class ListingImagesComponentRobot(composeRule: ComposeContentTestRule) :
+    TestRobotBase<ListingImagesComponentRobot, ListingImagesComponentRobotInitData>(composeRule) {
     override fun setupComponent(data: ListingImagesComponentRobotInitData?) = apply {
         composeRule.setContent {
-            MviExampleTheme {
+            AppTheme {
                 ListingImagesComponent(
                     screenState = data!!.screenStateType,
                     media = data.images

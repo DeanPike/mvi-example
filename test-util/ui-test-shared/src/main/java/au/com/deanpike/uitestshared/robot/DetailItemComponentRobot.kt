@@ -4,7 +4,7 @@ import androidx.annotation.DrawableRes
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import au.com.deanpike.uishared.R
 import au.com.deanpike.uishared.component.DetailItemComponent
-import au.com.deanpike.uishared.theme.MviExampleTheme
+import au.com.deanpike.uishared.theme.AppTheme
 import au.com.deanpike.uitestshared.base.TestRobotBase
 import au.com.deanpike.uitestshared.base.TestRobotInitData
 import au.com.deanpike.uitestshared.util.assertContentDescription
@@ -12,11 +12,12 @@ import au.com.deanpike.uitestshared.util.assertDrawableDisplayed
 import au.com.deanpike.uitestshared.util.assertTagDisplayed
 import au.com.deanpike.uitestshared.util.assertTextDisplayed
 
-class DetailItemComponentRobot(composeRule: ComposeContentTestRule) : TestRobotBase<DetailItemComponentRobot, TestRobotInitData>(composeRule) {
+class DetailItemComponentRobot(composeRule: ComposeContentTestRule) :
+    TestRobotBase<DetailItemComponentRobot, TestRobotInitData>(composeRule) {
 
     override fun setupComponent(data: TestRobotInitData?) = apply {
         composeRule.setContent {
-            MviExampleTheme {
+            AppTheme {
                 DetailItemComponent(
                     icon = R.drawable.baseline_bed_24,
                     text = "3",

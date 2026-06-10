@@ -30,14 +30,17 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.lerp
 import au.com.deanpike.commonshared.model.Media
+import au.com.deanpike.commonshared.type.MediaType
 import au.com.deanpike.uishared.R
 import au.com.deanpike.uishared.base.ScreenStateType
 import au.com.deanpike.uishared.component.ListingDetailImagesTestTags.LISTING_DETAIL_IMAGES_IMAGE
 import au.com.deanpike.uishared.component.ListingDetailImagesTestTags.LISTING_DETAIL_IMAGES_PAGER
 import au.com.deanpike.uishared.component.ListingDetailImagesTestTags.LISTING_DETAIL_IMAGES_POSITION_INDICATOR
+import au.com.deanpike.uishared.theme.AppTheme
 import au.com.deanpike.uishared.theme.Dimension.DIM_16
 import coil3.compose.AsyncImage
 import coil3.request.ImageRequest
@@ -88,7 +91,10 @@ fun ListingDetailImagesComponent(media: List<Media>) {
                 horizontalArrangement = Arrangement.Center
             ) {
                 repeat(pagerState.pageCount) { iteration ->
-                    val color = if (pagerState.currentPage == iteration) Color.DarkGray else Color.LightGray.copy(alpha = 0.5F)
+                    val color =
+                        if (pagerState.currentPage == iteration) Color.DarkGray else Color.LightGray.copy(
+                            alpha = 0.5F
+                        )
                     Box(
                         modifier = Modifier
                             .padding(2.dp)
@@ -188,21 +194,21 @@ object ListingDetailImagesTestTags {
     const val LISTING_DETAIL_IMAGES_POSITION_INDICATOR = "${PREFIX}POSITION_INDICATOR"
 }
 
-//@Preview
-//@Composable
-//fun ListingDetailImagesComponentPreview() {
-//    MviExampleTheme {
-//        ListingDetailImagesComponent(
-//            media = listOf(
-//                Media(
-//                    mediaType = MediaType.PHOTO,
-//                    url = "https://bucket-api.domain.com.au/v1/bucket/image/2019096805_1_1_240305_054335-w2048-h1365"
-//                ),
-//                Media(
-//                    mediaType = MediaType.PHOTO,
-//                    url = "https://bucket-api.domain.com.au/v1/bucket/image/2019096805_2_1_240305_054335-w2048-h1365"
-//                )
-//            )
-//        )
-//    }
-//}
+@Preview
+@Composable
+fun ListingDetailImagesComponentPreview() {
+    AppTheme {
+        ListingDetailImagesComponent(
+            media = listOf(
+                Media(
+                    mediaType = MediaType.PHOTO,
+                    url = "https://bucket-api.domain.com.au/v1/bucket/image/2019096805_1_1_240305_054335-w2048-h1365"
+                ),
+                Media(
+                    mediaType = MediaType.PHOTO,
+                    url = "https://bucket-api.domain.com.au/v1/bucket/image/2019096805_2_1_240305_054335-w2048-h1365"
+                )
+            )
+        )
+    }
+}

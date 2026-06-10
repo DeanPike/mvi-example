@@ -33,9 +33,9 @@ import au.com.deanpike.detail.ui.project.ProjectChildComponentTestTags.PROJECT_C
 import au.com.deanpike.uishared.R
 import au.com.deanpike.uishared.base.listingIdTestTag
 import au.com.deanpike.uishared.component.BedBathCarComponent
+import au.com.deanpike.uishared.theme.AppTheme
 import au.com.deanpike.uishared.theme.Dimension.DIM_16
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
-import au.com.deanpike.uishared.theme.MviExampleTheme
 import coil3.compose.AsyncImage
 import coil3.request.ImageRequest
 import coil3.request.crossfade
@@ -133,7 +133,7 @@ object ProjectChildComponentTestTags {
 @Preview(showBackground = true)
 @Composable
 fun ProjectChildComponentPreview() {
-    MviExampleTheme {
+    AppTheme {
         ProjectChildComponent(
             child = ProjectChild(
                 id = 2019256252,
