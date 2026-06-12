@@ -10,7 +10,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import au.com.deanpike.detail.client.model.detail.Advertiser
 import au.com.deanpike.detail.client.model.detail.Agent
 import au.com.deanpike.detail.client.model.detail.PhoneNumber
@@ -24,6 +23,7 @@ import au.com.deanpike.uishared.theme.AppTheme
 import au.com.deanpike.uishared.theme.Dimension.DIM_16
 import au.com.deanpike.uishared.theme.Dimension.DIM_4
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
+import au.com.deanpike.uishared.util.ThemePreviews
 
 @Composable
 fun AgencyComponent(
@@ -40,9 +40,8 @@ fun AgencyComponent(
                 .testTag(AGENT_LABEL),
             text = stringResource(id = R.string.agent),
             fontWeight = FontWeight.Bold,
-            style = MaterialTheme.typography.bodyLarge.copy(
-                color = MaterialTheme.colorScheme.secondary
-            ),
+            style = MaterialTheme.typography.bodyLarge,
+            color = MaterialTheme.colorScheme.onBackground
         )
 
         advertiser.name?.let {
@@ -53,9 +52,9 @@ fun AgencyComponent(
                     .testTag(AGENCY_NAME),
                 text = it,
                 style = MaterialTheme.typography.titleMedium.copy(
-                    fontWeight = FontWeight.Medium,
-                    color = MaterialTheme.colorScheme.secondary
-                )
+                    fontWeight = FontWeight.Medium
+                ),
+                color = MaterialTheme.colorScheme.onBackground
             )
         }
         advertiser.address?.let {
@@ -65,9 +64,9 @@ fun AgencyComponent(
                     .padding(start = DIM_16, end = DIM_16, bottom = DIM_4)
                     .testTag(AGENCY_ADDRESS),
                 style = MaterialTheme.typography.titleMedium.copy(
-                    fontWeight = FontWeight.Medium,
-                    color = MaterialTheme.colorScheme.secondary
+                    fontWeight = FontWeight.Medium
                 ),
+                color = MaterialTheme.colorScheme.onBackground,
                 text = it,
             )
         }
@@ -83,7 +82,7 @@ object AgencyComponentTestTags {
     const val AGENCY_ADDRESS = "${PREFIX}ADDRESS"
 }
 
-@Preview(showBackground = true)
+@ThemePreviews
 @Composable
 fun AgencyComponentPreview() {
     val advertiser = Advertiser(

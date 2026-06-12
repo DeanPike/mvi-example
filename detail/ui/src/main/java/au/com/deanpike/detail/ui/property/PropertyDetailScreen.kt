@@ -68,6 +68,7 @@ import au.com.deanpike.uishared.theme.Dimension.DIM_8
 import au.com.deanpike.uishared.util.MviWindowWidthSizeClassProvider
 import au.com.deanpike.uishared.util.SetStatusBarAppearance
 import au.com.deanpike.uishared.util.StatusBarGradient
+import au.com.deanpike.uishared.util.ThemePreviews
 
 @Composable
 fun PropertyDetailScreen(
@@ -228,7 +229,7 @@ fun PropertyDetailSuccess(
                     .testTag(PROPERTY_DETAIL_SUCCESS_ADDRESS),
                 text = state.propertyDetail?.address ?: "",
                 style = MaterialTheme.typography.labelLarge.copy(
-                    color = MaterialTheme.colorScheme.secondary
+                    color = MaterialTheme.colorScheme.onBackground
                 )
             )
 
@@ -325,7 +326,7 @@ object PropertyDetailScreenTestTags {
 
 }
 
-@Preview
+@ThemePreviews
 @Composable
 fun PropertyDetailScreenContentPreview() {
     AppTheme {
@@ -384,7 +385,7 @@ fun PropertyDetailScreenContentPreview() {
     }
 }
 
-@Preview
+@ThemePreviews
 @Composable
 fun PropertyDetailScreenProgressPreview() {
     AppTheme {

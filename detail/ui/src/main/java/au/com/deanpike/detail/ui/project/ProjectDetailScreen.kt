@@ -40,7 +40,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import au.com.deanpike.commonshared.model.Media
@@ -78,6 +77,7 @@ import au.com.deanpike.uishared.util.NavigationBarScrim
 import au.com.deanpike.uishared.util.SetStatusBarAppearance
 import au.com.deanpike.uishared.util.SetupStatusBar
 import au.com.deanpike.uishared.util.StatusBarGradient
+import au.com.deanpike.uishared.util.ThemePreviews
 
 @Composable
 fun ProjectDetailScreen(
@@ -147,7 +147,7 @@ fun ProjectDetailScreenContent(
                             .testTag(PROJECT_DETAIL_LOADING_TITLE),
                         text = stringResource(R.string.loading_data_for),
                         textAlign = TextAlign.Center,
-                        color = MaterialTheme.colorScheme.primary
+                        color = MaterialTheme.colorScheme.onBackground
                     )
                     Spacer(modifier = Modifier.height(DIM_16))
                     Text(
@@ -157,14 +157,14 @@ fun ProjectDetailScreenContent(
                         text = loadingAddress,
                         textAlign = TextAlign.Center,
                         style = MaterialTheme.typography.labelLarge,
-                        color = MaterialTheme.colorScheme.primary
+                        color = MaterialTheme.colorScheme.onBackground
                     )
                     Spacer(modifier = Modifier.height(DIM_16))
                     CircularProgressIndicator(
                         modifier = Modifier
                             .align(Alignment.CenterHorizontally)
                             .testTag(PROJECT_DETAIL_PROGRESS),
-                        color = MaterialTheme.colorScheme.primary
+                        color = MaterialTheme.colorScheme.onBackground
                     )
                 }
             }
@@ -361,7 +361,7 @@ object ProjectDetailScreenTestTags {
     const val PROJECT_DETAIL_SUCCESS_ADDRESS = "${PREFIX}SUCCESS_ADDRESS"
 }
 
-@Preview
+@ThemePreviews
 @Composable
 fun ProjectDetailScreenContentPreview() {
     AppTheme {
@@ -442,7 +442,7 @@ fun ProjectDetailScreenContentPreview() {
     }
 }
 
-@Preview
+@ThemePreviews
 @Composable
 fun ProjectDetailScreenProgressPreview() {
     AppTheme {

@@ -36,6 +36,7 @@ import au.com.deanpike.uishared.component.BedBathCarComponent
 import au.com.deanpike.uishared.theme.AppTheme
 import au.com.deanpike.uishared.theme.Dimension.DIM_16
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
+import au.com.deanpike.uishared.util.ThemePreviews
 import coil3.compose.AsyncImage
 import coil3.request.ImageRequest
 import coil3.request.crossfade
@@ -96,7 +97,8 @@ fun ProjectChildComponent(
                         modifier = Modifier
                             .padding(start = DIM_8, top = DIM_8)
                             .testTag(PROJECT_CHILD_LIFECYCLE),
-                        text = it
+                        text = it,
+                        color = MaterialTheme.colorScheme.onBackground
                     )
                 }
 
@@ -114,7 +116,8 @@ fun ProjectChildComponent(
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Bold,
                         maxLines = 2,
-                        overflow = TextOverflow.Ellipsis
+                        overflow = TextOverflow.Ellipsis,
+                        color = MaterialTheme.colorScheme.onBackground
                     )
                 }
             }
@@ -130,7 +133,7 @@ object ProjectChildComponentTestTags {
     const val PROJECT_CHILD_LIFECYCLE = "${PREFIX}LIFECYCLE"
 }
 
-@Preview(showBackground = true)
+@ThemePreviews
 @Composable
 fun ProjectChildComponentPreview() {
     AppTheme {

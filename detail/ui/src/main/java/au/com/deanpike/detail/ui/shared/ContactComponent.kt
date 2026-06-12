@@ -9,11 +9,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import au.com.deanpike.uishared.theme.AppTheme
 import au.com.deanpike.uishared.theme.Dimension.DIM_4
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
+import au.com.deanpike.uishared.util.ThemePreviews
 
 @Composable
 fun ContactComponent(
@@ -33,19 +33,21 @@ fun ContactComponent(
                 .testTag("${testTag}_LABEL"),
             text = label,
             fontWeight = FontWeight.Bold,
-            style = MaterialTheme.typography.bodyMedium
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onBackground
         )
         Text(
             modifier = Modifier
                 .padding(start = DIM_4)
                 .testTag("${testTag}_VALUE"),
             text = value ?: "",
-            style = MaterialTheme.typography.bodyMedium
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onBackground
         )
     }
 }
 
-@Preview(showBackground = true)
+@ThemePreviews
 @Composable
 fun ContactComponentPreview() {
     AppTheme {
@@ -57,7 +59,7 @@ fun ContactComponentPreview() {
     }
 }
 
-@Preview(showBackground = true)
+@ThemePreviews
 @Composable
 fun ContactComponentWithNoValuePreview() {
     AppTheme {

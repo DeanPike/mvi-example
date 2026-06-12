@@ -22,7 +22,6 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import au.com.deanpike.detail.client.model.detail.Agent
 import au.com.deanpike.detail.client.model.detail.PhoneNumber
@@ -39,6 +38,7 @@ import au.com.deanpike.uishared.theme.AppTheme
 import au.com.deanpike.uishared.theme.Dimension.DIM_16
 import au.com.deanpike.uishared.theme.Dimension.DIM_4
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
+import au.com.deanpike.uishared.util.ThemePreviews
 import coil3.compose.AsyncImage
 
 @Composable
@@ -74,7 +74,8 @@ fun AgentComponent(
                         text = agent.name ?: "",
                         style = MaterialTheme.typography.titleMedium,
                         maxLines = 2,
-                        overflow = TextOverflow.Ellipsis
+                        overflow = TextOverflow.Ellipsis,
+                        color = MaterialTheme.colorScheme.onBackground
                     )
                     Row {
                         Column {
@@ -145,7 +146,7 @@ object AgentComponentTestTags {
     const val AGENT_EMAIL = "${PREFIX}EMAIL"
 }
 
-@Preview(showBackground = true)
+@ThemePreviews
 @Composable
 fun AgentComponentPreview() {
     AppTheme {
@@ -180,7 +181,7 @@ fun AgentComponentPreview() {
     }
 }
 
-@Preview(showBackground = true)
+@ThemePreviews
 @Composable
 fun AgentComponentNoImagePreview() {
     AppTheme {

@@ -16,12 +16,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import au.com.deanpike.detail.ui.shared.FullSizeImageTestTags.FULL_SIZE_IMAGE_BACK_BUTTON
 import au.com.deanpike.detail.ui.shared.FullSizeImageTestTags.FULL_SIZE_IMAGE_IMAGE
 import au.com.deanpike.uishared.R
 import au.com.deanpike.uishared.base.drawableTestTag
 import au.com.deanpike.uishared.theme.AppTheme
+import au.com.deanpike.uishared.util.ThemePreviews
 import me.saket.telephoto.zoomable.EnabledZoomGestures
 import me.saket.telephoto.zoomable.coil3.ZoomableAsyncImage
 import me.saket.telephoto.zoomable.rememberZoomableImageState
@@ -51,7 +51,7 @@ fun FullSizeImageComponent(
             onClick = { onBackClicked() },
             shape = CircleShape,
             colors = IconButtonDefaults.iconButtonColors().copy(
-                containerColor = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.4F)
+                containerColor = MaterialTheme.colorScheme.secondary
             )
         ) {
             Icon(
@@ -62,7 +62,7 @@ fun FullSizeImageComponent(
                     ),
                 painter = painterResource(R.drawable.arrow_back_24),
                 contentDescription = stringResource(R.string.back),
-                tint = MaterialTheme.colorScheme.background,
+                tint = MaterialTheme.colorScheme.onSecondary,
             )
         }
     }
@@ -74,7 +74,7 @@ object FullSizeImageTestTags {
     const val FULL_SIZE_IMAGE_BACK_BUTTON = "${PREFIX}_BACK_BUTTON"
 }
 
-@Preview
+@ThemePreviews
 @Composable
 fun ImageComponentListPreview() {
     AppTheme {
