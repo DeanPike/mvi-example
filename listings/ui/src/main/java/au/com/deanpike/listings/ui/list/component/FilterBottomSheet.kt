@@ -20,11 +20,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import au.com.deanpike.listings.client.type.DwellingType
 import au.com.deanpike.listings.client.type.StatusType
@@ -38,7 +36,9 @@ import au.com.deanpike.listings.ui.list.component.FilterBottomSheetTestTags.FILT
 import au.com.deanpike.listings.ui.list.component.FilterBottomSheetTestTags.FILTER_BOTTOM_SHEET_RENT_BUTTON
 import au.com.deanpike.listings.ui.list.component.FilterBottomSheetTestTags.FILTER_BOTTOM_SHEET_SOLD_BUTTON
 import au.com.deanpike.listings.ui.list.component.FilterBottomSheetTestTags.FILTER_BOTTOM_SHEET_TOWNHOUSE
+import au.com.deanpike.uishared.theme.AppTheme
 import au.com.deanpike.uishared.theme.Dimension.DIM_16
+import au.com.deanpike.uishared.util.ThemePreviews
 
 @Composable
 fun FilterBottomSheet(
@@ -67,42 +67,57 @@ fun FilterBottomSheet(
         ) {
             OutlinedButton(
                 modifier = Modifier.testTag(FILTER_BOTTOM_SHEET_BUY_BUTTON),
-                border = if (selectedStatusType == StatusType.BUY) BorderStroke(2.dp, Color.Black.copy(alpha = 0.5F)) else ButtonDefaults.outlinedButtonBorder(true),
-                colors = ButtonDefaults.buttonColors().copy(
-                    containerColor = if (selectedStatusType == StatusType.BUY) Color.Green.copy(alpha = 0.1F) else Color.Transparent,
-                    contentColor = MaterialTheme.colorScheme.onSurface
+                border = if (selectedStatusType == StatusType.BUY) BorderStroke(
+                    width = 2.dp,
+                    color = MaterialTheme.colorScheme.onPrimary
+                ) else ButtonDefaults.outlinedButtonBorder(true),
+                colors = ButtonDefaults.outlinedButtonColors().copy(
+                    containerColor = if (selectedStatusType == StatusType.BUY) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.secondary,
                 ),
                 onClick = {
                     selectedStatusType = StatusType.BUY
                 }
             ) {
-                Text(stringResource(R.string.buy))
+                Text(
+                    text = stringResource(R.string.buy),
+                    color = MaterialTheme.colorScheme.onPrimary
+                )
             }
             OutlinedButton(
                 modifier = Modifier.testTag(FILTER_BOTTOM_SHEET_RENT_BUTTON),
-                border = if (selectedStatusType == StatusType.RENT) BorderStroke(2.dp, Color.Black.copy(alpha = 0.5F)) else ButtonDefaults.outlinedButtonBorder(true),
-                colors = ButtonDefaults.buttonColors().copy(
-                    containerColor = if (selectedStatusType == StatusType.RENT) Color.Green.copy(alpha = 0.1F) else Color.Transparent,
-                    contentColor = MaterialTheme.colorScheme.onSurface
+                border = if (selectedStatusType == StatusType.RENT) BorderStroke(
+                    width = 2.dp,
+                    color = MaterialTheme.colorScheme.onPrimary
+                ) else ButtonDefaults.outlinedButtonBorder(true),
+                colors = ButtonDefaults.outlinedButtonColors().copy(
+                    containerColor = if (selectedStatusType == StatusType.RENT) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.secondary,
                 ),
                 onClick = {
                     selectedStatusType = StatusType.RENT
                 }
             ) {
-                Text(stringResource(R.string.rent))
+                Text(
+                    text = stringResource(R.string.rent),
+                    color = MaterialTheme.colorScheme.onPrimary
+                )
             }
             OutlinedButton(
                 modifier = Modifier.testTag(FILTER_BOTTOM_SHEET_SOLD_BUTTON),
-                border = if (selectedStatusType == StatusType.SOLD) BorderStroke(2.dp, Color.Black.copy(alpha = 0.5F)) else ButtonDefaults.outlinedButtonBorder(true),
-                colors = ButtonDefaults.buttonColors().copy(
-                    containerColor = if (selectedStatusType == StatusType.SOLD) Color.Green.copy(alpha = 0.1F) else Color.Transparent,
-                    contentColor = MaterialTheme.colorScheme.onSurface
+                border = if (selectedStatusType == StatusType.SOLD) BorderStroke(
+                    width = 2.dp,
+                    color = MaterialTheme.colorScheme.onPrimary
+                ) else ButtonDefaults.outlinedButtonBorder(true),
+                colors = ButtonDefaults.outlinedButtonColors().copy(
+                    containerColor = if (selectedStatusType == StatusType.SOLD) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.secondary,
                 ),
                 onClick = {
                     selectedStatusType = StatusType.SOLD
                 }
             ) {
-                Text(stringResource(R.string.sold))
+                Text(
+                    text = stringResource(R.string.sold),
+                    color = MaterialTheme.colorScheme.onPrimary
+                )
             }
         }
 
@@ -198,7 +213,8 @@ private fun ListingTypeItem(
         Text(
             modifier = Modifier.testTag("${testTag}_TEXT"),
             text = description,
-            style = MaterialTheme.typography.bodyMedium
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onBackground
         )
         Checkbox(
             modifier = Modifier.testTag("${testTag}_CHECKBOX"),
@@ -247,10 +263,10 @@ object FilterBottomSheetTestTags {
 }
 
 
-@Preview(showBackground = true)
+@ThemePreviews
 @Composable
 fun FilterBottomSheetPreview() {
-    MaterialTheme {
+    AppTheme {
         FilterBottomSheet(
             statusType = StatusType.BUY,
             dwellingTypes = listOf(DwellingType.HOUSE, DwellingType.TOWNHOUSE)

@@ -54,6 +54,7 @@ import au.com.deanpike.uishared.theme.Dimension.DIM_16
 import au.com.deanpike.uishared.theme.Dimension.DIM_4
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
 import au.com.deanpike.uishared.util.SetStatusBarAppearance
+import au.com.deanpike.uishared.util.ThemePreviews
 
 @Composable
 fun ListingListScreen(
@@ -150,7 +151,7 @@ private fun TopBar(
                 .testTag(LISTING_LIST_TITLE),
             text = stringResource(id = R.string.list_heading),
             fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.primary
+            color = MaterialTheme.colorScheme.onBackground
         )
         Text(
             modifier = Modifier
@@ -170,7 +171,7 @@ private fun TopBar(
                 }
             },
             style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.primary
+            color = MaterialTheme.colorScheme.onBackground
         )
     }
 }
@@ -284,8 +285,8 @@ object ListingListScreenTestTags {
     const val LISTING_LIST = "${PREFIX}LIST"
 }
 
+@ThemePreviews
 @Composable
-@Preview
 fun ListingListScreen1ContentSuccessPreview() {
     AppTheme {
         ListingListScreenContent(
@@ -297,8 +298,8 @@ fun ListingListScreen1ContentSuccessPreview() {
     }
 }
 
+@ThemePreviews
 @Composable
-@Preview
 fun ListingListScreen1ContentLoadingPreview() {
     AppTheme {
         ListingListScreenContent(
@@ -310,8 +311,8 @@ fun ListingListScreen1ContentLoadingPreview() {
     }
 }
 
+@ThemePreviews
 @Composable
-@Preview(showBackground = true)
 fun TopBarPreview() {
     AppTheme {
         TopBar(

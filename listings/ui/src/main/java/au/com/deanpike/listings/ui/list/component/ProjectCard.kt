@@ -38,9 +38,11 @@ import au.com.deanpike.listings.ui.list.component.ProjectCardTesTags.PROJECT_CAR
 import au.com.deanpike.listings.ui.list.component.ProjectCardTesTags.PROJECT_CARD_LAYOUT
 import au.com.deanpike.listings.ui.list.component.ProjectCardTesTags.PROJECT_CARD_PROJECT_NAME
 import au.com.deanpike.uishared.R
+import au.com.deanpike.uishared.theme.AppTheme
 import au.com.deanpike.uishared.theme.Dimension.DIM_16
 import au.com.deanpike.uishared.theme.Dimension.DIM_4
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
+import au.com.deanpike.uishared.util.ThemePreviews
 import coil3.compose.AsyncImage
 import coil3.request.ImageRequest
 import coil3.request.crossfade
@@ -158,43 +160,45 @@ object ProjectCardTesTags {
     const val PROJECT_CARD_CHILD_ROW = "${PREFIX}CHILD_ROW"
 }
 
-@Preview(device = Devices.PIXEL_8_PRO, showBackground = true)
+@ThemePreviews
 @Composable
 fun ProjectCardPreview() {
-    ProjectCard(
-        project = Project(
-            id = 1234,
-            listingType = ListingType.PROJECT,
-            address = "100 Harris Street, Pyrmont, 2000",
-            listingImage = "https://bucket-api.domain.com.au/v1/bucket/image/10c22c15-f2cb-4b50-b55c-ad9466bc1427-w2500-h1668",
-            bannerImage = "https://bucket-api.domain.com.au/v1/bucket/image/5501_3_13_220624_031714-w1600-h1080",
-            logoImage = "https://images.domain.com.au/img/Agencys/devproject/logo_5501_240421_114243",
-            projectName = "Blakelys Run",
-            projectColour = "#c4bfad",
-            properties = listOf(
-                ProjectChild(
-                    id = 1111,
-                    listingType = ListingType.PROPERTY,
-                    lifecycleStatus = "New",
-                    listingDetails = ListingDetails(
-                        price = "Offers Above $659,275",
-                        numberOfBedrooms = 3,
-                        numberOfBathrooms = 2,
-                        numberOfCarSpaces = 1
-                    )
-                ),
-                ProjectChild(
-                    id = 2222,
-                    listingType = ListingType.PROPERTY,
-                    lifecycleStatus = "Sold",
-                    listingDetails = ListingDetails(
-                        price = "Contact Agent",
-                        numberOfBedrooms = null,
-                        numberOfBathrooms = null,
-                        numberOfCarSpaces = null
+    AppTheme {
+        ProjectCard(
+            project = Project(
+                id = 1234,
+                listingType = ListingType.PROJECT,
+                address = "100 Harris Street, Pyrmont, 2000",
+                listingImage = "https://bucket-api.domain.com.au/v1/bucket/image/10c22c15-f2cb-4b50-b55c-ad9466bc1427-w2500-h1668",
+                bannerImage = "https://bucket-api.domain.com.au/v1/bucket/image/5501_3_13_220624_031714-w1600-h1080",
+                logoImage = "https://images.domain.com.au/img/Agencys/devproject/logo_5501_240421_114243",
+                projectName = "Blakelys Run",
+                projectColour = "#c4bfad",
+                properties = listOf(
+                    ProjectChild(
+                        id = 1111,
+                        listingType = ListingType.PROPERTY,
+                        lifecycleStatus = "New",
+                        listingDetails = ListingDetails(
+                            price = "Offers Above $659,275",
+                            numberOfBedrooms = 3,
+                            numberOfBathrooms = 2,
+                            numberOfCarSpaces = 1
+                        )
+                    ),
+                    ProjectChild(
+                        id = 2222,
+                        listingType = ListingType.PROPERTY,
+                        lifecycleStatus = "Sold",
+                        listingDetails = ListingDetails(
+                            price = "Contact Agent",
+                            numberOfBedrooms = null,
+                            numberOfBathrooms = null,
+                            numberOfCarSpaces = null
+                        )
                     )
                 )
             )
         )
-    )
+    }
 }

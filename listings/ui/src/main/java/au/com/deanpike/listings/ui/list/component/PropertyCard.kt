@@ -42,6 +42,7 @@ import au.com.deanpike.listings.ui.list.component.PropertyCardTestTags.PROPERTY_
 import au.com.deanpike.listings.ui.util.StringUtils
 import au.com.deanpike.uishared.R
 import au.com.deanpike.uishared.theme.AppTheme
+import au.com.deanpike.uishared.util.ThemePreviews
 import coil3.compose.AsyncImage
 import coil3.request.ImageRequest
 import coil3.request.crossfade
@@ -103,7 +104,7 @@ fun PropertyCard(
                         text = property.detail.price ?: "",
                         style = MaterialTheme.typography.bodyLarge,
                         fontWeight = FontWeight.Bold,
-                        color = Color(0xFF111111)
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
 
@@ -117,7 +118,7 @@ fun PropertyCard(
                         numberOfBathrooms = property.detail.numberOfBathrooms,
                         numberOfCarSpaces = property.detail.numberOfCarSpaces
                     ),
-                    color = Color(0xFF333333),
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                     style = MaterialTheme.typography.labelLarge
                 )
 
@@ -126,7 +127,7 @@ fun PropertyCard(
                         .padding(horizontal = 16.dp)
                         .testTag(PROPERTY_CARD_ADDRESS),
                     text = property.address,
-                    color = Color(0xFF333333),
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                     style = MaterialTheme.typography.labelLarge
                 )
 
@@ -136,7 +137,7 @@ fun PropertyCard(
                         .testTag(PROPERTY_CARD_HEADLINE),
                     text = property.headLine ?: "",
                     style = MaterialTheme.typography.bodyMedium,
-                    color = Color(0xFF111111)
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
 
@@ -152,7 +153,7 @@ fun PropertyCard(
                         .border(width = 1.dp, color = MaterialTheme.colorScheme.primary, shape = RoundedCornerShape(12.dp))
                         .padding(4.dp),
                     text = property.lifecycleStatus ?: "",
-                    color = Color(0xFF2B2B2B),
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                     style = MaterialTheme.typography.bodyMedium,
                     textAlign = TextAlign.Start
                 )
@@ -171,7 +172,7 @@ object PropertyCardTestTags {
     const val PROPERTY_CARD_HEADLINE = "${PREFIX}HEADLINE"
 }
 
-@Preview(device = Devices.PIXEL_8_PRO, showBackground = true)
+@ThemePreviews
 @Composable
 fun PropertyCardPreview() {
     AppTheme {

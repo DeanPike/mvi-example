@@ -12,12 +12,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import au.com.deanpike.listings.client.type.DwellingType
 import au.com.deanpike.listings.client.type.StatusType
 import au.com.deanpike.listings.ui.R
@@ -31,8 +31,10 @@ import au.com.deanpike.listings.ui.list.component.FilterComponentTestTags.FILTER
 import au.com.deanpike.listings.ui.util.StringUtils.getPropertyTypeDescription
 import au.com.deanpike.listings.ui.util.StringUtils.getStatusDescription
 import au.com.deanpike.uishared.base.drawableTestTag
+import au.com.deanpike.uishared.theme.AppTheme
 import au.com.deanpike.uishared.theme.Dimension.DIM_16
 import au.com.deanpike.uishared.theme.Dimension.DIM_4
+import au.com.deanpike.uishared.util.ThemePreviews
 
 @Composable
 fun FilterComponent(
@@ -54,7 +56,7 @@ fun FilterComponent(
             text = stringResource(id = R.string.status),
             style = MaterialTheme.typography.bodyMedium,
             fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.primary
+            color = MaterialTheme.colorScheme.onBackground
         )
         Text(
             modifier = Modifier
@@ -62,7 +64,7 @@ fun FilterComponent(
                 .testTag(FILTER_COMPONENT_STATUS_TEXT),
             text = getStatusDescription(selectedStatus),
             style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.primary
+            color = MaterialTheme.colorScheme.onBackground
         )
         Text(
             modifier = Modifier
@@ -71,7 +73,7 @@ fun FilterComponent(
             text = stringResource(id = R.string.property_type),
             style = MaterialTheme.typography.bodyMedium,
             fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.primary
+            color = MaterialTheme.colorScheme.onBackground
         )
         Text(
             modifier = Modifier.testTag(FILTER_COMPONENT_DWELLING_TYPE_TEXT),
@@ -83,7 +85,7 @@ fun FilterComponent(
             style = MaterialTheme.typography.bodyMedium,
             overflow = TextOverflow.Ellipsis,
             maxLines = 1,
-            color = MaterialTheme.colorScheme.primary
+            color = MaterialTheme.colorScheme.onBackground
         )
         Spacer(modifier = Modifier.weight(1f))
 
@@ -103,7 +105,8 @@ fun FilterComponent(
                     id = R.drawable.outline_format_list_bulleted_24
                 ),
                 painter = painterResource(R.drawable.outline_format_list_bulleted_24),
-                contentDescription = stringResource(id = R.string.filter)
+                contentDescription = stringResource(id = R.string.filter),
+                colorFilter = ColorFilter.tint(color = MaterialTheme.colorScheme.secondary)
             )
         }
     }
@@ -121,10 +124,10 @@ object FilterComponentTestTags {
 
 }
 
-@Preview(showBackground = true)
+@ThemePreviews
 @Composable
 fun FilterComponent1Preview() {
-    MaterialTheme {
+    AppTheme {
         FilterComponent(
             selectedStatus = StatusType.BUY,
             selectedDwellingTypes = listOf(DwellingType.APARTMENT_UNIT_FLAT),
@@ -133,10 +136,10 @@ fun FilterComponent1Preview() {
     }
 }
 
-@Preview(showBackground = true)
+@ThemePreviews
 @Composable
 fun FilterComponent1MultipleListingTypesPreview() {
-    MaterialTheme {
+    AppTheme {
         FilterComponent(
             selectedStatus = StatusType.BUY,
             selectedDwellingTypes = listOf(
