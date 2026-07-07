@@ -21,6 +21,8 @@ abstract class BaseViewModel<Event : UiEvent, State : UiState, Effect : UiEffect
     var uiState by mutableStateOf(initialState)
         private set
 
+    private val stateLock = Any()
+
     private val _event: MutableSharedFlow<Event> = MutableSharedFlow()
     private val event = _event.asSharedFlow()
 
@@ -37,7 +39,9 @@ abstract class BaseViewModel<Event : UiEvent, State : UiState, Effect : UiEffect
     }
 
     protected fun setState(reduce: State.() -> State) {
-        uiState = uiState.reduce()
+        synchronized(stateLock) {
+            uiState = uiState.reduce()
+        }
     }
 
     @OptIn(DelicateCoroutinesApi::class)
