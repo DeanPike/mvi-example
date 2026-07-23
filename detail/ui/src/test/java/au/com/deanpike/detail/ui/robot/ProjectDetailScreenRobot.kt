@@ -1,5 +1,6 @@
 package au.com.deanpike.detail.ui.robot
 
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.test.assertTextContains
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import androidx.compose.ui.test.onNodeWithTag
@@ -18,7 +19,6 @@ import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_DET
 import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_DETAIL_PROGRESS
 import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_DETAIL_SUCCESS_ADDRESS
 import au.com.deanpike.detail.ui.project.ProjectDetailScreenTestTags.PROJECT_LAYOUT
-import au.com.deanpike.uishared.theme.MviExampleTheme
 import au.com.deanpike.uitestshared.base.TestRobotBase
 import au.com.deanpike.uitestshared.base.TestRobotInitData
 import au.com.deanpike.uitestshared.util.advanceTimeAndWait
@@ -40,7 +40,7 @@ class ProjectDetailScreenRobot(composeRule: ComposeContentTestRule) : TestRobotB
         closeClicked = false
 
         composeRule.setContent {
-            MviExampleTheme {
+            MaterialTheme {
                 ProjectDetailScreenContent(
                     state = data!!.project,
                     loadingAddress = data.loadingAddress,

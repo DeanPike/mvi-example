@@ -1,5 +1,6 @@
 package au.com.deanpike.listings.ui.robot
 
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import au.com.deanpike.listings.client.type.DwellingType
 import au.com.deanpike.listings.client.type.StatusType
@@ -12,7 +13,6 @@ import au.com.deanpike.listings.ui.list.component.FilterComponentTestTags.FILTER
 import au.com.deanpike.listings.ui.list.component.FilterComponentTestTags.FILTER_COMPONENT_LAYOUT
 import au.com.deanpike.listings.ui.list.component.FilterComponentTestTags.FILTER_COMPONENT_STATUS_LABEL
 import au.com.deanpike.listings.ui.list.component.FilterComponentTestTags.FILTER_COMPONENT_STATUS_TEXT
-import au.com.deanpike.uishared.theme.MviExampleTheme
 import au.com.deanpike.uitestshared.base.TestRobotBase
 import au.com.deanpike.uitestshared.base.TestRobotInitData
 import au.com.deanpike.uitestshared.util.advanceTimeAndWait
@@ -27,7 +27,7 @@ class FilterComponentRobot(composeRule: ComposeContentTestRule) : TestRobotBase<
 
     override fun setupComponent(data: FilterComponentRobotInitData?) = apply {
         composeRule.setContent {
-            MviExampleTheme {
+            MaterialTheme {
                 FilterComponent(
                     selectedStatus = data!!.status,
                     selectedDwellingTypes = data.dwellingTypes,

@@ -1,5 +1,6 @@
 package au.com.deanpike.detail.ui.robot
 
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import au.com.deanpike.detail.client.model.detail.ProjectChild
 import au.com.deanpike.detail.ui.project.ProjectChildComponent
@@ -7,7 +8,6 @@ import au.com.deanpike.detail.ui.project.ProjectChildComponentTestTags.PROJECT_C
 import au.com.deanpike.detail.ui.project.ProjectChildComponentTestTags.PROJECT_CHILD_LAYOUT
 import au.com.deanpike.detail.ui.project.ProjectChildComponentTestTags.PROJECT_CHILD_LIFECYCLE
 import au.com.deanpike.detail.ui.project.ProjectChildComponentTestTags.PROJECT_CHILD_PRICE
-import au.com.deanpike.uishared.theme.MviExampleTheme
 import au.com.deanpike.uitestshared.base.TestRobotBase
 import au.com.deanpike.uitestshared.base.TestRobotInitData
 import au.com.deanpike.uitestshared.util.assertTagDisplayed
@@ -22,7 +22,7 @@ class ProjectChildComponentRobot(composeRule: ComposeContentTestRule) : TestRobo
         clickedProjectChildId = null
 
         composeRule.setContent {
-            MviExampleTheme {
+            MaterialTheme {
                 ProjectChildComponent(
                     child = ProjectChild(
                         id = 2019256252,

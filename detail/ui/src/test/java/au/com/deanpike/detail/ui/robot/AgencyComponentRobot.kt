@@ -1,5 +1,6 @@
 package au.com.deanpike.detail.ui.robot
 
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import au.com.deanpike.detail.client.model.detail.Advertiser
 import au.com.deanpike.detail.ui.shared.AgencyComponent
@@ -7,7 +8,6 @@ import au.com.deanpike.detail.ui.shared.AgencyComponentTestTags.AGENCY_ADDRESS
 import au.com.deanpike.detail.ui.shared.AgencyComponentTestTags.AGENCY_LAYOUT
 import au.com.deanpike.detail.ui.shared.AgencyComponentTestTags.AGENCY_NAME
 import au.com.deanpike.detail.ui.shared.AgencyComponentTestTags.AGENT_LABEL
-import au.com.deanpike.uishared.theme.MviExampleTheme
 import au.com.deanpike.uitestshared.base.TestRobotBase
 import au.com.deanpike.uitestshared.base.TestRobotInitData
 import au.com.deanpike.uitestshared.util.assertTagDisplayed
@@ -17,7 +17,7 @@ import au.com.deanpike.uitestshared.util.scrollTo
 class AgencyComponentRobot(composeRule: ComposeContentTestRule) : TestRobotBase<AgencyComponentRobot, AgencyComponentRobotInitData>(composeRule) {
     override fun setupComponent(data: AgencyComponentRobotInitData?) = apply {
         composeRule.setContent {
-            MviExampleTheme {
+            MaterialTheme {
                 AgencyComponent(
                     advertiser = data!!.advertiser
                 )

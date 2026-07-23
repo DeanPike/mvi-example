@@ -1,5 +1,6 @@
 package au.com.deanpike.listings.ui.robot
 
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import au.com.deanpike.listings.client.type.DwellingType
 import au.com.deanpike.listings.client.type.StatusType
@@ -13,7 +14,6 @@ import au.com.deanpike.listings.ui.list.component.FilterBottomSheetTestTags.FILT
 import au.com.deanpike.listings.ui.list.component.FilterBottomSheetTestTags.FILTER_BOTTOM_SHEET_RENT_BUTTON
 import au.com.deanpike.listings.ui.list.component.FilterBottomSheetTestTags.FILTER_BOTTOM_SHEET_SOLD_BUTTON
 import au.com.deanpike.listings.ui.list.component.FilterBottomSheetTestTags.FILTER_BOTTOM_SHEET_TOWNHOUSE
-import au.com.deanpike.uishared.theme.MviExampleTheme
 import au.com.deanpike.uitestshared.base.TestRobotBase
 import au.com.deanpike.uitestshared.base.TestRobotInitData
 import au.com.deanpike.uitestshared.util.advanceTimeAndWait
@@ -33,7 +33,7 @@ class FilterBottomSheetRobot(composeRule: ComposeContentTestRule) : TestRobotBas
 
     override fun setupComponent(data: FilterBottomSheetRobotInitData?) = apply {
         composeRule.setContent {
-            MviExampleTheme {
+            MaterialTheme {
                 FilterBottomSheet(
                     statusType = data!!.statusType,
                     dwellingTypes = data.dwellingTypes,

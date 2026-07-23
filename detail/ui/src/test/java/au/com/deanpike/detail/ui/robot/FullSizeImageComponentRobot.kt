@@ -1,10 +1,10 @@
 package au.com.deanpike.detail.ui.robot
 
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import au.com.deanpike.detail.ui.shared.FullSizeImageComponent
 import au.com.deanpike.detail.ui.shared.FullSizeImageTestTags
 import au.com.deanpike.uishared.R
-import au.com.deanpike.uishared.theme.MviExampleTheme
 import au.com.deanpike.uitestshared.base.TestRobotBase
 import au.com.deanpike.uitestshared.base.TestRobotInitData
 import au.com.deanpike.uitestshared.util.assertDrawableDisplayed
@@ -18,7 +18,7 @@ class FullSizeImageComponentRobot(composeRule: ComposeContentTestRule) : TestRob
 
     override fun setupComponent(data: FullSizeImageComponentRobotInitData?) = apply {
         composeRule.setContent {
-            MviExampleTheme {
+            MaterialTheme {
                 FullSizeImageComponent(
                     url = data!!.url,
                     onBackClicked = {

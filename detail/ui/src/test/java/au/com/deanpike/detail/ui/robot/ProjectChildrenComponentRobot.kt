@@ -1,11 +1,11 @@
 package au.com.deanpike.detail.ui.robot
 
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import au.com.deanpike.detail.client.model.detail.ProjectChild
 import au.com.deanpike.detail.ui.project.ProjectChildComponentTestTags.PROJECT_CHILD_LAYOUT
 import au.com.deanpike.detail.ui.project.ProjectChildrenComponent
 import au.com.deanpike.detail.ui.project.ProjectChildrenComponentTestTags.PROJECT_CHILDREN
-import au.com.deanpike.uishared.theme.MviExampleTheme
 import au.com.deanpike.uitestshared.base.TestRobotBase
 import au.com.deanpike.uitestshared.base.TestRobotInitData
 import au.com.deanpike.uitestshared.util.assertListingDisplayedAtPosition
@@ -19,7 +19,7 @@ class ProjectChildrenComponentRobot(composeRule: ComposeContentTestRule) : TestR
         clickedProjectChildId = null
 
         composeRule.setContent {
-            MviExampleTheme {
+            MaterialTheme {
                 ProjectChildrenComponent(
                     childListings = data!!.childListings,
                     screenWidth = 1000,

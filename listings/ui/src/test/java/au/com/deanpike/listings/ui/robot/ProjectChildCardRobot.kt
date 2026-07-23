@@ -1,5 +1,6 @@
 package au.com.deanpike.listings.ui.robot
 
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import au.com.deanpike.listings.client.model.listing.response.ProjectChild
 import au.com.deanpike.listings.ui.list.component.ProjectChildCard
@@ -7,7 +8,6 @@ import au.com.deanpike.listings.ui.list.component.ProjectChildCardTestTags.PROJE
 import au.com.deanpike.listings.ui.list.component.ProjectChildCardTestTags.PROJECT_CHILD_CARD_LAYOUT
 import au.com.deanpike.listings.ui.list.component.ProjectChildCardTestTags.PROJECT_CHILD_CARD_LIFECYCLE_STATUS
 import au.com.deanpike.listings.ui.list.component.ProjectChildCardTestTags.PROJECT_CHILD_CARD_PRICE
-import au.com.deanpike.uishared.theme.MviExampleTheme
 import au.com.deanpike.uitestshared.base.TestRobotBase
 import au.com.deanpike.uitestshared.base.TestRobotInitData
 import au.com.deanpike.uitestshared.util.advanceTimeAndWait
@@ -25,7 +25,7 @@ class ProjectChildCardRobot(composeRule: ComposeContentTestRule) : TestRobotBase
 
     override fun setupComponent(data: ProjectChildCardRobotInitData?) = apply {
         composeRule.setContent {
-            MviExampleTheme {
+            MaterialTheme {
                 ProjectChildCard(
                     projectChild = data!!.projectChild,
                     onProjectChildClicked = { id ->

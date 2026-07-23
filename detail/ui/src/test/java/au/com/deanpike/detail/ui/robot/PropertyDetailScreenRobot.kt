@@ -1,5 +1,6 @@
 package au.com.deanpike.detail.ui.robot
 
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import androidx.test.espresso.Espresso
 import au.com.deanpike.detail.ui.property.PropertyDetailScreenContent
@@ -18,7 +19,6 @@ import au.com.deanpike.uishared.component.DetailListItemTestTags.DETAIL_ITEM_BAT
 import au.com.deanpike.uishared.component.DetailListItemTestTags.DETAIL_ITEM_BEDROOMS
 import au.com.deanpike.uishared.component.DetailListItemTestTags.DETAIL_ITEM_CAR_SPACES
 import au.com.deanpike.uishared.component.PriceComponentTestTags.PRICE_COMPONENT_LABEL
-import au.com.deanpike.uishared.theme.MviExampleTheme
 import au.com.deanpike.uitestshared.base.TestRobotBase
 import au.com.deanpike.uitestshared.base.TestRobotInitData
 import au.com.deanpike.uitestshared.robot.DetailItemComponentRobot
@@ -38,7 +38,7 @@ class PropertyDetailScreenRobot(composeRule: ComposeContentTestRule) : TestRobot
 
     override fun setupComponent(data: PropertyDetailScreenRobotInitData?) = apply {
         composeRule.setContent {
-            MviExampleTheme {
+            MaterialTheme {
                 PropertyDetailScreenContent(
                     state = data!!.state,
                     loadingAddress = data.loadingAddress,

@@ -1,5 +1,6 @@
 package au.com.deanpike.listings.ui.robot
 
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import au.com.deanpike.listings.client.model.listing.response.Project
 import au.com.deanpike.listings.ui.list.ListingListScreenEvent
@@ -8,7 +9,6 @@ import au.com.deanpike.listings.ui.list.component.ProjectCardTesTags.PROJECT_CAR
 import au.com.deanpike.listings.ui.list.component.ProjectCardTesTags.PROJECT_CARD_IMAGE
 import au.com.deanpike.listings.ui.list.component.ProjectCardTesTags.PROJECT_CARD_LAYOUT
 import au.com.deanpike.listings.ui.list.component.ProjectCardTesTags.PROJECT_CARD_PROJECT_NAME
-import au.com.deanpike.uishared.theme.MviExampleTheme
 import au.com.deanpike.uitestshared.base.TestRobotBase
 import au.com.deanpike.uitestshared.base.TestRobotInitData
 import au.com.deanpike.uitestshared.util.advanceTimeAndWait
@@ -26,7 +26,7 @@ class ProjectCardRobot(composeRule: ComposeContentTestRule) : TestRobotBase<Proj
 
     override fun setupComponent(data: ProjectCardRobotInitData?) = apply {
         composeRule.setContent {
-            MviExampleTheme {
+            MaterialTheme {
                 ProjectCard(
                     project = data!!.project,
                     onEvent = { event ->

@@ -1,5 +1,6 @@
 package au.com.deanpike.detail.ui.robot
 
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.test.assertAny
 import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.filterToOne
@@ -17,7 +18,6 @@ import au.com.deanpike.detail.ui.shared.AgentComponentTestTags.AGENT_GENERAL
 import au.com.deanpike.detail.ui.shared.AgentComponentTestTags.AGENT_IMAGE
 import au.com.deanpike.detail.ui.shared.AgentComponentTestTags.AGENT_MOBILE
 import au.com.deanpike.detail.ui.shared.AgentComponentTestTags.AGENT_NAME
-import au.com.deanpike.uishared.theme.MviExampleTheme
 import au.com.deanpike.uitestshared.base.TestRobotBase
 import au.com.deanpike.uitestshared.base.TestRobotInitData
 import au.com.deanpike.uitestshared.util.assertTagDisplayed
@@ -26,7 +26,7 @@ class AgentComponentRobot(composeRule: ComposeContentTestRule) : TestRobotBase<A
     override fun setupComponent(data: AgentComponentRobotInitData?) = apply {
 
         composeRule.setContent {
-            MviExampleTheme {
+            MaterialTheme {
                 AgentComponent(
                     agents = data!!.agents
                 )

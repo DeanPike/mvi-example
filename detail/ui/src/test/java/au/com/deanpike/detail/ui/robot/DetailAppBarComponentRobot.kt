@@ -1,9 +1,9 @@
 package au.com.deanpike.detail.ui.robot
 
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import au.com.deanpike.detail.ui.shared.DetailAppBarComponent
 import au.com.deanpike.detail.ui.shared.DetailAppBarComponentTestTags
-import au.com.deanpike.uishared.theme.MviExampleTheme
 import au.com.deanpike.uitestshared.base.TestRobotBase
 import au.com.deanpike.uitestshared.base.TestRobotInitData
 import au.com.deanpike.uitestshared.util.assertTagDisplayed
@@ -15,7 +15,7 @@ class DetailAppBarComponentRobot(composeRule: ComposeContentTestRule) : TestRobo
 
     override fun setupComponent(data: TestRobotInitData?) = apply {
         composeRule.setContent {
-            MviExampleTheme {
+            MaterialTheme {
                 DetailAppBarComponent(
                     onCloseClicked = {
                         closeClicked = true

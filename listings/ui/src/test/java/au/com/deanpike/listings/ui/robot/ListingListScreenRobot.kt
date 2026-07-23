@@ -1,5 +1,6 @@
 package au.com.deanpike.listings.ui.robot
 
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
@@ -11,7 +12,6 @@ import au.com.deanpike.listings.ui.list.ListingListScreenTestTags.LISTING_LIST
 import au.com.deanpike.listings.ui.list.ListingListScreenTestTags.LISTING_LIST_HEADING
 import au.com.deanpike.listings.ui.list.component.ProjectCardTesTags.PROJECT_CARD_LAYOUT
 import au.com.deanpike.listings.ui.list.component.PropertyCardTestTags.PROPERTY_CARD_LAYOUT
-import au.com.deanpike.uishared.theme.MviExampleTheme
 import au.com.deanpike.uitestshared.base.TestRobotBase
 import au.com.deanpike.uitestshared.base.TestRobotInitData
 import au.com.deanpike.uitestshared.util.advanceTimeAndWait
@@ -22,7 +22,7 @@ import au.com.deanpike.uitestshared.util.scrollToItemPosition
 class ListingListScreenRobot(composeRule: ComposeContentTestRule) : TestRobotBase<ListingListScreenRobot, ListingListScreenRobotInitData>(composeRule) {
     override fun setupComponent(data: ListingListScreenRobotInitData?) = apply {
         composeRule.setContent {
-            MviExampleTheme {
+            MaterialTheme {
                 ListingListScreenContent(
                     state = data!!.state
                 )

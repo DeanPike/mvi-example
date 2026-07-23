@@ -1,5 +1,6 @@
 package au.com.deanpike.listings.ui.robot
 
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import au.com.deanpike.listings.client.model.listing.response.Property
 import au.com.deanpike.listings.ui.list.ListingListScreenEvent
@@ -10,7 +11,6 @@ import au.com.deanpike.listings.ui.list.component.PropertyCardTestTags.PROPERTY_
 import au.com.deanpike.listings.ui.list.component.PropertyCardTestTags.PROPERTY_CARD_IMAGE
 import au.com.deanpike.listings.ui.list.component.PropertyCardTestTags.PROPERTY_CARD_LAYOUT
 import au.com.deanpike.listings.ui.list.component.PropertyCardTestTags.PROPERTY_CARD_PRICE
-import au.com.deanpike.uishared.theme.MviExampleTheme
 import au.com.deanpike.uitestshared.base.TestRobotBase
 import au.com.deanpike.uitestshared.base.TestRobotInitData
 import au.com.deanpike.uitestshared.util.advanceTimeAndWait
@@ -26,7 +26,7 @@ class PropertyCardRobot(composeRule: ComposeContentTestRule) : TestRobotBase<Pro
 
     override fun setupComponent(data: PropertyCardRobotInitData?) = apply {
         composeRule.setContent {
-            MviExampleTheme {
+            MaterialTheme {
                 PropertyCard(
                     property = data!!.property,
                     onEvent = { event ->
