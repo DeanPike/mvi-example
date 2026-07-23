@@ -14,6 +14,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.key
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -45,92 +46,103 @@ import coil3.compose.AsyncImage
 fun AgentComponent(
     agents: List<Agent>
 ) {
-    agents.forEachIndexed { index, agent ->
-        Card(
-            modifier = Modifier
-                .padding(top = DIM_8, start = DIM_16, end = DIM_16)
-                .fillMaxWidth(),
-            border = BorderStroke(width = 0.5.dp, color = MaterialTheme.colorScheme.outline),
-            elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
-        ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .wrapContentHeight()
-                    .background(color = MaterialTheme.colorScheme.background)
-                    .padding(DIM_4)
-                    .testTag("${AGENT_CARD_LAYOUT}_$index")
-            ) {
-                Column(
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
+    ) {
+        agents.forEachIndexed { index, agent ->
+            key(agent.id) {
+                Card(
                     modifier = Modifier
-                        .weight(1f)
-                        .padding(end = DIM_8),
-                    horizontalAlignment = Alignment.Start
+                        .padding(top = DIM_8, start = DIM_16, end = DIM_16)
+                        .fillMaxWidth(),
+                    border = BorderStroke(
+                        width = 0.5.dp,
+                        color = MaterialTheme.colorScheme.outline
+                    ),
+                    elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
                 ) {
-                    Text(
+                    Row(
                         modifier = Modifier
-                            .padding(start = DIM_8)
-                            .testTag("${AGENT_NAME}_$index"),
-                        text = agent.name ?: "",
-                        style = MaterialTheme.typography.titleMedium,
-                        maxLines = 2,
-                        overflow = TextOverflow.Ellipsis,
-                        color = MaterialTheme.colorScheme.onBackground
-                    )
-                    Row {
-                        Column {
-                            ContactComponent(
-                                label = stringResource(id = R.string.mobile),
-                                value = agent.phoneNumbers.firstOrNull {
-                                    it.type == PhoneNumberType.MOBILE
-                                }?.number ?: "",
-                                testTag = "${AGENT_MOBILE}_$index"
+                            .fillMaxWidth()
+                            .wrapContentHeight()
+                            .background(color = MaterialTheme.colorScheme.background)
+                            .padding(DIM_4)
+                            .testTag("${AGENT_CARD_LAYOUT}_$index")
+                    ) {
+                        Column(
+                            modifier = Modifier
+                                .weight(1f)
+                                .padding(end = DIM_8),
+                            horizontalAlignment = Alignment.Start
+                        ) {
+                            Text(
+                                modifier = Modifier
+                                    .padding(start = DIM_8)
+                                    .testTag("${AGENT_NAME}_$index"),
+                                text = agent.name ?: "",
+                                style = MaterialTheme.typography.titleMedium,
+                                maxLines = 2,
+                                overflow = TextOverflow.Ellipsis,
+                                color = MaterialTheme.colorScheme.onBackground
                             )
-                            ContactComponent(
-                                label = stringResource(id = R.string.general),
-                                value = agent.phoneNumbers.firstOrNull {
-                                    it.type == PhoneNumberType.GENERAL
-                                }?.number ?: "",
-                                testTag = "${AGENT_GENERAL}_$index"
-                            )
-                            ContactComponent(
-                                label = stringResource(id = R.string.fax),
-                                value = agent.phoneNumbers.firstOrNull {
-                                    it.type == PhoneNumberType.FAX
-                                }?.number ?: "",
-                                testTag = "${AGENT_FAX}_$index"
-                            )
-                            ContactComponent(
-                                label = stringResource(id = R.string.email),
-                                value = agent.emailAddress ?: "",
-                                testTag = "${AGENT_EMAIL}_$index"
-                            )
+                            Row {
+                                Column {
+                                    ContactComponent(
+                                        label = stringResource(id = R.string.mobile),
+                                        value = agent.phoneNumbers.firstOrNull {
+                                            it.type == PhoneNumberType.MOBILE
+                                        }?.number ?: "",
+                                        testTag = "${AGENT_MOBILE}_$index"
+                                    )
+                                    ContactComponent(
+                                        label = stringResource(id = R.string.general),
+                                        value = agent.phoneNumbers.firstOrNull {
+                                            it.type == PhoneNumberType.GENERAL
+                                        }?.number ?: "",
+                                        testTag = "${AGENT_GENERAL}_$index"
+                                    )
+                                    ContactComponent(
+                                        label = stringResource(id = R.string.fax),
+                                        value = agent.phoneNumbers.firstOrNull {
+                                            it.type == PhoneNumberType.FAX
+                                        }?.number ?: "",
+                                        testTag = "${AGENT_FAX}_$index"
+                                    )
+                                    ContactComponent(
+                                        label = stringResource(id = R.string.email),
+                                        value = agent.emailAddress ?: "",
+                                        testTag = "${AGENT_EMAIL}_$index"
+                                    )
+                                }
+                            }
+                        }
+                        Column(
+                            modifier = Modifier
+                                .size(60.dp),
+                            horizontalAlignment = Alignment.End
+                        ) {
+                            agent.imageUrl?.let {
+                                AsyncImage(
+                                    modifier = Modifier
+                                        .padding(top = DIM_4, end = DIM_4)
+                                        .size(60.dp)
+                                        .clip(CircleShape)
+                                        .testTag("${AGENT_IMAGE}_$index"),
+                                    model = it,
+                                    contentDescription = stringResource(id = R.string.agent_photo),
+                                    contentScale = ContentScale.Crop,
+                                    placeholder = painterResource(id = au.com.deanpike.uishared.R.drawable.gallery_placeholder),
+                                    fallback = painterResource(id = au.com.deanpike.uishared.R.drawable.gallery_placeholder),
+                                    error = painterResource(id = au.com.deanpike.uishared.R.drawable.gallery_placeholder),
+                                )
+                            }
                         }
                     }
-                }
-                Column(
-                    modifier = Modifier
-                        .size(60.dp),
-                    horizontalAlignment = Alignment.End
-                ) {
-                    agent.imageUrl?.let {
-                        AsyncImage(
-                            modifier = Modifier
-                                .padding(top = DIM_4, end = DIM_4)
-                                .size(60.dp)
-                                .clip(CircleShape)
-                                .testTag("${AGENT_IMAGE}_$index"),
-                            model = it,
-                            contentDescription = stringResource(id = R.string.agent_photo),
-                            contentScale = ContentScale.Crop,
-                            placeholder = painterResource(id = au.com.deanpike.uishared.R.drawable.gallery_placeholder),
-                            fallback = painterResource(id = au.com.deanpike.uishared.R.drawable.gallery_placeholder),
-                            error = painterResource(id = au.com.deanpike.uishared.R.drawable.gallery_placeholder),
-                        )
-                    }
+
                 }
             }
-
         }
     }
 }

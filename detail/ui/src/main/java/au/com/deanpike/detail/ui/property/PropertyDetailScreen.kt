@@ -9,9 +9,11 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.windowInsetsPadding
@@ -34,7 +36,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import au.com.deanpike.commonshared.model.Media
 import au.com.deanpike.commonshared.type.MediaType
@@ -153,7 +154,10 @@ fun PropertyLoadingContent(
                     .fillMaxWidth()
                     .testTag(PROPERTY_DETAIL_LOADING_TITLE),
                 text = stringResource(R.string.loading_data_for),
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
+                style = MaterialTheme.typography.bodyLarge.copy(
+                    color = MaterialTheme.colorScheme.onBackground,
+                ),
             )
             Spacer(modifier = Modifier.height(DIM_16))
             Text(
@@ -162,7 +166,9 @@ fun PropertyLoadingContent(
                     .testTag(PROPERTY_DETAIL_LOADING_ADDRESS),
                 text = address,
                 textAlign = TextAlign.Center,
-                style = MaterialTheme.typography.labelLarge
+                style = MaterialTheme.typography.labelLarge.copy(
+                    color = MaterialTheme.colorScheme.onBackground,
+                ),
             )
             Spacer(modifier = Modifier.height(DIM_16))
             CircularProgressIndicator(
@@ -207,6 +213,7 @@ fun PropertyDetailSuccess(
                 .background(MaterialTheme.colorScheme.background)
                 .verticalScroll(scrollState)
                 .align(Alignment.Center)
+                .padding(bottom = WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding())
         ) {
             ListingImagesComponent(
                 screenState = state.screenState,
@@ -257,8 +264,10 @@ fun PropertyDetailSuccess(
                         .padding(start = DIM_16, end = DIM_16, top = DIM_8)
                         .testTag(PROPERTY_DETAIL_HEADLINE),
                     text = it,
-                    style = MaterialTheme.typography.bodyMedium,
-                    fontWeight = FontWeight.Bold
+                    fontWeight = FontWeight.Bold,
+                    style = MaterialTheme.typography.bodyMedium.copy(
+                        color = MaterialTheme.colorScheme.onBackground,
+                    ),
                 )
             }
             state.propertyDetail?.description?.let {
