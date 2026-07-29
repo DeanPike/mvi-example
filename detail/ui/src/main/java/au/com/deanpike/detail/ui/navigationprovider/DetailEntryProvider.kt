@@ -7,7 +7,6 @@ import androidx.navigation3.runtime.NavKey
 import au.com.deanpike.detail.ui.project.ProjectDetailScreen
 import au.com.deanpike.detail.ui.property.PropertyDetailScreen
 import au.com.deanpike.detail.ui.shared.FullSizeImageComponent
-import au.com.deanpike.navigation.extension.addDetail
 import au.com.deanpike.navigation.keys.DefaultDetailScreenKey
 import au.com.deanpike.navigation.keys.FullSizeImageComponentKey
 import au.com.deanpike.navigation.keys.ProjectDetailScreenKey

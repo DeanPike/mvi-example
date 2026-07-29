@@ -213,7 +213,9 @@ fun PropertyDetailSuccess(
                 .background(MaterialTheme.colorScheme.background)
                 .verticalScroll(scrollState)
                 .align(Alignment.Center)
-                .padding(bottom = WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding())
+                .padding(
+                    bottom = WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding()
+                )
         ) {
             ListingImagesComponent(
                 screenState = state.screenState,
