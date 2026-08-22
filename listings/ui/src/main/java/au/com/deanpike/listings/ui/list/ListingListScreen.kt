@@ -33,12 +33,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import au.com.deanpike.datashared.type.ListingType
+import au.com.deanpike.listings.client.model.listing.response.Listing
 import au.com.deanpike.listings.client.model.listing.response.Project
 import au.com.deanpike.listings.client.model.listing.response.Property
 import au.com.deanpike.listings.ui.R
@@ -58,8 +61,27 @@ import au.com.deanpike.uishared.theme.Dimension.DIM_4
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
 import au.com.deanpike.uishared.util.SetStatusBarAppearance
 import au.com.deanpike.uishared.util.ThemePreviews
+import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.jsonPrimitive
+import kotlinx.serialization.json.put
+import org.maplibre.compose.camera.CameraPosition
+import org.maplibre.compose.camera.rememberCameraState
+import org.maplibre.compose.expressions.dsl.asString
+import org.maplibre.compose.expressions.dsl.case
+import org.maplibre.compose.expressions.dsl.const
+import org.maplibre.compose.expressions.dsl.feature
+import org.maplibre.compose.expressions.dsl.switch
+import org.maplibre.compose.layers.CircleLayer
 import org.maplibre.compose.map.MaplibreMap
+import org.maplibre.compose.sources.GeoJsonData
+import org.maplibre.compose.sources.rememberGeoJsonSource
 import org.maplibre.compose.style.BaseStyle
+import org.maplibre.compose.util.ClickResult
+import org.maplibre.spatialk.geojson.Feature
+import org.maplibre.spatialk.geojson.FeatureCollection
+import org.maplibre.spatialk.geojson.Point
+import org.maplibre.spatialk.geojson.Position
 
 @Composable
 fun ListingListScreen(
@@ -233,7 +255,7 @@ private fun SuccessContent(
                 onEvent = onEvent
             )
         } else {
-            MapContent()
+            MapContent(listings = state.listings)
         }
     }
 
@@ -297,14 +319,102 @@ private fun PropertyListContent(
     }
 }
 
+private const val PIN_LISTING_ID_PROPERTY = "listingId"
+private const val PIN_LISTING_TYPE_PROPERTY = "listingType"
+
+internal data class MapPin(
+    val listingId: Long,
+    val listingType: ListingType,
+    val position: Position
+)
+
+internal fun toMapPins(listings: List<Listing>): List<MapPin> {
+    return listings.mapNotNull { listing ->
+        val geoLocation = when (listing) {
+            is Property -> listing.geoLocation
+            is Project -> listing.geoLocation
+            else -> null
+        } ?: return@mapNotNull null
+        MapPin(
+            listingId = listing.id,
+            listingType = listing.listingType,
+            position = Position(longitude = geoLocation.longitude, latitude = geoLocation.latitude)
+        )
+    }
+}
+
 @Composable
-private fun MapContent() {
+private fun MapContent(
+    listings: List<Listing>
+) {
+    val pins = remember(listings) {
+        toMapPins(listings)
+    }
+
+    var selectedListingId by remember {
+        mutableStateOf<Long?>(null)
+    }
+
     MaplibreMap(
         modifier = Modifier
             .fillMaxSize()
             .testTag(LISTING_MAP),
-        baseStyle = BaseStyle.Uri("https://tiles.openfreemap.org/styles/liberty")
-    )
+        baseStyle = BaseStyle.Uri("https://tiles.openfreemap.org/styles/liberty"),
+        cameraState = rememberCameraState(
+            firstPosition = CameraPosition(
+                target = Position(latitude = -25.6, longitude = 134.35),
+                zoom = 2.8
+            )
+        ),
+        onMapClick = { _, _ ->
+            selectedListingId = null
+            ClickResult.Pass
+        }
+    ) {
+        val pinsSource = rememberGeoJsonSource(
+            data = GeoJsonData.Features(
+                FeatureCollection(
+                    features = pins.map { pin ->
+                        Feature<Point, JsonObject?>(
+                            geometry = Point(pin.position),
+                            properties = buildJsonObject {
+                                put(PIN_LISTING_ID_PROPERTY, pin.listingId.toString())
+                                put(PIN_LISTING_TYPE_PROPERTY, pin.listingType.name)
+                            }
+                        )
+                    }
+                )
+            )
+        )
+        CircleLayer(
+            id = "listing-pins",
+            source = pinsSource,
+            color = switch(
+                input = feature[PIN_LISTING_TYPE_PROPERTY].asString(),
+                case(label = ListingType.PROPERTY.name, output = const(Color.Blue)),
+                case(label = ListingType.PROJECT.name, output = const(Color.Red)),
+                fallback = const(Color.Red)
+            ),
+            radius = const(8.dp),
+            strokeColor = selectedListingId?.let { selectedId ->
+                switch(
+                    input = feature[PIN_LISTING_ID_PROPERTY].asString(),
+                    case(label = selectedId.toString(), output = const(Color.Green)),
+                    fallback = const(Color.White)
+                )
+            } ?: const(Color.White),
+            strokeWidth = const(2.dp),
+            onClick = { clickedFeatures ->
+                selectedListingId = clickedFeatures.firstOrNull()
+                    ?.properties
+                    ?.get(PIN_LISTING_ID_PROPERTY)
+                    ?.jsonPrimitive
+                    ?.content
+                    ?.toLongOrNull()
+                ClickResult.Consume
+            }
+        )
+    }
 }
 
 @Composable
