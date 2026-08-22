@@ -83,6 +83,8 @@ dependencies {
     implementation(libs.material.icons.core)
     implementation(libs.material.icons.extended)
 
+    implementation(libs.maps.libre)
+
     testImplementation(platform(libs.junit.bom))
     testImplementation(libs.bundles.junit.jupiter)
     testImplementation(libs.mockk)

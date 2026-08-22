@@ -11,6 +11,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
 class PropertyConverterTest {
+
     @Test
     fun `create property`() {
         val result = SearchResult(
@@ -76,6 +77,8 @@ class PropertyConverterTest {
             assertThat(detail.numberOfBedrooms).isEqualTo(4)
             assertThat(detail.numberOfBathrooms).isEqualTo(3)
             assertThat(detail.numberOfCarSpaces).isEqualTo(2)
+            assertThat(geoLocation!!.latitude).isEqualTo(1.1)
+            assertThat(geoLocation!!.longitude).isEqualTo(2.2)
         }
     }
 }

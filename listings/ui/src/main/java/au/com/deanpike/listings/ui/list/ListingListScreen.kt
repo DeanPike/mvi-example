@@ -21,10 +21,13 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.PrimaryTabRow
+import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -34,7 +37,6 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import au.com.deanpike.listings.client.model.listing.response.Project
@@ -43,6 +45,7 @@ import au.com.deanpike.listings.ui.R
 import au.com.deanpike.listings.ui.list.ListingListScreenTestTags.LISTING_LIST
 import au.com.deanpike.listings.ui.list.ListingListScreenTestTags.LISTING_LIST_HEADING
 import au.com.deanpike.listings.ui.list.ListingListScreenTestTags.LISTING_LIST_TITLE
+import au.com.deanpike.listings.ui.list.ListingListScreenTestTags.LISTING_MAP
 import au.com.deanpike.listings.ui.list.component.FilterBottomSheet
 import au.com.deanpike.listings.ui.list.component.FilterComponent
 import au.com.deanpike.listings.ui.list.component.ProjectCard
@@ -55,6 +58,8 @@ import au.com.deanpike.uishared.theme.Dimension.DIM_4
 import au.com.deanpike.uishared.theme.Dimension.DIM_8
 import au.com.deanpike.uishared.util.SetStatusBarAppearance
 import au.com.deanpike.uishared.util.ThemePreviews
+import org.maplibre.compose.map.MaplibreMap
+import org.maplibre.compose.style.BaseStyle
 
 @Composable
 fun ListingListScreen(
@@ -163,7 +168,11 @@ private fun TopBar(
                 }
 
                 ScreenStateType.SUCCESS -> {
-                    pluralStringResource(id = R.plurals.project_properties, listingCount, listingCount)
+                    pluralStringResource(
+                        id = R.plurals.project_properties,
+                        listingCount,
+                        listingCount
+                    )
                 }
 
                 else -> {
@@ -185,6 +194,9 @@ private fun SuccessContent(
     var showFilters by remember {
         mutableStateOf(false)
     }
+    var selectedTabIndex by remember {
+        mutableIntStateOf(0)
+    }
 
     Column(
         modifier = Modifier.fillMaxSize()
@@ -198,36 +210,30 @@ private fun SuccessContent(
             }
         )
         HorizontalDivider()
-        LazyColumn(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(horizontal = 12.dp)
-                .testTag(LISTING_LIST),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
+        PrimaryTabRow(
+            selectedTabIndex = selectedTabIndex
         ) {
-            item(key = "header") {
-                Spacer(modifier = Modifier.height(4.dp))
-            }
-            state.listings.forEachIndexed { _, listing ->
-                if (listing is Property) {
-                    item(key = listing.id) {
-                        PropertyCard(
-                            property = listing,
-                            onEvent = onEvent
-                        )
-                    }
-                } else if (listing is Project) {
-                    item(key = listing.id) {
-                        ProjectCard(
-                            project = listing,
-                            onEvent = onEvent
-                        )
-                    }
-                }
-            }
-            item(key = "footer") {
-                Spacer(modifier = Modifier.height(WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding()))
-            }
+            Tab(
+                selected = selectedTabIndex == 0,
+                onClick = { selectedTabIndex = 0 },
+                enabled = state.screenState != ScreenStateType.LOADING,
+                text = { Text(stringResource(R.string.properties)) }
+            )
+            Tab(
+                selected = selectedTabIndex == 1,
+                onClick = { selectedTabIndex = 1 },
+                enabled = state.screenState != ScreenStateType.LOADING,
+                text = { Text(stringResource(R.string.map)) }
+            )
+        }
+        HorizontalDivider()
+        if (selectedTabIndex == 0) {
+            PropertyListContent(
+                state = state,
+                onEvent = onEvent
+            )
+        } else {
+            MapContent()
         }
     }
 
@@ -247,6 +253,58 @@ private fun SuccessContent(
             )
         }
     }
+}
+
+@Composable
+private fun PropertyListContent(
+    state: ListingListScreenState,
+    onEvent: (ListingListScreenEvent) -> Unit = {}
+) {
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(horizontal = 12.dp)
+            .testTag(LISTING_LIST),
+        verticalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
+        item(key = "header") {
+            Spacer(modifier = Modifier.height(4.dp))
+        }
+        state.listings.forEachIndexed { _, listing ->
+            if (listing is Property) {
+                item(key = listing.id) {
+                    PropertyCard(
+                        property = listing,
+                        onEvent = onEvent
+                    )
+                }
+            } else if (listing is Project) {
+                item(key = listing.id) {
+                    ProjectCard(
+                        project = listing,
+                        onEvent = onEvent
+                    )
+                }
+            }
+        }
+        item(key = "footer") {
+            Spacer(
+                modifier = Modifier.height(
+                    WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding()
+                )
+            )
+        }
+    }
+}
+
+@Composable
+private fun MapContent() {
+    MaplibreMap(
+        modifier = Modifier
+            .fillMaxSize()
+            .testTag(LISTING_MAP),
+        baseStyle = BaseStyle.Uri("https://tiles.openfreemap.org/styles/liberty")
+    )
 }
 
 @Composable
@@ -283,6 +341,7 @@ object ListingListScreenTestTags {
     const val LISTING_LIST_TITLE = "${PREFIX}TITLE"
     const val LISTING_LIST_HEADING = "${PREFIX}HEADING"
     const val LISTING_LIST = "${PREFIX}LIST"
+    const val LISTING_MAP = "${PREFIX}MAP"
 }
 
 @ThemePreviews

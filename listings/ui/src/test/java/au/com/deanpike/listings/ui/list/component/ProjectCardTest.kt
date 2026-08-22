@@ -2,6 +2,7 @@ package au.com.deanpike.listings.ui.list.component
 
 import au.com.deanpike.commonshared.model.ListingDetails
 import au.com.deanpike.datashared.type.ListingType
+import au.com.deanpike.listings.client.model.listing.response.GeoLocation
 import au.com.deanpike.listings.client.model.listing.response.Project
 import au.com.deanpike.listings.client.model.listing.response.ProjectChild
 import au.com.deanpike.listings.ui.list.component.ProjectCardTesTags.PROJECT_CARD_CHILD_ROW
@@ -27,6 +28,10 @@ class ProjectCardTest : RobolectricTestBase() {
         logoImage = null,
         projectName = "Blakelys Run",
         projectColour = "#c4bfad",
+        geoLocation = GeoLocation(
+            latitude = 1.1,
+            longitude = 2.2
+        ),
         properties = listOf(
             ProjectChild(
                 id = 1111,

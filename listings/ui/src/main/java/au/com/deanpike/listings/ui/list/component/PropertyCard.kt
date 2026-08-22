@@ -18,7 +18,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
@@ -26,11 +25,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Devices
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import au.com.deanpike.commonshared.model.ListingDetails
 import au.com.deanpike.datashared.type.ListingType
+import au.com.deanpike.listings.client.model.listing.response.GeoLocation
 import au.com.deanpike.listings.client.model.listing.response.Property
 import au.com.deanpike.listings.ui.list.ListingListScreenEvent
 import au.com.deanpike.listings.ui.list.component.PropertyCardTestTags.PROPERTY_CARD_ADDRESS
@@ -150,7 +148,11 @@ fun PropertyCard(
                         .wrapContentSize()
                         .clip(RoundedCornerShape(12.dp))
                         .background(MaterialTheme.colorScheme.secondaryContainer)
-                        .border(width = 1.dp, color = MaterialTheme.colorScheme.primary, shape = RoundedCornerShape(12.dp))
+                        .border(
+                            width = 1.dp,
+                            color = MaterialTheme.colorScheme.primary,
+                            shape = RoundedCornerShape(12.dp)
+                        )
                         .padding(4.dp),
                     text = property.lifecycleStatus ?: "",
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
@@ -187,6 +189,10 @@ fun PropertyCardPreview() {
                 dwellingType = "House",
                 headLine = "Two Bedroom Apartment in The Quay",
                 lifecycleStatus = "New",
+                geoLocation = GeoLocation(
+                    latitude = 1.1,
+                    longitude = 2.2
+                ),
                 detail = ListingDetails(
                     price = "Guide $520,000",
                     numberOfBedrooms = 3,

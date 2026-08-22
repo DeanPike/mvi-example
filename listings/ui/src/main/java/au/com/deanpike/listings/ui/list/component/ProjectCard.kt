@@ -24,11 +24,10 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Devices
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import au.com.deanpike.commonshared.model.ListingDetails
 import au.com.deanpike.datashared.type.ListingType
+import au.com.deanpike.listings.client.model.listing.response.GeoLocation
 import au.com.deanpike.listings.client.model.listing.response.Project
 import au.com.deanpike.listings.client.model.listing.response.ProjectChild
 import au.com.deanpike.listings.ui.list.ListingListScreenEvent
@@ -174,6 +173,7 @@ fun ProjectCardPreview() {
                 logoImage = "https://images.domain.com.au/img/Agencys/devproject/logo_5501_240421_114243",
                 projectName = "Blakelys Run",
                 projectColour = "#c4bfad",
+                geoLocation = GeoLocation(latitude = 1.1, longitude = 2.2),
                 properties = listOf(
                     ProjectChild(
                         id = 1111,

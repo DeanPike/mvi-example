@@ -4,6 +4,7 @@ import au.com.deanpike.commonshared.model.ListingDetails
 import au.com.deanpike.commonshared.util.ResponseWrapper
 import au.com.deanpike.datashared.dispatcher.DispatcherProvider
 import au.com.deanpike.datashared.type.ListingType
+import au.com.deanpike.listings.client.model.listing.response.GeoLocation
 import au.com.deanpike.listings.client.model.listing.response.Project
 import au.com.deanpike.listings.client.model.listing.response.ProjectChild
 import au.com.deanpike.listings.client.model.listing.response.Property
@@ -234,6 +235,10 @@ class ListingListViewModelTest {
             headLine = "Property headline",
             lifecycleStatus = "New",
             agencyColour = "White",
+            geoLocation = GeoLocation(
+                latitude = 1.1,
+                longitude = 2.2
+            ),
             detail = ListingDetails(
                 price = "$1000000",
                 numberOfBedrooms = 4,
@@ -277,7 +282,11 @@ class ListingListViewModelTest {
             logoImage = "http://project.lgog.image",
             projectName = "Project Name",
             properties = listOf(childOne, childTwo),
-            projectColour = "Red"
+            projectColour = "Red",
+            geoLocation = GeoLocation(
+                latitude = 3.3,
+                longitude = 4.4
+            ),
         )
     }
 }

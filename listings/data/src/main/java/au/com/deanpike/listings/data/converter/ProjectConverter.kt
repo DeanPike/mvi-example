@@ -6,6 +6,7 @@ import au.com.deanpike.commonshared.model.ListingDetails
 import au.com.deanpike.listings.client.model.listing.response.Project
 import au.com.deanpike.listings.client.model.listing.response.ProjectChild
 import au.com.deanpike.datashared.util.ListingTypeConverter
+import au.com.deanpike.listings.client.model.listing.response.GeoLocation
 import au.com.deanpike.network.model.external.listing.SearchResult
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -39,7 +40,11 @@ internal class ProjectConverter @Inject constructor() : ListingConverter {
             logoImage = listing.project?.projectLogoImage,
             projectName = listing.project?.projectName,
             projectColour = listing.project?.projectColorHex,
-            properties = properties
+            properties = properties,
+            geoLocation = GeoLocation(
+                latitude = listing.geoLocation.latitude,
+                longitude = listing.geoLocation.longitude
+            )
         )
     }
 }

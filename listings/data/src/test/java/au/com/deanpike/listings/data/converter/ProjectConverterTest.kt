@@ -13,6 +13,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
 class ProjectConverterTest {
+
     @Test
     fun `create project`() {
         val childOne = ProjectChildListing(
@@ -45,7 +46,7 @@ class ProjectConverterTest {
             projectLogoImage = "http://logo.image",
             projectPriceFrom = 1230000,
             projectColorHex = "White",
-            childListings = listOf(childOne)
+            childListings = listOf(childOne),
         )
 
         val result = SearchResult(
@@ -107,6 +108,8 @@ class ProjectConverterTest {
             assertThat(properties.size).isEqualTo(1)
             assertThat(projectColour).isEqualTo("White")
             assertThat(listingImage).isEqualTo("http://some.image.one")
+            assertThat(geoLocation!!.latitude).isEqualTo(1.1)
+            assertThat(geoLocation!!.longitude).isEqualTo(2.2)
         }
 
         with(project.properties[0]) {

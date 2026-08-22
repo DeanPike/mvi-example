@@ -11,6 +11,7 @@ data class Project(
     val logoImage: String?,
     val projectName: String?,
     val projectColour: String?,
-    val properties: List<ProjectChild>
+    val properties: List<ProjectChild>,
+    val geoLocation: GeoLocation?
 ) : Listing() {
 }

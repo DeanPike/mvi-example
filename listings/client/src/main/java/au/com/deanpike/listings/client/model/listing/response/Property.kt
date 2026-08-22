@@ -13,5 +13,6 @@ data class Property(
     val dwellingType: String?,
     val headLine: String?,
     val lifecycleStatus: String?,
-    val detail: ListingDetails
+    val detail: ListingDetails,
+    val geoLocation: GeoLocation?
 ) : Listing()

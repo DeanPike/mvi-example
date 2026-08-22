@@ -2,6 +2,7 @@ package au.com.deanpike.listings.ui.list.component
 
 import au.com.deanpike.commonshared.model.ListingDetails
 import au.com.deanpike.datashared.type.ListingType
+import au.com.deanpike.listings.client.model.listing.response.GeoLocation
 import au.com.deanpike.listings.client.model.listing.response.Property
 import au.com.deanpike.listings.ui.robot.PropertyCardRobot
 import au.com.deanpike.listings.ui.robot.PropertyCardRobotInitData
@@ -22,6 +23,10 @@ class PropertyCardTest : RobolectricTestBase() {
         dwellingType = "House",
         headLine = "Two Bedroom Apartment in The Quay",
         lifecycleStatus = "New",
+        geoLocation = GeoLocation(
+            latitude = 1.1,
+            longitude = 2.2
+        ),
         detail = ListingDetails(
             price = "Guide $520,000",
             numberOfBedrooms = 3,

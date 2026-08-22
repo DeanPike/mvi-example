@@ -2,6 +2,7 @@ package au.com.deanpike.listings.ui.list
 
 import au.com.deanpike.commonshared.model.ListingDetails
 import au.com.deanpike.datashared.type.ListingType
+import au.com.deanpike.listings.client.model.listing.response.GeoLocation
 import au.com.deanpike.listings.client.model.listing.response.Project
 import au.com.deanpike.listings.client.model.listing.response.ProjectChild
 import au.com.deanpike.listings.client.model.listing.response.Property
@@ -86,6 +87,10 @@ class ListingListScreenTest : RobolectricTestBase() {
             headLine = "Property headline one",
             lifecycleStatus = "New",
             agencyColour = "White",
+            geoLocation = GeoLocation(
+                latitude = 1.1,
+                longitude = 2.2
+            ),
             detail = ListingDetails(
                 price = "$1000000",
                 numberOfBedrooms = 4,
@@ -106,6 +111,10 @@ class ListingListScreenTest : RobolectricTestBase() {
             headLine = "Property headline two",
             lifecycleStatus = "Sold",
             agencyColour = "Blue",
+            geoLocation = GeoLocation(
+                latitude = 3.3,
+                longitude = 4.4
+            ),
             detail = ListingDetails(
                 price = "$100,500",
                 numberOfBedrooms = 5,
@@ -148,7 +157,11 @@ class ListingListScreenTest : RobolectricTestBase() {
             logoImage = "http://logo.image",
             projectName = "Project name",
             projectColour = "White",
-            properties = listOf(childOne, childTwo)
+            properties = listOf(childOne, childTwo),
+            geoLocation = GeoLocation(
+                latitude = 1.1,
+                longitude = 2.2
+            ),
         )
 
         return project

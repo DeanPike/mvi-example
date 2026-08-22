@@ -1,8 +1,9 @@
 package au.com.deanpike.listings.data.converter
 
-import au.com.deanpike.datashared.type.ListingType
-import au.com.deanpike.listings.client.model.listing.response.Listing
 import au.com.deanpike.commonshared.model.ListingDetails
+import au.com.deanpike.datashared.type.ListingType
+import au.com.deanpike.listings.client.model.listing.response.GeoLocation
+import au.com.deanpike.listings.client.model.listing.response.Listing
 import au.com.deanpike.listings.client.model.listing.response.Property
 import au.com.deanpike.network.model.external.listing.SearchResult
 import javax.inject.Inject
@@ -26,7 +27,11 @@ internal class PropertyConverter @Inject constructor() : ListingConverter {
             ),
             dwellingType = listing.dwellingType,
             headLine = listing.headline,
-            lifecycleStatus = listing.lifecycleStatus
+            lifecycleStatus = listing.lifecycleStatus,
+            geoLocation = GeoLocation(
+                latitude = listing.geoLocation.latitude,
+                longitude = listing.geoLocation.longitude
+            )
         )
     }
 }
