@@ -60,6 +60,7 @@ class MapContentTest {
 
         assertEquals(
             MapSelectionCardInfo(
+                listingId = 1,
                 address = "Property address",
                 imageUrl = "http://listing.image",
                 title = "Property headline",
@@ -78,6 +79,7 @@ class MapContentTest {
 
         assertEquals(
             MapSelectionCardInfo(
+                listingId = 2,
                 address = "Project address",
                 imageUrl = "http://listing.image",
                 title = "Project name",

@@ -233,7 +233,10 @@ private fun SuccessContent(
                 onEvent = onEvent
             )
         } else {
-            MapContent(listings = state.listings)
+            MapContent(
+                listings = state.listings,
+                onEvent = onEvent
+            )
         }
     }
 

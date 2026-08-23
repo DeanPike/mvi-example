@@ -1,6 +1,7 @@
 package au.com.deanpike.listings.ui.map
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -33,6 +34,7 @@ import au.com.deanpike.datashared.type.ListingType
 import au.com.deanpike.listings.client.model.listing.response.Listing
 import au.com.deanpike.listings.client.model.listing.response.Project
 import au.com.deanpike.listings.client.model.listing.response.Property
+import au.com.deanpike.listings.ui.list.ListingListScreenEvent
 import au.com.deanpike.listings.ui.list.ListingListScreenTestTags.LISTING_MAP
 import au.com.deanpike.listings.ui.list.MapPin
 import au.com.deanpike.uishared.R
@@ -69,7 +71,8 @@ import org.maplibre.spatialk.geojson.Position
 
 @Composable
 fun MapContent(
-    listings: List<Listing>
+    listings: List<Listing>,
+    onEvent: (ListingListScreenEvent) -> Unit = {}
 ) {
     val pins = remember(listings) {
         toMapPins(listings)
@@ -150,6 +153,22 @@ fun MapContent(
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
+                    .clickable {
+                        selectedListingCardInfo?.let { cardInfo ->
+                            onEvent(
+                                when (cardInfo.listingType) {
+                                    ListingType.PROJECT -> ListingListScreenEvent.OnProjectSelected(
+                                        id = cardInfo.listingId,
+                                        address = cardInfo.address
+                                    )
+                                    else -> ListingListScreenEvent.OnPropertySelected(
+                                        id = cardInfo.listingId,
+                                        address = cardInfo.address
+                                    )
+                                }
+                            )
+                        }
+                    }
                     .testTag(MapContentTestTags.LISTING_MAP_SELECTED_CARD),
                 elevation = CardDefaults.cardElevation(4.dp),
                 colors = CardDefaults.cardColors().copy(
@@ -213,12 +232,14 @@ internal fun toMapSelectionCardInfo(listings: List<Listing>, selectedListingId: 
     return listings.firstOrNull { it.id == selectedListingId }?.let { listing ->
         when (listing) {
             is Property -> MapSelectionCardInfo(
+                listingId = listing.id,
                 address = listing.address,
                 imageUrl = listing.listingImage,
                 title = listing.headLine,
                 listingType = listing.listingType
             )
             is Project -> MapSelectionCardInfo(
+                listingId = listing.id,
                 address = listing.address,
                 imageUrl = listing.listingImage,
                 title = listing.projectName,
@@ -262,6 +283,7 @@ object MapContentTestTags {
 }
 
 internal data class MapSelectionCardInfo(
+    val listingId: Long,
     val address: String,
     val imageUrl: String?,
     val title: String?,
