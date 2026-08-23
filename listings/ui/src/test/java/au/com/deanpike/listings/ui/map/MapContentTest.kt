@@ -1,14 +1,16 @@
-package au.com.deanpike.listings.ui.list
+package au.com.deanpike.listings.ui.map
 
 import au.com.deanpike.commonshared.model.ListingDetails
 import au.com.deanpike.datashared.type.ListingType
 import au.com.deanpike.listings.client.model.listing.response.GeoLocation
 import au.com.deanpike.listings.client.model.listing.response.Project
 import au.com.deanpike.listings.client.model.listing.response.Property
+import au.com.deanpike.listings.ui.list.MapPin
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNull
 import org.junit.Test
 
-class ListingMapPinsTest {
+class MapContentTest {
 
     @Test
     fun `maps properties and projects with a geo location to pins`() {
@@ -43,10 +45,64 @@ class ListingMapPinsTest {
     }
 
     @Test
-    fun `returns an empty list when there are no listings`() {
+    fun `returns an empty list of pins when there are no listings`() {
         val pins = toMapPins(emptyList())
 
         assertEquals(emptyList<MapPin>(), pins)
+    }
+
+    @Test
+    fun `maps a selected property to card info using its headline`() {
+        val property = getProperty(id = 1, geoLocation = null)
+        val project = getProject(id = 2, geoLocation = null)
+
+        val cardInfo = toMapSelectionCardInfo(listOf(property, project), selectedListingId = 1)
+
+        assertEquals(
+            MapSelectionCardInfo(
+                address = "Property address",
+                imageUrl = "http://listing.image",
+                title = "Property headline",
+                listingType = ListingType.PROPERTY
+            ),
+            cardInfo
+        )
+    }
+
+    @Test
+    fun `maps a selected project to card info using its project name`() {
+        val property = getProperty(id = 1, geoLocation = null)
+        val project = getProject(id = 2, geoLocation = null)
+
+        val cardInfo = toMapSelectionCardInfo(listOf(property, project), selectedListingId = 2)
+
+        assertEquals(
+            MapSelectionCardInfo(
+                address = "Project address",
+                imageUrl = "http://listing.image",
+                title = "Project name",
+                listingType = ListingType.PROJECT
+            ),
+            cardInfo
+        )
+    }
+
+    @Test
+    fun `returns null card info when no listing is selected`() {
+        val property = getProperty(id = 1, geoLocation = null)
+
+        val cardInfo = toMapSelectionCardInfo(listOf(property), selectedListingId = null)
+
+        assertNull(cardInfo)
+    }
+
+    @Test
+    fun `returns null card info when the selected id does not match a listing`() {
+        val property = getProperty(id = 1, geoLocation = null)
+
+        val cardInfo = toMapSelectionCardInfo(listOf(property), selectedListingId = 99)
+
+        assertNull(cardInfo)
     }
 
     private fun getProperty(id: Long, geoLocation: GeoLocation?): Property {
