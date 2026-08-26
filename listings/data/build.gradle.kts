@@ -25,7 +25,6 @@ dependencies {
     testImplementation(libs.assertj)
     testImplementation(libs.mockk)
     testImplementation(libs.coroutines.test)
-    testImplementation(libs.mockwebserver)
     testImplementation(libs.joda.time)
 }
 

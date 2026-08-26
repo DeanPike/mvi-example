@@ -13,8 +13,7 @@ internal interface ListingDataSource {
 
 internal class ListingDataSourceImpl @Inject constructor(
     private val api: ListingApi
-) : ListingDataSource, DataSourceBase(
-) {
+) : ListingDataSource, DataSourceBase() {
     override suspend fun getListings(request: ListingSearchRequest): ResponseWrapper<ListingResponse> {
         return safeApiCall {
             api.getListings(

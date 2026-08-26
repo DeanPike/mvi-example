@@ -1,6 +1,5 @@
-package au.com.deanpike.detail.data.api
+package au.com.deanpike.network.api
 
-import au.com.deanpike.network.api.ProjectDetailApi
 import com.google.gson.GsonBuilder
 import java.io.InputStreamReader
 import kotlinx.coroutines.test.runTest

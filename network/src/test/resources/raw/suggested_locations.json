@@ -1,0 +1,40 @@
+{
+  "Locations": [
+    {
+      "DisplayName": "Bondi, NSW, 2026",
+      "Name": "Bondi",
+      "State": "NSW",
+      "RegionName": "Sydney Region",
+      "AreaName": "Eastern Suburbs",
+      "Postcode": "2026",
+      "SuburbID": "5272",
+      "NameSlug": "bondi-nsw-2026",
+      "Category": "Suburb",
+      "Group": "Suburb"
+    },
+    {
+      "DisplayName": "Bondi Beach, NSW, 2026",
+      "Name": "Bondi Beach",
+      "State": "NSW",
+      "RegionName": "Sydney Region",
+      "AreaName": "Eastern Suburbs",
+      "Postcode": "2026",
+      "SuburbID": "5292",
+      "NameSlug": "bondi-beach-nsw-2026",
+      "Category": "Suburb",
+      "Group": "Suburb"
+    },
+    {
+      "DisplayName": "Bondi Junction, NSW, 2022",
+      "Name": "Bondi Junction",
+      "State": "NSW",
+      "RegionName": "Sydney Region",
+      "AreaName": "Eastern Suburbs",
+      "Postcode": "2022",
+      "SuburbID": "5302",
+      "NameSlug": "bondi-junction-nsw-2022",
+      "Category": "Suburb",
+      "Group": "Suburb"
+    }
+  ]
+}

@@ -14,4 +14,14 @@ dependencies {
     // Hilt
     implementation(libs.hilt.core)
     ksp(libs.hilt.compiler)
+
+    testImplementation(platform(libs.junit.bom))
+    testImplementation(libs.bundles.junit.jupiter)
+    testImplementation(libs.mockwebserver)
+    testImplementation(libs.coroutines.test)
+    testImplementation(libs.assertj)
+}
+
+tasks.test {
+    useJUnitPlatform()
 }

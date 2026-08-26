@@ -3,6 +3,7 @@ package au.com.deanpike.network.di
 import au.com.deanpike.network.api.ListingApi
 import au.com.deanpike.network.api.ProjectDetailApi
 import au.com.deanpike.network.api.PropertyDetailApi
+import au.com.deanpike.network.api.SuggestedLocationsApi
 import au.com.deanpike.network.util.BaseUrl
 import com.google.gson.Gson
 import dagger.Module
@@ -35,7 +36,7 @@ object RemoteDataSourceModule {
         okHttpClient: OkHttpClient,
         gson: Gson,
         @BaseUrl baseUrl: String
-    ) : Retrofit =
+    ): Retrofit =
         Retrofit.Builder()
             .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create(gson))
@@ -46,8 +47,14 @@ object RemoteDataSourceModule {
     fun provideListingApi(retrofit: Retrofit): ListingApi = retrofit.create(ListingApi::class.java)
 
     @Provides
-    fun providePropertyDetailsApi(retrofit: Retrofit): PropertyDetailApi = retrofit.create(PropertyDetailApi::class.java)
+    fun providePropertyDetailsApi(retrofit: Retrofit): PropertyDetailApi =
+        retrofit.create(PropertyDetailApi::class.java)
 
     @Provides
-    fun provideProjectDetailApi(retrofit: Retrofit): ProjectDetailApi = retrofit.create(ProjectDetailApi::class.java)
+    fun provideProjectDetailApi(retrofit: Retrofit): ProjectDetailApi =
+        retrofit.create(ProjectDetailApi::class.java)
+
+    @Provides
+    fun provideSuggestedLocationsApi(retrofit: Retrofit): SuggestedLocationsApi =
+        retrofit.create(SuggestedLocationsApi::class.java)
 }
