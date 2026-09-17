@@ -20,7 +20,7 @@ data class SearchResult(
     @SerializedName("additional_features")
     val additionalFeatures: List<String>?,
     @SerializedName("geo_location")
-    val geoLocation: GeoLocation,
+    val geoLocation: GeoLocation?,
     @SerializedName("promo_level")
     val promoLevel: String,
     @SerializedName("carspace_count")

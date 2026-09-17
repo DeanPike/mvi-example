@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName
 
 data class SuggestedLocations(
     @SerializedName("Locations")
-    val suggestedLocations: List<SuggestedLocation>
+    val suggestedLocations: List<SuggestedLocation> = emptyList()
 )

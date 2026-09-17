@@ -122,4 +122,40 @@ class ProjectConverterTest {
             assertThat(listingDetails.numberOfCarSpaces).isEqualTo(1)
         }
     }
+
+    @Test
+    fun `create project with null geo location`() {
+        val result = SearchResult(
+            id = 1234,
+            listingType = "project",
+            media = emptyList(),
+            address = "Property address",
+            advertiser = null,
+            price = "1500000",
+            bedroomCount = 0,
+            bathroomCount = 0,
+            carspaceCount = 0,
+            dwellingType = "House",
+            headline = "Property Headline",
+            lifecycleStatus = "New",
+            additionalFeatures = emptyList(),
+            auctionDate = null,
+            dateListed = null,
+            earliestInspections = emptyList(),
+            geoLocation = null,
+            hasVideo = false,
+            homepassEnabled = false,
+            landArea = null,
+            largeLand = false,
+            metadata = null,
+            project = null,
+            promoLevel = "",
+            topspot = null
+        )
+
+        val listing = ProjectConverter().convertListing(result)
+        assertThat(listing).isInstanceOf(au.com.deanpike.listings.client.model.listing.response.Project::class.java)
+
+        assertThat((listing as au.com.deanpike.listings.client.model.listing.response.Project).geoLocation).isNull()
+    }
 }

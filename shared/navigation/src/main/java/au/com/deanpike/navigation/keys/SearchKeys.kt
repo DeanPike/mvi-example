@@ -4,8 +4,4 @@ import androidx.navigation3.runtime.NavKey
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ListingScreenKey(
-    val location: String,
-    val status: String,
-    val dwellingTypes: List<String>
-) : NavKey
+data object SearchScreenKey : NavKey

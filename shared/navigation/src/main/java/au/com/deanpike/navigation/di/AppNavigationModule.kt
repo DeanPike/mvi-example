@@ -2,7 +2,7 @@ package au.com.deanpike.navigation.di
 
 import androidx.navigation3.runtime.NavBackStack
 import androidx.navigation3.runtime.NavKey
-import au.com.deanpike.navigation.keys.ListingScreenKey
+import au.com.deanpike.navigation.keys.SearchScreenKey
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,6 +15,6 @@ object AppNavigationModule {
     @Provides
     @Singleton
     fun provideBackStack(): NavBackStack<NavKey> {
-        return NavBackStack(ListingScreenKey)
+        return NavBackStack(SearchScreenKey)
     }
 }

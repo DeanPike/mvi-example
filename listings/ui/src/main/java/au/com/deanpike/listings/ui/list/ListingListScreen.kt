@@ -42,6 +42,8 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import au.com.deanpike.datashared.type.ListingType
 import au.com.deanpike.listings.client.model.listing.response.Project
 import au.com.deanpike.listings.client.model.listing.response.Property
+import au.com.deanpike.listings.client.type.DwellingType
+import au.com.deanpike.listings.client.type.StatusType
 import au.com.deanpike.listings.ui.R
 import au.com.deanpike.listings.ui.list.ListingListScreenTestTags.LISTING_LIST
 import au.com.deanpike.listings.ui.list.ListingListScreenTestTags.LISTING_LIST_HEADING
@@ -64,13 +66,20 @@ import org.maplibre.spatialk.geojson.Position
 @Composable
 fun ListingListScreen(
     viewModel: ListingListViewModel = hiltViewModel(),
+    location: String = "",
+    status: StatusType = StatusType.BUY,
+    dwellingTypes: List<DwellingType> = listOf(DwellingType.ALL),
     onPropertyClicked: (Long, String) -> Unit = { _, _ -> },
     onProjectClicked: (Long, String) -> Unit = { _, _ -> }
 ) {
     LaunchedEffect(viewModel.uiState.screenState) {
         if (viewModel.uiState.screenState == ScreenStateType.INITIAL) {
             viewModel.setEvent(
-                ListingListScreenEvent.Initialise
+                ListingListScreenEvent.Initialise(
+                    location = location,
+                    status = status,
+                    dwellingTypes = dwellingTypes
+                )
             )
         }
     }

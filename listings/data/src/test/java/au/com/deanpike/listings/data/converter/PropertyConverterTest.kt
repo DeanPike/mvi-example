@@ -81,4 +81,40 @@ class PropertyConverterTest {
             assertThat(geoLocation!!.longitude).isEqualTo(2.2)
         }
     }
+
+    @Test
+    fun `create property with null geo location`() {
+        val result = SearchResult(
+            id = 1234,
+            listingType = "property",
+            media = emptyList(),
+            address = "Property address",
+            advertiser = null,
+            price = "1500000",
+            bedroomCount = 4,
+            bathroomCount = 3,
+            carspaceCount = 2,
+            dwellingType = "House",
+            headline = "Property Headline",
+            lifecycleStatus = "New",
+            additionalFeatures = emptyList(),
+            auctionDate = null,
+            dateListed = null,
+            earliestInspections = emptyList(),
+            geoLocation = null,
+            hasVideo = false,
+            homepassEnabled = false,
+            landArea = null,
+            largeLand = false,
+            metadata = null,
+            project = null,
+            promoLevel = "",
+            topspot = null
+        )
+
+        val listing = PropertyConverter().convertListing(result)
+        assertThat(listing).isInstanceOf(Property::class.java)
+
+        assertThat((listing as Property).geoLocation).isNull()
+    }
 }

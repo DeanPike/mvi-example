@@ -55,7 +55,7 @@ class ListingListViewModelTest {
             )
         } returns ResponseWrapper.Success(listOf(getProject(), getProperty()))
 
-        viewModel.setEvent(ListingListScreenEvent.Initialise)
+        viewModel.setEvent(ListingListScreenEvent.Initialise())
         advanceUntilIdle()
 
         with(viewModel.uiState) {
@@ -123,7 +123,7 @@ class ListingListViewModelTest {
             )
         } returns ResponseWrapper.Error(IOException("No Internet"))
 
-        viewModel.setEvent(ListingListScreenEvent.Initialise)
+        viewModel.setEvent(ListingListScreenEvent.Initialise())
         advanceUntilIdle()
 
         with(viewModel.uiState) {

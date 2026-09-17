@@ -197,7 +197,7 @@ fun FilterBottomSheet(
 }
 
 @Composable
-private fun ListingTypeItem(
+fun ListingTypeItem(
     description: String,
     isSelected: Boolean,
     onValueChanged: (Boolean) -> Unit = {},
@@ -227,7 +227,7 @@ private fun ListingTypeItem(
     }
 }
 
-private fun updateDwellingTypes(
+fun updateDwellingTypes(
     currentTypes: List<DwellingType>,
     type: DwellingType,
     isChecked: Boolean

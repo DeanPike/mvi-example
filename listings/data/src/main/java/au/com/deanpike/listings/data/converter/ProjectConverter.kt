@@ -41,10 +41,12 @@ internal class ProjectConverter @Inject constructor() : ListingConverter {
             projectName = listing.project?.projectName,
             projectColour = listing.project?.projectColorHex,
             properties = properties,
-            geoLocation = GeoLocation(
-                latitude = listing.geoLocation.latitude,
-                longitude = listing.geoLocation.longitude
-            )
+            geoLocation = listing.geoLocation?.let {
+                GeoLocation(
+                    latitude = it.latitude,
+                    longitude = it.longitude
+                )
+            }
         )
     }
 }

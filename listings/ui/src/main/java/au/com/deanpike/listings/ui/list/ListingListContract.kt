@@ -10,12 +10,17 @@ import au.com.deanpike.uishared.base.UiState
 data class ListingListScreenState(
     val screenState: ScreenStateType = ScreenStateType.INITIAL,
     val listings: List<Listing> = emptyList(),
+    val location: String = "",
     val selectedStatus: StatusType = StatusType.BUY,
     val selectedDwellingTypes: List<DwellingType> = listOf(DwellingType.ALL),
 ) : UiState
 
 sealed class ListingListScreenEvent : UiEvent {
-    data object Initialise : ListingListScreenEvent()
+    data class Initialise(
+        val location: String = "",
+        val status: StatusType = StatusType.BUY,
+        val dwellingTypes: List<DwellingType> = listOf(DwellingType.ALL)
+    ) : ListingListScreenEvent()
 
     data class OnFilterApplied(
         val status: StatusType,

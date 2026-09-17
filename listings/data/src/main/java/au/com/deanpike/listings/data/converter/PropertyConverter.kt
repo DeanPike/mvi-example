@@ -28,10 +28,12 @@ internal class PropertyConverter @Inject constructor() : ListingConverter {
             dwellingType = listing.dwellingType,
             headLine = listing.headline,
             lifecycleStatus = listing.lifecycleStatus,
-            geoLocation = GeoLocation(
-                latitude = listing.geoLocation.latitude,
-                longitude = listing.geoLocation.longitude
-            )
+            geoLocation = listing.geoLocation?.let {
+                GeoLocation(
+                    latitude = it.latitude,
+                    longitude = it.longitude
+                )
+            }
         )
     }
 }

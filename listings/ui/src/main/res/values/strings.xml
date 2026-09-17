@@ -28,4 +28,8 @@
     <string name="multiple_property_types">Multiple property types</string>
     <string name="filter">Filter</string>
     <string name="status">Status</string>
+
+    <string name="search_heading">Search</string>
+    <string name="location">Location</string>
+    <string name="search">Search</string>
 </resources>

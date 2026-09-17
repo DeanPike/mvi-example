@@ -24,7 +24,7 @@ class ListingListViewModel @Inject constructor(
     override fun handleEvent(event: ListingListScreenEvent) {
         when (event) {
             is ListingListScreenEvent.Initialise -> {
-                initialise()
+                initialise(event)
             }
 
             is ListingListScreenEvent.OnFilterApplied -> {
@@ -43,9 +43,12 @@ class ListingListViewModel @Inject constructor(
         }
     }
 
-    private fun initialise() {
+    private fun initialise(event: ListingListScreenEvent.Initialise) {
         setState {
             copy(
+                location = event.location,
+                selectedStatus = event.status,
+                selectedDwellingTypes = event.dwellingTypes,
                 screenState = ScreenStateType.LOADING
             )
         }
