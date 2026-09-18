@@ -83,7 +83,8 @@ class ListingListViewModel @Inject constructor(
             when (val response = listingUseCase.getListings(
                 ListingSearch(
                     searchMode = uiState.selectedStatus,
-                    dwellingTypes = uiState.selectedDwellingTypes
+                    dwellingTypes = uiState.selectedDwellingTypes,
+                    location = uiState.location
                 )
             )) {
                 is ResponseWrapper.Success -> {

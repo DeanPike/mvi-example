@@ -8,7 +8,7 @@ import au.com.deanpike.uishared.base.UiEvent
 import au.com.deanpike.uishared.base.UiState
 
 data class SearchScreenState(
-    val location: String = "",
+    val selectedLocation: Location? = null,
     val suggestedLocations: List<Location> = emptyList(),
     val selectedStatus: StatusType = StatusType.BUY,
     val selectedDwellingTypes: List<DwellingType> = listOf(DwellingType.ALL)
@@ -16,7 +16,7 @@ data class SearchScreenState(
 
 sealed class SearchScreenEvent : UiEvent {
     data class OnLocationChanged(val location: String) : SearchScreenEvent()
-    data class OnLocationSelected(val location: String) : SearchScreenEvent()
+    data class OnLocationSelected(val location: Location) : SearchScreenEvent()
     data class OnStatusChanged(val status: StatusType) : SearchScreenEvent()
     data class OnDwellingTypesChanged(val dwellingTypes: List<DwellingType>) : SearchScreenEvent()
     data object OnSearchClicked : SearchScreenEvent()
@@ -24,7 +24,7 @@ sealed class SearchScreenEvent : UiEvent {
 
 sealed class SearchScreenEffect : UiEffect {
     data class OnSearchRequested(
-        val location: String,
+        val location: Location?,
         val status: StatusType,
         val dwellingTypes: List<DwellingType>
     ) : SearchScreenEffect()

@@ -3,6 +3,7 @@ package au.com.deanpike.listings.ui.search
 import androidx.lifecycle.viewModelScope
 import au.com.deanpike.commonshared.util.ResponseWrapper
 import au.com.deanpike.datashared.dispatcher.DispatcherProvider
+import au.com.deanpike.listings.client.model.suggestedlocation.Location
 import au.com.deanpike.listings.client.usecase.SuggestedLocationsUseCase
 import au.com.deanpike.uishared.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -50,7 +51,7 @@ class SearchViewModel @Inject constructor(
             is SearchScreenEvent.OnLocationSelected -> {
                 setState {
                     copy(
-                        location = event.location,
+                        selectedLocation = event.location,
                         suggestedLocations = emptyList()
                     )
                 }
@@ -76,7 +77,9 @@ class SearchViewModel @Inject constructor(
 
     private fun onLocationChanged(location: String) {
         setState {
-            copy(location = location)
+            copy(
+                selectedLocation = if (location.isBlank()) null else Location(displayName = location)
+            )
         }
 
         if (location.isBlank()) {
@@ -108,7 +111,7 @@ class SearchViewModel @Inject constructor(
     private fun onSearchClicked() {
         setEffect {
             SearchScreenEffect.OnSearchRequested(
-                location = uiState.location,
+                location = uiState.selectedLocation,
                 status = uiState.selectedStatus,
                 dwellingTypes = uiState.selectedDwellingTypes
             )

@@ -3,10 +3,12 @@ package au.com.deanpike.listings.data.usecase
 import au.com.deanpike.commonshared.util.ResponseWrapper
 import au.com.deanpike.listings.client.model.listing.response.Listing
 import au.com.deanpike.listings.client.model.listing.search.ListingSearch
+import au.com.deanpike.listings.client.model.suggestedlocation.Location
 import au.com.deanpike.listings.client.type.DwellingType
 import au.com.deanpike.listings.client.type.StatusType
 import au.com.deanpike.listings.client.usecase.ListingUseCase
 import au.com.deanpike.listings.data.repository.ListingRepository
+import au.com.deanpike.network.model.internal.AddressComponents
 import au.com.deanpike.network.model.internal.ListingSearchRequest
 import javax.inject.Inject
 
@@ -17,9 +19,25 @@ internal class ListingUseCaseImpl @Inject constructor(
         return repo.getListings(
             ListingSearchRequest(
                 searchMode = getSearchMode(search.searchMode),
-                dwellingTypes = getDwellingTypes(search.dwellingTypes) ?: emptyList()
+                dwellingTypes = getDwellingTypes(search.dwellingTypes) ?: emptyList(),
+                location = getAddressComponents(search.location)
             )
         )
+    }
+
+    private fun getAddressComponents(location: Location?): List<AddressComponents>? {
+        return location?.let {
+            listOf(
+                AddressComponents(
+                    area = it.areaName,
+                    postcode = it.postCode,
+                    region = it.regionName,
+                    stateShort = it.state,
+                    suburb = it.name,
+                    suburbId = it.suburbId?.toIntOrNull()
+                )
+            )
+        }
     }
 
     private fun getSearchMode(type: StatusType): String {
@@ -48,7 +66,7 @@ internal class ListingUseCaseImpl @Inject constructor(
                 }
             }
 
-            return dwellings
+            dwellings
         }
     }
 }

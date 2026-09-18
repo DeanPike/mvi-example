@@ -36,7 +36,9 @@ class SearchScreenTest : RobolectricTestBase() {
         robot
             .setupComponent(
                 data = SearchScreenRobotInitData(
-                    state = SearchScreenState(location = "Sydney")
+                    state = SearchScreenState(
+                        selectedLocation = Location(displayName = "Sydney")
+                    )
                 )
             )
             .assertLayoutDisplayed()
@@ -100,7 +102,12 @@ class SearchScreenTest : RobolectricTestBase() {
             .assertLayoutDisplayed()
             .clickLocationSuggestion()
 
-        assertEquals(SearchScreenEvent.OnLocationSelected("Sydney, NSW"), robot.lastEvent)
+        assertEquals(
+            SearchScreenEvent.OnLocationSelected(
+                Location(nameSlug = "sydney-nsw", displayName = "Sydney, NSW")
+            ),
+            robot.lastEvent
+        )
     }
 
     @Test

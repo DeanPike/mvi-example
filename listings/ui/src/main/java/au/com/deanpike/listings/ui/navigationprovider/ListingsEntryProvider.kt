@@ -3,6 +3,7 @@ package au.com.deanpike.listings.ui.navigationprovider
 import androidx.navigation3.runtime.EntryProviderScope
 import androidx.navigation3.runtime.NavBackStack
 import androidx.navigation3.runtime.NavKey
+import au.com.deanpike.listings.client.model.suggestedlocation.Location
 import au.com.deanpike.listings.client.type.DwellingType
 import au.com.deanpike.listings.client.type.StatusType
 import au.com.deanpike.listings.ui.list.ListingListScreen
@@ -19,7 +20,16 @@ fun EntryProviderScope<NavKey>.listingEntryBuilder(backStack: NavBackStack<NavKe
             onSearch = { location, status, dwellingTypes ->
                 backStack.add(
                     ListingScreenKey(
-                        location = location,
+                        locationDisplayName = location?.displayName,
+                        locationName = location?.name,
+                        locationState = location?.state,
+                        locationRegionName = location?.regionName,
+                        locationAreaName = location?.areaName,
+                        locationPostCode = location?.postCode,
+                        locationSuburbId = location?.suburbId,
+                        locationNameSlug = location?.nameSlug,
+                        locationCategory = location?.category,
+                        locationGroup = location?.group,
                         status = status.name,
                         dwellingTypes = dwellingTypes.map { it.name }
                     )
@@ -31,7 +41,7 @@ fun EntryProviderScope<NavKey>.listingEntryBuilder(backStack: NavBackStack<NavKe
         metadata = ListDetailSceneStrategy.listPane()
     ) { key ->
         ListingListScreen(
-            location = key.location,
+            location = key.toLocation(),
             status = StatusType.valueOf(key.status),
             dwellingTypes = key.dwellingTypes.map { DwellingType.valueOf(it) },
             onPropertyClicked = { propertyId, address ->
@@ -42,4 +52,27 @@ fun EntryProviderScope<NavKey>.listingEntryBuilder(backStack: NavBackStack<NavKe
             }
         )
     }
+}
+
+private fun ListingScreenKey.toLocation(): Location? {
+    if (locationDisplayName == null && locationName == null && locationState == null &&
+        locationRegionName == null && locationAreaName == null && locationPostCode == null &&
+        locationSuburbId == null && locationNameSlug == null && locationCategory == null &&
+        locationGroup == null
+    ) {
+        return null
+    }
+
+    return Location(
+        displayName = locationDisplayName,
+        name = locationName,
+        state = locationState,
+        regionName = locationRegionName,
+        areaName = locationAreaName,
+        postCode = locationPostCode,
+        suburbId = locationSuburbId,
+        nameSlug = locationNameSlug,
+        category = locationCategory,
+        group = locationGroup
+    )
 }

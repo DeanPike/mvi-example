@@ -42,8 +42,16 @@ internal class SuggestedLocationsRepositoryImplTest {
         )
 
         every { converter.convertSuggestedLocation(suggestedLocation) } returns Location(
+            displayName = "Bondi Beach, NSW 2026",
+            name = "Bondi Beach",
+            state = "NSW",
+            regionName = "Sydney",
+            areaName = "Eastern Suburbs",
+            postCode = "2026",
+            suburbId = "12345",
             nameSlug = "bondi-beach-nsw-2026",
-            displayName = "Bondi Beach, NSW 2026"
+            category = "Suburb",
+            group = "Suburbs"
         )
 
         val locations = repo.getSuggestedLocations(location = "Bondi")
@@ -53,8 +61,16 @@ internal class SuggestedLocationsRepositoryImplTest {
         assertThat(success.data.size).isEqualTo(1)
 
         with(success.data[0]) {
-            assertThat(nameSlug).isEqualTo("bondi-beach-nsw-2026")
             assertThat(displayName).isEqualTo("Bondi Beach, NSW 2026")
+            assertThat(name).isEqualTo("Bondi Beach")
+            assertThat(state).isEqualTo("NSW")
+            assertThat(regionName).isEqualTo("Sydney")
+            assertThat(areaName).isEqualTo("Eastern Suburbs")
+            assertThat(postCode).isEqualTo("2026")
+            assertThat(suburbId).isEqualTo("12345")
+            assertThat(nameSlug).isEqualTo("bondi-beach-nsw-2026")
+            assertThat(category).isEqualTo("Suburb")
+            assertThat(group).isEqualTo("Suburbs")
         }
     }
 

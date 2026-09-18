@@ -6,5 +6,7 @@ data class ListingSearchRequest(
     @SerializedName("search_mode")
     val searchMode: String,
     @SerializedName("dwelling_types")
-    val dwellingTypes: List<String>
+    val dwellingTypes: List<String>,
+    @SerializedName("locations")
+    val location: List<AddressComponents>? = null
 )

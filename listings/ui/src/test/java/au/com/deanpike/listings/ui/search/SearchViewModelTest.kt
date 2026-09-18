@@ -39,7 +39,7 @@ class SearchViewModelTest {
     @Test
     fun `should have default initial state`() {
         with(viewModel.uiState) {
-            assertThat(location).isEqualTo("")
+            assertThat(selectedLocation).isNull()
             assertThat(suggestedLocations).isEmpty()
             assertThat(selectedStatus).isEqualTo(StatusType.BUY)
             assertThat(selectedDwellingTypes).isEqualTo(listOf(DwellingType.ALL))
@@ -55,7 +55,7 @@ class SearchViewModelTest {
         advanceUntilIdle()
 
         with(viewModel.uiState) {
-            assertThat(location).isEqualTo("Sydney")
+            assertThat(selectedLocation).isEqualTo(Location(displayName = "Sydney"))
             assertThat(suggestedLocations).isEqualTo(locations)
         }
     }
@@ -73,7 +73,7 @@ class SearchViewModelTest {
         advanceUntilIdle()
 
         with(viewModel.uiState) {
-            assertThat(location).isEqualTo("")
+            assertThat(selectedLocation).isNull()
             assertThat(suggestedLocations).isEmpty()
         }
         coVerify(exactly = 1) { useCase.getSuggestedLocations(any()) }
@@ -87,7 +87,7 @@ class SearchViewModelTest {
         advanceUntilIdle()
 
         with(viewModel.uiState) {
-            assertThat(location).isEqualTo("Sydney")
+            assertThat(selectedLocation).isEqualTo(Location(displayName = "Sydney"))
             assertThat(suggestedLocations).isEmpty()
         }
     }
@@ -114,13 +114,41 @@ class SearchViewModelTest {
         advanceUntilIdle()
         assertThat(viewModel.uiState.suggestedLocations).isEqualTo(locations)
 
-        viewModel.setEvent(SearchScreenEvent.OnLocationSelected("Sydney, NSW"))
+        val selectedLocation = Location(nameSlug = "sydney-nsw", displayName = "Sydney, NSW")
+        viewModel.setEvent(SearchScreenEvent.OnLocationSelected(selectedLocation))
         advanceUntilIdle()
 
         with(viewModel.uiState) {
-            assertThat(location).isEqualTo("Sydney, NSW")
+            assertThat(this.selectedLocation).isEqualTo(selectedLocation)
             assertThat(suggestedLocations).isEmpty()
         }
+    }
+
+    @Test
+    fun `should replace selected location when a new location is typed manually`() = runTest {
+        val selectedLocation = Location(nameSlug = "sydney-nsw", displayName = "Sydney, NSW")
+        viewModel.setEvent(SearchScreenEvent.OnLocationSelected(selectedLocation))
+        advanceUntilIdle()
+        assertThat(viewModel.uiState.selectedLocation).isEqualTo(selectedLocation)
+
+        coEvery { useCase.getSuggestedLocations("Melbourne") } returns ResponseWrapper.Success(emptyList())
+        viewModel.setEvent(SearchScreenEvent.OnLocationChanged("Melbourne"))
+        advanceUntilIdle()
+
+        assertThat(viewModel.uiState.selectedLocation).isEqualTo(Location(displayName = "Melbourne"))
+    }
+
+    @Test
+    fun `should clear selected location when typed text is blank`() = runTest {
+        val selectedLocation = Location(nameSlug = "sydney-nsw", displayName = "Sydney, NSW")
+        viewModel.setEvent(SearchScreenEvent.OnLocationSelected(selectedLocation))
+        advanceUntilIdle()
+        assertThat(viewModel.uiState.selectedLocation).isEqualTo(selectedLocation)
+
+        viewModel.setEvent(SearchScreenEvent.OnLocationChanged(""))
+        advanceUntilIdle()
+
+        assertThat(viewModel.uiState.selectedLocation).isNull()
     }
 
     @Test
@@ -148,15 +176,25 @@ class SearchViewModelTest {
         viewModel.setEvent(
             SearchScreenEvent.OnDwellingTypesChanged(listOf(DwellingType.HOUSE))
         )
-        viewModel.setEvent(SearchScreenEvent.OnLocationSelected("Sydney, NSW"))
+        val selectedLocation = Location(nameSlug = "sydney-nsw", displayName = "Sydney, NSW")
+        viewModel.setEvent(SearchScreenEvent.OnLocationSelected(selectedLocation))
         advanceUntilIdle()
 
         viewModel.setEvent(SearchScreenEvent.OnSearchClicked)
         advanceUntilIdle()
 
         val effect = viewModel.effect.first() as SearchScreenEffect.OnSearchRequested
-        assertThat(effect.location).isEqualTo("Sydney, NSW")
+        assertThat(effect.location).isEqualTo(selectedLocation)
         assertThat(effect.status).isEqualTo(StatusType.RENT)
         assertThat(effect.dwellingTypes).isEqualTo(listOf(DwellingType.HOUSE))
+    }
+
+    @Test
+    fun `should emit search requested effect with null location when none selected`() = runTest {
+        viewModel.setEvent(SearchScreenEvent.OnSearchClicked)
+        advanceUntilIdle()
+
+        val effect = viewModel.effect.first() as SearchScreenEffect.OnSearchRequested
+        assertThat(effect.location).isNull()
     }
 }

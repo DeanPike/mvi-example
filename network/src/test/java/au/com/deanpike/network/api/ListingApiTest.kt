@@ -65,7 +65,7 @@ class ListingApiTest {
             assertThat(bedroomCount).isEqualTo(3)
             assertThat(bathroomCount).isEqualTo(1)
             assertThat(homepassEnabled).isFalse()
-            assertThat(geoLocation.latitude).isEqualTo(-33.478928)
+            assertThat(geoLocation!!.latitude).isEqualTo(-33.478928)
             assertThat(geoLocation.longitude).isEqualTo(150.16753)
             assertThat(promoLevel).isEqualTo("StandardPP")
             assertThat(carspaceCount).isEqualTo(1)
@@ -102,7 +102,7 @@ class ListingApiTest {
             assertThat(media[0].type).isEqualTo("photo")
             assertThat(media[0].imageUrl).isEqualTo("https://bucket-api.domain.com.au/v1/bucket/image/2842_8_13_210413_030454-w3244-h2160")
             assertThat(media[0].mediaType).isEqualTo("image")
-            assertThat(geoLocation.latitude).isEqualTo(-27.381521)
+            assertThat(geoLocation!!.latitude).isEqualTo(-27.381521)
             assertThat(geoLocation.longitude).isEqualTo(153.03517)
         }
         with(data.searchResults[1].project!!) {
@@ -169,7 +169,7 @@ class ListingApiTest {
             assertThat(homepassEnabled).isFalse()
             assertThat(additionalFeatures!!.size).isEqualTo(1)
             assertThat(additionalFeatures[0]).isEqualTo("internal laundry")
-            assertThat(geoLocation.latitude).isEqualTo(-27.66721)
+            assertThat(geoLocation!!.latitude).isEqualTo(-27.66721)
             assertThat(geoLocation.longitude).isEqualTo(153.05362)
             assertThat(promoLevel).isEqualTo("P+")
             assertThat(carspaceCount).isEqualTo(2)

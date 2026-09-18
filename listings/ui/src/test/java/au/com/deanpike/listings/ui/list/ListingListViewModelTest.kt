@@ -9,6 +9,7 @@ import au.com.deanpike.listings.client.model.listing.response.Project
 import au.com.deanpike.listings.client.model.listing.response.ProjectChild
 import au.com.deanpike.listings.client.model.listing.response.Property
 import au.com.deanpike.listings.client.model.listing.search.ListingSearch
+import au.com.deanpike.listings.client.model.suggestedlocation.Location
 import au.com.deanpike.listings.client.type.DwellingType
 import au.com.deanpike.listings.client.type.DwellingType.HOUSE
 import au.com.deanpike.listings.client.type.DwellingType.TOWNHOUSE
@@ -109,6 +110,28 @@ class ListingListViewModelTest {
             assertThat(detail.numberOfBathrooms).isEqualTo(3)
             assertThat(detail.numberOfCarSpaces).isEqualTo(2)
             assertThat(agencyColour).isEqualTo("White")
+        }
+    }
+
+    @Test
+    fun `should pass location from initialise event to the use case`() = runTest {
+        val location = Location(nameSlug = "sydney-nsw", displayName = "Sydney, NSW")
+        coEvery {
+            useCase.getListings(
+                ListingSearch(
+                    searchMode = StatusType.BUY,
+                    dwellingTypes = listOf(DwellingType.ALL),
+                    location = location
+                )
+            )
+        } returns ResponseWrapper.Success(listOf(getProperty()))
+
+        viewModel.setEvent(ListingListScreenEvent.Initialise(location = location))
+        advanceUntilIdle()
+
+        with(viewModel.uiState) {
+            assertThat(screenState).isEqualTo(ScreenStateType.SUCCESS)
+            assertThat(this.location).isEqualTo(location)
         }
     }
 

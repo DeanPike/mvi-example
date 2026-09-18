@@ -57,7 +57,7 @@ import au.com.deanpike.uishared.util.ThemePreviews
 @Composable
 fun SearchScreen(
     viewModel: SearchViewModel = hiltViewModel(),
-    onSearch: (String, StatusType, List<DwellingType>) -> Unit = { _, _, _ -> }
+    onSearch: (Location?, StatusType, List<DwellingType>) -> Unit = { _, _, _ -> }
 ) {
     LaunchedEffect(Unit) {
         viewModel.effect.collect { effect ->
@@ -86,16 +86,17 @@ fun SearchScreenContent(
             .padding(top = WindowInsets.statusBars.asPaddingValues(LocalDensity.current).calculateTopPadding())
             .padding(DIM_16)
     ) {
-        var locationInput by remember { mutableStateOf(state.location) }
+        val stateLocationText = state.selectedLocation?.displayName.orEmpty()
+        var locationInput by remember { mutableStateOf(stateLocationText) }
 
-        LaunchedEffect(state.location) {
-            if (state.location != locationInput) {
-                locationInput = state.location
+        LaunchedEffect(stateLocationText) {
+            if (stateLocationText != locationInput) {
+                locationInput = stateLocationText
             }
         }
 
         LaunchedEffect(locationInput) {
-            if (locationInput != state.location) {
+            if (locationInput != stateLocationText) {
                 onEvent(SearchScreenEvent.OnLocationChanged(locationInput))
             }
         }
@@ -273,21 +274,20 @@ private fun StatusButton(
 @Composable
 private fun LocationSuggestions(
     suggestions: List<Location>,
-    onSelected: (String) -> Unit
+    onSelected: (Location) -> Unit
 ) {
     Card(
         modifier = Modifier.fillMaxWidth()
     ) {
         LazyColumn {
             items(suggestions) { suggestion ->
-                val displayName = suggestion.displayName.orEmpty()
                 Text(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .clickable { onSelected(displayName) }
+                        .clickable { onSelected(suggestion) }
                         .padding(DIM_16)
                         .testTag(SEARCH_SCREEN_LOCATION_SUGGESTION),
-                    text = displayName,
+                    text = suggestion.displayName.orEmpty(),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onBackground
                 )

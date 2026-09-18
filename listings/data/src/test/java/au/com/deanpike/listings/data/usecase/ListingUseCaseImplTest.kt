@@ -6,10 +6,12 @@ import au.com.deanpike.datashared.type.ListingType
 import au.com.deanpike.listings.client.model.listing.response.GeoLocation
 import au.com.deanpike.listings.client.model.listing.response.Property
 import au.com.deanpike.listings.client.model.listing.search.ListingSearch
+import au.com.deanpike.listings.client.model.suggestedlocation.Location
 import au.com.deanpike.listings.client.type.DwellingType.HOUSE
 import au.com.deanpike.listings.client.type.StatusType
 import au.com.deanpike.listings.client.usecase.ListingUseCase
 import au.com.deanpike.listings.data.repository.ListingRepository
+import au.com.deanpike.network.model.internal.AddressComponents
 import au.com.deanpike.network.model.internal.ListingSearchRequest
 import io.mockk.coEvery
 import io.mockk.mockk
@@ -57,6 +59,52 @@ class ListingUseCaseImplTest {
         val data = (listingsResponse as ResponseWrapper.Success).data
         assertThat(data.size).isEqualTo(1)
         assertThat(data[0]).isEqualTo(property)
+    }
+
+    @Test
+    fun `get listings with location`() = runTest {
+        val property = getProperty()
+
+        coEvery {
+            repo.getListings(
+                request = ListingSearchRequest(
+                    searchMode = "buy",
+                    dwellingTypes = listOf("House"),
+                    location = listOf(
+                        AddressComponents(
+                            area = "Eastern Suburbs",
+                            postcode = "2026",
+                            region = "Sydney",
+                            stateShort = "NSW",
+                            suburb = "Bondi Beach",
+                            suburbId = 12345
+                        )
+                    )
+                )
+            )
+        } returns ResponseWrapper.Success(
+            listOf(
+                property
+            )
+        )
+
+        val listingsResponse = useCase.getListings(
+            ListingSearch(
+                searchMode = StatusType.BUY,
+                dwellingTypes = listOf(HOUSE),
+                location = Location(
+                    displayName = "Bondi Beach, NSW 2026",
+                    name = "Bondi Beach",
+                    state = "NSW",
+                    regionName = "Sydney",
+                    areaName = "Eastern Suburbs",
+                    postCode = "2026",
+                    suburbId = "12345"
+                )
+            )
+        )
+
+        assertThat(listingsResponse).isInstanceOf(ResponseWrapper.Success::class.java)
     }
 
     private fun getProperty() = Property(

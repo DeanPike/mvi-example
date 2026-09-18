@@ -11,8 +11,16 @@ internal interface SuggestedLocationConverter {
 internal class SuggestedLocationConverterImpl @Inject constructor() : SuggestedLocationConverter {
     override fun convertSuggestedLocation(suggestedLocation: SuggestedLocation): Location {
         return Location(
+            displayName = suggestedLocation.displayName,
+            name = suggestedLocation.name,
+            state = suggestedLocation.state,
+            regionName = suggestedLocation.regionName,
+            areaName = suggestedLocation.areaName,
+            postCode = suggestedLocation.postCode,
+            suburbId = suggestedLocation.suburbId,
             nameSlug = suggestedLocation.nameSlug,
-            displayName = suggestedLocation.displayName
+            category = suggestedLocation.category,
+            group = suggestedLocation.group
         )
     }
 

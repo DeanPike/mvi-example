@@ -24,8 +24,16 @@ class SuggestedLocationConverterImplTest {
         val location = SuggestedLocationConverterImpl().convertSuggestedLocation(suggestedLocation)
 
         with(location) {
-            assertThat(nameSlug).isEqualTo("bondi-beach-nsw-2026")
             assertThat(displayName).isEqualTo("Bondi Beach, NSW 2026")
+            assertThat(name).isEqualTo("Bondi Beach")
+            assertThat(state).isEqualTo("NSW")
+            assertThat(regionName).isEqualTo("Sydney")
+            assertThat(areaName).isEqualTo("Eastern Suburbs")
+            assertThat(postCode).isEqualTo("2026")
+            assertThat(suburbId).isEqualTo("12345")
+            assertThat(nameSlug).isEqualTo("bondi-beach-nsw-2026")
+            assertThat(category).isEqualTo("Suburb")
+            assertThat(group).isEqualTo("Suburbs")
         }
     }
 
@@ -36,8 +44,16 @@ class SuggestedLocationConverterImplTest {
         val location = SuggestedLocationConverterImpl().convertSuggestedLocation(suggestedLocation)
 
         with(location) {
-            assertThat(nameSlug).isNull()
             assertThat(displayName).isNull()
+            assertThat(name).isNull()
+            assertThat(state).isNull()
+            assertThat(regionName).isNull()
+            assertThat(areaName).isNull()
+            assertThat(postCode).isNull()
+            assertThat(suburbId).isNull()
+            assertThat(nameSlug).isNull()
+            assertThat(category).isNull()
+            assertThat(group).isNull()
         }
     }
 }

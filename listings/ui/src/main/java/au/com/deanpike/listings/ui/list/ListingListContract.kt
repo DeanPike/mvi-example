@@ -1,6 +1,7 @@
 package au.com.deanpike.listings.ui.list
 
 import au.com.deanpike.listings.client.model.listing.response.Listing
+import au.com.deanpike.listings.client.model.suggestedlocation.Location
 import au.com.deanpike.listings.client.type.DwellingType
 import au.com.deanpike.listings.client.type.StatusType
 import au.com.deanpike.uishared.base.ScreenStateType
@@ -10,14 +11,14 @@ import au.com.deanpike.uishared.base.UiState
 data class ListingListScreenState(
     val screenState: ScreenStateType = ScreenStateType.INITIAL,
     val listings: List<Listing> = emptyList(),
-    val location: String = "",
+    val location: Location? = null,
     val selectedStatus: StatusType = StatusType.BUY,
     val selectedDwellingTypes: List<DwellingType> = listOf(DwellingType.ALL),
 ) : UiState
 
 sealed class ListingListScreenEvent : UiEvent {
     data class Initialise(
-        val location: String = "",
+        val location: Location? = null,
         val status: StatusType = StatusType.BUY,
         val dwellingTypes: List<DwellingType> = listOf(DwellingType.ALL)
     ) : ListingListScreenEvent()
