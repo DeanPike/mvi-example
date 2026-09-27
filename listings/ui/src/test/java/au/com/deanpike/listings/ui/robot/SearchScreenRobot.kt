@@ -119,6 +119,10 @@ class SearchScreenRobot(composeRule: ComposeContentTestRule) : TestRobotBase<Sea
         composeRule.clickOn("${SEARCH_SCREEN_TOWNHOUSE}_CHECKBOX")
     }
 
+    fun clickHouseLabel() = apply {
+        composeRule.clickOn("${SEARCH_SCREEN_HOUSE}_TEXT")
+    }
+
     fun clickApartment() = apply {
         composeRule.clickOn("${SEARCH_SCREEN_APARTMENT}_CHECKBOX")
     }

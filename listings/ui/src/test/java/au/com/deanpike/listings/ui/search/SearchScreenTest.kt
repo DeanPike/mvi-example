@@ -170,6 +170,23 @@ class SearchScreenTest : RobolectricTestBase() {
     }
 
     @Test
+    fun `should notify dwelling types changed when house label clicked`() {
+        robot
+            .setupComponent(
+                data = SearchScreenRobotInitData(
+                    state = SearchScreenState(selectedDwellingTypes = listOf(DwellingType.ALL))
+                )
+            )
+            .assertLayoutDisplayed()
+            .clickHouseLabel()
+
+        assertEquals(
+            SearchScreenEvent.OnDwellingTypesChanged(listOf(DwellingType.HOUSE)),
+            robot.lastEvent
+        )
+    }
+
+    @Test
     fun `should notify dwelling types changed when townhouse clicked`() {
         robot
             .setupComponent(
