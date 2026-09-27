@@ -20,7 +20,7 @@ fun EntryProviderScope<NavKey>.listingEntryBuilder(backStack: NavBackStack<NavKe
             initialStatus = StatusType.valueOf(key.status),
             initialDwellingTypes = key.dwellingTypes.map { DwellingType.valueOf(it) },
             onSearch = { location, status, dwellingTypes ->
-                backStack.add(
+                backStack.showListingResults(
                     ListingScreenKey(
                         location = location,
                         status = status.name,
@@ -44,22 +44,33 @@ fun EntryProviderScope<NavKey>.listingEntryBuilder(backStack: NavBackStack<NavKe
                 backStack.add(ProjectDetailScreenKey(projectId, address))
             },
             onFilterClicked = { location, status, dwellingTypes ->
-                // Return to the existing search screen rather than stacking a new one on top.
-                val searchIndex = backStack.indexOfLast { it is SearchScreenKey }
-                if (searchIndex >= 0) {
-                    while (backStack.lastIndex > searchIndex) {
-                        backStack.removeAt(backStack.lastIndex)
-                    }
-                } else {
-                    backStack.add(
-                        SearchScreenKey(
-                            location = location,
-                            status = status.name,
-                            dwellingTypes = dwellingTypes.map { it.name }
-                        )
+                backStack.showSearch(
+                    SearchScreenKey(
+                        location = location,
+                        status = status.name,
+                        dwellingTypes = dwellingTypes.map { it.name }
                     )
-                }
+                )
             }
         )
     }
+}
+
+/**
+ * Opens search on top of the listing screen, pre-filled with the listing's current filters, so
+ * back from search returns to the listing screen.
+ */
+internal fun MutableList<NavKey>.showSearch(search: SearchScreenKey) {
+    if (lastOrNull() !is SearchScreenKey) {
+        add(search)
+    }
+}
+
+/**
+ * Makes [results] the only screen in the back stack, replacing the search screen, any previous
+ * results and the details opened from them. Back from the listing screen then exits the app.
+ */
+internal fun MutableList<NavKey>.showListingResults(results: ListingScreenKey) {
+    clear()
+    add(results)
 }

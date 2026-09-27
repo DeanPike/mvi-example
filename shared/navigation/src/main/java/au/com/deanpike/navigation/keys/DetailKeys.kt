@@ -20,6 +20,3 @@ data class ProjectDetailScreenKey(
 data class FullSizeImageComponentKey(
     val imageUrl: String
 ) : NavKey
-
-@Serializable
-data object DefaultDetailScreenKey : NavKey

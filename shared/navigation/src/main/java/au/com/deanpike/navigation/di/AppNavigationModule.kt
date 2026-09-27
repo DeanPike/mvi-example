@@ -15,6 +15,18 @@ object AppNavigationModule {
     @Provides
     @Singleton
     fun provideBackStack(): NavBackStack<NavKey> {
-        return NavBackStack(SearchScreenKey())
+        return NavBackStack(startDestination())
     }
+}
+
+private fun startDestination(): NavKey = SearchScreenKey()
+
+/**
+ * Resets the app-wide back stack to the start destination. The back stack is a singleton, so it
+ * outlives the activity: without this, reopening the app after leaving it with back (while the
+ * process is still alive) would show whatever screen was left in it.
+ */
+fun NavBackStack<NavKey>.resetToStartDestination() {
+    clear()
+    add(startDestination())
 }

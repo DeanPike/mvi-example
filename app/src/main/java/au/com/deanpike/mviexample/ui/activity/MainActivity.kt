@@ -3,6 +3,7 @@ package au.com.deanpike.mviexample.ui.activity
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.addCallback
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.core.view.WindowCompat
@@ -10,9 +11,8 @@ import androidx.core.view.WindowInsetsControllerCompat
 import androidx.navigation3.runtime.EntryProviderScope
 import androidx.navigation3.runtime.NavBackStack
 import androidx.navigation3.runtime.NavKey
-import au.com.deanpike.navigation.keys.DefaultDetailScreenKey
+import au.com.deanpike.navigation.di.resetToStartDestination
 import au.com.deanpike.uishared.theme.AppTheme
-import au.com.deanpike.uishared.util.MviWindowWidthSizeClassProvider
 import au.com.deanpike.uishared.util.SetupStatusBar
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -40,6 +40,20 @@ class MainActivity : ComponentActivity() {
             ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         }
 
+        // Back on the last screen closes the app. Without this, Android 12-15 only moves a root
+        // activity to the background, and reopening would resume on the listing screen instead of
+        // going through onCreate below. Registered before setContent so NavDisplay's own back
+        // handling (added later, so higher priority) still pops screens while there is more than one.
+        onBackPressedDispatcher.addCallback(this) {
+            finish()
+        }
+
+        // A fresh launch always starts on search. Recreation after a configuration change (fold,
+        // tablet rotation) passes a saved state and keeps the user where they were.
+        if (savedInstanceState == null) {
+            backStack.resetToStartDestination()
+        }
+
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
         // Adjust status and navigation bar appearance
@@ -49,10 +63,6 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             SetupStatusBar(this)
-            if (!MviWindowWidthSizeClassProvider.isCompactWidth()) {
-                backStack.add(DefaultDetailScreenKey)
-            }
-
             AppTheme {
                 ApplicationScreen(
                     backStack = backStack,

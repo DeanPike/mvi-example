@@ -1,13 +1,11 @@
 package au.com.deanpike.detail.ui.navigationprovider
 
-import androidx.compose.material3.Text
 import androidx.navigation3.runtime.EntryProviderScope
 import androidx.navigation3.runtime.NavBackStack
 import androidx.navigation3.runtime.NavKey
 import au.com.deanpike.detail.ui.project.ProjectDetailScreen
 import au.com.deanpike.detail.ui.property.PropertyDetailScreen
 import au.com.deanpike.detail.ui.shared.FullSizeImageComponent
-import au.com.deanpike.navigation.keys.DefaultDetailScreenKey
 import au.com.deanpike.navigation.keys.FullSizeImageComponentKey
 import au.com.deanpike.navigation.keys.ProjectDetailScreenKey
 import au.com.deanpike.navigation.keys.PropertyDetailScreenKey
@@ -57,10 +55,5 @@ fun EntryProviderScope<NavKey>.detailEntryBuilder(backStack: NavBackStack<NavKey
                 backStack.removeLastOrNull()
             }
         )
-    }
-    entry<DefaultDetailScreenKey>(
-        metadata = ListDetailSceneStrategy.detailPane()
-    ) {
-        Text(text = "Select a property or project to see details")
     }
 }

@@ -10,6 +10,7 @@ import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
+import au.com.deanpike.detail.ui.shared.DetailPlaceholder
 import au.com.deanpike.navigation.scene.rememberListDetailSceneStrategy
 
 @OptIn(ExperimentalMaterial3AdaptiveApi::class)
@@ -19,7 +20,9 @@ fun ApplicationScreen(
     backStack: NavBackStack<NavKey>,
     appEntryBuilder: Set<EntryProviderScope<NavKey>.() -> Unit>
 ) {
-    val listDetailStrategy = rememberListDetailSceneStrategy<NavKey>()
+    val listDetailStrategy = rememberListDetailSceneStrategy<NavKey>(
+        detailPlaceholder = { DetailPlaceholder() }
+    )
 
     NavDisplay(
         modifier = modifier,

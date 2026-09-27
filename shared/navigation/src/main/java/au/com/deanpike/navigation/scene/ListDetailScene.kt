@@ -21,32 +21,42 @@ class ListDetailScene<T : Any>(
     override val key: Any,
     override val previousEntries: List<NavEntry<T>>,
     val listEntry: NavEntry<T>,
-    val detailEntry: NavEntry<T>,
+    val detailEntry: NavEntry<T>?,
+    val detailPlaceholder: @Composable () -> Unit,
 ) : Scene<T> {
 
-    override val entries: List<NavEntry<T>> = listOf(listEntry, detailEntry)
+    override val entries: List<NavEntry<T>> = listOfNotNull(listEntry, detailEntry)
     override val content: @Composable (() -> Unit) = {
         Row(modifier = Modifier.fillMaxSize()) {
             Column(modifier = Modifier.weight(0.4f)) {
                 listEntry.Content()
             }
             Column(modifier = Modifier.weight(0.6f)) {
-                detailEntry.Content()
+                detailEntry?.Content() ?: detailPlaceholder()
             }
         }
     }
 }
 
+/**
+ * @param detailPlaceholder shown in the detail pane when a list is on top of the back stack with
+ * nothing selected yet.
+ */
 @Composable
-fun <T : Any> rememberListDetailSceneStrategy(): ListDetailSceneStrategy<T> {
+fun <T : Any> rememberListDetailSceneStrategy(
+    detailPlaceholder: @Composable () -> Unit
+): ListDetailSceneStrategy<T> {
     val windowSizeClass = currentWindowAdaptiveInfo().windowSizeClass
 
-    return remember(windowSizeClass) {
-        ListDetailSceneStrategy(windowSizeClass)
+    return remember(windowSizeClass, detailPlaceholder) {
+        ListDetailSceneStrategy(windowSizeClass, detailPlaceholder)
     }
 }
 
-class ListDetailSceneStrategy<T : Any>(val windowSizeClass: WindowSizeClass) : SceneStrategy<T> {
+class ListDetailSceneStrategy<T : Any>(
+    val windowSizeClass: WindowSizeClass,
+    val detailPlaceholder: @Composable () -> Unit
+) : SceneStrategy<T> {
 
     companion object {
 
@@ -75,15 +85,29 @@ class ListDetailSceneStrategy<T : Any>(val windowSizeClass: WindowSizeClass) : S
             return null
         }
 
-        val detailEntry = entries.lastOrNull()?.takeIf { it.metadata.contains(DetailKey) } ?: return null
-        val listEntry = entries.findLast { it.metadata.contains(ListKey) } ?: return null
-        val sceneKey = listEntry.contentKey
+        val lastEntry = entries.lastOrNull() ?: return null
 
+        // A list on top with nothing selected: show it beside the placeholder detail pane.
+        if (lastEntry.metadata.contains(ListKey)) {
+            return ListDetailScene(
+                key = lastEntry.contentKey,
+                previousEntries = entries.dropLast(1),
+                listEntry = lastEntry,
+                detailEntry = null,
+                detailPlaceholder = detailPlaceholder
+            )
+        }
+
+        val detailEntry = lastEntry.takeIf { it.metadata.contains(DetailKey) } ?: return null
+        val listEntry = entries.findLast { it.metadata.contains(ListKey) } ?: return null
+
+        // Keyed by the list entry so moving between the placeholder and a detail keeps the list pane.
         return ListDetailScene(
-            key = sceneKey,
+            key = listEntry.contentKey,
             previousEntries = entries.dropLast(1),
             listEntry = listEntry,
-            detailEntry = detailEntry
+            detailEntry = detailEntry,
+            detailPlaceholder = detailPlaceholder
         )
     }
 }
