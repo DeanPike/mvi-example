@@ -19,7 +19,7 @@ import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 import kotlin.time.Duration.Companion.milliseconds
 
-private const val LOCATION_SEARCH_DEBOUNCE_MS = 500L
+private const val LOCATION_SEARCH_DEBOUNCE_MS = 250L
 
 @OptIn(ExperimentalCoroutinesApi::class, FlowPreview::class)
 @HiltViewModel
