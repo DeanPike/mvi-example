@@ -27,10 +27,6 @@ class ListingListViewModel @Inject constructor(
                 initialise(event)
             }
 
-            is ListingListScreenEvent.OnFilterApplied -> {
-                onFilterChanged(event)
-            }
-
             is ListingListScreenEvent.OnRetryClicked -> {
                 onRetryClicked()
             }
@@ -39,6 +35,9 @@ class ListingListViewModel @Inject constructor(
             }
 
             is ListingListScreenEvent.OnProjectSelected -> {
+            }
+
+            is ListingListScreenEvent.OnFilterClicked -> {
             }
         }
     }
@@ -53,19 +52,6 @@ class ListingListViewModel @Inject constructor(
             )
         }
         getListings()
-    }
-
-    private fun onFilterChanged(event: ListingListScreenEvent.OnFilterApplied) {
-        if (uiState.selectedStatus != event.status || uiState.selectedDwellingTypes != event.dwellingTypes) {
-            setState {
-                copy(
-                    selectedDwellingTypes = event.dwellingTypes,
-                    selectedStatus = event.status,
-                    screenState = ScreenStateType.LOADING
-                )
-            }
-            getListings()
-        }
     }
 
     private fun onRetryClicked() {

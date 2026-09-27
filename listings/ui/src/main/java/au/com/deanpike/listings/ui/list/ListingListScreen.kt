@@ -20,7 +20,6 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.PrimaryTabRow
 import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
@@ -28,7 +27,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -49,7 +47,6 @@ import au.com.deanpike.listings.ui.R
 import au.com.deanpike.listings.ui.list.ListingListScreenTestTags.LISTING_LIST
 import au.com.deanpike.listings.ui.list.ListingListScreenTestTags.LISTING_LIST_HEADING
 import au.com.deanpike.listings.ui.list.ListingListScreenTestTags.LISTING_LIST_TITLE
-import au.com.deanpike.listings.ui.list.component.FilterBottomSheet
 import au.com.deanpike.listings.ui.list.component.FilterComponent
 import au.com.deanpike.listings.ui.list.component.ProjectCard
 import au.com.deanpike.listings.ui.list.component.PropertyCard
@@ -71,7 +68,8 @@ fun ListingListScreen(
     status: StatusType = StatusType.BUY,
     dwellingTypes: List<DwellingType> = listOf(DwellingType.ALL),
     onPropertyClicked: (Long, String) -> Unit = { _, _ -> },
-    onProjectClicked: (Long, String) -> Unit = { _, _ -> }
+    onProjectClicked: (Long, String) -> Unit = { _, _ -> },
+    onFilterClicked: (Location?, StatusType, List<DwellingType>) -> Unit = { _, _, _ -> }
 ) {
     LaunchedEffect(viewModel.uiState.screenState) {
         if (viewModel.uiState.screenState == ScreenStateType.INITIAL) {
@@ -97,6 +95,14 @@ fun ListingListScreen(
 
                 is ListingListScreenEvent.OnProjectSelected -> {
                     onProjectClicked(it.id, it.address)
+                }
+
+                is ListingListScreenEvent.OnFilterClicked -> {
+                    onFilterClicked(
+                        viewModel.uiState.location,
+                        viewModel.uiState.selectedStatus,
+                        viewModel.uiState.selectedDwellingTypes
+                    )
                 }
 
                 else -> {
@@ -201,9 +207,6 @@ private fun SuccessContent(
     state: ListingListScreenState,
     onEvent: (ListingListScreenEvent) -> Unit = {}
 ) {
-    var showFilters by remember {
-        mutableStateOf(false)
-    }
     var selectedTabIndex by remember {
         mutableIntStateOf(0)
     }
@@ -216,7 +219,7 @@ private fun SuccessContent(
             selectedStatus = state.selectedStatus,
             selectedDwellingTypes = state.selectedDwellingTypes,
             onEvent = {
-                showFilters = true
+                onEvent(ListingListScreenEvent.OnFilterClicked)
             }
         )
         HorizontalDivider()
@@ -246,23 +249,6 @@ private fun SuccessContent(
             MapContent(
                 listings = state.listings,
                 onEvent = onEvent
-            )
-        }
-    }
-
-    if (showFilters) {
-        ModalBottomSheet(
-            onDismissRequest = {
-                showFilters = false
-            }
-        ) {
-            FilterBottomSheet(
-                statusType = state.selectedStatus,
-                dwellingTypes = state.selectedDwellingTypes,
-                onApply = { status, listingTypes ->
-                    showFilters = false
-                    onEvent(ListingListScreenEvent.OnFilterApplied(status, listingTypes))
-                }
             )
         }
     }

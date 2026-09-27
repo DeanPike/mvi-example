@@ -18,7 +18,9 @@
             android:name=".ui.activity.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/Theme.Mviexample">
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Mviexample"
+            tools:ignore="DiscouragedApi,LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

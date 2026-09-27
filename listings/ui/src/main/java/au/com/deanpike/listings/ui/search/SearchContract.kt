@@ -11,10 +11,17 @@ data class SearchScreenState(
     val selectedLocation: Location? = null,
     val suggestedLocations: List<Location> = emptyList(),
     val selectedStatus: StatusType = StatusType.BUY,
-    val selectedDwellingTypes: List<DwellingType> = listOf(DwellingType.ALL)
+    val selectedDwellingTypes: List<DwellingType> = listOf(DwellingType.ALL),
+    val initialised: Boolean = false
 ) : UiState
 
 sealed class SearchScreenEvent : UiEvent {
+    data class Initialise(
+        val location: Location? = null,
+        val status: StatusType = StatusType.BUY,
+        val dwellingTypes: List<DwellingType> = listOf(DwellingType.ALL)
+    ) : SearchScreenEvent()
+
     data class OnLocationChanged(val location: String) : SearchScreenEvent()
     data class OnLocationSelected(val location: Location) : SearchScreenEvent()
     data class OnStatusChanged(val status: StatusType) : SearchScreenEvent()

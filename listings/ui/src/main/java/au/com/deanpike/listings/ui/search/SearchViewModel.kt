@@ -44,6 +44,20 @@ class SearchViewModel @Inject constructor(
 
     override fun handleEvent(event: SearchScreenEvent) {
         when (event) {
+            is SearchScreenEvent.Initialise -> {
+                // The composable re-sends Initialise whenever it re-enters composition (back
+                // navigation, rotation); only seed state from the nav key the first time.
+                if (uiState.initialised) return
+                setState {
+                    copy(
+                        selectedLocation = event.location,
+                        selectedStatus = event.status,
+                        selectedDwellingTypes = event.dwellingTypes,
+                        initialised = true
+                    )
+                }
+            }
+
             is SearchScreenEvent.OnLocationChanged -> {
                 onLocationChanged(event.location)
             }

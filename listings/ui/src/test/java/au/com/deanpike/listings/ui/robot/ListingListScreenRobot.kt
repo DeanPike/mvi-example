@@ -7,6 +7,7 @@ import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import androidx.compose.ui.test.onChildAt
 import androidx.compose.ui.test.onNodeWithTag
 import au.com.deanpike.listings.ui.list.ListingListScreenContent
+import au.com.deanpike.listings.ui.list.ListingListScreenEvent
 import au.com.deanpike.listings.ui.list.ListingListScreenState
 import au.com.deanpike.listings.ui.list.ListingListScreenTestTags.LISTING_LIST
 import au.com.deanpike.listings.ui.list.ListingListScreenTestTags.LISTING_LIST_HEADING
@@ -20,11 +21,17 @@ import au.com.deanpike.uitestshared.util.assertTextDisplayed
 import au.com.deanpike.uitestshared.util.scrollToItemPosition
 
 class ListingListScreenRobot(composeRule: ComposeContentTestRule) : TestRobotBase<ListingListScreenRobot, ListingListScreenRobotInitData>(composeRule) {
+    var lastEvent: ListingListScreenEvent? = null
+        private set
+
     override fun setupComponent(data: ListingListScreenRobotInitData?) = apply {
         composeRule.setContent {
             MaterialTheme {
                 ListingListScreenContent(
-                    state = data!!.state
+                    state = data!!.state,
+                    onEvent = {
+                        lastEvent = it
+                    }
                 )
             }
         }

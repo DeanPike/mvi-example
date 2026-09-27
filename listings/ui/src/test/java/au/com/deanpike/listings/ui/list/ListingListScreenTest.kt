@@ -6,20 +6,19 @@ import au.com.deanpike.listings.client.model.listing.response.GeoLocation
 import au.com.deanpike.listings.client.model.listing.response.Project
 import au.com.deanpike.listings.client.model.listing.response.ProjectChild
 import au.com.deanpike.listings.client.model.listing.response.Property
-import au.com.deanpike.listings.ui.robot.FilterBottomSheetRobot
 import au.com.deanpike.listings.ui.robot.FilterComponentRobot
 import au.com.deanpike.listings.ui.robot.ListingListScreenRobot
 import au.com.deanpike.listings.ui.robot.ListingListScreenRobotInitData
 import au.com.deanpike.uishared.base.ScreenStateType
 import au.com.deanpike.uitestshared.base.RobolectricTestBase
 import au.com.deanpike.uitestshared.util.disableAnimations
+import org.junit.Assert.assertEquals
 import org.junit.Test
 
 class ListingListScreenTest : RobolectricTestBase() {
 
     private val robot = ListingListScreenRobot(composeTestRule)
     private val filterRobot = FilterComponentRobot(composeTestRule)
-    private val bottomSheetRobot = FilterBottomSheetRobot(composeTestRule)
 
     @Test
     fun show_listings() {
@@ -50,7 +49,7 @@ class ListingListScreenTest : RobolectricTestBase() {
     }
 
     @Test
-    fun `show and hide filter options`() {
+    fun `clicking the filter row emits OnFilterClicked`() {
         val propertyOne = getPropertyOne()
         composeTestRule.disableAnimations()
 
@@ -65,15 +64,9 @@ class ListingListScreenTest : RobolectricTestBase() {
             )
             .assertLayoutDisplayed()
 
-        filterRobot
-            .clickFilterButton()
-            .assertFilterButtonDisplayed()
-            .clickFilterButton()
+        filterRobot.clickFilterButton()
 
-        bottomSheetRobot
-            .assertLayoutDisplayed()
-            .clickApplyButton()
-            .assertLayoutHidden()
+        assertEquals(ListingListScreenEvent.OnFilterClicked, robot.lastEvent)
     }
 
     private fun getPropertyOne(): Property {

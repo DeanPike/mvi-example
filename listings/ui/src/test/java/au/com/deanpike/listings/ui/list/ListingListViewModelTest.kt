@@ -11,14 +11,11 @@ import au.com.deanpike.listings.client.model.listing.response.Property
 import au.com.deanpike.listings.client.model.listing.search.ListingSearch
 import au.com.deanpike.listings.client.model.suggestedlocation.Location
 import au.com.deanpike.listings.client.type.DwellingType
-import au.com.deanpike.listings.client.type.DwellingType.HOUSE
-import au.com.deanpike.listings.client.type.DwellingType.TOWNHOUSE
 import au.com.deanpike.listings.client.type.StatusType
 import au.com.deanpike.listings.client.usecase.ListingUseCase
 import au.com.deanpike.testshared.extension.TestDispatcherExtension
 import au.com.deanpike.uishared.base.ScreenStateType
 import io.mockk.coEvery
-import io.mockk.coVerify
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.advanceUntilIdle
@@ -179,50 +176,9 @@ class ListingListViewModelTest {
     }
 
     @Test
-    fun `should handle status and dwelling type change`() = runTest {
-        coEvery {
-            useCase.getListings(
-                ListingSearch(
-                    searchMode = StatusType.RENT,
-                    dwellingTypes = listOf(TOWNHOUSE, HOUSE)
-                )
-            )
-        } returns ResponseWrapper.Success(listOf(getProject(), getProperty()))
-
-        viewModel.setEvent(
-            ListingListScreenEvent.OnFilterApplied(
-                status = StatusType.RENT,
-                dwellingTypes = listOf(TOWNHOUSE, HOUSE)
-            )
-        )
+    fun `handle filter clicked`() = runTest {
+        viewModel.setEvent(ListingListScreenEvent.OnFilterClicked)
         advanceUntilIdle()
-
-        with(viewModel.uiState) {
-            assertThat(screenState).isEqualTo(ScreenStateType.SUCCESS)
-            assertThat(listings.size).isEqualTo(2)
-            assertThat(selectedStatus).isEqualTo(StatusType.RENT)
-            assertThat(2).isEqualTo(selectedDwellingTypes.size)
-            assertThat(selectedDwellingTypes[0]).isEqualTo(TOWNHOUSE)
-            assertThat(selectedDwellingTypes[1]).isEqualTo(HOUSE)
-        }
-
-        // Do nothing if the user selects the same search mode
-        viewModel.setEvent(
-            ListingListScreenEvent.OnFilterApplied(
-                status = StatusType.RENT,
-                dwellingTypes = listOf(TOWNHOUSE, HOUSE)
-            )
-        )
-        advanceUntilIdle()
-
-        coVerify(exactly = 1) {
-            useCase.getListings(
-                ListingSearch(
-                    searchMode = StatusType.RENT,
-                    dwellingTypes = listOf(TOWNHOUSE, HOUSE)
-                )
-            )
-        }
     }
 
     @Test

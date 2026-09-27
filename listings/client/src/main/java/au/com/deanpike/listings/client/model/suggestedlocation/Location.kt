@@ -1,5 +1,8 @@
 package au.com.deanpike.listings.client.model.suggestedlocation
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class Location(
     val displayName: String? = null,
     val name: String? = null,

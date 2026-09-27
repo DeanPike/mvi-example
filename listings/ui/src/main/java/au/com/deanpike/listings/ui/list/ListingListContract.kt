@@ -23,10 +23,7 @@ sealed class ListingListScreenEvent : UiEvent {
         val dwellingTypes: List<DwellingType> = listOf(DwellingType.ALL)
     ) : ListingListScreenEvent()
 
-    data class OnFilterApplied(
-        val status: StatusType,
-        val dwellingTypes: List<DwellingType>
-    ) : ListingListScreenEvent()
+    data object OnFilterClicked : ListingListScreenEvent()
 
     data object OnRetryClicked : ListingListScreenEvent()
     data class OnPropertySelected(

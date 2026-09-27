@@ -57,8 +57,21 @@ import au.com.deanpike.uishared.util.ThemePreviews
 @Composable
 fun SearchScreen(
     viewModel: SearchViewModel = hiltViewModel(),
+    initialLocation: Location? = null,
+    initialStatus: StatusType = StatusType.BUY,
+    initialDwellingTypes: List<DwellingType> = listOf(DwellingType.ALL),
     onSearch: (Location?, StatusType, List<DwellingType>) -> Unit = { _, _, _ -> }
 ) {
+    LaunchedEffect(Unit) {
+        viewModel.setEvent(
+            SearchScreenEvent.Initialise(
+                location = initialLocation,
+                status = initialStatus,
+                dwellingTypes = initialDwellingTypes
+            )
+        )
+    }
+
     LaunchedEffect(Unit) {
         viewModel.effect.collect { effect ->
             when (effect) {

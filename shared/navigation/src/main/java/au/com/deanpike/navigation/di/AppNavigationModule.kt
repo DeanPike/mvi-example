@@ -15,6 +15,6 @@ object AppNavigationModule {
     @Provides
     @Singleton
     fun provideBackStack(): NavBackStack<NavKey> {
-        return NavBackStack(SearchScreenKey)
+        return NavBackStack(SearchScreenKey())
     }
 }

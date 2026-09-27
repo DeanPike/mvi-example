@@ -152,6 +152,45 @@ class SearchViewModelTest {
     }
 
     @Test
+    fun `should seed state from initialise`() = runTest {
+        val location = Location(nameSlug = "bondi-nsw-2026", displayName = "Bondi, NSW 2026")
+
+        viewModel.setEvent(
+            SearchScreenEvent.Initialise(
+                location = location,
+                status = StatusType.RENT,
+                dwellingTypes = listOf(DwellingType.HOUSE)
+            )
+        )
+        advanceUntilIdle()
+
+        with(viewModel.uiState) {
+            assertThat(selectedLocation).isEqualTo(location)
+            assertThat(selectedStatus).isEqualTo(StatusType.RENT)
+            assertThat(selectedDwellingTypes).isEqualTo(listOf(DwellingType.HOUSE))
+            assertThat(initialised).isTrue()
+        }
+    }
+
+    @Test
+    fun `should ignore initialise once already initialised`() = runTest {
+        viewModel.setEvent(SearchScreenEvent.Initialise())
+        advanceUntilIdle()
+
+        viewModel.setEvent(SearchScreenEvent.OnStatusChanged(StatusType.RENT))
+        viewModel.setEvent(SearchScreenEvent.OnDwellingTypesChanged(listOf(DwellingType.TOWNHOUSE)))
+        advanceUntilIdle()
+
+        viewModel.setEvent(SearchScreenEvent.Initialise())
+        advanceUntilIdle()
+
+        with(viewModel.uiState) {
+            assertThat(selectedStatus).isEqualTo(StatusType.RENT)
+            assertThat(selectedDwellingTypes).isEqualTo(listOf(DwellingType.TOWNHOUSE))
+        }
+    }
+
+    @Test
     fun `should update selected status`() = runTest {
         viewModel.setEvent(SearchScreenEvent.OnStatusChanged(StatusType.RENT))
         advanceUntilIdle()
