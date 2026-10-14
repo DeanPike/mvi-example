@@ -28,6 +28,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveableStateHolder
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -211,6 +212,9 @@ private fun SuccessContent(
         mutableIntStateOf(0)
     }
 
+    // Keeps the map's camera position while the list tab is shown
+    val saveableStateHolder = rememberSaveableStateHolder()
+
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -246,10 +250,12 @@ private fun SuccessContent(
                 onEvent = onEvent
             )
         } else {
-            MapContent(
-                listings = state.listings,
-                onEvent = onEvent
-            )
+            saveableStateHolder.SaveableStateProvider(MAP_STATE_KEY) {
+                MapContent(
+                    listings = state.listings,
+                    onEvent = onEvent
+                )
+            }
         }
     }
 }
@@ -330,6 +336,8 @@ private fun LoadingContent() {
         CircularProgressIndicator()
     }
 }
+
+private const val MAP_STATE_KEY = "map"
 
 object ListingListScreenTestTags {
     private const val PREFIX = "LISTING_LIST_SCREEN_"

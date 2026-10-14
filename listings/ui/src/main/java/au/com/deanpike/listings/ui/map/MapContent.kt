@@ -20,6 +20,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -99,6 +100,11 @@ fun MapContent(
 
     val selectedListingCardInfo = remember(listings, selectedListingId) {
         toMapSelectionCardInfo(listings, selectedListingId)
+    }
+
+    // Listing ids the camera was last fitted to, so returning to the map tab doesn't re-fit
+    var fittedListingIds by rememberSaveable {
+        mutableStateOf<List<Long>?>(null)
     }
 
     var clickedCluster by remember {
@@ -216,7 +222,10 @@ fun MapContent(
         }
 
         LaunchedEffect(mapState, pins) {
+            val listingIds = pins.map { it.listingId }
+            if (listingIds == fittedListingIds) return@LaunchedEffect
             val bounds = toPinBounds(pins) ?: return@LaunchedEffect
+            fittedListingIds = listingIds
             if (bounds.southwest == bounds.northeast) {
                 mapState.animateCamera(
                     CameraUpdate(
