@@ -54,6 +54,7 @@ import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.jsonPrimitive
 import kotlinx.serialization.json.put
+import org.maplibre.compose.camera.CameraAnimation
 import org.maplibre.compose.camera.CameraFit
 import org.maplibre.compose.camera.CameraPosition
 import org.maplibre.compose.camera.CameraUpdate
@@ -243,7 +244,10 @@ fun MapContent(
                             right = PIN_BOUNDS_PADDING,
                             bottom = PIN_BOUNDS_PADDING
                         )
-                    )
+                    ),
+                    animation = CameraAnimation.Fly(CameraAnimation.Fly.Standard) {
+                        speed = CameraAnimation.Fly.DefaultSpeed * FIT_PINS_SPEED_MULTIPLIER
+                    }
                 )
             }
         }
@@ -409,6 +413,7 @@ internal fun toPinBounds(pins: List<MapPin>): BoundingBox? {
 
 private const val SINGLE_PIN_ZOOM = 14.0
 private val PIN_BOUNDS_PADDING = 48.dp
+private const val FIT_PINS_SPEED_MULTIPLIER = 2.5
 private const val PIN_LISTING_ID_PROPERTY = "listingId"
 private const val PIN_LISTING_TYPE_PROPERTY = "listingType"
 private val SELECTED_PIN_COLOR = Color.Red

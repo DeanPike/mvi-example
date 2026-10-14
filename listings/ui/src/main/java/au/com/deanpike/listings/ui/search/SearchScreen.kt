@@ -9,6 +9,8 @@ import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.imePadding
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.lazy.LazyColumn
@@ -17,6 +19,8 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
@@ -30,6 +34,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -96,149 +101,172 @@ fun SearchScreenContent(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(top = WindowInsets.statusBars.asPaddingValues(LocalDensity.current).calculateTopPadding())
+            .padding(
+                top = WindowInsets.statusBars.asPaddingValues(LocalDensity.current)
+                    .calculateTopPadding()
+            )
+            .navigationBarsPadding()
+            .imePadding()
             .padding(DIM_16)
     ) {
-        val stateLocationText = state.selectedLocation?.displayName.orEmpty()
-        var locationInput by remember { mutableStateOf(stateLocationText) }
-
-        LaunchedEffect(stateLocationText) {
-            if (stateLocationText != locationInput) {
-                locationInput = stateLocationText
-            }
-        }
-
-        LaunchedEffect(locationInput) {
-            if (locationInput != stateLocationText) {
-                onEvent(SearchScreenEvent.OnLocationChanged(locationInput))
-            }
-        }
-
-        OutlinedTextField(
+        Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .testTag(SEARCH_SCREEN_LOCATION_FIELD),
-        value = locationInput,
-            onValueChange = {
-                locationInput = it
-            },
-            label = {
-                Text(text = stringResource(id = R.string.location))
-            },
-            singleLine = true
-        )
-
-        if (state.suggestedLocations.isNotEmpty()) {
-            LocationSuggestions(
-                suggestions = state.suggestedLocations,
-                onSelected = {
-                    onEvent(SearchScreenEvent.OnLocationSelected(it))
-                }
-            )
-        }
-
-        HorizontalDivider(
-            modifier = Modifier.padding(vertical = DIM_16)
-        )
-
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceEvenly
+                .weight(1f)
         ) {
-            StatusButton(
-                text = stringResource(R.string.buy),
-                isSelected = state.selectedStatus == StatusType.BUY,
-                testTag = SEARCH_SCREEN_BUY_BUTTON,
-                onClick = {
-                    onEvent(SearchScreenEvent.OnStatusChanged(StatusType.BUY))
+            val stateLocationText = state.selectedLocation?.displayName.orEmpty()
+            var locationInput by remember { mutableStateOf(stateLocationText) }
+
+            LaunchedEffect(stateLocationText) {
+                if (stateLocationText != locationInput) {
+                    locationInput = stateLocationText
+                }
+            }
+
+            LaunchedEffect(locationInput) {
+                if (locationInput != stateLocationText) {
+                    onEvent(SearchScreenEvent.OnLocationChanged(locationInput))
+                }
+            }
+
+            OutlinedTextField(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .testTag(SEARCH_SCREEN_LOCATION_FIELD),
+                value = locationInput,
+                onValueChange = {
+                    locationInput = it
+                },
+                label = {
+                    Text(text = stringResource(id = R.string.location))
+                },
+                singleLine = true,
+                trailingIcon = {
+                    IconButton(
+                        onClick = {
+                            locationInput = ""
+                        }
+                    ) {
+                        Icon(
+                            painter = painterResource(R.drawable.outline_highlight_off_24),
+                            contentDescription = stringResource(R.string.clear)
+                        )
+                    }
                 }
             )
-            StatusButton(
-                text = stringResource(R.string.rent),
-                isSelected = state.selectedStatus == StatusType.RENT,
-                testTag = SEARCH_SCREEN_RENT_BUTTON,
-                onClick = {
-                    onEvent(SearchScreenEvent.OnStatusChanged(StatusType.RENT))
-                }
+
+            if (state.suggestedLocations.isNotEmpty()) {
+                LocationSuggestions(
+                    suggestions = state.suggestedLocations,
+                    onSelected = {
+                        onEvent(SearchScreenEvent.OnLocationSelected(it))
+                    }
+                )
+            }
+
+            HorizontalDivider(
+                modifier = Modifier.padding(vertical = DIM_16)
             )
-            StatusButton(
-                text = stringResource(R.string.sold),
-                isSelected = state.selectedStatus == StatusType.SOLD,
-                testTag = SEARCH_SCREEN_SOLD_BUTTON,
-                onClick = {
-                    onEvent(SearchScreenEvent.OnStatusChanged(StatusType.SOLD))
-                }
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceEvenly
+            ) {
+                StatusButton(
+                    text = stringResource(R.string.buy),
+                    isSelected = state.selectedStatus == StatusType.BUY,
+                    testTag = SEARCH_SCREEN_BUY_BUTTON,
+                    onClick = {
+                        onEvent(SearchScreenEvent.OnStatusChanged(StatusType.BUY))
+                    }
+                )
+                StatusButton(
+                    text = stringResource(R.string.rent),
+                    isSelected = state.selectedStatus == StatusType.RENT,
+                    testTag = SEARCH_SCREEN_RENT_BUTTON,
+                    onClick = {
+                        onEvent(SearchScreenEvent.OnStatusChanged(StatusType.RENT))
+                    }
+                )
+                StatusButton(
+                    text = stringResource(R.string.sold),
+                    isSelected = state.selectedStatus == StatusType.SOLD,
+                    testTag = SEARCH_SCREEN_SOLD_BUTTON,
+                    onClick = {
+                        onEvent(SearchScreenEvent.OnStatusChanged(StatusType.SOLD))
+                    }
+                )
+            }
+
+            HorizontalDivider(
+                modifier = Modifier.padding(vertical = DIM_16)
+            )
+
+            ListingTypeItem(
+                description = stringResource(id = R.string.all),
+                isSelected = state.selectedDwellingTypes.contains(DwellingType.ALL),
+                onValueChanged = {
+                    onEvent(
+                        SearchScreenEvent.OnDwellingTypesChanged(
+                            updateDwellingTypes(
+                                currentTypes = state.selectedDwellingTypes,
+                                type = DwellingType.ALL,
+                                isChecked = it
+                            )
+                        )
+                    )
+                },
+                testTag = SEARCH_SCREEN_ALL_DWELLINGS
+            )
+            ListingTypeItem(
+                description = stringResource(id = R.string.house),
+                isSelected = state.selectedDwellingTypes.contains(DwellingType.HOUSE),
+                onValueChanged = {
+                    onEvent(
+                        SearchScreenEvent.OnDwellingTypesChanged(
+                            updateDwellingTypes(
+                                currentTypes = state.selectedDwellingTypes,
+                                type = DwellingType.HOUSE,
+                                isChecked = it
+                            )
+                        )
+                    )
+                },
+                testTag = SEARCH_SCREEN_HOUSE
+            )
+            ListingTypeItem(
+                description = stringResource(id = R.string.townhouse),
+                isSelected = state.selectedDwellingTypes.contains(DwellingType.TOWNHOUSE),
+                onValueChanged = {
+                    onEvent(
+                        SearchScreenEvent.OnDwellingTypesChanged(
+                            updateDwellingTypes(
+                                currentTypes = state.selectedDwellingTypes,
+                                type = DwellingType.TOWNHOUSE,
+                                isChecked = it
+                            )
+                        )
+                    )
+                },
+                testTag = SEARCH_SCREEN_TOWNHOUSE
+            )
+            ListingTypeItem(
+                description = stringResource(id = R.string.apartment_unit_flat),
+                isSelected = state.selectedDwellingTypes.contains(DwellingType.APARTMENT_UNIT_FLAT),
+                onValueChanged = {
+                    onEvent(
+                        SearchScreenEvent.OnDwellingTypesChanged(
+                            updateDwellingTypes(
+                                currentTypes = state.selectedDwellingTypes,
+                                type = DwellingType.APARTMENT_UNIT_FLAT,
+                                isChecked = it
+                            )
+                        )
+                    )
+                },
+                testTag = SEARCH_SCREEN_APARTMENT
             )
         }
-
-        HorizontalDivider(
-            modifier = Modifier.padding(vertical = DIM_16)
-        )
-
-        ListingTypeItem(
-            description = stringResource(id = R.string.all),
-            isSelected = state.selectedDwellingTypes.contains(DwellingType.ALL),
-            onValueChanged = {
-                onEvent(
-                    SearchScreenEvent.OnDwellingTypesChanged(
-                        updateDwellingTypes(
-                            currentTypes = state.selectedDwellingTypes,
-                            type = DwellingType.ALL,
-                            isChecked = it
-                        )
-                    )
-                )
-            },
-            testTag = SEARCH_SCREEN_ALL_DWELLINGS
-        )
-        ListingTypeItem(
-            description = stringResource(id = R.string.house),
-            isSelected = state.selectedDwellingTypes.contains(DwellingType.HOUSE),
-            onValueChanged = {
-                onEvent(
-                    SearchScreenEvent.OnDwellingTypesChanged(
-                        updateDwellingTypes(
-                            currentTypes = state.selectedDwellingTypes,
-                            type = DwellingType.HOUSE,
-                            isChecked = it
-                        )
-                    )
-                )
-            },
-            testTag = SEARCH_SCREEN_HOUSE
-        )
-        ListingTypeItem(
-            description = stringResource(id = R.string.townhouse),
-            isSelected = state.selectedDwellingTypes.contains(DwellingType.TOWNHOUSE),
-            onValueChanged = {
-                onEvent(
-                    SearchScreenEvent.OnDwellingTypesChanged(
-                        updateDwellingTypes(
-                            currentTypes = state.selectedDwellingTypes,
-                            type = DwellingType.TOWNHOUSE,
-                            isChecked = it
-                        )
-                    )
-                )
-            },
-            testTag = SEARCH_SCREEN_TOWNHOUSE
-        )
-        ListingTypeItem(
-            description = stringResource(id = R.string.apartment_unit_flat),
-            isSelected = state.selectedDwellingTypes.contains(DwellingType.APARTMENT_UNIT_FLAT),
-            onValueChanged = {
-                onEvent(
-                    SearchScreenEvent.OnDwellingTypesChanged(
-                        updateDwellingTypes(
-                            currentTypes = state.selectedDwellingTypes,
-                            type = DwellingType.APARTMENT_UNIT_FLAT,
-                            isChecked = it
-                        )
-                    )
-                )
-            },
-            testTag = SEARCH_SCREEN_APARTMENT
-        )
 
         Button(
             modifier = Modifier
