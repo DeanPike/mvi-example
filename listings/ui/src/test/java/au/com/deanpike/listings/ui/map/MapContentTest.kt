@@ -52,6 +52,29 @@ class MapContentTest {
     }
 
     @Test
+    fun `returns bounds enclosing all pins`() {
+        val pins = toMapPins(
+            listOf(
+                getProperty(id = 1, geoLocation = GeoLocation(latitude = -33.8, longitude = 151.2)),
+                getProject(id = 2, geoLocation = GeoLocation(latitude = -37.8, longitude = 144.9)),
+                getProperty(id = 3, geoLocation = GeoLocation(latitude = -27.4, longitude = 153.0))
+            )
+        )
+
+        val bounds = toPinBounds(pins)!!
+
+        assertEquals(-37.8, bounds.southwest.latitude, 0.0)
+        assertEquals(144.9, bounds.southwest.longitude, 0.0)
+        assertEquals(-27.4, bounds.northeast.latitude, 0.0)
+        assertEquals(153.0, bounds.northeast.longitude, 0.0)
+    }
+
+    @Test
+    fun `returns null bounds when there are no pins`() {
+        assertNull(toPinBounds(emptyList()))
+    }
+
+    @Test
     fun `maps a selected property to card info using its headline`() {
         val property = getProperty(id = 1, geoLocation = null)
         val project = getProject(id = 2, geoLocation = null)

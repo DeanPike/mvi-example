@@ -84,6 +84,7 @@ dependencies {
     implementation(libs.material.icons.extended)
 
     implementation(libs.maps.libre)
+    runtimeOnly(libs.maps.libre.runtime.opengl)
 
     testImplementation(platform(libs.junit.bom))
     testImplementation(libs.bundles.junit.jupiter)

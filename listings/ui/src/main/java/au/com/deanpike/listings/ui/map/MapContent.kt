@@ -16,6 +16,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -30,6 +31,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import au.com.deanpike.datashared.type.ListingType
 import au.com.deanpike.listings.client.model.listing.response.Listing
 import au.com.deanpike.listings.client.model.listing.response.Project
@@ -51,21 +53,34 @@ import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.jsonPrimitive
 import kotlinx.serialization.json.put
+import org.maplibre.compose.camera.CameraFit
 import org.maplibre.compose.camera.CameraPosition
-import org.maplibre.compose.camera.rememberCameraState
+import org.maplibre.compose.camera.CameraUpdate
 import org.maplibre.compose.expressions.dsl.asString
-import org.maplibre.compose.expressions.dsl.case
 import org.maplibre.compose.expressions.dsl.const
+import org.maplibre.compose.expressions.dsl.eq
 import org.maplibre.compose.expressions.dsl.feature
-import org.maplibre.compose.expressions.dsl.switch
+import org.maplibre.compose.expressions.dsl.format
+import org.maplibre.compose.expressions.dsl.image
+import org.maplibre.compose.expressions.dsl.not
+import org.maplibre.compose.expressions.dsl.offset
+import org.maplibre.compose.expressions.dsl.span
+import org.maplibre.compose.expressions.value.SymbolAnchor
+import org.maplibre.compose.interaction.ClickResult
+import org.maplibre.compose.interaction.MapInteractions
 import org.maplibre.compose.layers.CircleLayer
+import org.maplibre.compose.layers.SymbolLayer
 import org.maplibre.compose.map.MaplibreMap
+import org.maplibre.compose.map.rememberMapState
 import org.maplibre.compose.sources.GeoJsonData.Features
+import org.maplibre.compose.sources.GeoJsonSource
 import org.maplibre.compose.sources.rememberGeoJsonSource
 import org.maplibre.compose.style.BaseStyle
-import org.maplibre.compose.util.ClickResult
+import org.maplibre.compose.util.DpPadding
+import org.maplibre.spatialk.geojson.BoundingBox
 import org.maplibre.spatialk.geojson.Feature
 import org.maplibre.spatialk.geojson.FeatureCollection
+import org.maplibre.spatialk.geojson.Geometry
 import org.maplibre.spatialk.geojson.Point
 import org.maplibre.spatialk.geojson.Position
 
@@ -86,22 +101,17 @@ fun MapContent(
         toMapSelectionCardInfo(listings, selectedListingId)
     }
 
+    var clickedCluster by remember {
+        mutableStateOf<Pair<GeoJsonSource, Feature<Geometry, JsonObject?>>?>(null)
+    }
+
     Box(modifier = Modifier.fillMaxSize()) {
-        MaplibreMap(
-            modifier = Modifier
-                .fillMaxSize()
-                .testTag(LISTING_MAP),
+        val mapState = rememberMapState(
             baseStyle = BaseStyle.Uri("https://tiles.openfreemap.org/styles/liberty"),
-            cameraState = rememberCameraState(
-                firstPosition = CameraPosition(
-                    target = Position(latitude = -25.6, longitude = 134.35),
-                    zoom = 2.8
-                )
-            ),
-            onMapClick = { _, _ ->
-                selectedListingId = null
-                ClickResult.Pass
-            }
+            initialCameraPosition = CameraPosition(
+                center = Position(latitude = -25.6, longitude = 134.35),
+                zoom = 2.8
+            )
         ) {
             val pinsSource = rememberGeoJsonSource(
                 data = Features(
@@ -117,20 +127,53 @@ fun MapContent(
                         }
                     )
                 )
-            )
+            ) {
+                cluster = true
+                clusterRadius = CLUSTER_RADIUS
+                clusterMaxZoom = CLUSTER_MAX_ZOOM
+            }
+            val isCluster = feature.has(CLUSTER_POINT_COUNT_PROPERTY)
             CircleLayer(
+                id = "listing-clusters",
+                source = pinsSource,
+                filter = isCluster,
+                color = const(PIN_COLOR),
+                radius = const(CLUSTER_MARKER_RADIUS),
+                strokeColor = const(Color.White),
+                strokeWidth = const(2.dp),
+                onClick = { clickedFeatures ->
+                    clickedFeatures.firstOrNull()?.let { clusterFeature ->
+                        clickedCluster = pinsSource to clusterFeature
+                    }
+                    ClickResult.Consume
+                }
+            )
+            SymbolLayer(
+                id = "listing-cluster-counts",
+                source = pinsSource,
+                filter = isCluster,
+                textField = format(span(feature[CLUSTER_POINT_COUNT_ABBREVIATED_PROPERTY].asString())),
+                textFont = const(listOf(CLUSTER_COUNT_FONT)),
+                textSize = const(14.sp),
+                textColor = const(Color.White),
+                textAllowOverlap = const(true),
+                textIgnorePlacement = const(true)
+            )
+            val markerImage = image(
+                value = painterResource(id = au.com.deanpike.listings.ui.R.drawable.map_marker),
+                drawAsSdf = true
+            )
+            SymbolLayer(
                 id = "listing-pins",
                 source = pinsSource,
-                color = const(PIN_COLOR),
-                radius = const(8.dp),
-                strokeColor = selectedListingId?.let { selectedId ->
-                    switch(
-                        input = feature[PIN_LISTING_ID_PROPERTY].asString(),
-                        case(label = selectedId.toString(), output = const(Color.Green)),
-                        fallback = const(Color.White)
-                    )
-                } ?: const(Color.White),
-                strokeWidth = const(2.dp),
+                filter = !isCluster,
+                iconImage = markerImage,
+                iconColor = const(PIN_COLOR),
+                iconHaloColor = const(Color.White),
+                iconHaloWidth = const(1.dp),
+                iconAnchor = const(SymbolAnchor.Bottom),
+                iconOffset = offset(0.dp, MARKER_SDF_PADDING),
+                iconAllowOverlap = const(true),
                 onClick = { clickedFeatures ->
                     selectedListingId = clickedFeatures.firstOrNull()
                         ?.properties
@@ -141,7 +184,81 @@ fun MapContent(
                     ClickResult.Consume
                 }
             )
+            selectedListingId?.let { selectedId ->
+                SymbolLayer(
+                    id = "selected-listing-pin",
+                    source = pinsSource,
+                    filter = feature[PIN_LISTING_ID_PROPERTY].asString() eq const(selectedId.toString()),
+                    iconImage = markerImage,
+                    iconColor = const(SELECTED_PIN_COLOR),
+                    iconHaloColor = const(Color.White),
+                    iconHaloWidth = const(1.dp),
+                    iconAnchor = const(SymbolAnchor.Bottom),
+                    iconOffset = offset(0.dp, MARKER_SDF_PADDING),
+                    iconAllowOverlap = const(true)
+                )
+            }
         }
+
+        LaunchedEffect(mapState, clickedCluster) {
+            val (source, clusterFeature) = clickedCluster ?: return@LaunchedEffect
+            clickedCluster = null
+            val center = (clusterFeature.geometry as? Point)?.coordinates ?: return@LaunchedEffect
+            val zoom = mapState.style.sources[source]
+                ?.getClusterExpansionZoom(clusterFeature)
+                ?: return@LaunchedEffect
+            mapState.animateCamera(
+                CameraUpdate(
+                    center = center,
+                    zoom = zoom
+                )
+            )
+        }
+
+        LaunchedEffect(mapState, pins) {
+            val bounds = toPinBounds(pins) ?: return@LaunchedEffect
+            if (bounds.southwest == bounds.northeast) {
+                mapState.animateCamera(
+                    CameraUpdate(
+                        center = bounds.southwest,
+                        zoom = SINGLE_PIN_ZOOM
+                    )
+                )
+            } else {
+                mapState.animateCameraToBounds(
+                    boundingBox = bounds,
+                    fit = CameraFit(
+                        fitPadding = DpPadding(
+                            left = PIN_BOUNDS_PADDING,
+                            top = PIN_BOUNDS_PADDING,
+                            right = PIN_BOUNDS_PADDING,
+                            bottom = PIN_BOUNDS_PADDING
+                        )
+                    )
+                )
+            }
+        }
+
+        val interactions = remember {
+            MapInteractions {
+                callbacks {
+                    click {
+                        onUnhandled {
+                            selectedListingId = null
+                            ClickResult.Pass
+                        }
+                    }
+                }
+            }
+        }
+
+        MaplibreMap(
+            modifier = Modifier
+                .fillMaxSize()
+                .testTag(LISTING_MAP),
+            state = mapState,
+            interactions = interactions
+        )
 
         AnimatedVisibility(
             visible = selectedListingCardInfo != null,
@@ -265,8 +382,37 @@ internal fun toMapPins(listings: List<Listing>): List<MapPin> {
     }
 }
 
+internal fun toPinBounds(pins: List<MapPin>): BoundingBox? {
+    if (pins.isEmpty()) {
+        return null
+    }
+    return BoundingBox(
+        southwest = Position(
+            longitude = pins.minOf { it.position.longitude },
+            latitude = pins.minOf { it.position.latitude }
+        ),
+        northeast = Position(
+            longitude = pins.maxOf { it.position.longitude },
+            latitude = pins.maxOf { it.position.latitude }
+        )
+    )
+}
+
+private const val SINGLE_PIN_ZOOM = 14.0
+private val PIN_BOUNDS_PADDING = 48.dp
 private const val PIN_LISTING_ID_PROPERTY = "listingId"
 private const val PIN_LISTING_TYPE_PROPERTY = "listingType"
+private val SELECTED_PIN_COLOR = Color.Red
+
+// Drawing the marker as an SDF pads it by ceil(8dp * 0.75) on every side, so shift it down to put the tip on the coordinate
+private val MARKER_SDF_PADDING = 6.dp
+private const val CLUSTER_RADIUS = 50
+private const val CLUSTER_MAX_ZOOM = 14
+private val CLUSTER_MARKER_RADIUS = 16.dp
+private const val CLUSTER_POINT_COUNT_PROPERTY = "point_count"
+private const val CLUSTER_POINT_COUNT_ABBREVIATED_PROPERTY = "point_count_abbreviated"
+// Must be a font served by the base style's glyphs
+private const val CLUSTER_COUNT_FONT = "Noto Sans Bold"
 private val PIN_COLOR = Color.Green.copy(
     red = Color.Green.red * 0.76f,
     green = Color.Green.green * 0.76f,
